@@ -62,10 +62,11 @@ def write_script(folder: Path, episode: dict) -> Path:
 
 
 def remotion_still(root: Path, props: Path):
+    """Renders the series Cover template (src/compositions/Cover) with the episode's props."""
     npx = shutil.which("npx") or "npx"
 
     def render(png: Path, frame: int) -> None:
-        subprocess.run([npx, "remotion", "still", "src/index.ts", "Episode", str(png), f"--frame={frame}", f"--props={props}", "--log=error"], cwd=root, check=True)
+        subprocess.run([npx, "remotion", "still", "src/index.ts", "Cover", str(png), f"--props={props}", "--log=error"], cwd=root, check=True)
 
     return render
 
