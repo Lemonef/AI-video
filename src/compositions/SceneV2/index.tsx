@@ -23,6 +23,8 @@ const POSE_SPRING = {damping: 11, stiffness: 170}; // slight overshoot = arms se
 const REACT_FRAMES = [0, 3, 8, 14, 20];
 const REACT_SHAPE = [0, 0.07, -0.05, 0.015, 0];
 // Handheld drift: sum of slow incommensurate sines (smooth, never repeats visibly).
+const HIT_SEC = 0.5; // a jolt dies out over this long
+const HIT_PX = 26; // default jolt strength
 const HANDHELD_PX = 5;
 const HANDHELD_DEG = 0.25;
 const handheld = (f: number) => ({
@@ -49,8 +51,13 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const zoom = interpolate(t, [0, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1]);
 	const shake = (scene.shake ?? 0) * (isFreeze && tLine > lineSec ? 0 : 1);
 	const hh = handheld(frame);
-	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0);
-	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0);
+	// Jolts: fast oscillation under an exponential-ish decay from each hit moment.
+	const jolt = (scene.hits ?? []).reduce((amp, h) => {
+		const dt = tLine - h.at * lineSec;
+		return dt < 0 || dt > HIT_SEC ? amp : amp + (h.strength ?? HIT_PX) * (1 - dt / HIT_SEC) ** 2;
+	}, 0);
+	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0) + Math.sin(frame * 3.1) * jolt;
+	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0) + Math.cos(frame * 3.7) * jolt * 0.7;
 	const enter =
 		scene.transition === 'whip'
 			? {transform: `translateX(${interpolate(frame, [0, WHIP_FRAMES], [W * 0.6, 0], {extrapolateRight: 'clamp'})}px)`, filter: `blur(${interpolate(frame, [0, WHIP_FRAMES], [40, 0], {extrapolateRight: 'clamp'})}px)`}

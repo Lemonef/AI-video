@@ -157,7 +157,13 @@
           "tail": "right"
         }
       ],
-      "padAfter": 0.3
+      "padAfter": 0.3,
+      "hits": [
+        {
+          "at": 0.62,
+          "strength": 18
+        }
+      ]
     },
     {
       "id": "answer",
@@ -205,7 +211,13 @@
           "tail": "left"
         }
       ],
-      "padAfter": 0.3
+      "padAfter": 0.3,
+      "hits": [
+        {
+          "at": 0.85,
+          "strength": 12
+        }
+      ]
     },
     {
       "id": "twist",
@@ -255,7 +267,17 @@
           "tail": "left"
         }
       ],
-      "padAfter": 0.6
+      "padAfter": 0.6,
+      "hits": [
+        {
+          "at": 0.55,
+          "strength": 14
+        },
+        {
+          "at": 0.92,
+          "strength": 34
+        }
+      ]
     },
     {
       "id": "freeze",

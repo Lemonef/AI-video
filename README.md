@@ -48,7 +48,7 @@ Requires Node 18+, Python 3.11+, ffmpeg on PATH. Run `make.py` with the venv's P
 ## Styles
 
 - **v1** (git tag `v1`, ep01): bright pastel flat 2D, Mochi in office clothes.
-- **v2** (ep02 onward, `"style": "v2"`): cinematic night-forest flat 2D, with parallax trees, fog, moonlight and a torch beam, plus grain and vignette, the new Mochi rig, a time/place chip (`chip`), a character intro card (`intro`), a rules card that becomes a corner HUD and strikes rules as they break (`rules`, `rulesView`, `breaks`), and `*highlighted*` caption words. Environments: `forestEdge`, `forestPath`, `dark`.
+- **v2** (ep02 onward, `"style": "v2"`): cinematic night-forest flat 2D, with parallax trees, fog, moonlight and a torch beam, plus grain and vignette, the new Mochi rig, a time/place chip (`chip`), a character intro card (`intro`), a rules card that becomes a corner HUD and strikes rules as they break (`rules`, `rulesView`, `breaks`), and `*highlighted*` caption words. Camera: always a light handheld drift; `shake` = constant tremble for a scene; `hits: [{"at": 0.9, "strength": 30}]` = a sharp jolt on a scare beat. Environments: `forestEdge`, `forestPath`, `dark`.
 
 Keep the series identity fixed across episodes (Mochi, the voice, captions, the rules HUD and the end card); change only the setting and the story.
 

@@ -64,7 +64,8 @@ export type Scene = {
 	fireflies?: boolean;
 	density?: number; // tree density multiplier
 	transition?: 'fade' | 'whip' | 'cut';
-	shake?: number; // camera shake strength (px)
+	shake?: number; // constant camera tremble (px) for the whole scene
+	hits?: Array<{at: number; strength?: number}>; // sharp camera jolts at moments (scare beats), decaying
 	a?: string; // endcard choices
 	b?: string;
 	prompt?: string;
