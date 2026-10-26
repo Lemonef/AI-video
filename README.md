@@ -20,16 +20,16 @@ cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = curren
 
 Check what the voice actually said: `.venv/Scripts/python scripts/transcribe.py out/ep03.mp4`.
 
-Preview while editing: `npm run studio` (uses ep01 with estimated timing, no audio until `make.py` has run).
+Preview while editing: `npm run studio` (opens ep02 with estimated timing).
 
 ## Folder layout
 
 ```
-episodes/        one JSON per episode (ep01, ep02 = current)   archive/ = old style experiments
+episodes/        one JSON per episode (ep02 = v1, the current release)   archive/ = drafts
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
 scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
-out/             finished videos only: epNN.mp4 (+ cover, post kit), drafts/ (earlier experiments), voices/ (voice samples), refs/
+out/             finished videos only: epNN.mp4 (+ cover, post kit), drafts/ (earlier experiments), voices/ (voice samples)
 out/.build/      intermediates: raw renders, props, logs (safe to delete)
 docs/            TODO, cinematic-guide (the rules every episode follows), references
 ```
