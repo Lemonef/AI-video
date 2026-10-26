@@ -3,9 +3,10 @@ import {AbsoluteFill, Html5Audio, Sequence, interpolate, spring, staticFile, use
 import {Bubble} from '../../components/Bubble';
 import {Countdown} from '../../components/Countdown';
 import {castState} from '../../lib/castState';
+import {bubbleSize, placeBox, type Rect} from '../../lib/layout';
 import {cueAt} from '../../lib/cueAt';
 import {brokenFor, ruleBreaks} from '../../lib/rules';
-import {H, SFX, W} from '../../lib/tokens';
+import {CAPTION_TOP, H, SAFE, SFX, W} from '../../lib/tokens';
 import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
 import type {Episode, Scene} from '../../types';
 import {CAST2} from '../../v2/cast';
@@ -35,6 +36,8 @@ const HALO_OPACITY = 0.55; // soft fog-light behind each figure so a dark silhou
 const TINT_FADE_SEC = 0.35;
 const INTRO_BELOW_TITLE = 580; // v4 hook: the two-line big title ends ≈ SAFE.top + 120 + 2 × 101; the name card sits under it
 const POOL_REACH = 0.85; // the beam's ground pool sits this far along the beam's floor hit
+const OVERSCAN = 1.02; // 2% overscan hides the drift's edges
+const SCREEN: Rect = {x: SAFE.left, y: SAFE.top, w: SAFE.right - SAFE.left, h: SAFE.bottom - SAFE.top};
 const SHOT_PUSH = 1.04; // each cut keeps creeping in, so a held shot never feels static
 const HIT_SEC = 0.5; // a jolt dies out over this long
 const HIT_PX = 26; // default jolt strength
@@ -85,6 +88,15 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				? {}
 				: {opacity: interpolate(frame, [0, FADE_FRAMES], [0, 1], {extrapolateRight: 'clamp'})};
 
+	const reserved: Rect[] = [
+		{x: SAFE.left, y: CAPTION_TOP + 20, w: SAFE.right - SAFE.left, h: 190}, // captions band
+		...(scene.chip && !v4 ? [{x: SAFE.right - 440, y: SAFE.top, w: 440, h: 80}] : []),
+		...(scene.rulesView === 'hud' && !v4 ? [{x: SAFE.left - 20, y: SAFE.top + 50, w: 430, h: 270}] : []), // card is scaled 0.42 and tilted: generous margin
+		...(scene.rulesView === 'hud' && v4 ? [{x: SAFE.left, y: SAFE.top, w: 320, h: 120}] : []),
+		...((v4 || v6) && scene.title ? [{x: SAFE.left, y: SAFE.top + 110, w: SAFE.right - SAFE.left, h: 250}] : []),
+		...(scene.intro ? [{x: SAFE.left, y: (v4 || v6) && scene.title ? INTRO_BELOW_TITLE : SAFE.top + 120, w: 620, h: 170}] : []),
+		...(scene.countdown ? [{x: W / 2 - 170, y: SAFE.top + 40, w: 340, h: 340}] : []),
+	];
 	const breaks = ruleBreaks(ep);
 	const rules = (ep.rules?.items ?? []).map((text, i) => {
 		const age = brokenFor(breaks[i], index, p, lineSec);
@@ -133,7 +145,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			<AbsoluteFill style={{...enter}}>
 				<AbsoluteFill
 					style={{
-						transform: `translate(${sx}px, ${sy}px) rotate(${hh.r}deg) scale(${zoom * 1.02})`, // 2% overscan hides the drift's edges
+						transform: `translate(${sx}px, ${sy}px) rotate(${hh.r}deg) scale(${zoom * OVERSCAN})`,
 						transformOrigin: `${cam.x ?? W / 2}px ${cam.y ?? H / 2}px`,
 						filter: [isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : '', v3 ? V3_GRADE : ''].join(' ').trim() || undefined,
 					}}
@@ -172,10 +184,6 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					</svg>
 					{pools}
 					{beams}
-					{(scene.bubbles ?? []).map((b, i) => {
-						const f = atFrame(at(b));
-						return frame >= f ? <Bubble key={i} item={b} frame={frame - f} /> : null;
-					})}
 				</AbsoluteFill>
 				{v3 && scene.rain ? <Rain frame={frame} /> : null}
 				{v4 ? <Bokeh frame={frame} /> : null}
@@ -207,6 +215,17 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			) : null}
 			{scene.countdown ? <Countdown seconds={scene.countdown} t={tLine} start={countdownStart} /> : null}
 			{timing && scene.showCaptions !== false ? <Captions2 cues={timing.cues} t={tLine} /> : null}
+			{(scene.bubbles ?? []).map((b, i) => {
+				const f = atFrame(at(b));
+				if (frame < f) return null;
+				// project the world anchor through the camera, then keep the bubble on screen and off the UI
+				const z = zoom * OVERSCAN;
+				const ox = cam.x ?? W / 2;
+				const oy = cam.y ?? H / 2;
+				const size = bubbleSize(b.text, b.label);
+				const box = placeBox(ox + (b.x - ox) * z + sx, oy + (b.y - oy) * z + sy, size.w, size.h, SCREEN, reserved);
+				return <Bubble key={i} item={{...b, x: box.x + box.w / 2, y: box.y + box.h}} frame={frame - f} />;
+			})}
 
 			{timing ? (
 				<Sequence from={Math.round(padBefore * FPS)}>

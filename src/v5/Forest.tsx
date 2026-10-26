@@ -141,6 +141,7 @@ export const ForestDepth: React.FC<EnvProps> = ({frame, scroll, fireflies}) => {
 	);
 };
 
+const MOON_SIDE = {x: 830, y: 400};
 const GROUND_SIDE = 1480; // side-view ground line (matches v2 GROUND_Y so the v2 rig stands on it)
 const wrap = (x: number, span: number) => ((x % span) + span) % span;
 
@@ -190,8 +191,9 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 			</filter>
 		</defs>
 		<rect width={W} height={H} fill="url(#v6sky)" />
-		<circle cx={540} cy={380} r={260} fill="url(#v6moon)" />
-		<circle cx={540} cy={380} r={66} fill={J5.moon} />
+		{/* moon right of the hook title's line length and below the time chip */}
+		<circle cx={MOON_SIDE.x} cy={MOON_SIDE.y} r={260} fill="url(#v6moon)" />
+		<circle cx={MOON_SIDE.x} cy={MOON_SIDE.y} r={66} fill={J5.moon} />
 		<PineRow frame={frame} scroll={scroll} speed={0.12} base={GROUND_SIDE - 330} h={500} w={240} gap={150} t={1} salt={1} />
 		<rect x={0} y={GROUND_SIDE - 520} width={W} height={300} fill="url(#v6mist)" />
 		{/* mid row kept hazy and smaller so the character, not the trees, owns the frame */}
