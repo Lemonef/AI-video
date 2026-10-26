@@ -141,6 +141,90 @@ export const ForestDepth: React.FC<EnvProps> = ({frame, scroll, fireflies}) => {
 	);
 };
 
+const GROUND_SIDE = 1480; // side-view ground line (matches v2 GROUND_Y so the v2 rig stands on it)
+const wrap = (x: number, span: number) => ((x % span) + span) % span;
+
+/** A parallax row of the v5 pines for the side-on walk; far rows hazier, slower, smaller. */
+const PineRow: React.FC<{frame: number; scroll: number; speed: number; base: number; h: number; w: number; gap: number; t: number; salt: number}> = ({frame, scroll, speed, base, h, w, gap, t, salt}) => {
+	const span = W + gap * 2;
+	const count = Math.ceil(span / gap) + 1;
+	const offset = frame * scroll * speed;
+	return (
+		<g>
+			{Array.from({length: count}, (_, i) => {
+				const x = wrap(i * gap + rnd(i, salt) * gap * 0.5 - offset, span) - gap;
+				return <Pine key={i} x={x} base={base} h={h * (0.85 + rnd(i, salt + 1) * 0.3)} w={w} trunk={mix(J5.trunkNear, J5.trunkFar, t)} leaf={mix(J5.pineNear, J5.pineFar, t)} seed={i + salt * 50} />;
+			})}
+		</g>
+	);
+};
+
+/** Side-on forest for walking left-to-right (the v2/v3 framing), drawn with the v5 art rules. */
+export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
+	<g>
+		<defs>
+			<linearGradient id="v6sky" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stopColor={J5.skyTop} />
+				<stop offset="0.55" stopColor={J5.skyMid} />
+				<stop offset="1" stopColor={J5.skyLow} />
+			</linearGradient>
+			<radialGradient id="v6moon">
+				<stop offset="0" stopColor={J5.moon} stopOpacity={0.35} />
+				<stop offset="1" stopColor={J5.moon} stopOpacity={0} />
+			</radialGradient>
+			<linearGradient id="v6ground" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stopColor={J5.pathFar} />
+				<stop offset="1" stopColor={J5.ground} />
+			</linearGradient>
+			<linearGradient id="v6shaft" x1="0" y1="0" x2="1" y2="1">
+				<stop offset="0" stopColor={J5.moonShaft} stopOpacity={0.15} />
+				<stop offset="1" stopColor={J5.moonShaft} stopOpacity={0} />
+			</linearGradient>
+			<linearGradient id="v6mist" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stopColor={J5.haze} stopOpacity={0} />
+				<stop offset="0.5" stopColor={J5.haze} stopOpacity={0.35} />
+				<stop offset="1" stopColor={J5.haze} stopOpacity={0} />
+			</linearGradient>
+			<filter id="v6blur">
+				<feGaussianBlur stdDeviation="8" />
+			</filter>
+		</defs>
+		<rect width={W} height={H} fill="url(#v6sky)" />
+		<circle cx={540} cy={380} r={260} fill="url(#v6moon)" />
+		<circle cx={540} cy={380} r={66} fill={J5.moon} />
+		<PineRow frame={frame} scroll={scroll} speed={0.12} base={GROUND_SIDE - 330} h={500} w={240} gap={150} t={1} salt={1} />
+		<rect x={0} y={GROUND_SIDE - 520} width={W} height={300} fill="url(#v6mist)" />
+		{/* mid row kept hazy and smaller so the character, not the trees, owns the frame */}
+		<PineRow frame={frame} scroll={scroll} speed={0.35} base={GROUND_SIDE - 220} h={760} w={330} gap={240} t={0.78} salt={2} />
+		{[0, 1, 2].map((i) => (
+			<path key={i} d={`M${640 + i * 110},0 L${720 + i * 110},0 L${260 + i * 140},${GROUND_SIDE} L${120 + i * 140},${GROUND_SIDE} Z`} fill="url(#v6shaft)" opacity={0.6 + 0.4 * Math.sin(frame / 60 + i * 2)} />
+		))}
+		<rect x={0} y={GROUND_SIDE - 60} width={W} height={H - GROUND_SIDE + 60} fill="url(#v6ground)" />
+		<rect x={0} y={GROUND_SIDE - 120} width={W} height={220} fill="url(#v6mist)" opacity={0.8} />
+		{/* near trunks, out of focus, fast: foreground depth */}
+		<g filter="url(#v6blur)">
+			{Array.from({length: 3}, (_, i) => {
+				const x = wrap(i * 520 + 200 - frame * scroll * 0.8, W + 520) - 260;
+				return <rect key={i} x={x} y={0} width={80} height={H} fill={J5.trunkNear} />;
+			})}
+		</g>
+		{fireflies
+			? Array.from({length: 16}, (_, i) => {
+					const x = rnd(i, 31) * W + Math.sin(frame / 30 + i) * 30;
+					const y = GROUND_SIDE - 750 + rnd(i, 32) * 650 + Math.cos(frame / 26 + i * 2) * 24;
+					const on = 0.25 + 0.75 * Math.max(0, Math.sin(frame / 12 + i * 1.7));
+					return (
+						<g key={i} opacity={on}>
+							<circle cx={x} cy={y} r={11} fill="#E9FF9A" opacity={0.2} />
+							<circle cx={x} cy={y} r={3} fill="#E9FF9A" />
+						</g>
+					);
+				})
+			: null}
+	</g>
+);
+
 export const ENV5: Record<string, React.FC<EnvProps>> = {
 	forestDepth: ForestDepth,
+	forestSide: ForestSide,
 };

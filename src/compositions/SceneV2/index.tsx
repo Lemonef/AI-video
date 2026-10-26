@@ -57,9 +57,10 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const isFreeze = scene.type === 'freeze';
 	const isEnd = scene.type === 'endcard';
 	const v5 = ep.style === 'v5';
+	const v6 = ep.style === 'v6';
 	const v4 = ep.style === 'v4';
-	const v3 = ep.style === 'v3' || v4 || v5; // v4 and v5 include every v3 feature
-	const Env = (v5 ? ENV5[scene.bg] : undefined) ?? ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
+	const v3 = ep.style === 'v3' || v4 || v5 || v6; // later styles include every v3 feature
+	const Env = (v5 || v6 ? ENV5[scene.bg] : undefined) ?? ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 	const at = (cue: {at?: number; word?: string}) => cueAt(cue, timing, lineSec);

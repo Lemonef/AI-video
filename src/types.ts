@@ -94,7 +94,7 @@ export type Episode = {
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
-	style?: 'v1' | 'v2' | 'v3' | 'v4' | 'v5'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD. v5 = v3 sound/shots + redrawn chibi cast + perspective forest
+	style?: 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD. v5 = v3 sound/shots + redrawn chibi cast + perspective forest. v6 = v3 cast + v5-quality side forest
 	rules?: {title: string; items: string[]}; // v2: the episode's rules, tracked across scenes
 	mix?: {beds: string[]; duck?: number; bedVolume?: number}; // v3 sound design: looping beds + auto foley
 	scenes: Scene[];
