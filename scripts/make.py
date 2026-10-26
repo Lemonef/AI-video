@@ -54,8 +54,8 @@ def main() -> None:
     print(f"[4/4] loudness master -> {out.relative_to(ROOT)}")
     out = master(raw, out)
     kit = postkit.write(ROOT, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
-    print(f"done: {out}
-post kit: {kit}")
+    print(f"done: {out}")
+    print(f"post kit: {kit}")
 
 
 if __name__ == "__main__":

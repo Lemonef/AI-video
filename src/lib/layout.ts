@@ -5,23 +5,36 @@ export type Rect = {x: number; y: number; w: number; h: number};
 
 const overlaps = (a: Rect, b: Rect) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 
+const GAP = 12;
+
 /**
- * Place a box whose bottom-centre wants to sit at (ax, ay). Clamp it into `bounds`, then step it
- * down below (or, failing that, up above) any reserved rect it overlaps.
+ * Place a box whose bottom-centre wants to sit at (ax, ay): the free spot nearest to that anchor.
+ * Candidates are the anchor itself plus positions just above / below / left / right of every
+ * reserved rect, all clamped into `bounds`. Falls back to the least-overlapping candidate.
  */
 export const placeBox = (ax: number, ay: number, w: number, h: number, bounds: Rect, reserved: Rect[]): Rect => {
-	const clampX = (x: number) => Math.min(Math.max(x, bounds.x), bounds.x + bounds.w - w);
-	const clampY = (y: number) => Math.min(Math.max(y, bounds.y), bounds.y + bounds.h - h);
-	let box: Rect = {x: clampX(ax - w / 2), y: clampY(ay - h), w, h};
-	for (let pass = 0; pass < reserved.length + 1; pass++) {
-		const hit = reserved.find((r) => overlaps(box, r));
-		if (!hit) return box;
-		const below = clampY(hit.y + hit.h + 12);
-		const above = clampY(hit.y - h - 12);
-		const tryBelow = {...box, y: below};
-		box = !overlaps(tryBelow, hit) && !reserved.some((r) => r !== hit && overlaps(tryBelow, r)) ? tryBelow : {...box, y: above};
+	const clamp = (x: number, y: number): Rect => ({
+		x: Math.min(Math.max(x, bounds.x), bounds.x + bounds.w - w),
+		y: Math.min(Math.max(y, bounds.y), bounds.y + bounds.h - h),
+		w,
+		h,
+	});
+	const want = clamp(ax - w / 2, ay - h);
+	const candidates: Rect[] = [want];
+	for (const r of reserved) {
+		candidates.push(
+			clamp(want.x, r.y - h - GAP), // above
+			clamp(want.x, r.y + r.h + GAP), // below
+			clamp(r.x - w - GAP, want.y), // left
+			clamp(r.x + r.w + GAP, want.y), // right
+		);
 	}
-	return box;
+	const overlapArea = (c: Rect) =>
+		reserved.reduce((sum, r) => sum + Math.max(0, Math.min(c.x + c.w, r.x + r.w) - Math.max(c.x, r.x)) * Math.max(0, Math.min(c.y + c.h, r.y + r.h) - Math.max(c.y, r.y)), 0);
+	const dist = (c: Rect) => Math.hypot(c.x - want.x, c.y - want.y);
+	const free = candidates.filter((c) => !reserved.some((r) => overlaps(c, r)));
+	if (free.length) return free.reduce((best, c) => (dist(c) < dist(best) ? c : best));
+	return candidates.reduce((best, c) => (overlapArea(c) < overlapArea(best) ? c : best));
 };
 
 /** Rough rendered size of a Bubble (font 52 px, padding 38/26, optional label, tail). */

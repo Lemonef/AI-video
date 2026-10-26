@@ -1,7 +1,9 @@
 import React from 'react';
 import {spring, useVideoConfig} from 'remotion';
 import {C} from '../../lib/tokens';
-import {FONT_BUBBLE} from '../../lib/fonts';
+import {FONT_CAPTION} from '../../lib/fonts';
+// Kanit, not Mali: Mali misplaces stacked Thai tone marks (จ๊ rendered with a floating ๗-like mark).
+const FONT_BUBBLE = FONT_CAPTION;
 import type {BubbleItem} from '../../types';
 
 // HTML (not SVG) so Thai line-breaking and font shaping come from the browser.

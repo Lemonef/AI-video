@@ -10,7 +10,7 @@ import {CAPTION_TOP, H, SAFE, SFX, W} from '../../lib/tokens';
 import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
 import type {Episode, Scene} from '../../types';
 import {CAST2} from '../../v2/cast';
-import {Character2, torchLens} from '../../v2/Character';
+import {Character2, FACE_BOX, torchLens} from '../../v2/Character';
 import {ENVIRONMENTS} from '../../v2/Forest';
 import {CAST5} from '../../v5/cast';
 import {Character5, torchLens5} from '../../v5/Character';
@@ -97,6 +97,17 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		...(scene.intro ? [{x: SAFE.left, y: (v4 || v6) && scene.title ? INTRO_BELOW_TITLE : SAFE.top + 120, w: 620, h: 170}] : []),
 		...(scene.countdown ? [{x: W / 2 - 170, y: SAFE.top + 40, w: 340, h: 340}] : []),
 	];
+	// Faces are reserved too: a bubble must never cover the character it is about (or any other).
+	const camZ = zoom * OVERSCAN;
+	const camOx = cam.x ?? W / 2;
+	const camOy = cam.y ?? H / 2;
+	(scene.cast ?? []).forEach((m) => {
+		const s = m.scale ?? 1;
+		const fx = camOx + (castState(m, p, lineSec, FPS).x - camOx) * camZ;
+		const fy = camOy + (m.y + FACE_BOX.cy * s - camOy) * camZ;
+		const half = FACE_BOX.half * s * camZ;
+		reserved.push({x: fx - half, y: fy - half, w: half * 2, h: half * 2});
+	});
 	const breaks = ruleBreaks(ep);
 	const rules = (ep.rules?.items ?? []).map((text, i) => {
 		const age = brokenFor(breaks[i], index, p, lineSec);
@@ -232,7 +243,10 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					<Html5Audio src={staticFile(timing.audio)} />
 				</Sequence>
 			) : null}
-			{(scene.bubbles ?? []).map((b, i) => (
+			{/* cartoon pop per bubble: v1/v2 only; with a sound mix bubbles are silent (they read as an unwanted 'whoosh') */}
+			{ep.mix
+				? null
+				: (scene.bubbles ?? []).map((b, i) => (
 				<Sequence key={`pop${i}`} from={atFrame(at(b))} durationInFrames={FPS}>
 					<Html5Audio src={staticFile(SFX.pop)} volume={0.35} />
 				</Sequence>
@@ -266,7 +280,6 @@ const Foley: React.FC<{scene: Scene; real: boolean; atFrame: (cue: {at?: number;
 	(scene.shots ?? []).forEach((s) => {
 		if (s.sound) cues.push({from: atFrame(s), sound: s.sound, volume: 0.45});
 	});
-	if (scene.transition === 'whip') cues.push({from: 0, sound: 'swish', volume: 0.5});
 	// recorded footsteps come in as a bed (`steps`); synthetic ones are placed per footfall
 	const walker = real ? undefined : (scene.cast ?? []).find((m) => m.action === 'walk');
 	if (walker) {

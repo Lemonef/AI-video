@@ -458,11 +458,6 @@
       ],
       "sfx": [
         {
-          "at": 0.55,
-          "sound": "riser",
-          "volume": 0.35
-        },
-        {
           "at": 0.92,
           "word": "เจอแล้ว",
           "sound": "boom",

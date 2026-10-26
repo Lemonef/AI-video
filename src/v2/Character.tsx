@@ -16,6 +16,8 @@ const FOREARM = 130;
 const NECK_Y = -650;
 const HEAD_Y = -775;
 const HEAD_R = 98;
+/** Face area relative to the feet (scale 1), for keeping speech bubbles off the face. */
+export const FACE_BOX = {cy: HEAD_Y, half: HEAD_R + 40};
 const LIMB_W = 40;
 // Torch grip: upper arm forward, elbow bent up a little. torchLens() derives the beam origin from this.
 const TORCH_ARM: [number, number] = [-58, -24];
