@@ -23,7 +23,7 @@ const Beds: React.FC<{episode: EpisodeT}> = ({episode}) => {
 			{mix.beds.map((bed) => (
 				<Html5Audio
 					key={bed}
-					src={staticFile(sfxFile(bed))}
+					src={staticFile(sfxFile(bed, mix.real))}
 					loop
 					volume={(f) => base * bedLevel(spans, bed, f) * (1 - (1 - duck) * speechEnvelope(mask, f))}
 				/>

@@ -70,6 +70,8 @@ export type Scene = {
 	hits?: Array<{at: number; word?: string; strength?: number}>; // sharp camera jolts at moments (scare beats), decaying
 	// v3 (only when the episode has `mix`)
 	beds?: Record<string, number>; // bed level 0..1 for this scene, e.g. {"wind": 0.5, "crickets": 0}
+	bedsAt?: {at?: number; word?: string; only?: string[]}; // when this scene's bed levels take over (default: scene start); `only` = just these beds wait
+	bedsFade?: number; // seconds to glide into them (default 0.4; ~0.15 = sudden silence)
 	sfx?: Array<{at: number; word?: string; sound: string; volume?: number}>; // one-shots at fractions of the line
 	shots?: Array<{at: number; zoom: number; x: number; y: number}>; // camera cuts within the scene
 	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
@@ -96,7 +98,7 @@ export type Episode = {
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
 	style?: 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD. v5 = v3 sound/shots + redrawn chibi cast + perspective forest. v6 = v3 cast + v5-quality side forest
 	rules?: {title: string; items: string[]}; // v2: the episode's rules, tracked across scenes
-	mix?: {beds: string[]; duck?: number; bedVolume?: number}; // v3 sound design: looping beds + auto foley
+	mix?: {beds: string[]; duck?: number; bedVolume?: number; real?: boolean}; // real = recorded CC0 library (public/sfx/real) // v3 sound design: looping beds + auto foley
 	scenes: Scene[];
 	timing?: Record<string, SceneTiming>;
 };

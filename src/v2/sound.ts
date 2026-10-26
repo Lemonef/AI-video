@@ -1,8 +1,25 @@
+import {cueAt} from '../lib/cueAt';
+import {FPS, lineDuration, padBefore, sceneFrames} from '../lib/timing';
 import type {Episode, Scene} from '../types';
-import {FPS, padBefore, sceneFrames} from '../lib/timing';
 
-// Files written by scripts/pipeline/foley.py (+ the v1/v2 pop/tick/whoosh by sfx.py).
-export const sfxFile = (name: string) => `sfx/${name}.wav`;
+// Synthetic files from scripts/pipeline/foley.py (+ v1/v2 pop/tick/whoosh by sfx.py), or, with
+// mix.real, the recorded CC0 library from scripts/pipeline/freesound.py under the same names.
+const REAL: Record<string, string> = {
+	crickets: 'forest_night',
+	wind: 'wind',
+	rain: 'rain',
+	drone: 'dark_drone',
+	steps: 'steps_leaves',
+	impact: 'hit',
+	boom: 'boom',
+	stinger: 'stinger',
+	swish: 'whoosh',
+	whoosh: 'whoosh',
+	riser: 'riser',
+	heartbeat: 'heartbeat',
+	click: 'flashlight_click',
+};
+export const sfxFile = (name: string, real = false) => (real && REAL[name] ? `sfx/real/${REAL[name]}.mp3` : `sfx/${name}.wav`);
 
 export const BED_FADE_SEC = 0.4; // bed level glides between scenes instead of jumping
 export const DUCK_ATTACK_SEC = 0.08;
@@ -10,13 +27,15 @@ export const DUCK_RELEASE_SEC = 0.35;
 // Character2's walk swings with sin(frame / 3.4): period 2π·3.4 frames, two footfalls per period.
 export const STEP_EVERY_FRAMES = Math.round(Math.PI * 3.4);
 
-export type SceneSpan = {scene: Scene; from: number; frames: number};
+export type SceneSpan = {scene: Scene; from: number; frames: number; switchAt: number; fade: number; waits?: string[]};
 
 export const sceneSpans = (ep: Episode): SceneSpan[] => {
 	let from = 0;
 	return ep.scenes.map((scene) => {
 		const frames = sceneFrames(ep, scene);
-		const span = {scene, from, frames};
+		const lineSec = lineDuration(ep, scene);
+		const switchAt = scene.bedsAt ? from + Math.round((padBefore(ep, scene) + cueAt(scene.bedsAt, ep.timing?.[scene.id], lineSec) * lineSec) * FPS) : from;
+		const span = {scene, from, frames, switchAt, fade: (scene.bedsFade ?? BED_FADE_SEC) * FPS, waits: scene.bedsAt?.only};
 		from += frames;
 		return span;
 	});
@@ -43,13 +62,16 @@ export const speechEnvelope = (mask: Array<[number, number]>, frame: number): nu
 	return v;
 };
 
-/** Level of `bed` at an episode frame, gliding over BED_FADE_SEC after each scene boundary. */
+/** Level of `bed` at an episode frame. Each scene's levels take over at its switch moment
+ * (scene start, or a spoken word via bedsAt) and glide in over its fade. */
 export const bedLevel = (spans: SceneSpan[], bed: string, frame: number): number => {
-	const i = Math.max(0, spans.findIndex((s) => frame >= s.from && frame < s.from + s.frames));
-	const cur = spans[i]?.scene.beds?.[bed] ?? 0;
-	if (i === 0) return cur;
-	const prev = spans[i - 1].scene.beds?.[bed] ?? 0;
-	const k = Math.min(1, (frame - spans[i].from) / (BED_FADE_SEC * FPS));
-	return prev + (cur - prev) * k;
+	const level = (i: number) => spans[i]?.scene.beds?.[bed] ?? 0;
+	const at = (s: SceneSpan) => (!s.waits || s.waits.includes(bed) ? s.switchAt : s.from);
+	const fade = (s: SceneSpan) => (!s.waits || s.waits.includes(bed) ? s.fade : BED_FADE_SEC * FPS);
+	let i = spans.length - 1;
+	while (i > 0 && frame < at(spans[i])) i--;
+	if (i === 0 && frame < at(spans[0])) return level(0);
+	const k = fade(spans[i]) > 0 ? Math.min(1, (frame - at(spans[i])) / fade(spans[i])) : 1;
+	return i === 0 ? level(0) : level(i - 1) + (level(i) - level(i - 1)) * k;
 };
 

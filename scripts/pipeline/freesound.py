@@ -7,6 +7,7 @@ Key: FREESOUND_API_KEY or ~/.secrets/freesound_api_key (token auth gives the HQ 
 """
 import json
 import os
+import subprocess
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -32,6 +33,35 @@ LIBRARY = {
 }
 
 
+# Hand-picked after reviewing candidates by name + tags (rating-only search returned a creature
+# horn for "rain" and a woosh for "boom"). A pinned id always wins over the search.
+PINNED = {
+    "forest_night": 328293,  # Forest at night, crickets, cicadas (B&K field recording)
+    "wind": 201897,  # Windy Forest
+    "rain": 678435,  # Soft Rain in Forest, raindrops on leaves
+    "dark_drone": 33796,  # subtle bass/breath atmosphere
+    "steps_leaves": 218305,  # sneakers on dry leaves
+    "hit": 648534,  # deep cinematic transition hit
+    "boom": 346316,  # sub drop
+    "stinger": 271945,  # dramatic stinger/stab
+    "whoosh": 683096,  # airy soft woosh
+    "heartbeat": 249716,  # slow heartbeat
+    "riser": 840719,  # simple tension riser
+}
+
+BEDS = {"forest_night", "wind", "rain", "dark_drone", "steps_leaves"}
+BED_LUFS = -24  # beds sit under the voice
+HIT_LUFS = -14  # one-shots punch at voice level
+
+
+def _finish(raw: Path, out: Path, bed: bool) -> None:
+    """Normalise loudness so every clip mixes predictably; one-shots get leading silence trimmed
+    so a cue lands exactly on its word."""
+    trim = [] if bed else ["silenceremove=start_periods=1:start_threshold=-45dB"]
+    af = ",".join(trim + [f"loudnorm=I={BED_LUFS if bed else HIT_LUFS}:TP=-1.5"])
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", af, "-ar", "48000", "-ac", "2", "-b:a", "192k", str(out)], check=True)
+
+
 def _key() -> str:
     key = os.environ.get("FREESOUND_API_KEY") or (KEY_FILE.read_text().strip() if KEY_FILE.exists() else "")
     if not key:
@@ -52,6 +82,18 @@ def _search(query: str, lo: float, hi: float) -> list[dict]:
         return json.load(r).get("results", [])
 
 
+FIELDS = "id,name,username,duration,avg_rating,num_downloads,previews,url,license"
+
+
+def _sound(sound_id: int) -> dict:
+    url = f"https://freesound.org/apiv2/sounds/{sound_id}/?{urllib.parse.urlencode({'fields': FIELDS, 'token': _key()})}"
+    with urllib.request.urlopen(url, timeout=60) as r:
+        s = json.load(r)
+    if "Creative Commons 0" not in s.get("license", "") and "publicdomain/zero" not in s.get("license", ""):
+        raise RuntimeError(f"pinned sound {sound_id} is not CC0: {s.get('license')}")
+    return s
+
+
 def _score(s: dict) -> float:
     # Rating alone favours obscure 1-vote 5.0s; weight by how many people actually used it.
     return (s.get("avg_rating") or 0) * (1 + (s.get("num_downloads") or 0)) ** 0.5
@@ -64,15 +106,22 @@ def ensure(public_dir: Path, names: list[str] | None = None) -> dict:
     credits = json.loads(credits_path.read_text(encoding="utf-8")) if credits_path.exists() else {}
     for name in names or list(LIBRARY):
         target = out_dir / f"{name}.mp3"
-        if name in credits and target.exists():
+        pinned = PINNED.get(name)
+        if name in credits and target.exists() and (pinned is None or credits[name]["id"] == pinned):
             continue
-        query, lo, hi = LIBRARY[name]
-        results = _search(query, lo, hi)
-        if not results:
-            raise RuntimeError(f"no CC0 result for {name!r} ({query})")
-        best = max(results, key=_score)
+        if name in PINNED:
+            best = _sound(PINNED[name])
+        else:
+            query, lo, hi = LIBRARY[name]
+            results = _search(query, lo, hi)
+            if not results:
+                raise RuntimeError(f"no CC0 result for {name!r} ({query})")
+            best = max(results, key=_score)
+        raw = out_dir / f"{name}.download.mp3"
         with urllib.request.urlopen(best["previews"]["preview-hq-mp3"], timeout=120) as r:
-            target.write_bytes(r.read())
+            raw.write_bytes(r.read())
+        _finish(raw, target, name in BEDS)
+        raw.unlink()
         credits[name] = {k: best[k] for k in ("id", "name", "username", "url", "license", "duration")}
         print(f"  ♪ {name}: {best['name'][:50]} by {best['username']} ({best['duration']:.0f}s)")
         credits_path.write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf-8")

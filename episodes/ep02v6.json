@@ -10,10 +10,12 @@
       "wind",
       "crickets",
       "drone",
-      "rain"
+      "rain",
+      "steps"
     ],
-    "duck": 0.45,
-    "bedVolume": 0.55
+    "duck": 0.4,
+    "bedVolume": 0.9,
+    "real": true
   },
   "rules": {
     "title": "กฎเข้าป่าตอนกลางคืน",
@@ -63,7 +65,8 @@
       "beds": {
         "wind": 0.5,
         "crickets": 0.6,
-        "drone": 0.15
+        "drone": 0.15,
+        "steps": 0
       },
       "shots": [
         {
@@ -93,7 +96,8 @@
       "beds": {
         "wind": 0.25,
         "crickets": 0.25,
-        "drone": 0.45
+        "drone": 0.45,
+        "steps": 0
       },
       "sfx": [
         {
@@ -127,7 +131,8 @@
       "beds": {
         "wind": 0.45,
         "crickets": 0.85,
-        "drone": 0.15
+        "drone": 0.15,
+        "steps": 0.9
       },
       "shots": [
         {
@@ -194,7 +199,8 @@
       "beds": {
         "wind": 0.3,
         "crickets": 0,
-        "drone": 0.6
+        "drone": 0.6,
+        "steps": 0
       },
       "shots": [
         {
@@ -221,7 +227,15 @@
           "sound": "heartbeat",
           "volume": 0.8
         }
-      ]
+      ],
+      "bedsAt": {
+        "at": 0.6,
+        "word": "เงียบ",
+        "only": [
+          "crickets"
+        ]
+      },
+      "bedsFade": 0.15
     },
     {
       "id": "call",
@@ -274,7 +288,8 @@
       "beds": {
         "wind": 0.25,
         "drone": 0.75,
-        "rain": 0.5
+        "rain": 0.5,
+        "steps": 0
       },
       "rain": true,
       "shots": [
@@ -355,7 +370,8 @@
       ],
       "beds": {
         "drone": 0.7,
-        "rain": 0.5
+        "rain": 0.5,
+        "steps": 0
       },
       "rain": true,
       "shots": [
@@ -442,7 +458,8 @@
       ],
       "beds": {
         "drone": 0.9,
-        "rain": 0.6
+        "rain": 0.6,
+        "steps": 0
       },
       "rain": true,
       "shots": [
@@ -507,7 +524,8 @@
       "padAfter": 0.5,
       "beds": {
         "drone": 0.15,
-        "rain": 0.2
+        "rain": 0.2,
+        "steps": 0
       },
       "rain": true,
       "sfx": [
@@ -560,7 +578,8 @@
       "beds": {
         "drone": 0.35,
         "rain": 0.35,
-        "wind": 0.2
+        "wind": 0.2,
+        "steps": 0
       },
       "rain": true,
       "choices": {

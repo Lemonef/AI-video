@@ -218,7 +218,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					<Html5Audio src={staticFile(SFX.pop)} volume={0.35} />
 				</Sequence>
 			))}
-			{ep.mix ? <Foley scene={scene} atFrame={(c) => atFrame(at(c))} totalFrames={Math.ceil(sceneSeconds(ep, scene) * FPS)} /> : null}
+			{ep.mix ? <Foley scene={scene} real={!!ep.mix.real} atFrame={(c) => atFrame(at(c))} totalFrames={Math.ceil(sceneSeconds(ep, scene) * FPS)} /> : null}
 			{scene.countdown
 				? Array.from({length: scene.countdown}, (_, i) => (
 						<Sequence key={`tick${i}`} from={Math.round((padBefore + countdownStart + i) * FPS)} durationInFrames={FPS}>
@@ -234,7 +234,7 @@ const HIT_VOLUME_PER_PX = 1 / 30; // impact loudness follows the jolt strength
 const ONE_SHOT_FRAMES = FPS * 3;
 
 /** v3 sound cues: authored `sfx`, plus automatic impacts on hits, footsteps while walking, swishes on cuts. */
-const Foley: React.FC<{scene: Scene; atFrame: (cue: {at?: number; word?: string}) => number; totalFrames: number}> = ({scene, atFrame, totalFrames}) => {
+const Foley: React.FC<{scene: Scene; real: boolean; atFrame: (cue: {at?: number; word?: string}) => number; totalFrames: number}> = ({scene, real, atFrame, totalFrames}) => {
 	const cues: Array<{from: number; sound: string; volume: number}> = [];
 	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8}));
 	(scene.hits ?? []).forEach((h) => cues.push({from: atFrame(h), sound: 'impact', volume: Math.min(1, (h.strength ?? 26) * HIT_VOLUME_PER_PX)}));
@@ -242,7 +242,8 @@ const Foley: React.FC<{scene: Scene; atFrame: (cue: {at?: number; word?: string}
 		if (s.at > 0) cues.push({from: atFrame(s), sound: 'swish', volume: 0.35});
 	});
 	if (scene.transition === 'whip') cues.push({from: 0, sound: 'swish', volume: 0.5});
-	const walker = (scene.cast ?? []).find((m) => m.action === 'walk');
+	// recorded footsteps come in as a bed (`steps`); synthetic ones are placed per footfall
+	const walker = real ? undefined : (scene.cast ?? []).find((m) => m.action === 'walk');
 	if (walker) {
 		// walking lasts until a key switches it off (same rule as castState)
 		const stop = (walker.keys ?? []).find((k) => k.action && k.action !== 'walk');
@@ -253,7 +254,7 @@ const Foley: React.FC<{scene: Scene; atFrame: (cue: {at?: number; word?: string}
 		<>
 			{cues.map((c, i) => (
 				<Sequence key={`fx${i}`} from={Math.max(0, c.from)} durationInFrames={ONE_SHOT_FRAMES}>
-					<Html5Audio src={staticFile(sfxFile(c.sound))} volume={c.volume} />
+					<Html5Audio src={staticFile(sfxFile(c.sound, real))} volume={c.volume} />
 				</Sequence>
 			))}
 		</>
