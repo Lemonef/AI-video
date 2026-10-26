@@ -1,6 +1,8 @@
 import type {Action, CastMember, Expr, Look, Pose} from '../types';
 
-export type CastState = {pose: Pose; expr: Expr; look: Look; facing: 1 | -1; action: Action; framesSinceFlip: number; x: number; walking: boolean};
+const TURN_FRAMES = 8; // head turns ease over this many frames instead of snapping
+
+export type CastState = {pose: Pose; expr: Expr; look: Look; facing: 1 | -1; action: Action; turn: number; framesSinceFlip: number; x: number; walking: boolean};
 
 /**
  * Resolve a cast member at `p` (fraction of the narration line elapsed; negative before the line
@@ -8,11 +10,13 @@ export type CastState = {pose: Pose; expr: Expr; look: Look; facing: 1 | -1; act
  */
 export const castState = (m: CastMember, p: number, lineSec: number, fps: number): CastState => {
 	const keys = [...(m.keys ?? [])].sort((a, b) => a.at - b.at);
-	const st = {pose: m.pose ?? 'idle', expr: m.expr ?? 'smile', look: m.look ?? 'center', facing: m.facing ?? 1, action: m.action ?? 'idle'} as Omit<
+	const st = {pose: m.pose ?? 'idle', expr: m.expr ?? 'smile', look: m.look ?? 'center', facing: m.facing ?? 1, action: m.action ?? 'idle', turn: m.turn ?? 0} as Omit<
 		CastState,
 		'framesSinceFlip' | 'x' | 'walking'
 	>;
 	let flipAt: number | null = null;
+	let turnFrom = st.turn;
+	let turnAt: number | null = null;
 	for (const k of keys) {
 		if (k.at > p) break;
 		if (k.facing !== undefined && k.facing !== st.facing) flipAt = k.at;
@@ -21,6 +25,11 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 		if (k.look) st.look = k.look;
 		if (k.facing !== undefined) st.facing = k.facing;
 		if (k.action) st.action = k.action;
+		if (k.turn !== undefined && k.turn !== st.turn) {
+			turnFrom = st.turn;
+			turnAt = k.at;
+			st.turn = k.turn;
+		}
 	}
 
 	// The walk runs from where 'walk' starts (base action or a key) to the next key that switches it off.
@@ -37,6 +46,12 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 	const walks = m.toX !== undefined && walkStart !== null;
 	const walkP = walks && walkEnd > walkStart! ? Math.min(1, Math.max(0, (p - walkStart!) / (walkEnd - walkStart!))) : 0;
 	const x = walks ? m.x + (m.toX! - m.x) * walkP : m.x;
+
+	if (turnAt !== null) {
+		const f = Math.min(1, ((p - turnAt) * lineSec * fps) / TURN_FRAMES);
+		const eased = f * f * (3 - 2 * f); // smoothstep
+		st.turn = turnFrom + (st.turn - turnFrom) * eased;
+	}
 
 	return {
 		...st,
