@@ -24,6 +24,6 @@ export const RemotionRoot: React.FC = () => (
 		defaultProps={{episode: CURRENT} satisfies EpisodeProps}
 		calculateMetadata={({props}) => ({durationInFrames: totalFrames(props.episode)})}
 		/>
-		<Composition id="Avatar" component={Avatar} width={1080} height={1080} fps={FPS} durationInFrames={1} />
+		<Composition id="Avatar" component={Avatar} width={1080} height={1080} fps={FPS} durationInFrames={1} defaultProps={{variant: 'sun' as const}} />
 	</>
 );
