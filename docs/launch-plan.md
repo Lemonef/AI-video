@@ -4,7 +4,7 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 
 ## Today: set up (10 minutes)
 
-1. Profile picture: `out/profile-picture.png`
+1. Profile picture: `out/avatar/avatar-sun.png` (or `-mint` / `-book`)
 2. Name: **ช่วยจ๊าบด้วย!**
 3. Bio: `จ๊าบเจอเรื่องแปลกทุกวัน 👀 คุณเลือก A/B จ๊าบทำตาม | ตอนใหม่ 20:00`
 4. Stay a **personal** account: business accounts only get the commercial music library, so no trending sounds.
