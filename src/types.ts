@@ -53,7 +53,8 @@ export type Scene = {
 	camera?: Camera;
 	padBefore?: number; // seconds of silence before the line
 	padAfter?: number; // seconds after
-	countdown?: number; // freeze: seconds of 3-2-1 after the line
+	countdown?: number; // seconds of 3-2-1
+	countdownAt?: number; // start at this fraction of the line (overlays it, adds no time); default = after the line
 	// v2 only
 	chip?: string; // time/place chip, e.g. "23:47 · ทางเข้าป่า"
 	intro?: {name: string; trait: string; at?: number};

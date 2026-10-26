@@ -304,8 +304,7 @@
           "turn": -0.3
         }
       ],
-      "padAfter": 0.2,
-      "countdown": 3
+      "padAfter": 0.5
     },
     {
       "id": "end",
@@ -338,7 +337,9 @@
           "torch": true
         }
       ],
-      "padAfter": 1.5
+      "padAfter": 1.5,
+      "countdown": 3,
+      "countdownAt": 0.05
     }
   ]
 }

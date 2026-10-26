@@ -44,7 +44,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const Env = ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const isFreeze = scene.type === 'freeze';
 	const isEnd = scene.type === 'endcard';
-	const countdownStart = lineSec + padAfter(ep, scene);
+	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 
 	const cam = scene.camera ?? {};
@@ -133,7 +133,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} /> : null}
 			{ep.rules && scene.rulesView ? <RulesCard title={ep.rules.title} rules={rules} big={scene.rulesView === 'big'} frame={frame} revealed={revealed} /> : null}
 			{isEnd && scene.a && scene.b ? <EndCard2 a={scene.a} b={scene.b} prompt={scene.prompt} footer={scene.footer} frame={frame} /> : null}
-			{isFreeze && scene.countdown ? <Countdown seconds={scene.countdown} t={tLine} start={countdownStart} /> : null}
+			{scene.countdown ? <Countdown seconds={scene.countdown} t={tLine} start={countdownStart} /> : null}
 			{timing && scene.showCaptions !== false ? <Captions2 cues={timing.cues} t={tLine} /> : null}
 
 			{timing ? (
@@ -146,7 +146,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					<Html5Audio src={staticFile(SFX.pop)} volume={0.35} />
 				</Sequence>
 			))}
-			{isFreeze && scene.countdown
+			{scene.countdown
 				? Array.from({length: scene.countdown}, (_, i) => (
 						<Sequence key={`tick${i}`} from={Math.round((padBefore + countdownStart + i) * FPS)} durationInFrames={FPS}>
 							<Html5Audio src={staticFile(SFX.tick)} volume={0.6} />

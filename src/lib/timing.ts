@@ -15,7 +15,9 @@ export const padAfter = (ep: Episode, s: Scene) => s.padAfter ?? PAD_AFTER[mode(
 
 export const lineDuration = (ep: Episode, s: Scene) => ep.timing?.[s.id]?.duration ?? Math.max(1.5, s.say.length / EST_CHARS_PER_SEC);
 
-export const sceneSeconds = (ep: Episode, s: Scene) => padBefore(ep, s) + lineDuration(ep, s) + padAfter(ep, s) + (s.countdown ?? 0);
+// A countdown overlaid on the line (countdownAt) costs no time; one after the line extends the scene.
+export const sceneSeconds = (ep: Episode, s: Scene) =>
+	padBefore(ep, s) + lineDuration(ep, s) + padAfter(ep, s) + (s.countdownAt === undefined ? s.countdown ?? 0 : 0);
 
 export const sceneFrames = (ep: Episode, s: Scene) => Math.ceil(sceneSeconds(ep, s) * FPS);
 

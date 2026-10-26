@@ -139,7 +139,7 @@ export const EndCard2: React.FC<{a: string; b: string; prompt?: string; footer?:
 		);
 	};
 	return (
-		<div style={{position: 'absolute', left: SAFE.left, width: SAFE.right - SAFE.left, top: 520, display: 'flex', flexDirection: 'column', gap: 34}}>
+		<div style={{position: 'absolute', left: SAFE.left, width: SAFE.right - SAFE.left, top: 580, display: 'flex', flexDirection: 'column', gap: 34}}>
 			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 80, color: V2.white, textAlign: 'center', textShadow: '0 6px 20px #000'}}>คุณจะทำยังไง?</div>
 			{row('A', a, V2.yellow, 4)}
 			{row('B', b, V2.red, 12)}
