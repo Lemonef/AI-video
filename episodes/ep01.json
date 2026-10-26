@@ -1,21 +1,46 @@
 {
   "id": "ep01",
   "title": "ถ้าทุกคนในกรุงเทพได้ยินความคิดคุณ — ตอน 1",
-  "voice": "th-TH-PremwadeeNeural",
-  "rate": "+0%",
+  "engine": "gemini",
+  "voice": "Charon",
   "scenes": [
     {
       "id": "hook",
       "bg": "bedroom",
       "title": "จะเกิดอะไรขึ้นถ้า…",
       "say": "จะเกิดอะไรขึ้น ถ้าวันนึงคุณตื่นมา แล้วทุกคนในกรุงเทพ ได้ยินความคิดคุณ",
-      "camera": {"from": 1, "to": 1.06, "x": 560, "y": 900},
-      "props": [{"type": "alarm", "x": 860, "y": 1070}],
-      "cast": [
-        {"who": "mochi", "x": 540, "y": 1250, "scale": 1.15, "pose": "yawn", "expr": "sleepy",
-         "keys": [{"at": 0.62, "pose": "shock", "expr": "shock", "action": "shake"}]}
+      "camera": {
+        "from": 1,
+        "to": 1.06,
+        "x": 560,
+        "y": 900
+      },
+      "props": [
+        {
+          "type": "alarm",
+          "x": 860,
+          "y": 1070
+        }
       ],
-      "padAfter": 0.4
+      "cast": [
+        {
+          "who": "mochi",
+          "x": 540,
+          "y": 1250,
+          "scale": 1.15,
+          "pose": "yawn",
+          "expr": "sleepy",
+          "keys": [
+            {
+              "at": 0.62,
+              "pose": "shock",
+              "expr": "shock",
+              "action": "shake"
+            }
+          ]
+        }
+      ],
+      "tone": "curious, inviting"
     },
     {
       "id": "s1-neighbor",
@@ -23,42 +48,155 @@
       "say": "เจ็ดโมงเช้า คุณคิดในใจว่า ไม่อยากไปทำงานเลย แล้วเพื่อนบ้านก็ตะโกนกลับมาว่า เหมือนกัน!",
       "caption": "7 โมงเช้า คุณคิดในใจว่า 'ไม่อยากไปทำงานเลย'… แล้วเพื่อนบ้านก็ตะโกนกลับมาว่า 'เหมือนกัน!'",
       "cast": [
-        {"who": "mochi", "x": 420, "y": 1250, "scale": 1.1, "pose": "yawn", "expr": "sleepy",
-         "keys": [
-           {"at": 0.3, "pose": "idle", "expr": "flat"},
-           {"at": 0.86, "pose": "shock", "expr": "shock", "look": "right", "action": "shake"}
-         ]}
+        {
+          "who": "mochi",
+          "x": 420,
+          "y": 1250,
+          "scale": 1.1,
+          "pose": "yawn",
+          "expr": "sleepy",
+          "keys": [
+            {
+              "at": 0.3,
+              "pose": "idle",
+              "expr": "flat"
+            },
+            {
+              "at": 0.86,
+              "pose": "shock",
+              "expr": "shock",
+              "look": "right",
+              "action": "shake"
+            }
+          ]
+        }
       ],
       "bubbles": [
-        {"kind": "thought", "text": "ไม่อยากไปทำงานเลย…", "x": 400, "y": 640, "at": 0.3},
-        {"kind": "shout", "text": "เหมือนกัน!!", "label": "ห้องข้างๆ", "x": 760, "y": 470, "at": 0.88, "tail": "left"}
+        {
+          "kind": "thought",
+          "text": "ไม่อยากไปทำงานเลย…",
+          "x": 400,
+          "y": 640,
+          "at": 0.3
+        },
+        {
+          "kind": "shout",
+          "text": "เหมือนกัน!!",
+          "label": "ห้องข้างๆ",
+          "x": 760,
+          "y": 470,
+          "at": 0.88,
+          "tail": "left"
+        }
       ],
-      "padAfter": 0.9
+      "padAfter": 0.9,
+      "tone": "deadpan, then surprised"
     },
     {
       "id": "s2-bts",
       "bg": "bts",
       "say": "บนบีทีเอส คุณพยายามไม่คิดอะไร แต่คนข้างๆ เปิดกล่องทุเรียน",
       "caption": "บน BTS คุณพยายามไม่คิดอะไร… แต่คนข้างๆ เปิดกล่องทุเรียน",
-      "props": [{"type": "durian", "x": 760, "y": 1085, "at": 0.55}],
+      "props": [
+        {
+          "type": "durian",
+          "x": 760,
+          "y": 1085,
+          "at": 0.55
+        }
+      ],
       "cast": [
-        {"who": "girl", "x": 150, "y": 1250, "scale": 0.92, "look": "left", "expr": "flat",
-         "keys": [{"at": 1.12, "look": "right", "expr": "shock", "action": "shake"}]},
-        {"who": "mochi", "x": 470, "y": 1250, "scale": 1.0, "pose": "hold", "expr": "flat",
-         "keys": [
-           {"at": 0.62, "expr": "gross", "look": "right"},
-           {"at": 1.2, "expr": "sweat", "pose": "shock", "look": "center"}
-         ]},
-        {"who": "uncle", "x": 850, "y": 1250, "scale": 0.95, "pose": "hold", "expr": "smile", "look": "left",
-         "keys": [{"at": 1.12, "expr": "angry", "pose": "point"}]},
-        {"who": "student", "x": 1040, "y": 1250, "scale": 0.9, "facing": -1, "expr": "flat", "look": "right",
-         "keys": [{"at": 1.12, "look": "left", "expr": "shock", "facing": 1}]}
+        {
+          "who": "girl",
+          "x": 150,
+          "y": 1250,
+          "scale": 0.92,
+          "look": "left",
+          "expr": "flat",
+          "keys": [
+            {
+              "at": 1.12,
+              "look": "right",
+              "expr": "shock",
+              "action": "shake"
+            }
+          ]
+        },
+        {
+          "who": "mochi",
+          "x": 470,
+          "y": 1250,
+          "scale": 1.0,
+          "pose": "hold",
+          "expr": "flat",
+          "keys": [
+            {
+              "at": 0.62,
+              "expr": "gross",
+              "look": "right"
+            },
+            {
+              "at": 1.2,
+              "expr": "sweat",
+              "pose": "shock",
+              "look": "center"
+            }
+          ]
+        },
+        {
+          "who": "uncle",
+          "x": 850,
+          "y": 1250,
+          "scale": 0.95,
+          "pose": "hold",
+          "expr": "smile",
+          "look": "left",
+          "keys": [
+            {
+              "at": 1.12,
+              "expr": "angry",
+              "pose": "point"
+            }
+          ]
+        },
+        {
+          "who": "student",
+          "x": 1040,
+          "y": 1250,
+          "scale": 0.9,
+          "facing": -1,
+          "expr": "flat",
+          "look": "right",
+          "keys": [
+            {
+              "at": 1.12,
+              "look": "left",
+              "expr": "shock",
+              "facing": 1
+            }
+          ]
+        }
       ],
       "bubbles": [
-        {"kind": "thought", "text": "กลิ่นอะไรเนี่ย…", "x": 470, "y": 640, "at": 0.98},
-        {"kind": "speech", "text": "ได้ยินนะ!", "label": "ทั้งตู้", "x": 760, "y": 560, "at": 1.18, "tail": "left"}
+        {
+          "kind": "thought",
+          "text": "กลิ่นอะไรเนี่ย…",
+          "x": 470,
+          "y": 640,
+          "at": 0.98
+        },
+        {
+          "kind": "speech",
+          "text": "ได้ยินนะ!",
+          "label": "ทั้งตู้",
+          "x": 760,
+          "y": 560,
+          "at": 1.18,
+          "tail": "left"
+        }
       ],
-      "padAfter": 1.7
+      "padAfter": 1.7,
+      "tone": "suspenseful whisper"
     },
     {
       "id": "s3-boss",
@@ -66,18 +204,55 @@
       "say": "หัวหน้าเรียกเข้าห้อง ขอดูงานที่สั่งเมื่อวานหน่อย ซึ่งคุณยังไม่ได้ทำ",
       "caption": "หัวหน้าเรียกเข้าห้อง 'ขอดูงานที่สั่งเมื่อวานหน่อย'… ซึ่งคุณยังไม่ได้ทำ",
       "cast": [
-        {"who": "boss", "x": 760, "y": 1250, "scale": 1.05, "pose": "armsCrossed", "expr": "flat", "look": "left"},
-        {"who": "mochi", "x": -160, "toX": 300, "y": 1250, "scale": 1.0, "action": "walk", "expr": "smile",
-         "keys": [
-           {"at": 0.3, "action": "idle", "look": "right"},
-           {"at": 0.72, "expr": "sweat", "action": "wobble"}
-         ]}
+        {
+          "who": "boss",
+          "x": 760,
+          "y": 1250,
+          "scale": 1.05,
+          "pose": "armsCrossed",
+          "expr": "flat",
+          "look": "left"
+        },
+        {
+          "who": "mochi",
+          "x": -160,
+          "toX": 300,
+          "y": 1250,
+          "scale": 1.0,
+          "action": "walk",
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.3,
+              "action": "idle",
+              "look": "right"
+            },
+            {
+              "at": 0.72,
+              "expr": "sweat",
+              "action": "wobble"
+            }
+          ]
+        }
       ],
       "bubbles": [
-        {"kind": "speech", "text": "ขอดูงานที่สั่งเมื่อวานหน่อย", "x": 700, "y": 560, "at": 0.3, "tail": "down"},
-        {"kind": "thought", "text": "ยังไม่ได้ทำ…", "x": 300, "y": 660, "at": 0.78}
+        {
+          "kind": "speech",
+          "text": "ขอดูงานที่สั่งเมื่อวานหน่อย",
+          "x": 700,
+          "y": 560,
+          "at": 0.3,
+          "tail": "down"
+        },
+        {
+          "kind": "thought",
+          "text": "ยังไม่ได้ทำ…",
+          "x": 300,
+          "y": 660,
+          "at": 0.78
+        }
       ],
-      "padAfter": 0.6
+      "tone": "nervous"
     },
     {
       "id": "freeze",
@@ -85,12 +260,26 @@
       "bg": "closeup",
       "say": "คุณมีเวลา สามวินาที ก่อนความคิดจะหลุดออกไป",
       "caption": "คุณมีเวลา 3 วินาที ก่อนความคิดจะหลุดออกไป",
-      "camera": {"from": 1, "to": 1.12, "x": 540, "y": 990},
+      "camera": {
+        "from": 1,
+        "to": 1.12,
+        "x": 540,
+        "y": 990
+      },
       "cast": [
-        {"who": "mochi", "x": 540, "y": 1950, "scale": 2.2, "pose": "shock", "expr": "sweat", "action": "shake"}
+        {
+          "who": "mochi",
+          "x": 540,
+          "y": 1950,
+          "scale": 2.2,
+          "pose": "shock",
+          "expr": "sweat",
+          "action": "shake"
+        }
       ],
       "padAfter": 0.2,
-      "countdown": 3
+      "countdown": 3,
+      "tone": "urgent, fast"
     },
     {
       "id": "end",
@@ -103,9 +292,18 @@
       "prompt": "คอมเมนต์มา 👇",
       "footer": "ตอนต่อไปมาแน่!",
       "cast": [
-        {"who": "mochi", "x": 540, "y": 1900, "scale": 0.75, "pose": "wave", "expr": "smile", "action": "bounce"}
+        {
+          "who": "mochi",
+          "x": 540,
+          "y": 1900,
+          "scale": 0.75,
+          "pose": "wave",
+          "expr": "smile",
+          "action": "bounce"
+        }
       ],
-      "padAfter": 2.0
+      "padAfter": 2.0,
+      "tone": "excited, playful"
     }
   ]
 }
