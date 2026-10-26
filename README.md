@@ -5,7 +5,7 @@ Data-driven pipeline for a Thai TikTok "What If" series: flat-2D characters draw
 ## Make the next episode (one command)
 
 ```bash
-cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = v2 template)
+cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = current template)
 .venv/Scripts/python scripts/make.py ep03   # -> out/ep03.mp4
 ```
 
@@ -21,6 +21,20 @@ cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = v2 tem
 Check what the voice actually said: `.venv/Scripts/python scripts/transcribe.py out/ep03.mp4`.
 
 Preview while editing: `npm run studio` (uses ep01 with estimated timing, no audio until `make.py` has run).
+
+## Folder layout
+
+```
+episodes/        one JSON per episode (ep01, ep02 = current)   archive/ = old style experiments
+src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
+scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
+public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
+out/             finished videos only: epNN.mp4, versions/ (each style version), voices/ (voice samples), refs/
+out/.build/      intermediates: raw renders, props, logs (safe to delete)
+docs/            TODO, cinematic-guide (the rules every episode follows), references
+```
+
+Style versions are frozen as git tags (`v1`, `v2`, `v3`) and as videos in `out/versions/`. The current look is v6: the v3 cast and side-on walk, with the cleaner forest, real CC0 sound, and the cinematic-guide pacing (silent cuts, a silence before the hit, J-cuts, colour script, an escalating heartbeat).
 
 ## First-time setup
 

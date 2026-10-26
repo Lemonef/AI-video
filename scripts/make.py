@@ -44,9 +44,11 @@ def main() -> None:
     sfx.ensure(public)
     if args.no_render:
         return
+    # Finished videos live in out/; everything intermediate (raw render, props, logs) in out/.build/.
     out = ROOT / "out" / f"{args.episode}.mp4"
-    raw = out.with_suffix(".raw.mp4")
-    out.parent.mkdir(exist_ok=True)
+    build = ROOT / "out" / ".build"
+    build.mkdir(parents=True, exist_ok=True)
+    raw = build / f"{args.episode}.raw.mp4"
     print(f"[3/4] render -> {raw.relative_to(ROOT)}")
     render(ROOT, episode, timing, raw)
     print(f"[4/4] loudness master -> {out.relative_to(ROOT)}")

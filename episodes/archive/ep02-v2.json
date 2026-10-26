@@ -1,20 +1,10 @@
 {
-  "id": "ep02v5",
+  "id": "ep02",
   "title": "กฎเข้าป่าตอนกลางคืน — ตอน 1",
-  "style": "v5",
+  "style": "v2",
   "engine": "gemini",
   "voice": "Iapetus",
   "tempo": 1.08,
-  "mix": {
-    "beds": [
-      "wind",
-      "crickets",
-      "drone",
-      "rain"
-    ],
-    "duck": 0.45,
-    "bedVolume": 0.55
-  },
   "rules": {
     "title": "กฎเข้าป่าตอนกลางคืน",
     "items": [
@@ -26,11 +16,11 @@
   "scenes": [
     {
       "id": "hook",
-      "bg": "forestDepth",
+      "bg": "forestEdge",
       "chip": "23:40 · ทางเข้าป่า",
       "intro": {
-        "name": "จ๊าบ",
-        "trait": "กลัวทุกอย่าง แต่อยากรู้ทุกเรื่อง",
+        "name": "โมจิ",
+        "trait": "ขี้กลัว แต่ขี้สงสัยกว่า",
         "at": 0.45
       },
       "tone": "storytelling, suspenseful",
@@ -44,10 +34,10 @@
       },
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 600,
+          "y": 1560,
+          "scale": 0.82,
           "expr": "flat",
           "turn": -0.5,
           "torch": false,
@@ -59,53 +49,21 @@
             }
           ]
         }
-      ],
-      "beds": {
-        "wind": 0.5,
-        "crickets": 0.6,
-        "drone": 0.15
-      },
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.55,
-          "zoom": 1.35,
-          "x": 540,
-          "y": 1500
-        }
-      ],
-      "sfx": []
+      ]
     },
     {
       "id": "rules",
-      "bg": "forestDepth",
+      "bg": "forestEdge",
       "rulesView": "big",
       "reveal": 3,
       "showCaptions": false,
       "transition": "whip",
       "say": "ข้อแรก ห้ามเดินออกนอกทาง ข้อสอง ถ้ามีใครเรียกชื่อคุณ ห้ามขานรับ และข้อสุดท้าย ห้ามส่องไฟฉายไปข้างหลังเด็ดขาด",
-      "padAfter": 0.3,
-      "beds": {
-        "wind": 0.25,
-        "crickets": 0.25,
-        "drone": 0.45
-      },
-      "sfx": [
-        {
-          "at": 0.02,
-          "sound": "click",
-          "volume": 0.5
-        }
-      ]
+      "padAfter": 0.3
     },
     {
       "id": "walk",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "chip": "23:52 · ลึกเข้าไป 300 เมตร",
       "rulesView": "hud",
       "scroll": 7,
@@ -113,53 +71,21 @@
       "caption": "คุณเดินเข้าไปคนเดียว… ทุกอย่าง *ปกติ* ไฟฉายส่องทางข้างหน้า",
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
+          "who": "mochi",
+          "x": 360,
           "toX": 360,
-          "y": 1640,
-          "scale": 0.95,
+          "y": 1560,
+          "scale": 1.0,
           "action": "walk",
           "expr": "flat",
           "turn": 0.6,
           "torch": true
         }
-      ],
-      "beds": {
-        "wind": 0.45,
-        "crickets": 0.85,
-        "drone": 0.15
-      },
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.4,
-          "zoom": 1.6,
-          "x": 760,
-          "y": 1500
-        },
-        {
-          "at": 0.72,
-          "zoom": 1.8,
-          "x": 540,
-          "y": 1560
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.05,
-          "sound": "click",
-          "volume": 0.6
-        }
       ]
     },
     {
       "id": "silence",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "chip": "23:58",
       "rulesView": "hud",
       "fireflies": false,
@@ -175,10 +101,10 @@
       },
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 360,
+          "y": 1560,
+          "scale": 1.0,
           "expr": "flat",
           "turn": 0.6,
           "torch": true,
@@ -190,56 +116,24 @@
             }
           ]
         }
-      ],
-      "beds": {
-        "wind": 0.3,
-        "crickets": 0,
-        "drone": 0.6
-      },
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.5,
-          "zoom": 1.8,
-          "x": 540,
-          "y": 1560
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.6,
-          "word": "เงียบ",
-          "sound": "heartbeat",
-          "volume": 0.8
-        },
-        {
-          "at": 1.0,
-          "sound": "heartbeat",
-          "volume": 0.8
-        }
       ]
     },
     {
       "id": "call",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
       "tone": "whispers",
-      "say": "มีเสียงเรียกชื่อคุณจากข้างหลัง… จ๊าบ…",
-      "caption": "มีเสียง *เรียกชื่อคุณ* จากข้างหลัง… 'จ๊าบ…'",
+      "say": "มีเสียงเรียกชื่อคุณจากข้างหลัง… โมจิ…",
+      "caption": "มีเสียง *เรียกชื่อคุณ* จากข้างหลัง… 'โมจิ…'",
       "shake": 3,
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 360,
+          "y": 1560,
+          "scale": 1.0,
           "expr": "sweat",
           "turn": 0.1,
           "torch": true,
@@ -255,55 +149,25 @@
       "bubbles": [
         {
           "kind": "speech",
-          "text": "จ๊าบ…",
+          "text": "โมจิ…",
           "label": "???",
-          "x": 300,
-          "y": 760,
+          "x": 150,
+          "y": 720,
           "at": 0.62,
-          "tail": "right",
-          "word": "จ๊าบ"
+          "tail": "right"
         }
       ],
       "padAfter": 0.3,
       "hits": [
         {
           "at": 0.62,
-          "word": "จ๊าบ",
           "strength": 18
-        }
-      ],
-      "beds": {
-        "wind": 0.25,
-        "drone": 0.75,
-        "rain": 0.5
-      },
-      "rain": true,
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.62,
-          "word": "จ๊าบ",
-          "zoom": 1.8,
-          "x": 540,
-          "y": 1560
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.15,
-          "sound": "riser",
-          "volume": 0.45
         }
       ]
     },
     {
       "id": "answer",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
@@ -317,10 +181,10 @@
       ],
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 360,
+          "y": 1560,
+          "scale": 1.0,
           "expr": "shock",
           "turn": 0.1,
           "torch": true,
@@ -341,54 +205,27 @@
         {
           "kind": "speech",
           "text": "ครับ?",
-          "x": 760,
-          "y": 640,
+          "x": 620,
+          "y": 600,
           "at": 0.62,
-          "tail": "left",
-          "word": "ครับ"
+          "tail": "left"
         }
       ],
       "padAfter": 0.3,
       "hits": [
         {
           "at": 0.85,
-          "word": "ครับ",
           "strength": 12
-        }
-      ],
-      "beds": {
-        "drone": 0.7,
-        "rain": 0.5
-      },
-      "rain": true,
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.8,
-          "x": 540,
-          "y": 1560
-        },
-        {
-          "at": 0.85,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.9,
-          "sound": "heartbeat",
-          "volume": 0.8
         }
       ]
     },
     {
       "id": "twist",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
+      "density": 1.3,
       "tone": "whispers",
       "say": "ทั้งที่คุณเข้ามาคนเดียว แต่เสียงนั้นกลับตอบมาว่า เจอแล้ว",
       "caption": "ทั้งที่คุณเข้ามา *คนเดียว*… แต่เสียงนั้นตอบมาว่า '*เจอแล้ว*'",
@@ -402,18 +239,18 @@
       "props": [
         {
           "type": "watcher",
-          "x": 120,
-          "y": 1560,
-          "scale": 1.0,
+          "x": 110,
+          "y": 1540,
+          "scale": 1.15,
           "at": 0.55
         }
       ],
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 400,
+          "y": 1560,
+          "scale": 1.0,
           "expr": "shock",
           "turn": -0.7,
           "torch": true,
@@ -424,11 +261,10 @@
         {
           "kind": "shout",
           "text": "เจอแล้ว",
-          "x": 260,
-          "y": 820,
+          "x": 330,
+          "y": 880,
           "at": 0.92,
-          "tail": "left",
-          "word": "เจอแล้ว"
+          "tail": "left"
         }
       ],
       "padAfter": 0.6,
@@ -439,47 +275,7 @@
         },
         {
           "at": 0.92,
-          "word": "เจอแล้ว",
           "strength": 34
-        }
-      ],
-      "beds": {
-        "drone": 0.9,
-        "rain": 0.6
-      },
-      "rain": true,
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.55,
-          "zoom": 1.5,
-          "x": 120,
-          "y": 1500
-        },
-        {
-          "at": 0.9,
-          "word": "เจอแล้ว",
-          "zoom": 1.8,
-          "x": 540,
-          "y": 1560
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.55,
-          "sound": "stinger",
-          "volume": 0.75
-        },
-        {
-          "at": 0.92,
-          "word": "เจอแล้ว",
-          "sound": "boom",
-          "volume": 1.0
         }
       ]
     },
@@ -499,38 +295,21 @@
       },
       "cast": [
         {
-          "who": "jaab",
+          "who": "mochi",
           "x": 540,
-          "y": 1980,
-          "scale": 1.8,
+          "y": 2950,
+          "scale": 2.4,
           "pose": "shock",
           "expr": "shock",
           "turn": -0.3
         }
       ],
-      "padAfter": 0.5,
-      "beds": {
-        "drone": 0.15,
-        "rain": 0.2
-      },
-      "rain": true,
-      "sfx": [
-        {
-          "at": 0.0,
-          "sound": "heartbeat",
-          "volume": 0.9
-        },
-        {
-          "at": 0.6,
-          "sound": "heartbeat",
-          "volume": 0.9
-        }
-      ]
+      "padAfter": 0.5
     },
     {
       "id": "end",
       "type": "endcard",
-      "bg": "forestDepth",
+      "bg": "forestPath",
       "fireflies": false,
       "showCaptions": false,
       "tone": "playful",
@@ -542,17 +321,17 @@
       "props": [
         {
           "type": "watcher",
-          "x": 120,
-          "y": 1560,
-          "scale": 1.0
+          "x": 110,
+          "y": 1540,
+          "scale": 1.15
         }
       ],
       "cast": [
         {
-          "who": "jaab",
-          "x": 540,
-          "y": 1640,
-          "scale": 0.95,
+          "who": "mochi",
+          "x": 400,
+          "y": 1560,
+          "scale": 1.0,
           "expr": "shock",
           "turn": -0.7,
           "torch": true
@@ -560,23 +339,8 @@
       ],
       "padAfter": 1.5,
       "countdown": 3,
-      "countdownAt": 0.05,
-      "beds": {
-        "drone": 0.35,
-        "rain": 0.35,
-        "wind": 0.2
-      },
-      "rain": true,
-      "choices": {
-        "a": {
-          "x": 900,
-          "y": 1330
-        },
-        "b": {
-          "x": 120,
-          "y": 1250
-        }
-      }
+      "countdownAt": 0.05
     }
-  ]
+  ],
+  "_note": "archived style experiment (v2); render with: make.py needs it back in episodes/ (git tag v2 if tagged)"
 }

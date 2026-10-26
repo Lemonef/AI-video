@@ -34,7 +34,9 @@ export const sceneSpans = (ep: Episode): SceneSpan[] => {
 	return ep.scenes.map((scene) => {
 		const frames = sceneFrames(ep, scene);
 		const lineSec = lineDuration(ep, scene);
-		const switchAt = scene.bedsAt ? from + Math.round((padBefore(ep, scene) + cueAt(scene.bedsAt, ep.timing?.[scene.id], lineSec) * lineSec) * FPS) : from;
+		const switchAt = scene.bedsAt
+			? from + Math.round((padBefore(ep, scene) + cueAt(scene.bedsAt, ep.timing?.[scene.id], lineSec) * lineSec) * FPS)
+			: from - Math.round((scene.bedsLead ?? 0) * FPS); // J-cut: sound of the next scene arrives first
 		const span = {scene, from, frames, switchAt, fade: (scene.bedsFade ?? BED_FADE_SEC) * FPS, waits: scene.bedsAt?.only};
 		from += frames;
 		return span;
@@ -75,3 +77,28 @@ export const bedLevel = (spans: SceneSpan[], bed: string, frame: number): number
 	return i === 0 ? level(0) : level(i - 1) + (level(i) - level(i - 1)) * k;
 };
 
+
+export const HUSH_FLOOR = 0.04; // "silence" keeps a breath of air: true digital silence sounds like a glitch
+const HUSH_EDGE_SEC = 0.12;
+
+/** Episode-frame windows where every bed drops to HUSH_FLOOR (silence before a hit). */
+export const hushWindows = (ep: Episode, spans: SceneSpan[]): Array<[number, number]> =>
+	spans.flatMap(({scene, from}) => {
+		if (!scene.hush) return [];
+		const lineSec = lineDuration(ep, scene);
+		const wordAt = from + (padBefore(ep, scene) + cueAt({word: scene.hush.word}, ep.timing?.[scene.id], lineSec) * lineSec) * FPS;
+		const lead = (scene.hush.lead ?? 0.7) * FPS;
+		return [[wordAt - lead, wordAt + (scene.hush.hold ?? 0.2) * FPS] as [number, number]];
+	});
+
+/** 1 normally, easing to HUSH_FLOOR inside a hush window. */
+export const hushLevel = (windows: Array<[number, number]>, frame: number): number => {
+	const edge = HUSH_EDGE_SEC * FPS;
+	let v = 1;
+	for (const [a, b] of windows) {
+		if (frame < a - edge || frame > b + edge) continue;
+		const inside = frame < a ? (frame - (a - edge)) / edge : frame > b ? 1 - (frame - b) / edge : 1;
+		v = Math.min(v, 1 - (1 - HUSH_FLOOR) * Math.max(0, Math.min(1, inside)));
+	}
+	return v;
+};

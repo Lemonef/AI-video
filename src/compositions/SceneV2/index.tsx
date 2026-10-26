@@ -65,12 +65,12 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 	const at = (cue: {at?: number; word?: string}) => cueAt(cue, timing, lineSec);
 
-	const shot = [...(scene.shots ?? [])].reverse().find((s) => p >= s.at);
+	const shot = [...(scene.shots ?? [])].reverse().find((s) => p >= at(s));
 	const cam = shot ? {from: shot.zoom, to: shot.zoom * SHOT_PUSH, x: shot.x, y: shot.y} : scene.camera ?? {};
-	const camStart = shot ? padBefore + shot.at * lineSec : 0;
+	const camStart = shot ? padBefore + at(shot) * lineSec : 0;
 	const zoom = interpolate(t, [camStart, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1], {extrapolateLeft: 'clamp'});
 	const shake = (scene.shake ?? 0) * (isFreeze && tLine > lineSec ? 0 : 1);
-	const hh = handheld(frame);
+	const hh = ep.handheld ?? !v6 ? handheld(frame) : {x: 0, y: 0, r: 0};
 	// Jolts: fast oscillation under an exponential-ish decay from each hit moment.
 	const jolt = (scene.hits ?? []).reduce((amp, h) => {
 		const dt = tLine - at(h) * lineSec;
@@ -138,7 +138,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 						filter: [isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : '', v3 ? V3_GRADE : ''].join(' ').trim() || undefined,
 					}}
 				>
-					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: v4 ? V4_WORLD_GRADE : undefined}}>
+					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: v4 ? V4_WORLD_GRADE : v6 ? scene.grade : undefined}}>
 						<Env frame={frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} />
 						{(scene.props ?? []).map((pr, i) => {
 							const P = PROPS2[pr.type];
@@ -180,7 +180,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				{v3 && scene.rain ? <Rain frame={frame} /> : null}
 				{v4 ? <Bokeh frame={frame} /> : null}
 				<Film frame={frame} vignette={isFreeze ? 0.92 : 0.75} />
-				{v4 && scene.tint ? (
+				{(v4 || v6) && scene.tint ? (
 					<AbsoluteFill
 						style={{
 							background: scene.tint.color,
@@ -193,8 +193,8 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			</AbsoluteFill>
 
 			{scene.chip && !v4 ? <Chip text={scene.chip} /> : null}
-			{v4 && scene.title ? <BigTitle text={scene.title} frame={frame} /> : null}
-			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} top={v4 && scene.title ? INTRO_BELOW_TITLE : undefined} /> : null}
+			{(v4 || v6) && scene.title ? <BigTitle text={scene.title} frame={frame} /> : null}
+			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} top={(v4 || v6) && scene.title ? INTRO_BELOW_TITLE : undefined} /> : null}
 			{ep.rules && scene.rulesView && !(v4 && scene.rulesView === 'hud') ? <RulesCard title={ep.rules.title} rules={rules} big={scene.rulesView === 'big'} frame={frame} revealed={revealed} /> : null}
 			{v4 && ep.rules && scene.rulesView === 'hud' ? <RulesMini rules={rules} chip={scene.chip} /> : null}
 			{scene.stat && p >= (scene.stat.at ?? 0) ? <StatCard value={scene.stat.value} label={scene.stat.label} frame={frame - atFrame(scene.stat.at ?? 0)} /> : null}
@@ -231,15 +231,21 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 };
 
 const HIT_VOLUME_PER_PX = 1 / 30; // impact loudness follows the jolt strength
+const HIT_SOUND_MIN = 20; // weaker jolts stay silent: not every bump deserves a sound
 const ONE_SHOT_FRAMES = FPS * 3;
 
 /** v3 sound cues: authored `sfx`, plus automatic impacts on hits, footsteps while walking, swishes on cuts. */
 const Foley: React.FC<{scene: Scene; real: boolean; atFrame: (cue: {at?: number; word?: string}) => number; totalFrames: number}> = ({scene, real, atFrame, totalFrames}) => {
-	const cues: Array<{from: number; sound: string; volume: number}> = [];
-	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8}));
-	(scene.hits ?? []).forEach((h) => cues.push({from: atFrame(h), sound: 'impact', volume: Math.min(1, (h.strength ?? 26) * HIT_VOLUME_PER_PX)}));
+	const cues: Array<{from: number; sound: string; volume: number; rate?: number}> = [];
+	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8, rate: c.rate}));
+	(scene.hits ?? []).forEach((h) => {
+		const strength = h.strength ?? 26;
+		const sound = h.sound ?? (strength >= HIT_SOUND_MIN ? 'impact' : '');
+		if (sound) cues.push({from: atFrame(h), sound, volume: Math.min(1, strength * HIT_VOLUME_PER_PX)});
+	});
+	// Cuts are silent (as in film) unless a shot names its sound.
 	(scene.shots ?? []).forEach((s) => {
-		if (s.at > 0) cues.push({from: atFrame(s), sound: 'swish', volume: 0.35});
+		if (s.sound) cues.push({from: atFrame(s), sound: s.sound, volume: 0.45});
 	});
 	if (scene.transition === 'whip') cues.push({from: 0, sound: 'swish', volume: 0.5});
 	// recorded footsteps come in as a bed (`steps`); synthetic ones are placed per footfall
@@ -254,7 +260,7 @@ const Foley: React.FC<{scene: Scene; real: boolean; atFrame: (cue: {at?: number;
 		<>
 			{cues.map((c, i) => (
 				<Sequence key={`fx${i}`} from={Math.max(0, c.from)} durationInFrames={ONE_SHOT_FRAMES}>
-					<Html5Audio src={staticFile(sfxFile(c.sound, real))} volume={c.volume} />
+					<Html5Audio src={staticFile(sfxFile(c.sound, real))} volume={c.volume} playbackRate={c.rate ?? 1} />
 				</Sequence>
 			))}
 		</>

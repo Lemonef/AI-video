@@ -569,5 +569,6 @@
         }
       }
     }
-  ]
+  ],
+  "_note": "archived style experiment (v3); render with: make.py needs it back in episodes/ (git tag v3 if tagged)"
 }

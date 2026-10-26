@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Html5Audio, Sequence, staticFile} from 'remotion';
-import {bedLevel, sceneSpans, sfxFile, speechEnvelope, speechMask} from '../../v2/sound';
+import {bedLevel, hushLevel, hushWindows, sceneSpans, sfxFile, speechEnvelope, speechMask} from '../../v2/sound';
 import {SFX} from '../../lib/tokens';
 import {sceneFrames} from '../../lib/timing';
 import type {Episode as EpisodeT} from '../../types';
@@ -16,6 +16,7 @@ const Beds: React.FC<{episode: EpisodeT}> = ({episode}) => {
 	if (!mix) return null;
 	const spans = sceneSpans(episode);
 	const mask = speechMask(episode, spans);
+	const hush = hushWindows(episode, spans);
 	const duck = mix.duck ?? 0.45; // bed drops to this fraction while the narrator speaks
 	const base = mix.bedVolume ?? 0.5;
 	return (
@@ -25,7 +26,7 @@ const Beds: React.FC<{episode: EpisodeT}> = ({episode}) => {
 					key={bed}
 					src={staticFile(sfxFile(bed, mix.real))}
 					loop
-					volume={(f) => base * bedLevel(spans, bed, f) * (1 - (1 - duck) * speechEnvelope(mask, f))}
+					volume={(f) => base * bedLevel(spans, bed, f) * (1 - (1 - duck) * speechEnvelope(mask, f)) * hushLevel(hush, f)}
 				/>
 			))}
 		</>

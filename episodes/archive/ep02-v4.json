@@ -1,7 +1,7 @@
 {
-  "id": "ep02v6",
+  "id": "ep02v4",
   "title": "กฎเข้าป่าตอนกลางคืน — ตอน 1",
-  "style": "v6",
+  "style": "v4",
   "engine": "gemini",
   "voice": "Iapetus",
   "tempo": 1.08,
@@ -10,12 +10,10 @@
       "wind",
       "crickets",
       "drone",
-      "rain",
-      "steps"
+      "rain"
     ],
-    "duck": 0.4,
-    "bedVolume": 0.9,
-    "real": true
+    "duck": 0.45,
+    "bedVolume": 0.55
   },
   "rules": {
     "title": "กฎเข้าป่าตอนกลางคืน",
@@ -28,12 +26,12 @@
   "scenes": [
     {
       "id": "hook",
-      "bg": "forestSide",
+      "bg": "forestEdge",
       "chip": "23:40 · ทางเข้าป่า",
       "intro": {
         "name": "จ๊าบ",
         "trait": "กลัวทุกอย่าง แต่อยากรู้ทุกเรื่อง",
-        "at": 0.45
+        "at": 0.6
       },
       "tone": "storytelling, suspenseful",
       "say": "ถ้าคุณต้องเดินเข้าป่าคนเดียวตอนกลางคืน และมีกฎอยู่แค่สามข้อ",
@@ -46,7 +44,7 @@
       },
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 600,
           "y": 1560,
           "scale": 0.82,
@@ -65,8 +63,7 @@
       "beds": {
         "wind": 0.5,
         "crickets": 0.6,
-        "drone": 0.15,
-        "steps": 0
+        "drone": 0.15
       },
       "shots": [
         {
@@ -82,11 +79,12 @@
           "y": 880
         }
       ],
-      "sfx": []
+      "sfx": [],
+      "title": "เดินเข้าป่าคนเดียว\nห้าม*ขานรับ*"
     },
     {
       "id": "rules",
-      "bg": "forestSide",
+      "bg": "forestEdge",
       "rulesView": "big",
       "reveal": 3,
       "showCaptions": false,
@@ -96,8 +94,7 @@
       "beds": {
         "wind": 0.25,
         "crickets": 0.25,
-        "drone": 0.45,
-        "steps": 0
+        "drone": 0.45
       },
       "sfx": [
         {
@@ -109,7 +106,7 @@
     },
     {
       "id": "walk",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "chip": "23:52 · ลึกเข้าไป 300 เมตร",
       "rulesView": "hud",
       "scroll": 7,
@@ -117,7 +114,7 @@
       "caption": "คุณเดินเข้าไปคนเดียว… ทุกอย่าง *ปกติ* ไฟฉายส่องทางข้างหน้า",
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 360,
           "toX": 360,
           "y": 1560,
@@ -131,8 +128,7 @@
       "beds": {
         "wind": 0.45,
         "crickets": 0.85,
-        "drone": 0.15,
-        "steps": 0.9
+        "drone": 0.15
       },
       "shots": [
         {
@@ -164,7 +160,7 @@
     },
     {
       "id": "silence",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "chip": "23:58",
       "rulesView": "hud",
       "fireflies": false,
@@ -180,7 +176,7 @@
       },
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 360,
           "y": 1560,
           "scale": 1.0,
@@ -199,8 +195,7 @@
       "beds": {
         "wind": 0.3,
         "crickets": 0,
-        "drone": 0.6,
-        "steps": 0
+        "drone": 0.6
       },
       "shots": [
         {
@@ -228,18 +223,14 @@
           "volume": 0.8
         }
       ],
-      "bedsAt": {
-        "at": 0.6,
-        "word": "เงียบ",
-        "only": [
-          "crickets"
-        ]
-      },
-      "bedsFade": 0.15
+      "blackout": {
+        "at": 0.62,
+        "sec": 0.6
+      }
     },
     {
       "id": "call",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
@@ -249,7 +240,7 @@
       "shake": 3,
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 360,
           "y": 1560,
           "scale": 1.0,
@@ -270,26 +261,23 @@
           "kind": "speech",
           "text": "จ๊าบ…",
           "label": "???",
-          "x": 330,
-          "y": 760,
+          "x": 150,
+          "y": 720,
           "at": 0.62,
-          "tail": "right",
-          "word": "จ๊าบ"
+          "tail": "right"
         }
       ],
       "padAfter": 0.3,
       "hits": [
         {
           "at": 0.62,
-          "word": "จ๊าบ",
           "strength": 18
         }
       ],
       "beds": {
         "wind": 0.25,
         "drone": 0.75,
-        "rain": 0.5,
-        "steps": 0
+        "rain": 0.5
       },
       "rain": true,
       "shots": [
@@ -316,7 +304,7 @@
     },
     {
       "id": "answer",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
@@ -330,7 +318,7 @@
       ],
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 360,
           "y": 1560,
           "scale": 1.0,
@@ -357,8 +345,7 @@
           "x": 620,
           "y": 600,
           "at": 0.62,
-          "tail": "left",
-          "word": "ครับ"
+          "tail": "left"
         }
       ],
       "padAfter": 0.3,
@@ -370,8 +357,7 @@
       ],
       "beds": {
         "drone": 0.7,
-        "rain": 0.5,
-        "steps": 0
+        "rain": 0.5
       },
       "rain": true,
       "shots": [
@@ -398,10 +384,11 @@
     },
     {
       "id": "twist",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "rulesView": "hud",
       "fireflies": false,
       "transition": "cut",
+      "density": 1.3,
       "tone": "whispers",
       "say": "ทั้งที่คุณเข้ามาคนเดียว แต่เสียงนั้นกลับตอบมาว่า เจอแล้ว",
       "caption": "ทั้งที่คุณเข้ามา *คนเดียว*… แต่เสียงนั้นตอบมาว่า '*เจอแล้ว*'",
@@ -423,7 +410,7 @@
       ],
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 400,
           "y": 1560,
           "scale": 1.0,
@@ -440,8 +427,7 @@
           "x": 200,
           "y": 820,
           "at": 0.92,
-          "tail": "left",
-          "word": "เจอแล้ว"
+          "tail": "left"
         }
       ],
       "padAfter": 0.6,
@@ -452,14 +438,12 @@
         },
         {
           "at": 0.92,
-          "strength": 34,
-          "word": "เจอแล้ว"
+          "strength": 34
         }
       ],
       "beds": {
         "drone": 0.9,
-        "rain": 0.6,
-        "steps": 0
+        "rain": 0.6
       },
       "rain": true,
       "shots": [
@@ -491,10 +475,14 @@
         {
           "at": 0.92,
           "sound": "boom",
-          "volume": 1.0,
-          "word": "เจอแล้ว"
+          "volume": 1.0
         }
-      ]
+      ],
+      "tint": {
+        "color": "#B3262B",
+        "at": 0.9,
+        "strength": 0.7
+      }
     },
     {
       "id": "freeze",
@@ -512,7 +500,7 @@
       },
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 540,
           "y": 2950,
           "scale": 2.4,
@@ -524,8 +512,7 @@
       "padAfter": 0.5,
       "beds": {
         "drone": 0.15,
-        "rain": 0.2,
-        "steps": 0
+        "rain": 0.2
       },
       "rain": true,
       "sfx": [
@@ -539,12 +526,17 @@
           "sound": "heartbeat",
           "volume": 0.9
         }
-      ]
+      ],
+      "tint": {
+        "color": "#B3262B",
+        "at": 0,
+        "strength": 0.6
+      }
     },
     {
       "id": "end",
       "type": "endcard",
-      "bg": "forestSide",
+      "bg": "forestPath",
       "fireflies": false,
       "showCaptions": false,
       "tone": "playful",
@@ -563,7 +555,7 @@
       ],
       "cast": [
         {
-          "who": "jaab",
+          "who": "jaabDark",
           "x": 400,
           "y": 1560,
           "scale": 1.0,
@@ -578,8 +570,7 @@
       "beds": {
         "drone": 0.35,
         "rain": 0.35,
-        "wind": 0.2,
-        "steps": 0
+        "wind": 0.2
       },
       "rain": true,
       "choices": {
@@ -593,5 +584,6 @@
         }
       }
     }
-  ]
+  ],
+  "_note": "archived style experiment (v4); render with: make.py needs it back in episodes/ (git tag v4 if tagged)"
 }
