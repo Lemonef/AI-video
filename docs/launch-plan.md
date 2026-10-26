@@ -12,7 +12,7 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 
 ## Today: set up (10 minutes)
 
-1. Profile picture: `out/avatar/tiktok-avatar-720.jpg` (pre-shrunk + sharpened: TikTok stores ~200 px and resizes big uploads roughly)
+1. Profile picture: `out/avatar/tiktok-icon-720.png` (icon cut: big face, bold outline, no thin details; renders natively at 720 px because TikTok shows it at ~100-200 px)
 2. Name: **jaabstory**
 3. Bio: `จ๊าบเจอเรื่องแปลกทุกวัน 👀 คุณเลือก A/B จ๊าบทำตาม | ตอนใหม่ 20:00`
 4. Stay a **personal** account: business accounts only get the commercial music library, so no trending sounds.
