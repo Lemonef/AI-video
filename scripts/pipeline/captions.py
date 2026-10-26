@@ -49,6 +49,8 @@ def build_cues(caption: str, words: list[Word], duration: float) -> list[Cue]:
     proportional letter position rather than exact string match.
     """
     parts = chunk(caption)
+    if not parts:
+        return []
     total = sum(_norm_len(p) for p in parts) or 1
     spoken_ends: list[tuple[int, Word]] = []
     acc = 0
@@ -76,8 +78,15 @@ def build_cues(caption: str, words: list[Word], duration: float) -> list[Cue]:
     for i, p in enumerate(parts):
         end = starts[i + 1] if i + 1 < len(parts) else duration + TAIL_HOLD_SEC
         cues.append(Cue(starts[i], max(end, starts[i] + MIN_CHUNK_SEC), p))
-    # Enforce no overlap after the minimum-length stretch.
-    for i in range(len(cues) - 1):
-        if cues[i].end > cues[i + 1].start:
-            cues[i + 1] = Cue(cues[i].end, max(cues[i + 1].end, cues[i].end + MIN_CHUNK_SEC), cues[i + 1].text)
-    return cues
+    # Enforce no overlap after the minimum-length stretch, but never run past the line's end:
+    # a chunk with no room left is merged into the previous one instead of being pushed off-screen.
+    limit = duration + TAIL_HOLD_SEC
+    out: list[Cue] = [cues[0]]
+    for c in cues[1:]:
+        prev = out[-1]
+        start = max(c.start, prev.end)
+        if start + MIN_CHUNK_SEC > limit:
+            out[-1] = Cue(prev.start, max(prev.end, c.end), f"{prev.text} {c.text}")
+        else:
+            out.append(Cue(start, min(max(c.end, start + MIN_CHUNK_SEC), limit), c.text))
+    return out

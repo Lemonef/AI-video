@@ -36,3 +36,13 @@ def test_chunk_starts_track_speech_when_split():
 def test_no_word_timings_falls_back_to_proportional():
     cues = build_cues("ก" * 20 + " " + "ข" * 20, [], duration=4.0)
     assert abs(cues[1].start - 2.0) < 1e-9
+
+
+def test_empty_caption_gives_no_cues():
+    assert build_cues("   ", [Word("ก", 0, 0.2)], duration=1.0) == []
+
+
+def test_cues_never_pass_the_line_end():
+    cues = build_cues(" ".join(["a" * 20] * 4), [Word("aaaa", 0, 0.2)], duration=0.2)
+    assert cues[-1].end <= 0.2 + 0.3 + 1e-9
+    assert " ".join(c.text for c in cues) == " ".join(["a" * 20] * 4)  # nothing dropped
