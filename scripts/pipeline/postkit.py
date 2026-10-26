@@ -1,7 +1,7 @@
 """Post kit: everything Zen needs to post an episode by hand (see docs/growth-playbook.md).
 
-Writes out/<ep>.post.txt (caption, pinned comment, hashtags, posting checklist) and
-out/<ep>-cover.png (the hook frame) from the episode's optional `post` block.
+Writes out/final/<ep>.post.txt (caption, pinned comment, hashtags, posting checklist) and
+out/final/<ep>-cover.png (the hook frame) from the episode's optional `post` block.
 """
 import shutil
 import subprocess
@@ -18,7 +18,7 @@ CHECKLIST = [
 ]
 
 
-def write(root: Path, episode: dict, render_still) -> Path:
+def write(final_dir: Path, episode: dict, render_still) -> Path:
     post = episode.get("post", {})
     ep_id = episode["id"]
     hook = post.get("hook") or episode["scenes"][0].get("caption") or episode["scenes"][0]["say"]
@@ -38,9 +38,9 @@ def write(root: Path, episode: dict, render_still) -> Path:
         "== CHECKLIST ==",
         *[f"[ ] {c}" for c in CHECKLIST],
     ]
-    out = root / "out" / f"{ep_id}.post.txt"
+    out = final_dir / f"{ep_id}.post.txt"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    render_still(root / "out" / f"{ep_id}-cover.png", post.get("coverFrame", 45))
+    render_still(final_dir / f"{ep_id}-cover.png", post.get("coverFrame", 45))
     return out
 
 

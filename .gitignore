@@ -5,3 +5,4 @@ public/ep*/
 __pycache__/
 public/sfx/
 .pytest_cache/
+.build/

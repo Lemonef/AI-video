@@ -5,8 +5,8 @@ Data-driven pipeline for a Thai TikTok "What If" series: flat-2D characters draw
 ## Make the next episode (one command)
 
 ```bash
-cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = current template)
-.venv/Scripts/python scripts/make.py ep03   # -> out/ep03.mp4
+cp episodes/ep01.json episodes/ep02.json   # then edit the scenes (ep01 = current template)
+.venv/Scripts/python scripts/make.py ep02   # -> out/final/ep02.mp4
 ```
 
 `make.py` voices the episode (cached: an unchanged script is never re-voiced), builds word-timed captions, generates sound effects, renders with Remotion, and masters loudness to −14 LUFS. New episode = new data file, no new code.
@@ -20,17 +20,18 @@ cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = curren
 
 Check what the voice actually said: `.venv/Scripts/python scripts/transcribe.py out/ep03.mp4`.
 
-Preview while editing: `npm run studio` (opens ep02 with estimated timing).
+Preview while editing: `npm run studio` (opens ep01 with estimated timing).
 
 ## Folder layout
 
 ```
-episodes/        one JSON per episode (ep02 = v1, the current release)   archive/ = drafts
+episodes/        one JSON per episode (ep01 = v1, the current release)   archive/ = drafts
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
 scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
-out/             finished videos only: epNN.mp4 (+ cover, post kit), drafts/ (earlier experiments), voices/ (voice samples)
-out/.build/      intermediates: raw renders, props, logs (safe to delete)
+out/final/       ONLY what gets posted: epNN.mp4, epNN-cover.png, epNN.post.txt, profile-picture.jpg
+out/drafts/      earlier experiments (not for posting)
+.build/          intermediates: raw renders, props, logs (hidden, safe to delete)
 docs/            TODO, cinematic-guide (the rules every episode follows), references
 ```
 

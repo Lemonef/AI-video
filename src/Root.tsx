@@ -1,6 +1,6 @@
 import React from 'react';
 import {Composition} from 'remotion';
-import current from '../episodes/ep02.json';
+import current from '../episodes/ep01.json';
 import {Avatar} from './compositions/Avatar';
 import {Episode, type EpisodeProps} from './compositions/Episode';
 import {H, W} from './lib/tokens';
@@ -11,7 +11,7 @@ import type {Episode as EpisodeT} from './types';
 const CURRENT = current as unknown as EpisodeT;
 
 // scripts/make.py passes the episode (with TTS timing) via --props.
-// Studio previews the current episode (ep02 = v1) without audio, using estimated line lengths.
+// Studio previews the current episode (ep01 = v1) without audio, using estimated line lengths.
 export const RemotionRoot: React.FC = () => (
 	<>
 		<Composition

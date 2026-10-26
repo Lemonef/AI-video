@@ -12,7 +12,7 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 
 ## Today: set up (10 minutes)
 
-1. Profile picture: `out/avatar/jaab-1080.jpg` (native 1080 px, max-quality JPG; in the crop box, do not zoom)
+1. Profile picture: `out/final/profile-picture.jpg` (native 1080 px, max-quality JPG; in the crop box, do not zoom)
 2. Name: **jaabstory**
 3. Bio: `จ๊าบเจอเรื่องแปลกทุกวัน 👀 คุณเลือก A/B จ๊าบทำตาม | ตอนใหม่ 20:00`
 4. Stay a **personal** account: business accounts only get the commercial music library, so no trending sounds.
@@ -20,11 +20,11 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 
 ## Post the first video (tonight, 20:00)
 
-1. Upload `out/ep02.mp4`, cover `out/ep02-cover.png`.
-2. Caption and hashtags from `out/ep02.post.txt`.
+1. Upload `out/final/ep01.mp4`, cover `out/final/ep01-cover.png`.
+2. Caption and hashtags from `out/final/ep01.post.txt`.
 3. Turn on the "AI-generated content" label (the voice is AI).
 4. Optional: add a trending sound at low volume. The voice must stay clear.
-5. Pin the comment from `ep02.post.txt` right after posting, and reply to comments for 30–60 minutes.
+5. Pin the comment from `ep01.post.txt` right after posting, and reply to comments for 30–60 minutes.
 6. Create a playlist per series (first one: "กฎเข้าป่า"), if the account has playlists.
 
 ## Next day

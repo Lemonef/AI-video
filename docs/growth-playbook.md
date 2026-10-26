@@ -35,7 +35,7 @@ Researched 2026-10-27. Most sources are marketing blogs rather than TikTok data,
 
 ## Automated by the pipeline
 
-`make.py` writes `out/<ep>.post.txt` (caption, pinned comment, hashtags) and `out/<ep>-cover.png` (the hook frame, for the cover and the playlist thumbnail) from the episode's `post` block, so posting manually takes about a minute.
+`make.py` writes `out/final/<ep>.post.txt` (caption, pinned comment, hashtags) and `out/final/<ep>-cover.png` (the hook frame, for the cover and the playlist thumbnail) from the episode's `post` block, so posting manually takes about a minute.
 
 ## Sources
 

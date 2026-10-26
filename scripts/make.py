@@ -44,16 +44,18 @@ def main() -> None:
     sfx.ensure(public)
     if args.no_render:
         return
-    # Finished videos live in out/; everything intermediate (raw render, props, logs) in out/.build/.
-    out = ROOT / "out" / f"{args.episode}.mp4"
-    build = ROOT / "out" / ".build"
+    # out/final/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
+    final = ROOT / "out" / "final"
+    final.mkdir(parents=True, exist_ok=True)
+    out = final / f"{args.episode}.mp4"
+    build = ROOT / ".build"
     build.mkdir(parents=True, exist_ok=True)
     raw = build / f"{args.episode}.raw.mp4"
     print(f"[3/4] render -> {raw.relative_to(ROOT)}")
     render(ROOT, episode, timing, raw)
     print(f"[4/4] loudness master -> {out.relative_to(ROOT)}")
     out = master(raw, out)
-    kit = postkit.write(ROOT, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
+    kit = postkit.write(final, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
     print(f"done: {out}")
     print(f"post kit: {kit}")
 
