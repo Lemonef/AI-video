@@ -76,22 +76,30 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     voice = episode["voice"]
     lines = [_line(s) for s in episode["scenes"]]
     script = "\n".join(lines)  # newline = natural breath between lines
-    key = _key(engine.name, voice, script)
+    speed = float(episode.get("tempo", 1.0))
+    voice_key = _key(engine.name, voice, script)  # the paid/quota'd part: only re-voice when this changes
+    key = _key(voice_key, str(speed))
+    raw = ep_dir / "take.raw.mp3"
     take = ep_dir / "take.mp3"
     take_meta = cache.get("_take", {})
-    if take_meta.get("key") == key and take.exists():
-        words = [Word(**w) for w in take_meta["words"]]
-        print("  = take (cached)")
+    if take_meta.get("voice_key") == voice_key and raw.exists():
+        print("  = take voice (cached)")
     else:
         print(f"  > take: voicing {len(lines)} lines in one request…", flush=True)
         tmp = ep_dir / "take.tmp.mp3"
         engine.synthesize(script, voice, "", tmp)
-        tmp.replace(take)
-        print("  > take: aligning with Whisper…", flush=True)
+        tmp.replace(raw)
+    if take_meta.get("key") == key and take.exists():
+        words = [Word(**w) for w in take_meta["words"]]
+        print("  = take alignment (cached)")
+    else:
+        media.tempo(raw, speed, take)
+        print(f"  > take: tempo x{speed}, aligning with Whisper…", flush=True)
         words = whisper.words(str(take))
     take_sec = media.duration(take)
-    timing: dict = {"_take": {"key": key, "words": [asdict(w) for w in words], "duration": take_sec}}
-    for scene, (start, end) in zip(episode["scenes"], scene_cuts(lines, words, take_sec)):
+    timing: dict = {"_take": {"key": key, "voice_key": voice_key, "words": [asdict(w) for w in words], "duration": take_sec}}
+    cuts = scene_cuts(lines, words, take_sec, media.silences(take))
+    for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"
         media.cut(take, start, end, mp3)
         timing[scene["id"]] = _entry(episode, scene, key, words_in(words, start, end), end - start)
