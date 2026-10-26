@@ -43,7 +43,7 @@ export const Episode: React.FC<EpisodeProps> = ({episode}) => {
 				from += len;
 				return (
 					<Sequence key={s.id} from={at} durationInFrames={len} name={s.id}>
-						{episode.style === 'v2' || episode.style === 'v3' || episode.style === 'v4' ? <SceneV2 ep={episode} scene={s} index={i} /> : <Scene ep={episode} scene={s} />}
+						{episode.style === 'v2' || episode.style === 'v3' || episode.style === 'v4' || episode.style === 'v5' ? <SceneV2 ep={episode} scene={s} index={i} /> : <Scene ep={episode} scene={s} />}
 						{episode.mix ? null : <Html5Audio src={staticFile(SFX.whoosh)} volume={0.35} />}
 					</Sequence>
 				);

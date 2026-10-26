@@ -1,0 +1,582 @@
+{
+  "id": "ep02v5",
+  "title": "กฎเข้าป่าตอนกลางคืน — ตอน 1",
+  "style": "v5",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "tempo": 1.08,
+  "mix": {
+    "beds": [
+      "wind",
+      "crickets",
+      "drone",
+      "rain"
+    ],
+    "duck": 0.45,
+    "bedVolume": 0.55
+  },
+  "rules": {
+    "title": "กฎเข้าป่าตอนกลางคืน",
+    "items": [
+      "ห้ามเดินออกนอกทาง",
+      "ถ้ามีคนเรียกชื่อ ห้ามขานรับ",
+      "ห้ามส่องไฟฉายไปข้างหลัง"
+    ]
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bg": "forestDepth",
+      "chip": "23:40 · ทางเข้าป่า",
+      "intro": {
+        "name": "จ๊าบ",
+        "trait": "กลัวทุกอย่าง แต่อยากรู้ทุกเรื่อง",
+        "at": 0.45
+      },
+      "tone": "storytelling, suspenseful",
+      "say": "ถ้าคุณต้องเดินเข้าป่าคนเดียวตอนกลางคืน และมีกฎอยู่แค่สามข้อ",
+      "caption": "ถ้าคุณต้องเดินเข้าป่า *คนเดียว* ตอนกลางคืน… และมีกฎแค่ *3 ข้อ*",
+      "camera": {
+        "from": 1.08,
+        "to": 1.0,
+        "x": 540,
+        "y": 1100
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "flat",
+          "turn": -0.5,
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.7,
+              "turn": 0.2,
+              "expr": "sweat"
+            }
+          ]
+        }
+      ],
+      "beds": {
+        "wind": 0.5,
+        "crickets": 0.6,
+        "drone": 0.15
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.35,
+          "x": 540,
+          "y": 1500
+        }
+      ],
+      "sfx": []
+    },
+    {
+      "id": "rules",
+      "bg": "forestDepth",
+      "rulesView": "big",
+      "reveal": 3,
+      "showCaptions": false,
+      "transition": "whip",
+      "say": "ข้อแรก ห้ามเดินออกนอกทาง ข้อสอง ถ้ามีใครเรียกชื่อคุณ ห้ามขานรับ และข้อสุดท้าย ห้ามส่องไฟฉายไปข้างหลังเด็ดขาด",
+      "padAfter": 0.3,
+      "beds": {
+        "wind": 0.25,
+        "crickets": 0.25,
+        "drone": 0.45
+      },
+      "sfx": [
+        {
+          "at": 0.02,
+          "sound": "click",
+          "volume": 0.5
+        }
+      ]
+    },
+    {
+      "id": "walk",
+      "bg": "forestDepth",
+      "chip": "23:52 · ลึกเข้าไป 300 เมตร",
+      "rulesView": "hud",
+      "scroll": 7,
+      "say": "คุณเดินเข้าไปคนเดียว ทุกอย่างยังปกติดี เสียงจิ้งหรีดดังอยู่รอบตัว มีแค่ไฟฉายส่องทางข้างหน้า",
+      "caption": "คุณเดินเข้าไปคนเดียว… ทุกอย่าง *ปกติ* ไฟฉายส่องทางข้างหน้า",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "toX": 360,
+          "y": 1640,
+          "scale": 0.95,
+          "action": "walk",
+          "expr": "flat",
+          "turn": 0.6,
+          "torch": true
+        }
+      ],
+      "beds": {
+        "wind": 0.45,
+        "crickets": 0.85,
+        "drone": 0.15
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.4,
+          "zoom": 1.6,
+          "x": 760,
+          "y": 1500
+        },
+        {
+          "at": 0.72,
+          "zoom": 1.8,
+          "x": 540,
+          "y": 1560
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.05,
+          "sound": "click",
+          "volume": 0.6
+        }
+      ]
+    },
+    {
+      "id": "silence",
+      "bg": "forestDepth",
+      "chip": "23:58",
+      "rulesView": "hud",
+      "fireflies": false,
+      "transition": "cut",
+      "tone": "quieter",
+      "say": "แล้วจู่ๆ เสียงจิ้งหรีดก็เงียบหายไปหมด",
+      "caption": "แล้วจู่ๆ… *เสียงจิ้งหรีดก็เงียบหาย*",
+      "camera": {
+        "from": 1.0,
+        "to": 1.12,
+        "x": 380,
+        "y": 900
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "flat",
+          "turn": 0.6,
+          "torch": true,
+          "keys": [
+            {
+              "at": 0.55,
+              "expr": "sweat",
+              "turn": 0.1
+            }
+          ]
+        }
+      ],
+      "beds": {
+        "wind": 0.3,
+        "crickets": 0,
+        "drone": 0.6
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.8,
+          "x": 540,
+          "y": 1560
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.6,
+          "word": "เงียบ",
+          "sound": "heartbeat",
+          "volume": 0.8
+        },
+        {
+          "at": 1.0,
+          "sound": "heartbeat",
+          "volume": 0.8
+        }
+      ]
+    },
+    {
+      "id": "call",
+      "bg": "forestDepth",
+      "rulesView": "hud",
+      "fireflies": false,
+      "transition": "cut",
+      "tone": "whispers",
+      "say": "มีเสียงเรียกชื่อคุณจากข้างหลัง… จ๊าบ…",
+      "caption": "มีเสียง *เรียกชื่อคุณ* จากข้างหลัง… 'จ๊าบ…'",
+      "shake": 3,
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "sweat",
+          "turn": 0.1,
+          "torch": true,
+          "keys": [
+            {
+              "at": 0.6,
+              "expr": "shock",
+              "action": "shake"
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "kind": "speech",
+          "text": "จ๊าบ…",
+          "label": "???",
+          "x": 300,
+          "y": 760,
+          "at": 0.62,
+          "tail": "right",
+          "word": "จ๊าบ"
+        }
+      ],
+      "padAfter": 0.3,
+      "hits": [
+        {
+          "at": 0.62,
+          "word": "จ๊าบ",
+          "strength": 18
+        }
+      ],
+      "beds": {
+        "wind": 0.25,
+        "drone": 0.75,
+        "rain": 0.5
+      },
+      "rain": true,
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.62,
+          "word": "จ๊าบ",
+          "zoom": 1.8,
+          "x": 540,
+          "y": 1560
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.15,
+          "sound": "riser",
+          "volume": 0.45
+        }
+      ]
+    },
+    {
+      "id": "answer",
+      "bg": "forestDepth",
+      "rulesView": "hud",
+      "fireflies": false,
+      "transition": "cut",
+      "say": "แล้วคุณก็เผลอขานรับไปว่า ครับ",
+      "caption": "แล้วคุณก็ *เผลอขานรับ* ไปว่า 'ครับ?'",
+      "breaks": [
+        {
+          "rule": 2,
+          "at": 0.8
+        }
+      ],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "shock",
+          "turn": 0.1,
+          "torch": true,
+          "keys": [
+            {
+              "at": 0.55,
+              "turn": -0.7,
+              "expr": "talk"
+            },
+            {
+              "at": 0.85,
+              "expr": "shock"
+            }
+          ]
+        }
+      ],
+      "bubbles": [
+        {
+          "kind": "speech",
+          "text": "ครับ?",
+          "x": 760,
+          "y": 640,
+          "at": 0.62,
+          "tail": "left",
+          "word": "ครับ"
+        }
+      ],
+      "padAfter": 0.3,
+      "hits": [
+        {
+          "at": 0.85,
+          "word": "ครับ",
+          "strength": 12
+        }
+      ],
+      "beds": {
+        "drone": 0.7,
+        "rain": 0.5
+      },
+      "rain": true,
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.8,
+          "x": 540,
+          "y": 1560
+        },
+        {
+          "at": 0.85,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.9,
+          "sound": "heartbeat",
+          "volume": 0.8
+        }
+      ]
+    },
+    {
+      "id": "twist",
+      "bg": "forestDepth",
+      "rulesView": "hud",
+      "fireflies": false,
+      "transition": "cut",
+      "tone": "whispers",
+      "say": "ทั้งที่คุณเข้ามาคนเดียว แต่เสียงนั้นกลับตอบมาว่า เจอแล้ว",
+      "caption": "ทั้งที่คุณเข้ามา *คนเดียว*… แต่เสียงนั้นตอบมาว่า '*เจอแล้ว*'",
+      "camera": {
+        "from": 1.0,
+        "to": 1.1,
+        "x": 300,
+        "y": 1000
+      },
+      "shake": 2,
+      "props": [
+        {
+          "type": "watcher",
+          "x": 120,
+          "y": 1560,
+          "scale": 1.0,
+          "at": 0.55
+        }
+      ],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "shock",
+          "turn": -0.7,
+          "torch": true,
+          "action": "shake"
+        }
+      ],
+      "bubbles": [
+        {
+          "kind": "shout",
+          "text": "เจอแล้ว",
+          "x": 260,
+          "y": 820,
+          "at": 0.92,
+          "tail": "left",
+          "word": "เจอแล้ว"
+        }
+      ],
+      "padAfter": 0.6,
+      "hits": [
+        {
+          "at": 0.55,
+          "strength": 14
+        },
+        {
+          "at": 0.92,
+          "word": "เจอแล้ว",
+          "strength": 34
+        }
+      ],
+      "beds": {
+        "drone": 0.9,
+        "rain": 0.6
+      },
+      "rain": true,
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.5,
+          "x": 120,
+          "y": 1500
+        },
+        {
+          "at": 0.9,
+          "word": "เจอแล้ว",
+          "zoom": 1.8,
+          "x": 540,
+          "y": 1560
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.55,
+          "sound": "stinger",
+          "volume": 0.75
+        },
+        {
+          "at": 0.92,
+          "word": "เจอแล้ว",
+          "sound": "boom",
+          "volume": 1.0
+        }
+      ]
+    },
+    {
+      "id": "freeze",
+      "type": "freeze",
+      "bg": "dark",
+      "transition": "cut",
+      "tone": "urgent",
+      "say": "คุณมีเวลาแค่สามวินาที",
+      "caption": "คุณมีเวลาแค่ *3 วินาที*",
+      "camera": {
+        "from": 1.0,
+        "to": 1.15,
+        "x": 540,
+        "y": 900
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1980,
+          "scale": 1.8,
+          "pose": "shock",
+          "expr": "shock",
+          "turn": -0.3
+        }
+      ],
+      "padAfter": 0.5,
+      "beds": {
+        "drone": 0.15,
+        "rain": 0.2
+      },
+      "rain": true,
+      "sfx": [
+        {
+          "at": 0.0,
+          "sound": "heartbeat",
+          "volume": 0.9
+        },
+        {
+          "at": 0.6,
+          "sound": "heartbeat",
+          "volume": 0.9
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "type": "endcard",
+      "bg": "forestDepth",
+      "fireflies": false,
+      "showCaptions": false,
+      "tone": "playful",
+      "say": "จะวิ่งต่อไปข้างหน้า หรือจะหันไฟฉายไปข้างหลังทั้งที่กฎห้ามไว้ คอมเมนต์มาเลย เอ หรือ บี",
+      "a": "วิ่งต่อไปข้างหน้า ห้ามหันกลับ",
+      "b": "หันไฟฉายไปข้างหลัง (ผิดกฎข้อ 3)",
+      "prompt": "คอมเมนต์ A หรือ B 👇",
+      "footer": "ตอนต่อไป: เราเล่าตามที่คนส่วนใหญ่เลือก",
+      "props": [
+        {
+          "type": "watcher",
+          "x": 120,
+          "y": 1560,
+          "scale": 1.0
+        }
+      ],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 0.95,
+          "expr": "shock",
+          "turn": -0.7,
+          "torch": true
+        }
+      ],
+      "padAfter": 1.5,
+      "countdown": 3,
+      "countdownAt": 0.05,
+      "beds": {
+        "drone": 0.35,
+        "rain": 0.35,
+        "wind": 0.2
+      },
+      "rain": true,
+      "choices": {
+        "a": {
+          "x": 900,
+          "y": 1330
+        },
+        "b": {
+          "x": 120,
+          "y": 1250
+        }
+      }
+    }
+  ]
+}

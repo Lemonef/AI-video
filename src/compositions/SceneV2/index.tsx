@@ -3,6 +3,7 @@ import {AbsoluteFill, Html5Audio, Sequence, interpolate, spring, staticFile, use
 import {Bubble} from '../../components/Bubble';
 import {Countdown} from '../../components/Countdown';
 import {castState} from '../../lib/castState';
+import {cueAt} from '../../lib/cueAt';
 import {brokenFor, ruleBreaks} from '../../lib/rules';
 import {H, SFX, W} from '../../lib/tokens';
 import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
@@ -10,6 +11,9 @@ import type {Episode, Scene} from '../../types';
 import {CAST2} from '../../v2/cast';
 import {Character2, torchLens} from '../../v2/Character';
 import {ENVIRONMENTS} from '../../v2/Forest';
+import {CAST5} from '../../v5/cast';
+import {Character5, torchLens5} from '../../v5/Character';
+import {ENV5} from '../../v5/Forest';
 import {PROPS2} from '../../v2/props';
 import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
 import {Beam, BigTitle, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
@@ -50,13 +54,15 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const tLine = t - padBefore;
 	const p = tLine / lineSec;
 	const timing = ep.timing?.[scene.id];
-	const Env = ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const isFreeze = scene.type === 'freeze';
 	const isEnd = scene.type === 'endcard';
+	const v5 = ep.style === 'v5';
 	const v4 = ep.style === 'v4';
-	const v3 = ep.style === 'v3' || v4; // v4 includes every v3 feature
+	const v3 = ep.style === 'v3' || v4 || v5; // v4 and v5 include every v3 feature
+	const Env = (v5 ? ENV5[scene.bg] : undefined) ?? ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
+	const at = (cue: {at?: number; word?: string}) => cueAt(cue, timing, lineSec);
 
 	const shot = [...(scene.shots ?? [])].reverse().find((s) => p >= s.at);
 	const cam = shot ? {from: shot.zoom, to: shot.zoom * SHOT_PUSH, x: shot.x, y: shot.y} : scene.camera ?? {};
@@ -66,7 +72,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const hh = handheld(frame);
 	// Jolts: fast oscillation under an exponential-ish decay from each hit moment.
 	const jolt = (scene.hits ?? []).reduce((amp, h) => {
-		const dt = tLine - h.at * lineSec;
+		const dt = tLine - at(h) * lineSec;
 		return dt < 0 || dt > HIT_SEC ? amp : amp + (h.strength ?? HIT_PX) * (1 - dt / HIT_SEC) ** 2;
 	}, 0);
 	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0) + Math.sin(frame * 3.1) * jolt;
@@ -88,8 +94,9 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const beams: React.ReactNode[] = [];
 	const pools: React.ReactNode[] = [];
 	const cast = (scene.cast ?? []).map((m, i) => {
+		const look5 = v5 ? CAST5[m.who] : undefined;
 		const look = CAST2[m.who];
-		if (!look) return null;
+		if (!look && !look5) return null;
 		const st = castState(m, p, lineSec, FPS);
 		const rot = st.action === 'wobble' ? Math.sin(frame / 6) * 4 : st.action === 'shake' ? Math.sin(frame * 2.2) * 2.5 : 0;
 		const flip = st.framesSinceFlip < FLIP_FRAMES ? interpolate(st.framesSinceFlip, [0, FLIP_FRAMES / 2, FLIP_FRAMES], [-st.facing, 0, st.facing]) : st.facing;
@@ -97,7 +104,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const poseBlend = Number.isFinite(st.framesSincePose) ? spring({frame: Math.max(0, st.framesSincePose), fps: FPS, config: POSE_SPRING}) : 1;
 		const react = Number.isFinite(st.framesSinceExpr) ? interpolate(st.framesSinceExpr, REACT_FRAMES, REACT_SHAPE, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : 0;
 		if (m.torch) {
-			const lens = torchLens();
+			const lens = look5 ? torchLens5() : torchLens();
 			if (v4) {
 				const ly = m.y + lens.y * s;
 				const rad = ((st.facing > 0 ? lens.angle : 180 - lens.angle) * Math.PI) / 180;
@@ -111,7 +118,11 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		}
 		return (
 			<g key={i} transform={`translate(${st.x} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`}>
-				<Character2 look={look} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
+				{look5 ? (
+					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
+				) : (
+					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
+				)}
 			</g>
 		);
 	});
@@ -161,7 +172,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					{pools}
 					{beams}
 					{(scene.bubbles ?? []).map((b, i) => {
-						const f = atFrame(b.at ?? 0);
+						const f = atFrame(at(b));
 						return frame >= f ? <Bubble key={i} item={b} frame={frame - f} /> : null;
 					})}
 				</AbsoluteFill>
@@ -202,11 +213,11 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				</Sequence>
 			) : null}
 			{(scene.bubbles ?? []).map((b, i) => (
-				<Sequence key={`pop${i}`} from={atFrame(b.at ?? 0)} durationInFrames={FPS}>
+				<Sequence key={`pop${i}`} from={atFrame(at(b))} durationInFrames={FPS}>
 					<Html5Audio src={staticFile(SFX.pop)} volume={0.35} />
 				</Sequence>
 			))}
-			{ep.mix ? <Foley scene={scene} atFrame={atFrame} totalFrames={Math.ceil(sceneSeconds(ep, scene) * FPS)} /> : null}
+			{ep.mix ? <Foley scene={scene} atFrame={(c) => atFrame(at(c))} totalFrames={Math.ceil(sceneSeconds(ep, scene) * FPS)} /> : null}
 			{scene.countdown
 				? Array.from({length: scene.countdown}, (_, i) => (
 						<Sequence key={`tick${i}`} from={Math.round((padBefore + countdownStart + i) * FPS)} durationInFrames={FPS}>
@@ -222,20 +233,20 @@ const HIT_VOLUME_PER_PX = 1 / 30; // impact loudness follows the jolt strength
 const ONE_SHOT_FRAMES = FPS * 3;
 
 /** v3 sound cues: authored `sfx`, plus automatic impacts on hits, footsteps while walking, swishes on cuts. */
-const Foley: React.FC<{scene: Scene; atFrame: (at: number) => number; totalFrames: number}> = ({scene, atFrame, totalFrames}) => {
+const Foley: React.FC<{scene: Scene; atFrame: (cue: {at?: number; word?: string}) => number; totalFrames: number}> = ({scene, atFrame, totalFrames}) => {
 	const cues: Array<{from: number; sound: string; volume: number}> = [];
-	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c.at), sound: c.sound, volume: c.volume ?? 0.8}));
-	(scene.hits ?? []).forEach((h) => cues.push({from: atFrame(h.at), sound: 'impact', volume: Math.min(1, (h.strength ?? 26) * HIT_VOLUME_PER_PX)}));
+	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8}));
+	(scene.hits ?? []).forEach((h) => cues.push({from: atFrame(h), sound: 'impact', volume: Math.min(1, (h.strength ?? 26) * HIT_VOLUME_PER_PX)}));
 	(scene.shots ?? []).forEach((s) => {
-		if (s.at > 0) cues.push({from: atFrame(s.at), sound: 'swish', volume: 0.35});
+		if (s.at > 0) cues.push({from: atFrame(s), sound: 'swish', volume: 0.35});
 	});
 	if (scene.transition === 'whip') cues.push({from: 0, sound: 'swish', volume: 0.5});
 	const walker = (scene.cast ?? []).find((m) => m.action === 'walk');
 	if (walker) {
 		// walking lasts until a key switches it off (same rule as castState)
 		const stop = (walker.keys ?? []).find((k) => k.action && k.action !== 'walk');
-		const end = stop ? atFrame(stop.at) : totalFrames;
-		for (let f = Math.max(0, atFrame(0)); f < end; f += STEP_EVERY_FRAMES) cues.push({from: f, sound: 'step', volume: 0.32});
+		const end = stop ? atFrame(stop) : totalFrames;
+		for (let f = Math.max(0, atFrame({at: 0})); f < end; f += STEP_EVERY_FRAMES) cues.push({from: f, sound: 'step', volume: 0.32});
 	}
 	return (
 		<>
