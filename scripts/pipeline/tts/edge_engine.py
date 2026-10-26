@@ -10,7 +10,7 @@ from pathlib import Path
 
 import aiohttp
 import edge_tts
-from edge_tts.exceptions import NoAudioReceived
+from edge_tts.exceptions import NoAudioReceived, WebSocketError
 
 from .word import Word
 
@@ -21,6 +21,7 @@ TICKS_PER_SEC = 10_000_000  # edge-tts offsets are in 100 ns units
 
 class EdgeTtsEngine:
     name = "edge"
+    whole_take = False  # returns word timings per line; per-line voicing is cached
 
     def synthesize(self, text: str, voice: str, rate: str, out_path: Path) -> list[Word]:
         if voice.startswith("th-") and re.search(r"\d", text):
@@ -31,7 +32,7 @@ class EdgeTtsEngine:
                 audio, words = asyncio.run(self._once(text, voice, rate))
                 out_path.write_bytes(audio)
                 return words
-            except (NoAudioReceived, aiohttp.ClientError) as e:
+            except (NoAudioReceived, WebSocketError, aiohttp.ClientError) as e:
                 last_err = e
                 time.sleep(BACKOFF_SEC * attempt)
         raise RuntimeError(f"edge-tts gave no audio after {MAX_ATTEMPTS} tries: {text!r}") from last_err

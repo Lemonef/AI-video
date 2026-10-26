@@ -18,3 +18,11 @@ def synth(expr: str, out: Path) -> None:
         ["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", expr, "-ar", "48000", "-ac", "2", str(out)],
         check=True,
     )
+
+
+def cut(src: Path, start: float, end: float, out: Path) -> None:
+    """Cut [start, end) seconds of `src` into `out` (re-encoded, so cuts are sample-accurate)."""
+    subprocess.run(
+        ["ffmpeg", "-y", "-v", "error", "-ss", f"{start:.3f}", "-to", f"{end:.3f}", "-i", str(src), "-ar", "48000", str(out)],
+        check=True,
+    )

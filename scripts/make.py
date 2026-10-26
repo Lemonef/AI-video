@@ -2,7 +2,7 @@
 
     python scripts/make.py ep01              # voice (cached) + render out/ep01.mp4
     python scripts/make.py ep02 --force      # re-voice every line
-    python scripts/make.py ep01 --engine edge --voice th-TH-NiwatNeural
+    python scripts/make.py ep01 --engine edge --voice th-TH-NiwatNeural   # override the episode's engine/voice
 """
 import argparse
 import json
@@ -22,7 +22,7 @@ from pipeline.tts import get_engine  # noqa: E402
 def main() -> None:
     ap = argparse.ArgumentParser(description="Build one episode from episodes/<id>.json")
     ap.add_argument("episode", help="episode id, e.g. ep01")
-    ap.add_argument("--engine", default="edge", help="TTS engine (see scripts/pipeline/tts)")
+    ap.add_argument("--engine", help="TTS engine, overrides the episode's (edge | gemini)")
     ap.add_argument("--voice", help="override the episode's voice")
     ap.add_argument("--force", action="store_true", help="re-voice every line, ignore cache")
     ap.add_argument("--no-render", action="store_true", help="voice + captions only")
@@ -30,12 +30,16 @@ def main() -> None:
 
     src = ROOT / "episodes" / f"{args.episode}.json"
     episode = json.loads(src.read_text(encoding="utf-8"))
+    if args.engine:
+        episode["engine"] = args.engine
     if args.voice:
         episode["voice"] = args.voice
+    engine = get_engine(episode.get("engine", "edge"))
+    episode["take"] = engine.whole_take
     public = ROOT / "public"
 
-    print(f"[1/4] voice ({args.engine}, {episode['voice']})")
-    timing = narrate(episode, get_engine(args.engine), public, force=args.force)
+    print(f"[1/4] voice ({engine.name}, {episode['voice']})")
+    timing = narrate(episode, engine, public, force=args.force)
     print("[2/4] sound effects")
     sfx.ensure(public)
     if args.no_render:
