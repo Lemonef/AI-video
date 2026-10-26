@@ -1,4 +1,4 @@
-"""make.py — one command per episode: voice -> captions -> sfx -> render -> loudness master.
+"""make.py — one command per episode: voice -> captions -> sfx -> render -> loudness master -> post kit.
 
     python scripts/make.py ep01              # voice (cached) + render out/ep01.mp4
     python scripts/make.py ep02 --force      # re-voice every line
@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from pipeline import sfx  # noqa: E402
+from pipeline import postkit, sfx  # noqa: E402
 from pipeline.master import master  # noqa: E402
 from pipeline.narrate import narrate  # noqa: E402
 from pipeline.render import render  # noqa: E402
@@ -53,7 +53,9 @@ def main() -> None:
     render(ROOT, episode, timing, raw)
     print(f"[4/4] loudness master -> {out.relative_to(ROOT)}")
     out = master(raw, out)
-    print(f"done: {out}")
+    kit = postkit.write(ROOT, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
+    print(f"done: {out}
+post kit: {kit}")
 
 
 if __name__ == "__main__":

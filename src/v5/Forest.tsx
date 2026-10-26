@@ -141,7 +141,7 @@ export const ForestDepth: React.FC<EnvProps> = ({frame, scroll, fireflies}) => {
 	);
 };
 
-const MOON_SIDE = {x: 830, y: 400};
+const MOON_SIDE = {x: 880, y: 420};
 const GROUND_SIDE = 1480; // side-view ground line (matches v2 GROUND_Y so the v2 rig stands on it)
 const wrap = (x: number, span: number) => ((x % span) + span) % span;
 
