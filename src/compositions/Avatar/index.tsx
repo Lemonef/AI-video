@@ -45,7 +45,7 @@ export const Avatar: React.FC<AvatarProps> = ({bg, icon}) => {
 				</defs>
 				{/* one soft disc behind the head: depth without clutter */}
 				{icon ? null : <circle cx={SIZE / 2} cy={SIZE * 0.42} r={SIZE * 0.3} fill={b.halo} />}
-				<g filter="url(#sticker)" transform={icon ? `translate(${SIZE / 2} ${SIZE * 2.28}) scale(2.55)` : `translate(${SIZE / 2} ${SIZE * 1.8}) scale(1.9)`}>
+				<g filter="url(#sticker)" transform={icon ? `translate(${SIZE / 2} ${SIZE * 2.3}) scale(2.4)` : `translate(${SIZE / 2} ${SIZE * 1.8}) scale(1.9)`}>
 					<Character2 look={look} pose="idle" expr="smile" turn={0} frame={20} />
 				</g>
 			</svg>
