@@ -74,7 +74,7 @@ def remotion_still(root: Path, props: Path):
     """Renders the series Cover template (src/compositions/Cover) with the episode's props."""
     npx = shutil.which("npx") or "npx"
 
-    def render(png: Path, frame: int) -> None:
+    def render(png: Path, _frame: int) -> None:  # the Cover template is a still; frame kept for the call signature
         subprocess.run([npx, "remotion", "still", "src/index.ts", "Cover", str(png), f"--props={props}", "--log=error"], cwd=root, check=True)
 
     return render
