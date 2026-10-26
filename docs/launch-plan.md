@@ -20,11 +20,11 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 
 ## Post the first video (tonight, 20:00)
 
-1. Upload `out/final/ep01.mp4`, cover `out/final/ep01-cover.png`.
-2. Caption and hashtags from `out/final/ep01.post.txt`.
+1. Upload `out/final/ep01/video.mp4`, cover `out/final/ep01/cover.png`.
+2. Caption and hashtags from `out/final/ep01/post.txt`.
 3. Turn on the "AI-generated content" label (the voice is AI).
 4. Optional: add a trending sound at low volume. The voice must stay clear.
-5. Pin the comment from `ep01.post.txt` right after posting, and reply to comments for 30–60 minutes.
+5. Pin the comment from `post.txt` right after posting, and reply to comments for 30–60 minutes.
 6. Create a playlist per series (first one: "กฎเข้าป่า"), if the account has playlists.
 
 ## Next day

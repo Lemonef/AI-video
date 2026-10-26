@@ -44,10 +44,10 @@ def main() -> None:
     sfx.ensure(public)
     if args.no_render:
         return
-    # out/final/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
-    final = ROOT / "out" / "final"
+    # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
+    final = ROOT / "out" / "final" / args.episode  # one folder per episode: video, cover, post kit, script
     final.mkdir(parents=True, exist_ok=True)
-    out = final / f"{args.episode}.mp4"
+    out = final / "video.mp4"
     build = ROOT / ".build"
     build.mkdir(parents=True, exist_ok=True)
     raw = build / f"{args.episode}.raw.mp4"

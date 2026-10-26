@@ -6,7 +6,7 @@ Data-driven pipeline for a Thai TikTok "What If" series: flat-2D characters draw
 
 ```bash
 cp episodes/ep01.json episodes/ep02.json   # then edit the scenes (ep01 = current template)
-.venv/Scripts/python scripts/make.py ep02   # -> out/final/ep02.mp4
+.venv/Scripts/python scripts/make.py ep02   # -> out/final/ep02/ (video, cover, post kit, script)
 ```
 
 `make.py` voices the episode (cached: an unchanged script is never re-voiced), builds word-timed captions, generates sound effects, renders with Remotion, and masters loudness to −14 LUFS. New episode = new data file, no new code.
@@ -29,10 +29,10 @@ episodes/        one JSON per episode (ep01 = v1, the current release)   archive
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
 scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
-out/final/       what gets posted: epNN.mp4, epNN-cover.png, epNN.post.txt
+out/final/epNN/  what gets posted, one folder per episode: video.mp4, cover.png, post.txt, script.md
 out/avatar/      profile picture (jaab-1080.jpg)
 out/voices/      voice samples (Iapetus = the series voice)
-out/drafts/      earlier experiments (not for posting)
+out/drafts/<name>/  earlier experiments, one folder each: video.mp4, script.md (not for posting)
 .build/          intermediates: raw renders, props, logs (hidden, safe to delete)
 docs/            TODO, cinematic-guide (the rules every episode follows), references
 ```
