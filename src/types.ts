@@ -74,6 +74,8 @@ export type Scene = {
 	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
 	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
 	rain?: boolean; // v3: rain streaks over the scene
+	tint?: {color: string; at?: number; strength?: number}; // v4: colour-coded light (e.g. red = danger) from `at`
+	blackout?: {at: number; sec: number}; // v4: torch dies, frame goes black, captions stay
 	a?: string; // endcard choices
 	b?: string;
 	prompt?: string;
@@ -91,7 +93,7 @@ export type Episode = {
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
-	style?: 'v1' | 'v2' | 'v3'; // visual style; default v1. v3 = v2 + dust, rain, grade
+	style?: 'v1' | 'v2' | 'v3' | 'v4'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD
 	rules?: {title: string; items: string[]}; // v2: the episode's rules, tracked across scenes
 	mix?: {beds: string[]; duck?: number; bedVolume?: number}; // v3 sound design: looping beds + auto foley
 	scenes: Scene[];

@@ -33,6 +33,8 @@ export type Look2 = {
 	style: 'mochi' | 'long' | 'short';
 	bag?: boolean;
 	lanyard?: boolean;
+	silhouette?: boolean; // v4: dark figure, rim light, glowing eyes carry the acting
+	accent?: string; // v4: the one colour on the figure (bag + lanyard)
 };
 
 // [shoulder, elbow] degrees per arm; 0 = hanging, + = swing toward the character's front-left.
@@ -76,6 +78,43 @@ const Limb: React.FC<{x: number; y: number; a1: number; a2: number; l1: number; 
 		</g>
 	</g>
 );
+
+/** v4 face: no features, just two glowing eyes whose shape does the acting. */
+const GlowEyes: React.FC<{expr: Expr; turn: number; frame: number}> = ({expr, turn, frame}) => {
+	const fx = turn * 34;
+	const y = HEAD_Y + 4;
+	const blink = frame % 110 < 4 && expr !== 'shock';
+	const eye = (dx: number) => {
+		const cx = dx * (1 - Math.abs(turn) * 0.25) + fx;
+		const far = Math.sign(dx) === -Math.sign(turn) && turn !== 0;
+		const sx = far ? 1 - Math.abs(turn) * 0.3 : 1;
+		const side = Math.sign(dx);
+		let shape: React.ReactNode;
+		if (blink || expr === 'sleepy') shape = <rect x={-20} y={-3} width={40} height={6} rx={3} />;
+		else if (expr === 'shock') shape = <circle r={24} />;
+		else if (expr === 'smile') shape = <path d="M-20,6 A20,20 0 0 1 20,6 L14,6 A14,14 0 0 0 -14,6 Z" />;
+		else if (expr === 'sweat' || expr === 'gross') shape = <path d={`M-18,${-6 * side} Q0,${-22 + 6 * side} 18,${6 * side} Q0,16 -18,${-6 * side} Z`} />; // worried: lids slope down outward
+		else if (expr === 'angry') shape = <path d={`M-18,${8 * side} L18,${-8 * side} L18,14 L-18,14 Z`} />;
+		else shape = <ellipse rx={17} ry={20} />;
+		return (
+			<g key={dx} transform={`translate(${cx} ${y}) scale(${sx} 1)`} fill="#FFFFFF">
+				<g filter="url(#eyeGlow)" opacity={0.85}>{shape}</g>
+				{shape}
+			</g>
+		);
+	};
+	return (
+		<g>
+			<defs>
+				<filter id="eyeGlow" x="-200%" y="-200%" width="500%" height="500%">
+					<feGaussianBlur stdDeviation="10" />
+				</filter>
+			</defs>
+			{eye(-36)}
+			{eye(36)}
+		</g>
+	);
+};
 
 const Face: React.FC<{look: Look2; expr: Expr; turn: number; frame: number}> = ({look, expr, turn, frame}) => {
 	const fx = turn * 34; // features slide toward the turned side
@@ -206,7 +245,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 			<Limb x={-SHOULDER_X} y={SHOULDER_Y + breathe} a1={lArm[0]} a2={lArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} />
 			{look.bag ? (
 				// the bag lags the walk cycle by ~45°: overlapping action
-				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
+				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={look.accent ?? V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
 			) : null}
 			{/* legs */}
 			<Limb x={-34} y={HIP_Y} a1={thighL} a2={kneeL} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
@@ -219,18 +258,18 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				<path d={`M${-60},${SHOULDER_Y - 4} q60,44 120,0`} stroke={look.topShade} strokeWidth={14} fill="none" strokeLinecap="round" />
 				{look.bag ? (
 					<g stroke={V2.bagShade} strokeWidth={12} strokeLinecap="round">
-						<path d={`M${-60},${SHOULDER_Y + 4} l-6,150`} />
-						<path d={`M${60},${SHOULDER_Y + 4} l6,150`} />
+						<path d={`M${-60},${SHOULDER_Y + 4} l-6,150`} stroke={look.accent ? look.accent : undefined} />
+						<path d={`M${60},${SHOULDER_Y + 4} l6,150`} stroke={look.accent ? look.accent : undefined} />
 					</g>
 				) : null}
 				{look.lanyard ? (
 					<g>
-						<path d={`M-30,${SHOULDER_Y - 2} L0,${SHOULDER_Y + 90} L30,${SHOULDER_Y - 2}`} stroke={V2.lanyard} strokeWidth={6} fill="none" />
+						<path d={`M-30,${SHOULDER_Y - 2} L0,${SHOULDER_Y + 90} L30,${SHOULDER_Y - 2}`} stroke={look.accent ?? V2.lanyard} strokeWidth={6} fill="none" />
 						<rect x={-20} y={SHOULDER_Y + 86} width={40} height={52} rx={6} fill={V2.paper} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 1.2) * 9 : Math.sin(frame / 30) * 2) + react * 60} 0 ${SHOULDER_Y + 86})`} />
 					</g>
 				) : null}
 				{/* moonlight rim on the left contour */}
-				<path d={`M${-SHOULDER_X - 12},${SHOULDER_Y + 14} L${-78},${HIP_Y + 14}`} stroke={V2.rim} strokeWidth={5} strokeLinecap="round" opacity={0.6} />
+				<path d={`M${-SHOULDER_X - 12},${SHOULDER_Y + 14} L${-78},${HIP_Y + 14}`} stroke={V2.rim} strokeWidth={look.silhouette ? 9 : 5} strokeLinecap="round" opacity={look.silhouette ? 0.9 : 0.6} />
 				{/* neck + head */}
 				<rect x={-22} y={NECK_Y - 30} width={44} height={50} fill={look.skinShade} />
 				<g transform={`rotate(${turn * 4} 0 ${HEAD_Y + 60})`}>
@@ -238,8 +277,8 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 					<ellipse cx={HEAD_R - 4 + turn * 10} cy={HEAD_Y + 10} rx={16} ry={24} fill={look.skinShade} />
 					<ellipse cx={0} cy={HEAD_Y} rx={HEAD_R} ry={HEAD_R * 1.05} fill={look.skin} />
 					<path d={`M${HEAD_R * 0.35},${HEAD_Y - HEAD_R * 0.95} A${HEAD_R},${HEAD_R * 1.05} 0 0 1 ${HEAD_R * 0.35},${HEAD_Y + HEAD_R * 0.95} Q${HEAD_R * 0.75},${HEAD_Y} ${HEAD_R * 0.35},${HEAD_Y - HEAD_R * 0.95} Z`} fill={look.skinShade} opacity={0.35} />
-					<path d={`M${-HEAD_R + 2},${HEAD_Y - 30} A${HEAD_R},${HEAD_R * 1.05} 0 0 0 ${-HEAD_R * 0.6},${HEAD_Y + HEAD_R * 0.85}`} stroke={V2.rim} strokeWidth={5} fill="none" opacity={0.7} />
-					<Face look={look} expr={expr} turn={turn} frame={frame} />
+					<path d={`M${-HEAD_R + 2},${HEAD_Y - 30} A${HEAD_R},${HEAD_R * 1.05} 0 0 0 ${-HEAD_R * 0.6},${HEAD_Y + HEAD_R * 0.85}`} stroke={V2.rim} strokeWidth={look.silhouette ? 9 : 5} fill="none" opacity={look.silhouette ? 0.95 : 0.7} />
+					{look.silhouette ? <GlowEyes expr={expr} turn={turn} frame={frame} /> : <Face look={look} expr={expr} turn={turn} frame={frame} />}
 					<Hair look={look} turn={turn} frame={frame} panic={panic} react={react} />
 				</g>
 			</g>

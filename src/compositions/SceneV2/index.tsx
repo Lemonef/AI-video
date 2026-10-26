@@ -12,7 +12,7 @@ import {Character2, torchLens} from '../../v2/Character';
 import {ENVIRONMENTS} from '../../v2/Forest';
 import {PROPS2} from '../../v2/props';
 import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
-import {Beam, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, Rain, RulesCard, StatCard} from '../../v2/ui';
+import {Beam, BigTitle, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
@@ -26,6 +26,11 @@ const REACT_SHAPE = [0, 0.07, -0.05, 0.015, 0];
 // Handheld drift: sum of slow incommensurate sines (smooth, never repeats visibly).
 const V3_GRADE = 'saturate(0.82) contrast(1.08)'; // v3: cooler, moodier; the torch stays the only warm accent
 const V3_DUST = 26;
+const V4_WORLD_GRADE = 'saturate(0.5) brightness(0.8) contrast(1.15)'; // near-monochrome night; light sources stay bright (drawn after)
+const HALO_OPACITY = 0.55; // soft fog-light behind each figure so a dark silhouette always reads
+const TINT_FADE_SEC = 0.35;
+const INTRO_BELOW_TITLE = 580; // v4 hook: the two-line big title ends ≈ SAFE.top + 120 + 2 × 101; the name card sits under it
+const POOL_REACH = 0.85; // the beam's ground pool sits this far along the beam's floor hit
 const SHOT_PUSH = 1.04; // each cut keeps creeping in, so a held shot never feels static
 const HIT_SEC = 0.5; // a jolt dies out over this long
 const HIT_PX = 26; // default jolt strength
@@ -48,7 +53,8 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const Env = ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const isFreeze = scene.type === 'freeze';
 	const isEnd = scene.type === 'endcard';
-	const v3 = ep.style === 'v3';
+	const v4 = ep.style === 'v4';
+	const v3 = ep.style === 'v3' || v4; // v4 includes every v3 feature
 	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 
@@ -80,6 +86,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const revealed = scene.rulesView === 'big' && scene.reveal ? Math.min(rules.length, Math.floor(Math.max(0, p) * scene.reveal) + 1) : rules.length;
 
 	const beams: React.ReactNode[] = [];
+	const pools: React.ReactNode[] = [];
 	const cast = (scene.cast ?? []).map((m, i) => {
 		const look = CAST2[m.who];
 		if (!look) return null;
@@ -91,6 +98,12 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const react = Number.isFinite(st.framesSinceExpr) ? interpolate(st.framesSinceExpr, REACT_FRAMES, REACT_SHAPE, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : 0;
 		if (m.torch) {
 			const lens = torchLens();
+			if (v4) {
+				const ly = m.y + lens.y * s;
+				const rad = ((st.facing > 0 ? lens.angle : 180 - lens.angle) * Math.PI) / 180;
+				const reach = Math.sin(rad) > 0.05 ? ((m.y - ly) / Math.sin(rad)) * POOL_REACH : 600;
+				pools.push(<LightPool key={`pool${i}`} x={st.x + lens.x * s * flip + Math.cos(rad) * reach} y={m.y - 10} flicker={0.9} />);
+			}
 			const flicker = 0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37);
 			beams.push(
 				<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={m.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />,
@@ -113,7 +126,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 						filter: [isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : '', v3 ? V3_GRADE : ''].join(' ').trim() || undefined,
 					}}
 				>
-					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute'}}>
+					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: v4 ? V4_WORLD_GRADE : undefined}}>
 						<Env frame={frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} />
 						{(scene.props ?? []).map((pr, i) => {
 							const P = PROPS2[pr.type];
@@ -125,8 +138,27 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 								</g>
 							);
 						})}
+						{v4
+							? (scene.cast ?? []).map((m, i) => (
+									<ellipse key={`halo${i}`} cx={castState(m, p, lineSec, FPS).x} cy={m.y - 480 * (m.scale ?? 1)} rx={330 * (m.scale ?? 1)} ry={560 * (m.scale ?? 1)} fill="url(#halo)" opacity={HALO_OPACITY} />
+								))
+							: null}
+						{v4
+							? (scene.props ?? [])
+									.filter((pr) => pr.type === 'watcher' && (pr.at === undefined || p >= pr.at))
+									.map((pr, i) => <ellipse key={`phalo${i}`} cx={pr.x} cy={pr.y - 320 * (pr.scale ?? 1)} rx={220} ry={460} fill="url(#halo)" opacity={HALO_OPACITY * 0.8} />)
+							: null}
+						{v4 ? (
+							<defs>
+								<radialGradient id="halo">
+									<stop offset="0" stopColor="#6F86B3" stopOpacity={0.9} />
+									<stop offset="1" stopColor="#6F86B3" stopOpacity={0} />
+								</radialGradient>
+							</defs>
+						) : null}
 						{cast}
 					</svg>
+					{pools}
 					{beams}
 					{(scene.bubbles ?? []).map((b, i) => {
 						const f = atFrame(b.at ?? 0);
@@ -134,12 +166,25 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					})}
 				</AbsoluteFill>
 				{v3 && scene.rain ? <Rain frame={frame} /> : null}
+				{v4 ? <Bokeh frame={frame} /> : null}
 				<Film frame={frame} vignette={isFreeze ? 0.92 : 0.75} />
+				{v4 && scene.tint ? (
+					<AbsoluteFill
+						style={{
+							background: scene.tint.color,
+							mixBlendMode: 'multiply',
+							opacity: (scene.tint.strength ?? 0.75) * interpolate(tLine - (scene.tint.at ?? 0) * lineSec, [0, TINT_FADE_SEC], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
+						}}
+					/>
+				) : null}
+				{v4 && scene.blackout && tLine >= scene.blackout.at * lineSec && tLine < scene.blackout.at * lineSec + scene.blackout.sec ? <AbsoluteFill style={{background: '#000'}} /> : null}
 			</AbsoluteFill>
 
-			{scene.chip ? <Chip text={scene.chip} /> : null}
-			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} /> : null}
-			{ep.rules && scene.rulesView ? <RulesCard title={ep.rules.title} rules={rules} big={scene.rulesView === 'big'} frame={frame} revealed={revealed} /> : null}
+			{scene.chip && !v4 ? <Chip text={scene.chip} /> : null}
+			{v4 && scene.title ? <BigTitle text={scene.title} frame={frame} /> : null}
+			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} top={v4 && scene.title ? INTRO_BELOW_TITLE : undefined} /> : null}
+			{ep.rules && scene.rulesView && !(v4 && scene.rulesView === 'hud') ? <RulesCard title={ep.rules.title} rules={rules} big={scene.rulesView === 'big'} frame={frame} revealed={revealed} /> : null}
+			{v4 && ep.rules && scene.rulesView === 'hud' ? <RulesMini rules={rules} chip={scene.chip} /> : null}
 			{scene.stat && p >= (scene.stat.at ?? 0) ? <StatCard value={scene.stat.value} label={scene.stat.label} frame={frame - atFrame(scene.stat.at ?? 0)} /> : null}
 			{isEnd && scene.a && scene.b ? (
 				scene.choices ? (

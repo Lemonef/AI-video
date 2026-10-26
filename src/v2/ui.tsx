@@ -67,11 +67,11 @@ export const Chip: React.FC<{text: string}> = ({text}) => (
 );
 
 /** Character intro: name + one-line trait, slides in at the left edge. */
-export const IntroCard: React.FC<{name: string; trait: string; frame: number}> = ({name, trait, frame}) => {
+export const IntroCard: React.FC<{name: string; trait: string; frame: number; top?: number}> = ({name, trait, frame, top}) => {
 	const {fps} = useVideoConfig();
 	const s = spring({frame, fps, config: {damping: 14}});
 	return (
-		<div style={{position: 'absolute', top: SAFE.top + 120, left: SAFE.left, transform: `translateX(${(s - 1) * 400}px)`, opacity: s}}>
+		<div style={{position: 'absolute', top: top ?? SAFE.top + 120, left: SAFE.left, transform: `translateX(${(s - 1) * 400}px)`, opacity: s}}>
 			<div style={{borderLeft: `8px solid ${V2.yellow}`, paddingLeft: 20}}>
 				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 96, color: V2.white, lineHeight: 1}}>{name}</div>
 				<div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 38, color: V2.yellow, marginTop: 6}}>{trait}</div>
@@ -238,5 +238,83 @@ export const Rain: React.FC<{frame: number}> = ({frame}) => (
 			const x = x0 + y * 0.18;
 			return <line key={i} x1={x} y1={y} x2={x + len * 0.18} y2={y + len} stroke="#BFD3F2" strokeWidth={near ? 2.4 : 1.2} opacity={near ? 0.35 : 0.22} />;
 		})}
+	</svg>
+);
+
+const MONO = "'Courier New', monospace";
+
+/** v4 HUD: tiny monospace stakes line, rules as ①②③ that turn red and strike when broken. */
+export const RulesMini: React.FC<{rules: RuleState[]; chip?: string}> = ({rules, chip}) => (
+	<div style={{position: 'absolute', top: SAFE.top + 20, left: SAFE.left, fontFamily: MONO, color: 'rgba(255,255,255,0.8)'}}>
+		<div style={{display: 'flex', gap: 12, alignItems: 'center'}}>
+			<span style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 30, letterSpacing: 2}}>กฎ</span>
+			{rules.map((r, i) => (
+				<span
+					key={i}
+					style={{
+						width: 40,
+						height: 40,
+						borderRadius: 99,
+						border: `3px solid ${r.broken ? V2.red : 'rgba(255,255,255,0.8)'}`,
+						color: r.broken ? V2.red : V2.white,
+						display: 'inline-flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						fontFamily: FONT_CAPTION,
+						fontWeight: 800,
+						fontSize: 24,
+						position: 'relative',
+					}}
+				>
+					{i + 1}
+					{r.broken ? <span style={{position: 'absolute', width: 52, height: 4, background: V2.red, transform: `rotate(-45deg) scaleX(${Math.min(1, r.brokenAge / 0.25)})`}} /> : null}
+				</span>
+			))}
+		</div>
+		{chip ? <div style={{fontSize: 24, letterSpacing: 3, marginTop: 10, color: 'rgba(255,255,255,0.6)'}}>{chip}</div> : null}
+	</div>
+);
+
+/** v4 hook title: two big lines top-left, *starred* words in the accent colour. */
+export const BigTitle: React.FC<{text: string; frame: number}> = ({text, frame}) => {
+	const {fps} = useVideoConfig();
+	const s = spring({frame, fps, config: {damping: 16}});
+	return (
+		<div style={{position: 'absolute', top: SAFE.top + 120, left: SAFE.left, right: W - SAFE.right, opacity: s, transform: `translateY(${(1 - s) * 30}px)`}}>
+			{text.split('\n').map((line, i) => (
+				<div key={i} style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 92, lineHeight: 1.1, color: V2.white, textShadow: '0 6px 30px rgba(0,0,0,0.9)'}}>
+					{line.split(/(\*[^*]+\*)/g).filter(Boolean).map((p, j) => (p.startsWith('*') ? <span key={j} style={{color: V2.yellow}}>{p.slice(1, -1)}</span> : <span key={j}>{p}</span>))}
+				</div>
+			))}
+		</div>
+	);
+};
+
+/** Out-of-focus foreground specks drifting past the lens (depth cue). */
+export const Bokeh: React.FC<{frame: number}> = ({frame}) => (
+	<svg width={W} height={H} style={{position: 'absolute', inset: 0, pointerEvents: 'none', mixBlendMode: 'screen'}}>
+		<defs>
+			<filter id="bokehBlur">
+				<feGaussianBlur stdDeviation="14" />
+			</filter>
+		</defs>
+		{Array.from({length: 9}, (_, i) => {
+			const x = ((i * 271.3 + frame * (0.3 + (i % 3) * 0.2)) % (W + 300)) - 150;
+			const y = 200 + ((i * 523.7) % (H - 400)) + Math.sin(frame / 50 + i) * 30;
+			return <circle key={i} cx={x} cy={y} r={30 + (i % 4) * 22} fill="#9FB6D9" opacity={0.08 + (i % 3) * 0.04} filter="url(#bokehBlur)" />;
+		})}
+	</svg>
+);
+
+/** Warm pool where the torch beam meets the ground. */
+export const LightPool: React.FC<{x: number; y: number; flicker: number}> = ({x, y, flicker}) => (
+	<svg width={W} height={H} style={{position: 'absolute', inset: 0, pointerEvents: 'none', mixBlendMode: 'screen', opacity: flicker}}>
+		<defs>
+			<radialGradient id="pool">
+				<stop offset="0" stopColor={V2.torch} stopOpacity={0.45} />
+				<stop offset="1" stopColor={V2.torch} stopOpacity={0} />
+			</radialGradient>
+		</defs>
+		<ellipse cx={x} cy={y} rx={260} ry={60} fill="url(#pool)" />
 	</svg>
 );
