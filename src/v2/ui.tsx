@@ -7,7 +7,7 @@ import type {Cue} from '../types';
 import {V2} from './tokens';
 
 /** Film finish: animated grain + vignette. Sits on top of everything except text. */
-export const Film: React.FC<{frame: number; vignette?: number}> = ({frame, vignette = 0.75}) => (
+export const Film: React.FC<{frame: number; vignette?: number; grain?: boolean}> = ({frame, vignette = 0.75, grain = true}) => (
 	<svg width={W} height={H} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
 		<defs>
 			<filter id="grain">
@@ -24,7 +24,8 @@ export const Film: React.FC<{frame: number; vignette?: number}> = ({frame, vigne
 			</radialGradient>
 		</defs>
 		<rect width={W} height={H} fill="url(#vig)" />
-		<rect width={W} height={H} filter="url(#grain)" />
+		{/* animated grain: off for uploads, TikTok's re-encode spends its bits on the noise and blocks everything else */}
+		{grain ? <rect width={W} height={H} filter="url(#grain)" /> : null}
 	</svg>
 );
 

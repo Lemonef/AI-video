@@ -198,7 +198,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				</AbsoluteFill>
 				{v3 && scene.rain ? <Rain frame={frame} /> : null}
 				{v4 ? <Bokeh frame={frame} /> : null}
-				<Film frame={frame} vignette={isFreeze ? 0.92 : 0.75} />
+				<Film frame={frame} vignette={isFreeze ? 0.92 : 0.75} grain={ep.grain ?? !v6} />
 				{(v4 || v6) && scene.tint ? (
 					<AbsoluteFill
 						style={{
