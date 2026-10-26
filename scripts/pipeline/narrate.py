@@ -11,9 +11,12 @@ from dataclasses import asdict
 from pathlib import Path
 
 from . import media, whisper
-from .align import scene_cuts, words_in
+from .align import scene_cuts, spoken_len, words_in
 from .captions import build_cues
 from .tts import TtsEngine, Word
+
+
+MIN_COVERAGE = 0.7  # below this share of the script's letters, the transcript is not trusted for cutting
 
 
 def _key(*parts: str) -> str:
@@ -96,6 +99,10 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         media.tempo(raw, speed, take)
         print(f"  > take: tempo x{speed}, aligning with Whisper…", flush=True)
         words = whisper.words(str(take))
+    heard = sum(spoken_len(w.text) for w in words)
+    expected = sum(spoken_len(line) for line in lines)
+    if heard < MIN_COVERAGE * expected:
+        raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
     take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "words": [asdict(w) for w in words], "duration": take_sec}}
     cuts = scene_cuts(lines, words, take_sec, media.silences(take))

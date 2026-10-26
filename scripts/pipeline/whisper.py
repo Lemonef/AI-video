@@ -26,8 +26,14 @@ def _model():
     return WhisperModel(MODEL, device="cpu", compute_type="int8")
 
 
+# Without these, Whisper can hallucinate whole stretches (seen: 30 s of English gibberish over a
+# Thai take). VAD skips non-speech, no self-conditioning stops errors snowballing, a Thai prompt
+# anchors the language.
+DECODE = {"vad_filter": True, "condition_on_previous_text": False, "temperature": 0.0, "initial_prompt": "เรื่องเล่าภาษาไทย"}
+
+
 def transcribe(path: str, language: str = "th"):
-    segments, _ = _model().transcribe(load_audio(path), language=language, word_timestamps=True)
+    segments, _ = _model().transcribe(load_audio(path), language=language, word_timestamps=True, **DECODE)
     return list(segments)
 
 

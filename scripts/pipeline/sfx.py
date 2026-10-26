@@ -1,7 +1,8 @@
-"""Procedural, licence-free sound effects (pop / tick / whoosh) generated once with ffmpeg."""
+"""Procedural, licence-free sound effects. pop / tick / whoosh (ffmpeg) are the v1/v2 set and must
+not change; the v3 beds and one-shots come from foley.py (numpy)."""
 from pathlib import Path
 
-from . import media
+from . import foley, media
 
 SOUNDS = {
     "pop.wav": "aevalsrc=0.8*sin(2*PI*(380+2600*t)*t)*exp(-28*t):d=0.16",
@@ -17,3 +18,4 @@ def ensure(public_dir: Path) -> None:
         target = out_dir / name
         if not target.exists():
             media.synth(expr, target)
+    foley.ensure(out_dir)

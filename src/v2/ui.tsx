@@ -29,7 +29,7 @@ export const Film: React.FC<{frame: number; vignette?: number}> = ({frame, vigne
 );
 
 /** Volumetric torch beam from (x, y) toward `angle` degrees (0 = right). Additive look via screen blend. */
-export const Beam: React.FC<{x: number; y: number; angle: number; length?: number; spread?: number; flicker?: number}> = ({x, y, angle, length = 900, spread = 26, flicker = 1}) => {
+export const Beam: React.FC<{x: number; y: number; angle: number; length?: number; spread?: number; flicker?: number; dust?: number; frame?: number}> = ({x, y, angle, length = 900, spread = 26, flicker = 1, dust = 0, frame = 0}) => {
 	const half = (spread * Math.PI) / 180;
 	const a = (angle * Math.PI) / 180;
 	const p1 = [x + Math.cos(a - half) * length, y + Math.sin(a - half) * length];
@@ -45,6 +45,16 @@ export const Beam: React.FC<{x: number; y: number; angle: number; length?: numbe
 			</defs>
 			<path d={`M${x},${y} L${p1[0]},${p1[1]} L${p2[0]},${p2[1]} Z`} fill="url(#beam)" />
 			<circle cx={x} cy={y} r={34} fill={V2.torch} opacity={0.35} />
+			{Array.from({length: dust}, (_, i) => {
+				// each mote sits at a fixed spot in the cone (distance d, offset k) and drifts slowly
+				const d = (((i * 0.6180339) % 1) * 0.85 + 0.08) * length;
+				const k = (((i * 0.4142135) % 1) * 2 - 1) * Math.tan(half) * 0.9;
+				const drift = Math.sin(frame / 40 + i) * 14;
+				const px = x + Math.cos(a) * d - Math.sin(a) * d * k + drift;
+				const py = y + Math.sin(a) * d + Math.cos(a) * d * k + Math.cos(frame / 33 + i * 2) * 10 - ((frame * 0.6 + i * 37) % 60);
+				const tw = 0.35 + 0.65 * Math.abs(Math.sin(frame / 18 + i));
+				return <circle key={i} cx={px} cy={py} r={1.6 + (i % 3)} fill="#FFF3D6" opacity={tw * (1 - d / length)} />;
+			})}
 		</svg>
 	);
 };
@@ -148,3 +158,85 @@ export const EndCard2: React.FC<{a: string; b: string; prompt?: string; footer?:
 		</div>
 	);
 };
+
+/** Big number beat ("3 ข้อ", "300 เมตร"): huge accent value, small label above. */
+export const StatCard: React.FC<{value: string; label: string; frame: number}> = ({value, label, frame}) => {
+	const {fps} = useVideoConfig();
+	const s = spring({frame, fps, config: {damping: 13, stiffness: 140}});
+	return (
+		<div style={{position: 'absolute', top: 640, left: 0, width: W, textAlign: 'center', opacity: s, transform: `scale(${0.85 + 0.15 * s})`}}>
+			<div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 40, letterSpacing: 8, color: 'rgba(255,255,255,0.75)'}}>{label}</div>
+			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 230, lineHeight: 1.05, color: V2.red, textShadow: '0 10px 40px rgba(0,0,0,0.8)'}}>{value}</div>
+		</div>
+	);
+};
+
+/** Pip-style end card: each option is pinned by a leader line to the place in the scene it leads to. */
+export const ChoiceMap: React.FC<{
+	a: string;
+	b: string;
+	at: {a: {x: number; y: number}; b: {x: number; y: number}};
+	title?: string;
+	prompt?: string;
+	footer?: string;
+	frame: number;
+}> = ({a, b, at, title, prompt, footer, frame}) => {
+	const {fps} = useVideoConfig();
+	// Layout below the countdown ring (SAFE.top + 60 … +360): title, then options, then the prompt.
+	const TITLE_Y = 600;
+	const LABEL_Y = 860;
+	const PROMPT_Y = 1390; // below the pinned targets so no leader line crosses it
+	const opt = (tag: string, text: string, color: string, p: {x: number; y: number}, labelX: number, delay: number) => {
+		const s = spring({frame: frame - delay, fps, config: {damping: 15}});
+		const draw = interpolate(frame - delay, [0, 12], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+		const ex = labelX + 30;
+		const ey = LABEL_Y + 30;
+		return (
+			<g opacity={s}>
+				<line x1={ex} y1={ey} x2={ex + (p.x - ex) * draw} y2={ey + (p.y - ey) * draw} stroke={color} strokeWidth={4} />
+				<circle cx={p.x} cy={p.y} r={10 * draw} fill={color} />
+				<circle cx={ex} cy={LABEL_Y} r={30} fill={color} />
+				<text x={ex} y={LABEL_Y + 13} textAnchor="middle" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={40} fill={V2.ink}>
+					{tag}
+				</text>
+				<foreignObject x={labelX + 74} y={LABEL_Y - 34} width={380} height={160}>
+					<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 44, lineHeight: 1.2, color: V2.white, textShadow: '0 4px 14px #000'}}>{text}</div>
+				</foreignObject>
+			</g>
+		);
+	};
+	return (
+		<>
+			<div style={{position: 'absolute', top: TITLE_Y, width: W, textAlign: 'center'}}>
+				{title ? <div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 34, letterSpacing: 6, color: 'rgba(255,255,255,0.7)'}}>{title}</div> : null}
+				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 78, color: V2.white}}>
+					<span style={{color: V2.yellow}}>คุณ</span>เป็นคนเลือก
+				</div>
+			</div>
+			<svg width={W} height={H} style={{position: 'absolute', inset: 0}}>
+				{/* each label sits on the same side as its target, so the leader lines never cross */}
+				{opt('A', a, V2.yellow, at.a, at.a.x <= at.b.x ? SAFE.left : W / 2 + 10, 4)}
+				{opt('B', b, V2.red, at.b, at.a.x <= at.b.x ? W / 2 + 10 : SAFE.left, 12)}
+			</svg>
+			<div style={{position: 'absolute', top: PROMPT_Y, width: W, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16}}>
+				{prompt ? <div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 52, color: V2.ink, background: V2.white, borderRadius: 999, padding: '12px 34px'}}>{prompt}</div> : null}
+				{footer ? <div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 40, color: V2.yellow}}>{footer}</div> : null}
+			</div>
+		</>
+	);
+};
+
+/** Diagonal rain streaks in two depths (far: thin + slow, near: thick + fast). */
+export const Rain: React.FC<{frame: number}> = ({frame}) => (
+	<svg width={W} height={H} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
+		{Array.from({length: 140}, (_, i) => {
+			const near = i % 4 === 0;
+			const speed = near ? 70 : 42;
+			const len = near ? 90 : 50;
+			const x0 = ((i * 97.3) % (W + 300)) - 150;
+			const y = ((i * 211.7 + frame * speed) % (H + 200)) - 100;
+			const x = x0 + y * 0.18;
+			return <line key={i} x1={x} y1={y} x2={x + len * 0.18} y2={y + len} stroke="#BFD3F2" strokeWidth={near ? 2.4 : 1.2} opacity={near ? 0.35 : 0.22} />;
+		})}
+	</svg>
+);

@@ -19,6 +19,7 @@ ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:gene
 KEY_FILE = Path.home() / ".secrets" / "gemini_api_key"
 PCM_RATE = 24_000  # raw PCM output when the response has no WAV header
 TIMEOUT_SEC = 300
+EMPTY_RETRIES = 2  # Gemini sometimes answers with no audio part; retrying the same model usually works
 
 
 def _api_key() -> str:
@@ -48,17 +49,22 @@ class GeminiTtsEngine:
                 data=json.dumps(body).encode(),
                 headers={"Content-Type": "application/json", "x-goog-api-key": _api_key()},
             )
-            try:
-                data = json.load(urllib.request.urlopen(req, timeout=TIMEOUT_SEC))
-            except urllib.error.HTTPError as e:
-                errors.append(f"{model}: HTTP {e.code}")
-                if e.code in (429, 404):  # quota spent / model retired -> try the next one
+            for _ in range(1 + EMPTY_RETRIES):
+                try:
+                    data = json.load(urllib.request.urlopen(req, timeout=TIMEOUT_SEC))
+                except urllib.error.HTTPError as e:
+                    errors.append(f"{model}: HTTP {e.code}")
+                    if e.code in (429, 404):  # quota spent / model retired -> try the next one
+                        break
+                    raise
+                cand = (data.get("candidates") or [{}])[0]
+                parts = cand.get("content", {}).get("parts") or []
+                if not parts or "inlineData" not in parts[0]:
+                    errors.append(f"{model}: no audio (finishReason={cand.get('finishReason')})")
                     continue
-                raise
-            audio = base64.b64decode(data["candidates"][0]["content"]["parts"][0]["inlineData"]["data"])
-            self._write_mp3(audio, out_path)
-            print(f"    (gemini model: {model}, voice: {voice})")
-            return []
+                self._write_mp3(base64.b64decode(parts[0]["inlineData"]["data"]), out_path)
+                print(f"    (gemini model: {model}, voice: {voice})")
+                return []
         raise RuntimeError("all Gemini TTS models refused: " + "; ".join(errors))
 
     @staticmethod

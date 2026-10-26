@@ -67,6 +67,13 @@ export type Scene = {
 	transition?: 'fade' | 'whip' | 'cut';
 	shake?: number; // constant camera tremble (px) for the whole scene
 	hits?: Array<{at: number; strength?: number}>; // sharp camera jolts at moments (scare beats), decaying
+	// v3 (only when the episode has `mix`)
+	beds?: Record<string, number>; // bed level 0..1 for this scene, e.g. {"wind": 0.5, "crickets": 0}
+	sfx?: Array<{at: number; sound: string; volume?: number}>; // one-shots at fractions of the line
+	shots?: Array<{at: number; zoom: number; x: number; y: number}>; // camera cuts within the scene
+	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
+	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
+	rain?: boolean; // v3: rain streaks over the scene
 	a?: string; // endcard choices
 	b?: string;
 	prompt?: string;
@@ -74,7 +81,7 @@ export type Scene = {
 };
 
 export type Cue = {start: number; end: number; text: string};
-export type SceneTiming = {audio: string; duration: number; cues: Cue[]};
+export type SceneTiming = {audio: string; duration: number; cues: Cue[]; words?: Array<{text: string; start: number; end: number}>};
 
 export type Episode = {
 	id: string;
@@ -84,8 +91,9 @@ export type Episode = {
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
-	style?: 'v1' | 'v2'; // visual style; default v1
+	style?: 'v1' | 'v2' | 'v3'; // visual style; default v1. v3 = v2 + dust, rain, grade
 	rules?: {title: string; items: string[]}; // v2: the episode's rules, tracked across scenes
+	mix?: {beds: string[]; duck?: number; bedVolume?: number}; // v3 sound design: looping beds + auto foley
 	scenes: Scene[];
 	timing?: Record<string, SceneTiming>;
 };

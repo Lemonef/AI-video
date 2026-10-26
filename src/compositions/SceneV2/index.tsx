@@ -11,7 +11,8 @@ import {CAST2} from '../../v2/cast';
 import {Character2, torchLens} from '../../v2/Character';
 import {ENVIRONMENTS} from '../../v2/Forest';
 import {PROPS2} from '../../v2/props';
-import {Beam, Captions2, Chip, EndCard2, Film, IntroCard, RulesCard} from '../../v2/ui';
+import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
+import {Beam, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, Rain, RulesCard, StatCard} from '../../v2/ui';
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
@@ -23,6 +24,9 @@ const POSE_SPRING = {damping: 11, stiffness: 170}; // slight overshoot = arms se
 const REACT_FRAMES = [0, 3, 8, 14, 20];
 const REACT_SHAPE = [0, 0.07, -0.05, 0.015, 0];
 // Handheld drift: sum of slow incommensurate sines (smooth, never repeats visibly).
+const V3_GRADE = 'saturate(0.82) contrast(1.08)'; // v3: cooler, moodier; the torch stays the only warm accent
+const V3_DUST = 26;
+const SHOT_PUSH = 1.04; // each cut keeps creeping in, so a held shot never feels static
 const HIT_SEC = 0.5; // a jolt dies out over this long
 const HIT_PX = 26; // default jolt strength
 const HANDHELD_PX = 5;
@@ -44,11 +48,14 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const Env = ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
 	const isFreeze = scene.type === 'freeze';
 	const isEnd = scene.type === 'endcard';
+	const v3 = ep.style === 'v3';
 	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 
-	const cam = scene.camera ?? {};
-	const zoom = interpolate(t, [0, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1]);
+	const shot = [...(scene.shots ?? [])].reverse().find((s) => p >= s.at);
+	const cam = shot ? {from: shot.zoom, to: shot.zoom * SHOT_PUSH, x: shot.x, y: shot.y} : scene.camera ?? {};
+	const camStart = shot ? padBefore + shot.at * lineSec : 0;
+	const zoom = interpolate(t, [camStart, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1], {extrapolateLeft: 'clamp'});
 	const shake = (scene.shake ?? 0) * (isFreeze && tLine > lineSec ? 0 : 1);
 	const hh = handheld(frame);
 	// Jolts: fast oscillation under an exponential-ish decay from each hit moment.
@@ -86,7 +93,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			const lens = torchLens();
 			const flicker = 0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37);
 			beams.push(
-				<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={m.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} />,
+				<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={m.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />,
 			);
 		}
 		return (
@@ -103,7 +110,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					style={{
 						transform: `translate(${sx}px, ${sy}px) rotate(${hh.r}deg) scale(${zoom * 1.02})`, // 2% overscan hides the drift's edges
 						transformOrigin: `${cam.x ?? W / 2}px ${cam.y ?? H / 2}px`,
-						filter: isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : undefined,
+						filter: [isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : '', v3 ? V3_GRADE : ''].join(' ').trim() || undefined,
 					}}
 				>
 					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute'}}>
@@ -126,13 +133,21 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 						return frame >= f ? <Bubble key={i} item={b} frame={frame - f} /> : null;
 					})}
 				</AbsoluteFill>
+				{v3 && scene.rain ? <Rain frame={frame} /> : null}
 				<Film frame={frame} vignette={isFreeze ? 0.92 : 0.75} />
 			</AbsoluteFill>
 
 			{scene.chip ? <Chip text={scene.chip} /> : null}
 			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} /> : null}
 			{ep.rules && scene.rulesView ? <RulesCard title={ep.rules.title} rules={rules} big={scene.rulesView === 'big'} frame={frame} revealed={revealed} /> : null}
-			{isEnd && scene.a && scene.b ? <EndCard2 a={scene.a} b={scene.b} prompt={scene.prompt} footer={scene.footer} frame={frame} /> : null}
+			{scene.stat && p >= (scene.stat.at ?? 0) ? <StatCard value={scene.stat.value} label={scene.stat.label} frame={frame - atFrame(scene.stat.at ?? 0)} /> : null}
+			{isEnd && scene.a && scene.b ? (
+				scene.choices ? (
+					<ChoiceMap a={scene.a} b={scene.b} at={scene.choices} title={ep.title} prompt={scene.prompt} footer={scene.footer} frame={frame} />
+				) : (
+					<EndCard2 a={scene.a} b={scene.b} prompt={scene.prompt} footer={scene.footer} frame={frame} />
+				)
+			) : null}
 			{scene.countdown ? <Countdown seconds={scene.countdown} t={tLine} start={countdownStart} /> : null}
 			{timing && scene.showCaptions !== false ? <Captions2 cues={timing.cues} t={tLine} /> : null}
 
@@ -146,6 +161,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					<Html5Audio src={staticFile(SFX.pop)} volume={0.35} />
 				</Sequence>
 			))}
+			{ep.mix ? <Foley scene={scene} atFrame={atFrame} totalFrames={Math.ceil(sceneSeconds(ep, scene) * FPS)} /> : null}
 			{scene.countdown
 				? Array.from({length: scene.countdown}, (_, i) => (
 						<Sequence key={`tick${i}`} from={Math.round((padBefore + countdownStart + i) * FPS)} durationInFrames={FPS}>
@@ -154,5 +170,35 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					))
 				: null}
 		</AbsoluteFill>
+	);
+};
+
+const HIT_VOLUME_PER_PX = 1 / 30; // impact loudness follows the jolt strength
+const ONE_SHOT_FRAMES = FPS * 3;
+
+/** v3 sound cues: authored `sfx`, plus automatic impacts on hits, footsteps while walking, swishes on cuts. */
+const Foley: React.FC<{scene: Scene; atFrame: (at: number) => number; totalFrames: number}> = ({scene, atFrame, totalFrames}) => {
+	const cues: Array<{from: number; sound: string; volume: number}> = [];
+	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c.at), sound: c.sound, volume: c.volume ?? 0.8}));
+	(scene.hits ?? []).forEach((h) => cues.push({from: atFrame(h.at), sound: 'impact', volume: Math.min(1, (h.strength ?? 26) * HIT_VOLUME_PER_PX)}));
+	(scene.shots ?? []).forEach((s) => {
+		if (s.at > 0) cues.push({from: atFrame(s.at), sound: 'swish', volume: 0.35});
+	});
+	if (scene.transition === 'whip') cues.push({from: 0, sound: 'swish', volume: 0.5});
+	const walker = (scene.cast ?? []).find((m) => m.action === 'walk');
+	if (walker) {
+		// walking lasts until a key switches it off (same rule as castState)
+		const stop = (walker.keys ?? []).find((k) => k.action && k.action !== 'walk');
+		const end = stop ? atFrame(stop.at) : totalFrames;
+		for (let f = Math.max(0, atFrame(0)); f < end; f += STEP_EVERY_FRAMES) cues.push({from: f, sound: 'step', volume: 0.32});
+	}
+	return (
+		<>
+			{cues.map((c, i) => (
+				<Sequence key={`fx${i}`} from={Math.max(0, c.from)} durationInFrames={ONE_SHOT_FRAMES}>
+					<Html5Audio src={staticFile(sfxFile(c.sound))} volume={c.volume} />
+				</Sequence>
+			))}
+		</>
 	);
 };
