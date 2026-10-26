@@ -8,7 +8,7 @@ import {EndCard} from '../../components/EndCard';
 import {TitleCard} from '../../components/TitleCard';
 import {castState} from '../../lib/castState';
 import {H, SFX, W} from '../../lib/tokens';
-import {DEFAULT_PAD_BEFORE, FPS, lineDuration, sceneSeconds} from '../../lib/timing';
+import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
 import {BACKGROUNDS} from '../../registry/backgrounds';
 import {CAST} from '../../registry/cast';
 import {PROPS} from '../../registry/props';
@@ -20,15 +20,15 @@ const FREEZE_FILTER = 'saturate(0.35) contrast(1.05)';
 export const Scene: React.FC<{ep: Episode; scene: SceneT}> = ({ep, scene}) => {
 	const frame = useCurrentFrame();
 	const t = frame / FPS;
-	const padBefore = scene.padBefore ?? DEFAULT_PAD_BEFORE;
+	const padBefore = padBeforeOf(ep, scene);
 	const lineSec = lineDuration(ep, scene);
 	const tLine = t - padBefore;
-	// Not clamped above 1: keys and bubbles with at > 1 land in the pause after the line.
-	const p = Math.max(0, tLine / lineSec);
+	// Unclamped: negative during padBefore (nothing at `at: 0` fires early); > 1 in the pause after the line.
+	const p = tLine / lineSec;
 	const timing = ep.timing?.[scene.id];
 	const Bg = BACKGROUNDS[scene.bg] ?? BACKGROUNDS.card;
 	const isFreeze = scene.type === 'freeze';
-	const countdownStart = lineSec + (scene.padAfter ?? 0);
+	const countdownStart = lineSec + padAfter(ep, scene);
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 
 	const cam = scene.camera ?? {};

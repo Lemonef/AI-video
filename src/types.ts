@@ -1,4 +1,4 @@
-// Episode data model. One episodes/epNN.json = one video; scripts/tts.py adds `timing`.
+// Episode data model. One episodes/epNN.json = one video; scripts/make.py adds `timing` and `take`.
 
 export type Pose = 'idle' | 'wave' | 'shock' | 'yawn' | 'armsCrossed' | 'point' | 'think' | 'hold';
 export type Expr = 'smile' | 'sleepy' | 'shock' | 'sweat' | 'flat' | 'angry' | 'gross' | 'talk';
@@ -9,7 +9,7 @@ export type Action = 'idle' | 'walk' | 'wobble' | 'bounce' | 'shake';
 export type CastKey = {at: number; pose?: Pose; expr?: Expr; look?: Look; facing?: 1 | -1; action?: Action};
 
 export type CastMember = {
-	who: string; // key in src/kit/cast.ts
+	who: string; // key in src/registry/cast.ts
 	x: number; // feet position in the 1080x1920 frame
 	y: number;
 	scale?: number;
@@ -42,6 +42,7 @@ export type Scene = {
 	bg: string;
 	say: string; // spoken text (TTS-friendly: numbers as words, no emoji)
 	caption?: string; // displayed text; defaults to `say`
+	tone?: string; // delivery tag for expressive engines, e.g. "whispers", "excited" (sent as [tone])
 	showCaptions?: boolean;
 	title?: string;
 	cast?: CastMember[];
@@ -63,8 +64,10 @@ export type SceneTiming = {audio: string; duration: number; cues: Cue[]};
 export type Episode = {
 	id: string;
 	title: string;
+	engine?: string; // TTS engine: "gemini" (one expressive take) or "edge" (per line)
 	voice: string;
 	rate?: string;
+	take?: boolean; // set by make.py when the narration is one continuous take
 	scenes: Scene[];
 	timing?: Record<string, SceneTiming>;
 };
