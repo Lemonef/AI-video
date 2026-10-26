@@ -9,7 +9,7 @@ cp episodes/ep02.json episodes/ep03.json   # then edit the scenes (ep02 = v2 tem
 .venv/Scripts/python scripts/make.py ep03   # -> out/ep03.mp4
 ```
 
-`make.py` voices each line (cached: only changed lines are re-voiced), builds word-timed captions, generates sound effects, renders with Remotion, and masters loudness to −14 LUFS. New episode = new data file, no new code.
+`make.py` voices the episode (cached: an unchanged script is never re-voiced), builds word-timed captions, generates sound effects, renders with Remotion, and masters loudness to −14 LUFS. New episode = new data file, no new code.
 
 | Flag | Effect |
 |---|---|
