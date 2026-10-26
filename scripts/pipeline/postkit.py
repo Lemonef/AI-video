@@ -24,18 +24,27 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
     end = next((s for s in episode["scenes"] if s.get("type") == "endcard"), {})
     question = post.get("question") or f"A) {end.get('a', '')}  หรือ  B) {end.get('b', '')} ?"
     part = post.get("part")
+    pin = post.get("pin", f"📌 A = {end.get('a', '')} · B = {end.get('b', '')}\nคนส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น!")
     lines = [
-        "== CAPTION ==",
+        "1) PASTE INTO 'DESCRIPTION' (whole block):",
+        "",
         f"{'ตอนที่ ' + str(part) + ' · ' if part else ''}{hook.replace('*', '')}",
         question,
-        f"เลือกแล้วคอมเมนต์ A หรือ B 👇 {post.get('next', 'ตอนต่อไปมาแน่')}",
+        f"คอมเมนต์ A หรือ B 👇 {post.get('next', 'ตอนต่อไปมาแน่')}",
         " ".join(post.get("hashtags", DEFAULT_TAGS)),
         "",
-        "== PINNED COMMENT ==",
-        post.get("pin", f"📌 A = {end.get('a', '')} · B = {end.get('b', '')} — เสียงส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น!"),
+        "2) ON THE UPLOAD PAGE:",
+        "- Cover: cover.png (from this folder)",
+        "- When to post: Schedule -> 20:00",
+        "- Who can see: Everyone · High-quality uploads: ON",
+        "- Show more: AI-generated content ON · comments ON · Duet/Stitch ON · Disclose post content OFF",
         "",
-        "== CHECKLIST ==",
-        *[f"[ ] {c}" for c in CHECKLIST],
+        "3) RIGHT AFTER IT GOES LIVE: post this comment, then hold it -> Pin:",
+        "",
+        pin,
+        "",
+        "4) THEN:",
+        *[f"[ ] {c}" for c in CHECKLIST if not c.startswith(("Cover", "Pin"))],
     ]
     out = final_dir / "post.txt"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
