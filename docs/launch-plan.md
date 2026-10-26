@@ -36,6 +36,7 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 ## Every week
 
 - 3–4 posts, always at 20:00. Test for 2–4 weeks, then follow the account's own data.
+- No need to be online at 20:00: upload at tiktok.com/upload and use **Schedule** (up to about 10 days ahead). Batch-schedule the week in one sitting.
 - **Mix the week:** a thriller part or two, plus one everyday or choice story.
 - A series runs 2–3 parts, then a new one. จ๊าบ, the voice and the look always stay the same.
 - Sunday: send Claude the TikTok Studio numbers (views, % watched to the end, comments, new followers). The type that wins gets more slots.
