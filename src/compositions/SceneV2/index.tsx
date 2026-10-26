@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Html5Audio, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Html5Audio, Sequence, interpolate, spring, staticFile, useCurrentFrame} from 'remotion';
 import {Bubble} from '../../components/Bubble';
 import {Countdown} from '../../components/Countdown';
 import {castState} from '../../lib/castState';
@@ -18,6 +18,18 @@ const FADE_FRAMES = 8;
 const WHIP_FRAMES = 7;
 const FREEZE_FILTER = 'saturate(0.25) brightness(0.8) contrast(1.1)';
 const BACKDROP_FILTER = 'blur(10px) brightness(0.55)'; // behind full-screen cards (rules, end card)
+const POSE_SPRING = {damping: 11, stiffness: 170}; // slight overshoot = arms settle, not snap
+// Reaction impulse over frames since an expression change: anticipation squash, pop stretch, settle.
+const REACT_FRAMES = [0, 3, 8, 14, 20];
+const REACT_SHAPE = [0, 0.07, -0.05, 0.015, 0];
+// Handheld drift: sum of slow incommensurate sines (smooth, never repeats visibly).
+const HANDHELD_PX = 5;
+const HANDHELD_DEG = 0.25;
+const handheld = (f: number) => ({
+	x: (Math.sin(f / 37) + 0.6 * Math.sin(f / 23 + 1.3)) * HANDHELD_PX,
+	y: (Math.sin(f / 41 + 2.1) + 0.6 * Math.sin(f / 29)) * HANDHELD_PX,
+	r: Math.sin(f / 53 + 0.7) * HANDHELD_DEG,
+});
 
 export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({ep, scene, index}) => {
 	const frame = useCurrentFrame();
@@ -36,8 +48,9 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const cam = scene.camera ?? {};
 	const zoom = interpolate(t, [0, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1]);
 	const shake = (scene.shake ?? 0) * (isFreeze && tLine > lineSec ? 0 : 1);
-	const sx = shake ? Math.sin(frame * 1.9) * shake : 0;
-	const sy = shake ? Math.cos(frame * 2.3) * shake : 0;
+	const hh = handheld(frame);
+	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0);
+	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0);
 	const enter =
 		scene.transition === 'whip'
 			? {transform: `translateX(${interpolate(frame, [0, WHIP_FRAMES], [W * 0.6, 0], {extrapolateRight: 'clamp'})}px)`, filter: `blur(${interpolate(frame, [0, WHIP_FRAMES], [40, 0], {extrapolateRight: 'clamp'})}px)`}
@@ -60,6 +73,8 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const rot = st.action === 'wobble' ? Math.sin(frame / 6) * 4 : st.action === 'shake' ? Math.sin(frame * 2.2) * 2.5 : 0;
 		const flip = st.framesSinceFlip < FLIP_FRAMES ? interpolate(st.framesSinceFlip, [0, FLIP_FRAMES / 2, FLIP_FRAMES], [-st.facing, 0, st.facing]) : st.facing;
 		const s = m.scale ?? 1;
+		const poseBlend = Number.isFinite(st.framesSincePose) ? spring({frame: Math.max(0, st.framesSincePose), fps: FPS, config: POSE_SPRING}) : 1;
+		const react = Number.isFinite(st.framesSinceExpr) ? interpolate(st.framesSinceExpr, REACT_FRAMES, REACT_SHAPE, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : 0;
 		if (m.torch) {
 			const lens = torchLens();
 			const flicker = 0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37);
@@ -69,7 +84,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		}
 		return (
 			<g key={i} transform={`translate(${st.x} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`}>
-				<Character2 look={look} pose={st.pose} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
+				<Character2 look={look} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 			</g>
 		);
 	});
@@ -79,7 +94,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			<AbsoluteFill style={{...enter}}>
 				<AbsoluteFill
 					style={{
-						transform: `translate(${sx}px, ${sy}px) scale(${zoom})`,
+						transform: `translate(${sx}px, ${sy}px) rotate(${hh.r}deg) scale(${zoom * 1.02})`, // 2% overscan hides the drift's edges
 						transformOrigin: `${cam.x ?? W / 2}px ${cam.y ?? H / 2}px`,
 						filter: isFreeze && tLine > lineSec ? FREEZE_FILTER : isEnd || scene.rulesView === 'big' ? BACKDROP_FILTER : undefined,
 					}}

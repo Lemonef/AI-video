@@ -11,6 +11,8 @@ const rnd = (i: number, salt = 1) => {
 };
 
 const wrap = (x: number, span: number) => ((x % span) + span) % span;
+// Just below the time chip (top-right); tall pines may cover part of it, which reads as depth.
+const MOON_Y = 330;
 
 const Pine: React.FC<{x: number; base: number; h: number; w: number; color: string}> = ({x, base, h, w, color}) => {
 	const tiers = 4;
@@ -77,10 +79,10 @@ const Sky: React.FC<{frame: number}> = ({frame}) => (
 		{Array.from({length: 70}, (_, i) => (
 			<circle key={i} cx={rnd(i, 9) * W} cy={rnd(i, 10) * 900} r={1 + rnd(i, 11) * 2.2} fill={V2.moon} opacity={0.25 + 0.5 * Math.abs(Math.sin(frame / 25 + i))} />
 		))}
-		<circle cx={820} cy={330} r={260} fill="url(#v2moon)" />
-		<circle cx={820} cy={330} r={78} fill={V2.moon} />
-		<circle cx={846} cy={318} r={14} fill="#DCD5BC" opacity={0.6} />
-		<circle cx={800} cy={356} r={9} fill="#DCD5BC" opacity={0.5} />
+		<circle cx={820} cy={MOON_Y} r={260} fill="url(#v2moon)" />
+		<circle cx={820} cy={MOON_Y} r={78} fill={V2.moon} />
+		<circle cx={846} cy={MOON_Y - 12} r={14} fill="#DCD5BC" opacity={0.6} />
+		<circle cx={800} cy={MOON_Y + 26} r={9} fill="#DCD5BC" opacity={0.5} />
 	</g>
 );
 

@@ -2,7 +2,20 @@ import type {Action, CastMember, Expr, Look, Pose} from '../types';
 
 const TURN_FRAMES = 8; // head turns ease over this many frames instead of snapping
 
-export type CastState = {pose: Pose; expr: Expr; look: Look; facing: 1 | -1; action: Action; turn: number; framesSinceFlip: number; x: number; walking: boolean};
+export type CastState = {
+	pose: Pose;
+	expr: Expr;
+	look: Look;
+	facing: 1 | -1;
+	action: Action;
+	turn: number;
+	framesSinceFlip: number;
+	x: number;
+	walking: boolean;
+	poseFrom: Pose; // previous pose, for eased transitions
+	framesSincePose: number; // Infinity = never changed
+	framesSinceExpr: number; // drives the reaction squash (anticipation + overshoot)
+};
 
 /**
  * Resolve a cast member at `p` (fraction of the narration line elapsed; negative before the line
@@ -12,16 +25,26 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 	const keys = [...(m.keys ?? [])].sort((a, b) => a.at - b.at);
 	const st = {pose: m.pose ?? 'idle', expr: m.expr ?? 'smile', look: m.look ?? 'center', facing: m.facing ?? 1, action: m.action ?? 'idle', turn: m.turn ?? 0} as Omit<
 		CastState,
-		'framesSinceFlip' | 'x' | 'walking'
-	>;
+		'framesSinceFlip' | 'x' | 'walking' | 'poseFrom' | 'framesSincePose' | 'framesSinceExpr'
+	> & {pose: Pose; expr: Expr};
 	let flipAt: number | null = null;
+	let poseFrom: Pose = st.pose;
+	let poseAt: number | null = null;
+	let exprAt: number | null = null;
 	let turnFrom = st.turn;
 	let turnAt: number | null = null;
 	for (const k of keys) {
 		if (k.at > p) break;
 		if (k.facing !== undefined && k.facing !== st.facing) flipAt = k.at;
-		if (k.pose) st.pose = k.pose;
-		if (k.expr) st.expr = k.expr;
+		if (k.pose && k.pose !== st.pose) {
+			poseFrom = st.pose;
+			poseAt = k.at;
+			st.pose = k.pose;
+		}
+		if (k.expr && k.expr !== st.expr) {
+			exprAt = k.at;
+			st.expr = k.expr;
+		}
 		if (k.look) st.look = k.look;
 		if (k.facing !== undefined) st.facing = k.facing;
 		if (k.action) st.action = k.action;
@@ -53,9 +76,13 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 		st.turn = turnFrom + (st.turn - turnFrom) * eased;
 	}
 
+	const since = (at: number | null) => (at === null ? Infinity : (p - at) * lineSec * fps);
 	return {
 		...st,
-		framesSinceFlip: flipAt === null ? Infinity : (p - flipAt) * lineSec * fps,
+		poseFrom,
+		framesSincePose: since(poseAt),
+		framesSinceExpr: since(exprAt),
+		framesSinceFlip: since(flipAt),
 		x,
 		walking: walks && p >= walkStart! && p < walkEnd,
 	};

@@ -56,7 +56,14 @@ type Props = {
 	frame: number;
 	walking?: boolean;
 	torch?: boolean; // holding a flashlight in the right hand, beam drawn by the scene
+	poseFrom?: Pose; // previous pose; arms blend from it
+	poseBlend?: number; // 0 = poseFrom, 1 = pose (spring, may overshoot slightly)
+	react?: number; // reaction impulse: + squash (anticipation), - stretch (pop); drives follow-through
 };
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const IDLE_SWAY_DEG = 1.2; // weight shift so a standing character is never frozen
+const SQUASH_X = 0.5; // horizontal bulge per unit of vertical squash (keeps volume)
 
 const Limb: React.FC<{x: number; y: number; a1: number; a2: number; l1: number; l2: number; color: string; shade: string; end?: React.ReactNode}> = ({x, y, a1, a2, l1, l2, color, shade, end}) => (
 	<g transform={`translate(${x} ${y}) rotate(${a1})`}>
@@ -133,7 +140,7 @@ const Face: React.FC<{look: Look2; expr: Expr; turn: number; frame: number}> = (
 	);
 };
 
-const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean}> = ({look, turn, frame, panic}) => {
+const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean; react: number}> = ({look, turn, frame, panic, react}) => {
 	const top = HEAD_Y - HEAD_R;
 	const sx = turn * 10;
 	if (look.style === 'long') {
@@ -144,7 +151,8 @@ const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean}>
 		);
 	}
 	// Mochi: tousled fringe + the signature curl that springs up when panicking.
-	const curl = panic ? -8 + Math.sin(frame / 1.4) * 10 : 14 + Math.sin(frame / 22) * 4;
+	// follow-through: the curl whips opposite the body's squash/stretch, then settles
+	const curl = (panic ? -8 + Math.sin(frame / 1.4) * 10 : 14 + Math.sin(frame / 22) * 4) - react * 260;
 	return (
 		<g>
 			<path
@@ -160,8 +168,13 @@ const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean}>
 	);
 };
 
-export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch}) => {
-	const p = POSES[pose];
+export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch, poseFrom, poseBlend = 1, react = 0}) => {
+	const to = POSES[pose];
+	const from = POSES[poseFrom ?? pose];
+	const p = {
+		l: [lerp(from.l[0], to.l[0], poseBlend), lerp(from.l[1], to.l[1], poseBlend)] as ArmPose,
+		r: [lerp(from.r[0], to.r[0], poseBlend), lerp(from.r[1], to.r[1], poseBlend)] as ArmPose,
+	};
 	const swing = walking ? Math.sin(frame / 3.4) : 0;
 	const breathe = Math.sin(frame / 18) * 3;
 	const bob = walking ? -Math.abs(Math.cos(frame / 3.4)) * 10 : 0;
@@ -185,12 +198,16 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 		</g>
 	);
 
+	const sway = walking ? 0 : Math.sin(frame / 45) * IDLE_SWAY_DEG;
 	return (
-		<g transform={`translate(0 ${bob})`}>
+		<g transform={`translate(0 ${bob}) scale(${1 + react * SQUASH_X} ${1 - react}) rotate(${sway} 0 ${HIP_Y})`}>
 			<ellipse cx={0} cy={bob * -1 + 4} rx={110} ry={20} fill="rgba(0,0,0,0.35)" />
 			{/* back arm + bag sit behind the body */}
 			<Limb x={-SHOULDER_X} y={SHOULDER_Y + breathe} a1={lArm[0]} a2={lArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} />
-			{look.bag ? <rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={V2.bag} /> : null}
+			{look.bag ? (
+				// the bag lags the walk cycle by ~45°: overlapping action
+				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
+			) : null}
 			{/* legs */}
 			<Limb x={-34} y={HIP_Y} a1={thighL} a2={kneeL} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
 			<Limb x={34} y={HIP_Y} a1={thighR} a2={kneeR} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
@@ -209,7 +226,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				{look.lanyard ? (
 					<g>
 						<path d={`M-30,${SHOULDER_Y - 2} L0,${SHOULDER_Y + 90} L30,${SHOULDER_Y - 2}`} stroke={V2.lanyard} strokeWidth={6} fill="none" />
-						<rect x={-20} y={SHOULDER_Y + 86} width={40} height={52} rx={6} fill={V2.paper} />
+						<rect x={-20} y={SHOULDER_Y + 86} width={40} height={52} rx={6} fill={V2.paper} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 1.2) * 9 : Math.sin(frame / 30) * 2) + react * 60} 0 ${SHOULDER_Y + 86})`} />
 					</g>
 				) : null}
 				{/* moonlight rim on the left contour */}
@@ -223,7 +240,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 					<path d={`M${HEAD_R * 0.35},${HEAD_Y - HEAD_R * 0.95} A${HEAD_R},${HEAD_R * 1.05} 0 0 1 ${HEAD_R * 0.35},${HEAD_Y + HEAD_R * 0.95} Q${HEAD_R * 0.75},${HEAD_Y} ${HEAD_R * 0.35},${HEAD_Y - HEAD_R * 0.95} Z`} fill={look.skinShade} opacity={0.35} />
 					<path d={`M${-HEAD_R + 2},${HEAD_Y - 30} A${HEAD_R},${HEAD_R * 1.05} 0 0 0 ${-HEAD_R * 0.6},${HEAD_Y + HEAD_R * 0.85}`} stroke={V2.rim} strokeWidth={5} fill="none" opacity={0.7} />
 					<Face look={look} expr={expr} turn={turn} frame={frame} />
-					<Hair look={look} turn={turn} frame={frame} panic={panic} />
+					<Hair look={look} turn={turn} frame={frame} panic={panic} react={react} />
 				</g>
 			</g>
 			{/* front arm last so it overlaps the body */}
