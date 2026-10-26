@@ -29,12 +29,12 @@ episodes/        one JSON per episode (ep01, ep02 = current)   archive/ = old st
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
 scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
-out/             finished videos only: epNN.mp4, versions/ (each style version), voices/ (voice samples), refs/
+out/             finished videos only: epNN.mp4 (+ cover, post kit), drafts/ (earlier experiments), voices/ (voice samples), refs/
 out/.build/      intermediates: raw renders, props, logs (safe to delete)
 docs/            TODO, cinematic-guide (the rules every episode follows), references
 ```
 
-Style versions are frozen as git tags (`v1`, `v2`, `v3`) and as videos in `out/versions/`. The current look is v6: the v3 cast and side-on walk, with the cleaner forest, real CC0 sound, and the cinematic-guide pacing (silent cuts, a silence before the hit, J-cuts, colour script, an escalating heartbeat).
+**Current release: v1** (git tag `v1`): Jaab in the night forest, the Gemini Iapetus one-take voice, real CC0 sound, the cinematic-guide pacing, and the layout guard. Everything earlier is a draft (tags `draft-1` to `draft-3`, videos in `out/drafts/`). In code, the style switch for v1 is `"style": "v6"` (an internal name left over from the drafts).
 
 ## First-time setup
 
