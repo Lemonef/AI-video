@@ -50,7 +50,7 @@ def main() -> None:
     print(f"[3/4] render -> {raw.relative_to(ROOT)}")
     render(ROOT, episode, timing, raw)
     print(f"[4/4] loudness master -> {out.relative_to(ROOT)}")
-    master(raw, out)
+    out = master(raw, out)
     print(f"done: {out}")
 
 

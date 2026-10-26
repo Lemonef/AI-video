@@ -49,9 +49,9 @@ export const Beam: React.FC<{x: number; y: number; angle: number; length?: numbe
 	);
 };
 
-/** Small time/place chip, top-centre (e.g. "23:47 · ทางเข้าป่า"). */
+/** Small time/place chip, top-right: the rules HUD owns the top-left (e.g. "23:47 · ทางเข้าป่า"). */
 export const Chip: React.FC<{text: string}> = ({text}) => (
-	<div style={{position: 'absolute', top: SAFE.top + 10, left: 0, width: W, display: 'flex', justifyContent: 'center'}}>
+	<div style={{position: 'absolute', top: SAFE.top + 10, left: SAFE.left, width: SAFE.right - SAFE.left, display: 'flex', justifyContent: 'flex-end'}}>
 		<div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 34, color: V2.white, background: V2.chip, border: '2px solid rgba(255,255,255,0.35)', borderRadius: 999, padding: '6px 26px', letterSpacing: 1}}>{text}</div>
 	</div>
 );
