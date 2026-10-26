@@ -29,7 +29,9 @@ episodes/        one JSON per episode (ep01 = v1, the current release)   archive
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
 scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
-out/final/       ONLY what gets posted: epNN.mp4, epNN-cover.png, epNN.post.txt, profile-picture.jpg
+out/final/       what gets posted: epNN.mp4, epNN-cover.png, epNN.post.txt
+out/avatar/      profile picture (jaab-1080.jpg)
+out/voices/      voice samples (Iapetus = the series voice)
 out/drafts/      earlier experiments (not for posting)
 .build/          intermediates: raw renders, props, logs (hidden, safe to delete)
 docs/            TODO, cinematic-guide (the rules every episode follows), references
