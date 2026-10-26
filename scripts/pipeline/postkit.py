@@ -7,7 +7,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
-DEFAULT_TAGS = ["#เรื่องผี", "#จะเกิดอะไรขึ้นถ้า", "#ช่วยจ๊าบด้วย", "#animation", "#storytime"]
+# Genre-neutral defaults (scary / funny / shop all share them); episodes add their own genre tags.
+DEFAULT_TAGS = ["#jaabstory", "#จ๊าบ", "#จะเกิดอะไรขึ้นถ้า", "#animation", "#storytime"]
 CHECKLIST = [
     "Cover = the -cover.png (also the playlist thumbnail)",
     "Add to the arc's playlist, in order",
