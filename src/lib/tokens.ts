@@ -33,10 +33,15 @@ export const C = {
 	durianDark: '#8C9A2E',
 } as const;
 
-// TikTok UI covers these regions of a 1080x1920 frame; keep text out of them.
-export const SAFE = {top: 170, bottom: 1500, right: 940, left: 60} as const;
 export const W = 1080;
 export const H = 1920;
+// Tall phones (~9:19.5) show a 9:16 video zoomed to fill the height, cutting a strip off each side.
+const TALL_PHONE_ASPECT = 19.5 / 9;
+const CROP_X = Math.ceil((W - H / TALL_PHONE_ASPECT) / 2); // ~97 px per side
+export const VISIBLE = {left: CROP_X, right: W - CROP_X} as const;
+const EDGE_MARGIN = 20;
+// TikTok UI covers these regions of a 1080x1920 frame; keep text out of them. right = the button rail.
+export const SAFE = {top: 170, bottom: 1500, right: 940, left: VISIBLE.left + EDGE_MARGIN} as const;
 export const FLOOR_Y = 1260;
 export const CAPTION_TOP = 1330; // below the floor line, above TikTok's bottom UI (SAFE.bottom)
 

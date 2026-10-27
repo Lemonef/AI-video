@@ -2,9 +2,14 @@ import React from 'react';
 import {interpolate, spring, useVideoConfig} from 'remotion';
 import {FONT_CAPTION} from '../lib/fonts';
 import {activeCue} from '../lib/cues';
+import {fitText} from '@remotion/layout-utils';
 import {CAPTION_TOP, H, SAFE, W} from '../lib/tokens';
 import type {Cue} from '../types';
 import {V2} from './tokens';
+
+// Centred text spans symmetric margins: the stricter side (the button rail) sets the width.
+const SAFE_WIDTH = W - 2 * Math.max(SAFE.left, W - SAFE.right);
+const STAT_MAX_PX = 230;
 
 /** Film finish: animated grain + vignette. Sits on top of everything except text. */
 export const Film: React.FC<{frame: number; vignette?: number; grain?: boolean}> = ({frame, vignette = 0.75, grain = true}) => (
@@ -164,10 +169,13 @@ export const EndCard2: React.FC<{a: string; b: string; prompt?: string; footer?:
 export const StatCard: React.FC<{value: string; label: string; frame: number}> = ({value, label, frame}) => {
 	const {fps} = useVideoConfig();
 	const s = spring({frame, fps, config: {damping: 13, stiffness: 140}});
+	// Big, but never wider than what a tall phone actually shows.
+	const fit = fitText({text: value, withinWidth: SAFE_WIDTH, fontFamily: FONT_CAPTION, fontWeight: 800});
+	const size = Math.min(STAT_MAX_PX, fit.fontSize);
 	return (
 		<div style={{position: 'absolute', top: 640, left: 0, width: W, textAlign: 'center', opacity: s, transform: `scale(${0.85 + 0.15 * s})`}}>
 			<div style={{fontFamily: FONT_CAPTION, fontWeight: 600, fontSize: 40, letterSpacing: 8, color: 'rgba(255,255,255,0.75)'}}>{label}</div>
-			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 230, lineHeight: 1.05, color: V2.red, textShadow: '0 10px 40px rgba(0,0,0,0.8)'}}>{value}</div>
+			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: size, lineHeight: 1.05, whiteSpace: 'nowrap', color: V2.red, textShadow: '0 10px 40px rgba(0,0,0,0.8)'}}>{value}</div>
 		</div>
 	);
 };
@@ -187,11 +195,15 @@ export const ChoiceMap: React.FC<{
 	const TITLE_Y = 600;
 	const LABEL_Y = 860;
 	const PROMPT_Y = 1390; // below the pinned targets so no leader line crosses it
-	const opt = (tag: string, text: string, color: string, p: {x: number; y: number}, labelX: number, delay: number) => {
+	const opt = (tag: string, text: string, color: string, target: {x: number; y: number}, labelX: number, delay: number) => {
 		const s = spring({frame: frame - delay, fps, config: {damping: 15}});
 		const draw = interpolate(frame - delay, [0, 12], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 		const ex = labelX + 30;
 		const ey = LABEL_Y + 30;
+		// Text and targets stay out of TikTok's button rail (SAFE.right): long options wrap instead.
+		const textX = labelX + 74;
+		const textW = (labelX < W / 2 ? W / 2 - 10 : SAFE.right) - textX;
+		const p = {x: Math.min(Math.max(target.x, SAFE.left), SAFE.right), y: target.y};
 		return (
 			<g opacity={s}>
 				<line x1={ex} y1={ey} x2={ex + (p.x - ex) * draw} y2={ey + (p.y - ey) * draw} stroke={color} strokeWidth={4} />
@@ -200,7 +212,7 @@ export const ChoiceMap: React.FC<{
 				<text x={ex} y={LABEL_Y + 13} textAnchor="middle" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={40} fill={V2.ink}>
 					{tag}
 				</text>
-				<foreignObject x={labelX + 74} y={LABEL_Y - 34} width={380} height={160}>
+				<foreignObject x={textX} y={LABEL_Y - 34} width={textW} height={160}>
 					<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 44, lineHeight: 1.2, color: V2.white, textShadow: '0 4px 14px #000'}}>{text}</div>
 				</foreignObject>
 			</g>
