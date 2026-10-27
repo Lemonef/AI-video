@@ -90,6 +90,8 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     else:
         print(f"  > take: voicing {len(lines)} lines in one request…", flush=True)
         tmp = ep_dir / "take.tmp.mp3"
+        if hasattr(engine, "model"):
+            engine.model = episode.get("voiceModel")  # no silent fallback to a different-sounding model
         engine.synthesize(script, voice, "", tmp)
         tmp.replace(raw)
     if take_meta.get("key") == key and take.exists():
@@ -98,10 +100,16 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     else:
         media.tempo(raw, speed, take)
         print(f"  > take: tempo x{speed}, aligning with Whisper…", flush=True)
-        words = whisper.words(str(take))
+        try:
+            words = whisper.words(str(take))
+        except (ImportError, OSError) as e:
+            # e.g. Windows Smart App Control blocking faster-whisper's native DLLs. Fall back to cuts
+            # placed by script length and snapped to the take's real pauses; captions spread per line.
+            print(f"  ! Whisper unavailable ({type(e).__name__}): aligning by pauses only, word cues fall back to 'at'")
+            words = []
     heard = sum(spoken_len(w.text) for w in words)
     expected = sum(spoken_len(line) for line in lines)
-    if heard < MIN_COVERAGE * expected:
+    if words and heard < MIN_COVERAGE * expected:
         raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
     take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "words": [asdict(w) for w in words], "duration": take_sec}}

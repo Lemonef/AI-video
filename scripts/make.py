@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from pipeline import postkit, sfx  # noqa: E402
+from pipeline import postkit, retention, sfx  # noqa: E402
 from pipeline.master import master  # noqa: E402
 from pipeline.narrate import narrate  # noqa: E402
 from pipeline.render import render  # noqa: E402
@@ -26,6 +26,7 @@ def main() -> None:
     ap.add_argument("--voice", help="override the episode's voice")
     ap.add_argument("--force", action="store_true", help="re-voice every line, ignore cache")
     ap.add_argument("--no-render", action="store_true", help="voice + captions only")
+    ap.add_argument("--allow-retention", action="store_true", help="render even if the retention lint fails (deliberate exceptions only)")
     args = ap.parse_args()
 
     src = ROOT / "episodes" / f"{args.episode}.json"
@@ -40,6 +41,9 @@ def main() -> None:
 
     print(f"[1/4] voice ({engine.name}, {episode['voice']})")
     timing = narrate(episode, engine, public, force=args.force)
+    print("    retention check (docs/growth-playbook.md)")
+    if not retention.report(retention.check(episode, timing)) and not args.allow_retention and not args.no_render:
+        raise SystemExit("retention lint failed: fix the episode (or pass --allow-retention on purpose)")
     print("[2/4] sound effects")
     sfx.ensure(public)
     if args.no_render:

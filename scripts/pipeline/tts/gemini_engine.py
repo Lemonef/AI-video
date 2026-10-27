@@ -32,6 +32,7 @@ def _api_key() -> str:
 class GeminiTtsEngine:
     name = "gemini"
     whole_take = True  # voice the episode in one request; see pipeline/take.py
+    model: str | None = None  # pinned per series (episode "voiceModel"): models sound different, never mix them
 
     def synthesize(self, text: str, voice: str, rate: str, out_path: Path) -> list[Word]:
         # `rate` is edge-specific; Gemini pacing is steered by [tags] in the text instead.
@@ -43,7 +44,7 @@ class GeminiTtsEngine:
             },
         }
         errors = []
-        for model in MODELS:
+        for model in (self.model,) if self.model else MODELS:
             req = urllib.request.Request(
                 ENDPOINT.format(model=model),
                 data=json.dumps(body).encode(),

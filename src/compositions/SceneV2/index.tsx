@@ -17,7 +17,7 @@ import {Character5, torchLens5} from '../../v5/Character';
 import {ENV5} from '../../v5/Forest';
 import {PROPS2} from '../../v2/props';
 import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
-import {Beam, BigTitle, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
+import {Beam, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
@@ -211,6 +211,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				{v4 && scene.blackout && tLine >= scene.blackout.at * lineSec && tLine < scene.blackout.at * lineSec + scene.blackout.sec ? <AbsoluteFill style={{background: '#000'}} /> : null}
 			</AbsoluteFill>
 
+			{index === 0 && ep.post?.part ? <PartBadge part={ep.post.part} total={ep.post.total} /> : null}
 			{scene.chip && !v4 ? <Chip text={scene.chip} /> : null}
 			{(v4 || v6) && scene.title ? <BigTitle text={scene.title} frame={frame} /> : null}
 			{scene.intro && p >= (scene.intro.at ?? 0) ? <IntroCard name={scene.intro.name} trait={scene.intro.trait} frame={frame - atFrame(scene.intro.at ?? 0)} top={(v4 || v6) && scene.title ? INTRO_BELOW_TITLE : undefined} /> : null}

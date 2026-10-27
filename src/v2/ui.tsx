@@ -319,3 +319,13 @@ export const LightPool: React.FC<{x: number; y: number; flicker: number}> = ({x,
 		<ellipse cx={x} cy={y} rx={260} ry={60} fill="url(#pool)" />
 	</svg>
 );
+
+/** "ตอน 1/3" in the opening scene: part-2+ viewers need to know where they are (growth playbook). */
+export const PartBadge: React.FC<{part: number; total?: number}> = ({part, total}) => (
+	<div style={{position: 'absolute', top: SAFE.top + 30, left: SAFE.left}}>
+		<span style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 42, color: V2.ink, background: V2.yellow, borderRadius: 14, padding: '4px 18px'}}>
+			ตอน {part}
+			{total ? `/${total}` : ''}
+		</span>
+	</div>
+);
