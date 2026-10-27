@@ -10,6 +10,12 @@ Researched 2026-10-27. Most sources are marketing blogs rather than TikTok data,
 4. **Post the next part as a reply-to-comment video** on the comment that chose the winning path. It thanks that viewer and threads the series together.
 5. **Put a fixed time in the caption** ("ตอนต่อไป พรุ่งนี้ 20:00"), the way Keep Pip Alive does ("New part every day at 7pm"). The habit is the product.
 
+## Lessons from our own data
+
+- **ep01 (20 views):** most viewers left at **0:01**, average watch 17s of 66s, 10% finished. Two rules follow:
+  1. **Cold open:** second 0 is the scariest or funniest moment, with movement, a sound and a question (e.g. black screen, a whispered "จ๊าบ…", glowing eyes, big text "อย่าหันกลับไป"). The setup and recap come after.
+  2. **35–45s per episode** while the account is new (more completions, and under 60s so Duet and Stitch stay available).
+
 ## Comments
 
 6. **Pin your own comment** with the choice plus a tally ("📌 A = วิ่งต่อ · B = หันไฟฉาย — ตอนนี้ A นำ!"), or pin the best viewer comment. One pin per video.
