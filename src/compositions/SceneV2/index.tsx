@@ -81,10 +81,14 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	}, 0);
 	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0) + Math.sin(frame * 3.1) * jolt;
 	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0) + Math.cos(frame * 3.7) * jolt * 0.7;
+	// Default: a straight cut within one location (a fade there dips to black mid-action and reads as
+	// a glitch) and on frame 1 (the hook must grab at once); fade only where the location changes.
+	const prev = ep.scenes[index - 1];
+	const transition = scene.transition ?? (!prev || prev.bg === scene.bg ? 'cut' : 'fade');
 	const enter =
-		scene.transition === 'whip'
+		transition === 'whip'
 			? {transform: `translateX(${interpolate(frame, [0, WHIP_FRAMES], [W * 0.6, 0], {extrapolateRight: 'clamp'})}px)`, filter: `blur(${interpolate(frame, [0, WHIP_FRAMES], [40, 0], {extrapolateRight: 'clamp'})}px)`}
-			: scene.transition === 'cut'
+			: transition === 'cut'
 				? {}
 				: {opacity: interpolate(frame, [0, FADE_FRAMES], [0, 1], {extrapolateRight: 'clamp'})};
 

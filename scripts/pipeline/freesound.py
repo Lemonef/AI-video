@@ -50,14 +50,20 @@ PINNED = {
 }
 
 BEDS = {"forest_night", "wind", "rain", "dark_drone", "steps_leaves"}
+# One-shots whose recording holds more than one event: keep only the first. heartbeat's 2nd
+# lub-dub sits 2.5 s in, so every cue fired a stray beat wherever that happened to land.
+CUT_SEC = {"heartbeat": 1.0}
+CUT_FADE_SEC = 0.15
 BED_LUFS = -24  # beds sit under the voice
 HIT_LUFS = -14  # one-shots punch at voice level
 
 
-def _finish(raw: Path, out: Path, bed: bool) -> None:
+def _finish(raw: Path, out: Path, bed: bool, cut: float | None = None) -> None:
     """Normalise loudness so every clip mixes predictably; one-shots get leading silence trimmed
-    so a cue lands exactly on its word."""
+    so a cue lands exactly on its word, and `cut` keeps only the first `cut` seconds (faded)."""
     trim = [] if bed else ["silenceremove=start_periods=1:start_threshold=-45dB"]
+    if cut:
+        trim += [f"atrim=0:{cut}", f"afade=t=out:st={cut - CUT_FADE_SEC}:d={CUT_FADE_SEC}"]
     af = ",".join(trim + [f"loudnorm=I={BED_LUFS if bed else HIT_LUFS}:TP=-1.5"])
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", af, "-ar", "48000", "-ac", "2", "-b:a", "192k", str(out)], check=True)
 
@@ -107,7 +113,8 @@ def ensure(public_dir: Path, names: list[str] | None = None) -> dict:
     for name in names or list(LIBRARY):
         target = out_dir / f"{name}.mp3"
         pinned = PINNED.get(name)
-        if name in credits and target.exists() and (pinned is None or credits[name]["id"] == pinned):
+        fresh = name in credits and target.exists() and credits[name].get("cut") == CUT_SEC.get(name)
+        if fresh and (pinned is None or credits[name]["id"] == pinned):
             continue
         if name in PINNED:
             best = _sound(PINNED[name])
@@ -120,9 +127,11 @@ def ensure(public_dir: Path, names: list[str] | None = None) -> dict:
         raw = out_dir / f"{name}.download.mp3"
         with urllib.request.urlopen(best["previews"]["preview-hq-mp3"], timeout=120) as r:
             raw.write_bytes(r.read())
-        _finish(raw, target, name in BEDS)
+        _finish(raw, target, name in BEDS, CUT_SEC.get(name))
         raw.unlink()
         credits[name] = {k: best[k] for k in ("id", "name", "username", "url", "license", "duration")}
+        if name in CUT_SEC:
+            credits[name]["cut"] = CUT_SEC[name]
         print(f"  ♪ {name}: {best['name'][:50]} by {best['username']} ({best['duration']:.0f}s)")
         credits_path.write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf-8")
     return credits

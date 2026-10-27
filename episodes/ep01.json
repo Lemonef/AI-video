@@ -219,15 +219,6 @@
         ]
       },
       "bedsFade": 0.15,
-      "sfx": [
-        {
-          "at": 0.7,
-          "word": "เงียบ",
-          "sound": "heartbeat",
-          "volume": 0.7,
-          "rate": 0.85
-        }
-      ],
       "grade": "saturate(0.7) brightness(0.92)"
     },
     {
@@ -321,15 +312,6 @@
           "at": 0.6,
           "word": "จ๊าบ",
           "strength": 16
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.6,
-          "word": "จ๊าบ",
-          "sound": "heartbeat",
-          "volume": 0.85,
-          "rate": 1.0
         }
       ],
       "beds": {
