@@ -27,6 +27,12 @@ Short version. The reasons behind each step are in `growth-playbook.md`.
 5. Pin the comment from `post.txt` right after posting, and reply to comments for 30–60 minutes.
 6. Create a playlist per series (first one: "กฎเข้าป่า"), if the account has playlists.
 
+## When nobody votes yet (normal for the first videos)
+
+- Don't seed comments from your own or alt accounts: TikTok bans inauthentic engagement, and it doesn't help ranking anyway. Asking real friends to watch and comment honestly is fine.
+- No votes means จ๊าบ decides, and the silence becomes story: part 2 opens with "ไม่มีใครตอบ… จ๊าบเลยต้องตัดสินใจเอง" and takes the more dramatic option.
+- Every end card says "ไม่มีใครเลือก = จ๊าบเลือกเอง", and every episode must satisfy on its own; the vote is a bonus until the audience exists.
+
 ## Next day
 
 1. Screenshot the top comments and the A/B split, then send them to Claude as "ep1".
