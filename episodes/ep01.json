@@ -40,7 +40,7 @@
       "#jaabstory"
     ],
     "series": "กฎเข้าป่า",
-    "coverHook": "อย่าหันกลับไป!",
+    "coverHook": "อย่าขาน!",
     "total": 3,
     "keyword": "เรื่องหลอนในป่า"
   },
@@ -97,7 +97,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.35,
         "rain": 0.35,
         "steps": 0
       }
@@ -137,7 +137,7 @@
       "beds": {
         "wind": 0.15,
         "crickets": 0.45,
-        "drone": 0.08,
+        "drone": 0,
         "rain": 0,
         "steps": 0
       },
@@ -158,7 +158,7 @@
       "beds": {
         "wind": 0.15,
         "crickets": 0.45,
-        "drone": 0.08,
+        "drone": 0,
         "rain": 0,
         "steps": 0
       }
@@ -188,7 +188,7 @@
       "beds": {
         "wind": 0.15,
         "crickets": 0.45,
-        "drone": 0.08,
+        "drone": 0,
         "rain": 0,
         "steps": 0
       }
@@ -210,7 +210,7 @@
       "beds": {
         "wind": 0.15,
         "crickets": 0.45,
-        "drone": 0.08,
+        "drone": 0,
         "rain": 0,
         "steps": 0
       }
@@ -226,7 +226,7 @@
       "beds": {
         "wind": 0.4,
         "crickets": 0.7,
-        "drone": 0.12,
+        "drone": 0,
         "rain": 0,
         "steps": 0.9
       },
@@ -275,7 +275,7 @@
       "beds": {
         "wind": 0.3,
         "crickets": 0,
-        "drone": 0.55,
+        "drone": 0.2,
         "rain": 0,
         "steps": 0
       },
@@ -332,7 +332,7 @@
       "beds": {
         "wind": 0.3,
         "crickets": 0,
-        "drone": 0.55,
+        "drone": 0.3,
         "rain": 0,
         "steps": 0
       }
@@ -397,7 +397,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.45,
         "rain": 0.35,
         "steps": 0
       },
@@ -438,7 +438,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.4,
         "rain": 0.35,
         "steps": 0.8
       }
@@ -486,7 +486,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.45,
         "rain": 0.35,
         "steps": 0
       },
@@ -544,7 +544,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.55,
         "rain": 0.35,
         "steps": 0
       }
@@ -588,7 +588,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.4,
         "rain": 0.35,
         "steps": 0.9
       }
@@ -675,7 +675,7 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.75,
+        "drone": 0.6,
         "rain": 0.35,
         "steps": 0
       }
@@ -769,7 +769,7 @@
         "word": "เจอแล้ว"
       },
       "beds": {
-        "drone": 0.9,
+        "drone": 0.85,
         "rain": 0.6,
         "wind": 0,
         "crickets": 0,
@@ -796,7 +796,7 @@
         "y": 960
       },
       "beds": {
-        "drone": 0.8,
+        "drone": 0.5,
         "rain": 0.5,
         "wind": 0,
         "crickets": 0,
@@ -848,7 +848,7 @@
         }
       },
       "beds": {
-        "drone": 0.35,
+        "drone": 0.25,
         "rain": 0.35,
         "wind": 0.2,
         "crickets": 0,

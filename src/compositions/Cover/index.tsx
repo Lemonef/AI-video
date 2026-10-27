@@ -28,11 +28,11 @@ const outline = (px: number, color = '#0B0E18') => ({
 
 export const Cover: React.FC<CoverProps> = ({episode}) => {
 	const post = (episode as Episode & {post?: {series?: string; part?: number; total?: number; coverHook?: string}}).post ?? {};
-	const Env = ENV5.forestSide;
+	const Env = ENV5.forestPath; // the series' v7 look: the path into the forest
 	const hook = post.coverHook ?? '';
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
-			<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: 'saturate(0.7) brightness(0.75)'}}>
+			<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: 'saturate(0.85) brightness(0.92)'}}>
 				<Env frame={0} scroll={0} fireflies={false} density={1} />
 				<g transform="translate(150 1640) scale(1.25)" opacity={0.95}>
 					{React.createElement(PROPS2.watcher, {frame: 9})}

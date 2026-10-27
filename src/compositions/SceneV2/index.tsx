@@ -15,6 +15,7 @@ import {ENVIRONMENTS} from '../../v2/Forest';
 import {CAST5} from '../../v5/cast';
 import {Character5, torchLens5} from '../../v5/Character';
 import {ENV5} from '../../v5/Forest';
+import {castFilter} from '../../v7/light';
 import {PROPS2} from '../../v2/props';
 import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
 import {Beam, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
@@ -167,7 +168,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			);
 		}
 		return (
-			<g key={i} transform={`translate(${st.x + shiver} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`}>
+			<g key={i} transform={`translate(${st.x + shiver} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (

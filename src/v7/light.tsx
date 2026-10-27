@@ -72,3 +72,19 @@ export const Shaft: React.FC<{id: string; points: Array<[number, number]>; from:
 export const ContactShadow: React.FC<{x: number; y: number; rx: number; ry: number; opacity?: number}> = ({x, y, rx, ry, opacity = 0.55}) => (
 	<ellipse cx={x} cy={y} rx={rx} ry={ry} fill="#000" opacity={opacity} style={{filter: 'blur(10px)'}} />
 );
+
+/**
+ * How the cast is lit in each v7 place. Characters are drawn flat and evenly bright; in a night
+ * scene that reads as pasted on. Dim them to the scene and add a thin rim on the side the light
+ * comes from (a drop-shadow offset toward the light shows only as a sliver around the outline).
+ */
+export type CastLight = {brightness: number; saturate: number; rim: string; dx: number; dy: number};
+export const CAST_LIGHT: Record<string, CastLight> = {
+	forestPath: {brightness: 0.62, saturate: 0.8, rim: 'rgba(157,184,230,0.75)', dx: 5, dy: -4}, // moon up right
+	forestClinic: {brightness: 0.66, saturate: 0.85, rim: 'rgba(255,214,150,0.55)', dx: 0, dy: -5}, // the clinic's glow ahead
+	houseNight: {brightness: 0.82, saturate: 0.9, rim: 'rgba(255,184,102,0.7)', dx: -4, dy: -5}, // the bulb, up and to his left
+};
+export const castFilter = (bg: string): string | undefined => {
+	const l = CAST_LIGHT[bg];
+	return l ? `brightness(${l.brightness}) saturate(${l.saturate}) drop-shadow(${l.dx}px ${l.dy}px 0 ${l.rim})` : undefined;
+};
