@@ -3,6 +3,7 @@ import {Composition} from 'remotion';
 import current from '../episodes/ep01.json';
 import {Avatar} from './compositions/Avatar';
 import {Cover} from './compositions/Cover';
+import {EnvPreview} from './compositions/EnvPreview';
 import {Episode, type EpisodeProps} from './compositions/Episode';
 import {H, W} from './lib/tokens';
 import {FPS, totalFrames} from './lib/timing';
@@ -27,5 +28,6 @@ export const RemotionRoot: React.FC = () => (
 		/>
 		<Composition id="Cover" component={Cover} width={W} height={H} fps={FPS} durationInFrames={1} defaultProps={{episode: CURRENT}} />
 		<Composition id="Avatar" component={Avatar} width={1080} height={1080} fps={FPS} durationInFrames={1} defaultProps={{bg: 'yellow' as const}} />
+		<Composition id="EnvPreview" component={EnvPreview} width={W} height={H} fps={FPS} durationInFrames={FPS * 4} defaultProps={{bg: 'houseNight'}} />
 	</>
 );

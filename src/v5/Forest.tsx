@@ -1,6 +1,8 @@
 import React from 'react';
 import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
+import {ForestPath} from '../v7/ForestPath';
+import {HouseNight} from '../v7/House';
 import {J5, VP} from './tokens';
 
 /**
@@ -227,4 +229,6 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 export const ENV5: Record<string, React.FC<EnvProps>> = {
 	forestDepth: ForestDepth,
 	forestSide: ForestSide,
+	houseNight: HouseNight,
+	forestPath: ForestPath,
 };
