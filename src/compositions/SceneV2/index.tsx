@@ -6,7 +6,7 @@ import {castState} from '../../lib/castState';
 import {bubbleSize, placeBox, type Rect} from '../../lib/layout';
 import {cueAt} from '../../lib/cueAt';
 import {brokenFor, ruleBreaks} from '../../lib/rules';
-import {CAPTION_TOP, H, SAFE, SFX, W} from '../../lib/tokens';
+import {CAPTION_TOP, H, SAFE, SFX, VISIBLE, W} from '../../lib/tokens';
 import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
 import type {Episode, Scene} from '../../types';
 import {CAST2} from '../../v2/cast';
@@ -111,6 +111,11 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const fy = camOy + (m.y + FACE_BOX.cy * s - camOy) * camZ;
 		const half = FACE_BOX.half * s * camZ;
 		reserved.push({x: fx - half, y: fy - half, w: half * 2, h: half * 2});
+		// Framing lint: a face that is on screen must be inside what a tall phone shows.
+		const onScreen = fx + half > 0 && fx - half < W;
+		if (onScreen && (fx - half < VISIBLE.left || fx + half > VISIBLE.right)) {
+			throw new Error(`framing: ${m.who}'s face in scene "${scene.id}" (x ${Math.round(fx - half)}-${Math.round(fx + half)}) is cut off on tall phones; visible x is ${VISIBLE.left}-${VISIBLE.right}. Lower the shot zoom or move the camera.`);
+		}
 	});
 	const breaks = ruleBreaks(ep);
 	const rules = (ep.rules?.items ?? []).map((text, i) => {
@@ -166,7 +171,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					}}
 				>
 					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: v4 ? V4_WORLD_GRADE : v6 ? scene.grade : undefined}}>
-						<Env frame={frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} />
+						<Env frame={frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} progress={scene.progress ? interpolate(p, [0, 1], scene.progress, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : undefined} />
 						{(scene.props ?? []).map((pr, i) => {
 							const P = PROPS2[pr.type];
 							if (!P || (pr.at !== undefined && p < pr.at)) return null;
@@ -212,7 +217,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 						}}
 					/>
 				) : null}
-				{v4 && scene.blackout && tLine >= scene.blackout.at * lineSec && tLine < scene.blackout.at * lineSec + scene.blackout.sec ? <AbsoluteFill style={{background: '#000'}} /> : null}
+				{(v4 || v6) && scene.blackout && tLine >= scene.blackout.at * lineSec && tLine < scene.blackout.at * lineSec + scene.blackout.sec ? <AbsoluteFill style={{background: '#000'}} /> : null}
 			</AbsoluteFill>
 
 			{index === 0 && ep.post?.part ? <PartBadge part={ep.post.part} total={ep.post.total} /> : null}

@@ -1,7 +1,8 @@
 import React from 'react';
 import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
-import {ForestPath} from '../v7/ForestPath';
+import {ForestClinic, ForestPath} from '../v7/ForestPath';
+import {ForestMap, InsertThermometer, InsertTorch} from '../v7/Inserts';
 import {HouseNight} from '../v7/House';
 import {J5, VP} from './tokens';
 
@@ -231,4 +232,8 @@ export const ENV5: Record<string, React.FC<EnvProps>> = {
 	forestSide: ForestSide,
 	houseNight: HouseNight,
 	forestPath: ForestPath,
+	forestClinic: ForestClinic,
+	forestMap: ForestMap,
+	insertThermometer: InsertThermometer,
+	insertTorch: InsertTorch,
 };

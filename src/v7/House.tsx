@@ -94,8 +94,14 @@ const Bed: React.FC = () => (
 		<ContactShadow x={460} y={1560} rx={290} ry={40} />
 		<polygon points={pts([[220, 1520], [700, 1520], [700, 1562], [220, 1562]])} fill="#5F6178" />
 		<polygon points={pts([[300, 1290], [640, 1290], [700, 1520], [220, 1520]])} fill={C.sheet} />
-		<path d="M420,1330 L645,1320 L700,1520 L360,1525 Q380,1430 420,1330 Z" fill={C.blanket} />
 		<path d="M300,1300 L410,1296 Q425,1330 400,1362 L280,1368 Q270,1330 300,1300 Z" fill={C.pillow} />
+		{/* mum asleep with a fever: head on the pillow, damp cloth on her forehead, body under the blanket */}
+		<circle cx={352} cy={1318} r={36} fill="#C9A383" />
+		<path d="M318,1306 Q330,1272 362,1276 Q392,1282 390,1312 Q372,1296 350,1300 Q332,1302 318,1306 Z" fill="#2A1E1A" />
+		<circle cx={312} cy={1296} r={14} fill="#2A1E1A" />
+		<rect x={334} y={1296} width={44} height={12} rx={5} fill="#E8E2D4" />
+		<path d="M384,1350 Q470,1290 600,1316 Q660,1330 690,1420 L700,1520 L330,1525 Q340,1420 384,1350 Z" fill={C.blanket} />
+		<path d="M420,1340 Q520,1300 620,1330" fill="none" stroke="#000" strokeOpacity={0.18} strokeWidth={6} />
 		{/* mosquito net: a draped box over the bed (one big triangle reads as a light beam) */}
 		<path d="M250,1010 L690,1010 L712,1520 L208,1520 Z" fill={C.net} opacity={0.07} />
 		<path d="M250,1010 Q300,1060 340,1010 Q400,1065 460,1010 Q520,1065 580,1010 Q640,1060 690,1010" fill="none" stroke={C.net} strokeOpacity={0.35} strokeWidth={3} />

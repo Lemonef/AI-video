@@ -2,7 +2,7 @@ import React from 'react';
 import {H, W} from '../lib/tokens';
 import {GROUND_Y, V2} from './tokens';
 
-export type EnvProps = {frame: number; scroll: number; fireflies: boolean; density: number};
+export type EnvProps = {frame: number; scroll: number; fireflies: boolean; density: number; progress?: number};
 
 // Deterministic pseudo-random so every render of a frame is identical.
 const rnd = (i: number, salt = 1) => {

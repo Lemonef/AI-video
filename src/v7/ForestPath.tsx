@@ -34,7 +34,19 @@ const C = {
 	moonGlow: '#8FB0E8',
 	torch: '#FFC27A',
 	night: '#03060E',
+	clinicLight: '#FFE2A6',
 };
+
+/** The clinic at the end of the path: small and far, its lit windows the only warm thing ahead. */
+const Clinic: React.FC = () => (
+	<g>
+		<rect x={VP.x - 46} y={VP.y - 62} width={92} height={62} fill="#2C3346" />
+		<polygon points={`${VP.x - 54},${VP.y - 62} ${VP.x},${VP.y - 92} ${VP.x + 54},${VP.y - 62}`} fill="#222838" />
+		<rect x={VP.x - 34} y={VP.y - 48} width={22} height={18} fill="#FFE2A6" />
+		<rect x={VP.x + 12} y={VP.y - 48} width={22} height={18} fill="#FFE2A6" />
+		<rect x={VP.x - 8} y={VP.y - 30} width={16} height={30} fill="#FFD27A" />
+	</g>
+);
 
 const rnd = (i: number, salt: number) => {
 	const x = Math.sin(i * 127.1 + salt * 311.7) * 43758.5453;
@@ -127,7 +139,7 @@ const BananaLeaf: React.FC<{x: number; y: number; angle: number; size: number; c
 	</g>
 );
 
-export const ForestPath: React.FC<EnvProps> = ({frame, scroll}) => {
+export const ForestPath: React.FC<EnvProps & {clinic?: boolean}> = ({frame, scroll, clinic}) => {
 	const dolly = frame * scroll * DOLLY_PER_SCROLL;
 	const span = Z_FAR - Z_NEAR;
 	const items = Array.from({length: ROWS * 2}, (_, k) => {
@@ -164,6 +176,7 @@ export const ForestPath: React.FC<EnvProps> = ({frame, scroll}) => {
 			{/* the far forest as a tall wall: the eye should never find where the trees end */}
 			<Treeline y={VP.y + 6} amp={340} color={mix(C.leafFar, C.skyLow, 0.35)} seed={1} />
 			<Treeline y={VP.y + 6} amp={200} color={mix(C.leafNear, C.leafFar, 0.7)} seed={2} />
+			{clinic ? <Clinic /> : null}
 			<polygon points={`${VP.x - 6},${VP.y} ${VP.x + 6},${VP.y} ${pathR(H)},${H} ${pathL(H)},${H}`} fill={C.path} />
 			<polygon points={`${VP.x - 6},${VP.y} ${pathL(H) + 60},${H} ${pathL(H)},${H}`} fill={C.pathEdge} />
 			<polygon points={`${VP.x + 6},${VP.y} ${pathR(H) - 60},${H} ${pathR(H)},${H}`} fill={C.pathEdge} />
@@ -189,9 +202,13 @@ export const ForestPath: React.FC<EnvProps> = ({frame, scroll}) => {
 			})}
 			<BananaLeaf x={-80} y={1800} angle={-35} size={1.1} color={C.leafNear} />
 			<BananaLeaf x={1160} y={1760} angle={215} size={1.0} color={C.leafNear} />
-			<Darkness id="fp" color={C.night} opacity={0.62} lights={[{x: VP.x, y: 1480, reach: 700 * flicker}, {x: 760, y: 300, reach: 520}]} />
+			<Darkness id="fp" color={C.night} opacity={0.62} lights={[{x: VP.x, y: 1480, reach: 700 * flicker}, {x: 760, y: 300, reach: 520}, ...(clinic ? [{x: VP.x, y: VP.y - 20, reach: 260}] : [])]} />
+			{clinic ? <Glow id="fp-clinic" x={VP.x} y={VP.y - 30} r={300} color={C.clinicLight} strength={0.9} /> : null}
 			<Glow id="fp-moon" x={760} y={300} r={420} color={C.moonGlow} strength={0.7} />
 			<Shaft id="fp-torch" points={[[470, H], [610, H], [760, 1050], [320, 1050]]} from={[540, H]} to={[540, 1050]} color={C.torch} opacity={0.38 * flicker} blur={24} />
 		</g>
 	);
 };
+
+/** The same path, with the clinic's lit windows at the far end. */
+export const ForestClinic: React.FC<EnvProps> = (props) => <ForestPath {...props} clinic />;

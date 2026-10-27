@@ -60,6 +60,7 @@ export type Scene = {
 	chip?: string; // time/place chip, e.g. "23:47 · ทางเข้าป่า"
 	intro?: {name: string; trait: string; at?: number};
 	rulesView?: 'big' | 'hud'; // rules card full-screen or as a corner HUD
+	progress?: [number, number]; // v7 map: how far along the route the marker is, from..to over the scene (0..1)
 	reveal?: number; // big view: how many rules are shown (reveals one by one over the line)
 	breaks?: Array<{rule: number; at: number}>; // rule (1-based) broken at `at` in this scene; stays broken
 	scroll?: number; // px/frame the forest scrolls past (walking)
