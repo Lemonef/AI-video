@@ -15,6 +15,7 @@ Researched 2026-10-27. Most sources are marketing blogs rather than TikTok data,
 - **ep01 (20 views):** most viewers left at **0:01**, average watch 17s of 66s, 10% finished. Two rules follow:
   1. **Cold open:** second 0 is the scariest or funniest moment, with movement, a sound and a question (e.g. black screen, a whispered "จ๊าบ…", glowing eyes, big text "อย่าหันกลับไป"). The setup and recap come after.
   2. **35–45s per episode** while the account is new (more completions, and under 60s so Duet and Stitch stay available).
+  3. **Rules just-in-time:** in ep01 the rules scene was about 13s (20% of the video) of a card read out one rule at a time, and viewers left through it. From now on, the full rules card shows for 3–4s max, all rules at once, with the narrator saying only "มีกฎ 3 ข้อ". Each rule is read out when it matters, right before it is tested, with a zoom on it in the HUD.
 
 ## Comments
 
