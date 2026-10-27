@@ -89,7 +89,14 @@ export type Scene = {
 };
 
 export type Cue = {start: number; end: number; text: string};
-export type SceneTiming = {audio: string; duration: number; cues: Cue[]; words?: Array<{text: string; start: number; end: number}>};
+export type SceneTiming = {
+	audio: string;
+	duration: number;
+	cues: Cue[];
+	words?: Array<{text: string; start: number; end: number}>;
+	say?: string; // no word timings (Whisper unavailable): the spoken line, for letter-position cues
+	speech?: [number, number]; // ...and the seconds of the clip that hold speech
+};
 
 export type Episode = {
 	id: string;

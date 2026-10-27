@@ -110,6 +110,13 @@ def measured_rate(public_dir: Path) -> float | None:
     return letters / seconds if seconds else None
 
 
+def speech_span(start: float, end: float, pauses: list[tuple[float, float]]) -> list[float]:
+    """[first, last] second of speech inside the clip [start, end): the cut pauses at its edges trimmed."""
+    lead = next((b - start for a, b in pauses if a <= start < b), 0.0)
+    tail = next((a - start for a, b in pauses if a < end <= b), end - start)
+    return [round(max(0.0, lead), 3), round(max(lead, tail), 3)]
+
+
 def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
     voice = episode["voice"]
     lines, script, voice_key = _take_keys(episode, engine)
@@ -138,7 +145,7 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         except (ImportError, OSError) as e:
             # e.g. Windows Smart App Control blocking faster-whisper's native DLLs. Fall back to cuts
             # placed by script length and snapped to the take's real pauses; captions spread per line.
-            print(f"  ! Whisper unavailable ({type(e).__name__}): aligning by pauses only, word cues fall back to 'at'")
+            print(f"  ! Whisper unavailable ({type(e).__name__}): aligning by pauses only, word cues placed by letter position")
             words = []
     heard = sum(spoken_len(w.text) for w in words)
     expected = sum(spoken_len(line) for line in lines)
@@ -146,11 +153,15 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
     take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
-    cuts = scene_cuts(lines, words, take_sec, media.silences(take))
+    pauses = media.silences(take)
+    cuts = scene_cuts(lines, words, take_sec, pauses)
     for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"
         media.cut(take, start, end, mp3)
         timing[scene["id"]] = _entry(episode, scene, key, words_in(words, start, end), end - start)
+        if not words:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
+            timing[scene["id"]]["say"] = scene["say"]
+            timing[scene["id"]]["speech"] = speech_span(start, end, pauses)
         print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
     _save(timing_path, timing)
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}
