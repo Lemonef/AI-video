@@ -28,6 +28,17 @@ Researched 2026-10-27. Most sources are marketing blogs rather than TikTok data,
 9. **Pin three videos on the profile:** EP1 of the current arc, the best performer, and a "who is จ๊าบ" intro.
 10. **The character is the brand.** Same face, name, voice and look on every post (see the series hub: build around the character, not the trend).
 
+## Captions and search
+
+Researched 2026-10-27 (blogs and tool vendors, not TikTok data; treat as directional).
+
+- **Search phrase first.** Captions are indexed for TikTok search and cut off in the feed, so the phrase people would type ("เรื่องหลอนในป่า") goes in the first ~50 characters, before the hook. `post.keyword` in the episode puts it there.
+- **3-5 specific hashtags**, Thai, about the content (#เรื่องผี #เรื่องหลอน #ผีป่า + the arc + #jaabstory). Broad English tags (#animation, #storytime) reach the wrong audience; #จ๊าบ is also slang for "cool". `postkit.py` refuses more than 5.
+- Natural language, no keyword stuffing.
+- **Instagram Reels:** same video and caption, posted at the same time. The cover is already inside IG's 3:4 grid crop; "Link a reel" chains the parts.
+
+Sources: [go-viral](https://www.go-viral.app/blog/tiktok-hashtag-strategy/), [ttcalculator](https://ttcalculator.net/guides/growth/tiktok-seo-search-ranking/), [virlo](https://virlo.ai/blog/how-to-use-hashtags-on-tiktok), [ecomdymedia](https://ecomdymedia.com/blog/tiktok-keywords-2026).
+
 ## Schedule
 
 11. **Thai evening, about 18:00–22:00 ICT,** tested over 2–4 weeks against your own analytics. Global "best times" disagree with each other.
