@@ -37,13 +37,36 @@ export const placeBox = (ax: number, ay: number, w: number, h: number, bounds: R
 	return candidates.reduce((best, c) => (overlapArea(c) < overlapArea(best) ? c : best));
 };
 
-/** Rough rendered size of a Bubble (font 52 px, padding 38/26, optional label, tail). */
-export const bubbleSize = (text: string, label?: string): {w: number; h: number} => {
-	const CHAR_W = 30; // average Thai glyph advance at the bubble font size
-	const MAX_W = 620;
-	const PAD_X = 76;
-	const LINE_H = 70;
-	const w = Math.min(MAX_W, text.length * CHAR_W + PAD_X);
-	const lines = Math.ceil((text.length * CHAR_W + PAD_X) / MAX_W);
-	return {w, h: lines * LINE_H + 52 + (label ? 50 : 0) + 56};
+// Bubble metrics (font 52 px, padding 38/26). Shared by sizing and rendering so the placed box is
+// exactly the drawn one.
+export const BUBBLE = {charW: 30, maxW: 620, padX: 88, lineH: 70, padY: 52, label: 50, tail: 56} as const; // padX = 2x38 padding + 2x6 border
+// Thai vowels and tone marks stacked above/below a letter take no horizontal space.
+const COMBINING = /[ัิ-ฺ็-๎]/g;
+export const textAdvance = (s: string, charW: number) => s.replace(COMBINING, '').length * charW;
+
+/**
+ * Split text into lines that break ONLY at the spaces the script put between phrases. Browsers
+ * break Thai at any dictionary word boundary ("แม่หาย|แล้ว"), which splits a phrase in two.
+ */
+export const phraseLines = (text: string, maxW: number, charW: number): string[] => {
+	const lines: string[] = [];
+	let cur = '';
+	for (const word of text.split(/\s+/).filter(Boolean)) {
+		const next = cur ? `${cur} ${word}` : word;
+		if (cur && textAdvance(next, charW) > maxW) {
+			lines.push(cur);
+			cur = word;
+		} else {
+			cur = next;
+		}
+	}
+	if (cur) lines.push(cur);
+	return lines;
+};
+
+/** Rendered size of a Bubble: its phrase lines, padding, optional label and tail. */
+export const bubbleSize = (text: string, label?: string): {w: number; h: number; lines: string[]} => {
+	const lines = phraseLines(text, BUBBLE.maxW - BUBBLE.padX, BUBBLE.charW);
+	const w = Math.min(BUBBLE.maxW, Math.max(...lines.map((l) => textAdvance(l, BUBBLE.charW))) + BUBBLE.padX);
+	return {w, h: lines.length * BUBBLE.lineH + BUBBLE.padY + (label ? BUBBLE.label : 0) + BUBBLE.tail, lines};
 };

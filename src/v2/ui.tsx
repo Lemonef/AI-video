@@ -11,6 +11,13 @@ import {V2} from './tokens';
 const SAFE_WIDTH = W - 2 * Math.max(SAFE.left, W - SAFE.right);
 const STAT_MAX_PX = 230;
 
+/**
+ * Thai text that may wrap ONLY at the spaces between phrases. Browsers otherwise break Thai at any
+ * dictionary word boundary and split a phrase across lines ("แม่หาย|แล้ว").
+ */
+export const phrases = (s: string): React.ReactNode[] =>
+	s.split(/(\s+)/).map((t, i) => (/^\s+$/.test(t) ? t : <span key={i} style={{whiteSpace: 'nowrap'}}>{t}</span>));
+
 /** Film finish: animated grain + vignette. Sits on top of everything except text. */
 export const Film: React.FC<{frame: number; vignette?: number; grain?: boolean}> = ({frame, vignette = 0.75, grain = true}) => (
 	<svg width={W} height={H} style={{position: 'absolute', inset: 0, pointerEvents: 'none'}}>
@@ -136,7 +143,7 @@ export const Captions2: React.FC<{cues: Cue[]; t: number}> = ({cues, t}) => {
 	return (
 		<div style={{position: 'absolute', left: SAFE.left, width: SAFE.right - SAFE.left, top: CAPTION_TOP + 40, display: 'flex', justifyContent: 'center', transform: `translateY(${rise}px)`}}>
 			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 66, lineHeight: 1.3, color: V2.white, textAlign: 'center', textShadow: '0 4px 18px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9)'}}>
-				{parts.map((p, i) => (p.startsWith('*') ? <span key={i} style={{color: V2.yellow}}>{p.slice(1, -1)}</span> : <span key={i}>{p}</span>))}
+				{parts.map((p, i) => (p.startsWith('*') ? <span key={i} style={{color: V2.yellow}}>{phrases(p.slice(1, -1))}</span> : <span key={i}>{phrases(p)}</span>))}
 			</div>
 		</div>
 	);
@@ -150,7 +157,7 @@ export const EndCard2: React.FC<{a: string; b: string; prompt?: string; footer?:
 		return (
 			<div style={{display: 'flex', alignItems: 'center', gap: 26, background: 'rgba(11,14,24,0.78)', border: `3px solid ${color}`, borderRadius: 28, padding: '24px 30px', transform: `translateY(${(1 - s) * 80}px)`, opacity: s}}>
 				<div style={{flex: '0 0 auto', width: 104, height: 104, borderRadius: 22, background: color, color: V2.ink, fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 72, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{tag}</div>
-				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 56, color: V2.white, lineHeight: 1.25}}>{text}</div>
+				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 56, color: V2.white, lineHeight: 1.25}}>{phrases(text)}</div>
 			</div>
 		);
 	};
@@ -213,7 +220,7 @@ export const ChoiceMap: React.FC<{
 					{tag}
 				</text>
 				<foreignObject x={textX} y={LABEL_Y - 34} width={textW} height={160}>
-					<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 44, lineHeight: 1.2, color: V2.white, textShadow: '0 4px 14px #000'}}>{text}</div>
+					<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 44, lineHeight: 1.2, color: V2.white, textShadow: '0 4px 14px #000'}}>{phrases(text)}</div>
 				</foreignObject>
 			</g>
 		);
@@ -296,7 +303,7 @@ export const BigTitle: React.FC<{text: string; frame: number}> = ({text, frame})
 		<div style={{position: 'absolute', top: SAFE.top + 120, left: SAFE.left, right: W - SAFE.right, opacity: s, transform: `translateY(${(1 - s) * 30}px)`}}>
 			{text.split('\n').map((line, i) => (
 				<div key={i} style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 92, lineHeight: 1.1, color: V2.white, textShadow: '0 6px 30px rgba(0,0,0,0.9)'}}>
-					{line.split(/(\*[^*]+\*)/g).filter(Boolean).map((p, j) => (p.startsWith('*') ? <span key={j} style={{color: V2.yellow}}>{p.slice(1, -1)}</span> : <span key={j}>{p}</span>))}
+					{line.split(/(\*[^*]+\*)/g).filter(Boolean).map((p, j) => (p.startsWith('*') ? <span key={j} style={{color: V2.yellow}}>{phrases(p.slice(1, -1))}</span> : <span key={j}>{phrases(p)}</span>))}
 				</div>
 			))}
 		</div>

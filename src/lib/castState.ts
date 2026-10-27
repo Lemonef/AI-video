@@ -84,6 +84,7 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 		framesSinceExpr: since(exprAt),
 		framesSinceFlip: since(flipAt),
 		x,
-		walking: walks && p >= walkStart! && p < walkEnd,
+		// walking in place counts too: on a receding path the world moves, he does not (no toX)
+		walking: walkStart !== null && p >= walkStart && p < walkEnd,
 	};
 };

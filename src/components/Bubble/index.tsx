@@ -4,11 +4,14 @@ import {C} from '../../lib/tokens';
 import {FONT_CAPTION} from '../../lib/fonts';
 // Kanit, not Mali: Mali misplaces stacked Thai tone marks (จ๊ rendered with a floating ๗-like mark).
 const FONT_BUBBLE = FONT_CAPTION;
+import {bubbleSize} from '../../lib/layout';
 import type {BubbleItem} from '../../types';
 
-// HTML (not SVG) so Thai line-breaking and font shaping come from the browser.
+// HTML (not SVG) for Thai font shaping; line breaks come from phraseLines (spaces only), the same
+// split bubbleSize used to place the box.
 export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame}) => {
 	const {fps} = useVideoConfig();
+	const {w, lines} = bubbleSize(item.text, item.label);
 	const pop = spring({frame, fps, config: {damping: 11, stiffness: 160}});
 	const wob = item.kind === 'shout' ? Math.sin(frame / 2) * 2.5 : 0;
 	const bg = item.kind === 'thought' ? C.white : item.kind === 'shout' ? C.sun : C.paper;
@@ -22,7 +25,7 @@ export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame
 				top: item.y,
 				transform: `translate(-50%, -100%) scale(${pop}) rotate(${wob}deg)`,
 				transformOrigin: '50% 100%',
-				maxWidth: 620,
+				width: w,
 			}}
 		>
 			{item.label ? (
@@ -57,7 +60,11 @@ export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame
 					boxShadow: `10px 10px 0 ${C.shadow}`,
 				}}
 			>
-				{item.text}
+				{lines.map((line, i) => (
+					<div key={i} style={{whiteSpace: 'nowrap'}}>
+						{line}
+					</div>
+				))}
 			</div>
 			{item.kind === 'thought' ? (
 				<div style={{position: 'relative', height: 70}}>

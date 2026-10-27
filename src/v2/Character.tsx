@@ -209,6 +209,9 @@ const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean; 
 	);
 };
 
+const FRONT_TURN = 0.35; // |head turn| below this the body reads as facing the camera
+const FRONT_STEP_LIFT = 22; // px a leg lifts per step when walking toward the camera
+
 export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch, poseFrom, poseBlend = 1, react = 0}) => {
 	const to = POSES[pose];
 	const from = POSES[poseFrom ?? pose];
@@ -223,11 +226,15 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 	// Holding a torch overrides the right arm: forward and slightly down, steady while walking.
 	const rArm: ArmPose = torch ? TORCH_ARM : [p.r[0] - swing * 22, p.r[1] - (walking ? 10 : 0)];
 	const lArm: ArmPose = [p.l[0] + swing * 22, p.l[1] + (walking ? 10 : 0)];
-	const thighL = swing * 24;
-	const thighR = -swing * 24;
-	// The back-swinging leg bends at the knee.
-	const kneeL = walking ? Math.max(0, -swing) * 38 : 0;
-	const kneeR = walking ? Math.max(0, swing) * 38 : 0;
+	// Seen from the front, legs swinging fore-aft would read as kicking sideways: they lift in
+	// turn instead (a step toward the camera). Side-on, the classic swing with a bent back knee.
+	const front = Math.abs(turn) < FRONT_TURN;
+	const thighL = front ? swing * 4 : swing * 24;
+	const thighR = front ? -swing * 4 : -swing * 24;
+	const kneeL = walking && !front ? Math.max(0, -swing) * 38 : 0;
+	const kneeR = walking && !front ? Math.max(0, swing) * 38 : 0;
+	const liftL = walking && front ? Math.max(0, swing) * FRONT_STEP_LIFT : 0;
+	const liftR = walking && front ? Math.max(0, -swing) * FRONT_STEP_LIFT : 0;
 	const shoe = <ellipse cx={8} cy={4} rx={30} ry={16} fill={V2.shoe} />;
 	const hand = <circle r={19} fill={look.skin} />;
 	const torchHand = (
@@ -250,8 +257,8 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={look.accent ?? V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
 			) : null}
 			{/* legs */}
-			<Limb x={-34} y={HIP_Y} a1={thighL} a2={kneeL} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
-			<Limb x={34} y={HIP_Y} a1={thighR} a2={kneeR} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
+			<Limb x={-34} y={HIP_Y - liftL} a1={thighL} a2={kneeL} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
+			<Limb x={34} y={HIP_Y - liftR} a1={thighR} a2={kneeR} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
 			{/* torso: hoodie with cel shadow on the right, pocket, hood */}
 			<g transform={`translate(0 ${breathe})`}>
 				<path d={`M${-SHOULDER_X - 14},${SHOULDER_Y + 8} Q0,${SHOULDER_Y - 26} ${SHOULDER_X + 14},${SHOULDER_Y + 8} L${78},${HIP_Y + 18} Q0,${HIP_Y + 40} ${-78},${HIP_Y + 18} Z`} fill={look.top} />

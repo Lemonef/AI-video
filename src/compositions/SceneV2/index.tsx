@@ -21,6 +21,8 @@ import {Beam, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, 
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
+const TREMBLE_DEG = 0.8; // scared trembling amplitude
+const SCARED_LEAN_DEG = -2; // leaning away from the threat
 const WHIP_FRAMES = 7;
 const FREEZE_FILTER = 'saturate(0.25) brightness(0.8) contrast(1.1)';
 const BACKDROP_FILTER = 'blur(10px) brightness(0.55)'; // behind full-screen cards (rules, end card)
@@ -131,7 +133,14 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const look = CAST2[m.who];
 		if (!look && !look5) return null;
 		const st = castState(m, p, lineSec, FPS);
-		const rot = st.action === 'wobble' ? Math.sin(frame / 6) * 4 : st.action === 'shake' ? Math.sin(frame * 2.2) * 2.5 : 0;
+		// 'shake' = scared trembling: small, irregular (two slow-ish sines), leaning away. A sine at
+		// ~2 rad/frame flips direction every frame and reads as a glitch, not fear.
+		const rot =
+			st.action === 'wobble'
+				? Math.sin(frame / 6) * 4
+				: st.action === 'shake'
+					? SCARED_LEAN_DEG + Math.sin(frame * 0.9) * TREMBLE_DEG + Math.sin(frame * 1.7 + 1) * TREMBLE_DEG * 0.5
+					: 0;
 		const flip = st.framesSinceFlip < FLIP_FRAMES ? interpolate(st.framesSinceFlip, [0, FLIP_FRAMES / 2, FLIP_FRAMES], [-st.facing, 0, st.facing]) : st.facing;
 		const s = m.scale ?? 1;
 		const poseBlend = Number.isFinite(st.framesSincePose) ? spring({frame: Math.max(0, st.framesSincePose), fps: FPS, config: POSE_SPRING}) : 1;
