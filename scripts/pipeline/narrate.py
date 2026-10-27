@@ -33,6 +33,7 @@ def _entry(episode: dict, scene: dict, key: str, words: list[Word], duration: fl
     cues = build_cues(scene.get("caption", scene["say"]), words, duration)
     return {
         "key": key,
+        "letters": spoken_len(scene["say"]),  # with duration + tempo: the measured speaking rate
         "audio": f"{episode['id']}/{scene['id']}.mp3",
         "duration": duration,
         "words": [asdict(w) for w in words],
@@ -75,12 +76,44 @@ def _narrate_lines(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: 
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}
 
 
-def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
-    voice = episode["voice"]
+def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
     lines = [_line(s) for s in episode["scenes"]]
     script = "\n".join(lines)  # newline = natural breath between lines
+    voice_key = _key(engine.name, episode["voice"], script)  # the quota'd part: only re-voice when this changes
+    return lines, script, voice_key
+
+
+def needs_voicing(episode: dict, engine: TtsEngine, public_dir: Path) -> bool:
+    """True when building this episode would spend a TTS request (whole-take engines only)."""
+    if not engine.whole_take:
+        return False
+    ep_dir = public_dir / episode["id"]
+    timing_path = ep_dir / "timing.json"
+    if not (timing_path.exists() and (ep_dir / "take.raw.mp3").exists()):
+        return True
+    cached = json.loads(timing_path.read_text(encoding="utf-8")).get("_take", {})
+    return cached.get("voice_key") != _take_keys(episode, engine)[2]
+
+
+def measured_rate(public_dir: Path) -> float | None:
+    """Spoken letters per second at tempo 1.0, measured across every voiced take on disk."""
+    letters = seconds = 0.0
+    for path in public_dir.glob("*/timing.json"):
+        timing = json.loads(path.read_text(encoding="utf-8"))
+        tempo = timing.get("_take", {}).get("tempo")
+        if not tempo:
+            continue
+        for sid, entry in timing.items():
+            if sid != "_take" and entry.get("letters"):
+                letters += entry["letters"]
+                seconds += entry["duration"] * tempo
+    return letters / seconds if seconds else None
+
+
+def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
+    voice = episode["voice"]
+    lines, script, voice_key = _take_keys(episode, engine)
     speed = float(episode.get("tempo", 1.0))
-    voice_key = _key(engine.name, voice, script)  # the paid/quota'd part: only re-voice when this changes
     key = _key(voice_key, str(speed))
     raw = ep_dir / "take.raw.mp3"
     take = ep_dir / "take.mp3"
@@ -94,7 +127,7 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
             engine.model = episode.get("voiceModel")  # no silent fallback to a different-sounding model
         engine.synthesize(script, voice, "", tmp)
         tmp.replace(raw)
-    if take_meta.get("key") == key and take.exists():
+    if take_meta.get("key") == key and take.exists() and take_meta.get("tempo"):
         words = [Word(**w) for w in take_meta["words"]]
         print("  = take alignment (cached)")
     else:
@@ -112,7 +145,7 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     if words and heard < MIN_COVERAGE * expected:
         raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
     take_sec = media.duration(take)
-    timing: dict = {"_take": {"key": key, "voice_key": voice_key, "words": [asdict(w) for w in words], "duration": take_sec}}
+    timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
     cuts = scene_cuts(lines, words, take_sec, media.silences(take))
     for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"

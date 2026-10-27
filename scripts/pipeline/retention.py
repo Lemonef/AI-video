@@ -6,6 +6,8 @@ retention research (2026-10-27) and ep01's own data (most viewers left at 0:01).
 """
 from dataclasses import dataclass
 
+from .align import spoken_len
+
 TOTAL_TARGET_SEC = 45  # new account: shorter = more completions
 TOTAL_MAX_SEC = 59.5  # stay under 60 s so Duet/Stitch remain available
 HOOK_MAX_SEC = 4.0  # the opening scene must state its stakes fast
@@ -63,6 +65,13 @@ def check(episode: dict, timing: dict) -> list[Finding]:
         if longest > limit:
             out.append(Finding("FAIL" if longest > limit * 1.5 else "WARN", s["id"], f"{longest:.1f}s without a cut ({'push' if moving else 'static'} limit {limit}s)"))
     return out
+
+
+def estimate(episode: dict, letters_per_sec: float) -> dict:
+    """Timing stand-in before voicing: each line's length at the measured speaking rate, so a
+    script that would fail is fixed for free instead of spending a quota'd TTS request."""
+    rate = letters_per_sec * float(episode.get("tempo", 1.0))
+    return {s["id"]: {"duration": spoken_len(s["say"]) / rate} for s in episode["scenes"]}
 
 
 def report(findings: list[Finding]) -> bool:

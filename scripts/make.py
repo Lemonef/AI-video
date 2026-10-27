@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from pipeline import postkit, retention, sfx  # noqa: E402
 from pipeline.master import master  # noqa: E402
-from pipeline.narrate import narrate  # noqa: E402
+from pipeline.narrate import measured_rate, narrate, needs_voicing  # noqa: E402
 from pipeline.render import render  # noqa: E402
 from pipeline.tts import get_engine  # noqa: E402
 
@@ -39,6 +39,12 @@ def main() -> None:
     episode["take"] = engine.whole_take
     public = ROOT / "public"
 
+    if needs_voicing(episode, engine, public) and not args.allow_retention:
+        rate = measured_rate(public)
+        if rate:  # free-tier requests are scarce: lint the script on estimated timing before spending one
+            print(f"    pre-voice retention estimate ({rate:.1f} letters/s measured)")
+            if not retention.report(retention.check(episode, retention.estimate(episode, rate))):
+                raise SystemExit("estimated timing fails the retention lint: shorten the script before spending a voice request")
     print(f"[1/4] voice ({engine.name}, {episode['voice']})")
     timing = narrate(episode, engine, public, force=args.force)
     print("    retention check (docs/growth-playbook.md)")
