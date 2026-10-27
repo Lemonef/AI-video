@@ -11,12 +11,16 @@ import {ENV5} from '../../v5/Forest';
 
 /**
  * Series cover template (one look for every episode, so the profile grid reads as an index).
- * Everything sits inside the profile grid's ~3:4 centre crop (y ≈ 240–1680) and above the
- * caption band TikTok prints over the bottom.
+ * Everything sits inside the CENTRE SQUARE (y 420-1500): the tightest crop any platform takes
+ * (Instagram's composer previews 1:1, its feed is 4:5 and its grid 3:4; TikTok's grid is 3:4),
+ * so one cover fits all of them.
  */
-const GRID_TOP = 300;
-const GRID_BOTTOM = 1560;
+const SQUARE_TOP = (H - W) / 2;
+const SQUARE_MARGIN = 40;
+const GRID_TOP = SQUARE_TOP + SQUARE_MARGIN;
+const GRID_BOTTOM = SQUARE_TOP + W - SQUARE_MARGIN;
 const SIDE = 80;
+const HOOK_BLOCK = 170; // the hook line's height at 120 px type: it ends on GRID_BOTTOM
 
 export type CoverProps = {episode: Episode};
 
@@ -49,10 +53,10 @@ export const Cover: React.FC<CoverProps> = ({episode}) => {
 					<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 64, color: V2.ink, background: V2.yellow, borderRadius: 18, padding: '4px 26px'}}>EP.{post.part ?? 1}</div>
 					{post.total ? <div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 52, color: V2.white, ...outline(8)}}>{post.part}/{post.total}</div> : null}
 				</div>
-				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 168, lineHeight: 1.05, color: V2.white, marginTop: 18, ...outline(14)}}>{post.series ?? episode.title}</div>
+				<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 150, lineHeight: 1.05, color: V2.white, marginTop: 12, ...outline(14)}}>{post.series ?? episode.title}</div>
 			</div>
 			{hook ? (
-				<div style={{position: 'absolute', top: GRID_BOTTOM - 210, left: SIDE, right: SIDE, textAlign: 'center'}}>
+				<div style={{position: 'absolute', top: GRID_BOTTOM - HOOK_BLOCK, left: SIDE, right: SIDE, textAlign: 'center'}}>
 					<span style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 120, color: V2.yellow, ...outline(14)}}>{hook}</span>
 				</div>
 			) : null}
