@@ -11,7 +11,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from . import media, whisper
-from .align import scene_cuts, spoken_len, words_in
+from .align import _norm, scene_cuts, spoken_len, words_in
 from .captions import build_cues
 from .tts import TtsEngine, Word
 
@@ -110,6 +110,26 @@ def measured_rate(public_dir: Path) -> float | None:
     return letters / seconds if seconds else None
 
 
+def word_start(say: str, word: str, words: list[Word], speech: list[float] | None) -> float | None:
+    """Seconds into the clip where `word` begins: from Whisper's words when present (matched on
+    joined letters, as src/lib/cueAt.ts does), else by its letter position across the spoken span."""
+    target = _norm(word)
+    if words:
+        joined, starts = "", []
+        for w in words:
+            starts.append(len(joined))
+            joined += _norm(w.text)
+        idx = joined.find(target)
+        if idx >= 0:
+            k = max(i for i, s in enumerate(starts) if s <= idx)
+            return words[k].start
+    line = _norm(say)
+    idx = line.find(target)
+    if idx < 0 or not speech:
+        return None
+    return speech[0] + (speech[1] - speech[0]) * idx / len(line)
+
+
 def speech_span(start: float, end: float, pauses: list[tuple[float, float]]) -> list[float]:
     """[first, last] second of speech inside the clip [start, end): the cut pauses at its edges trimmed."""
     lead = next((b - start for a, b in pauses if a <= start < b), 0.0)
@@ -163,6 +183,10 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         if speech:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
             timing[scene["id"]]["say"] = scene["say"]
             timing[scene["id"]]["speech"] = speech
+        if scene.get("monster"):  # the creature's own words, from this one to the end of the line
+            at = word_start(scene["say"], scene["monster"], words_in(words, start, end), speech)
+            if at is not None:
+                media.monster(mp3, at)
         print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
     _save(timing_path, timing)
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}

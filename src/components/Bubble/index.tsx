@@ -7,14 +7,18 @@ const FONT_BUBBLE = FONT_CAPTION;
 import {bubbleSize} from '../../lib/layout';
 import type {BubbleItem} from '../../types';
 
+// An off-screen voice: dark glass, no tail, so it never reads as the on-screen character speaking.
+const VOICE = {bg: 'rgba(8,12,24,0.8)', edge: 'rgba(255,255,255,0.28)', ink: '#F2F4F8', glow: 'rgba(120,150,220,0.35)'};
+
 // HTML (not SVG) for Thai font shaping; line breaks come from phraseLines (spaces only), the same
 // split bubbleSize used to place the box.
 export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame}) => {
 	const {fps} = useVideoConfig();
-	const {w, lines} = bubbleSize(item.text, item.label);
+	const {w, lines} = bubbleSize(item.text, item.label, item.kind !== 'voice');
 	const pop = spring({frame, fps, config: {damping: 11, stiffness: 160}});
 	const wob = item.kind === 'shout' ? Math.sin(frame / 2) * 2.5 : 0;
-	const bg = item.kind === 'thought' ? C.white : item.kind === 'shout' ? C.sun : C.paper;
+	const voice = item.kind === 'voice';
+	const bg = item.kind === 'thought' ? C.white : item.kind === 'shout' ? C.sun : voice ? VOICE.bg : C.paper;
 	const radius = item.kind === 'thought' ? 80 : item.kind === 'shout' ? 18 : 44;
 
 	return (
@@ -51,13 +55,14 @@ export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame
 					fontWeight: 700,
 					fontSize: 52,
 					lineHeight: 1.35,
-					color: C.ink,
+					color: voice ? VOICE.ink : C.ink,
 					background: bg,
-					border: `6px solid ${C.ink}`,
+					border: voice ? `6px solid ${VOICE.edge}` : `6px solid ${C.ink}`,
 					borderRadius: radius,
 					padding: '26px 38px',
 					textAlign: 'center',
-					boxShadow: `10px 10px 0 ${C.shadow}`,
+					boxShadow: voice ? `0 0 40px ${VOICE.glow}` : `10px 10px 0 ${C.shadow}`,
+					fontStyle: voice ? 'italic' : undefined,
 				}}
 			>
 				{lines.map((line, i) => (
@@ -66,7 +71,7 @@ export const Bubble: React.FC<{item: BubbleItem; frame: number}> = ({item, frame
 					</div>
 				))}
 			</div>
-			{item.kind === 'thought' ? (
+			{voice ? null : item.kind === 'thought' ? (
 				<div style={{position: 'relative', height: 70}}>
 					<div style={{position: 'absolute', left: '42%', top: 10, width: 34, height: 34, borderRadius: 99, background: C.white, border: `5px solid ${C.ink}`}} />
 					<div style={{position: 'absolute', left: '36%', top: 48, width: 20, height: 20, borderRadius: 99, background: C.white, border: `4px solid ${C.ink}`}} />

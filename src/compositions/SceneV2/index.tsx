@@ -21,8 +21,8 @@ import {Beam, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, 
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
-const TREMBLE_DEG = 0.8; // scared trembling amplitude
-const SCARED_LEAN_DEG = -2; // leaning away from the threat
+const TREMBLE_PX = 2.5; // scared quiver: a small sideways shiver of the whole body
+const SCARED_LEAN_DEG = -1.5; // leaning away from the threat (held, not rocking)
 const WHIP_FRAMES = 7;
 const FREEZE_FILTER = 'saturate(0.25) brightness(0.8) contrast(1.1)';
 const BACKDROP_FILTER = 'blur(10px) brightness(0.55)'; // behind full-screen cards (rules, end card)
@@ -42,6 +42,7 @@ const OVERSCAN = 1.02; // 2% overscan hides the drift's edges
 const SCREEN: Rect = {x: SAFE.left, y: SAFE.top, w: SAFE.right - SAFE.left, h: SAFE.bottom - SAFE.top};
 const SHOT_PUSH = 1.04; // each cut keeps creeping in, so a held shot never feels static
 const HIT_SEC = 0.5; // a jolt dies out over this long
+const HIT_HZ = 5; // jolt swings per second: ~2.5 swings before it settles
 const HIT_PX = 26; // default jolt strength
 const HANDHELD_PX = 5;
 const HANDHELD_DEG = 0.25;
@@ -76,13 +77,20 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const zoom = interpolate(t, [camStart, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1], {extrapolateLeft: 'clamp'});
 	const shake = (scene.shake ?? 0) * (isFreeze && tLine > lineSec ? 0 : 1);
 	const hh = ep.handheld ?? !v6 ? handheld(frame) : {x: 0, y: 0, r: 0};
-	// Jolts: fast oscillation under an exponential-ish decay from each hit moment.
-	const jolt = (scene.hits ?? []).reduce((amp, h) => {
-		const dt = tLine - at(h) * lineSec;
-		return dt < 0 || dt > HIT_SEC ? amp : amp + (h.strength ?? HIT_PX) * (1 - dt / HIT_SEC) ** 2;
-	}, 0);
-	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0) + Math.sin(frame * 3.1) * jolt;
-	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0) + Math.cos(frame * 3.7) * jolt * 0.7;
+	// Jolts: a thump, not a buzz. One hard push that swings back a couple of times and settles,
+	// timed in seconds (HIT_HZ). The old per-frame sine (~pi rad/frame) flipped every frame: strobing.
+	const jolt = (scene.hits ?? []).reduce(
+		(acc, h) => {
+			const dt = tLine - at(h) * lineSec;
+			if (dt < 0 || dt > HIT_SEC) return acc;
+			const amp = (h.strength ?? HIT_PX) * (1 - dt / HIT_SEC) ** 2;
+			const phase = 2 * Math.PI * HIT_HZ * dt;
+			return {x: acc.x + Math.sin(phase) * amp, y: acc.y + Math.sin(phase + 1.3) * amp * 0.6};
+		},
+		{x: 0, y: 0},
+	);
+	const sx = hh.x + (shake ? Math.sin(frame * 1.9) * shake : 0) + jolt.x;
+	const sy = hh.y + (shake ? Math.cos(frame * 2.3) * shake : 0) + jolt.y;
 	// Default: a straight cut within one location (a fade there dips to black mid-action and reads as
 	// a glitch) and on frame 1 (the hook must grab at once); fade only where the location changes.
 	const prev = ep.scenes[index - 1];
@@ -113,6 +121,9 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const fy = camOy + (m.y + FACE_BOX.cy * s - camOy) * camZ;
 		const half = FACE_BOX.half * s * camZ;
 		reserved.push({x: fx - half, y: fy - half, w: half * 2, h: half * 2});
+		// the body down to the feet too: a bubble on his chest reads as him speaking
+		const feet = camOy + (m.y - camOy) * camZ;
+		reserved.push({x: fx - half, y: fy + half, w: half * 2, h: Math.max(0, feet - fy - half)});
 		// Framing lint: a face that is on screen must be inside what a tall phone shows.
 		const onScreen = fx + half > 0 && fx - half < W;
 		if (onScreen && (fx - half < VISIBLE.left || fx + half > VISIBLE.right)) {
@@ -133,14 +144,11 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const look = CAST2[m.who];
 		if (!look && !look5) return null;
 		const st = castState(m, p, lineSec, FPS);
-		// 'shake' = scared trembling: small, irregular (two slow-ish sines), leaning away. A sine at
-		// ~2 rad/frame flips direction every frame and reads as a glitch, not fear.
-		const rot =
-			st.action === 'wobble'
-				? Math.sin(frame / 6) * 4
-				: st.action === 'shake'
-					? SCARED_LEAN_DEG + Math.sin(frame * 0.9) * TREMBLE_DEG + Math.sin(frame * 1.7 + 1) * TREMBLE_DEG * 0.5
-					: 0;
+		// 'shake' = scared: a held lean away plus a small sideways shiver (two incommensurate sines,
+		// so it never repeats). Rotating around the feet made the whole body rock like a metronome.
+		const scared = st.action === 'shake';
+		const rot = st.action === 'wobble' ? Math.sin(frame / 6) * 4 : scared ? SCARED_LEAN_DEG : 0;
+		const shiver = scared ? (Math.sin(frame * 0.9) + 0.5 * Math.sin(frame * 1.7 + 1)) * TREMBLE_PX : 0;
 		const flip = st.framesSinceFlip < FLIP_FRAMES ? interpolate(st.framesSinceFlip, [0, FLIP_FRAMES / 2, FLIP_FRAMES], [-st.facing, 0, st.facing]) : st.facing;
 		const s = m.scale ?? 1;
 		const poseBlend = Number.isFinite(st.framesSincePose) ? spring({frame: Math.max(0, st.framesSincePose), fps: FPS, config: POSE_SPRING}) : 1;
@@ -159,7 +167,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			);
 		}
 		return (
-			<g key={i} transform={`translate(${st.x} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`}>
+			<g key={i} transform={`translate(${st.x + shiver} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`}>
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (
@@ -222,7 +230,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 						style={{
 							background: scene.tint.color,
 							mixBlendMode: 'multiply',
-							opacity: (scene.tint.strength ?? 0.75) * interpolate(tLine - (scene.tint.at ?? 0) * lineSec, [0, TINT_FADE_SEC], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
+							opacity: (scene.tint.strength ?? 0.75) * interpolate(tLine - at(scene.tint) * lineSec, [0, TINT_FADE_SEC], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}),
 						}}
 					/>
 				) : null}
@@ -252,8 +260,10 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				const z = zoom * OVERSCAN;
 				const ox = cam.x ?? W / 2;
 				const oy = cam.y ?? H / 2;
-				const size = bubbleSize(b.text, b.label);
-				const box = placeBox(ox + (b.x - ox) * z + sx, oy + (b.y - oy) * z + sy, size.w, size.h, SCREEN, reserved);
+				const size = bubbleSize(b.text, b.label, b.kind !== 'voice');
+				// an off-screen voice has no place in the world: its anchor is a screen position
+				const anchor = b.kind === 'voice' ? {x: b.x, y: b.y} : {x: ox + (b.x - ox) * z + sx, y: oy + (b.y - oy) * z + sy};
+				const box = placeBox(anchor.x, anchor.y, size.w, size.h, SCREEN, reserved);
 				return <Bubble key={i} item={{...b, x: box.x + box.w / 2, y: box.y + box.h}} frame={frame - f} />;
 			})}
 

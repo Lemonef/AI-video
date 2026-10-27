@@ -27,7 +27,7 @@ export type CastMember = {
 export type PropItem = {type: string; x: number; y: number; scale?: number; at?: number};
 
 export type BubbleItem = {
-	kind: 'thought' | 'speech' | 'shout';
+	kind: 'thought' | 'speech' | 'shout' | 'voice'; // voice = off-screen speaker: no tail, x/y are SCREEN coords
 	text: string;
 	x: number;
 	y: number;
@@ -74,6 +74,7 @@ export type Scene = {
 	bedsAt?: {at?: number; word?: string; only?: string[]}; // when this scene's bed levels take over (default: scene start); `only` = just these beds wait
 	bedsFade?: number; // seconds to glide into them (default 0.4; ~0.15 = sudden silence)
 	bedsLead?: number; // J-cut: this scene's beds start this many seconds BEFORE its picture
+	monster?: string; // from this word to the end of the line the voice is the creature's: pitched down (scripts/pipeline/media.py)
 	hush?: {word: string; lead?: number; hold?: number}; // silence-before-the-hit: every bed drops to near zero `lead` s before the word, for `lead + hold` s
 	grade?: string; // colour script: CSS filter for this scene's world (v6)
 	sfx?: Array<{at: number; word?: string; sound: string; volume?: number; rate?: number}>; // rate > 1 = faster (escalating heartbeat) // one-shots at fractions of the line
@@ -81,7 +82,7 @@ export type Scene = {
 	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
 	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
 	rain?: boolean; // v3: rain streaks over the scene
-	tint?: {color: string; at?: number; strength?: number}; // v4: colour-coded light (e.g. red = danger) from `at`
+	tint?: {color: string; at?: number; word?: string; strength?: number}; // v4: colour-coded light (e.g. red = danger) from `at`, or on `word`
 	blackout?: {at: number; sec: number}; // v4: torch dies, frame goes black, captions stay
 	a?: string; // endcard choices
 	b?: string;

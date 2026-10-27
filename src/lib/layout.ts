@@ -65,8 +65,8 @@ export const phraseLines = (text: string, maxW: number, charW: number): string[]
 };
 
 /** Rendered size of a Bubble: its phrase lines, padding, optional label and tail. */
-export const bubbleSize = (text: string, label?: string): {w: number; h: number; lines: string[]} => {
+export const bubbleSize = (text: string, label?: string, tail = true): {w: number; h: number; lines: string[]} => {
 	const lines = phraseLines(text, BUBBLE.maxW - BUBBLE.padX, BUBBLE.charW);
 	const w = Math.min(BUBBLE.maxW, Math.max(...lines.map((l) => textAdvance(l, BUBBLE.charW))) + BUBBLE.padX);
-	return {w, h: lines.length * BUBBLE.lineH + BUBBLE.padY + (label ? BUBBLE.label : 0) + BUBBLE.tail, lines};
+	return {w, h: lines.length * BUBBLE.lineH + BUBBLE.padY + (label ? BUBBLE.label : 0) + (tail ? BUBBLE.tail : 0), lines};
 };
