@@ -8,6 +8,7 @@ _KEEP = re.compile(r"[฀-๿A-Za-z0-9]")
 _TAG = re.compile(r"\[[^\]]*\]")  # [whispers] etc. are not spoken
 SNAP_WINDOW_SEC = 0.8  # the fuzzy estimate is within ~a word; only snap to a pause that close
 DISTANCE_PENALTY = 0.4  # prefer long pauses, but not far ones: score = pause length - penalty * distance
+BREAK_DRIFT_PENALTY = 0.2  # no transcript: seconds of pause traded per second away from the estimate (ep01 v2: 0.1-0.2 stable)
 
 
 def spoken_len(s: str) -> int:
@@ -54,10 +55,13 @@ def scene_cuts(lines: list[str], words: list[Word], take_sec: float, silences: l
     heard = "".join(word_text)
     starts = [0.0]
     if not words or not heard:
-        seen = 0
+        seen, estimates = 0, []
         for part in script_parts[:-1]:
             seen += len(part)
-            starts.append(take_sec * seen / max(1, len(script)))
+            estimates.append(take_sec * seen / max(1, len(script)))
+        if silences:
+            return _cuts(_line_breaks(estimates, silences, take_sec), take_sec)
+        starts += estimates
     else:
         cmap = _char_map(script, heard)
         word_start_char, acc = [], 0
@@ -74,8 +78,46 @@ def scene_cuts(lines: list[str], words: list[Word], take_sec: float, silences: l
             starts.append((prev_end + words[i].start) / 2)
     if silences:
         starts = [0.0] + [snap(s, silences) for s in starts[1:]]
-    ends = starts[1:] + [take_sec]
-    return list(zip(starts, ends))
+    return _cuts(starts[1:], take_sec)
+
+
+def _cuts(breaks: list[float], take_sec: float) -> list[tuple[float, float]]:
+    starts = [0.0, *breaks]
+    return list(zip(starts, [*breaks, take_sec]))
+
+
+def _line_breaks(estimates: list[float], silences: list[tuple[float, float]], take_sec: float) -> list[float]:
+    """Without a transcript: pick one pause per line break, in order, for the whole take at once.
+
+    The narrator breathes longest between lines, so the chosen pauses maximise total pause length
+    while each stays near its letter-proportional estimate. Snapping each estimate on its own
+    lets the error build up line by line until a cut lands on a comma inside a sentence.
+    """
+    edge = 0.05  # lead-in / tail silence of the take is never a line break
+    inner = [s for s in silences if s[0] > edge and s[1] < take_sec - edge]
+    n, m = len(estimates), len(inner)
+    if m < n:
+        return [snap(e, silences) for e in estimates]
+
+    def score(i: int, j: int) -> float:
+        a, b = inner[j]
+        return (b - a) - BREAK_DRIFT_PENALTY * abs((a + b) / 2 - estimates[i])
+
+    best = [[score(0, j) for j in range(m)]]
+    back: list[list[int]] = [[-1] * m]
+    for i in range(1, n):
+        row, links = [float("-inf")] * m, [-1] * m
+        for j in range(i, m):
+            k = max(range(i - 1, j), key=lambda k: best[i - 1][k])
+            row[j], links[j] = best[i - 1][k] + score(i, j), k
+        best.append(row)
+        back.append(links)
+    j = max(range(n - 1, m), key=lambda j: best[n - 1][j])
+    picked = []
+    for i in range(n - 1, -1, -1):
+        picked.append(sum(inner[j]) / 2)
+        j = back[i][j]
+    return picked[::-1]
 
 
 def snap(estimate: float, silences: list[tuple[float, float]]) -> float:

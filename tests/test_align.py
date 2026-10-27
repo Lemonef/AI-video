@@ -48,3 +48,13 @@ def test_fuzzy_alignment_survives_misheard_words():
     words = [Word("กินข้าว", 0.0, 0.8), Word("7โมง", 0.9, 1.5), Word("ขาว", 2.0, 2.4), Word("ดำ", 2.5, 2.9)]
     cuts = scene_cuts(lines, words, take_sec=3.0)
     assert cuts[1][0] == pytest.approx(1.75)
+
+
+def test_without_transcript_cuts_pick_line_breaths_not_commas():
+    # 3 equal lines over 9 s: estimates 3 s and 6 s. The narrator ran slow on line 2, so its real
+    # breath is at 7.0 s; a short comma pause at 6.2 s sits nearer the estimate. Snapping one cut at
+    # a time would take the comma and cut mid-sentence; the whole-take choice takes the long breath.
+    lines = ["กกกก", "ขขขข", "คคคค"]
+    silences = [(0.0, 0.2), (2.6, 3.4), (6.1, 6.3), (6.6, 7.4), (8.9, 9.0)]
+    cuts = scene_cuts(lines, [], take_sec=9.0, silences=silences)
+    assert cuts == [(0.0, 3.0), (3.0, 7.0), (7.0, 9.0)]

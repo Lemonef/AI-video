@@ -187,7 +187,7 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 				<stop offset="1" stopColor={J5.haze} stopOpacity={0} />
 			</linearGradient>
 			<filter id="v6blur">
-				<feGaussianBlur stdDeviation="8" />
+				<feGaussianBlur stdDeviation="24" />
 			</filter>
 		</defs>
 		<rect width={W} height={H} fill="url(#v6sky)" />
@@ -198,18 +198,16 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 		<rect x={0} y={GROUND_SIDE - 520} width={W} height={300} fill="url(#v6mist)" />
 		{/* mid row kept hazy and smaller so the character, not the trees, owns the frame */}
 		<PineRow frame={frame} scroll={scroll} speed={0.35} base={GROUND_SIDE - 220} h={760} w={330} gap={240} t={0.78} salt={2} />
-		{[0, 1, 2].map((i) => (
-			<path key={i} d={`M${640 + i * 110},0 L${720 + i * 110},0 L${260 + i * 140},${GROUND_SIDE} L${120 + i * 140},${GROUND_SIDE} Z`} fill="url(#v6shaft)" opacity={0.6 + 0.4 * Math.sin(frame / 60 + i * 2)} />
-		))}
+		{/* light shafts blurred: a hard polygon edge reads as a seam in the picture */}
+		<g filter="url(#v6blur)">
+			{[0, 1, 2].map((i) => (
+				<path key={i} d={`M${640 + i * 110},0 L${720 + i * 110},0 L${260 + i * 140},${GROUND_SIDE} L${120 + i * 140},${GROUND_SIDE} Z`} fill="url(#v6shaft)" opacity={0.6 + 0.4 * Math.sin(frame / 60 + i * 2)} />
+			))}
+		</g>
 		<rect x={0} y={GROUND_SIDE - 60} width={W} height={H - GROUND_SIDE + 60} fill="url(#v6ground)" />
 		<rect x={0} y={GROUND_SIDE - 120} width={W} height={220} fill="url(#v6mist)" opacity={0.8} />
-		{/* near trunks, out of focus, fast: foreground depth */}
-		<g filter="url(#v6blur)">
-			{Array.from({length: 3}, (_, i) => {
-				const x = wrap(i * 520 + 200 - frame * scroll * 0.8, W + 520) - 260;
-				return <rect key={i} x={x} y={0} width={80} height={H} fill={J5.trunkNear} />;
-			})}
-		</g>
+		{/* No near "foreground" trunks here: this layer renders BEHIND the cast, so they read as flat
+		    dark bars cutting through the frame (and through Jaab), not as depth. */}
 		{fireflies
 			? Array.from({length: 16}, (_, i) => {
 					const x = rnd(i, 31) * W + Math.sin(frame / 30 + i) * 30;
