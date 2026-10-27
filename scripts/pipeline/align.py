@@ -9,6 +9,7 @@ _TAG = re.compile(r"\[[^\]]*\]")  # [whispers] etc. are not spoken
 SNAP_WINDOW_SEC = 0.8  # the fuzzy estimate is within ~a word; only snap to a pause that close
 DISTANCE_PENALTY = 0.4  # prefer long pauses, but not far ones: score = pause length - penalty * distance
 BREAK_DRIFT_PENALTY = 0.2  # no transcript: seconds of pause traded per second away from the estimate (ep01 v2: 0.1-0.2 stable)
+LINE_PACE_PENALTY = 0.25  # seconds of pause traded per second a line runs off its letters' pace (ep01 v4: <0.275 keeps breaths over commas)
 
 
 def spoken_len(s: str) -> int:
@@ -60,7 +61,7 @@ def scene_cuts(lines: list[str], words: list[Word], take_sec: float, silences: l
             seen += len(part)
             estimates.append(take_sec * seen / max(1, len(script)))
         if silences:
-            return _cuts(_line_breaks(estimates, silences, take_sec), take_sec)
+            return _cuts(_line_breaks(estimates, silences, take_sec, [len(p) for p in script_parts]), take_sec)
         starts += estimates
     else:
         cmap = _char_map(script, heard)
@@ -86,33 +87,41 @@ def _cuts(breaks: list[float], take_sec: float) -> list[tuple[float, float]]:
     return list(zip(starts, [*breaks, take_sec]))
 
 
-def _line_breaks(estimates: list[float], silences: list[tuple[float, float]], take_sec: float) -> list[float]:
+def _line_breaks(estimates: list[float], silences: list[tuple[float, float]], take_sec: float, letters: list[int] | None = None) -> list[float]:
     """Without a transcript: pick one pause per line break, in order, for the whole take at once.
 
     The narrator breathes longest between lines, so the chosen pauses maximise total pause length
     while each stays near its letter-proportional estimate. Snapping each estimate on its own
     lets the error build up line by line until a cut lands on a comma inside a sentence.
+    A dramatic pause INSIDE a line can still outlast the real break; `letters` (per line) adds a
+    pace check: each line's length should match its letters at the take's average speed.
     """
     edge = 0.05  # lead-in / tail silence of the take is never a line break
     inner = [s for s in silences if s[0] > edge and s[1] < take_sec - edge]
     n, m = len(estimates), len(inner)
     if m < n:
         return [snap(e, silences) for e in estimates]
+    mid = [(a + b) / 2 for a, b in inner]
+    sec_per_letter = take_sec / max(1, sum(letters)) if letters else 0.0
+
+    def pace(line: int, start: float, end: float) -> float:
+        """Penalty for a line whose length disagrees with its letters at the average pace."""
+        return LINE_PACE_PENALTY * abs((end - start) - letters[line] * sec_per_letter) if letters else 0.0
 
     def score(i: int, j: int) -> float:
         a, b = inner[j]
-        return (b - a) - BREAK_DRIFT_PENALTY * abs((a + b) / 2 - estimates[i])
+        return (b - a) - BREAK_DRIFT_PENALTY * abs(mid[j] - estimates[i])
 
-    best = [[score(0, j) for j in range(m)]]
+    best = [[score(0, j) - pace(0, 0.0, mid[j]) for j in range(m)]]
     back: list[list[int]] = [[-1] * m]
     for i in range(1, n):
         row, links = [float("-inf")] * m, [-1] * m
         for j in range(i, m):
-            k = max(range(i - 1, j), key=lambda k: best[i - 1][k])
-            row[j], links[j] = best[i - 1][k] + score(i, j), k
+            k = max(range(i - 1, j), key=lambda k: best[i - 1][k] - pace(i, mid[k], mid[j]))
+            row[j], links[j] = best[i - 1][k] - pace(i, mid[k], mid[j]) + score(i, j), k
         best.append(row)
         back.append(links)
-    j = max(range(n - 1, m), key=lambda j: best[n - 1][j])
+    j = max(range(n - 1, m), key=lambda j: best[n - 1][j] - pace(n, mid[j], take_sec))
     picked = []
     for i in range(n - 1, -1, -1):
         picked.append(sum(inner[j]) / 2)

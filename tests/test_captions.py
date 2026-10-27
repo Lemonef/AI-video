@@ -46,3 +46,14 @@ def test_cues_never_pass_the_line_end():
     cues = build_cues(" ".join(["a" * 20] * 4), [Word("aaaa", 0, 0.2)], duration=0.2)
     assert cues[-1].end <= 0.2 + 0.3 + 1e-9
     assert " ".join(c.text for c in cues) == " ".join(["a" * 20] * 4)  # nothing dropped
+
+
+def test_highlight_with_a_space_stays_in_one_chunk():
+    parts = chunk("อนามัยอยู่ข้างหน้าแล้ว… อีกแค่ *300 เมตร*")
+    assert any(p.endswith("*300 เมตร*") for p in parts)
+    assert all(p.count("*") % 2 == 0 for p in parts)
+
+
+def test_without_words_chunks_stay_inside_the_spoken_part():
+    cues = build_cues("กกกก ขขขข คคคค งงงง", [], duration=4.0, speech=(1.0, 3.0))
+    assert cues[1].start >= 1.0 and cues[-1].start < 3.0

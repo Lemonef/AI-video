@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from .tts.word import Word
 
-MAX_CHUNK_CHARS = 24  # one caption line on a phone at the caption font size
+MAX_CHUNK_CHARS = 16  # 1-3 words at a time, the punchy rhythm of the reference shorts (was one full line)
 MIN_CHUNK_SEC = 0.35  # shorter than this flickers
 TAIL_HOLD_SEC = 0.3  # keep the last chunk up briefly after the voice stops
 BREAK_AFTER = ("…", "!", "?", "'")  # punctuation that ends a phrase
@@ -24,10 +24,11 @@ def _norm_len(s: str) -> int:
 
 
 def chunk(caption: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
-    """Group space-separated phrases into chunks that fit one caption line."""
+    """Group space-separated phrases into chunks that fit one caption line. A *highlight* stays
+    whole even when it contains a space, so its markers never split across chunks."""
     chunks: list[str] = []
     cur = ""
-    for tok in caption.split():
+    for tok in re.findall(r"\S*\*[^*]+\*\S*|\S+", caption):
         joined = f"{cur} {tok}" if cur else tok
         if cur and len(joined) > max_chars:
             chunks.append(cur)
@@ -42,12 +43,14 @@ def chunk(caption: str, max_chars: int = MAX_CHUNK_CHARS) -> list[str]:
     return chunks
 
 
-def build_cues(caption: str, words: list[Word], duration: float) -> list[Cue]:
+def build_cues(caption: str, words: list[Word], duration: float, speech: tuple[float, float] | None = None) -> list[Cue]:
     """Time each chunk by mapping its position in the caption onto the spoken word timeline.
 
     Caption and spoken text may differ ("7" vs "เจ็ด", quotes, ellipses), so chunks are placed by
-    proportional letter position rather than exact string match.
+    proportional letter position rather than exact string match. Without word timings, `speech`
+    (the seconds of the clip that hold speech) keeps chunks off the pauses at the clip's edges.
     """
+    speak_from, speak_to = speech or (0.0, duration)
     parts = chunk(caption)
     if not parts:
         return []
@@ -61,7 +64,7 @@ def build_cues(caption: str, words: list[Word], duration: float) -> list[Cue]:
 
     def time_at(frac: float) -> float:
         if not words or spoken_total == 0:
-            return frac * duration
+            return speak_from + frac * (speak_to - speak_from)
         target = frac * spoken_total
         for end_idx, w in spoken_ends:
             if end_idx > target:

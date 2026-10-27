@@ -58,3 +58,12 @@ def test_without_transcript_cuts_pick_line_breaths_not_commas():
     silences = [(0.0, 0.2), (2.6, 3.4), (6.1, 6.3), (6.6, 7.4), (8.9, 9.0)]
     cuts = scene_cuts(lines, [], take_sec=9.0, silences=silences)
     assert cuts == [(0.0, 3.0), (3.0, 7.0), (7.0, 9.0)]
+
+
+def test_without_transcript_a_dramatic_pause_inside_a_line_loses_to_the_real_break():
+    # Line 1 is short (4 letters), line 2 long (12). Line 2 has a long dramatic pause in its middle
+    # (2.6-3.4 s); the real break after line 1 (1.0-1.5 s) is shorter. Pace says line 1 ~ 1.25 s.
+    lines = ["กกกก", "ขขขขขขขขขขขข"]
+    silences = [(1.0, 1.5), (2.6, 3.4)]
+    cuts = scene_cuts(lines, [], take_sec=5.0, silences=silences)
+    assert cuts[0] == (0.0, 1.25)

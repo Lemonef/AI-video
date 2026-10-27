@@ -29,8 +29,8 @@ def _line(scene: dict) -> str:
     return f"[{tone}] {scene['say']}" if tone else scene["say"]
 
 
-def _entry(episode: dict, scene: dict, key: str, words: list[Word], duration: float) -> dict:
-    cues = build_cues(scene.get("caption", scene["say"]), words, duration)
+def _entry(episode: dict, scene: dict, key: str, words: list[Word], duration: float, speech: list[float] | None = None) -> dict:
+    cues = build_cues(scene.get("caption", scene["say"]), words, duration, (speech[0], speech[1]) if speech else None)
     return {
         "key": key,
         "letters": spoken_len(scene["say"]),  # with duration + tempo: the measured speaking rate
@@ -158,10 +158,11 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"
         media.cut(take, start, end, mp3)
-        timing[scene["id"]] = _entry(episode, scene, key, words_in(words, start, end), end - start)
-        if not words:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
+        speech = None if words else speech_span(start, end, pauses)
+        timing[scene["id"]] = _entry(episode, scene, key, words_in(words, start, end), end - start, speech)
+        if speech:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
             timing[scene["id"]]["say"] = scene["say"]
-            timing[scene["id"]]["speech"] = speech_span(start, end, pauses)
+            timing[scene["id"]]["speech"] = speech
         print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
     _save(timing_path, timing)
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}

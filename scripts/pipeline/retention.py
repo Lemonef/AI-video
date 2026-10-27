@@ -8,9 +8,12 @@ from dataclasses import dataclass
 
 from .align import spoken_len
 
-TOTAL_TARGET_SEC = 45  # new account: shorter = more completions
-TOTAL_MAX_SEC = 59.5  # stay under 60 s so Duet/Stitch remain available
-HOOK_MAX_SEC = 4.0  # the opening scene must state its stakes fast
+# Length: the story sets it. The 45 s target squeezed EP1 v2 into a rush with no build-up; the
+# references that work (StickItOutStories, Once Upon a Strange, PromptKUB, 2026-10-27) run 70-93 s
+# at a calm pace, and Creator Rewards only pays on videos over 1 minute.
+TOTAL_TARGET_SEC = 90  # warn above: every beat must still earn its seconds
+TOTAL_MAX_SEC = 120
+HOOK_MAX_SEC = 6.0  # the opening line states the stakes; at a calm 1.0x pace that is ~5-6 s
 MAX_STATIC_SEC = 4.5  # a visual change (cut/push/new element) at least this often
 MAX_PUSH_SEC = 7.0  # a slow camera push counts as change, but not forever
 RULES_CARD_MAX_SEC = 4.0  # never read a rules list out: show, then teach just-in-time
@@ -30,6 +33,16 @@ def _scene_sec(scene: dict, timing: dict) -> float:
     return scene.get("padBefore", 0) + line + scene.get("padAfter", 0) + extra
 
 
+def _changes(scene: dict) -> list[float]:
+    """Fractions of the line where the picture visibly changes. Word cues count at their `at`
+    fallback here: the lint runs before word timings are trusted."""
+    marks = [sh.get("at", 0) for sh in scene.get("shots", [])]
+    marks += [b.get("at", 0) for b in scene.get("bubbles", [])]
+    marks += [p["at"] for p in scene.get("props", []) if "at" in p]
+    marks += [scene[k]["at"] for k in ("stat", "tint", "blackout") if k in scene and "at" in scene[k]]
+    return [m for m in marks if 0 < m < 1]
+
+
 def check(episode: dict, timing: dict) -> list[Finding]:
     out: list[Finding] = []
     scenes = episode["scenes"]
@@ -37,7 +50,7 @@ def check(episode: dict, timing: dict) -> list[Finding]:
     if total > TOTAL_MAX_SEC:
         out.append(Finding("FAIL", "episode", f"{total:.1f}s long; must stay under {TOTAL_MAX_SEC:.0f}s"))
     elif total > TOTAL_TARGET_SEC:
-        out.append(Finding("WARN", "episode", f"{total:.1f}s long; target is {TOTAL_TARGET_SEC}s while the account is new"))
+        out.append(Finding("WARN", "episode", f"{total:.1f}s long; target is {TOTAL_TARGET_SEC}s: cut a beat that does not move the story"))
 
     first = scenes[0]
     first_sec = _scene_sec(first, timing)
@@ -55,8 +68,10 @@ def check(episode: dict, timing: dict) -> list[Finding]:
             out.append(Finding("WARN", s["id"], f"{s['padAfter']:.1f}s of dead air after the line"))
         if kind == "endcard":
             continue
-        # longest stretch without a cut; a camera push stretches the allowance
-        cuts = sorted({0.0, *[sh.get("at", 0) for sh in s.get("shots", [])], 1.0})
+        # longest stretch without a visual change: a cut, or a new element popping in (stat card,
+        # bubble, prop, red tint, blackout) - the references change the picture that way as often
+        # as by cutting. A camera push stretches the allowance.
+        cuts = sorted({0.0, *_changes(s), 1.0})
         line = timing[s["id"]]["duration"]
         longest = max((b - a) * line for a, b in zip(cuts, cuts[1:])) + s.get("padAfter", 0)
         cam = s.get("camera", {})
