@@ -20,6 +20,7 @@ KEY_FILE = Path.home() / ".secrets" / "gemini_api_key"
 PCM_RATE = 24_000  # raw PCM output when the response has no WAV header
 TIMEOUT_SEC = 300
 EMPTY_RETRIES = 2  # Gemini sometimes answers with no audio part; retrying the same model usually works
+BLOCKED_REASONS = ("SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST", "RECITATION")  # deterministic refusals: never retry
 
 
 def _api_key() -> str:
@@ -61,7 +62,10 @@ class GeminiTtsEngine:
                 cand = (data.get("candidates") or [{}])[0]
                 parts = cand.get("content", {}).get("parts") or []
                 if not parts or "inlineData" not in parts[0]:
-                    errors.append(f"{model}: no audio (finishReason={cand.get('finishReason')})")
+                    reason = cand.get("finishReason")
+                    errors.append(f"{model}: no audio (finishReason={reason})")
+                    if reason in BLOCKED_REASONS:  # the text itself is refused: a retry only burns quota
+                        raise RuntimeError(f"Gemini refused the script ({reason}): soften the wording, then retry. " + "; ".join(errors))
                     continue
                 self._write_mp3(base64.b64decode(parts[0]["inlineData"]["data"]), out_path)
                 print(f"    (gemini model: {model}, voice: {voice})")

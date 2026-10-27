@@ -236,7 +236,7 @@
       "fireflies": false,
       "rulesView": "hud",
       "transition": "cut",
-      "tone": "serious, low",
+      "tone": "suspenseful",
       "say": "กฎข้อสอง ถ้ามีใครเรียกชื่อ ห้ามขานรับ",
       "showCaptions": false,
       "stat": {
@@ -434,7 +434,7 @@
       "fireflies": false,
       "rain": true,
       "rulesView": "hud",
-      "tone": "creepy, whispering",
+      "tone": "whispers",
       "say": "แล้วเสียงนั้นก็ตอบกลับมาว่า เจอแล้ว",
       "caption": "แล้วเสียงนั้นตอบกลับมาว่า… '*เจอแล้ว*'",
       "props": [
@@ -539,7 +539,7 @@
       "fireflies": false,
       "rain": true,
       "showCaptions": false,
-      "tone": "urgent, then playful",
+      "tone": "urgent",
       "say": "จะวิ่งต่อ หรือหันไฟฉายไปดู คอมเมนต์ เอ หรือ บี ไม่มีใครเลือก จ๊าบเลือกเอง",
       "a": "วิ่งต่อ ห้ามหันกลับ",
       "b": "หันไฟฉายไปดู (ผิดกฎข้อ 3)",
