@@ -61,6 +61,12 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "- Share to Feed: ON · AI label: ON",
         "- After posting: the same comment as 3), then pin it",
         "- Next part: use 'Link a reel' to point this one at part 2",
+        "",
+        "6) YOUTUBE SHORTS (same video.mp4 - the original, never a TikTok download: watermarks get buried):",
+        f"- Title: {' · '.join(x for x in (post.get('series'), label) if x)} · {hook.replace('*', '')}"[:100 + len("- Title: ")],
+        "- Description: lines 2-4 of the block in 1) (question, A/B + next time, hashtags)",
+        "- Audience: No, it's not made for kids (horror; 'for kids' turns comments off)",
+        "- Thumbnail (mobile): the opening title frame or the red scare frame",
     ]
     out = final_dir / "post.txt"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
