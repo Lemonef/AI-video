@@ -22,6 +22,7 @@ export type CastMember = {
 	keys?: CastKey[];
 	turn?: number; // v2: head turn -1..1 (3/4 view)
 	torch?: boolean; // v2: holding a flashlight (scene draws the beam)
+	noShadow?: boolean; // casts no shadow on the ground (the double's tell)
 };
 
 export type PropItem = {type: string; x: number; y: number; scale?: number; at?: number};

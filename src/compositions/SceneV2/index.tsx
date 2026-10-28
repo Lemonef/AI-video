@@ -118,7 +118,8 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const camOy = cam.y ?? H / 2;
 	(scene.cast ?? []).forEach((m) => {
 		const s = m.scale ?? 1;
-		const fx = camOx + (castState(m, p, lineSec, FPS).x - camOx) * camZ;
+		const cs = castState(m, p, lineSec, FPS);
+		const fx = camOx + (cs.x - camOx) * camZ;
 		const fy = camOy + (m.y + FACE_BOX.cy * s - camOy) * camZ;
 		const half = FACE_BOX.half * s * camZ;
 		reserved.push({x: fx - half, y: fy - half, w: half * 2, h: half * 2});
@@ -127,7 +128,9 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		reserved.push({x: fx - half, y: fy + half, w: half * 2, h: Math.max(0, feet - fy - half)});
 		// Framing lint: a face that is on screen must be inside what a tall phone shows.
 		const onScreen = fx + half > 0 && fx - half < W;
-		if (onScreen && (fx - half < VISIBLE.left || fx + half > VISIBLE.right)) {
+		// a deliberate exit/entrance (walking to or from a point outside the frame) may cross the edge
+		const crossing = cs.walking && m.toX !== undefined && (m.toX < 0 || m.toX > W || m.x < 0 || m.x > W);
+		if (onScreen && !crossing && (fx - half < VISIBLE.left || fx + half > VISIBLE.right)) {
 			throw new Error(`framing: ${m.who}'s face in scene "${scene.id}" (x ${Math.round(fx - half)}-${Math.round(fx + half)}) is cut off on tall phones; visible x is ${VISIBLE.left}-${VISIBLE.right}. Lower the shot zoom or move the camera.`);
 		}
 	});
@@ -172,7 +175,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (
-					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
+					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} noShadow={m.noShadow} />
 				)}
 			</g>
 		);
@@ -265,6 +268,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				// an off-screen voice has no place in the world: its anchor is a screen position
 				const anchor = b.kind === 'voice' ? {x: b.x, y: b.y} : {x: ox + (b.x - ox) * z + sx, y: oy + (b.y - oy) * z + sy};
 				const box = placeBox(anchor.x, anchor.y, size.w, size.h, SCREEN, reserved);
+				reserved.push(box); // a later bubble must not land on this one
 				return <Bubble key={i} item={{...b, x: box.x + box.w / 2, y: box.y + box.h}} frame={frame - f} />;
 			})}
 

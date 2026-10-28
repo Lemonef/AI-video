@@ -1,0 +1,666 @@
+{
+  "id": "ep02",
+  "title": "กฎเข้าป่าตอนกลางคืน — ตอน 2",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "tempo": 1.0,
+  "mix": {
+    "beds": [
+      "wind",
+      "crickets",
+      "drone",
+      "rain",
+      "steps"
+    ],
+    "duck": 0.18,
+    "bedVolume": 0.9,
+    "real": true
+  },
+  "rules": {
+    "title": "กฎเข้าป่าตอนกลางคืน",
+    "items": [
+      "ห้ามเดินออกนอกทาง",
+      "ถ้ามีคนเรียกชื่อ ห้ามขานรับ",
+      "ห้ามส่องไฟฉายไปข้างหลัง"
+    ]
+  },
+  "handheld": false,
+  "post": {
+    "part": 2,
+    "hook": "จะเกิดอะไรขึ้น ถ้าคุณหันไปมอง… แล้วเห็นตัวเองยืนยิ้มอยู่ 😨",
+    "question": "ถ้าเป็นคุณ… จะวิ่งตามมันกลับบ้าน หรือไปเอายาให้ทันก่อน?",
+    "next": "ตอนจบ \"ประตูบ้าน…\" พรุ่งนี้ 20:00",
+    "coverFrame": 45,
+    "hashtags": [
+      "#เรื่องผี",
+      "#เรื่องหลอน",
+      "#การ์ตูนผี",
+      "#ฮาโลวีน",
+      "#jaabstory"
+    ],
+    "series": "กฎเข้าป่า",
+    "coverHook": "ผิดกฎข้อ 3!",
+    "total": 3,
+    "keyword": ""
+  },
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "scenes": [
+    {
+      "id": "cold",
+      "bg": "forestPath",
+      "fireflies": false,
+      "title": "ผิดกฎข้อ*สาม*",
+      "say": "จะเกิดอะไรขึ้น ถ้าคุณหันไปมอง แล้วเห็นตัวเองยืนยิ้มอยู่",
+      "caption": "จะเกิดอะไรขึ้น ถ้าคุณ *หันไปมอง*… แล้วเห็น *ตัวเอง* ยืนยิ้มอยู่",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1640,
+          "scale": 1.0,
+          "torch": true,
+          "expr": "shock",
+          "turn": 0.8,
+          "action": "shake"
+        },
+        {
+          "who": "jaab",
+          "x": 800,
+          "y": 1470,
+          "scale": 0.72,
+          "torch": false,
+          "noShadow": true,
+          "expr": "smile",
+          "turn": -0.4
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.62,
+          "zoom": 1.3,
+          "x": 760,
+          "y": 1150
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.0,
+          "strength": 22,
+          "sound": "heartbeat"
+        }
+      ],
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "recap1",
+      "bg": "houseNight",
+      "transition": "whip",
+      "chip": "ตอนที่แล้ว",
+      "say": "ตอนที่แล้ว แม่ของจ๊าบไข้ขึ้นสูง เขาจึงต้องลัดป่าไปโรงบาล",
+      "caption": "ตอนที่แล้ว… แม่ *ไข้ขึ้นสูง* จ๊าบต้อง *ลัดป่าไปโรงบาล*",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 700,
+          "y": 1620,
+          "scale": 0.95,
+          "torch": false,
+          "expr": "sweat",
+          "turn": -0.6
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.2,
+          "x": 480,
+          "y": 1350
+        }
+      ],
+      "beds": {
+        "wind": 0.15,
+        "crickets": 0.45,
+        "drone": 0,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "recap2",
+      "bg": "forestPath",
+      "fireflies": false,
+      "rain": true,
+      "chip": "ตอนที่แล้ว",
+      "transition": "cut",
+      "say": "เขาเผลอขานรับเสียงที่เลียนเสียงแม่ แล้วมันก็กระซิบว่า เจอแล้ว",
+      "caption": "เขา *เผลอขานรับ*… แล้วมันกระซิบว่า '*เจอแล้ว*'",
+      "monster": "เจอแล้ว",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 1.05,
+          "torch": true,
+          "expr": "shock",
+          "turn": 0,
+          "action": "shake"
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.18,
+          "x": 540,
+          "y": 1150
+        },
+        {
+          "at": 0.45,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.85,
+          "word": "เจอแล้ว",
+          "zoom": 1.35,
+          "x": 540,
+          "y": 1180
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.85,
+          "word": "เจอแล้ว",
+          "strength": 24,
+          "sound": ""
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.86,
+          "word": "เจอแล้ว",
+          "sound": "boom",
+          "volume": 0.8
+        }
+      ],
+      "tint": {
+        "color": "#B3262B",
+        "at": 0.85,
+        "word": "เจอแล้ว",
+        "strength": 0.45
+      },
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "empty",
+      "bg": "forestPath",
+      "transition": "cut",
+      "say": "แต่ข้างหลังไม่มีอะไรเลย มีแค่ทางที่เขาเดินผ่านมา",
+      "caption": "แต่ข้างหลัง… *ไม่มีอะไรเลย*",
+      "camera": {
+        "from": 1.0,
+        "to": 1.15,
+        "x": 540,
+        "y": 900
+      },
+      "beds": {
+        "wind": 0.4,
+        "crickets": 0.5,
+        "drone": 0,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "prints",
+      "bg": "insertFootprints",
+      "transition": "cut",
+      "say": "แต่บนดินโคลน มีรอยเท้าเปล่า เดินตามเขามาตลอดทาง",
+      "caption": "บนดินโคลน มี *รอยเท้าเปล่า*… เดินตามเขามาตลอดทาง",
+      "progress": [
+        0.0,
+        0.85
+      ],
+      "camera": {
+        "from": 1.0,
+        "to": 1.12,
+        "x": 540,
+        "y": 1200
+      },
+      "beds": {
+        "wind": 0.3,
+        "crickets": 0,
+        "drone": 0.4,
+        "rain": 0,
+        "steps": 0
+      },
+      "bedsAt": {
+        "word": "รอยเท้า",
+        "at": 0.3,
+        "only": [
+          "crickets"
+        ]
+      },
+      "bedsFade": 0.15
+    },
+    {
+      "id": "guess",
+      "bg": "insertFootprints",
+      "chip": "ทายก่อน 👀",
+      "say": "ลองดูดีๆ รอยเท้านั้นไปหยุดตรงไหน",
+      "caption": "ลองดูดีๆ… รอยเท้านั้น *ไปหยุดตรงไหน?*",
+      "progress": [
+        0.85,
+        1.0
+      ],
+      "camera": {
+        "from": 1.12,
+        "to": 1.3,
+        "x": 540,
+        "y": 1500
+      },
+      "beds": {
+        "wind": 0.3,
+        "crickets": 0,
+        "drone": 0.4,
+        "rain": 0,
+        "steps": 0
+      },
+      "padAfter": 1.0
+    },
+    {
+      "id": "behind",
+      "bg": "forestPath",
+      "fireflies": false,
+      "transition": "cut",
+      "say": "มันหยุด ตรงหลังเขาพอดี",
+      "caption": "มันหยุด… *ตรงหลังเขาพอดี*",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 1.05,
+          "torch": true,
+          "expr": "shock",
+          "turn": 0,
+          "action": "shake"
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.35,
+          "x": 540,
+          "y": 1180
+        }
+      ],
+      "hush": {
+        "word": "หลัง",
+        "lead": 0.6,
+        "hold": 0.2
+      },
+      "hits": [
+        {
+          "at": 0.6,
+          "word": "หลัง",
+          "strength": 30,
+          "sound": ""
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.6,
+          "word": "หลัง",
+          "sound": "boom",
+          "volume": 0.9
+        },
+        {
+          "at": 0.6,
+          "word": "หลัง",
+          "sound": "heartbeat",
+          "volume": 0.8,
+          "rate": 1.2
+        }
+      ],
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      },
+      "padAfter": 0.5
+    },
+    {
+      "id": "phone",
+      "bg": "insertPhone",
+      "transition": "cut",
+      "say": "แล้วโทรศัพท์ก็สั่น สายจากบ้าน แบตเหลือหนึ่งเปอร์เซ็นต์",
+      "caption": "โทรศัพท์สั่น… *สายจากบ้าน* แบตเหลือ *1%*",
+      "camera": {
+        "from": 1.0,
+        "to": 1.1,
+        "x": 540,
+        "y": 980
+      },
+      "beds": {
+        "wind": 0.3,
+        "crickets": 0,
+        "drone": 0.4,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "grandma",
+      "bg": "forestPath",
+      "fireflies": false,
+      "rulesView": "hud",
+      "say": "เสียงยายร้อนรน ยายลืมบอก ถ้าขานรับ มันจะได้เสียงเรา ถ้าหันไปมอง มันจะได้หน้าเรา และถ้ามัน",
+      "caption": "ยายลืมบอก…",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 1.05,
+          "torch": true,
+          "expr": "sweat",
+          "turn": 0
+        }
+      ],
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 620,
+          "y": 430,
+          "text": "ขานรับ = มันได้เสียงเรา",
+          "at": 0.3,
+          "word": "ขานรับ"
+        },
+        {
+          "kind": "voice",
+          "x": 620,
+          "y": 640,
+          "text": "หันไปมอง = มันได้หน้าเรา",
+          "at": 0.6,
+          "word": "หันไปมอง"
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.85,
+          "zoom": 1.35,
+          "x": 540,
+          "y": 1180
+        }
+      ],
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "dead",
+      "bg": "insertTorch",
+      "transition": "cut",
+      "chip": "แบต 0%",
+      "say": "สายตัด แบตหมด ไฟฉายดับ",
+      "caption": "สายตัด… แบตหมด… *ไฟฉายดับ*",
+      "blackout": {
+        "at": 0.6,
+        "sec": 1.4
+      },
+      "beds": {
+        "drone": 0.7,
+        "rain": 0.4,
+        "wind": 0,
+        "crickets": 0,
+        "steps": 0
+      },
+      "padAfter": 0.8
+    },
+    {
+      "id": "ahead",
+      "bg": "forestAhead",
+      "fireflies": false,
+      "transition": "cut",
+      "say": "ในความมืด มีไฟฉายอีกดวง ส่องมาจากทางข้างหน้า",
+      "caption": "ในความมืด… มี *ไฟฉายอีกดวง* ส่องมาจากข้างหน้า",
+      "camera": {
+        "from": 1.0,
+        "to": 1.25,
+        "x": 540,
+        "y": 1000
+      },
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "double",
+      "bg": "forestAhead",
+      "fireflies": false,
+      "say": "คนถือไฟฉาย ใส่เสื้อตัวเดียวกับจ๊าบ สะพายกระเป๋าใบเดียวกัน",
+      "caption": "ใส่ *เสื้อตัวเดียวกับจ๊าบ*… สะพาย *กระเป๋าใบเดียวกัน*",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1420,
+          "scale": 0.72,
+          "torch": true,
+          "noShadow": true,
+          "expr": "smile",
+          "turn": 0
+        }
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.3,
+          "x": 540,
+          "y": 1150
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.5,
+          "strength": 14
+        }
+      ],
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "home",
+      "bg": "forestAhead",
+      "fireflies": false,
+      "say": "แล้วมันก็หันหลัง เดินกลับไปทางบ้าน ทางที่แม่นอนรออยู่",
+      "caption": "มันเดินกลับไป… *ทางบ้าน* ที่แม่นอนรออยู่",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "toX": -200,
+          "y": 1420,
+          "scale": 0.72,
+          "torch": true,
+          "noShadow": true,
+          "expr": "smile",
+          "turn": -0.9,
+          "action": "walk"
+        }
+      ],
+      "camera": {
+        "from": 1.0,
+        "to": 1.1,
+        "x": 540,
+        "y": 1100
+      },
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "stakes",
+      "bg": "forestDark",
+      "fireflies": false,
+      "rulesView": "hud",
+      "say": "ตอนนี้มันมีทั้งเสียงและหน้าของจ๊าบ เหลืออีกอย่างเดียว",
+      "caption": "มันมีทั้ง *เสียง* และ *หน้า* ของจ๊าบ… เหลืออีก *อย่างเดียว*",
+      "stat": {
+        "label": "มันได้ไปแล้ว",
+        "value": "เสียง + หน้า",
+        "at": 0.15
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1520,
+          "scale": 0.72,
+          "torch": false,
+          "expr": "shock",
+          "turn": 0
+        }
+      ],
+      "camera": {
+        "from": 1.0,
+        "to": 1.15,
+        "x": 540,
+        "y": 1150
+      },
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.65,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "map",
+      "bg": "forestMapChase",
+      "transition": "cut",
+      "say": "โรงบาลอยู่ข้างหน้าอีกแค่สามร้อยเมตร แต่มันกำลังไปถึงบ้านก่อน",
+      "caption": "โรงบาลเหลือ *300 เมตร*… แต่มัน *กำลังไปถึงบ้านก่อน*",
+      "progress": [
+        0.0,
+        1.0
+      ],
+      "camera": {
+        "from": 1.0,
+        "to": 1.15,
+        "x": 540,
+        "y": 1100
+      },
+      "beds": {
+        "wind": 0.2,
+        "crickets": 0,
+        "drone": 0.75,
+        "rain": 0.35,
+        "steps": 0
+      }
+    },
+    {
+      "id": "end",
+      "type": "endcard",
+      "bg": "forestDark",
+      "fireflies": false,
+      "rain": true,
+      "showCaptions": false,
+      "say": "จะวิ่งตามมันกลับบ้าน หรือไปเอายาให้ทันก่อน คอมเมนต์ เอ หรือ บี เสียงส่วนใหญ่ตัดสินตอนจบ",
+      "a": "วิ่งตามมัน กลับบ้าน",
+      "b": "ไปเอายา ให้ทันก่อน",
+      "prompt": "คอมเมนต์ A หรือ B 👇",
+      "footer": "ตอนจบ: \"ประตูบ้าน…\" · กดติดตาม",
+      "countdown": 3,
+      "countdownAt": 0.05,
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 540,
+          "y": 1640,
+          "scale": 1.05,
+          "torch": false,
+          "expr": "shock",
+          "turn": 0
+        }
+      ],
+      "choices": {
+        "a": {
+          "x": 300,
+          "y": 1300
+        },
+        "b": {
+          "x": 800,
+          "y": 1100
+        }
+      },
+      "beds": {
+        "drone": 0.35,
+        "rain": 0.35,
+        "wind": 0.2,
+        "crickets": 0,
+        "steps": 0
+      },
+      "padAfter": 1.0
+    }
+  ]
+}

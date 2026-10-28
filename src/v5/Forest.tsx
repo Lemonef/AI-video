@@ -1,8 +1,10 @@
 import React from 'react';
 import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
-import {ForestClinic, ForestPath} from '../v7/ForestPath';
-import {ForestMap, InsertThermometer, InsertTorch} from '../v7/Inserts';
+import {ForestAhead, ForestClinic, ForestDark, ForestPath} from '../v7/ForestPath';
+import {ForestMap, ForestMapChase, InsertFootprints, InsertPhone, InsertThermometer, InsertTorch} from '../v7/Inserts';
+import {StoreDark, StoreInside, StoreOutside} from '../v7/Store';
+import {CityMap, InsertShutter, InsertTV, StoreMap} from '../v7/StoreInserts';
 import {HouseNight} from '../v7/House';
 import {J5, VP} from './tokens';
 
@@ -236,4 +238,16 @@ export const ENV5: Record<string, React.FC<EnvProps>> = {
 	forestMap: ForestMap,
 	insertThermometer: InsertThermometer,
 	insertTorch: InsertTorch,
+	forestDark: ForestDark,
+	forestAhead: ForestAhead,
+	forestMapChase: ForestMapChase,
+	insertFootprints: InsertFootprints,
+	insertPhone: InsertPhone,
+	storeInside: StoreInside,
+	storeDark: StoreDark,
+	storeOutside: StoreOutside,
+	insertTV: InsertTV,
+	cityMap: CityMap,
+	storeMap: StoreMap,
+	insertShutter: InsertShutter,
 };

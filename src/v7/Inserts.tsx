@@ -30,6 +30,9 @@ const C = {
 	marker: '#FFD23F',
 };
 
+const CHASE_JAAB_AT = 0.86; // Jaab's place on the route when the double turns back
+const CHASE_RUN = 0.7; // how far back toward home the double gets over the scene
+
 const rnd = (i: number, salt: number) => {
 	const x = Math.sin(i * 127.1 + salt * 311.7) * 43758.5453;
 	return x - Math.floor(x);
@@ -86,7 +89,7 @@ export const InsertTorch: React.FC<EnvProps> = ({frame}) => {
 };
 
 /** Top-down map of the shortcut: forest canopy, the path from home to the clinic, and the marker. */
-export const ForestMap: React.FC<EnvProps> = ({frame, progress = 0}) => {
+export const ForestMap: React.FC<EnvProps & {chase?: boolean}> = ({frame, progress = 0, chase}) => {
 	// the route as a smooth S-curve, home at the bottom, clinic at the top
 	const route = 'M540,1640 C300,1450 820,1250 560,1020 C320,820 780,620 540,380';
 	const pulse = 1 + 0.25 * Math.abs(Math.sin(frame / 8));
@@ -98,7 +101,9 @@ export const ForestMap: React.FC<EnvProps> = ({frame, progress = 0}) => {
 		const b = (k: number) => (1 - u) ** 3 * P[0][k] + 3 * (1 - u) ** 2 * u * P[1][k] + 3 * (1 - u) * u ** 2 * P[2][k] + u ** 3 * P[3][k];
 		return {x: b(0), y: b(1)};
 	};
-	const m = at(Math.min(1, Math.max(0, progress)));
+	// chase: Jaab holds near the clinic while the double ('???') walks back toward home
+	const m = at(chase ? CHASE_JAAB_AT : Math.min(1, Math.max(0, progress)));
+	const d = at(Math.max(0, CHASE_JAAB_AT - CHASE_RUN * Math.min(1, Math.max(0, progress))));
 	return (
 		<g>
 			<rect width={W} height={H} fill="#0F2420" />
@@ -118,7 +123,84 @@ export const ForestMap: React.FC<EnvProps> = ({frame, progress = 0}) => {
 			<text x={m.x + 44} y={m.y + 14} fontFamily={FONT_CAPTION} fontWeight={800} fontSize={44} fill="#fff" stroke="#000" strokeWidth={6} paintOrder="stroke">
 				จ๊าบ
 			</text>
+			{chase ? (
+				<g>
+					<circle cx={d.x} cy={d.y} r={34 * pulse} fill={C.red} opacity={0.3} />
+					<circle cx={d.x} cy={d.y} r={22} fill={C.red} stroke="#000" strokeWidth={4} />
+					<text x={d.x - 44} y={d.y + 14} textAnchor="end" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={44} fill="#fff" stroke="#000" strokeWidth={6} paintOrder="stroke">
+						???
+					</text>
+				</g>
+			) : null}
 			<Darkness id="map" color={C.night} opacity={0.45} lights={[{x: m.x, y: m.y, reach: 700}]} />
+		</g>
+	);
+};
+
+/** The double heading home while Jaab stands near the clinic. */
+export const ForestMapChase: React.FC<EnvProps> = (props) => <ForestMap {...props} chase />;
+
+/** Close-up of the mud: his shoe prints, and bare footprints beside them that stop right behind him. */
+export const InsertFootprints: React.FC<EnvProps> = ({frame, progress = 0}) => {
+	const STEPS = 7;
+	const shown = Math.ceil(progress * STEPS); // the bare prints appear one by one toward him
+	const flicker = 0.92 + 0.08 * Math.sin(frame / 5);
+	const shoe = (x: number, y: number, k: number) => (
+		<g key={`s${k}`} transform={`translate(${x} ${y}) rotate(${k % 2 ? 6 : -6})`}>
+			<ellipse rx={30} ry={62} fill="#2C2018" />
+			{[0, 1, 2, 3].map((i) => (
+				<line key={i} x1={-20} y1={-40 + i * 24} x2={20} y2={-40 + i * 24} stroke="#3E2E22" strokeWidth={6} />
+			))}
+		</g>
+	);
+	const bare = (x: number, y: number, k: number) => (
+		<g key={`b${k}`} transform={`translate(${x} ${y}) rotate(${k % 2 ? 4 : -4})`}>
+			<ellipse cy={10} rx={24} ry={48} fill="#22180F" />
+			{[-18, -8, 2, 12, 20].map((tx, i) => (
+				<circle key={i} cx={tx} cy={-48 + Math.abs(i - 1.5) * 4} r={i === 0 ? 9 : 7} fill="#22180F" />
+			))}
+		</g>
+	);
+	return (
+		<g>
+			<rect width={W} height={H} fill="#5A4433" />
+			{Array.from({length: 40}, (_, i) => (
+				<ellipse key={i} cx={(i * 263) % W} cy={(i * 457) % H} rx={60 + (i % 5) * 20} ry={18} fill="#4C392A" opacity={0.6} />
+			))}
+			{Array.from({length: STEPS}, (_, k) => shoe(k % 2 ? 470 : 380, 1700 - k * 220, k))}
+			{Array.from({length: STEPS}, (_, k) => (STEPS - 1 - k < shown ? bare(k % 2 ? 690 : 610, 1640 - k * 220, k) : null))}
+			<Darkness id="fprint" color={C.night} opacity={0.82} lights={[{x: 540, y: 1300, reach: 760 * flicker}]} />
+		</g>
+	);
+};
+
+/** Close-up of his phone ringing: grandma calling, 1% battery. */
+export const InsertPhone: React.FC<EnvProps> = ({frame}) => {
+	const buzz = Math.floor(frame / 3) % 4 < 2 ? Math.sin(frame * 2.1) * 6 : 0; // vibrates in bursts
+	return (
+		<g>
+			<rect width={W} height={H} fill="#070B14" />
+			<g transform={`translate(${540 + buzz} 980) rotate(-6)`}>
+				<rect x={-250} y={-500} width={500} height={1000} rx={60} fill="#15181F" />
+				<rect x={-226} y={-470} width={452} height={940} rx={44} fill="#0E2A22" />
+				<text x={180} y={-420} textAnchor="end" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={34} fill={C.red}>
+					1%
+				</text>
+				<circle cy={-200} r={90} fill="#3A4A5A" />
+				<text y={-170} textAnchor="middle" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={88} fill="#E8EEF5">
+					ย
+				</text>
+				<text y={-40} textAnchor="middle" fontFamily={FONT_CAPTION} fontWeight={800} fontSize={76} fill="#FFFFFF">
+					ยาย
+				</text>
+				<text y={20} textAnchor="middle" fontFamily={FONT_CAPTION} fontWeight={600} fontSize={40} fill="#A9C3B8">
+					กำลังโทรเข้า…
+				</text>
+				<circle cx={-120} cy={300} r={60} fill={C.red} />
+				<circle cx={120} cy={300} r={60} fill="#3DBE6A" />
+				<path d="M-210,520 Q-120,420 0,460 Q120,420 210,520 L210,620 L-210,620 Z" fill={C.skin} />
+			</g>
+			<Glow id="phone" x={540} y={900} r={700} color="#7FE0B8" strength={0.35} />
 		</g>
 	);
 };

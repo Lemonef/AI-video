@@ -60,6 +60,7 @@ type Props = {
 	frame: number;
 	walking?: boolean;
 	torch?: boolean; // holding a flashlight in the right hand, beam drawn by the scene
+	noShadow?: boolean; // no ground shadow (the double's tell)
 	poseFrom?: Pose; // previous pose; arms blend from it
 	poseBlend?: number; // 0 = poseFrom, 1 = pose (spring, may overshoot slightly)
 	react?: number; // reaction impulse: + squash (anticipation), - stretch (pop); drives follow-through
@@ -212,7 +213,7 @@ const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean; 
 const FRONT_TURN = 0.35; // |head turn| below this the body reads as facing the camera
 const FRONT_STEP_LIFT = 22; // px a leg lifts per step when walking toward the camera
 
-export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch, poseFrom, poseBlend = 1, react = 0}) => {
+export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch, noShadow, poseFrom, poseBlend = 1, react = 0}) => {
 	const to = POSES[pose];
 	const from = POSES[poseFrom ?? pose];
 	const p = {
@@ -249,7 +250,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 	const sway = walking ? 0 : Math.sin(frame / 45) * IDLE_SWAY_DEG;
 	return (
 		<g transform={`translate(0 ${bob}) scale(${1 + react * SQUASH_X} ${1 - react}) rotate(${sway} 0 ${HIP_Y})`}>
-			<ellipse cx={0} cy={bob * -1 + 4} rx={110} ry={20} fill="rgba(0,0,0,0.35)" />
+			{noShadow ? null : <ellipse cx={0} cy={bob * -1 + 4} rx={110} ry={20} fill="rgba(0,0,0,0.35)" />}
 			{/* back arm + bag sit behind the body */}
 			<Limb x={-SHOULDER_X} y={SHOULDER_Y + breathe} a1={lArm[0]} a2={lArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} />
 			{look.bag ? (

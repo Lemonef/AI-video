@@ -139,7 +139,7 @@ const BananaLeaf: React.FC<{x: number; y: number; angle: number; size: number; c
 	</g>
 );
 
-export const ForestPath: React.FC<EnvProps & {clinic?: boolean}> = ({frame, scroll, clinic}) => {
+export const ForestPath: React.FC<EnvProps & {clinic?: boolean; dark?: boolean; ahead?: boolean}> = ({frame, scroll, clinic, dark, ahead}) => {
 	const dolly = frame * scroll * DOLLY_PER_SCROLL;
 	const span = Z_FAR - Z_NEAR;
 	const items = Array.from({length: ROWS * 2}, (_, k) => {
@@ -202,13 +202,30 @@ export const ForestPath: React.FC<EnvProps & {clinic?: boolean}> = ({frame, scro
 			})}
 			<BananaLeaf x={-80} y={1800} angle={-35} size={1.1} color={C.leafNear} />
 			<BananaLeaf x={1160} y={1760} angle={215} size={1.0} color={C.leafNear} />
-			<Darkness id="fp" color={C.night} opacity={0.62} lights={[{x: VP.x, y: 1480, reach: 700 * flicker}, {x: 760, y: 300, reach: 520}, ...(clinic ? [{x: VP.x, y: VP.y - 20, reach: 260}] : [])]} />
+			{/* dark = his torch is dead: only the moon; ahead = another torch coming down the path */}
+			<Darkness
+				id="fp"
+				color={C.night}
+				opacity={dark ? 0.86 : 0.62}
+				lights={[
+					...(dark ? [] : [{x: VP.x, y: 1480, reach: 700 * flicker}]),
+					{x: 760, y: 300, reach: 520},
+					...(clinic ? [{x: VP.x, y: VP.y - 20, reach: 260}] : []),
+					...(ahead ? [{x: VP.x, y: VP.y + 260, reach: 380 * flicker}] : []),
+				]}
+			/>
+			{ahead ? <Glow id="fp-ahead" x={VP.x} y={VP.y + 200} r={260} color={C.torch} strength={0.8 * flicker} /> : null}
 			{clinic ? <Glow id="fp-clinic" x={VP.x} y={VP.y - 30} r={300} color={C.clinicLight} strength={0.9} /> : null}
 			<Glow id="fp-moon" x={760} y={300} r={420} color={C.moonGlow} strength={0.7} />
-			<Shaft id="fp-torch" points={[[470, H], [610, H], [760, 1050], [320, 1050]]} from={[540, H]} to={[540, 1050]} color={C.torch} opacity={0.38 * flicker} blur={24} />
+			{dark ? null : <Shaft id="fp-torch" points={[[470, H], [610, H], [760, 1050], [320, 1050]]} from={[540, H]} to={[540, 1050]} color={C.torch} opacity={0.38 * flicker} blur={24} />}
 		</g>
 	);
 };
 
 /** The same path, with the clinic's lit windows at the far end. */
 export const ForestClinic: React.FC<EnvProps> = (props) => <ForestPath {...props} clinic />;
+
+/** His torch dead: the path by moonlight only. */
+export const ForestDark: React.FC<EnvProps> = (props) => <ForestPath {...props} dark />;
+/** Dark, and another torch coming down the path toward him. */
+export const ForestAhead: React.FC<EnvProps> = (props) => <ForestPath {...props} dark ahead />;
