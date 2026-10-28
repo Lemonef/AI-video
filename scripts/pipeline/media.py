@@ -33,17 +33,20 @@ MONSTER_PITCH = 0.72  # the creature's words: deeper AND slower by this rate (0.
 MONSTER_ECHO = "aecho=0.8:0.6:70|140:0.35|0.2"  # a little space around it, as if not quite human
 
 
-def monster(path: Path, start: float) -> float:
-    """Re-voice the clip from `start` (s) as the creature: slowed and deepened together (asetrate
-    alone, the classic slowed-tape demon voice), a faint echo. The narrator says a punch word fast;
-    keeping its length made it a blur, so the clip grows. Returns the clip's new length."""
+def monster(path: Path, start: float, end: float | None = None) -> float:
+    """Re-voice `start`..`end` (s; to the clip's end when None) as the creature: slowed and
+    deepened together (asetrate alone, the classic slowed-tape demon voice), a faint echo; the
+    narration after it stays as it was. The narrator says a punch word fast; keeping its length
+    made it a blur, so the clip grows. Returns the clip's new length."""
     sr = 48000  # cut() writes every clip at 48 kHz
     tmp = path.with_suffix(".monster.mp3")
-    graph = (
-        f"[0:a]atrim=0:{start:.3f},asetpts=PTS-STARTPTS[head];"
-        f"[0:a]atrim={start:.3f},asetpts=PTS-STARTPTS,asetrate={sr * MONSTER_PITCH:.0f},aresample={sr},{MONSTER_ECHO}[tail];"
-        "[head][tail]concat=n=2:v=0:a=1[out]"
-    )
+    span = f"{start:.3f}:{end:.3f}" if end is not None else f"{start:.3f}"
+    parts = ["[0:a]atrim=0:{:.3f},asetpts=PTS-STARTPTS[head]".format(start),
+             f"[0:a]atrim={span},asetpts=PTS-STARTPTS,asetrate={sr * MONSTER_PITCH:.0f},aresample={sr},{MONSTER_ECHO}[mid]"]
+    if end is not None:
+        parts.append(f"[0:a]atrim={end:.3f},asetpts=PTS-STARTPTS[tail]")
+    labels = "[head][mid][tail]" if end is not None else "[head][mid]"
+    graph = ";".join(parts) + f";{labels}concat=n={labels.count('[')}:v=0:a=1[out]"
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(path), "-filter_complex", graph, "-map", "[out]", "-ar", str(sr), str(tmp)], check=True)
     tmp.replace(path)
     return duration(path)

@@ -124,6 +124,20 @@ def cue_words(scene: dict) -> set[str]:
     return found
 
 
+def monster_end(say: str, word: str, at: float, spoken_end: float, words: list[Word], speech: list[float] | None, pauses: list[tuple[float, float]]) -> float:
+    """Where the creature's words stop: the start of the narration that follows them (snapped
+    back to the breath before it), or the end of the speech when they close the line."""
+    rest = say.split(word, 1)[1].strip() if word in say else ""
+    if not rest:
+        return spoken_end
+    nxt = word_start(say, rest.split()[0], words, speech)
+    if nxt is None or nxt <= at:
+        return spoken_end
+    # the narrator breathes before carrying on: end inside that pause, not mid-syllable
+    gaps = [a for a, _ in pauses if at < a <= nxt + BREATH_AFTER_SEC]
+    return min(gaps, key=lambda a: abs(a - nxt)) if gaps else nxt
+
+
 def snap_to_breath(t: float, pauses: list[tuple[float, float]]) -> float:
     """A letter-position estimate lands within ~0.3 s of the word; if a pause ends near it, the
     word starts exactly there (Thai narration takes a breath before a punch word)."""
@@ -253,16 +267,21 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
             clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
             cue_times = {w: snap_to_breath(t, clip_pauses) for w in cue_words(scene) if (t := word_start(scene["say"], w, [], speech)) is not None}
         length = end - start
-        if scene.get("monster"):  # the creature's own words, from this one to the end of the line
-            at = cue_times.get(scene["monster"])
-            at = at if at is not None else word_start(scene["say"], scene["monster"], clip_words, speech)
+        if scene.get("monster"):  # the creature's own words only; the narrator goes on in his own voice
+            word = scene["monster"]
+            at = cue_times.get(word)
+            at = at if at is not None else word_start(scene["say"], word, clip_words, speech)
             if at is not None:
-                length = media.monster(mp3, at)  # slowed: the clip grows
                 spoken_end = speech[1] if speech else (clip_words[-1].end if clip_words else end - start)
-                stretched_end = at + (spoken_end - at) / media.MONSTER_PITCH
-                cue_times[f"{scene['monster']}:end"] = stretched_end  # cue a hit AFTER the word, not over it
+                pauses_in = [(a - start, b - start) for a, b in pauses if start < b and a < end]
+                word_end = monster_end(scene["say"], word, at, spoken_end, clip_words, speech, pauses_in)
+                length = media.monster(mp3, at, word_end)  # slowed: the clip grows
+                grown = (word_end - at) * (1 / media.MONSTER_PITCH - 1)
+                # everything after the creature's words moves later by what the slowing added
+                cue_times = {w: t + grown if t >= word_end else t for w, t in cue_times.items()}
+                cue_times[f"{word}:end"] = word_end + grown  # cue a hit AFTER the word, not over it
                 if speech:
-                    speech = [speech[0], round(stretched_end, 3)]
+                    speech = [speech[0], round(spoken_end + grown, 3)]
         timing[scene["id"]] = _entry(episode, scene, key, clip_words, length, speech)
         if speech:
             timing[scene["id"]].update(say=scene["say"], speech=speech)
