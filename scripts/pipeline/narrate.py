@@ -10,13 +10,16 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from . import media, whisper
+from . import gemini_align, media, whisper
 from .align import _norm, scene_cuts, spoken_len, words_in
 from .captions import build_cues
 from .tts import TtsEngine, Word
 
 
 MIN_COVERAGE = 0.7  # below this share of the script's letters, the transcript is not trusted for cutting
+PAUSE_TOLERANCE_SEC = 0.3  # Gemini's line starts are ~0.1-0.3 s loose; a pause ending this soon after still counts as "before"
+MAX_PAUSE_GAP_SEC = 0.8  # if the nearest pause before a line start is further back than this, cut at the start itself
+MIN_LINE_SEC = 0.5  # a line start this close to the end of the take cannot be real
 
 
 def _key(*parts: str) -> str:
@@ -130,6 +133,41 @@ def word_start(say: str, word: str, words: list[Word], speech: list[float] | Non
     return speech[0] + (speech[1] - speech[0]) * idx / len(line)
 
 
+def _repair_starts(starts: list[float], letters: list[int], take_sec: float, pauses: list[tuple[float, float]]) -> tuple[list[float], int]:
+    """Keep plausible starts (inside the take, after the previous one); re-estimate the rest
+    between their nearest good neighbours, in proportion to letters, then take the nearest pause
+    (a line starts just after one). Good anchors beat a whole-take guess."""
+    good, last = [True], 0.0
+    for s in starts[1:]:  # compare with the last GOOD start, so one invented time spoils only itself
+        ok = last < s < take_sec - MIN_LINE_SEC
+        good.append(ok)
+        last = s if ok else last
+    fixed = [0.0 if i == 0 else s for i, s in enumerate(starts)]
+    for i, ok in enumerate(good):
+        if ok:
+            continue
+        lo = max(j for j in range(i) if good[j])
+        hi = next((j for j in range(i + 1, len(starts)) if good[j]), None)
+        t_lo, t_hi = fixed[lo], (starts[hi] if hi is not None else take_sec)
+        span = letters[lo : hi if hi is not None else len(letters)]
+        est = t_lo + (t_hi - t_lo) * sum(letters[lo:i]) / max(1, sum(span))
+        ends = [b for a, b in pauses if t_lo < b < t_hi] or [est]
+        fixed[i] = min(ends, key=lambda b: abs(b - est))
+    return fixed, good.count(False)
+
+
+def _cuts_from_starts(starts: list[float], take_sec: float, pauses: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    """Scene (start, end) from each line's start: a cut sits in the pause just BEFORE a line starts
+    (searching back from the start, since a line begins right after its pause)."""
+    breaks = []
+    for s in starts[1:]:
+        before = [(a, b) for a, b in pauses if b <= s + PAUSE_TOLERANCE_SEC]
+        a, b = before[-1] if before else (s, s)
+        breaks.append((a + b) / 2 if s - b <= MAX_PAUSE_GAP_SEC else s)
+    begins = [0.0, *breaks]
+    return list(zip(begins, [*breaks, take_sec]))
+
+
 def speech_span(start: float, end: float, pauses: list[tuple[float, float]]) -> list[float]:
     """[first, last] second of speech inside the clip [start, end): the cut pauses at its edges trimmed."""
     lead = next((b - start for a, b in pauses if a <= start < b), 0.0)
@@ -174,7 +212,18 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
     pauses = media.silences(take)
+    line_starts = None
+    if not words:  # no transcript: ask Gemini when each line starts (cached with the alignment)
+        line_starts = take_meta.get("line_starts") if take_meta.get("key") == key else None
+        line_starts = line_starts or gemini_align.line_starts(take, lines)
+        timing["_take"]["line_starts"] = line_starts
     cuts = scene_cuts(lines, words, take_sec, pauses)
+    if line_starts:
+        # Gemini can invent a time (ep02: 104 s in a 71 s take): keep only starts that fall inside
+        # the take, after the previous line; any other line keeps its pause-based cut.
+        fixed, bad = _repair_starts(line_starts, [spoken_len(line) for line in lines], take_sec, pauses)
+        cuts = _cuts_from_starts(fixed, take_sec, pauses)
+        print(f"  = cuts from Gemini line starts, snapped to pauses ({bad} implausible start(s) replaced by the pause guess)")
     for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"
         media.cut(take, start, end, mp3)
