@@ -292,7 +292,13 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 					<path d={`M${-HEAD_R + 2},${HEAD_Y - 30} A${HEAD_R},${HEAD_R * 1.05} 0 0 0 ${-HEAD_R * 0.6},${HEAD_Y + HEAD_R * 0.85}`} stroke={V2.rim} strokeWidth={look.silhouette ? 9 : 5} fill="none" opacity={look.silhouette ? 0.95 : 0.7} />
 					{back ? null : look.silhouette ? <GlowEyes expr={expr} turn={turn} frame={frame} /> : <Face look={look} expr={expr} turn={turn} frame={frame} />}
 					{/* from behind the hair covers the head down to the nape */}
-					{back ? <ellipse cx={0} cy={HEAD_Y - 6} rx={HEAD_R + 4} ry={HEAD_R * 1.02} fill={look.hair} /> : null}
+					{back ? (
+						<g>
+							<ellipse cx={0} cy={HEAD_Y} rx={HEAD_R + 2} ry={HEAD_R * 1.05 + 2} fill={look.hair} />
+							<path d={`M${-HEAD_R * 0.55},${HEAD_Y + HEAD_R * 0.6} Q0,${HEAD_Y + HEAD_R * 0.4} ${HEAD_R * 0.55},${HEAD_Y + HEAD_R * 0.6} L${HEAD_R * 0.3},${HEAD_Y + HEAD_R * 1.05} H${-HEAD_R * 0.3} Z`} fill={look.skinShade} />
+							<path d={`M${-30},${HEAD_Y - HEAD_R * 0.7} q30,-14 60,-4`} stroke={look.hairHi} strokeWidth={8} fill="none" strokeLinecap="round" />
+						</g>
+					) : null}
 					<Hair look={look} turn={turn} frame={frame} panic={panic} react={react} />
 				</g>
 				{/* from behind the bag sits on top of the body, swinging a beat behind the walk */}

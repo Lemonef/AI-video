@@ -166,24 +166,29 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 				pools.push(<LightPool key={`pool${i}`} x={st.x + lens.x * s * flip + Math.cos(rad) * reach} y={st.y - 10} flicker={0.9} />);
 			}
 			const flicker = 0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37);
-			// from behind, the torch is hidden in front of him and lights the path ahead: straight up
-			// the screen from the torch's height, shrinking with him as he recedes
-			beams.push(
-				st.back ? (
-					<Beam key={`beam${i}`} x={st.x} y={st.y + lens.y * s} angle={-90} length={BEAM_LENGTH * s} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />
-				) : (
-					<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={st.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />
-				),
-			);
+			// from behind, the torch is in front of him: its beam goes up the path and is drawn under
+			// him (with the cast, below), so his body hides where it starts
+			if (!st.back) {
+				beams.push(
+					<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={st.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />,
+				);
+			}
 		}
+		const beamAhead =
+			m.torch && st.back ? (
+				<Beam x={st.x} y={st.y + (look5 ? torchLens5() : torchLens()).y * s} angle={-90} length={BEAM_LENGTH * s} flicker={0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37)} dust={v3 ? V3_DUST : 0} frame={frame} />
+			) : null;
 		return (
-			<g key={i} transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
+			<React.Fragment key={i}>
+			{beamAhead}
+			<g transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (
 					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} noShadow={m.noShadow} back={st.back} />
 				)}
 			</g>
+			</React.Fragment>
 		);
 	});
 
