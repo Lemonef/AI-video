@@ -140,9 +140,12 @@ export const Captions2: React.FC<{cues: Cue[]; t: number}> = ({cues, t}) => {
 	if (!cue) return null;
 	const rise = interpolate(t - cue.start, [0, 0.14], [18, 0], {extrapolateRight: 'clamp'});
 	const parts = cue.text.split(/(\*[^*]+\*)/g).filter(Boolean);
+	// keyed by cue: each caption is a NEW element. Editing one element's text in place left a stale
+	// glyph of the old caption (its blurred shadow) on screen for a few frames in headless renders.
 	return (
-		<div style={{position: 'absolute', left: SAFE.left, width: SAFE.right - SAFE.left, top: CAPTION_TOP + 40, display: 'flex', justifyContent: 'center', transform: `translateY(${rise}px)`}}>
-			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 66, lineHeight: 1.3, color: V2.white, textAlign: 'center', textShadow: '0 4px 18px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9)'}}>
+		<div key={`${cue.start}`} style={{position: 'absolute', left: SAFE.left, width: SAFE.right - SAFE.left, top: CAPTION_TOP + 40, display: 'flex', justifyContent: 'center', transform: `translateY(${rise}px)`}}>
+			{/* outline + a tight shadow: an 18px blurred shadow left stale glyphs when the text changed */}
+			<div style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 66, lineHeight: 1.3, color: V2.white, textAlign: 'center', WebkitTextStroke: '8px rgba(0,0,0,0.85)', paintOrder: 'stroke fill', textShadow: '0 3px 6px rgba(0,0,0,0.8)'}}>
 				{parts.map((p, i) => (p.startsWith('*') ? <span key={i} style={{color: V2.yellow}}>{phrases(p.slice(1, -1))}</span> : <span key={i}>{phrases(p)}</span>))}
 			</div>
 		</div>
