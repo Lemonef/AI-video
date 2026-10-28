@@ -10,7 +10,7 @@ import {CAPTION_TOP, H, SAFE, SFX, VISIBLE, W} from '../../lib/tokens';
 import {FPS, lineDuration, padAfter, padBefore as padBeforeOf, sceneSeconds} from '../../lib/timing';
 import type {Episode, Scene} from '../../types';
 import {CAST2} from '../../v2/cast';
-import {Character2, FACE_BOX, torchLens} from '../../v2/Character';
+import {Character2, FACE_BOX, torchLens, torchLensBack} from '../../v2/Character';
 import {ENVIRONMENTS} from '../../v2/Forest';
 import {CAST5} from '../../v5/cast';
 import {Character5, torchLens5} from '../../v5/Character';
@@ -35,6 +35,7 @@ const REACT_SHAPE = [0, 0.07, -0.05, 0.015, 0];
 const V3_GRADE = 'saturate(0.82) contrast(1.08)'; // v3: cooler, moodier; the torch stays the only warm accent
 const V3_DUST = 26;
 const V4_WORLD_GRADE = 'saturate(0.5) brightness(0.8) contrast(1.15)'; // near-monochrome night; light sources stay bright (drawn after)
+const BACK_BEAM_TILT_DEG = 8; // the torch at his side points up the path, leaning in toward its middle
 const HALO_OPACITY = 0.55; // soft fog-light behind each figure so a dark silhouette always reads
 const TINT_FADE_SEC = 0.35;
 const INTRO_BELOW_TITLE = 580; // v4 hook: the two-line big title ends ≈ SAFE.top + 120 + 2 × 101; the name card sits under it
@@ -176,7 +177,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		}
 		const beamAhead =
 			m.torch && st.back ? (
-				<Beam x={st.x} y={st.y + (look5 ? torchLens5() : torchLens()).y * s} angle={-90} length={BEAM_LENGTH * s} flicker={0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37)} dust={v3 ? V3_DUST : 0} frame={frame} />
+				<Beam x={st.x + torchLensBack().x * s * st.facing} y={st.y + torchLensBack().y * s} angle={-90 - BACK_BEAM_TILT_DEG * st.facing} length={BEAM_LENGTH * s} flicker={0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37)} dust={v3 ? V3_DUST : 0} frame={frame} />
 			) : null;
 		return (
 			<React.Fragment key={i}>

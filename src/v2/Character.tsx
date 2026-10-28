@@ -22,6 +22,8 @@ const LIMB_W = 40;
 // Torch grip: upper arm forward, elbow bent up a little. torchLens() derives the beam origin from this.
 const TORCH_ARM: [number, number] = [-58, -24];
 const TORCH_LEN = 74; // grip to lens along the forearm
+// From behind: the torch arm held out to his right side, hand at hip height, so the torch shows.
+const BACK_TORCH_ARM: [number, number] = [-28, 20];
 
 export type Look2 = {
 	skin: string;
@@ -226,7 +228,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 	const bob = walking ? -Math.abs(Math.cos(frame / 3.4)) * 10 : 0;
 	const panic = expr === 'shock' || expr === 'sweat';
 	// Holding a torch overrides the right arm: forward and slightly down, steady while walking.
-	const rArm: ArmPose = torch && !back ? TORCH_ARM : [p.r[0] - swing * 22, p.r[1] - (walking ? 10 : 0)];
+	const rArm: ArmPose = torch ? (back ? BACK_TORCH_ARM : TORCH_ARM) : [p.r[0] - swing * 22, p.r[1] - (walking ? 10 : 0)];
 	const lArm: ArmPose = [p.l[0] + swing * 22, p.l[1] + (walking ? 10 : 0)];
 	// Seen from the front, legs swinging fore-aft would read as kicking sideways: they lift in
 	// turn instead (a step toward the camera). Side-on, the classic swing with a bent back knee.
@@ -239,6 +241,14 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 	const liftR = walking && front ? Math.max(0, -swing) * FRONT_STEP_LIFT : 0;
 	const shoe = <ellipse cx={8} cy={4} rx={30} ry={16} fill={V2.shoe} />;
 	const hand = <circle r={19} fill={look.skin} />;
+	const torchHandBack = (
+		<g>
+			{/* the torch points away up the path: we see its tail below the fist, its light ahead of it */}
+			<rect x={-14} y={0} width={28} height={58} rx={8} fill="#7A8296" />
+			<rect x={-14} y={44} width={28} height={14} rx={6} fill="#3A3F52" />
+			<circle r={19} fill={look.skin} />
+		</g>
+	);
 	const torchHand = (
 		<g>
 			<rect x={-14} y={-6} width={28} height={70} rx={8} fill="#3A3F52" />
@@ -254,7 +264,8 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 			{noShadow ? null : <ellipse cx={0} cy={bob * -1 + 4} rx={110} ry={20} fill="rgba(0,0,0,0.35)" />}
 			{/* back arm + bag sit behind the body */}
 			<Limb x={-SHOULDER_X} y={SHOULDER_Y + breathe} a1={lArm[0]} a2={lArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} />
-			{back ? <Limb x={SHOULDER_X} y={SHOULDER_Y + breathe} a1={rArm[0]} a2={rArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} /> : null}
+			{back && !torch ? <Limb x={SHOULDER_X} y={SHOULDER_Y + breathe} a1={rArm[0]} a2={rArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={hand} /> : null}
+			
 			{look.bag && !back ? (
 				// the bag lags the walk cycle by ~45°: overlapping action
 				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={look.accent ?? V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
@@ -295,7 +306,6 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 					{back ? (
 						<g>
 							<ellipse cx={0} cy={HEAD_Y} rx={HEAD_R + 2} ry={HEAD_R * 1.05 + 2} fill={look.hair} />
-							<path d={`M${-HEAD_R * 0.55},${HEAD_Y + HEAD_R * 0.6} Q0,${HEAD_Y + HEAD_R * 0.4} ${HEAD_R * 0.55},${HEAD_Y + HEAD_R * 0.6} L${HEAD_R * 0.3},${HEAD_Y + HEAD_R * 1.05} H${-HEAD_R * 0.3} Z`} fill={look.skinShade} />
 							<path d={`M${-30},${HEAD_Y - HEAD_R * 0.7} q30,-14 60,-4`} stroke={look.hairHi} strokeWidth={8} fill="none" strokeLinecap="round" />
 						</g>
 					) : null}
@@ -307,7 +317,9 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				) : null}
 			</g>
 			{/* front arm last so it overlaps the body */}
-			{back ? null : <Limb x={SHOULDER_X} y={SHOULDER_Y + breathe} a1={rArm[0]} a2={rArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={torch ? torchHand : hand} />}
+			{back && !torch ? null : (
+				<Limb x={SHOULDER_X} y={SHOULDER_Y + breathe} a1={rArm[0]} a2={rArm[1]} l1={UPPER_ARM} l2={FOREARM} color={look.top} shade={look.topShade} end={torch ? (back ? torchHandBack : torchHand) : hand} />
+			)}
 		</g>
 	);
 };
@@ -321,4 +333,13 @@ export const torchLens = (): {x: number; y: number; angle: number} => {
 	const ey = SHOULDER_Y + Math.cos(a1) * UPPER_ARM;
 	const reach = FOREARM + TORCH_LEN;
 	return {x: ex - Math.sin(a2) * reach, y: ey + Math.cos(a2) * reach, angle: 90 + TORCH_ARM[0] + TORCH_ARM[1]};
+};
+
+/** From behind: where the torch head sits relative to the feet (the beam leaves from here, up the path). */
+export const torchLensBack = (): {x: number; y: number} => {
+	const a1 = (BACK_TORCH_ARM[0] * Math.PI) / 180;
+	const a2 = ((BACK_TORCH_ARM[0] + BACK_TORCH_ARM[1]) * Math.PI) / 180;
+	const ex = SHOULDER_X - Math.sin(a1) * UPPER_ARM;
+	const ey = SHOULDER_Y + Math.cos(a1) * UPPER_ARM;
+	return {x: ex - Math.sin(a2) * FOREARM, y: ey + Math.cos(a2) * FOREARM}; // the fist: the torch head is just beyond it, facing away
 };
