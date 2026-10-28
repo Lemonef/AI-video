@@ -28,7 +28,11 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
     question = post.get("question") or f"A) {end.get('a', '')}  หรือ  B) {end.get('b', '')} ?"
     part = post.get("part")
     nxt = post.get("next", "ตอนต่อไปมาแน่")
-    pin = post.get("pin", f"📌 A = {end.get('a', '')} · B = {end.get('b', '')}\nคนส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น! {nxt}")
+    # only an episode that ends on a choice asks for A/B; a finale asks an open question
+    vote = bool(end.get("a") and end.get("b"))
+    pin = post.get("pin") or (
+        f"📌 A = {end.get('a', '')} · B = {end.get('b', '')}\nคนส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น! {nxt}" if vote else f"📌 {question}\n{nxt}"
+    )
     tags = post.get("hashtags", DEFAULT_TAGS)
     if len(tags) > MAX_TAGS:
         raise ValueError(f"{len(tags)} hashtags; keep {MAX_TAGS} or fewer, specific ones")
@@ -39,7 +43,7 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "",
         f"{first + ' · ' if first else ''}{hook.replace('*', '')}",
         question,
-        f"คอมเมนต์ A หรือ B 👇 {nxt}",
+        f"คอมเมนต์ A หรือ B 👇 {nxt}" if vote else nxt,
         " ".join(tags),
         "",
         "2) ON THE UPLOAD PAGE:",
