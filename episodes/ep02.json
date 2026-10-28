@@ -198,7 +198,7 @@
       "sfx": [
         {
           "at": 0.86,
-          "word": "เจอแล้ว",
+          "word": "เจอแล้ว:end",
           "sound": "boom",
           "volume": 0.8
         }
@@ -216,7 +216,12 @@
         "rain": 0.35,
         "steps": 0
       },
-      "padAfter": 0.7
+      "padAfter": 0.5,
+      "hush": {
+        "word": "เจอแล้ว",
+        "lead": 0.7,
+        "hold": 0.9
+      }
     },
     {
       "id": "empty",

@@ -245,23 +245,29 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     for scene, (start, end) in zip(episode["scenes"], cuts):
         mp3 = ep_dir / f"{scene['id']}.mp3"
         media.cut(take, start, end, mp3)
+        clip_words = words_in(words, start, end)
         speech = None if words else speech_span(start, end, pauses)
-        timing[scene["id"]] = _entry(episode, scene, key, words_in(words, start, end), end - start, speech)
-        if speech:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
-            timing[scene["id"]]["say"] = scene["say"]
-            timing[scene["id"]]["speech"] = speech
+        cue_times: dict[str, float] = {}
+        if speech:  # word cues are placed by letter position across the spoken part (see src/lib/cueAt.ts)...
             # ...refined: a word that follows a breath starts where that breath ends
             clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
-            timing[scene["id"]]["cueTimes"] = {
-                w: snap_to_breath(t, clip_pauses)
-                for w in cue_words(scene)
-                if (t := word_start(scene["say"], w, [], speech)) is not None
-            }
+            cue_times = {w: snap_to_breath(t, clip_pauses) for w in cue_words(scene) if (t := word_start(scene["say"], w, [], speech)) is not None}
+        length = end - start
         if scene.get("monster"):  # the creature's own words, from this one to the end of the line
-            cached = timing[scene["id"]].get("cueTimes", {}).get(scene["monster"])
-            at = cached if cached is not None else word_start(scene["say"], scene["monster"], words_in(words, start, end), speech)
+            at = cue_times.get(scene["monster"])
+            at = at if at is not None else word_start(scene["say"], scene["monster"], clip_words, speech)
             if at is not None:
-                media.monster(mp3, at)
+                length = media.monster(mp3, at)  # slowed: the clip grows
+                spoken_end = speech[1] if speech else (clip_words[-1].end if clip_words else end - start)
+                stretched_end = at + (spoken_end - at) / media.MONSTER_PITCH
+                cue_times[f"{scene['monster']}:end"] = stretched_end  # cue a hit AFTER the word, not over it
+                if speech:
+                    speech = [speech[0], round(stretched_end, 3)]
+        timing[scene["id"]] = _entry(episode, scene, key, clip_words, length, speech)
+        if speech:
+            timing[scene["id"]].update(say=scene["say"], speech=speech)
+        if cue_times:
+            timing[scene["id"]]["cueTimes"] = cue_times
         print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
     _save(timing_path, timing)
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}
