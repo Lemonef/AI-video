@@ -14,7 +14,7 @@
       "steps"
     ],
     "duck": 0.18,
-    "bedVolume": 0.9,
+    "bedVolume": 0.4,
     "real": true
   },
   "rules": {
@@ -89,9 +89,9 @@
       "chip": "✅ B · ไปเอายาให้ทันก่อน",
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -127,8 +127,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -162,8 +162,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0.6
       }
     },
@@ -219,8 +219,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -262,8 +262,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -333,9 +333,9 @@
       ],
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -380,9 +380,9 @@
       },
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -447,9 +447,9 @@
       ],
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -520,9 +520,9 @@
       ],
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.45,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -543,8 +543,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.4,
-        "rain": 0.35,
+        "drone": 0.5,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -563,8 +563,8 @@
       "beds": {
         "wind": 0.2,
         "crickets": 0,
-        "drone": 0.4,
-        "rain": 0.35,
+        "drone": 0.5,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -617,9 +617,9 @@
       },
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.5,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -676,9 +676,9 @@
       "padAfter": 0.6,
       "beds": {
         "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.65,
-        "rain": 0.35,
+        "crickets": 0.3,
+        "drone": 0.5,
+        "rain": 0,
         "steps": 0
       }
     },
@@ -751,7 +751,7 @@
       "beds": {
         "wind": 0.1,
         "crickets": 0,
-        "drone": 0.5,
+        "drone": 0.45,
         "rain": 0,
         "steps": 0
       }
@@ -804,7 +804,7 @@
       "beds": {
         "wind": 0.1,
         "crickets": 0,
-        "drone": 0.6,
+        "drone": 0.45,
         "rain": 0,
         "steps": 0
       }
@@ -853,7 +853,7 @@
       "beds": {
         "wind": 0.1,
         "crickets": 0,
-        "drone": 0.5,
+        "drone": 0.45,
         "rain": 0,
         "steps": 0
       }
