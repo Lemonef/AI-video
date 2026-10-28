@@ -31,5 +31,7 @@ export const CAST2: Record<string, Look2> = {
 	// the infected: grey-green skin, dull clothes; they read by silhouette and walk, not gore
 	zombie: {skin: '#8FA58A', skinShade: '#6E8469', hair: '#2B2E2A', hairHi: '#3A3E38', top: '#5E5A55', topShade: '#46433F', pants: '#3B3D44', pantsShade: '#2C2E34', style: 'mochi'},
 	zombie2: {skin: '#9AA88F', skinShade: '#77856D', hair: '#3A2E26', hairHi: '#4C3D33', top: '#6B4E4E', topShade: '#523B3B', pants: '#3F3A36', pantsShade: '#2F2B28', style: 'long'},
+	// Jaab's mum: older, hair in a bun, a faded sarong-coloured top
+	mum: {skin: '#D9AA85', skinShade: '#B98A67', hair: '#3A3436', hairHi: '#55494C', top: '#7A4E6E', topShade: '#5E3B55', pants: '#4A3A44', pantsShade: '#382B33', style: 'long'},
 	runner: {skin: '#D9A77F', skinShade: '#B9875F', hair: '#1E1A1C', hairHi: '#36303A', top: '#3E6FA8', topShade: '#2F5684', pants: '#2C3140', pantsShade: '#21252F', style: 'mochi'},
 };
