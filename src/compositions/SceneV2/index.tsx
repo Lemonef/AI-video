@@ -18,7 +18,7 @@ import {ENV5} from '../../v5/Forest';
 import {castFilter} from '../../v7/light';
 import {PROPS2} from '../../v2/props';
 import {STEP_EVERY_FRAMES, sfxFile} from '../../v2/sound';
-import {Beam, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
+import {Beam, BEAM_LENGTH, BigTitle, PartBadge, Bokeh, Captions2, ChoiceMap, Chip, EndCard2, Film, IntroCard, LightPool, Rain, RulesCard, RulesMini, StatCard} from '../../v2/ui';
 
 const FLIP_FRAMES = 6;
 const FADE_FRAMES = 8;
@@ -117,14 +117,14 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const camOx = cam.x ?? W / 2;
 	const camOy = cam.y ?? H / 2;
 	(scene.cast ?? []).forEach((m) => {
-		const s = m.scale ?? 1;
 		const cs = castState(m, p, lineSec, FPS);
+		const s = cs.scale;
 		const fx = camOx + (cs.x - camOx) * camZ;
-		const fy = camOy + (m.y + FACE_BOX.cy * s - camOy) * camZ;
+		const fy = camOy + (cs.y + FACE_BOX.cy * s - camOy) * camZ;
 		const half = FACE_BOX.half * s * camZ;
 		reserved.push({x: fx - half, y: fy - half, w: half * 2, h: half * 2});
 		// the body down to the feet too: a bubble on his chest reads as him speaking
-		const feet = camOy + (m.y - camOy) * camZ;
+		const feet = camOy + (cs.y - camOy) * camZ;
 		reserved.push({x: fx - half, y: fy + half, w: half * 2, h: Math.max(0, feet - fy - half)});
 		// Framing lint: a face that is on screen must be inside what a tall phone shows.
 		const onScreen = fx + half > 0 && fx - half < W;
@@ -154,28 +154,34 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 		const rot = st.action === 'wobble' ? Math.sin(frame / 6) * 4 : scared ? SCARED_LEAN_DEG : 0;
 		const shiver = scared ? (Math.sin(frame * 0.9) + 0.5 * Math.sin(frame * 1.7 + 1)) * TREMBLE_PX : 0;
 		const flip = st.framesSinceFlip < FLIP_FRAMES ? interpolate(st.framesSinceFlip, [0, FLIP_FRAMES / 2, FLIP_FRAMES], [-st.facing, 0, st.facing]) : st.facing;
-		const s = m.scale ?? 1;
+		const s = st.scale;
 		const poseBlend = Number.isFinite(st.framesSincePose) ? spring({frame: Math.max(0, st.framesSincePose), fps: FPS, config: POSE_SPRING}) : 1;
 		const react = Number.isFinite(st.framesSinceExpr) ? interpolate(st.framesSinceExpr, REACT_FRAMES, REACT_SHAPE, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : 0;
 		if (m.torch) {
 			const lens = look5 ? torchLens5() : torchLens();
 			if (v4) {
-				const ly = m.y + lens.y * s;
+				const ly = st.y + lens.y * s;
 				const rad = ((st.facing > 0 ? lens.angle : 180 - lens.angle) * Math.PI) / 180;
-				const reach = Math.sin(rad) > 0.05 ? ((m.y - ly) / Math.sin(rad)) * POOL_REACH : 600;
-				pools.push(<LightPool key={`pool${i}`} x={st.x + lens.x * s * flip + Math.cos(rad) * reach} y={m.y - 10} flicker={0.9} />);
+				const reach = Math.sin(rad) > 0.05 ? ((st.y - ly) / Math.sin(rad)) * POOL_REACH : 600;
+				pools.push(<LightPool key={`pool${i}`} x={st.x + lens.x * s * flip + Math.cos(rad) * reach} y={st.y - 10} flicker={0.9} />);
 			}
 			const flicker = 0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37);
+			// from behind, the torch is hidden in front of him and lights the path ahead: straight up
+			// the screen from the torch's height, shrinking with him as he recedes
 			beams.push(
-				<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={m.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />,
+				st.back ? (
+					<Beam key={`beam${i}`} x={st.x} y={st.y + lens.y * s} angle={-90} length={BEAM_LENGTH * s} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />
+				) : (
+					<Beam key={`beam${i}`} x={st.x + lens.x * s * flip} y={st.y + lens.y * s} angle={st.facing > 0 ? lens.angle : 180 - lens.angle} flicker={flicker} dust={v3 ? V3_DUST : 0} frame={frame} />
+				),
 			);
 		}
 		return (
-			<g key={i} transform={`translate(${st.x + shiver} ${m.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
+			<g key={i} transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (
-					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} noShadow={m.noShadow} />
+					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} noShadow={m.noShadow} back={st.back} />
 				)}
 			</g>
 		);

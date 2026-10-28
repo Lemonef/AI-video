@@ -42,7 +42,9 @@ export const Film: React.FC<{frame: number; vignette?: number; grain?: boolean}>
 );
 
 /** Volumetric torch beam from (x, y) toward `angle` degrees (0 = right). Additive look via screen blend. */
-export const Beam: React.FC<{x: number; y: number; angle: number; length?: number; spread?: number; flicker?: number; dust?: number; frame?: number}> = ({x, y, angle, length = 900, spread = 26, flicker = 1, dust = 0, frame = 0}) => {
+/** Torch beam reach at scale 1. */
+export const BEAM_LENGTH = 900;
+export const Beam: React.FC<{x: number; y: number; angle: number; length?: number; spread?: number; flicker?: number; dust?: number; frame?: number}> = ({x, y, angle, length = BEAM_LENGTH, spread = 26, flicker = 1, dust = 0, frame = 0}) => {
 	const half = (spread * Math.PI) / 180;
 	const a = (angle * Math.PI) / 180;
 	const p1 = [x + Math.cos(a - half) * length, y + Math.sin(a - half) * length];

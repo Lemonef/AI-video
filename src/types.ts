@@ -6,7 +6,7 @@ export type Look = 'left' | 'center' | 'right';
 export type Action = 'idle' | 'walk' | 'wobble' | 'bounce' | 'shake';
 
 /** A state switch at a fraction (0..1) of the scene's narration. */
-export type CastKey = {at: number; pose?: Pose; expr?: Expr; look?: Look; facing?: 1 | -1; action?: Action; turn?: number};
+export type CastKey = {at: number; pose?: Pose; expr?: Expr; look?: Look; facing?: 1 | -1; action?: Action; turn?: number; back?: boolean};
 
 export type CastMember = {
 	who: string; // key in src/registry/cast.ts
@@ -19,10 +19,13 @@ export type CastMember = {
 	facing?: 1 | -1;
 	action?: Action;
 	toX?: number; // walk target
+	toY?: number; // walk target into depth: feet line at the end of the walk
+	toScale?: number; // scale at the end of the walk (smaller = further away); perspective-correct
 	keys?: CastKey[];
 	turn?: number; // v2: head turn -1..1 (3/4 view)
 	torch?: boolean; // v2: holding a flashlight (scene draws the beam)
 	noShadow?: boolean; // casts no shadow on the ground (the double's tell)
+	back?: boolean; // v2: seen from behind (walking away into the shot)
 };
 
 export type PropItem = {type: string; x: number; y: number; scale?: number; at?: number};

@@ -540,14 +540,22 @@
         {
           "who": "jaab",
           "x": 540,
-          "toX": -200,
           "y": 1420,
           "scale": 0.72,
           "torch": true,
           "noShadow": true,
           "expr": "smile",
-          "turn": -0.9,
-          "action": "walk"
+          "turn": 0,
+          "action": "idle",
+          "toY": 1040,
+          "toScale": 0.26,
+          "keys": [
+            {
+              "at": 0.15,
+              "back": true,
+              "action": "walk"
+            }
+          ]
         }
       ],
       "camera": {

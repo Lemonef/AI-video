@@ -11,6 +11,9 @@ export type CastState = {
 	turn: number;
 	framesSinceFlip: number;
 	x: number;
+	y: number;
+	scale: number;
+	back: boolean;
 	walking: boolean;
 	poseFrom: Pose; // previous pose, for eased transitions
 	framesSincePose: number; // Infinity = never changed
@@ -23,9 +26,9 @@ export type CastState = {
  */
 export const castState = (m: CastMember, p: number, lineSec: number, fps: number): CastState => {
 	const keys = [...(m.keys ?? [])].sort((a, b) => a.at - b.at);
-	const st = {pose: m.pose ?? 'idle', expr: m.expr ?? 'smile', look: m.look ?? 'center', facing: m.facing ?? 1, action: m.action ?? 'idle', turn: m.turn ?? 0} as Omit<
+	const st = {pose: m.pose ?? 'idle', expr: m.expr ?? 'smile', look: m.look ?? 'center', facing: m.facing ?? 1, action: m.action ?? 'idle', turn: m.turn ?? 0, back: m.back ?? false} as Omit<
 		CastState,
-		'framesSinceFlip' | 'x' | 'walking' | 'poseFrom' | 'framesSincePose' | 'framesSinceExpr'
+		'framesSinceFlip' | 'x' | 'y' | 'scale' | 'walking' | 'poseFrom' | 'framesSincePose' | 'framesSinceExpr'
 	> & {pose: Pose; expr: Expr};
 	let flipAt: number | null = null;
 	let poseFrom: Pose = st.pose;
@@ -48,6 +51,8 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 		if (k.look) st.look = k.look;
 		if (k.facing !== undefined) st.facing = k.facing;
 		if (k.action) st.action = k.action;
+		if (k.back !== undefined && k.back !== st.back) flipAt = k.at; // turning round reads as the same squash-through-profile flip
+		if (k.back !== undefined) st.back = k.back;
 		if (k.turn !== undefined && k.turn !== st.turn) {
 			turnFrom = st.turn;
 			turnAt = k.at;
@@ -66,9 +71,16 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 			break;
 		}
 	}
-	const walks = m.toX !== undefined && walkStart !== null;
+	const walks = (m.toX !== undefined || m.toY !== undefined || m.toScale !== undefined) && walkStart !== null;
 	const walkP = walks && walkEnd > walkStart! ? Math.min(1, Math.max(0, (p - walkStart!) / (walkEnd - walkStart!))) : 0;
-	const x = walks ? m.x + (m.toX! - m.x) * walkP : m.x;
+	// Walking into depth at a steady pace: distance (1/scale) changes linearly, so on screen he
+	// slows and shrinks as he recedes. Position on screen is affine in scale under perspective.
+	const s0 = m.scale ?? 1;
+	const s1 = m.toScale ?? s0;
+	const scale = s1 === s0 ? s0 : 1 / (1 / s0 + (1 / s1 - 1 / s0) * walkP);
+	const along = s1 === s0 ? walkP : (scale - s0) / (s1 - s0);
+	const x = walks ? m.x + ((m.toX ?? m.x) - m.x) * along : m.x;
+	const y = walks ? m.y + ((m.toY ?? m.y) - m.y) * along : m.y;
 
 	if (turnAt !== null) {
 		const f = Math.min(1, ((p - turnAt) * lineSec * fps) / TURN_FRAMES);
@@ -84,6 +96,8 @@ export const castState = (m: CastMember, p: number, lineSec: number, fps: number
 		framesSinceExpr: since(exprAt),
 		framesSinceFlip: since(flipAt),
 		x,
+		y,
+		scale,
 		// walking in place counts too: on a receding path the world moves, he does not (no toX)
 		walking: walkStart !== null && p >= walkStart && p < walkEnd,
 	};
