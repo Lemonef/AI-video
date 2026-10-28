@@ -47,10 +47,32 @@ export const HouseOutside: React.FC<EnvProps> = ({frame}) => {
 			))}
 			<rect x={440} y={760} width={200} height={PORCH_Y - 760} rx={6} fill={C.door} />
 			<circle cx={610} cy={980} r={9} fill="#C9A86A" />
-			<rect x={200} y={760} width={170} height={150} rx={6} fill={C.window} />
+			{/* the window glows warm: mum's room, the lamp still on */}
+			<rect x={200} y={760} width={170} height={150} rx={6} fill={C.warm} opacity={0.85} />
+			<path d="M200,760 Q240,840 220,910 L200,910 Z" fill="#8A5A3C" opacity={0.8} />
+			<path d="M370,760 Q330,840 350,910 L370,910 Z" fill="#8A5A3C" opacity={0.8} />
 			<rect x={200} y={760} width={170} height={150} rx={6} fill="none" stroke={C.plank} strokeWidth={10} />
-			{/* the porch floor and steps down to the yard */}
+			{/* laundry under the eave */}
+			<path d="M140,690 Q420,730 700,690" stroke="#2A2018" strokeWidth={3} fill="none" />
+			{[220, 330, 470].map((x, i) => (
+				<rect key={i} x={x} y={704 + (i % 2) * 6} width={70 + i * 10} height={90 - i * 10} rx={6} fill={['#7E5A6E', '#5D7A94', '#B08A57'][i]} />
+			))}
+			{/* the porch floor, sandals by the door, potted plants, steps down to the yard */}
 			<rect x={60} y={PORCH_Y} width={W - 120} height={40} fill={C.woodDark} />
+			{[0, 1].map((i) => (
+				<g key={i}>
+					<ellipse cx={680 + i * 70} cy={PORCH_Y - 6} rx={26} ry={9} fill="#3E6B8A" />
+					<ellipse cx={706 + i * 70} cy={PORCH_Y - 4} rx={26} ry={9} fill="#3E6B8A" />
+				</g>
+			))}
+			{[150, 860].map((x, i) => (
+				<g key={x}>
+					<path d={`M${x},${PORCH_Y} l20,-70 h60 l20,70 Z`} fill="#8C4B33" />
+					{[-30, 0, 30].map((a, k) => (
+						<path key={k} d={`M${x + 50},${PORCH_Y - 70} q${a},-80 ${a * 1.6 + (i ? -10 : 10)},-130`} stroke="#1F3A2A" strokeWidth={22} strokeLinecap="round" fill="none" />
+					))}
+				</g>
+			))}
 			{[0, 1, 2].map((i) => (
 				<rect key={i} x={420 - i * 20} y={PORCH_Y + 40 + i * 70} width={240 + i * 40} height={30} fill={C.woodDark} />
 			))}
@@ -58,12 +80,37 @@ export const HouseOutside: React.FC<EnvProps> = ({frame}) => {
 			{[120, W - 140].map((x) => (
 				<rect key={x} x={x} y={PORCH_Y + 40} width={30} height={200} fill={C.plank} />
 			))}
+			{/* a water jar by the steps */}
+			<ellipse cx={810} cy={PORCH_Y + 330} rx={110} ry={120} fill="#4A2E22" />
+			<ellipse cx={810} cy={PORCH_Y + 220} rx={80} ry={18} fill="#2A1A14" />
+			{/* the spirit house in the yard, its small candle the only other warm light */}
+			<rect x={136} y={PORCH_Y + 220} width={22} height={300} fill="#4A4436" />
+			<rect x={80} y={PORCH_Y + 120} width={134} height={110} rx={6} fill="#6E5C3A" />
+			<polygon points={`66,${PORCH_Y + 124} 147,${PORCH_Y + 40} 228,${PORCH_Y + 124}`} fill="#6E2A22" />
+			<polygon points={`96,${PORCH_Y + 60} 147,${PORCH_Y + 6} 198,${PORCH_Y + 60}`} fill="#7A5E2A" />
+			<rect x={136} y={PORCH_Y + 168} width={10} height={30} fill="#F2EFE6" />
+			<circle cx={141} cy={PORCH_Y + 162} r={6} fill="#FFD27A" />
 			{/* the porch bulb */}
 			<line x1={BULB.x} y1={640} x2={BULB.x} y2={BULB.y - 20} stroke="#1A140F" strokeWidth={4} />
 			<circle cx={BULB.x} cy={BULB.y} r={16} fill={C.bulb} />
-			<Darkness id="ho" color={C.night} opacity={0.86} lights={[{x: BULB.x, y: BULB.y + 300, reach: 640 * flicker}]} />
+			{/* the moon, cold, top left: warm porch against cold night */}
+			<circle cx={180} cy={240} r={52} fill="#DCE6F5" />
+			<Darkness
+				id="ho"
+				color={C.night}
+				opacity={0.86}
+				lights={[
+					{x: BULB.x, y: BULB.y + 300, reach: 640 * flicker},
+					{x: 285, y: 835, reach: 260},
+					{x: 141, y: PORCH_Y + 162, reach: 110},
+					{x: 180, y: 240, reach: 260},
+				]}
+			/>
 			<Shaft id="ho-pool" points={[[BULB.x - 30, BULB.y], [BULB.x + 30, BULB.y], [BULB.x + 380, PORCH_Y + 40], [BULB.x - 380, PORCH_Y + 40]]} from={[BULB.x, BULB.y]} to={[BULB.x, PORCH_Y]} color={C.warm} opacity={0.25 * flicker} blur={20} />
 			<Glow id="ho-bulb" x={BULB.x} y={BULB.y} r={420} color={C.warm} strength={flicker} />
+			<Glow id="ho-window" x={285} y={835} r={260} color={C.warm} strength={0.6} />
+			<Glow id="ho-candle" x={141} y={PORCH_Y + 162} r={90} color="#FFD27A" strength={0.45 * flicker} />
+			<Glow id="ho-moon" x={180} y={240} r={300} color="#8FB0E8" strength={0.5} />
 		</g>
 	);
 };
