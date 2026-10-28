@@ -99,6 +99,7 @@ export type SceneTiming = {
 	words?: Array<{text: string; start: number; end: number}>;
 	say?: string; // no word timings (Whisper unavailable): the spoken line, for letter-position cues
 	speech?: [number, number]; // ...and the seconds of the clip that hold speech
+	cueTimes?: Record<string, number>; // ...and each cue word's start (s), snapped to the breath before it
 };
 
 export type Episode = {

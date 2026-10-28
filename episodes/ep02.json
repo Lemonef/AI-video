@@ -215,7 +215,8 @@
         "drone": 0.65,
         "rain": 0.35,
         "steps": 0
-      }
+      },
+      "padAfter": 0.7
     },
     {
       "id": "empty",

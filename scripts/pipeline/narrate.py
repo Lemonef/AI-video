@@ -20,6 +20,8 @@ MIN_COVERAGE = 0.7  # below this share of the script's letters, the transcript i
 PAUSE_TOLERANCE_SEC = 0.3  # Gemini's line starts are ~0.1-0.3 s loose; a pause ending this soon after still counts as "before"
 MAX_PAUSE_GAP_SEC = 0.8  # if the nearest pause before a line start is further back than this, cut at the start itself
 MIN_LINE_SEC = 0.5  # a line start this close to the end of the take cannot be real
+BREATH_BEFORE_SEC = 0.5  # how far before a letter-position estimate a breath may end and still be "its" breath
+BREATH_AFTER_SEC = 0.35  # ...and how far after (estimates run early as often as late)
 
 
 def _key(*parts: str) -> str:
@@ -111,6 +113,22 @@ def measured_rate(public_dir: Path) -> float | None:
                 letters += entry["letters"]
                 seconds += entry["duration"] * tempo
     return letters / seconds if seconds else None
+
+
+def cue_words(scene: dict) -> set[str]:
+    """Every word a scene times something on: bubbles, hits, sfx, shots, tint, hush, beds, monster."""
+    found = {c["word"] for k in ("bubbles", "hits", "sfx", "shots") for c in scene.get(k, []) if c.get("word")}
+    found |= {scene[k]["word"] for k in ("tint", "hush", "bedsAt") if isinstance(scene.get(k), dict) and scene[k].get("word")}
+    if scene.get("monster"):
+        found.add(scene["monster"])
+    return found
+
+
+def snap_to_breath(t: float, pauses: list[tuple[float, float]]) -> float:
+    """A letter-position estimate lands within ~0.3 s of the word; if a pause ends near it, the
+    word starts exactly there (Thai narration takes a breath before a punch word)."""
+    ends = [b for _, b in pauses if t - BREATH_BEFORE_SEC <= b <= t + BREATH_AFTER_SEC]
+    return min(ends, key=lambda b: abs(b - t)) if ends else t
 
 
 def word_start(say: str, word: str, words: list[Word], speech: list[float] | None) -> float | None:
@@ -232,8 +250,16 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         if speech:  # word cues are then placed by letter position across the spoken part (see src/lib/cueAt.ts)
             timing[scene["id"]]["say"] = scene["say"]
             timing[scene["id"]]["speech"] = speech
+            # ...refined: a word that follows a breath starts where that breath ends
+            clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
+            timing[scene["id"]]["cueTimes"] = {
+                w: snap_to_breath(t, clip_pauses)
+                for w in cue_words(scene)
+                if (t := word_start(scene["say"], w, [], speech)) is not None
+            }
         if scene.get("monster"):  # the creature's own words, from this one to the end of the line
-            at = word_start(scene["say"], scene["monster"], words_in(words, start, end), speech)
+            cached = timing[scene["id"]].get("cueTimes", {}).get(scene["monster"])
+            at = cached if cached is not None else word_start(scene["say"], scene["monster"], words_in(words, start, end), speech)
             if at is not None:
                 media.monster(mp3, at)
         print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")

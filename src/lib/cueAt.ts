@@ -10,6 +10,8 @@ const strip = (s: string) => s.replace(/[^\u0E00-\u0E7FA-Za-z0-9]/g, '');
  */
 export const cueAt = (cue: {at?: number; word?: string}, timing: SceneTiming | undefined, lineSec: number): number => {
 	if (!cue.word || !timing) return cue.at ?? 0;
+	const measured = timing.cueTimes?.[cue.word];
+	if (measured !== undefined) return measured / lineSec; // the pipeline found where the word starts
 	if (!timing.words?.length) return byLetters(cue.word, cue.at, timing, lineSec);
 	const target = strip(cue.word);
 	const words = timing.words;
