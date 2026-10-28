@@ -89,3 +89,11 @@ Before writing, every answer must be yes:
 After posting (TikTok Studio): still watching at 3 s > 60%; average watch > 50%; finished > 20%;
 comments per 1,000 views > 10; Part 2 views / Part 1 views > 50%. The retention graph's steepest
 drop is the scene to fix.
+
+## What 1M+ stories are made of (YouTube search by views, 2026-10-28)
+
+- **DanPlan "By the way, Can You Survive the Zombie Apocalypse? Part 1"** (11.2M; likely the format's origin): the viewer is "you"; a scenario, then A/B/C/D, then the right answer with a survival reason, then the next scenario builds on it, until escape or death. A choice about every minute; the viewer feels smart when right.
+- **หลอนไดอารี่ "คนเลี้ยงผี" EP.106** (8.6M, Thai): real pressure (laid off, family debt) -> temptation (a friend got rich from ของดี from a พ่อหมอ) -> a deal with one rule ("ask it yourself") -> first price (a dream: "bring raw meat") -> reward (shop booms, lottery) -> greed (more asks, her own blood) -> the bigger price ("กูให้มึงทุกอย่าง คราวนี้มึงต้องให้กูบ้าง"). The lead's own choices cause the fall.
+- Also: PASULOL survival tips (8.3M, Thai), Ghibli Arni zombie glass house (7.1M).
+
+**Shared components:** relatable pressure (money, family, work); one clear rule or deal; each step pays or costs more; the lead's choices drive it; the viewer guesses along ("what would you do?" before the reveal); the ending says something. Applied: กฎเข้าป่า = rising price (answer -> voice, look -> face, one thing left); next story moves to #17 ตะกรุดสามคำขอ (same arc as คนเลี้ยงผี).
