@@ -36,6 +36,16 @@ const V3_GRADE = 'saturate(0.82) contrast(1.08)'; // v3: cooler, moodier; the to
 const V3_DUST = 26;
 const V4_WORLD_GRADE = 'saturate(0.5) brightness(0.8) contrast(1.15)'; // near-monochrome night; light sources stay bright (drawn after)
 const BACK_BEAM_TILT_DEG = 8; // the torch at his side points up the path, leaning in toward its middle
+// Floor shadows from a light behind the cast: the body laid on the floor toward the camera,
+// flattened by the light's height and leaning away from it.
+const SHADOW_LENGTH = 0.42; // shadow height / body height
+const SHADOW_LEAN = 0.9; // skew per unit of (x - light) / body height
+const SHADOW_OPACITY = 0.6;
+// On the wall behind them instead (reads at a glance where the floor is a thin strip):
+// the silhouette sits beside the body, pushed away from the light, a little bigger.
+const WALL_SHADOW_SHIFT = 130; // px at scale 1, away from the light
+const WALL_SHADOW_RISE = 40;
+const WALL_SHADOW_GROW = 1.12;
 const HALO_OPACITY = 0.55; // soft fog-light behind each figure so a dark silhouette always reads
 const TINT_FADE_SEC = 0.35;
 const INTRO_BELOW_TITLE = 580; // v4 hook: the two-line big title ends ≈ SAFE.top + 120 + 2 × 101; the name card sits under it
@@ -179,8 +189,23 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			m.torch && st.back ? (
 				<Beam x={st.x + torchLensBack().x * s * st.facing} y={st.y + torchLensBack().y * s} angle={-90 - BACK_BEAM_TILT_DEG * st.facing} length={BEAM_LENGTH * s} flicker={0.85 + 0.15 * Math.sin(frame * 0.9) * Math.sin(frame * 0.37)} dust={v3 ? V3_DUST : 0} frame={frame} />
 			) : null;
+		const floorShadow =
+			scene.shadows && !m.noShadow && !look5 ? (
+				<g
+					transform={
+						scene.shadows.wall
+							? `translate(${st.x + Math.sign(st.x - scene.shadows.x || 1) * WALL_SHADOW_SHIFT * s} ${st.y - WALL_SHADOW_RISE * s}) scale(${s * flip * WALL_SHADOW_GROW} ${s * WALL_SHADOW_GROW})`
+							: `translate(${st.x} ${st.y}) skewX(${(Math.atan(((st.x - scene.shadows.x) / H) * SHADOW_LEAN * 2) * 180) / Math.PI}) scale(${s * flip} ${-s * SHADOW_LENGTH})`
+					}
+					style={{filter: 'brightness(0) blur(3px)'}}
+					opacity={SHADOW_OPACITY}
+				>
+					<Character2 look={look!} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={0} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} noShadow back={st.back} />
+				</g>
+			) : null;
 		return (
 			<React.Fragment key={i}>
+			{floorShadow}
 			{beamAhead}
 			<g transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
 				{look5 ? (

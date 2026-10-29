@@ -87,6 +87,7 @@ export type Scene = {
 	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
 	rain?: boolean; // v3: rain streaks over the scene
 	tint?: {color: string; at?: number; word?: string; strength?: number}; // v4: colour-coded light (e.g. red = danger) from `at`, or on `word`
+	shadows?: {x: number; wall?: boolean}; // wall: thrown on the wall behind them, beside the body; a light behind the cast at screen x: every member that casts a shadow throws its body onto the floor toward the camera
 	blackout?: {at: number; sec: number}; // v4: torch dies, frame goes black, captions stay
 	a?: string; // endcard choices
 	b?: string;
