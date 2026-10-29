@@ -86,7 +86,7 @@
           "sound": "heartbeat"
         }
       ],
-      "chip": "✅ B · ไปเอายาให้ทันก่อน",
+      "chip": "✅ คนส่วนใหญ่เลือก B · ไปเอายาก่อน",
       "beds": {
         "wind": 0.2,
         "crickets": 0.3,
@@ -137,8 +137,8 @@
       "bg": "forestClinic",
       "fireflies": false,
       "transition": "cut",
-      "say": "แต่จ๊าบเลือกไปเอายาก่อน เขาวิ่งสุดแรง สามร้อยเมตรสุดท้าย",
-      "caption": "จ๊าบเลือก *ไปเอายาก่อน*… วิ่งสุดแรง *สามร้อยเมตร* สุดท้าย",
+      "say": "คนส่วนใหญ่เลือกบี จ๊าบจึงไปเอายาก่อน เขาวิ่งสุดแรง สามร้อยเมตรสุดท้าย",
+      "caption": "คนส่วนใหญ่เลือก *B*… จ๊าบไป *เอายาก่อน* วิ่งสุดแรง *สามร้อยเมตร* สุดท้าย",
       "cast": [
         {
           "who": "jaab",
@@ -475,7 +475,8 @@
           "y": 1180,
           "scale": 0.5,
           "expr": "sweat",
-          "turn": 0
+          "turn": 0,
+          "noShadow": true
         },
         {
           "who": "jaab",
@@ -528,17 +529,11 @@
     },
     {
       "id": "guess",
-      "bg": "insertFeetTwo",
+      "bg": "houseOutside",
       "chip": "ทายก่อน 👀",
       "transition": "cut",
       "say": "ลองดูดีๆ ตัวไหนคือจ๊าบตัวจริง",
       "caption": "ลองดูดีๆ… ตัวไหนคือ *จ๊าบตัวจริง*?",
-      "camera": {
-        "from": 1.0,
-        "to": 1.1,
-        "x": 540,
-        "y": 1100
-      },
       "padAfter": 1.0,
       "beds": {
         "wind": 0.2,
@@ -546,27 +541,94 @@
         "drone": 0.5,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 380,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "shock",
+          "turn": 0.4
+        },
+        {
+          "who": "jaab",
+          "x": 700,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "noShadow": true,
+          "expr": "shock",
+          "turn": -0.4
+        }
+      ],
+      "shadows": {
+        "x": 720,
+        "wall": true
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.3,
+          "x": 540,
+          "y": 1050
+        }
+      ]
     },
     {
       "id": "answer",
-      "bg": "insertFeetTwo",
+      "bg": "houseOutside",
       "transition": "cut",
       "say": "ใต้แสงไฟหน้าบ้าน มีแค่ตัวเดียวที่มีเงา",
       "caption": "ใต้แสงไฟ… มีแค่ *ตัวเดียว* ที่มี *เงา*",
-      "camera": {
-        "from": 1.1,
-        "to": 1.45,
-        "x": 400,
-        "y": 1250
-      },
       "beds": {
         "wind": 0.2,
         "crickets": 0,
         "drone": 0.5,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 380,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "shock",
+          "turn": 0.4
+        },
+        {
+          "who": "jaab",
+          "x": 700,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "noShadow": true,
+          "expr": "shock",
+          "turn": -0.4
+        }
+      ],
+      "shadows": {
+        "x": 720,
+        "wall": true
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.3,
+          "x": 540,
+          "y": 1050
+        },
+        {
+          "at": 0.45,
+          "word": "ตัวเดียว",
+          "zoom": 1.6,
+          "x": 540,
+          "y": 1250
+        }
+      ]
     },
     {
       "id": "slam",
@@ -706,7 +768,8 @@
           "scale": 0.85,
           "expr": "smile",
           "turn": -0.7,
-          "pose": "hold"
+          "pose": "hold",
+          "noShadow": true
         }
       ],
       "camera": {
@@ -725,16 +788,10 @@
     },
     {
       "id": "shadow",
-      "bg": "insertFeetMum",
+      "bg": "houseNight",
       "transition": "cut",
       "say": "แต่ใต้หลอดไฟในห้อง มีเงาอยู่แค่ของจ๊าบ",
       "caption": "แต่ใต้หลอดไฟ… มีเงาแค่ *ของจ๊าบ*",
-      "camera": {
-        "from": 1.0,
-        "to": 1.4,
-        "x": 740,
-        "y": 1250
-      },
       "hush": {
         "word": "ของจ๊าบ",
         "lead": 0.6,
@@ -754,7 +811,48 @@
         "drone": 0.45,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 700,
+          "y": 1720,
+          "scale": 0.85,
+          "torch": false,
+          "expr": "sleepy",
+          "turn": 0.7,
+          "pose": "hold"
+        },
+        {
+          "who": "mum",
+          "x": 790,
+          "y": 1720,
+          "scale": 0.85,
+          "expr": "smile",
+          "turn": -0.7,
+          "pose": "hold",
+          "noShadow": true
+        }
+      ],
+      "shadows": {
+        "x": 640,
+        "wall": true
+      },
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 745,
+          "y": 1500
+        },
+        {
+          "at": 0.5,
+          "word": "ของจ๊าบ",
+          "zoom": 1.33,
+          "x": 745,
+          "y": 1800
+        }
+      ]
     },
     {
       "id": "bed",
@@ -769,7 +867,8 @@
           "y": 1720,
           "scale": 0.85,
           "expr": "smile",
-          "turn": -0.6
+          "turn": -0.6,
+          "noShadow": true
         }
       ],
       "shots": [
@@ -823,7 +922,8 @@
           "y": 1720,
           "scale": 0.85,
           "expr": "smile",
-          "turn": 0
+          "turn": 0,
+          "noShadow": true
         }
       ],
       "shots": [
