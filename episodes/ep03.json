@@ -4,7 +4,7 @@
   "style": "v6",
   "engine": "gemini",
   "voice": "Iapetus",
-  "tempo": 1.0,
+  "tempo": 1.03,
   "mix": {
     "beds": [
       "wind",
@@ -28,8 +28,8 @@
   "handheld": false,
   "post": {
     "part": 3,
-    "hook": "จะเกิดอะไรขึ้น ถ้าแม่… กำลังจะเปิดประตูให้ตัวปลอม 😨",
-    "question": "แล้วคนที่เปิดประตูให้จ๊าบ… คือใคร? คอมเมนต์ทฤษฎีของคุณ 👇",
+    "hook": "จะเกิดอะไรขึ้น ถ้าแม่เปิดผิดคน 😨",
+    "question": "แม่ตัวจริงยังหลับ… แล้วใครกอดจ๊าบอยู่? คอมเมนต์ทฤษฎีของคุณ 👇",
     "next": "เรื่องใหม่เร็วๆ นี้ · กดติดตามไว้",
     "coverFrame": 45,
     "hashtags": [
@@ -40,7 +40,7 @@
       "#jaabstory"
     ],
     "series": "กฎเข้าป่า",
-    "coverHook": "ตัวไหนตัวจริง?",
+    "coverHook": "แม่เปิดให้ใคร?",
     "total": 3,
     "keyword": ""
   },
@@ -49,913 +49,975 @@
     {
       "id": "cold",
       "bg": "houseOutside",
-      "title": "ตอน*จบ*",
-      "say": "จะเกิดอะไรขึ้น ถ้าแม่ของคุณ กำลังจะเปิดประตู ให้ตัวปลอม",
-      "caption": "จะเกิดอะไรขึ้น ถ้า *แม่* กำลังจะ *เปิดประตู*… ให้ *ตัวปลอม*",
+      "say": "จะเกิดอะไรขึ้น ถ้าแม่เปิดผิดคน",
+      "caption": "จะเกิดอะไรขึ้น ถ้าแม่เปิดผิดคน",
+      "transition": "cut",
       "cast": [
         {
           "who": "jaab",
-          "noShadow": true,
-          "x": 540,
+          "x": 360,
           "y": 1180,
           "scale": 0.5,
           "torch": false,
-          "back": true,
-          "expr": "smile"
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
+          "noShadow": true,
+          "pose": "wave",
+          "facing": -1
         }
       ],
       "shots": [
         {
           "at": 0,
-          "zoom": 1.0,
+          "zoom": 1.05,
+          "x": 540,
+          "y": 850
+        },
+        {
+          "at": 0.45,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "insertDoorLock"
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "hits": [
+        {
+          "at": 0,
+          "strength": 18,
+          "sound": "heartbeat"
+        }
+      ],
+      "title": "*อย่าเปิด!*",
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 540,
+          "y": 490,
+          "text": "แม่!     แม่!",
+          "label": "เสียงเดียวกันสองคน",
+          "at": 0
+        }
+      ]
+    },
+    {
+      "id": "rewind",
+      "bg": "forestClinic",
+      "say": "สิบนาทีก่อน คนส่วนใหญ่เลือกบี จ๊าบไปเอายา",
+      "caption": "สิบนาทีก่อน คนส่วนใหญ่เลือกบี จ๊าบไปเอายา",
+      "transition": "cut",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1600,
+          "scale": 0.9,
+          "torch": false,
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ],
+          "back": true,
+          "action": "walk",
+          "toY": 1200,
+          "toScale": 0.5
+        }
+      ],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
           "x": 540,
           "y": 960
         },
         {
-          "at": 0.6,
-          "word": "เปิดประตู",
-          "zoom": 1.45,
-          "x": 540,
-          "y": 980
+          "at": 0.5,
+          "zoom": 1.3,
+          "x": 390,
+          "y": 1050
         }
       ],
-      "hits": [
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "chip": "✅ คนส่วนใหญ่เลือก B · ไปเอายาก่อน"
+    },
+    {
+      "id": "deadline",
+      "bg": "insertThermometer",
+      "say": "แม่ไข้สูง ยายสั่ง ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
+      "caption": "แม่ไข้สูง ยายสั่ง ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
         {
           "at": 0.0,
-          "strength": 20,
-          "sound": "heartbeat"
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.3333,
+          "zoom": 1.12,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6667,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "insertDyingBulb"
         }
       ],
-      "chip": "✅ คนส่วนใหญ่เลือก B · ไปเอายาก่อน",
       "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.45,
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "chip": "ต้องป้อนยาก่อนไฟดับ"
     },
     {
-      "id": "recap",
+      "id": "return",
       "bg": "forestAhead",
-      "fireflies": false,
-      "chip": "ตอนที่แล้ว",
-      "transition": "whip",
-      "say": "ตอนที่แล้ว ตัวปลอมได้ทั้งเสียงและหน้าของจ๊าบ แล้วมันก็เดินกลับไปทางบ้าน",
-      "caption": "ตอนที่แล้ว… มันได้ทั้ง *เสียง* และ *หน้า* ของจ๊าบ แล้วเดินกลับไป *ทางบ้าน*",
-      "cast": [
-        {
-          "who": "jaab",
-          "noShadow": true,
-          "x": 540,
-          "y": 1420,
-          "scale": 0.72,
-          "torch": true,
-          "back": true,
-          "action": "walk",
-          "toY": 1040,
-          "toScale": 0.26,
-          "expr": "smile"
-        }
-      ],
-      "camera": {
-        "from": 1.0,
-        "to": 1.1,
-        "x": 540,
-        "y": 1100
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "run",
-      "bg": "forestClinic",
-      "fireflies": false,
+      "say": "ขากลับ เสียงเขาเรียกแม่ อยู่ข้างหน้าแล้ว ทั้งที่ยาอยู่กับเขา",
+      "caption": "ขากลับ เสียงเขาเรียกแม่ อยู่ข้างหน้าแล้ว ทั้งที่ยาอยู่กับเขา",
       "transition": "cut",
-      "say": "คนส่วนใหญ่เลือกบี จ๊าบจึงไปเอายาก่อน เขาวิ่งสุดแรง สามร้อยเมตรสุดท้าย",
-      "caption": "คนส่วนใหญ่เลือก *B*… จ๊าบไป *เอายาก่อน* วิ่งสุดแรง *สามร้อยเมตร* สุดท้าย",
       "cast": [
         {
           "who": "jaab",
-          "x": 540,
-          "y": 1700,
-          "scale": 0.95,
-          "torch": true,
-          "back": true,
-          "action": "walk",
-          "toY": 1180,
-          "toScale": 0.4,
-          "expr": "sweat"
-        }
-      ],
-      "camera": {
-        "from": 1.0,
-        "to": 1.08,
-        "x": 540,
-        "y": 1200
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0.6
-      }
-    },
-    {
-      "id": "medicine",
-      "bg": "forestClinic",
-      "fireflies": false,
-      "transition": "cut",
-      "say": "ได้ยาลดไข้มาแล้ว แต่ระหว่างวิ่งกลับ เขาได้ยินเสียงตัวเอง ดังมาจากทางบ้าน",
-      "caption": "ได้ *ยาลดไข้* แล้ว… แต่เขาได้ยิน *เสียงตัวเอง* ดังมาจากบ้าน",
-      "stat": {
-        "label": "ได้แล้ว",
-        "value": "ยาลดไข้ ✓",
-        "at": 0.05
-      },
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 540,
-          "y": 1600,
-          "scale": 0.9,
-          "torch": true,
+          "x": 720,
+          "y": 1570,
+          "scale": 0.8,
+          "torch": false,
           "expr": "shock",
-          "turn": 0.7,
           "keys": [
             {
-              "at": 0.55,
-              "action": "shake"
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
             }
-          ]
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 1000
-        },
-        {
-          "at": 0.6,
-          "word": "เสียงตัวเอง",
-          "zoom": 1.35,
-          "x": 540,
-          "y": 1150
-        }
-      ],
-      "hush": {
-        "word": "เสียงตัวเอง",
-        "lead": 0.5,
-        "hold": 0.4
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "voice",
-      "bg": "forestDark",
-      "fireflies": false,
-      "transition": "cut",
-      "say": "แม่ครับ เปิดประตูหน่อย ผมเอายามาแล้ว",
-      "caption": "\"แม่ครับ… *เปิดประตู* หน่อย… ผมเอายามาแล้ว\"",
-      "bubbles": [
-        {
-          "kind": "voice",
-          "x": 540,
-          "y": 520,
-          "text": "แม่ครับ เปิดประตูหน่อย",
-          "word": "แม่ครับ",
-          "label": "เสียงจ๊าบ…?"
-        }
-      ],
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 540,
-          "y": 1600,
-          "scale": 0.9,
-          "torch": true,
-          "expr": "shock",
-          "turn": 0,
-          "action": "shake"
-        }
-      ],
-      "camera": {
-        "from": 1.15,
-        "to": 1.35,
-        "x": 540,
-        "y": 1150
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "arrive",
-      "bg": "houseOutside",
-      "transition": "whip",
-      "say": "จ๊าบวิ่งมาถึงหน้าบ้าน ตัวปลอมยืนอยู่หน้าประตู แล้วมันก็หันมายิ้มให้",
-      "caption": "จ๊าบมาถึง… ตัวปลอมยืนอยู่ *หน้าประตู*… แล้ว *หันมายิ้ม*",
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 380,
-          "y": 1760,
-          "scale": 1.0,
-          "torch": true,
-          "expr": "sweat",
-          "turn": 0.7
-        },
-        {
-          "who": "jaab",
-          "noShadow": true,
-          "x": 560,
-          "y": 1180,
-          "scale": 0.5,
-          "torch": false,
+          ],
           "back": true,
-          "expr": "smile",
-          "keys": [
-            {
-              "at": 0.75,
-              "back": false,
-              "turn": -0.5
-            }
-          ]
+          "action": "walk",
+          "toY": 1250,
+          "toScale": 0.5
         }
       ],
       "shots": [
         {
-          "at": 0,
-          "zoom": 1.0,
+          "at": 0.0,
+          "zoom": 1,
           "x": 540,
-          "y": 1100
-        },
-        {
-          "at": 0.35,
-          "word": "ตัวปลอม",
-          "zoom": 1.35,
-          "x": 560,
-          "y": 1000
-        },
-        {
-          "at": 0.72,
-          "word": "หันมายิ้ม",
-          "zoom": 1.7,
-          "x": 380,
-          "y": 900
-        }
-      ],
-      "hits": [
-        {
-          "at": 0.75,
-          "word": "หันมายิ้ม",
-          "strength": 16,
-          "sound": "stinger"
-        }
-      ],
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "lock",
-      "bg": "houseOutside",
-      "transition": "cut",
-      "say": "แล้วกลอนประตูก็ดังแกร๊ก แม่กำลังจะเปิดให้มัน",
-      "caption": "*แกร๊ก*… แม่กำลังจะ *เปิดให้มัน*",
-      "cast": [
-        {
-          "who": "jaab",
-          "noShadow": true,
-          "x": 560,
-          "y": 1180,
-          "scale": 0.5,
-          "torch": false,
-          "expr": "smile",
-          "turn": -0.3
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.9,
-          "x": 610,
-          "y": 980
-        }
-      ],
-      "sfx": [
-        {
-          "at": 0.2,
-          "word": "แกร๊ก",
-          "sound": "click",
-          "volume": 0.9
-        }
-      ],
-      "hush": {
-        "word": "แกร๊ก",
-        "lead": 0.5,
-        "hold": 0.3
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "rule",
-      "bg": "houseOutside",
-      "rulesView": "hud",
-      "transition": "cut",
-      "say": "แล้วจ๊าบก็นึกถึงคำที่ยายพูดไม่จบ ถ้ามันได้เข้าบ้าน มันจะได้ทุกอย่างของเรา",
-      "caption": "คำที่ยายพูดไม่จบ… ถ้ามัน *ได้เข้าบ้าน* มันจะได้ *ทุกอย่าง* ของเรา",
-      "bubbles": [
-        {
-          "kind": "voice",
-          "x": 620,
-          "y": 560,
-          "text": "เข้าบ้านได้ = มันได้ทุกอย่าง",
-          "word": "ได้เข้าบ้าน",
-          "label": "ยาย"
-        }
-      ],
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 380,
-          "y": 1760,
-          "scale": 1.0,
-          "torch": true,
-          "expr": "shock",
-          "turn": 0.6,
-          "action": "shake"
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 1100
-        },
-        {
-          "at": 0.4,
-          "word": "ได้เข้าบ้าน",
-          "zoom": 1.6,
-          "x": 380,
-          "y": 980
-        },
-        {
-          "at": 0.7,
-          "word": "ทุกอย่าง",
-          "zoom": 1.4,
-          "x": 420,
-          "y": 1300
-        }
-      ],
-      "hits": [
-        {
-          "at": 0.7,
-          "word": "ทุกอย่าง",
-          "strength": 14,
-          "sound": ""
-        }
-      ],
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "door",
-      "bg": "houseOutside",
-      "transition": "cut",
-      "say": "ประตูเปิดออก จ๊าบกระโดดขึ้นไปยืนข้างมัน แล้วทั้งสองก็ร้องเรียกแม่ ด้วยเสียงเดียวกัน",
-      "caption": "ประตูเปิด… จ๊าบ *สองคน* ร้องเรียกแม่ ด้วย *เสียงเดียวกัน*",
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 380,
-          "y": 1180,
-          "scale": 0.5,
-          "torch": false,
-          "expr": "shock",
-          "turn": 0.4
-        },
-        {
-          "who": "mum",
-          "x": 540,
-          "y": 1180,
-          "scale": 0.5,
-          "expr": "sweat",
-          "turn": 0,
-          "noShadow": true
-        },
-        {
-          "who": "jaab",
-          "noShadow": true,
-          "x": 700,
-          "y": 1180,
-          "scale": 0.5,
-          "torch": false,
-          "expr": "shock",
-          "turn": -0.4
-        }
-      ],
-      "bubbles": [
-        {
-          "kind": "voice",
-          "x": 300,
-          "y": 560,
-          "text": "แม่!",
-          "word": "เสียงเดียวกัน"
-        },
-        {
-          "kind": "voice",
-          "x": 780,
-          "y": 560,
-          "text": "แม่!",
-          "word": "เสียงเดียวกัน"
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 1000
+          "y": 960
         },
         {
           "at": 0.5,
-          "zoom": 1.6,
+          "zoom": 1.25,
+          "x": 710,
+          "y": 1000
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "twins",
+      "bg": "houseOutside",
+      "say": "พอถึงบ้าน อีกคนยกมือทัก ใช้มือข้างที่จ๊าบไม่ถนัด",
+      "caption": "พอถึงบ้าน อีกคนยกมือทัก ใช้มือข้างที่จ๊าบไม่ถนัด",
+      "transition": "cut",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
+          "noShadow": true,
+          "pose": "wave",
+          "facing": -1
+        }
+      ],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
           "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.35,
+          "x": 570,
           "y": 950
         }
       ],
       "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.45,
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
         "rain": 0,
         "steps": 0
       }
+    },
+    {
+      "id": "eyes",
+      "bg": "insertDoubleEyes",
+      "say": "หน้าตาเหมือนกัน แต่กะพริบตาไม่พร้อมกัน",
+      "caption": "หน้าตาเหมือนกัน แต่กะพริบตาไม่พร้อมกัน",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.15,
+          "x": 640,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "secret",
+      "bg": "houseOutside",
+      "say": "มันพูดชื่อเล่น ที่แม่เรียกเขาแค่สองคน แม้แต่ยายก็ไม่เคยได้ยิน",
+      "caption": "มันพูดชื่อเล่น ที่แม่เรียกเขาแค่สองคน แม้แต่ยายก็ไม่เคยได้ยิน",
+      "transition": "cut",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
+          "noShadow": true,
+          "pose": "wave",
+          "facing": -1
+        }
+      ],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.35,
+          "x": 570,
+          "y": 940
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 540,
+          "y": 420,
+          "text": "ลูกหมีของแม่",
+          "label": "มันรู้ได้ยังไง?",
+          "at": 0.4
+        }
+      ]
+    },
+    {
+      "id": "copy",
+      "bg": "insertDoorLock",
+      "say": "แม่ครับ ลูกหมีเอายามาแล้ว",
+      "caption": "แม่ครับ ลูกหมีเอายามาแล้ว",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.2,
+          "x": 620,
+          "y": 900
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "monster": "แม่ครับ"
+    },
+    {
+      "id": "bolt",
+      "bg": "insertDoorLock",
+      "say": "กลอนขยับ แต่หลอดไฟเริ่มติด ติด ดับ ดับ",
+      "caption": "กลอนขยับ แต่หลอดไฟเริ่มติด ติด ดับ ดับ",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "insertDyingBulb"
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "sfx": [
+        {
+          "at": 0,
+          "sound": "click",
+          "volume": 0.7
+        }
+      ]
+    },
+    {
+      "id": "stop",
+      "bg": "houseOutside",
+      "say": "จ๊าบตะโกน อย่าเปิด ให้เรายืนใต้ไฟก่อน ถ้าไฟดับ แม่จะแยกเราไม่ออก",
+      "caption": "จ๊าบตะโกน อย่าเปิด ให้เรายืนใต้ไฟก่อน ถ้าไฟดับ แม่จะแยกเราไม่ออก",
+      "transition": "cut",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.5,
+          "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
+          "noShadow": true,
+          "pose": "wave",
+          "facing": -1
+        }
+      ],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.3333,
+          "zoom": 1.12,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6667,
+          "zoom": 1.35,
+          "x": 510,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "hits": [
+        {
+          "at": 0,
+          "strength": 12,
+          "sound": ""
+        }
+      ]
     },
     {
       "id": "guess",
       "bg": "houseOutside",
-      "chip": "ทายก่อน 👀",
+      "say": "ลองดูดีดี คนไหนไม่ควรได้เข้าบ้าน",
+      "caption": "ลองดูดีดี คนไหนไม่ควรได้เข้าบ้าน",
       "transition": "cut",
-      "say": "ลองดูดีๆ ตัวไหนคือจ๊าบตัวจริง",
-      "caption": "ลองดูดีๆ… ตัวไหนคือ *จ๊าบตัวจริง*?",
-      "padAfter": 1.0,
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.5,
-        "rain": 0,
-        "steps": 0
-      },
       "cast": [
         {
           "who": "jaab",
-          "x": 380,
+          "x": 360,
           "y": 1180,
           "scale": 0.5,
           "torch": false,
           "expr": "shock",
-          "turn": 0.4
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
         },
         {
           "who": "jaab",
-          "x": 700,
+          "x": 720,
           "y": 1180,
           "scale": 0.5,
           "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
           "noShadow": true,
-          "expr": "shock",
-          "turn": -0.4
+          "pose": "wave",
+          "facing": -1
         }
       ],
-      "shadows": {
-        "x": 720,
-        "wall": true
-      },
       "shots": [
         {
-          "at": 0,
-          "zoom": 1.3,
+          "at": 0.0,
+          "zoom": 1,
           "x": 540,
-          "y": 1050
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.15,
+          "x": 540,
+          "y": 960
         }
-      ]
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "shadows": {
+        "x": 600,
+        "wall": true
+      },
+      "padAfter": 0.5,
+      "chip": "ลองดูดีๆ… ใครไม่มีเงา?"
     },
     {
       "id": "answer",
       "bg": "houseOutside",
+      "say": "คนซ้ายมีเงาบนผนัง แต่คนขวาไม่มี",
+      "caption": "คนซ้ายมีเงาบนผนัง แต่คนขวาไม่มี",
       "transition": "cut",
-      "say": "ใต้แสงไฟหน้าบ้าน มีแค่ตัวเดียวที่มีเงา",
-      "caption": "ใต้แสงไฟ… มีแค่ *ตัวเดียว* ที่มี *เงา*",
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0,
-        "drone": 0.5,
-        "rain": 0,
-        "steps": 0
-      },
       "cast": [
         {
           "who": "jaab",
-          "x": 380,
+          "x": 360,
           "y": 1180,
           "scale": 0.5,
           "torch": false,
           "expr": "shock",
-          "turn": 0.4
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ]
         },
         {
           "who": "jaab",
-          "x": 700,
+          "x": 720,
           "y": 1180,
           "scale": 0.5,
           "torch": false,
+          "expr": "smile",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.6,
+              "pose": "idle"
+            }
+          ],
           "noShadow": true,
-          "expr": "shock",
-          "turn": -0.4
+          "pose": "wave",
+          "facing": -1
         }
       ],
-      "shadows": {
-        "x": 720,
-        "wall": true
-      },
       "shots": [
         {
-          "at": 0,
-          "zoom": 1.3,
+          "at": 0.0,
+          "zoom": 1.05,
           "x": 540,
-          "y": 1050
+          "y": 960
         },
         {
-          "at": 0.45,
-          "word": "ตัวเดียว",
-          "zoom": 1.6,
+          "at": 0.5,
+          "zoom": 1.25,
           "x": 540,
-          "y": 1250
+          "y": 1030
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "shadows": {
+        "x": 600,
+        "wall": true
+      }
+    },
+    {
+      "id": "feet",
+      "bg": "insertFeetTwo",
+      "say": "แม้แต่ใต้เท้า ก็ไม่มี",
+      "caption": "แม้แต่ใต้เท้า ก็ไม่มี",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "hush": {
+        "word": "ไม่มี",
+        "lead": 0.4,
+        "hold": 0.3
+      }
+    },
+    {
+      "id": "bulb",
+      "bg": "insertDyingBulb",
+      "say": "ไฟวูบอีกครั้ง คราวนี้ดับนานกว่าเดิม",
+      "caption": "ไฟวูบอีกครั้ง คราวนี้ดับนานกว่าเดิม",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.2,
+          "x": 540,
+          "y": 850
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "reach",
+      "bg": "houseOutside",
+      "say": "มือจากในบ้าน คว้าจ๊าบคนซ้ายเข้าไป เขากำยาไว้ ไม่ยอมทำหล่น",
+      "caption": "มือจากในบ้าน คว้าจ๊าบคนซ้ายเข้าไป เขากำยาไว้ ไม่ยอมทำหล่น",
+      "transition": "cut",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1400,
+          "scale": 0.7,
+          "torch": false,
+          "expr": "shock",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.65,
+              "pose": "hold"
+            }
+          ],
+          "action": "walk",
+          "toX": 460,
+          "toY": 1180,
+          "toScale": 0.5
+        }
+      ],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.3333,
+          "zoom": 1.12,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6667,
+          "zoom": 1.35,
+          "x": 430,
+          "y": 1000
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "slam",
+      "bg": "insertDoorLock",
+      "say": "ประตูปิด อีกคนหยุดยิ้มทันที",
+      "caption": "ประตูปิด อีกคนหยุดยิ้มทันที",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.15,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      },
+      "hits": [
+        {
+          "at": 0,
+          "strength": 28,
+          "sound": "impact"
         }
       ]
     },
     {
-      "id": "slam",
-      "bg": "houseOutside",
-      "transition": "cut",
-      "say": "แม่ดูเงา แล้วดึงจ๊าบเข้าบ้าน กระแทกประตูใส่มันเต็มแรง",
-      "caption": "แม่ดึงจ๊าบเข้าบ้าน… แล้ว *กระแทกประตู* ใส่มัน!",
-      "cast": [
-        {
-          "who": "jaab",
-          "noShadow": true,
-          "x": 540,
-          "y": 1180,
-          "scale": 0.5,
-          "torch": false,
-          "expr": "angry",
-          "turn": 0
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.3,
-          "x": 540,
-          "y": 1000
-        },
-        {
-          "at": 0.7,
-          "word": "กระแทก",
-          "zoom": 1.7,
-          "x": 540,
-          "y": 950
-        }
-      ],
-      "hits": [
-        {
-          "at": 0.7,
-          "word": "กระแทก",
-          "strength": 34,
-          "sound": "impact"
-        }
-      ],
-      "tint": {
-        "color": "#B3262B",
-        "at": 0.7,
-        "word": "กระแทก",
-        "strength": 0.35
-      },
-      "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.5,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
       "id": "whisper",
-      "bg": "houseOutside",
+      "bg": "insertDoorLock",
+      "say": "แม่ครับ เปิดให้ผมด้วย",
+      "caption": "แม่ครับ เปิดให้ผมด้วย",
       "transition": "cut",
-      "monster": "แม่ครับ",
-      "say": "ข้างนอก มันยังกระซิบผ่านประตู แม่ครับ แล้วทุกอย่างก็เงียบไป",
-      "caption": "ข้างนอก มันยังกระซิบ… '*แม่ครับ*'… แล้วก็ *เงียบไป*",
       "cast": [],
       "shots": [
         {
-          "at": 0,
-          "zoom": 1.0,
+          "at": 0.0,
+          "zoom": 1,
           "x": 540,
-          "y": 1050
-        },
-        {
-          "at": 0.3,
-          "word": "กระซิบ",
-          "zoom": 1.5,
-          "x": 540,
-          "y": 980
-        },
-        {
-          "at": 0.55,
-          "word": "แม่ครับ",
-          "zoom": 2.1,
-          "x": 560,
           "y": 960
         },
         {
-          "at": 0.8,
-          "word": "เงียบไป",
-          "zoom": 1.0,
+          "at": 0.5,
+          "zoom": 1.15,
           "x": 540,
-          "y": 1050
+          "y": 960
         }
       ],
-      "hush": {
-        "word": "แม่ครับ",
-        "lead": 0.7,
-        "hold": 0.9
-      },
-      "sfx": [
-        {
-          "at": 0.6,
-          "word": "แม่ครับ:end",
-          "sound": "boom",
-          "volume": 0.7
-        }
-      ],
-      "padAfter": 0.6,
       "beds": {
-        "wind": 0.2,
-        "crickets": 0.3,
-        "drone": 0.5,
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
         "rain": 0,
         "steps": 0
+      },
+      "monster": "แม่ครับ",
+      "hush": {
+        "word": "แม่ครับ",
+        "lead": 0.5,
+        "hold": 0.8
       }
     },
     {
       "id": "hug",
-      "bg": "houseNight",
+      "bg": "insertHug",
+      "say": "แม่กอดเขาแน่น ยายังอยู่ในมือ ยังทัน",
+      "caption": "แม่กอดเขาแน่น ยายังอยู่ในมือ ยังทัน",
       "transition": "cut",
-      "say": "ในบ้าน แม่กอดจ๊าบไว้แน่น ยาอยู่ในมือ ทุกอย่างจบแล้ว",
-      "caption": "แม่กอดจ๊าบไว้แน่น… ยาอยู่ในมือ… *จบแล้ว*",
-      "cast": [
+      "cast": [],
+      "shots": [
         {
-          "who": "jaab",
-          "x": 700,
-          "y": 1720,
-          "scale": 0.85,
-          "torch": false,
-          "expr": "sleepy",
-          "turn": 0.7,
-          "pose": "hold"
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
         },
         {
-          "who": "mum",
-          "x": 790,
-          "y": 1720,
-          "scale": 0.85,
-          "expr": "smile",
-          "turn": -0.7,
-          "pose": "hold",
-          "noShadow": true
+          "at": 0.5,
+          "zoom": 1.15,
+          "x": 700,
+          "y": 1150
         }
       ],
-      "camera": {
-        "from": 1.0,
-        "to": 1.12,
-        "x": 745,
-        "y": 1300
-      },
       "beds": {
-        "wind": 0.1,
-        "crickets": 0.5,
+        "wind": 0.08,
+        "crickets": 0.15,
         "drone": 0,
         "rain": 0,
         "steps": 0
       }
     },
     {
-      "id": "shadow",
-      "bg": "houseNight",
+      "id": "wrong",
+      "bg": "insertHug",
+      "say": "แต่คนที่กอดเขา กลับไม่ยอมปล่อย เขาก้มมองพื้น แล้วตัวก็แข็งไป",
+      "caption": "แต่คนที่กอดเขา กลับไม่ยอมปล่อย เขาก้มมองพื้น แล้วตัวก็แข็งไป",
       "transition": "cut",
-      "say": "แต่ใต้หลอดไฟในห้อง มีเงาอยู่แค่ของจ๊าบ",
-      "caption": "แต่ใต้หลอดไฟ… มีเงาแค่ *ของจ๊าบ*",
-      "hush": {
-        "word": "ของจ๊าบ",
-        "lead": 0.6,
-        "hold": 0.3
-      },
-      "sfx": [
+      "cast": [],
+      "shots": [
         {
-          "at": 0.8,
-          "word": "ของจ๊าบ:end",
-          "sound": "boom",
-          "volume": 0.85
+          "at": 0.0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.3333,
+          "zoom": 1.12,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6667,
+          "zoom": 1.25,
+          "x": 720,
+          "y": 1100
         }
       ],
       "beds": {
-        "wind": 0.1,
-        "crickets": 0,
-        "drone": 0.45,
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
+        "rain": 0,
+        "steps": 0
+      }
+    },
+    {
+      "id": "shadow",
+      "bg": "insertFeetMum",
+      "say": "แม่ไม่มีเงา",
+      "caption": "แม่ไม่มีเงา",
+      "transition": "cut",
+      "cast": [],
+      "shots": [
+        {
+          "at": 0.0,
+          "zoom": 1.05,
+          "x": 540,
+          "y": 1150
+        }
+      ],
+      "beds": {
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
         "rain": 0,
         "steps": 0
       },
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 700,
-          "y": 1720,
-          "scale": 0.85,
-          "torch": false,
-          "expr": "sleepy",
-          "turn": 0.7,
-          "pose": "hold"
-        },
-        {
-          "who": "mum",
-          "x": 790,
-          "y": 1720,
-          "scale": 0.85,
-          "expr": "smile",
-          "turn": -0.7,
-          "pose": "hold",
-          "noShadow": true
-        }
-      ],
-      "shadows": {
-        "x": 640,
-        "wall": true
-      },
-      "shots": [
+      "hits": [
         {
           "at": 0,
-          "zoom": 1.0,
-          "x": 745,
-          "y": 1500
-        },
-        {
-          "at": 0.5,
-          "word": "ของจ๊าบ",
-          "zoom": 1.33,
-          "x": 745,
-          "y": 1800
+          "strength": 15,
+          "sound": "stinger"
         }
       ]
     },
     {
       "id": "bed",
       "bg": "houseNight",
+      "say": "ตัวจริงยังหลับ แล้วใครกอดจ๊าบอยู่",
+      "caption": "ตัวจริงยังหลับ แล้วใครกอดจ๊าบอยู่",
       "transition": "cut",
-      "say": "เพราะแม่ตัวจริง ยังนอนหลับอยู่บนเตียง ตั้งแต่ต้น",
-      "caption": "เพราะ *แม่ตัวจริง*… ยังนอนหลับอยู่บนเตียง *ตั้งแต่ต้น*",
-      "cast": [
-        {
-          "who": "mum",
-          "x": 820,
-          "y": 1720,
-          "scale": 0.85,
-          "expr": "smile",
-          "turn": -0.6,
-          "noShadow": true
-        }
-      ],
+      "cast": [],
       "shots": [
         {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 540,
-          "y": 1200
-        },
-        {
-          "at": 0.4,
-          "word": "นอนหลับ",
-          "zoom": 2.1,
+          "at": 0.0,
+          "zoom": 2,
           "x": 350,
-          "y": 1330
-        }
-      ],
-      "hits": [
-        {
-          "at": 0.4,
-          "word": "นอนหลับ",
-          "strength": 18,
-          "sound": "stinger"
-        }
-      ],
-      "tint": {
-        "color": "#B3262B",
-        "at": 0.85,
-        "word": "ตั้งแต่ต้น",
-        "strength": 0.3
-      },
-      "beds": {
-        "wind": 0.1,
-        "crickets": 0,
-        "drone": 0.45,
-        "rain": 0,
-        "steps": 0
-      }
-    },
-    {
-      "id": "end",
-      "bg": "houseNight",
-      "transition": "cut",
-      "title": "*จบ*",
-      "say": "แล้วคนที่เปิดประตูให้จ๊าบ คือใคร",
-      "caption": "แล้วคนที่เปิดประตูให้จ๊าบ… *คือใคร*?",
-      "cast": [
-        {
-          "who": "mum",
-          "x": 720,
-          "y": 1720,
-          "scale": 0.85,
-          "expr": "smile",
-          "turn": 0,
-          "noShadow": true
-        }
-      ],
-      "shots": [
-        {
-          "at": 0,
-          "zoom": 1.0,
-          "x": 720,
-          "y": 1300
+          "y": 1320
         },
         {
           "at": 0.5,
-          "word": "คือใคร",
-          "zoom": 1.6,
-          "x": 720,
-          "y": 1000
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "insertHug"
         }
       ],
-      "sfx": [
-        {
-          "at": 0.5,
-          "word": "คือใคร",
-          "sound": "riser",
-          "volume": 0.5
-        }
-      ],
-      "padAfter": 1.5,
       "beds": {
-        "wind": 0.1,
-        "crickets": 0,
-        "drone": 0.45,
+        "wind": 0.12,
+        "crickets": 0.12,
+        "drone": 0.28,
         "rain": 0,
         "steps": 0
+      },
+      "hush": {
+        "word": "ใคร",
+        "lead": 0.3,
+        "hold": 0.5
       }
     }
   ]
