@@ -80,6 +80,8 @@ export const ContactShadow: React.FC<{x: number; y: number; rx: number; ry: numb
  */
 export type CastLight = {brightness: number; saturate: number; rim: string; dx: number; dy: number};
 export const CAST_LIGHT: Record<string, CastLight> = {
+	houseOutside: {brightness: 0.88, saturate: 0.9, rim: "rgba(255,184,102,0.55)", dx: -3, dy: -3},
+	houseThreshold: {brightness: 0.9, saturate: 0.9, rim: "rgba(255,184,102,0.5)", dx: -3, dy: -3},
 	forestPath: {brightness: 0.62, saturate: 0.8, rim: 'rgba(157,184,230,0.75)', dx: 5, dy: -4}, // moon up right
 	forestClinic: {brightness: 0.66, saturate: 0.85, rim: 'rgba(255,214,150,0.55)', dx: 0, dy: -5}, // the clinic's glow ahead
 	houseNight: {brightness: 0.82, saturate: 0.9, rim: 'rgba(255,184,102,0.7)', dx: -4, dy: -5}, // the bulb, up and to his left

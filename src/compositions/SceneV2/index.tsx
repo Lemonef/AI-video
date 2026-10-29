@@ -87,7 +87,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const bg = shot?.bg ?? scene.bg;
 	const Env = (v5 || v6 ? ENV5[bg] : undefined) ?? ENVIRONMENTS[bg] ?? ENVIRONMENTS.dark;
 	// An insert replaces the cast as well as the environment.
-	const members = shot?.bg ? [] : scene.cast ?? [];
+	const members = shot?.hideCast || (shot?.bg && !shot.showCast) ? [] : scene.cast ?? [];
 	const cam = shot ? {from: shot.zoom, to: shot.zoom * SHOT_PUSH, x: shot.x, y: shot.y} : scene.camera ?? {};
 	const camStart = shot ? padBefore + at(shot) * lineSec : 0;
 	const zoom = interpolate(t, [camStart, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1], {extrapolateLeft: 'clamp'});
@@ -211,7 +211,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 			<React.Fragment key={i}>
 			{floorShadow}
 			{beamAhead}
-			<g transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(scene.bg)}}>
+			<g transform={`translate(${st.x + shiver} ${st.y}) rotate(${rot}) scale(${s * flip} ${s})`} style={{filter: castFilter(bg)}}>
 				{look5 ? (
 					<Character5 look={look5} pose={st.pose} poseFrom={st.poseFrom} poseBlend={poseBlend} react={react} expr={st.expr} turn={st.turn} frame={frame + i * 17} walking={st.walking} torch={m.torch} />
 				) : (
@@ -233,7 +233,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 					}}
 				>
 					<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: v4 ? V4_WORLD_GRADE : v6 ? scene.grade : undefined}}>
-						<Env frame={frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} progress={scene.progress ? interpolate(p, [0, 1], scene.progress, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : undefined} />
+						<Env frame={shot?.bg ? Math.max(0, frame - Math.round(camStart * FPS)) : frame} scroll={scene.scroll ?? 0} fireflies={scene.fireflies ?? true} density={scene.density ?? 1} progress={scene.progress ? interpolate(p, [0, 1], scene.progress, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}) : undefined} />
 						{(scene.props ?? []).map((pr, i) => {
 							const P = PROPS2[pr.type];
 							if (!P || (pr.at !== undefined && p < pr.at)) return null;
@@ -344,30 +344,30 @@ const ONE_SHOT_FRAMES = FPS * 3;
 
 /** v3 sound cues: authored `sfx`, plus automatic impacts on hits, footsteps while walking, swishes on cuts. */
 const Foley: React.FC<{scene: Scene; real: boolean; atFrame: (cue: {at?: number; word?: string}) => number; totalFrames: number}> = ({scene, real, atFrame, totalFrames}) => {
-	const cues: Array<{from: number; sound: string; volume: number; rate?: number}> = [];
-	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8, rate: c.rate}));
+	const cues: Array<{from: number; sound: string; volume: number; rate?: number; trimBefore?: number}> = [];
+	(scene.sfx ?? []).forEach((c) => cues.push({from: atFrame(c), sound: c.sound, volume: c.volume ?? 0.8, rate: c.rate, trimBefore: c.trimBefore}));
 	(scene.hits ?? []).forEach((h) => {
 		const strength = h.strength ?? 26;
 		const sound = h.sound ?? (strength >= HIT_SOUND_MIN ? 'impact' : '');
-		if (sound) cues.push({from: atFrame(h), sound, volume: Math.min(1, strength * HIT_VOLUME_PER_PX)});
+		if (sound) cues.push({from: atFrame(h), sound, volume: Math.min(1, strength * HIT_VOLUME_PER_PX), trimBefore: h.trimBefore});
 	});
 	// Cuts are silent (as in film) unless a shot names its sound.
 	(scene.shots ?? []).forEach((s) => {
 		if (s.sound) cues.push({from: atFrame(s), sound: s.sound, volume: 0.45});
 	});
 	// recorded footsteps come in as a bed (`steps`); synthetic ones are placed per footfall
-	const walker = real ? undefined : (scene.cast ?? []).find((m) => m.action === 'walk');
+	const walker = !real || scene.footsteps ? (scene.cast ?? []).find((m) => m.action === 'walk') : undefined;
 	if (walker) {
 		// walking lasts until a key switches it off (same rule as castState)
 		const stop = (walker.keys ?? []).find((k) => k.action && k.action !== 'walk');
 		const end = stop ? atFrame(stop) : totalFrames;
-		for (let f = Math.max(0, atFrame({at: 0})); f < end; f += STEP_EVERY_FRAMES) cues.push({from: f, sound: 'step', volume: 0.32});
+		for (let f = Math.max(0, atFrame({at: 0})); f < end; f += STEP_EVERY_FRAMES) cues.push({from: f, sound: 'step', volume: scene.footsteps ? 0.12 : 0.32});
 	}
 	return (
 		<>
 			{cues.map((c, i) => (
 				<Sequence key={`fx${i}`} from={Math.max(0, c.from)} durationInFrames={ONE_SHOT_FRAMES}>
-					<Html5Audio src={staticFile(sfxFile(c.sound, real))} volume={c.volume} playbackRate={c.rate ?? 1} />
+					<Html5Audio src={staticFile(sfxFile(c.sound, real))} volume={c.volume} playbackRate={c.rate ?? 1} trimBefore={c.trimBefore === undefined ? undefined : Math.round(c.trimBefore * FPS)} />
 				</Sequence>
 			))}
 		</>

@@ -3,7 +3,7 @@ import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
 import {ForestAhead, ForestClinic, ForestDark, ForestPath} from '../v7/ForestPath';
 import {ForestMap, ForestMapChase, InsertFootprints, InsertPhone, InsertThermometer, InsertTorch} from '../v7/Inserts';
-import {HouseOutside, InsertDoorLock, InsertDoubleEyes, InsertDyingBulb, InsertFeetMum, InsertFeetTwo, InsertHug} from '../v7/HouseOutside';
+import {HouseOutside, HouseThreshold, InsertPull, InsertBoltOpen, InsertBoltShut, InsertDoorLock, InsertDoubleEyes, InsertDyingBulb, InsertFeetMum, InsertFeetTwo, InsertHug} from '../v7/HouseOutside';
 import {StoreDark, StoreInside, StoreOutside} from '../v7/Store';
 import {CityMap, InsertShutter, InsertTV, StoreMap} from '../v7/StoreInserts';
 import {HouseNight} from '../v7/House';
@@ -252,6 +252,10 @@ export const ENV5: Record<string, React.FC<EnvProps>> = {
 	storeMap: StoreMap,
 	insertShutter: InsertShutter,
 	houseOutside: HouseOutside,
+	houseThreshold: HouseThreshold,
+	insertPull: InsertPull,
+	insertBoltOpen: InsertBoltOpen,
+	insertBoltShut: InsertBoltShut,
 	insertFeetTwo: InsertFeetTwo,
 	insertFeetMum: InsertFeetMum,
 	insertDoorLock: InsertDoorLock,

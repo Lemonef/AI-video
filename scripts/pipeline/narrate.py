@@ -54,10 +54,49 @@ def narrate(episode: dict, engine: TtsEngine, public_dir: Path, force: bool = Fa
     ep_dir = public_dir / episode["id"]
     ep_dir.mkdir(parents=True, exist_ok=True)
     timing_path = ep_dir / "timing.json"
+    if episode.get("voiceClips"):
+        return _narrate_approved_clips(episode, public_dir, timing_path)
     cache = {} if force or not timing_path.exists() else json.loads(timing_path.read_text(encoding="utf-8"))
     if engine.whole_take:
         return _narrate_take(episode, engine, ep_dir, timing_path, cache)
     return _narrate_lines(episode, engine, ep_dir, timing_path, cache)
+
+
+def _narrate_approved_clips(episode: dict, public_dir: Path, timing_path: Path) -> dict:
+    """Rebuild captions from approved, already processed clips after a targeted speech repair.
+
+    Fail on stale text, voice or effects rather than silently reusing a mismatched recording.
+    These sources stay separate from the generated per-build files.
+    """
+    public_root = public_dir.resolve()
+    manifest_path = (public_root / episode["voiceClips"]).resolve()
+    if not manifest_path.is_relative_to(public_root):
+        raise ValueError("voiceClips must be inside public/")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if any(manifest.get(k) != episode.get(k) for k in ("engine", "voice", "voiceModel", "tempo")):
+        raise ValueError("approved clips use a different voice, model or tempo")
+    timing = {}
+    for scene in episode["scenes"]:
+        clip = manifest["clips"][scene["id"]]
+        if _norm(clip["say"]) != _norm(scene["say"]):
+            raise ValueError(f"approved clip text no longer matches scene {scene['id']}")
+        for effect in ("monster", "monsterPreserveTiming"):
+            if clip.get(effect) != scene.get(effect):
+                raise ValueError(f"approved clip effect no longer matches scene {scene['id']}")
+        path = (public_root / clip["audio"]).resolve()
+        if not path.is_relative_to(public_root):
+            raise ValueError("approved audio must be inside public/")
+        length = media.duration(path)
+        words = [Word(**word) for word in clip["words"]]
+        if not words or any(w.start < 0 or w.end < w.start or w.end > length + .05 for w in words):
+            raise ValueError(f"invalid approved word timings in scene {scene['id']}")
+        key = _key("approved", hashlib.sha256(path.read_bytes()).hexdigest())
+        entry = _entry(episode, scene, key, words, length)
+        entry["audio"] = path.relative_to(public_root).as_posix()
+        timing[scene["id"]] = entry
+        print(f"  = {scene['id']}: approved clip ({length:.2f}s)")
+    _save(timing_path, timing)
+    return timing
 
 
 def _narrate_lines(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
@@ -90,6 +129,8 @@ def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
 
 def needs_voicing(episode: dict, engine: TtsEngine, public_dir: Path) -> bool:
     """True when building this episode would spend a TTS request (whole-take engines only)."""
+    if episode.get("voiceClips"):
+        return False
     if not engine.whole_take:
         return False
     ep_dir = public_dir / episode["id"]
@@ -271,12 +312,15 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
             word = scene["monster"]
             at = cue_times.get(word)
             at = at if at is not None else word_start(scene["say"], word, clip_words, speech)
+            if word == scene["say"]:  # a complete dialogue line, even if Whisper spells a word differently
+                at = clip_words[0].start if clip_words else (speech[0] if speech else 0.0)
             if at is not None:
                 spoken_end = speech[1] if speech else (clip_words[-1].end if clip_words else end - start)
                 pauses_in = [(a - start, b - start) for a, b in pauses if start < b and a < end]
                 word_end = monster_end(scene["say"], word, at, spoken_end, clip_words, speech, pauses_in)
-                length = media.monster(mp3, at, word_end)  # slowed: the clip grows
-                grown = (word_end - at) * (1 / media.MONSTER_PITCH - 1)
+                preserve = bool(scene.get("monsterPreserveTiming"))
+                length = media.monster(mp3, at, word_end, preserve_timing=preserve)
+                grown = 0.0 if preserve else (word_end - at) * (1 / media.MONSTER_PITCH - 1)
                 # everything after the creature's words moves later by what the slowing added
                 cue_times = {w: t + grown if t >= word_end else t for w, t in cue_times.items()}
                 cue_times[f"{word}:end"] = word_end + grown  # cue a hit AFTER the word, not over it

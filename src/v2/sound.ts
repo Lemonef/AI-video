@@ -24,8 +24,8 @@ export const sfxFile = (name: string, real = false) => (real && REAL[name] ? `sf
 export const BED_FADE_SEC = 0.4; // bed level glides between scenes instead of jumping
 export const DUCK_ATTACK_SEC = 0.08;
 export const DUCK_RELEASE_SEC = 0.35;
-// Character2's walk swings with sin(frame / 3.4): period 2π·3.4 frames, two footfalls per period.
-export const STEP_EVERY_FRAMES = Math.round(Math.PI * 3.4);
+// Character2 takes two steps per 1.2-second gait cycle.
+export const STEP_EVERY_FRAMES = 18;
 
 export type SceneSpan = {scene: Scene; from: number; frames: number; switchAt: number; fade: number; waits?: string[]};
 

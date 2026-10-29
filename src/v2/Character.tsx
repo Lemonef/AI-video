@@ -1,6 +1,7 @@
 import React from 'react';
 import type {Expr, Pose} from '../types';
 import {V2} from './tokens';
+import {walkCycle} from '../lib/walkCycle';
 
 /**
  * v2 rig: ~4.5 heads tall, two-segment limbs, cel shading (lit front + shadow side), moonlight rim,
@@ -213,8 +214,6 @@ const Hair: React.FC<{look: Look2; turn: number; frame: number; panic: boolean; 
 	);
 };
 
-const FRONT_TURN = 0.35; // |head turn| below this the body reads as facing the camera
-const FRONT_STEP_LIFT = 22; // px a leg lifts per step when walking toward the camera
 
 export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walking, torch, noShadow, poseFrom, poseBlend = 1, react = 0, back}) => {
 	const to = POSES[pose];
@@ -223,23 +222,25 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 		l: [lerp(from.l[0], to.l[0], poseBlend), lerp(from.l[1], to.l[1], poseBlend)] as ArmPose,
 		r: [lerp(from.r[0], to.r[0], poseBlend), lerp(from.r[1], to.r[1], poseBlend)] as ArmPose,
 	};
-	const swing = walking ? Math.sin(frame / 3.4) : 0;
+	const gait = walkCycle(frame);
+	const swing = walking ? gait.swing : 0;
 	const breathe = Math.sin(frame / 18) * 3;
-	const bob = walking ? -Math.abs(Math.cos(frame / 3.4)) * 10 : 0;
+	const bob = walking ? gait.bob : 0;
 	const panic = expr === 'shock' || expr === 'sweat';
 	// Holding a torch overrides the right arm: forward and slightly down, steady while walking.
-	const rArm: ArmPose = torch ? (back ? BACK_TORCH_ARM : TORCH_ARM) : [p.r[0] - swing * 22, p.r[1] - (walking ? 10 : 0)];
-	const lArm: ArmPose = [p.l[0] + swing * 22, p.l[1] + (walking ? 10 : 0)];
-	// Seen from the front, legs swinging fore-aft would read as kicking sideways: they lift in
-	// turn instead (a step toward the camera). Side-on, the classic swing with a bent back knee.
-	const front = Math.abs(turn) < FRONT_TURN;
-	const thighL = front ? swing * 4 : swing * 24;
-	const thighR = front ? -swing * 4 : -swing * 24;
-	const kneeL = walking && !front ? Math.max(0, -swing) * 38 : 0;
-	const kneeR = walking && !front ? Math.max(0, swing) * 38 : 0;
-	const liftL = walking && front ? Math.max(0, swing) * FRONT_STEP_LIFT : 0;
-	const liftR = walking && front ? Math.max(0, -swing) * FRONT_STEP_LIFT : 0;
+	const rArm: ArmPose = torch ? (back ? BACK_TORCH_ARM : TORCH_ARM) : [p.r[0] - swing * 9, p.r[1] - (walking ? 3 : 0)];
+	const lArm: ArmPose = [p.l[0] + swing * 9, p.l[1] + (walking ? 3 : 0)];
+	// The body stays front/back even when the head turns. Keep the hips attached to the
+	// pelvis and foreshorten a lifting leg; never lift the hip or kick the knee sideways.
 	const shoe = <ellipse cx={8} cy={4} rx={30} ry={16} fill={V2.shoe} />;
+	const leg = (x: number, state: ReturnType<typeof walkCycle>['left']) => {
+		const st = walking ? state : {hipX: x, hipY: HIP_Y, kneeX: x, kneeY: HIP_Y + THIGH, ankleX: x, ankleY: HIP_Y + THIGH + SHIN, lift: 0};
+		return <g>
+			<path d={`M${st.hipX},${st.hipY} L${st.kneeX},${st.kneeY} L${st.ankleX},${st.ankleY}`} stroke={look.pants} strokeWidth={LIMB_W} strokeLinecap="round" strokeLinejoin="round" fill="none" />
+			<path d={`M${st.hipX + 8},${st.hipY + 8} L${st.kneeX + 8},${st.kneeY} L${st.ankleX + 8},${st.ankleY - 8}`} stroke={look.pantsShade} strokeWidth={LIMB_W * 0.4} strokeLinecap="round" strokeLinejoin="round" fill="none" opacity={0.65} />
+			<g transform={`translate(${st.ankleX} ${st.ankleY}) scale(1 ${1 - st.lift / 180})`}>{shoe}</g>
+		</g>;
+	};
 	const hand = <circle r={19} fill={look.skin} />;
 	const torchHandBack = (
 		<g>
@@ -268,11 +269,11 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 			
 			{look.bag && !back ? (
 				// the bag lags the walk cycle by ~45°: overlapping action
-				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={look.accent ?? V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
+				<rect x={-112} y={SHOULDER_Y + 10} width={60} height={200} rx={24} fill={look.accent ?? V2.bag} transform={`rotate(${(walking ? Math.sin(frame / 30 * (2 * Math.PI / 1.2) - 0.8) * 6 : 0) + react * 40} -82 ${SHOULDER_Y + 10})`} />
 			) : null}
 			{/* legs */}
-			<Limb x={-34} y={HIP_Y - liftL} a1={thighL} a2={kneeL} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
-			<Limb x={34} y={HIP_Y - liftR} a1={thighR} a2={kneeR} l1={THIGH} l2={SHIN} color={look.pants} shade={look.pantsShade} end={shoe} />
+			{leg(-34, gait.left)}
+			{leg(34, gait.right)}
 			{/* torso: hoodie with cel shadow on the right, pocket, hood */}
 			<g transform={`translate(0 ${breathe})`}>
 				<path d={`M${-SHOULDER_X - 14},${SHOULDER_Y + 8} Q0,${SHOULDER_Y - 26} ${SHOULDER_X + 14},${SHOULDER_Y + 8} L${78},${HIP_Y + 18} Q0,${HIP_Y + 40} ${-78},${HIP_Y + 18} Z`} fill={look.top} />
@@ -288,7 +289,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				{look.lanyard && !back ? (
 					<g>
 						<path d={`M-30,${SHOULDER_Y - 2} L0,${SHOULDER_Y + 90} L30,${SHOULDER_Y - 2}`} stroke={look.accent ?? V2.lanyard} strokeWidth={6} fill="none" />
-						<rect x={-20} y={SHOULDER_Y + 86} width={40} height={52} rx={6} fill={V2.paper} transform={`rotate(${(walking ? Math.sin(frame / 3.4 - 1.2) * 9 : Math.sin(frame / 30) * 2) + react * 60} 0 ${SHOULDER_Y + 86})`} />
+						<rect x={-20} y={SHOULDER_Y + 86} width={40} height={52} rx={6} fill={V2.paper} transform={`rotate(${(walking ? Math.sin(frame / 30 * (2 * Math.PI / 1.2) - 1.2) * 9 : Math.sin(frame / 30) * 2) + react * 60} 0 ${SHOULDER_Y + 86})`} />
 					</g>
 				) : null}
 				{/* moonlight rim on the left contour */}
@@ -313,7 +314,7 @@ export const Character2: React.FC<Props> = ({look, pose, expr, turn, frame, walk
 				</g>
 				{/* from behind the bag sits on top of the body, swinging a beat behind the walk */}
 				{back && look.bag ? (
-					<rect x={-70} y={SHOULDER_Y + 20} width={140} height={190} rx={30} fill={look.accent ?? V2.bag} transform={`rotate(${walking ? Math.sin(frame / 3.4 - 0.8) * 3 : 0} 0 ${SHOULDER_Y + 20})`} />
+					<rect x={-70} y={SHOULDER_Y + 20} width={140} height={190} rx={30} fill={look.accent ?? V2.bag} transform={`rotate(${walking ? Math.sin(frame / 30 * (2 * Math.PI / 1.2) - 0.8) * 3 : 0} 0 ${SHOULDER_Y + 20})`} />
 				) : null}
 			</g>
 			{/* front arm last so it overlaps the body */}

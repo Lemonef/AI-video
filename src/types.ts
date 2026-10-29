@@ -47,6 +47,7 @@ export type Scene = {
 	id: string;
 	type?: 'story' | 'freeze' | 'endcard';
 	bg: string;
+	footsteps?: boolean; // individual footfalls locked to the gait, rather than a looping bed
 	say: string; // spoken text (TTS-friendly: numbers as words, no emoji)
 	caption?: string; // displayed text; defaults to `say`
 	tone?: string; // delivery tag for expressive engines, e.g. "whispers", "excited" (sent as [tone])
@@ -72,17 +73,18 @@ export type Scene = {
 	density?: number; // tree density multiplier
 	transition?: 'fade' | 'whip' | 'cut';
 	shake?: number; // constant camera tremble (px) for the whole scene
-	hits?: Array<{at: number; word?: string; strength?: number; sound?: string}>; // sharp jolts on scare beats; sound overrides the auto impact ('' = silent)
+	hits?: Array<{at: number; word?: string; strength?: number; sound?: string; trimBefore?: number}>; // sharp jolts on scare beats; sound overrides the auto impact ('' = silent)
 	// v3 (only when the episode has `mix`)
 	beds?: Record<string, number>; // bed level 0..1 for this scene, e.g. {"wind": 0.5, "crickets": 0}
 	bedsAt?: {at?: number; word?: string; only?: string[]}; // when this scene's bed levels take over (default: scene start); `only` = just these beds wait
 	bedsFade?: number; // seconds to glide into them (default 0.4; ~0.15 = sudden silence)
 	bedsLead?: number; // J-cut: this scene's beds start this many seconds BEFORE its picture
+	monsterPreserveTiming?: boolean; // pitch effect keeps the original word/caption timing
 	monster?: string; // from this word to the end of the line the voice is the creature's: pitched down (scripts/pipeline/media.py)
 	hush?: {word: string; lead?: number; hold?: number}; // silence-before-the-hit: every bed drops to near zero `lead` s before the word, for `lead + hold` s
 	grade?: string; // colour script: CSS filter for this scene's world (v6)
-	sfx?: Array<{at: number; word?: string; sound: string; volume?: number; rate?: number}>; // rate > 1 = faster (escalating heartbeat) // one-shots at fractions of the line
-	shots?: Array<{at: number; word?: string; zoom: number; x: number; y: number; bg?: string; sound?: string}>; // camera cuts within the scene; silent unless `sound`
+	sfx?: Array<{at: number; word?: string; sound: string; volume?: number; rate?: number; trimBefore?: number}>; // rate > 1 = faster (escalating heartbeat) // one-shots at fractions of the line
+	shots?: Array<{at: number; word?: string; zoom: number; x: number; y: number; bg?: string; showCast?: boolean; hideCast?: boolean; sound?: string}>; // camera cuts within the scene; silent unless `sound`
 	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
 	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
 	rain?: boolean; // v3: rain streaks over the scene
@@ -111,6 +113,7 @@ export type Episode = {
 	title: string;
 	engine?: string; // TTS engine: "gemini" (one expressive take) or "edge" (per line)
 	voice: string;
+	voiceClips?: string; // approved per-scene speech repairs, manifest relative to public/
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
