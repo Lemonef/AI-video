@@ -1,7 +1,7 @@
 # TODO — the only place live status lives
 
 ## NOW (2026-10-29) — read this first
-- [x] Part 3 rewrite draft: `out/drafts/ep03/video.mp4` (79.5 s), all 21 scene stills reviewed; existing final preserved. Review: `docs/ep03-rewrite-review.md`.
+- [x] Part 3 animation/sound pass: `out/drafts/ep03/ep03-reviewed-v3.mp4` (78.6 s), full-body shadows, animated pull, repaired hands, approved voice clips; original final preserved. Review: `docs/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
   - [x] Part 2 posted (IG ~1.1K views first night, 2 real followers; TikTok stuck at ~3 views - check "not eligible" warning)

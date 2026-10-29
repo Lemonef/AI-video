@@ -57,14 +57,14 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "talk",
           "keys": [
             {
               "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "turn": 0.2
             }
           ]
         },
@@ -72,19 +72,17 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "smile",
+          "pose": "idle",
+          "expr": "talk",
+          "noShadow": true,
           "keys": [
             {
               "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "turn": -0.2
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
@@ -131,28 +129,30 @@
     {
       "id": "rewind",
       "bg": "forestClinic",
-      "say": "สิบนาทีก่อน คนส่วนใหญ่เลือกบี จ๊าบไปเอายา",
-      "caption": "สิบนาทีก่อน คนส่วนใหญ่เลือกบี จ๊าบไปเอายา",
+      "say": "สิบนาทีก่อน คนส่วนใหญ่เลือกบี จ๊าบไปเอายาก่อน",
+      "caption": "สิบนาทีก่อน… คนส่วนใหญ่เลือก* B*… จ๊าบไป* เอายาก่อน*",
       "transition": "cut",
       "cast": [
         {
           "who": "jaab",
-          "x": 360,
+          "x": 430,
           "y": 1600,
           "scale": 0.9,
-          "torch": false,
+          "torch": true,
           "expr": "shock",
           "keys": [
             {
-              "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "at": 0.6,
+              "turn": 0.2
             }
           ],
           "back": true,
           "action": "walk",
           "toY": 1200,
-          "toScale": 0.5
+          "toScale": 0.5,
+          "toX": 500,
+          "pose": "idle",
+          "turn": 0
         }
       ],
       "shots": [
@@ -176,13 +176,14 @@
         "rain": 0,
         "steps": 0
       },
-      "chip": "✅ คนส่วนใหญ่เลือก B · ไปเอายาก่อน"
+      "chip": "✅ คนส่วนใหญ่เลือก B · ไปเอายาก่อน",
+      "footsteps": true
     },
     {
       "id": "deadline",
       "bg": "insertThermometer",
-      "say": "แม่ไข้สูง ยายสั่ง ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
-      "caption": "แม่ไข้สูง ยายสั่ง ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
+      "say": "แม่ไข้สูง ยายบอกไว้ ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
+      "caption": "แม่ไข้สูง ยายบอกไว้ ต้องป้อนยาก่อนไฟหน้าบ้านดับ ไม่งั้นแม่จะไม่ตื่น",
       "transition": "cut",
       "cast": [],
       "shots": [
@@ -224,22 +225,24 @@
       "cast": [
         {
           "who": "jaab",
-          "x": 720,
+          "x": 650,
           "y": 1570,
           "scale": 0.8,
-          "torch": false,
+          "torch": true,
           "expr": "shock",
           "keys": [
             {
-              "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "at": 0.6,
+              "turn": 0.2
             }
           ],
           "back": true,
           "action": "walk",
           "toY": 1250,
-          "toScale": 0.5
+          "toScale": 0.5,
+          "toX": 560,
+          "pose": "idle",
+          "turn": 0
         }
       ],
       "shots": [
@@ -262,7 +265,8 @@
         "drone": 0.28,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "footsteps": true
     },
     {
       "id": "twins",
@@ -275,14 +279,14 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "sweat",
           "keys": [
             {
               "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "turn": 0.2
             }
           ]
         },
@@ -290,19 +294,22 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
+          "pose": "idle",
           "expr": "smile",
+          "noShadow": true,
           "keys": [
             {
-              "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "at": 0.355,
+              "pose": "wave"
+            },
+            {
+              "at": 0.98,
+              "pose": "idle",
+              "turn": -0.25
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
@@ -336,15 +343,15 @@
       "cast": [],
       "shots": [
         {
-          "at": 0.0,
+          "at": 0,
           "zoom": 1,
           "x": 540,
           "y": 960
         },
         {
           "at": 0.5,
-          "zoom": 1.15,
-          "x": 640,
+          "zoom": 1.01,
+          "x": 540,
           "y": 960
         }
       ],
@@ -367,14 +374,14 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "sweat",
           "keys": [
             {
               "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "turn": 0.2
             }
           ]
         },
@@ -382,19 +389,17 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
+          "pose": "idle",
           "expr": "smile",
+          "noShadow": true,
           "keys": [
             {
               "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "turn": -0.2
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
@@ -431,23 +436,35 @@
     },
     {
       "id": "copy",
-      "bg": "insertDoorLock",
+      "bg": "houseOutside",
       "say": "แม่ครับ ลูกหมีเอายามาแล้ว",
       "caption": "แม่ครับ ลูกหมีเอายามาแล้ว",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.62,
+          "torch": false,
+          "pose": "idle",
+          "expr": "talk",
+          "noShadow": true,
+          "turn": -0.3
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1,
-          "x": 540,
-          "y": 960
+          "at": 0,
+          "zoom": 1.12,
+          "x": 700,
+          "y": 930
         },
         {
           "at": 0.5,
-          "zoom": 1.2,
-          "x": 620,
-          "y": 900
+          "zoom": 1.25,
+          "x": 700,
+          "y": 930
         }
       ],
       "beds": {
@@ -456,8 +473,7 @@
         "drone": 0.28,
         "rain": 0,
         "steps": 0
-      },
-      "monster": "แม่ครับ"
+      }
     },
     {
       "id": "bolt",
@@ -468,17 +484,26 @@
       "cast": [],
       "shots": [
         {
-          "at": 0.0,
+          "at": 0,
           "zoom": 1,
           "x": 540,
-          "y": 960
+          "y": 1000
         },
         {
-          "at": 0.5,
+          "at": 0.13,
+          "zoom": 1.08,
+          "x": 570,
+          "y": 960,
+          "bg": "insertBoltOpen",
+          "word": "ขยับ"
+        },
+        {
+          "at": 0.4,
           "zoom": 1,
           "x": 540,
           "y": 960,
-          "bg": "insertDyingBulb"
+          "bg": "insertDyingBulb",
+          "word": "หลอดไฟ"
         }
       ],
       "beds": {
@@ -490,9 +515,10 @@
       },
       "sfx": [
         {
-          "at": 0,
+          "at": 0.13,
+          "word": "ขยับ",
           "sound": "click",
-          "volume": 0.7
+          "volume": 0.35
         }
       ]
     },
@@ -507,14 +533,20 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "sweat",
           "keys": [
             {
-              "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "at": 0.1,
+              "pose": "point",
+              "expr": "angry"
+            },
+            {
+              "at": 0.62,
+              "pose": "idle",
+              "expr": "sweat"
             }
           ]
         },
@@ -522,19 +554,17 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
+          "pose": "idle",
           "expr": "smile",
+          "noShadow": true,
           "keys": [
             {
               "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "turn": -0.2
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
@@ -583,14 +613,14 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "sweat",
           "keys": [
             {
               "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "turn": 0.2
             }
           ]
         },
@@ -598,33 +628,31 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
+          "pose": "idle",
           "expr": "smile",
+          "noShadow": true,
           "keys": [
             {
               "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "turn": -0.2
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1,
+          "at": 0,
+          "zoom": 1.02,
           "x": 540,
-          "y": 960
+          "y": 1000
         },
         {
           "at": 0.5,
-          "zoom": 1.15,
+          "zoom": 1.12,
           "x": 540,
-          "y": 960
+          "y": 1000
         }
       ],
       "beds": {
@@ -635,7 +663,7 @@
         "steps": 0
       },
       "shadows": {
-        "x": 600,
+        "x": 620,
         "wall": true
       },
       "padAfter": 0.5,
@@ -652,14 +680,14 @@
           "who": "jaab",
           "x": 360,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
-          "expr": "shock",
+          "pose": "idle",
+          "expr": "sweat",
           "keys": [
             {
               "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
+              "turn": 0.2
             }
           ]
         },
@@ -667,33 +695,31 @@
           "who": "jaab",
           "x": 720,
           "y": 1180,
-          "scale": 0.5,
+          "scale": 0.62,
           "torch": false,
+          "pose": "idle",
           "expr": "smile",
+          "noShadow": true,
           "keys": [
             {
               "at": 0.5,
-              "turn": -0.6,
-              "pose": "idle"
+              "turn": -0.2
             }
-          ],
-          "noShadow": true,
-          "pose": "wave",
-          "facing": -1
+          ]
         }
       ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1.05,
+          "at": 0,
+          "zoom": 1.02,
           "x": 540,
-          "y": 960
+          "y": 1000
         },
         {
           "at": 0.5,
-          "zoom": 1.25,
+          "zoom": 1.12,
           "x": 540,
-          "y": 1030
+          "y": 1000
         }
       ],
       "beds": {
@@ -704,23 +730,55 @@
         "steps": 0
       },
       "shadows": {
-        "x": 600,
+        "x": 620,
         "wall": true
       }
     },
     {
       "id": "feet",
-      "bg": "insertFeetTwo",
+      "bg": "houseOutside",
       "say": "แม้แต่ใต้เท้า ก็ไม่มี",
       "caption": "แม้แต่ใต้เท้า ก็ไม่มี",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1180,
+          "scale": 0.62,
+          "torch": false,
+          "pose": "idle",
+          "expr": "sweat",
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.2
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.62,
+          "torch": false,
+          "pose": "idle",
+          "expr": "smile",
+          "noShadow": true,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.2
+            }
+          ]
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1,
+          "at": 0,
+          "zoom": 1.02,
           "x": 540,
-          "y": 960
+          "y": 1000
         }
       ],
       "beds": {
@@ -734,6 +792,10 @@
         "word": "ไม่มี",
         "lead": 0.4,
         "hold": 0.3
+      },
+      "shadows": {
+        "x": 620,
+        "wall": true
       }
     },
     {
@@ -767,49 +829,23 @@
     },
     {
       "id": "reach",
-      "bg": "houseOutside",
+      "bg": "insertPull",
       "say": "มือจากในบ้าน คว้าจ๊าบคนซ้ายเข้าไป เขากำยาไว้ ไม่ยอมทำหล่น",
       "caption": "มือจากในบ้าน คว้าจ๊าบคนซ้ายเข้าไป เขากำยาไว้ ไม่ยอมทำหล่น",
       "transition": "cut",
-      "cast": [
-        {
-          "who": "jaab",
-          "x": 360,
-          "y": 1400,
-          "scale": 0.7,
-          "torch": false,
-          "expr": "shock",
-          "keys": [
-            {
-              "at": 0.5,
-              "turn": 0.65,
-              "pose": "hold"
-            }
-          ],
-          "action": "walk",
-          "toX": 460,
-          "toY": 1180,
-          "toScale": 0.5
-        }
-      ],
+      "cast": [],
       "shots": [
         {
-          "at": 0.0,
+          "at": 0,
           "zoom": 1,
           "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.3333,
-          "zoom": 1.12,
-          "x": 540,
-          "y": 960
-        },
-        {
-          "at": 0.6667,
-          "zoom": 1.35,
-          "x": 430,
           "y": 1000
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.04,
+          "x": 600,
+          "y": 1050
         }
       ],
       "beds": {
@@ -818,27 +854,58 @@
         "drone": 0.28,
         "rain": 0,
         "steps": 0
-      }
+      },
+      "progress": [
+        0,
+        1
+      ]
     },
     {
       "id": "slam",
-      "bg": "insertDoorLock",
+      "bg": "houseOutside",
       "say": "ประตูปิด อีกคนหยุดยิ้มทันที",
       "caption": "ประตูปิด อีกคนหยุดยิ้มทันที",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.62,
+          "torch": false,
+          "pose": "idle",
+          "expr": "smile",
+          "noShadow": true,
+          "keys": [
+            {
+              "at": 0.544,
+              "expr": "flat",
+              "turn": -0.3
+            }
+          ]
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1,
+          "at": 0,
+          "zoom": 1.03,
           "x": 540,
           "y": 960
         },
         {
-          "at": 0.5,
-          "zoom": 1.15,
+          "at": 0.224,
+          "word": "ปิด",
+          "zoom": 1,
           "x": 540,
-          "y": 960
+          "y": 960,
+          "bg": "insertBoltShut"
+        },
+        {
+          "at": 0.544,
+          "word": "หยุดยิ้ม",
+          "zoom": 1.18,
+          "x": 700,
+          "y": 950
         }
       ],
       "beds": {
@@ -850,31 +917,58 @@
       },
       "hits": [
         {
-          "at": 0,
-          "strength": 28,
-          "sound": "impact"
+          "at": 0.224,
+          "word": "ปิด",
+          "strength": 16,
+          "sound": ""
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.224,
+          "word": "ปิด",
+          "sound": "impact",
+          "volume": 0.14,
+          "trimBefore": 0.94
         }
       ]
     },
     {
       "id": "whisper",
-      "bg": "insertDoorLock",
+      "bg": "houseOutside",
       "say": "แม่ครับ เปิดให้ผมด้วย",
       "caption": "แม่ครับ เปิดให้ผมด้วย",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 720,
+          "y": 1180,
+          "scale": 0.62,
+          "torch": false,
+          "pose": "idle",
+          "expr": "talk",
+          "noShadow": true,
+          "keys": [
+            {
+              "at": 0.9,
+              "expr": "flat"
+            }
+          ]
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1,
-          "x": 540,
-          "y": 960
+          "at": 0,
+          "zoom": 1.12,
+          "x": 700,
+          "y": 950
         },
         {
           "at": 0.5,
-          "zoom": 1.15,
-          "x": 540,
-          "y": 960
+          "zoom": 1.22,
+          "x": 700,
+          "y": 950
         }
       ],
       "beds": {
@@ -884,12 +978,13 @@
         "rain": 0,
         "steps": 0
       },
-      "monster": "แม่ครับ",
+      "monster": "แม่ครับ เปิดให้ผมด้วย",
       "hush": {
         "word": "แม่ครับ",
         "lead": 0.5,
         "hold": 0.8
-      }
+      },
+      "monsterPreserveTiming": true
     },
     {
       "id": "hug",
@@ -913,8 +1008,8 @@
         }
       ],
       "beds": {
-        "wind": 0.08,
-        "crickets": 0.15,
+        "wind": 0.05,
+        "crickets": 0,
         "drone": 0,
         "rain": 0,
         "steps": 0
@@ -926,53 +1021,118 @@
       "say": "แต่คนที่กอดเขา กลับไม่ยอมปล่อย เขาก้มมองพื้น แล้วตัวก็แข็งไป",
       "caption": "แต่คนที่กอดเขา กลับไม่ยอมปล่อย เขาก้มมองพื้น แล้วตัวก็แข็งไป",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1390,
+          "scale": 0.72,
+          "torch": false,
+          "pose": "idle",
+          "expr": "sweat",
+          "turn": 0.2,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.1
+            }
+          ]
+        },
+        {
+          "who": "mum",
+          "x": 700,
+          "y": 1390,
+          "scale": 0.72,
+          "torch": false,
+          "pose": "hold",
+          "expr": "smile",
+          "noShadow": true,
+          "turn": -0.4
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
+          "at": 0,
           "zoom": 1,
           "x": 540,
-          "y": 960
+          "y": 960,
+          "hideCast": true
         },
         {
-          "at": 0.3333,
+          "at": 0.4,
           "zoom": 1.12,
-          "x": 540,
-          "y": 960
+          "x": 650,
+          "y": 1080,
+          "hideCast": true
         },
         {
-          "at": 0.6667,
-          "zoom": 1.25,
-          "x": 720,
-          "y": 1100
+          "at": 0.562,
+          "zoom": 1,
+          "x": 540,
+          "y": 1040,
+          "bg": "houseThreshold",
+          "word": "มองพื้น",
+          "showCast": true
         }
       ],
       "beds": {
         "wind": 0.12,
-        "crickets": 0.12,
+        "crickets": 0,
         "drone": 0.28,
         "rain": 0,
         "steps": 0
+      },
+      "shadows": {
+        "x": 620,
+        "wall": true
       }
     },
     {
       "id": "shadow",
-      "bg": "insertFeetMum",
+      "bg": "houseThreshold",
       "say": "แม่ไม่มีเงา",
       "caption": "แม่ไม่มีเงา",
       "transition": "cut",
-      "cast": [],
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 360,
+          "y": 1390,
+          "scale": 0.72,
+          "torch": false,
+          "pose": "idle",
+          "expr": "sweat",
+          "turn": 0.2,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": -0.1
+            }
+          ]
+        },
+        {
+          "who": "mum",
+          "x": 700,
+          "y": 1390,
+          "scale": 0.72,
+          "torch": false,
+          "pose": "hold",
+          "expr": "smile",
+          "noShadow": true,
+          "turn": -0.4
+        }
+      ],
       "shots": [
         {
-          "at": 0.0,
-          "zoom": 1.05,
+          "at": 0,
+          "zoom": 1.04,
           "x": 540,
-          "y": 1150
+          "y": 1040
         }
       ],
       "beds": {
         "wind": 0.12,
-        "crickets": 0.12,
+        "crickets": 0,
         "drone": 0.28,
         "rain": 0,
         "steps": 0
@@ -980,10 +1140,15 @@
       "hits": [
         {
           "at": 0,
-          "strength": 15,
+          "word": "ไม่มี",
+          "strength": 12,
           "sound": "stinger"
         }
-      ]
+      ],
+      "shadows": {
+        "x": 620,
+        "wall": true
+      }
     },
     {
       "id": "bed",
@@ -1009,7 +1174,7 @@
       ],
       "beds": {
         "wind": 0.12,
-        "crickets": 0.12,
+        "crickets": 0,
         "drone": 0.28,
         "rain": 0,
         "steps": 0
@@ -1020,5 +1185,6 @@
         "hold": 0.5
       }
     }
-  ]
+  ],
+  "voiceClips": "approved/ep03/timing.json"
 }
