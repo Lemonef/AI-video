@@ -82,7 +82,7 @@ export type Scene = {
 	hush?: {word: string; lead?: number; hold?: number}; // silence-before-the-hit: every bed drops to near zero `lead` s before the word, for `lead + hold` s
 	grade?: string; // colour script: CSS filter for this scene's world (v6)
 	sfx?: Array<{at: number; word?: string; sound: string; volume?: number; rate?: number}>; // rate > 1 = faster (escalating heartbeat) // one-shots at fractions of the line
-	shots?: Array<{at: number; word?: string; zoom: number; x: number; y: number; sound?: string}>; // camera cuts within the scene; silent unless `sound`
+	shots?: Array<{at: number; word?: string; zoom: number; x: number; y: number; bg?: string; sound?: string}>; // camera cuts within the scene; silent unless `sound`
 	stat?: {value: string; label: string; at?: number}; // big number card ("3 ข้อ")
 	choices?: {a: {x: number; y: number}; b: {x: number; y: number}}; // end card: options pinned to places in the scene
 	rain?: boolean; // v3: rain streaks over the scene

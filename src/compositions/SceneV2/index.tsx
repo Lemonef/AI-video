@@ -78,12 +78,16 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const v6 = ep.style === 'v6';
 	const v4 = ep.style === 'v4';
 	const v3 = ep.style === 'v3' || v4 || v5 || v6; // later styles include every v3 feature
-	const Env = (v5 || v6 ? ENV5[scene.bg] : undefined) ?? ENVIRONMENTS[scene.bg] ?? ENVIRONMENTS.dark;
+
 	const countdownStart = scene.countdownAt === undefined ? lineSec + padAfter(ep, scene) : scene.countdownAt * lineSec;
 	const atFrame = (at: number) => Math.round((padBefore + at * lineSec) * FPS);
 	const at = (cue: {at?: number; word?: string}) => cueAt(cue, timing, lineSec);
 
 	const shot = [...(scene.shots ?? [])].reverse().find((s) => p >= at(s));
+	const bg = shot?.bg ?? scene.bg;
+	const Env = (v5 || v6 ? ENV5[bg] : undefined) ?? ENVIRONMENTS[bg] ?? ENVIRONMENTS.dark;
+	// An insert replaces the cast as well as the environment.
+	const members = shot?.bg ? [] : scene.cast ?? [];
 	const cam = shot ? {from: shot.zoom, to: shot.zoom * SHOT_PUSH, x: shot.x, y: shot.y} : scene.camera ?? {};
 	const camStart = shot ? padBefore + at(shot) * lineSec : 0;
 	const zoom = interpolate(t, [camStart, sceneSeconds(ep, scene)], [cam.from ?? 1, cam.to ?? cam.from ?? 1], {extrapolateLeft: 'clamp'});
@@ -127,7 +131,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 	const camZ = zoom * OVERSCAN;
 	const camOx = cam.x ?? W / 2;
 	const camOy = cam.y ?? H / 2;
-	(scene.cast ?? []).forEach((m) => {
+	members.forEach((m) => {
 		const cs = castState(m, p, lineSec, FPS);
 		const s = cs.scale;
 		const fx = camOx + (cs.x - camOx) * camZ;
@@ -154,7 +158,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 
 	const beams: React.ReactNode[] = [];
 	const pools: React.ReactNode[] = [];
-	const cast = (scene.cast ?? []).map((m, i) => {
+	const cast = members.map((m, i) => {
 		const look5 = v5 ? CAST5[m.who] : undefined;
 		const look = CAST2[m.who];
 		if (!look && !look5) return null;
@@ -241,7 +245,7 @@ export const SceneV2: React.FC<{ep: Episode; scene: Scene; index: number}> = ({e
 							);
 						})}
 						{v4
-							? (scene.cast ?? []).map((m, i) => (
+							? members.map((m, i) => (
 									<ellipse key={`halo${i}`} cx={castState(m, p, lineSec, FPS).x} cy={m.y - 480 * (m.scale ?? 1)} rx={330 * (m.scale ?? 1)} ry={560 * (m.scale ?? 1)} fill="url(#halo)" opacity={HALO_OPACITY} />
 								))
 							: null}

@@ -27,9 +27,12 @@ def main() -> None:
     ap.add_argument("--voice", help="override the episode's voice")
     ap.add_argument("--force", action="store_true", help="re-voice every line, ignore cache")
     ap.add_argument("--no-render", action="store_true", help="voice + captions only")
+    ap.add_argument("--draft", action="store_true", help="build into out/drafts/<ep>/ without changing the published final")
     ap.add_argument("--publish", action="store_true", help="only copy the newest version into out/final/<ep>/")
     ap.add_argument("--allow-retention", action="store_true", help="render even if the retention lint fails (deliberate exceptions only)")
     args = ap.parse_args()
+    if args.draft and args.publish:
+        ap.error("--draft and --publish cannot be combined")
 
     src = ROOT / "episodes" / f"{args.episode}.json"
     episode = json.loads(src.read_text(encoding="utf-8"))
@@ -63,7 +66,9 @@ def main() -> None:
         return
     # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
     final.mkdir(parents=True, exist_ok=True)
-    out = final / "video.mp4"
+    destination = ROOT / "out" / "drafts" / args.episode if args.draft else final
+    destination.mkdir(parents=True, exist_ok=True)
+    out = destination / "video.mp4"
     build = ROOT / ".build"
     build.mkdir(parents=True, exist_ok=True)
     raw = build / f"{args.episode}.raw.mp4"
@@ -72,7 +77,7 @@ def main() -> None:
     version = versions.new_version(ROOT, args.episode)
     print(f"[4/4] loudness master -> {version.relative_to(ROOT)} -> {out.relative_to(ROOT)}")
     master(raw, version)
-    kit = postkit.write(final, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
+    kit = postkit.write(destination, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
     versions.publish(version, out)
     print(f"done: {out}")
     print(f"post kit: {kit}")

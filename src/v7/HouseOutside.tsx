@@ -167,3 +167,58 @@ export const InsertFeetMum: React.FC<EnvProps> = ({frame}) => (
 		<Feet x={740} y={1300} shadow={false} mum />
 	</g>
 );
+
+/** The opening image: mum's hand has reached the old brass door bolt. */
+export const InsertDoorLock: React.FC<EnvProps> = ({frame}) => {
+	const tremble = Math.sin(frame * 0.7) * 3;
+	return (
+		<g>
+			<rect width={W} height={H} fill={C.woodDark} />
+			{Array.from({length: 9}, (_, i) => <line key={i} x1={120 + i * 115} y1={0} x2={120 + i * 115} y2={H} stroke={C.plank} strokeWidth={8} />)}
+			<rect x={245} y={760} width={590} height={210} rx={24} fill="#241A15" opacity={0.75} />
+			<rect x={300} y={820} width={430} height={78} rx={26} fill="#B98A43" />
+			<rect x={680} y={780} width={90} height={160} rx={18} fill="#80602E" />
+			<g transform={`translate(${tremble} 0)`}>
+				<path d="M160,1260 C260,1080 370,920 535,870 C610,848 650,920 606,970 C550,1034 486,1042 420,1110 C358,1174 336,1300 280,1390 Z" fill={C.mumFoot} />
+				<path d="M510,890 C548,812 590,770 628,786 C674,806 654,874 610,930 Z" fill={C.mumFoot} />
+			</g>
+			<Darkness id="lock" color={C.night} opacity={0.74} lights={[{x: 620, y: 860, reach: 760}]} />
+			<Glow id="lock-warm" x={650} y={780} r={650} color={C.warm} strength={0.65} />
+		</g>
+	);
+};
+
+/** Uncanny facial insert: two matching eyes blink a fraction apart. */
+export const InsertDoubleEyes: React.FC<EnvProps> = ({frame}) => {
+	const leftClosed = frame % 70 > 55 && frame % 70 < 62;
+	const rightClosed = (frame + 11) % 70 > 55 && (frame + 11) % 70 < 62;
+	const eye = (x: number, closed: boolean) => (
+		<g transform={`translate(${x} 950)`}>
+			<ellipse rx={210} ry={closed ? 10 : 105} fill="#F4EEE3" />
+			{closed ? null : <><circle r={58} fill="#251B18" /><circle cx={18} cy={-20} r={13} fill="#fff" /></>}
+		</g>
+	);
+	return <g><rect width={W} height={H} fill="#211815" /><rect y={560} width={W} height={760} fill="#C9A383" />{eye(290, leftClosed)}{eye(790, rightClosed)}<Darkness id="eyes" color={C.night} opacity={0.58} lights={[{x: 290, y: 950, reach: 420}, {x: 790, y: 950, reach: 420}]} /></g>;
+};
+
+/** The deadline made visible: the porch bulb sputters toward darkness. */
+export const InsertDyingBulb: React.FC<EnvProps> = ({frame}) => {
+	const on = Math.floor(frame / 5) % 5 !== 2 && Math.floor(frame / 7) % 6 !== 4;
+	return <g><rect width={W} height={H} fill={C.night} /><line x1={540} y1={0} x2={540} y2={680} stroke="#201711" strokeWidth={18} /><circle cx={540} cy={800} r={115} fill={on ? C.bulb : "#4C463C"} /><Glow id="dying" x={540} y={800} r={on ? 650 : 180} color={C.warm} strength={on ? 0.9 : 0.12} /><path d="M430,800 Q540,660 650,800" fill="none" stroke="#7A6848" strokeWidth={12} /></g>;
+};
+
+/** Cut-around hug: arms and a hand grip Jaab's back; no stiff standing rigs. */
+export const InsertHug: React.FC<EnvProps> = ({frame}) => {
+	const squeeze = 8 * Math.sin(frame / 12);
+	return (
+		<g>
+			<rect width={W} height={H} fill="#3B2A22" />
+			<Glow id="hug-lamp" x={840} y={360} r={900} color={C.warm} strength={0.65} />
+			<path d="M150,1920 Q120,1120 360,650 Q540,480 735,690 Q930,1100 910,1920 Z" fill="#2B3142" />
+			<path d={`M90,1320 Q300,1030 610,1120 Q760,1160 ${850 + squeeze},1330 Q850,1420 760,1420 Q610,1300 430,1350 Q260,1410 90,1530 Z`} fill={C.mumFoot} />
+			<path d="M710,1050 Q830,970 920,1040 Q980,1110 900,1180 L770,1240 Q680,1160 710,1050 Z" fill={C.mumFoot} />
+			{[0,1,2,3].map((i) => <path key={i} d={`M${760 + i * 34},1070 Q${790 + i * 28},990 ${820 + i * 30},1020`} stroke="#B78E72" strokeWidth={26} strokeLinecap="round" />)}
+			<Darkness id="hug" color={C.night} opacity={0.48} lights={[{x: 820, y: 720, reach: 1050}]} />
+		</g>
+	);
+};
