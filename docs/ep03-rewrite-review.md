@@ -1,6 +1,7 @@
 # Part 3 animation and sound review - 2026-10-29
+**Approved and promoted by Zen, 2026-10-29:** current final is `out/final/ep03/video.mp4` with the matching cover, post text and script. The previous final and its kit are now drafts in `out/drafts/ep03/previous-final/`. All four promoted files and all four archived originals were verified by SHA-256. Earlier preservation statements below describe the draft-review stage.
 
-Latest export: `out/drafts/ep03/ep03-reviewed-v3.mp4` (**78.6 seconds**, 1440 x 2560 / 30 fps).
+Latest reviewed export: `out/drafts/ep03/ep03-reviewed-v3.mp4` (**78.6 seconds**, 1440 x 2560 / 30 fps).
 Canonical draft: `out/drafts/ep03/video.mp4` (identical bytes).
 Version: `D:\AI-video\out\versions\ep03\2026-10-29_195320.mp4`.
 

@@ -1,11 +1,11 @@
 # TODO — the only place live status lives
 
 ## NOW (2026-10-29) — read this first
-- [x] Part 3 animation/sound pass: `out/drafts/ep03/ep03-reviewed-v3.mp4` (78.6 s), full-body shadows, animated pull, repaired hands, approved voice clips; original final preserved. Review: `docs/ep03-rewrite-review.md`.
+- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
   - [x] Part 2 posted (IG ~1.1K views first night, 2 real followers; TikTok stuck at ~3 views - check "not eligible" warning)
-  - [x] Part 3 finale built: `out/final/ep03/video.mp4` 77.3 s (B opening, wall-shadow test, fake mum twist, no end choice)
+  - [x] Part 3 finale approved: `out/final/ep03/video.mp4` 78.6 s (repaired hands and animated pull, full-body shadows, corrected B caption and voice).
   - [ ] Zen posts Part 3 at 20:00 (TikTok, IG via Business Suite, YouTube) + pins comment
   - [ ] Collect numbers: views, avg watch time, retention graphs (IG + TikTok), comments
 - [ ] Upgrade phase (start in a NEW chat; Codex does the heavy work, Claude writes the contract + checks frames)
