@@ -29,3 +29,16 @@ Original code-rendered episode using established Jaab rig, not a completed1:1 re
 Reference copy remains PAUSED unfinished. Three Wishes direction stopped, no release. Failed encoding take retained as local diagnostic, excluded from git.
 
 Cover QA caught inherited forest/watcher artwork from the old template; fixed story-selectable coverBg, human looter, flood exterior and shorter single-line hook. Re-rendered cover only; video bytes unchanged. Third cover revision moves the villain below the title and hides scene-only text.
+
+
+## Superseding pacing revision ? owner rejects fixed45s
+
+Owner heard fast,monotone,repeated pacing, then explicitly said video can be as long as it needs. Historical35?45s advice was wrongly treated as requirement; no replacement target or total cap is authorized. Pipeline total90/120second restrictions removed; visual-stagnation/hook/framing checks retained. Old45s final and full audio cache preserved at out/drafts/bangkok-flood/ep01/previous-rushed-final/.
+
+A genuinely fresh Iapetus performance (same Gemini2.5model) was generated with episode-level natural/story-specific direction,joined scene text,tempo1.0 instead of1.03,more varied natural Thai syntax and purposeful recognition/threat holds. No instructed runtime. Transcript covers the whole revised script and complete final villain dialogue, with no spoken English direction. Source take72.922875s. Camera cuts retimed around the performance.
+
+New promoted final: SAME out/final/bangkok-flood/ep01/video.mp4,74.500s container,2233pictureframes,1440x2560,30fps. SHA256 dccad60c4c1217077aa6f8b925849c86971c19269e584179f65cf5b893d33c22. Distinct review copy out/drafts/bangkok-flood/ep01/natural-pacing.mp4; isolated performance natural-narration.mp3. Cover/post/script updated alongside final.
+
+All10new scene stills and12action phases inspected in ep01-natural-review. Actual new mix -13.02LUFS/-1.49dBTP,LRA2.6. Output is not speed-stretched to an artificial duration.31pytest pass (new tests ensure long stories allowed,visual checks preserved,performance direction invalidates voice cache without changing alignment lines); TypeScript pass. Threat's4.6s held visual reported as WARN, intentional quiet build,not a blocked duration check.
+
+Still OPEN: actual owner playback/listening/performance acceptance. Transcript,frames and loudness do not establish that the new voice sounds natural. No social posting. Do not call the prior45s pacing approved. Reusable direction/cache mechanism informed by official https://ai.google.dev/gemini-api/docs/speech-generation; no model switch.
