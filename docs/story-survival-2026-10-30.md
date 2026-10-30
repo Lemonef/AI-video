@@ -128,3 +128,59 @@ P3: coordinated evacuation, payoff of an earlier useful item/decision, emotional
 ### Visual/audio requirements carried forward
 
 Keep Jaab's approved identity; design Khem distinctly (own person, no real-person face/voice imitation). Geographic wide → load/hand inserts → full-body stair motion → two-shot reaction → restrained close-up for fear reveal. Water/reflections follow floor planes; rain only where visible. Source of light and wet/dry levels consistent. Natural Thai, continuous performance/edit flow, intelligible dialogue, quiet beds and contact-synced effects. Validate bounds/overlap/captions/exports and actually review each scene/motion before final. Final release will go in `out/final/bangkok-flood/ep01/`; no such finished video exists yet.
+
+
+## LATEST OWNER CORRECTION — thugs are the antagonists
+
+Overrides the comic-helper Khem premise. Owner wants people exploiting the flood to steal, not a lovable thug sidekick. Keep a little character/situational humour, but survival/criminal pressure is the main story. User explicitly asks refine/think before making it; deadline pressure does not authorize another premature render.
+
+### Revised story: กรุงเทพจมน้ำ — พวกที่มาช่วยขนของ
+
+Premise: Jaab has reached a dry upper floor during an overnight flood. Two men pretending to help evacuate possessions are actually looting the emptied apartments. He can stay unnoticed, but warning the other residents makes him their next target.
+
+The flood is not merely wallpaper: blackout and evacuation empty apartments; outside access is by boat, slowing help; the wet lower route prevents a normal street exit. The safe upper floor is physically safe from current water, not inexplicably about to flood eight floors deep. The human antagonists now create immediate danger.
+
+Villains: two fictional opportunistic looters, recognizable silhouettes/outfits, no specific real-person imitation. Leader is calm and coercive rather than cartoon shouting. Accomplice's greed supplies one small joke. Do not equate Rangsit residents with criminals; these are individual fictional characters.
+
+### Preferred first-part hook
+
+“หนีน้ำขึ้นมาได้แล้ว… แต่ห้องข้างๆ กำลังโดนปล้น”
+First image: blue flood reflection through stairwell window, a dry landing, two men taking a TV DOWN toward a waiting boat while claiming to move it higher. Readable contradiction at phone size. No slow setup, no rewind, no supernatural reveal.
+
+### Full Thai narration draft — before timing/voicing
+
+1. หนีน้ำขึ้นมาได้แล้ว แต่ห้องข้างจ๊าบกำลังโดนปล้น
+2. หลังน้ำท่วมทั้งคืน ไฟคอนโดดับ คนชั้นล่างย้ายขึ้นมา ส่วนหลายห้อง เจ้าของหนีออกไปแล้ว
+3. ผู้ชายสองคนเคาะห้อง บอกว่ามาช่วยขนของขึ้นที่สูง จ๊าบเกือบเปิดให้
+4. แต่พอมองลงไป ทีวีห้องข้างๆ อยู่บนเรือของพวกมัน ยกขึ้นที่สูงอะไร ยกกลับบ้านตัวเองชัดๆ
+5. จ๊าบปิดประตู แล้วโทรขอความช่วยเหลือ แจ้งตึกกับชั้นที่อยู่ แต่เรือยังมาไม่ถึง
+6. ตอนนั้นเอง พวกมันเคาะห้องป้าข้างบันได ป้าคิดว่าคนมาช่วย กำลังจะเปิด
+7. ถ้าเงียบ จ๊าบอาจรอดคนเดียว เขาเลยตะโกนจากหน้าต่าง อย่าเปิด พวกนี้ขโมยของ
+8. หน้าต่างอีกหลายห้องเปิด คนเริ่มช่วยกันตะโกน ป้าหยุดมือทัน แต่พวกมันเห็นแล้วว่าเสียงมาจากห้องไหน
+9. ลูกบิดห้องจ๊าบขยับ แล้วมีเสียงพูด เมื่อกี้ มึงว่าใครขโมย
+10. คุณจะให้จ๊าบขวางประตู รอคนมาช่วย หรือออกทางบันไดอีกฝั่ง ไปสมทบห้องอื่น คอมเมนต์ เอ หรือ บี
+
+Draft is a natural-Thai story, not an approved performance. Shorten before voicing if actual pace pushes it beyond a useful short episode; do not time-compress every sentence just to hit a quota.
+
+### Causal / retention review
+
+- GOAL: remain safe during flood and get help; after discovering theft, protect another resident without surrendering himself.
+- EARLY CLUE: “up to higher ground” claim vs goods actually going downstairs into a boat. Show this BEFORE narration names the lie. A distinctive neighbor TV/recognition cue establishes ownership; a TV alone does not prove theft.
+- HUMOUR: the euphemism “helping carry things” exposed by where things go. One short aside aimed at the crooks' greed; do not make the victim or flooding a punchline.
+- CHOICE/AGENCY: Jaab initially closes the door and calls for help, so he is not inexplicably failing to take the obvious action. Then he chooses to warn the neighbor, sacrificing anonymity. The retaliation follows HIS meaningful choice.
+- PART1 PAYOFF: residents understand the theft; the neighbor stops opening the door. We deliver a successful warning rather than ending before anything happens.
+- CLIMAX: the thieves identify Jaab's room. A previously demonstrated safe refuge becomes a human-threat trap.
+- NEXT QUESTION: how can he survive the response? End on a specific decision that changes Part2.
+- GEOGRAPHY TO SHOW: dry upper corridor, Jaab room, neighbor by stairwell, main stairs controlled by looters, an alternate stair route reachable from the corridor. No balcony jumping, impossible side exit from a locked room, or suddenly invented second staircase.
+- A/B STILL NEEDS BOARDING CHECK: A barricade/wait reduces exposure but door has limited resistance. B join alerted residents reduces isolation but requires crossing a visible corridor. Establish the route at the start; don't place a looter directly across every route and then offer B as if open. No guarantee that either vote automatically kills someone.
+- VILLAIN PLAUSIBILITY: quiet theft benefits from evacuated units and false assistance; public warning threatens their plan. Keep threat/retaliation short and believable, not extended villain speeches while everyone could leave.
+- PHONE/RESCUE: help is actually requested. Flood slows arrival; do not invent total signal failure just to isolate him or claim responders universally unavailable.
+- TONE: grounded survival thriller with a few dry comic reactions. No ghost/mimic, floating duck sidekick or magical flood clock. New plot, not the former ghost finale with a different background.
+
+### Three-part direction, dependent on real votes
+
+P1 identify looters, warn neighbors, become target.
+P2 follow selected defensive/collective route; the others Jaab warned can help, repaying that earlier choice. Solve a concrete escape/confrontation problem before adding one complication.
+P3 coordinated escape/verified help; earlier recognition/boat/neighbor details pay off. Jaab survives through observation and community, not becoming an invincible fighter. Close the arc with a brief comic release after danger ends.
+
+Production remains paused at STORY FIRST. Need concise final script and coherent shot map, then make the actual flood sets/cast/voice, review scenes and actions, and release under out/final/bangkok-flood/ep01. No finished flood video yet.
