@@ -6,6 +6,7 @@ import {loadFont} from '@remotion/google-fonts/Anton';
 import captions from './captions.json';
 import calibration from './calibration.json';
 import actorBlocking from './actor-blocking.json';
+import {crowdAt} from './crowd-blocking';
 import {FidelityStage} from './FidelityScenes';
 import {shotAt,STUDY_FPS} from './shots';
 
@@ -65,6 +66,10 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
   const [[a,c,tx],[b,d,ty]]=appliedMatrix,det=a*d-b*c;
   actorTarget={x:(d*(hx-tx)-c*(hy-ty))/det,y:(-b*(hx-tx)+a*(hy-ty))/det,r:radius/Math.hypot(a,b)};
  }
+ const crowdTargets=crowdAt(shot.id,frame)?.map(k=>{
+  const [[a,c,tx],[b,d,ty]]=appliedMatrix,det=a*d-b*c;
+  return {n:k.n,x:(d*(k.x-tx)-c*(k.y-ty))/det,y:(-b*(k.x-tx)+a*(k.y-ty))/det,r:k.r/Math.hypot(a,b)};
+ });
  const fullSec=frame/STUDY_FPS;
  const remaining=Math.max(0,299-Math.floor(fullSec-47.0));
  const timer=`${Math.floor(remaining/60).toString().padStart(2,'0')}:${(remaining%60).toString().padStart(2,'0')}`;
@@ -75,7 +80,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
    <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient></defs>
    <g transform={cameraTransform}>
-    <FidelityStage actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
+    <FidelityStage crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
    </g>
    {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={p*.45}/>:null}
    <rect width={W} height={H} fill="url(#study-vignette)"/>

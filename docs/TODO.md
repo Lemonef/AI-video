@@ -17,7 +17,9 @@
     - [ ] Continue autonomous matching after Zen rejected first pass; self-review every shot/action, close fidelity gaps before story upgrades
     - [x] Original scratch narration/foley and word captions built; v3 rendered, not fidelity-approved
     - [x] Four-plate source-assisted experiment compared at105 samples; improves MAE42.3 to37.0, not1:1
-    - [ ] Review calibrated seven-plate iteration and correct rig/blocking/dark shots
+    - [x] Inspect all seven v6 comparison sheets; v7 full-resolution progress delivered
+    - [ ] Picture/animation first per latest owner feedback: finish measured crowd paths/poses, lead rig/acting, hands, light/torch, diagrams/camera/text; voice deferred
+    - [x] Short crowd v8 tests, measured head paths and source-frame proportion correction (not full-film acceptance)
     - [x] Reusable reference-animation-rebuild skill created/installed; keep enriching actual techniques
   - [ ] Future-film natural Thai/prosody/edit review: vary talk/pause/action rhythm; inspect actual whole-take flow and continuous beds; use docs/episode-release-checklist.md before final
   - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)

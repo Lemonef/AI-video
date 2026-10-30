@@ -2,6 +2,7 @@ import React from 'react';
 import {staticFile} from 'remotion';
 import {walkCycle} from '../../lib/walkCycle';
 import type {StageProps} from './Stages';
+import type {CrowdTarget} from './crowd-blocking';
 
 // Art coordinates follow the 270 x 480 reference review plane; camera transforms stay outside.
 type HeadTarget={x:number;y:number;r:number};
@@ -140,10 +141,37 @@ const Counter:React.FC<{f:number;pose:string;emotion:string;assisted?:boolean}>=
  <Bag x={154} y={374} s={.97}/><Radio x={201} y={365} s={.77} f={f}/>
  </g>;
 
-const Threat:React.FC<{x:number;y:number;s:number;f:number;n:number}>=({x,y,s,f,n})=>{const a=Math.sin(f/13+n),walk=Math.sin(f/7+n);return <g transform={`translate(${x+Math.sin(f/38+n)*1.7} ${y}) scale(${s})`}><ellipse cy="2" rx="9" ry="2.5" fill="#22302e" opacity=".35"/><path d={`M-4,-31 L${-5+walk*3},-2 M4,-31 L${7-walk*3},-1`} stroke={n%2?'#9e9b65':'#5c7483'} strokeWidth="4.6" strokeLinecap="round"/><path d="M-7,-59 H7 L8,-30 H-7Z" fill={['#d5d4af','#973f31','#3c6745','#b8a64e'][n%4]}/><path d={`M-7,-56 l-7,${11+a*2} l-6,-11 M7,-56 l8,${10-a*3} l6,-12`} stroke="#8f9c69" strokeWidth="3.2" fill="none" strokeLinecap="round"/><circle cy="-69" r="9.5" fill="#a3ac78"/><path d="M-9,-74 l2,-8 l4,6 l3,-9 l3,8 l6,-4 l-1,7" fill="#394935"/>{[-3.5,3.5].map(dx=><g key={dx}><circle cx={dx} cy="-69" r="2.8" fill="#d9dfb7"/><circle cx={dx} cy="-69" r="1" fill="#24342a"/></g>)}<ellipse cy="-62" rx="2" ry="2.6" fill="#26372b"/></g>;};
-const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean}>=({f,close=false,assisted=false})=>assisted?<g>
+// Crowd acting uses separate running and reaching silhouettes on a shared contact clock.
+const Threat:React.FC<{x:number;y:number;s:number;f:number;n:number;target?:CrowdTarget}>=({x,y,s,f,n,target})=>{
+ if(target){s=target.r/9.5;x=target.x;y=target.y+69*s;}
+ const running=n>=2&&n<=5,phase=f*(running?.28:.14)+n*1.7;
+ const swing=Math.sin(phase),bounce=Math.abs(Math.sin(phase))* (running?2.3:.6);
+ const skin=running?'#ddd9c6':'#a3ac78',shirt=['#d5d4af','#b9532c','#3c6745','#b8a64e','#c6c3a6','#973f31','#b8a64e'][n%7];
+ const legs=[-1,1].map(side=>{
+  const q=Math.sin(phase+(side<0?Math.PI:0)),lift=Math.max(0,q);
+  return {side,kx:side*3+q*(running?7:3),ky:-27-lift*(running?5:1),ax:side*3+q*(running?10:4),ay:-14-lift*(running?10:3)};
+ });
+ return <g transform={`translate(${x+Math.sin(f/38+n)*1.7} ${y}) scale(${s})`}>
+  <ellipse cy="-12" rx="10" ry="2.5" fill="#22302e" opacity=".35"/>
+  <g transform={`translate(0 ${-bounce}) rotate(${running?-9:4} 0 -32)`}>
+   {legs.map(l=><g key={l.side}><path d={`M${l.side*3},-38 L${l.kx},${l.ky} L${l.ax},${l.ay+bounce}`} stroke={n%2?'#9e9b65':'#5c7483'} strokeWidth="4.6" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d={`M${l.ax-2},${l.ay+bounce} h6`} stroke="#34413e" strokeWidth="3" strokeLinecap="round"/></g>)}
+   <path d="M-7,-59 H7 L8,-38 H-7Z" fill={shirt}/>
+   {[-1,1].map(side=>{
+    const q=swing*side;
+    const ex=running?side*9+q*5:side*(n===0?7:9),ey=running?-47-q*5:(n===0?-48:-45);
+    const wx=running?side*5+q*9:side*(n===0?3:9),wy=running?-54-q*8:(n===0?-54:-36)+Math.sin(phase+side)*1;
+    return <g key={side}><path d={`M${side*6},-56 L${ex},${ey}`} stroke={shirt} strokeWidth="4" fill="none" strokeLinecap="round"/><path d={`M${ex},${ey} L${wx},${wy}`} stroke={skin} strokeWidth="3.2" fill="none" strokeLinecap="round"/><circle cx={wx} cy={wy} r="1.9" fill={skin}/></g>;
+   })}
+   <circle cy="-69" r="9.5" fill={skin}/>
+   {n===3?<><path d="M-10,-73 Q-10,-84 0,-84 Q10,-84 10,-73Z" fill="#cfb536"/><path d="M-12,-73 H12" stroke="#d2bc4b" strokeWidth="2"/></>:<path d="M-9,-74 l2,-8 l4,6 l3,-9 l3,8 l6,-4 l-1,7" fill="#394935"/>}
+   {[-3.5,3.5].map(dx=><g key={dx}>{!running?<circle cx={dx} cy="-69" r="2.8" fill="#d9dfb7"/>:null}<circle cx={dx} cy="-69" r={running?1.2:1} fill="#24342a"/></g>)}
+   {running?<path d="M-2,-62 h4" stroke="#26372b" strokeWidth="1.2"/>:<ellipse cy="-62" rx="2" ry="2.6" fill="#26372b"/>}
+  </g>
+ </g>;
+};
+const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean;targets?:CrowdTarget[]}>=({f,close=false,assisted=false,targets})=>assisted?<g>
  <image href={staticFile('reference-study/parking-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
- <Threat x={103} y={303} s={.75} f={f} n={0}/><Threat x={41} y={326} s={.8} f={f} n={1}/><Threat x={163} y={305} s={.85} f={f} n={2}/><Threat x={156} y={252} s={.67} f={f} n={3}/><Threat x={249} y={283} s={.72} f={f} n={0}/>
+ {targets?.map(t=><Threat key={t.n} target={t} x={0} y={0} s={1} f={f} n={t.n}/>)}
  </g>:<g>
  <rect width="270" height="480" fill="url(#f-sky)"/><path d="M0,158 L20,150 L31,160 L49,143 L68,152 L84,142 L103,151 L117,140 L138,153 L153,137 L171,150 L193,136 L215,150 L237,140 L270,153 V227 H0Z" fill="#112c2b"/>
  <path d="M0,229 H270 V480 H0Z" fill="#5c6b6f"/><path d="M0,219 H270 V238 H0Z" fill="#4a575b"/><path d="M0,226 H270" stroke="#c2bf98" strokeWidth="1.3"/><path d="M0,216 H270" stroke="#687466" strokeWidth="3"/><path d="M0,203 H270" stroke="#889084" strokeWidth="1.2"/><path d="M0,210 H270" stroke="#c8bca1" strokeWidth=".6" strokeDasharray="15 12"/>
@@ -202,7 +230,7 @@ const Controls:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fil
 const Mechanism:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d6d3ba"/><text x="208" y="155" fontSize="7" fill="#73836d">MOTOR</text><rect x="48" y="164" width="206" height="47" rx="4" fill="#a7b2a9" stroke="#3d5354" strokeWidth="1.7"/><circle cx="128" cy="187" r="16" fill="none" stroke="#3e5553" strokeWidth="1.5"/>{range(6).map(i=><path key={i} transform={`rotate(${i*60+p*16} 128 187)`} d="M128,187 L128,173" stroke="#4a5f58"/>)}<rect x="174" y="175" width="52" height="26" rx="3" fill="#879991"/><rect x="54" y="212" width="145" height="188" fill="#b5bfb0"/>{range(16).map(i=><path key={i} d={`M54,${215+i*12} H199`} stroke="#677e75" strokeWidth="1.4"/>)}<path d="M49,208 V397 Q41,413 33,396 V192" stroke="#516851" strokeWidth="1.5" strokeDasharray="2 3" fill="none"/></g>;
 const Gap:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d1c9ab"/><rect width="270" height="284" fill="url(#f-metal)"/>{range(26).map(i=><path key={i} d={`M0,${i*11} H270`} stroke="#6b8077" strokeWidth="1.3"/>)}<path d="M0,281 H270 V350 H0Z" fill="#21332c"/>{[80,130,184].map((x,i)=><g key={x} transform={`translate(${x} ${284+smooth(p)*4})`}><path d={`M0,0 L${Math.sin(p*10+i)*4},43`} stroke="#849468" strokeWidth="6" strokeLinecap="round"/><ellipse rx="7" ry="4" fill="#a0ac79"/>{[-4,-1,2,5].map(dx=><path key={dx} d={`M${dx},-1 v-6`} stroke="#a0ac79" strokeWidth="1.7"/>)}</g>)}<path d="M0,347 H270" stroke="#8f9275" strokeWidth="2"/></g>;
 
-export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget}>=({shot,local,p,sourceAssisted=false,actorTarget})=>{
+export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget;crowdTargets?:CrowdTarget[]}>=({shot,local,p,sourceAssisted=false,actorTarget,crowdTargets})=>{
  const id=shot.id;let content:React.ReactNode;
  if(id===33&&sourceAssisted)content=<g>
  <defs><linearGradient id="portrait-body-shade"><stop stopColor="#000" stopOpacity=".78"/><stop offset=".45" stopColor="#000" stopOpacity=".65"/><stop offset=".56" stopColor="#000" stopOpacity="0"/></linearGradient><clipPath id="portrait-rig-shade"><circle cx={actorTarget?.x??145} cy={actorTarget?.y??228} r={actorTarget?.r??75}/><path d={`M${(actorTarget?.x??145)-30},${(actorTarget?.y??228)+65} h60 l12,210 h-90Z`}/></clipPath></defs>
@@ -216,7 +244,7 @@ export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTar
  else if(shot.stage==='counter')content=<Counter assisted={sourceAssisted} f={local} pose={id===9?'phone':id===5||id===7?'alert':'rest'} emotion={id===7?'panic':id===5&&p<.7?'tired':id===9?'worried':'calm'}/>;
  else if(id===15&&local>=33)content=<Map assisted={sourceAssisted} parking f={local} p={0}/>;
  else if(shot.stage==='door'||shot.stage==='chain')content=<Door assisted={sourceAssisted} f={local} p={p} id={id}/>;
- else if(shot.stage==='parking')content=<Lot assisted={sourceAssisted} f={local} close={id!==11}/>;
+ else if(shot.stage==='parking')content=<Lot targets={crowdTargets} assisted={sourceAssisted} f={shot.start+local} close={id!==11}/>;
  else if(shot.stage==='radio')content=<PropInsert assisted={sourceAssisted} f={local} dark={id>=32}/>;
  else if(shot.stage==='map')content=<Map assisted={sourceAssisted} parking={id===16} f={local} p={p}/>;
  else if(shot.stage==='control')content=<Controls p={p}/>;

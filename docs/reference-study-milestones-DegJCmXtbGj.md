@@ -200,3 +200,10 @@ Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-a
 - 105 whole-film samples: MAE 22.014,SSIM 0.7298. Slight aggregate regression versus v6 despite contact/material corrections; do not claim global fidelity gain. Changed button/shutter comparison page5 inspected. All v6 sheets reviewed before integration.
 - Export audio measured -14.47 LUFS/-1.17 dBTP; listening and voice suitability still open. Cached 33 voice lines reused. Comparison runs under system Python (cv2); sound uses .venv (edge_tts).
 - Code local3074e24. Public-origin push held after approval review; no source-derived media uploaded. Literal1:1 remains open; this file is a private source-assisted progress copy.
+
+### M39 ? owner rejects v7 fidelity; picture first
+- Owner says animation still does not match. Initially requested English voice tone/pace1:1, then explicitly deferred voice: focus animation and picture first. No voice generated or changed.
+- Targeted5-second crowd tests instead of full93-second exports: crowd-v8-test (limbs only, rejected internally: fixed positions), crowd-v8-blocked-test (measured paths, rejected internally: heads/body too large), crowd-v8-proportions-test (smaller heads/shorter lower body, inspected source frame681).
+- Added manual head-circle paths in crowd-blocking.ts and inverted calibrated camera independently. Jointed arms/legs, staggered gait, running versus reaching, hardhat, varied clothing. Corrected shadows after shortening body; last shadow edit awaits rendered inspection.
+- Demonstrated improvement in head/feet position at frame681; no full-film or1:1 sign-off. Other crowd frames, exact poses/identity, source camera differences, lead actor/hand/torch/diagrams/text remain open.
+- Latest short test: out/drafts/reference-study/DegJCmXtbGj/crowd-v8-proportions-test.mp4; source comparison crowd-v8-proportions-review.jpg. Full latest delivery remains v7.
