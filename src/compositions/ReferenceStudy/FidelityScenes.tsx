@@ -49,30 +49,32 @@ const Car:React.FC<{x:number;y:number;s?:number;c:string;flip?:boolean}>=({x,y,s
 // Prop anchors and limb endpoints share local rig space.
 const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotion?:string;lean?:number}>=({x,y,s=1,f,pose='rest',emotion='calm',lean=0})=>{
  ({x,y,s}=actorLayout(x,y,s,pose,f,lean,React.useContext(HeadTargetContext)));
+ const profile=pose==='pull'||pose==='keys';
  const gait=walkCycle(f);
  const step=pose==='walk'?gait.swing:0,pull=pose==='pull'?Math.sin(f/3.9):0,headY=-175;
- const bodyBob=pose==='walk'?gait.bob*GAIT_SCALE:0;
+ const bodyBob=pose==='walk'?gait.bob*GAIT_SCALE*.86:0;
  const handR=pose==='pull'?[RIG.pullHandX,-113+pull*20]:pose==='phone'?[17,-102]:pose==='light'?[37,-100]:pose==='alert'?[25,-95]:[28,-97];
  const handL=pose==='alert'?[25,-125]:pose==='keys'?[-31,-107]:[-24,-81];
+ const faceOffset=pose==='pull'?12:pose==='keys'?9:pose==='phone'?5:0;
  const eyeY=headY+4,blink=emotion==='tired'||(f%127>=90&&f%127<94);
  const arm=(side:number,hand:number[])=>{const root=[side*12,-135],elbow=pose==='alert'?[side*32,-124]:side===1&&pose==='pull'?[31,-130+pull*8]:[side*28,-116];return <g><path d={`M${root} L${elbow}`} fill="none" stroke={P.green} strokeWidth="10" strokeLinecap="round"/><path d={`M${elbow} L${hand}`} fill="none" stroke="#29422e" strokeWidth="5.7" strokeLinecap="round"/><circle cx={hand[0]} cy={hand[1]} r="3.6" fill={P.skin}/>{side===1&&pose==='phone'?<g transform={`translate(${hand[0]} ${hand[1]}) rotate(8)`}><rect x="-4" y="-10" width="8" height="16" rx="1.2" fill="#202b27"/><rect x="-3" y="-8" width="6" height="11" fill="#b84131"/></g>:null}{side===-1&&pose==='keys'?<g transform={`translate(${hand[0]} ${hand[1]+4})`}><circle r="3" fill="none" stroke="#b8c5ad"/><path d="M0,3 v8 m0,-3 h4" stroke="#c5c6ad" strokeWidth="1.4"/></g>:null}{side===1&&pose==='light'?<g transform={`translate(${hand[0]} ${hand[1]})`}><path d="M0,-3 H13 V3 H0Z" fill="#233333"/><rect x="10" y="-4" width="5" height="8" fill="#c5cabc"/></g>:null}</g>};
- return <g transform={`translate(${x} ${y}) scale(${s})`}><ellipse cx="4" cy="3" rx="17" ry="3.9" fill="#172322" opacity=".3"/>
+ return <g transform={`translate(${x} ${y}) scale(${s})`}><ellipse cx="4" cy="-6" rx="17" ry="3.9" fill="#172322" opacity=".3"/>
  <g transform={`rotate(${lean} 0 -65) translate(0 ${bodyBob})`}>
  {[-1,1].map(side=>{
   const leg=side<0?gait.left:gait.right;
   const walking=pose==='walk';
-  const hipX=walking?leg.hipX*GAIT_SCALE:side*6;
-  const kneeX=walking?leg.kneeX*GAIT_SCALE:side*6;
-  const kneeY=walking?(leg.kneeY+390)*GAIT_SCALE-64:-33;
-  const ankleX=walking?leg.ankleX*GAIT_SCALE:side*6;
-  const ankleY=walking?(leg.ankleY+390)*GAIT_SCALE-64:-3;
+  const hipX=walking?leg.hipX*GAIT_SCALE:side*(profile?4:6);
+  const kneeX=walking?leg.kneeX*GAIT_SCALE:side*(profile?4:6)+(profile?8:0);
+  const kneeY=walking?((leg.kneeY+390)*GAIT_SCALE)*.86-64:-36;
+  const ankleX=walking?leg.ankleX*GAIT_SCALE:side*(profile?4:6)+(profile?7:0);
+  const ankleY=walking?((leg.ankleY+390)*GAIT_SCALE)*.86-64:-11;
   return <g key={side}><path d={`M${hipX},-64 L${kneeX},${kneeY} L${ankleX},${ankleY}`} fill="none" stroke={side===-1?'#a3a079':'#bbb78c'} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankleX+1} cy={ankleY+3} rx="6.5" ry={2.9-(walking?leg.lift/70:0)} fill="#3c4436"/></g>;
  })}
- <path d="M-17,-143 Q0,-148 17,-141 L13,-63 H-13Z" fill="#2e5a3c"/><path d="M-9,-130 H11 L14,-47 H-11Z" fill="#1b3033"/><rect x="-6" y="-67" width="14" height="6" rx="1.5" fill="#34484b"/><path d="M-14,-80 V-49 H-3 V-80" fill="#263c36"/>
- {arm(-1,handL)}{arm(1,handR)}<rect x="-3.5" y="-152" width="7" height="13" fill={P.skin}/><path d="M-7,-140 L0,-120 L7,-140" fill="none" stroke="#a1b09a" strokeWidth="1.3"/><rect x="-4" y="-122" width="8" height="6" rx="1" fill="#9aaa92"/><rect x="-13" y="-98" width="7" height="15" rx="1" fill="#1b2a25"/><rect x="-12" y="-96" width="5" height="10" fill="#bb3a2e"/>
+ <g transform={profile?'translate(7 0) skewX(3) scale(.65 1)':undefined}><path d="M-17,-143 Q0,-148 17,-141 L13,-63 H-13Z" fill="#2e5a3c"/><path d="M-9,-130 H11 L14,-47 H-11Z" fill="#1b3033"/><rect x="-6" y="-67" width="14" height="6" rx="1.5" fill="#34484b"/><path d="M-14,-80 V-49 H-3 V-80" fill="#263c36"/>
+ </g>{arm(-1,handL)}{arm(1,handR)}<rect x="-3.5" y="-152" width="7" height="13" fill={P.skin}/><path d="M-7,-140 L0,-120 L7,-140" fill="none" stroke="#a1b09a" strokeWidth="1.3"/><rect x="-4" y="-122" width="8" height="6" rx="1" fill="#9aaa92"/><rect x="-13" y="-98" width="7" height="15" rx="1" fill="#1b2a25"/><rect x="-12" y="-96" width="5" height="10" fill="#bb3a2e"/>
  <circle cy={headY} r="30" fill={P.skin}/><path d={`M-28,${headY-4} Q-28,${headY+26} 0,${headY+30} Q-22,${headY+20} -19,${headY-3}Z`} fill="#c3c5b5" opacity=".15"/>
- {[-9,9].map(dx=><g key={dx}>{emotion==='panic'?<circle cx={dx} cy={eyeY} r="6.9" fill="none" stroke={P.ink} strokeWidth="1.7"/>:null}{blink&&emotion!=='panic'?<path d={`M${dx-3},${eyeY} h6`} stroke={P.ink} strokeWidth="1.7" strokeLinecap="round"/>:<ellipse cx={dx} cy={eyeY} rx={emotion==='panic'?2.6:2.4} ry={emotion==='panic'?2.8:3.1} fill={P.ink}/>}</g>)}
- {emotion==='panic'?<ellipse cy={headY+18} rx="3.5" ry="4.8" fill={P.ink}/>:emotion==='worried'?<path d={`M-5,${headY+19} q2,-5 5,-1 q3,4 5,-1`} stroke={P.ink} strokeWidth="1.9" fill="none" strokeLinecap="round"/>:<path d={`M-4,${headY+18} h8`} stroke={P.ink} strokeWidth="1.8" strokeLinecap="round"/>}
+ {[-9,9].map(baseX=>{const dx=baseX+faceOffset;return <g key={baseX}>{emotion==='panic'?<circle cx={dx} cy={eyeY} r="6.9" fill="none" stroke={P.ink} strokeWidth="1.7"/>:null}{blink&&emotion!=='panic'?<path d={`M${dx-3},${eyeY} h6`} stroke={P.ink} strokeWidth="1.7" strokeLinecap="round"/>:<ellipse cx={dx} cy={eyeY} rx={emotion==='panic'?2.6:2.4} ry={emotion==='panic'?2.8:3.1} fill={P.ink}/>}</g>;})}
+ <g transform={`translate(${faceOffset} 0)`}>{emotion==='panic'?<ellipse cy={headY+18} rx="3.5" ry="4.8" fill={P.ink}/>:emotion==='worried'?<path d={`M-5,${headY+19} q2,-5 5,-1 q3,4 5,-1`} stroke={P.ink} strokeWidth="1.9" fill="none" strokeLinecap="round"/>:<path d={`M-4,${headY+18} h8`} stroke={P.ink} strokeWidth="1.8" strokeLinecap="round"/>}</g>
  <path d={`M-30,${headY-8} Q-30,${headY-34} -2,${headY-35} Q26,${headY-36} 30,${headY-8}Z`} fill="url(#f-cap)"/><ellipse cx="2" cy={headY-8} rx="33" ry="5.1" fill="#315c3d"/><circle cy={headY-35} r="1.6" fill="#456c46"/>
  </g></g>;
 };
@@ -193,7 +195,7 @@ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,as
  <defs><clipPath id="door-glass"><path d="M108,158 L270,141 V375 L108,353Z"/></clipPath></defs>
  {id>=15&&id<29?<g clipPath="url(#door-glass)" opacity=".58"><Threat x={168} y={316} s={.7} f={f} n={0}/><Threat x={230} y={305} s={.66} f={f} n={3}/><Threat x={136} y={330} s={.8} f={f} n={1}/></g>:null}
  {down>0?<g><polygon points={pts([[107,158],[270,141],[270,141+232*down],[107,158+195*down]])} fill="url(#f-metal)"/>{range(Math.floor(32*down)).map(i=><path key={i} d={`M107,${161+i*6.1} L270,${144+i*7.25}`} stroke={i%2?'#c9ced0':'#79858e'} strokeWidth={i%2?.7:1.25}/>)}<path d={`M107,${158+195*down} L270,${141+232*down}`} stroke="#586e69" strokeWidth="4"/></g>:null}
- <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':closed?'calm':'worried'} lean={id===10?7:0}/>
+ <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
  {pull?<g><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#334a41" strokeWidth="1.8" fill="none"/><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#acb5a2" strokeWidth=".7" strokeDasharray="2 2" strokeDashoffset={-f*.8} fill="none"/></g>:null}
  </g>;
 
@@ -205,7 +207,7 @@ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,as
  <rect x="125" y="192" width="29" height="59" fill="#e3e3c2"/><path d="M154,200 L270,192" stroke="#75857b" strokeWidth="1.5"/><path d="M191,193 v60" stroke="#263e3b" strokeWidth="1.5"/><path d="M160,204 H205 V234 H160 M165,204 V234 M176,204 V234 M188,204 V234 M200,204 V234 M159,213 H207 M158,223 H205" stroke="#b1c1b7" strokeWidth="1.4" fill="none"/><path d="M160,203 H202" stroke="#be3c29" strokeWidth="2"/>
  <path d="M183,254 V279 M197,252 V277" stroke="#c0c9b8" strokeWidth="6"/><Cart x={18} y={371} s={1.47}/><Cart x={2} y={356} s={1.5}/><Baskets x={93} y={368} s={1.18}/><Baskets x={268} y={424} s={1.25}/>
  {down>0?<g><polygon points={pts([[107,158],[270,141],[270,141+232*down],[107,158+195*down]])} fill="url(#f-metal)"/>{range(Math.floor(32*down)).map(i=><path key={i} d={`M107,${161+i*6.1} L270,${144+i*7.25}`} stroke={i%2?'#c9ced0':'#79858e'} strokeWidth={i%2?.7:1.25}/>)}<path d={`M107,${158+195*down} L270,${141+232*down}`} stroke="#586e69" strokeWidth="4"/></g>:null}
- <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':closed?'calm':'worried'} lean={id===10?7:0}/>
+ <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
  {pull?<g><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#334a41" strokeWidth="1.8" fill="none"/><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#acb5a2" strokeWidth=".7" strokeDasharray="2 2" strokeDashoffset={-f*.8} fill="none"/></g>:null}
  </g>;
 };

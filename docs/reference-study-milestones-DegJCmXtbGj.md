@@ -207,3 +207,8 @@ Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-a
 - Added manual head-circle paths in crowd-blocking.ts and inverted calibrated camera independently. Jointed arms/legs, staggered gait, running versus reaching, hardhat, varied clothing. Corrected shadows after shortening body; last shadow edit awaits rendered inspection.
 - Demonstrated improvement in head/feet position at frame681; no full-film or1:1 sign-off. Other crowd frames, exact poses/identity, source camera differences, lead actor/hand/torch/diagrams/text remain open.
 - Latest short test: out/drafts/reference-study/DegJCmXtbGj/crowd-v8-proportions-test.mp4; source comparison crowd-v8-proportions-review.jpg. Full latest delivery remains v7.
+
+### M40 ? lead guide and profile correction
+- Full270x480 source contact sheets revealed wrong horizontal door guides (shot13 x~151, prior103; shot14 moves right, prior guides moved left), and low pull-head guides. Corrected selected13/14/22/24/26/27 guides; approximate/manual, not exact mocap. Bounded skin-component diagnostics validate regions only, not automatic acceptance.
+- Targeted stills767/1842 and pull phases1807/1842/1876 inspected; then profile-test frame1842 inspected. Narrowed pull/key torso, bent stance, shortened shins and matching bob scaling, side-directed face, neutral pull expression. Shadow ground adjusted with shortened legs.
+- Latest short action clip: out/drafts/reference-study/DegJCmXtbGj/lead-v8-profile-test.mp4 (frames1799?1884). Source comparison lead-v8-profile-review.jpg. Improvement at checked frame; grip/contact, expression, shutter/camera geometry and other shots remain different. Walking after shared proportions change needs temporal review. No fullv8 export and no voice changes.
