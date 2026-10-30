@@ -113,6 +113,8 @@ export type Episode = {
 	title: string;
 	engine?: string; // TTS engine: "gemini" (one expressive take) or "edge" (per line)
 	voice: string;
+	narrationDirection?: string; // performance instructions, included in the voice cache key
+	narrationJoin?: string; // scene boundaries need not impose spoken paragraph breaks
 	voiceClips?: string; // approved per-scene speech repairs, manifest relative to public/
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take

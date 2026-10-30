@@ -8,11 +8,7 @@ from dataclasses import dataclass
 
 from .align import spoken_len
 
-# Length: the story sets it. The 45 s target squeezed EP1 v2 into a rush with no build-up; the
-# references that work (StickItOutStories, Once Upon a Strange, PromptKUB, 2026-10-27) run 70-93 s
-# at a calm pace, and Creator Rewards only pays on videos over 1 minute.
-TOTAL_TARGET_SEC = 90  # warn above: every beat must still earn its seconds
-TOTAL_MAX_SEC = 120
+# Owner2026-10-30: no total-runtime target or cap. Story and performance set the length.
 HOOK_MAX_SEC = 6.0  # the opening line states the stakes; at a calm 1.0x pace that is ~5-6 s
 MAX_STATIC_SEC = 4.5  # a visual change (cut/push/new element) at least this often
 MAX_PUSH_SEC = 7.0  # a slow camera push counts as change, but not forever
@@ -47,10 +43,6 @@ def check(episode: dict, timing: dict) -> list[Finding]:
     out: list[Finding] = []
     scenes = episode["scenes"]
     total = sum(_scene_sec(s, timing) for s in scenes)
-    if total > TOTAL_MAX_SEC:
-        out.append(Finding("FAIL", "episode", f"{total:.1f}s long; must stay under {TOTAL_MAX_SEC:.0f}s"))
-    elif total > TOTAL_TARGET_SEC:
-        out.append(Finding("WARN", "episode", f"{total:.1f}s long; target is {TOTAL_TARGET_SEC}s: cut a beat that does not move the story"))
 
     first = scenes[0]
     first_sec = _scene_sec(first, timing)

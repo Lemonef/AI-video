@@ -122,7 +122,10 @@ def _narrate_lines(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: 
 
 def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
     lines = [_line(s) for s in episode["scenes"]]
-    script = "\n".join(lines)  # newline = natural breath between lines
+    script = episode.get("narrationJoin", "\n").join(lines)
+    direction = episode.get("narrationDirection")
+    if direction:
+        script = f"{direction}\n\nRead only this Thai story, exactly as written:\n{script}"
     voice_key = _key(engine.name, episode["voice"], script)  # the quota'd part: only re-voice when this changes
     return lines, script, voice_key
 

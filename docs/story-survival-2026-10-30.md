@@ -188,3 +188,7 @@ Production remains paused at STORY FIRST. Need concise final script and coherent
 
 ## BUILT — owner said finish/build now
 User supplied exact flood/condo opening and then explicitly instructed to finish/build quickly. Final10-scene45s episode: episodes/flood01.json; new Flood.tsx/cast; out/final/bangkok-flood/ep01/video.mp4 +cover/post/script. Full actual review/evidence: docs/flood01-release-review.md. No longer waiting on premise approval. Reference remains paused, Three Wishes canceled. No social post performed.
+
+
+## Later explicit owner pacing override
+Initial45s render rejected as fast/monotone/repeating rhythm. Owner says any length needed. All earlier45–55s story suggestions here are superseded, not production constraints. No totaldurationcap. New performance/script revision uses Iapetus1.0tempo, varied clauses/intent and connected narrative across picture cuts; take72.923s without requesting that duration. Previousfinal/audio archived; staged draft underreview. See docs/flood01-release-review.md.

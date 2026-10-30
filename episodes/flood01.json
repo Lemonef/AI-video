@@ -7,7 +7,7 @@
   "engine": "gemini",
   "voice": "Iapetus",
   "voiceModel": "gemini-2.5-flash-preview-tts",
-  "tempo": 1.03,
+  "tempo": 1.0,
   "handheld": false,
   "grain": false,
   "mix": {
@@ -81,14 +81,13 @@
           "sound": "heartbeat",
           "strength": 7
         }
-      ],
-      "tone": "conversational Thai, urgent"
+      ]
     },
     {
       "id": "safe",
       "bg": "floodHall",
-      "say": "ไฟดับทั้งตึก จ๊าบหนีขึ้นมาชั้นหก คิดว่าพ้นน้ำแล้วคงปลอดภัย",
-      "caption": "ไฟดับทั้งตึก จ๊าบหนีขึ้นมาชั้นหก คิดว่าพ้นน้ำแล้วคงปลอดภัย",
+      "say": "ฝนตกมาทั้งคืน พอน้ำเข้าชั้นล่าง ไฟก็ดับ จ๊าบย้ายขึ้นมาชั้นหก อย่างน้อย ตรงนี้ก็ยังแห้ง",
+      "caption": "ฝนตกมาทั้งคืน พอน้ำเข้าชั้นล่าง ไฟก็ดับ จ๊าบย้ายขึ้นมาชั้นหก อย่างน้อย ตรงนี้ก็ยังแห้ง",
       "cast": [
         {
           "who": "jaab",
@@ -119,9 +118,15 @@
           "y": 960
         },
         {
-          "at": 0.5,
-          "zoom": 1.07,
-          "x": 540,
+          "at": 0.31,
+          "zoom": 1.08,
+          "x": 500,
+          "y": 1000
+        },
+        {
+          "at": 0.74,
+          "zoom": 1.04,
+          "x": 560,
           "y": 960
         }
       ],
@@ -137,8 +142,8 @@
     {
       "id": "helpers",
       "bg": "floodHall",
-      "say": "มีผู้ชายสองคนเคาะห้อง อ้างว่ามาช่วยขนของขึ้นที่สูง จ๊าบเกือบเปิดให้",
-      "caption": "มีผู้ชายสองคนเคาะห้อง อ้างว่ามาช่วยขนของขึ้นที่สูง จ๊าบเกือบเปิดให้",
+      "say": "นิติครับ มาช่วยขนของ ผู้ชายหน้าห้องพูดแบบนั้น อีกคนถือถุงใบใหญ่ จ๊าบเลยเอื้อมไปที่ลูกบิด",
+      "caption": "นิติครับ มาช่วยขนของ ผู้ชายหน้าห้องพูดแบบนั้น อีกคนถือถุงใบใหญ่ จ๊าบเลยเอื้อมไปที่ลูกบิด",
       "cast": [
         {
           "who": "floodThug",
@@ -184,7 +189,13 @@
           "y": 960
         },
         {
-          "at": 0.55,
+          "at": 0.38,
+          "zoom": 1.05,
+          "x": 540,
+          "y": 1000
+        },
+        {
+          "at": 0.64,
           "zoom": 1,
           "x": 540,
           "y": 960,
@@ -212,8 +223,8 @@
     {
       "id": "proof",
       "bg": "floodBoat",
-      "say": "แต่ทีวีห้องหกร้อยสาม อยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ขนกลับบ้านตัวเองชัดๆ",
-      "caption": "แต่ทีวีห้องหกร้อยสาม อยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ขนกลับบ้านตัวเองชัดๆ",
+      "say": "แต่เดี๋ยวนะ ทีวีห้องหกร้อยสาม ทำไมอยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ยกลงเรือกันอยู่ชัดๆ",
+      "caption": "แต่เดี๋ยวนะ ทีวีห้องหกร้อยสาม ทำไมอยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ยกลงเรือกันอยู่ชัดๆ",
       "cast": [],
       "transition": "cut",
       "progress": [
@@ -241,13 +252,13 @@
         "rain": 0.08,
         "steps": 0
       },
-      "tone": "dry disbelief, then serious"
+      "padAfter": 0.3
     },
     {
       "id": "call",
       "bg": "floodPhone",
-      "say": "จ๊าบล็อกห้อง แล้วโทรแจ้งเหตุ บอกตึกกับชั้นที่อยู่ แต่เรือยังมาไม่ถึง",
-      "caption": "จ๊าบล็อกห้อง แล้วโทรแจ้งเหตุ บอกตึกกับชั้นที่อยู่ แต่เรือยังมาไม่ถึง",
+      "say": "จ๊าบชะงัก แล้วล็อกประตูเงียบๆ เขาโทรแจ้งเหตุ บอกชื่อตึกกับเลขห้อง เจ้าหน้าที่รับเรื่องแล้ว แต่เรือยังมาไม่ถึง",
+      "caption": "จ๊าบชะงัก แล้วล็อกประตูเงียบๆ เขาโทรแจ้งเหตุ บอกชื่อตึกกับเลขห้อง เจ้าหน้าที่รับเรื่องแล้ว แต่เรือยังมาไม่ถึง",
       "cast": [],
       "transition": "cut",
       "progress": [
@@ -262,9 +273,15 @@
           "y": 960
         },
         {
-          "at": 0.5,
-          "zoom": 1.07,
-          "x": 540,
+          "at": 0.31,
+          "zoom": 1.08,
+          "x": 500,
+          "y": 1000
+        },
+        {
+          "at": 0.74,
+          "zoom": 1.04,
+          "x": 560,
           "y": 960
         }
       ],
@@ -279,8 +296,8 @@
     {
       "id": "neighbor",
       "bg": "floodHall",
-      "say": "พวกมันหันไปเคาะห้องป้า ป้าคิดว่าคนมาช่วย กำลังจะเปิด",
-      "caption": "พวกมันหันไปเคาะห้องป้า ป้าคิดว่าคนมาช่วย กำลังจะเปิด",
+      "say": "เสียงเคาะย้ายไปห้องข้างบันได มาช่วยครับป้า แล้วจ๊าบก็ได้ยิน เสียงป้าปลดกลอน",
+      "caption": "เสียงเคาะย้ายไปห้องข้างบันได มาช่วยครับป้า แล้วจ๊าบก็ได้ยิน เสียงป้าปลดกลอน",
       "cast": [
         {
           "who": "mum",
@@ -344,8 +361,8 @@
     {
       "id": "warning",
       "bg": "floodWindow",
-      "say": "จ๊าบยอมเสี่ยง ตะโกนเตือนจากหน้าต่าง อย่าเปิด พวกนี้ขโมยของ",
-      "caption": "จ๊าบยอมเสี่ยง ตะโกนเตือนจากหน้าต่าง อย่าเปิด พวกนี้ขโมยของ",
+      "say": "ป้า อย่าเปิด จ๊าบตะโกนจากหน้าต่าง พวกนี้ขโมยของ",
+      "caption": "ป้า อย่าเปิด จ๊าบตะโกนจากหน้าต่าง พวกนี้ขโมยของ",
       "cast": [],
       "transition": "cut",
       "progress": [
@@ -373,7 +390,6 @@
         "rain": 0.08,
         "steps": 0
       },
-      "tone": "urgent, clear",
       "bubbles": [
         {
           "kind": "voice",
@@ -390,13 +406,14 @@
           "sound": "heartbeat",
           "strength": 6
         }
-      ]
+      ],
+      "tone": "sudden urgent warning, then controlled fear"
     },
     {
       "id": "saved",
       "bg": "floodHall",
-      "say": "ห้องอื่นเริ่มตะโกนตาม ป้าหยุดมือทัน แต่พวกมันรู้แล้ว ว่าเสียงมาจากห้องไหน",
-      "caption": "ห้องอื่นเริ่มตะโกนตาม ป้าหยุดมือทัน แต่พวกมันรู้แล้ว ว่าเสียงมาจากห้องไหน",
+      "say": "ห้องตรงข้ามตะโกนตาม อีกห้องเปิดไฟฉาย ป้าล็อกประตูกลับทัน จ๊าบโล่งอกได้แค่นิดเดียว เสียงฝีเท้าที่ทางเดิน กลับเดินมาหยุดหน้าห้องเขา",
+      "caption": "ห้องตรงข้ามตะโกนตาม อีกห้องเปิดไฟฉาย ป้าล็อกประตูกลับทัน จ๊าบโล่งอกได้แค่นิดเดียว เสียงฝีเท้าที่ทางเดิน กลับเดินมาหยุดหน้าห้องเขา",
       "cast": [
         {
           "who": "floodThug",
@@ -427,10 +444,16 @@
           "y": 960
         },
         {
-          "at": 0.5,
-          "zoom": 1.12,
-          "x": 420,
-          "y": 1050
+          "at": 0.31,
+          "zoom": 1.08,
+          "x": 500,
+          "y": 1000
+        },
+        {
+          "at": 0.74,
+          "zoom": 1.04,
+          "x": 560,
+          "y": 960
         }
       ],
       "beds": {
@@ -444,8 +467,8 @@
     {
       "id": "threat",
       "bg": "floodLock",
-      "say": "ลูกบิดห้องจ๊าบขยับ แล้วเสียงเดิมก็พูด เมื่อกี้ มึงว่าใครขโมย",
-      "caption": "ลูกบิดห้องจ๊าบขยับ แล้วเสียงเดิมก็พูด เมื่อกี้ มึงว่าใครขโมย",
+      "say": "ลูกบิดค่อยๆ ขยับ จ๊าบถอยออกมา แล้วเสียงเดิมก็พูด เบากว่าเมื่อกี้ เมื่อกี้ มึงว่าใครขโมย",
+      "caption": "ลูกบิดค่อยๆ ขยับ จ๊าบถอยออกมา แล้วเสียงเดิมก็พูด เบากว่าเมื่อกี้ เมื่อกี้ มึงว่าใครขโมย",
       "cast": [],
       "transition": "cut",
       "progress": [
@@ -473,7 +496,6 @@
         "rain": 0.03,
         "steps": 0
       },
-      "tone": "low, threatening but intelligible",
       "bubbles": [
         {
           "kind": "voice",
@@ -483,13 +505,15 @@
           "label": "เสียงหน้าห้อง",
           "at": 0.48
         }
-      ]
+      ],
+      "padAfter": 0.6,
+      "tone": "quiet, controlled menace on the final quoted words"
     },
     {
       "id": "end",
       "bg": "floodHall",
-      "say": "ขวางประตูรอคนช่วย หรือออกอีกทาง ไปสมทบห้องอื่น คุณเลือกเอหรือบี",
-      "caption": "ขวางประตูรอคนช่วย หรือออกอีกทาง ไปสมทบห้องอื่น คุณเลือกเอหรือบี",
+      "say": "ถ้าเป็นคุณ จะขวางประตูไว้ แล้วรอคนมาช่วย หรือยอมออกไปสมทบห้องอื่น คุณเลือกเอ หรือบี",
+      "caption": "ถ้าเป็นคุณ จะขวางประตูไว้ แล้วรอคนมาช่วย หรือยอมออกไปสมทบห้องอื่น คุณเลือกเอ หรือบี",
       "cast": [],
       "transition": "cut",
       "progress": [
@@ -527,5 +551,7 @@
       "countdownAt": 0.08,
       "padAfter": 0.5
     }
-  ]
+  ],
+  "narrationJoin": " ",
+  "narrationDirection": "Perform as Iapetus, a native central-Thai male storyteller telling friends what happened. This is an intimate survival story, not a commercial or a news bulletin. Use an unhurried conversational pace with fully articulated Thai syllables. There is NO requested running time. Do not rush to finish. Vary phrase length, stress, pitch and breathing with meaning; do not repeat the same rise-fall melody or pause after every sentence. Connect observations smoothly across scene boundaries. Start curious and grounded, let relief soften the voice, make the TV discovery a brief dry aside, then gradually tighten the tension. Give the recognition and the door-handle moment a little room. The warning is a sudden genuine shout, followed by quieter apprehension. The looter's last quoted words are low, close and controlled, never cartoonishly deep. End with an engaged, open question. Do not read these directions or announce any scene headings."
 }
