@@ -5,6 +5,7 @@ import {FONT_CAPTION} from '../../lib/fonts';
 import {loadFont} from '@remotion/google-fonts/Anton';
 import captions from './captions.json';
 import calibration from './calibration.json';
+import actorBlocking from './actor-blocking.json';
 import {FidelityStage} from './FidelityScenes';
 import {shotAt,STUDY_FPS} from './shots';
 
@@ -37,16 +38,32 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  const focusX=(shot.id===15&&local>=33?135:c[2])*4;
  const focusY=(shot.id===15&&local>=33?240:shot.id===17?interpolate(local,[0,12,58,290,350,385],[240,220,100,100,-100,-120]):c[3])*4;
  // Geometry-only landmark registration is enabled only for the clearly labeled assisted study.
- const plate=shot.id===15&&local>=33?'map':({dark:'aisle',chain:'door',radio:'prop'} as Record<string,string>)[shot.stage]??shot.stage;
+ const plate=shot.id===33?'dark-face':shot.id===16||(shot.id===15&&local>=33)?'map-parking':({dark:'aisle',chain:'door',radio:'prop'} as Record<string,string>)[shot.stage]??shot.stage;
  const keys=calibration.samples.filter(k=>k.shot===shot.id&&k.plate===plate);
  const past=keys.filter(k=>k.frame<=frame);
  const before=past[past.length-1]??keys[0];
  const after=keys.find(k=>k.frame>=frame)??keys[keys.length-1];
+ let appliedMatrix=[[zoom,0,135-zoom*focusX/4],[0,zoom,240-zoom*focusY/4]];
+ if(sourceAssisted&&shot.id===33)appliedMatrix=[[1,0,0],[0,1,0]];
  let cameraTransform=`translate(${W/2} ${H/2}) scale(${zoom}) translate(${-focusX} ${-focusY})`;
  if(sourceAssisted&&before&&after){
   const t=after.frame===before.frame?0:(frame-before.frame)/(after.frame-before.frame);
   const m=before.matrix.map((row,i)=>row.map((v,j)=>v+(after.matrix[i][j]-v)*t));
+  appliedMatrix=m;
   cameraTransform=`matrix(${m[0][0]} ${m[1][0]} ${m[0][1]} ${m[1][1]} ${m[0][2]*4} ${m[1][2]*4})`;
+ }
+ if(sourceAssisted&&shot.id===33&&!keys.length)cameraTransform='matrix(1 0 0 1 0 0)';
+ const actorKeys=actorBlocking.samples.filter(k=>k.shot===shot.id);
+ const actorPast=actorKeys.filter(k=>k.frame<=frame);
+ const actorBefore=actorPast[actorPast.length-1]??actorKeys[0];
+ const actorAfter=actorKeys.find(k=>k.frame>=frame)??actorKeys[actorKeys.length-1];
+ let actorTarget: {x:number;y:number;r:number}|undefined;
+ if(actorBefore&&actorAfter&&!(shot.id===15&&local>=33)&&!(shot.id===29&&local<31)){
+  const t=actorAfter.frame===actorBefore.frame?0:Math.max(0,Math.min(1,(frame-actorBefore.frame)/(actorAfter.frame-actorBefore.frame)));
+  const hx=actorBefore.x+(actorAfter.x-actorBefore.x)*t,hy=actorBefore.y+(actorAfter.y-actorBefore.y)*t;
+  const radius=actorBefore.r+(actorAfter.r-actorBefore.r)*t;
+  const [[a,c,tx],[b,d,ty]]=appliedMatrix,det=a*d-b*c;
+  actorTarget={x:(d*(hx-tx)-c*(hy-ty))/det,y:(-b*(hx-tx)+a*(hy-ty))/det,r:radius/Math.hypot(a,b)};
  }
  const fullSec=frame/STUDY_FPS;
  const remaining=Math.max(0,299-Math.floor(fullSec-47.0));
@@ -58,7 +75,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
    <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient></defs>
    <g transform={cameraTransform}>
-    <FidelityStage sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
+    <FidelityStage actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
    </g>
    {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={p*.45}/>:null}
    <rect width={W} height={H} fill="url(#study-vignette)"/>

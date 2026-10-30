@@ -23,7 +23,7 @@ def main():
     shots=json.loads(args.shots.read_text())['shots']
     stage_files={'counter':'counter','door':'door','chain':'door','aisle':'aisle',
                  'dark':'aisle','parking':'parking','exterior':'exterior',
-                 'radio':'prop','map':'map'}
+                 'radio':'prop','map':'map','map-parking':'map-parking','dark-face':'dark-face'}
     cv2.setNumThreads(2)
     sift=cv2.SIFT_create(nfeatures=1000,contrastThreshold=.018)
     matcher=cv2.FlannBasedMatcher(dict(algorithm=1,trees=4),dict(checks=40))
@@ -45,7 +45,9 @@ def main():
         stage=shot['stage']
         # Coarse groups contain real internal transitions.
         if stage=='phone':continue
-        if shots.index(shot)+1==15 and frame>=885:stage='map'
+        sid=shots.index(shot)+1
+        if sid==16 or (sid==15 and frame>=885):stage='map-parking'
+        if sid==33:stage='dark-face'
         if stage not in plates:continue
         name,kp0,d0=plates[stage]
         mask=np.full((480,270),255,np.uint8)

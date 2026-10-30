@@ -2,7 +2,7 @@
 
 Source: https://www.instagram.com/p/DegJCmXtbGj/ (StickItOutStories), downloaded for local analysis. Source container duration 93.319546 s; picture stream 2799 frames / 93.300 s, 1080 x 1920, 30 fps. The visual timeline has 35 measured hard-cut groups. Original media and analytical frames stay in ignored `out/drafts/reference-study/DegJCmXtbGj/`.
 
-## Approved scope
+## Initial implementation scope (owner rejected as insufficient)
 
 Reconstruct framing, cut timing, subject placement, depth, light changes, insert logic and physical action as closely as practical in an isolated code-drawn study. This is private practice, never a post or a new story release. The reference's footage, voice, music and full written narration are not embedded in the export. The result is a silent visual study with small technical shot labels, not a pixel-identical or audio-identical duplicate.
 
@@ -83,3 +83,7 @@ Utilities: `scripts/reference_study_review.py` (three phases/shot + metrics), `c
 Reusable skill canonical home: `D:/second-brain/skills/reference-animation-rebuild/`; installed copy `C:/Users/user/.codex/skills/reference-animation-rebuild/`. Skill scaffold validated; comparison helper exercised on the real film. Technique reference includes shot grammar, geometry, rig/action/contact, local light, typography, sound and failure ledger. Installation must be refreshed after further edits.
 
 Current next corrections: finish source-assisted camera/rig review, add separate parking-map and dark-face plates (generation in progress), correct actor blocking for flashlight shot, distinguish cleaning/phone/keys/pull/torch acting, then compare every shot and dense actions again. Literal1:1 remains OPEN. Approved EP3 final must retain SHA256 c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee.
+
+## Complete milestone/checklist record
+
+See `docs/reference-study-milestones-DegJCmXtbGj.md` for every meaningful iteration,tools,comparisons,failures,steps and open matching checklist. Future original episode QA: `docs/episode-release-checklist.md` points to the canonical complete checklist in the skill.

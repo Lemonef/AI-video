@@ -1,0 +1,177 @@
+{
+  "reference": "https://www.instagram.com/p/DegJCmXtbGj/",
+  "note": "Prompt specs reconstruct the actual constraints, not verbatim historical prompts. Persist future prompts before generation. Original and derived media stay local/ignored.",
+  "assets": [
+    {
+      "id": "counter",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\counter-reference.png",
+      "extraction_seconds": 6.25,
+      "source_still_sha256": "bbc01f0cf35207cf3c6e778128fd4400b4bdcad424dddb8c6b469d964fa60df0",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-18d46374-b18f-4e3b-8d02-7e08679ba57b.png",
+      "generated_sha256": "d792fc8d9b96cdae4bc492557c2b2256ab0fcf892d945b48d6774a1af763759f",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\counter-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove cashier,body/limbs/shadow,narration caption; preserve clock,stock,window,checkout and foreground props. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "door",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\door-reference.png",
+      "extraction_seconds": 25.4,
+      "source_still_sha256": "286d46086ee83d1c802c52d8270dc81d4461c022bb24bc8d6fe3f29aa2d070aa",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-8a246c18-1e30-459b-aad3-60acb355c839.png",
+      "generated_sha256": "cae420a3984e296c185c0cfa36724bf51b3f9e92b37dd2078c92f36876afba52",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\door-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove cashier/body/shadow,narration caption; preserve glass/mullions,housing,cars,carts,baskets,mat. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "aisle",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\aisle-reference.png",
+      "extraction_seconds": 3.85,
+      "source_still_sha256": "4221a1ea712f06399b7aea8efe4ae0247a007a3d05683b718a070f69c8168f0b",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-63825919-2df1-4287-87e2-c0f952a410b1.png",
+      "generated_sha256": "cbcf14d0e3378592c51b9f034380d1f8865518a325512841965faca042aed422",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\aisle-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove small worker/shadow,narration caption; preserve trolley/yellow bucket,stock groups,vanishing point,lights,floor. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "parking",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\parking-reference.png",
+      "extraction_seconds": 20.4,
+      "source_still_sha256": "061524197d45cf3c219440df769ccaffd9df45bb516308fba7fe71f90a1f2d47",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-eff9ab3c-4fa5-43e3-899d-12b481d97250.png",
+      "generated_sha256": "e8139ae6ec38ec38c647f5a0799c2a7ea67fe06d213d00772e9ab94e31006996",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\parking-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove all people/zombies/body shadows,narration caption; preserve cars/open doors/cart/stripes,mullions,signboard,lamps,city/smoke. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "exterior",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\exterior-reference.png",
+      "extraction_seconds": 0.17,
+      "source_still_sha256": "767a7debb9746c746947d68317fd0e6f9c2ddbb8866112cee63b26842e676a49",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-18a6324a-e8ac-4d96-b511-6dfd0f5be797.png",
+      "generated_sha256": "510976f899b07c443029f5a0d1fd77ec6cf598b8029b970fa501a02de0d1fc15",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\exterior-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove small cashier behind glass and tiny right figure/shadow; preserve full storefront/sky/roof/trees/carts/cars/parking geometry and glow. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "prop",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\prop-reference.png",
+      "extraction_seconds": 9.5,
+      "source_still_sha256": "9eac7f31e5ac44c547e7fab9e44cc9a44293280f315e183e8fdcc674677e1069",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-43819b41-9e2e-4b83-85ac-62957c76ea8a.png",
+      "generated_sha256": "d991b22c9bb482760969ce50622ff1a385bc06f8f6eb64eb0bf8abbac1fdf19b",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\prop-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove only overlaid narrative caption; preserve scanner/phone/bag/radio and shelf/counter/floor geometry and shading. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "map",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\map-wide-reference.png",
+      "extraction_seconds": 40,
+      "source_still_sha256": "5b46568fa697dc69d732bfd61ee3d1106d3e653310b1f6a760911ac829a9b863",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-aa9a43bf-a53a-4eef-a1dc-ea9df99c1aeb.png",
+      "generated_sha256": "08ec940fdc4152d88106506f3ccaeaffe41c11165f56ecf3fbb8d24b0b7f6128",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\map-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove annotation words/bubbles/red dots/leaders and narrative caption; preserve roof/HVAC/skylights/service trucks,front crowd,all parking/jam/lamp geometry. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "map-parking",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\map-reference.png",
+      "extraction_seconds": 34.7,
+      "source_still_sha256": "b1c78004f26da0e06d8c34709c963cad4582256fba6f74b2cf359bc346ff5628",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-0c8159a7-4002-48f1-a792-4043e737dae5.png",
+      "generated_sha256": "f98aeec65374211ccf9c595cdd02f27e2c97785159e9f4bffcede06e68ce6ab4",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\map-parking-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove only lower-middle narrative caption; preserve all lots/cars,carts,lamps,arrows,two jammed rows and bottom building/tree. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "dark-face",
+      "source_still": "out\\drafts\\reference-study\\DegJCmXtbGj\\dark-face-reference.png",
+      "extraction_seconds": 84.4,
+      "source_still_sha256": "79fc33c35f4463a55f3e28aa5448ab1014ed9f779dc43297ba1b9b77d410ad7d",
+      "generated_original": "C:\\Users\\user\\.codex\\generated_images\\01a186bc-0236-7993-80f6-27c73d6b8c1c\\exec-7c59d13d-97aa-414e-9029-fc8f4fde87ad.png",
+      "generated_sha256": "07f2243447169bcd419fa8ad8430403060d2316a1bc427abcbc3f6cfdfce6e03",
+      "size": [
+        941,
+        1672
+      ],
+      "project_copy": "public\\reference-study\\dark-face-clean-v1.png",
+      "integrated_file_exists": true,
+      "inspected": true,
+      "tool": "built-in image_gen (not CLI)",
+      "provenance": "source-assisted object-removal edit; not independent background recreation",
+      "prompt_verbatim_captured": false,
+      "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove cashier/cap/face/body/limbs/torch/beam,narration caption; reconstruct shelves,pillar,night window,cars,counter/bag,retain dark illumination. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    }
+  ]
+}

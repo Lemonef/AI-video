@@ -19,6 +19,7 @@
     - [x] Four-plate source-assisted experiment compared at105 samples; improves MAE42.3 to37.0, not1:1
     - [ ] Review calibrated seven-plate iteration and correct rig/blocking/dark shots
     - [x] Reusable reference-animation-rebuild skill created/installed; keep enriching actual techniques
+  - [ ] Future-film natural Thai/prosody/edit review: vary talk/pause/action rhythm; inspect actual whole-take flow and continuous beds; use docs/episode-release-checklist.md before final
   - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
   - [ ] Camera vocabulary: over-the-shoulder, from behind, POV, low/high angle, mood shot first
   - [ ] Test a ChatGPT-generated background plate (Zen saves it to `assets/`) behind the animated cast
