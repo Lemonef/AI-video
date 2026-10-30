@@ -14,7 +14,11 @@
     - [x] Download and inspect reference; measure 35 shot groups
     - [x] Rebuild isolated sets, poses, camera and lighting on the measured timeline
     - [x] Render and inspect every shot plus action sequences (93.3 s, 1080x1920, silent practice.mp4)
-    - [ ] Review documented fidelity gaps with Zen; literal 1:1 artwork/audio work remains before story upgrades
+    - [ ] Continue autonomous matching after Zen rejected first pass; self-review every shot/action, close fidelity gaps before story upgrades
+    - [x] Original scratch narration/foley and word captions built; v3 rendered, not fidelity-approved
+    - [x] Four-plate source-assisted experiment compared at105 samples; improves MAE42.3 to37.0, not1:1
+    - [ ] Review calibrated seven-plate iteration and correct rig/blocking/dark shots
+    - [x] Reusable reference-animation-rebuild skill created/installed; keep enriching actual techniques
   - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
   - [ ] Camera vocabulary: over-the-shoulder, from behind, POV, low/high angle, mood shot first
   - [ ] Test a ChatGPT-generated background plate (Zen saves it to `assets/`) behind the animated cast

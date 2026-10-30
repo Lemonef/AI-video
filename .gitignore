@@ -6,3 +6,5 @@ __pycache__/
 public/sfx/
 .pytest_cache/
 .build/
+
+public/reference-study/
