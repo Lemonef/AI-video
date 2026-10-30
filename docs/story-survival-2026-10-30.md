@@ -184,3 +184,7 @@ P2 follow selected defensive/collective route; the others Jaab warned can help, 
 P3 coordinated escape/verified help; earlier recognition/boat/neighbor details pay off. Jaab survives through observation and community, not becoming an invincible fighter. Close the arc with a brief comic release after danger ends.
 
 Production remains paused at STORY FIRST. Need concise final script and coherent shot map, then make the actual flood sets/cast/voice, review scenes and actions, and release under out/final/bangkok-flood/ep01. No finished flood video yet.
+
+
+## BUILT — owner said finish/build now
+User supplied exact flood/condo opening and then explicitly instructed to finish/build quickly. Final10-scene45s episode: episodes/flood01.json; new Flood.tsx/cast; out/final/bangkok-flood/ep01/video.mp4 +cover/post/script. Full actual review/evidence: docs/flood01-release-review.md. No longer waiting on premise approval. Reference remains paused, Three Wishes canceled. No social post performed.

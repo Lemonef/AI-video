@@ -1,3 +1,4 @@
+import {FloodWide,FloodHall,FloodCarry,FloodBoat,FloodPhone,FloodLock,FloodWindow} from '../v7/Flood';
 import React from 'react';
 import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
@@ -231,6 +232,7 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 );
 
 export const ENV5: Record<string, React.FC<EnvProps>> = {
+ floodWide:FloodWide,floodHall:FloodHall,floodCarry:FloodCarry,floodBoat:FloodBoat,floodPhone:FloodPhone,floodLock:FloodLock,floodWindow:FloodWindow,
 	forestDepth: ForestDepth,
 	forestSide: ForestSide,
 	houseNight: HouseNight,

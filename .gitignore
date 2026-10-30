@@ -8,3 +8,7 @@ public/sfx/
 .build/
 
 public/reference-study/
+
+# Locally cached production voices and rejected story takes
+public/flood*/
+public/wishes*/

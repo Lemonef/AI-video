@@ -31,19 +31,20 @@ const outline = (px: number, color = '#0B0E18') => ({
 });
 
 export const Cover: React.FC<CoverProps> = ({episode}) => {
-	const post = (episode as Episode & {post?: {series?: string; part?: number; total?: number; coverHook?: string}}).post ?? {};
-	const Env = ENV5.forestPath; // the series' v7 look: the path into the forest
-	const hook = post.coverHook ?? '';
+	const post = episode.post ?? {};
+	const Env = ENV5[String(post.coverBg ?? 'forestPath')] ?? ENV5.forestPath;
+ const flood = post.coverBg === 'floodWide';
+	const hook = String(post.coverHook ?? '');
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
 			<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: 'saturate(0.85) brightness(0.92)'}}>
-				<Env frame={0} scroll={0} fireflies={false} density={1} />
-				<g transform="translate(150 1640) scale(1.25)" opacity={0.95}>
-					{React.createElement(PROPS2.watcher, {frame: 9})}
+				<Env frame={flood?-1:0} scroll={0} fireflies={false} density={1} />
+				<g transform={flood?"translate(170 1950) scale(1.1)":"translate(150 1640) scale(1.25)"} opacity={0.95}>
+					{flood?<Character2 look={CAST2.floodThug} pose="armsCrossed" expr="angry" turn={.3} frame={8} torch={false}/>:React.createElement(PROPS2.watcher, {frame: 9})}
 				</g>
 				{/* the hero, big and scared: the face carries the cover */}
 				<g transform="translate(620 2330) scale(1.7)">
-					<Character2 look={CAST2.jaab} pose="shock" expr="shock" turn={-0.35} frame={8} torch />
+					<Character2 look={CAST2.jaab} pose="shock" expr="shock" turn={-0.35} frame={8} torch={!flood} />
 				</g>
 			</svg>
 			{/* warm-to-dark grade toward the text, so white type always reads */}
@@ -57,7 +58,7 @@ export const Cover: React.FC<CoverProps> = ({episode}) => {
 			</div>
 			{hook ? (
 				<div style={{position: 'absolute', top: GRID_BOTTOM - HOOK_BLOCK, left: SIDE, right: SIDE, textAlign: 'center'}}>
-					<span style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: 120, color: V2.yellow, ...outline(14)}}>{hook}</span>
+					<span style={{fontFamily: FONT_CAPTION, fontWeight: 800, fontSize: flood?104:120, color: V2.yellow, ...outline(14)}}>{hook}</span>
 				</div>
 			) : null}
 		</AbsoluteFill>

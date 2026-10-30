@@ -24,6 +24,8 @@ const JAAB_DARK: Look2 = {
 };
 
 export const CAST2: Record<string, Look2> = {
+ floodThug: {skin:'#C99471',skinShade:'#A76F54',hair:'#171F29',hairHi:'#303A43',top:'#713D42',topShade:'#482B35',pants:'#252B38',pantsShade:'#171E2B',style:'short'},
+ floodThug2: {skin:'#DBAF8E',skinShade:'#BA8E6C',hair:'#252526',hairHi:'#454142',top:'#758152',topShade:'#505B3A',pants:'#303641',pantsShade:'#202731',style:'long'},
 	jaab: LEAD,
 	jaabDark: JAAB_DARK,
 	mochi: LEAD,

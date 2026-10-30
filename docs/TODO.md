@@ -1,7 +1,8 @@
 # TODO — the only place live status lives
 
 ## NOW (2026-10-30) — read this first
-- [ ] URGENT new survival story: research/premise/hooks/causal escalation/climax/earned choice BEFORE voice/render; docs/story-survival-2026-10-30.md. Three Wishes stopped by owner; not release-approved.
+- [x] New survival story Part1 built/reviewed: out/final/bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
+- [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.
 - [x] Group existing final arc as out/final/ghost/ep01–ep03; approved ep03 bytes/hash preserved.
 - [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
 - [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.

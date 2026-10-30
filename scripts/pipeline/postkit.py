@@ -48,7 +48,7 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "",
         "2) ON THE UPLOAD PAGE:",
         "- Cover: cover.png (from this folder)",
-        "- When to post: Schedule -> 20:00",
+        "- When to post: Post now after review (today’s 20:00 slot has passed)" if post.get("publishNow") else "- When to post: Schedule -> 20:00",
         "- Who can see: Everyone · High-quality uploads: ON",
         "- Show more: AI-generated content ON · comments ON · Duet/Stitch ON · Disclose post content OFF",
         "",

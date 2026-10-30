@@ -1,0 +1,531 @@
+{
+  "id": "flood01",
+  "title": "กรุงเทพจมน้ำ — พวกที่มาช่วยขนของ",
+  "seriesSlug": "bangkok-flood",
+  "releaseEpisode": "ep01",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "tempo": 1.03,
+  "handheld": false,
+  "grain": false,
+  "mix": {
+    "beds": [
+      "wind",
+      "crickets",
+      "drone",
+      "rain",
+      "steps"
+    ],
+    "duck": 0.16,
+    "bedVolume": 0.32,
+    "real": true
+  },
+  "post": {
+    "series": "กรุงเทพจมน้ำ",
+    "part": 1,
+    "total": 3,
+    "coverHook": "หนีน้ำ…เจอโจร",
+    "hook": "จะเกิดอะไรขึ้น ถ้าน้ำท่วมจนติดในคอนโด แล้วมีคนมาปล้นของ",
+    "question": "A ขวางประตูรอคนช่วย หรือ B ออกอีกทางไปสมทบห้องอื่น?",
+    "next": "ตอนต่อไป จ๊าบทำตามเสียงส่วนใหญ่",
+    "coverFrame": 35,
+    "hashtags": [
+      "#น้ำท่วม",
+      "#เรื่องเอาชีวิตรอด",
+      "#เรื่องเล่า",
+      "#การ์ตูนไทย",
+      "#jaabstory"
+    ],
+    "publishNow": true,
+    "coverBg": "floodWide"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bg": "floodWide",
+      "say": "จะเกิดอะไรขึ้น ถ้าน้ำท่วม แล้วติดอยู่ในคอนโด",
+      "caption": "จะเกิดอะไรขึ้น ถ้าน้ำท่วม แล้วติดอยู่ในคอนโด",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "title": "*น้ำท่วม… คนปล้น*",
+      "hits": [
+        {
+          "at": 0,
+          "sound": "heartbeat",
+          "strength": 7
+        }
+      ],
+      "tone": "conversational Thai, urgent"
+    },
+    {
+      "id": "safe",
+      "bg": "floodHall",
+      "say": "ไฟดับทั้งตึก จ๊าบหนีขึ้นมาชั้นหก คิดว่าพ้นน้ำแล้วคงปลอดภัย",
+      "caption": "ไฟดับทั้งตึก จ๊าบหนีขึ้นมาชั้นหก คิดว่าพ้นน้ำแล้วคงปลอดภัย",
+      "cast": [
+        {
+          "who": "jaab",
+          "x": 390,
+          "y": 1570,
+          "scale": 0.8,
+          "pose": "idle",
+          "expr": "sweat",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        }
+      ],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "chip": "ชั้นหก · ปลอดภัยจากน้ำชั่วคราว"
+    },
+    {
+      "id": "helpers",
+      "bg": "floodHall",
+      "say": "มีผู้ชายสองคนเคาะห้อง อ้างว่ามาช่วยขนของขึ้นที่สูง จ๊าบเกือบเปิดให้",
+      "caption": "มีผู้ชายสองคนเคาะห้อง อ้างว่ามาช่วยขนของขึ้นที่สูง จ๊าบเกือบเปิดให้",
+      "cast": [
+        {
+          "who": "floodThug",
+          "x": 350,
+          "y": 1570,
+          "scale": 0.68,
+          "pose": "hold",
+          "expr": "flat",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        },
+        {
+          "who": "floodThug2",
+          "x": 740,
+          "y": 1570,
+          "scale": 0.64,
+          "pose": "idle",
+          "expr": "flat",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        }
+      ],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "floodCarry"
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 540,
+          "y": 650,
+          "text": "มาช่วยขนของครับ",
+          "label": "ชายหน้าห้อง",
+          "at": 0.2
+        }
+      ]
+    },
+    {
+      "id": "proof",
+      "bg": "floodBoat",
+      "say": "แต่ทีวีห้องหกร้อยสาม อยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ขนกลับบ้านตัวเองชัดๆ",
+      "caption": "แต่ทีวีห้องหกร้อยสาม อยู่บนเรือพวกมัน ขนขึ้นที่สูงอะไร ขนกลับบ้านตัวเองชัดๆ",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "tone": "dry disbelief, then serious"
+    },
+    {
+      "id": "call",
+      "bg": "floodPhone",
+      "say": "จ๊าบล็อกห้อง แล้วโทรแจ้งเหตุ บอกตึกกับชั้นที่อยู่ แต่เรือยังมาไม่ถึง",
+      "caption": "จ๊าบล็อกห้อง แล้วโทรแจ้งเหตุ บอกตึกกับชั้นที่อยู่ แต่เรือยังมาไม่ถึง",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      }
+    },
+    {
+      "id": "neighbor",
+      "bg": "floodHall",
+      "say": "พวกมันหันไปเคาะห้องป้า ป้าคิดว่าคนมาช่วย กำลังจะเปิด",
+      "caption": "พวกมันหันไปเคาะห้องป้า ป้าคิดว่าคนมาช่วย กำลังจะเปิด",
+      "cast": [
+        {
+          "who": "mum",
+          "x": 390,
+          "y": 1570,
+          "scale": 0.76,
+          "pose": "hold",
+          "expr": "flat",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        },
+        {
+          "who": "floodThug",
+          "x": 750,
+          "y": 1570,
+          "scale": 0.65,
+          "pose": "point",
+          "expr": "flat",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        }
+      ],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "floodLock"
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      }
+    },
+    {
+      "id": "warning",
+      "bg": "floodWindow",
+      "say": "จ๊าบยอมเสี่ยง ตะโกนเตือนจากหน้าต่าง อย่าเปิด พวกนี้ขโมยของ",
+      "caption": "จ๊าบยอมเสี่ยง ตะโกนเตือนจากหน้าต่าง อย่าเปิด พวกนี้ขโมยของ",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "tone": "urgent, clear",
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 540,
+          "y": 850,
+          "text": "อย่าเปิด! พวกนี้ขโมยของ",
+          "label": "จ๊าบ",
+          "at": 0.4
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.42,
+          "sound": "heartbeat",
+          "strength": 6
+        }
+      ]
+    },
+    {
+      "id": "saved",
+      "bg": "floodHall",
+      "say": "ห้องอื่นเริ่มตะโกนตาม ป้าหยุดมือทัน แต่พวกมันรู้แล้ว ว่าเสียงมาจากห้องไหน",
+      "caption": "ห้องอื่นเริ่มตะโกนตาม ป้าหยุดมือทัน แต่พวกมันรู้แล้ว ว่าเสียงมาจากห้องไหน",
+      "cast": [
+        {
+          "who": "floodThug",
+          "x": 390,
+          "y": 1570,
+          "scale": 0.76,
+          "pose": "idle",
+          "expr": "angry",
+          "torch": false,
+          "keys": [
+            {
+              "at": 0.5,
+              "turn": 0.35
+            }
+          ]
+        }
+      ],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.12,
+          "x": 420,
+          "y": 1050
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      }
+    },
+    {
+      "id": "threat",
+      "bg": "floodLock",
+      "say": "ลูกบิดห้องจ๊าบขยับ แล้วเสียงเดิมก็พูด เมื่อกี้ มึงว่าใครขโมย",
+      "caption": "ลูกบิดห้องจ๊าบขยับ แล้วเสียงเดิมก็พูด เมื่อกี้ มึงว่าใครขโมย",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.015,
+        "crickets": 0,
+        "drone": 0.05,
+        "rain": 0.03,
+        "steps": 0
+      },
+      "tone": "low, threatening but intelligible",
+      "bubbles": [
+        {
+          "kind": "voice",
+          "x": 540,
+          "y": 1210,
+          "text": "เมื่อกี้ มึงว่าใครขโมย",
+          "label": "เสียงหน้าห้อง",
+          "at": 0.48
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "bg": "floodHall",
+      "say": "ขวางประตูรอคนช่วย หรือออกอีกทาง ไปสมทบห้องอื่น คุณเลือกเอหรือบี",
+      "caption": "ขวางประตูรอคนช่วย หรือออกอีกทาง ไปสมทบห้องอื่น คุณเลือกเอหรือบี",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.06,
+        "crickets": 0,
+        "drone": 0.15,
+        "rain": 0.08,
+        "steps": 0
+      },
+      "type": "endcard",
+      "a": "ขวางประตู รอคนช่วย",
+      "b": "ออกอีกทาง ไปสมทบห้องอื่น",
+      "prompt": "จ๊าบควรทำยังไง?",
+      "footer": "A หรือ B · ตอนต่อไปตามเสียงส่วนใหญ่",
+      "showCaptions": false,
+      "countdown": 3,
+      "countdownAt": 0.08,
+      "padAfter": 0.5
+    }
+  ]
+}
