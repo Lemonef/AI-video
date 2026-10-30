@@ -1,5 +1,7 @@
 import React from 'react';
 import {Composition} from 'remotion';
+import {ReferenceStudy} from './compositions/ReferenceStudy';
+import {STUDY_FRAMES,STUDY_FPS} from './compositions/ReferenceStudy/shots';
 import current from '../episodes/ep01.json';
 import {Avatar} from './compositions/Avatar';
 import {Cover} from './compositions/Cover';
@@ -30,6 +32,7 @@ export const RemotionRoot: React.FC = () => (
 		<Composition id="Cover" component={Cover} width={W} height={H} fps={FPS} durationInFrames={1} defaultProps={{episode: CURRENT}} />
 		<Composition id="Avatar" component={Avatar} width={1080} height={1080} fps={FPS} durationInFrames={1} defaultProps={{bg: 'yellow' as const}} />
 		<Composition id="CharPreview" component={CharPreview} width={W} height={H} fps={FPS} durationInFrames={FPS * 4} />
+		<Composition id="ReferenceStudy" component={ReferenceStudy} width={W} height={H} fps={STUDY_FPS} durationInFrames={STUDY_FRAMES} defaultProps={{showStudyLabels:true}} />
 		<Composition id="EnvPreview" component={EnvPreview} width={W} height={H} fps={FPS} durationInFrames={FPS * 4} defaultProps={{bg: 'houseNight'}} />
 	</>
 );

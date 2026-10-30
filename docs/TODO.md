@@ -1,6 +1,6 @@
 # TODO — the only place live status lives
 
-## NOW (2026-10-29) — read this first
+## NOW (2026-10-30) — read this first
 - [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
@@ -10,7 +10,11 @@
   - [ ] Collect numbers: views, avg watch time, retention graphs (IG + TikTok), comments
 - [ ] Upgrade phase (start in a NEW chat; Codex does the heavy work, Claude writes the contract + checks frames)
   - [ ] Read Part 2/3 retention graphs → where viewers drop
-  - [ ] Private exact-copy practice of reference reel IG DegJCmXtbGj (never posted)
+  - [ ] Private visual reconstruction of reference reel IG DegJCmXtbGj (never posted; `docs/reference-study-DegJCmXtbGj.md`)
+    - [x] Download and inspect reference; measure 35 shot groups
+    - [x] Rebuild isolated sets, poses, camera and lighting on the measured timeline
+    - [x] Render and inspect every shot plus action sequences (93.3 s, 1080x1920, silent practice.mp4)
+    - [ ] Review documented fidelity gaps with Zen; literal 1:1 artwork/audio work remains before story upgrades
   - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
   - [ ] Camera vocabulary: over-the-shoulder, from behind, POV, low/high angle, mood shot first
   - [ ] Test a ChatGPT-generated background plate (Zen saves it to `assets/`) behind the animated cast
