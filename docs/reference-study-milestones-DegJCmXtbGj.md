@@ -187,3 +187,10 @@ Code check: Gemini is already whole-take; take-mode default pads are0; per-line 
 Resource method: cached assets/voice/analysis,short affected previews before full candidates,full QA at meaningful milestones; no repeated image/voice generation without a demonstrated need. Exact account allowance/bill unavailable. Official OpenAI guidance reviewed2026-10-30: https://learn.chatgpt.com/docs/pricing (usage depends on task/context/model/tools/caching; actual limits in dashboard). No numeric budget specified. Do not promise negligible cost.
 
 Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-animation-rebuild/references/voice-flow.md`. Expanded release checklist and milestone handoff saved in skill/brain. Every milestone distinguishes planned,implemented,rendered,reviewed,listened,approved and posted.
+
+
+### M37 ? reconnect, complete sheet review and v7 integration
+- Connection restored; existing files preserved. All seven v6 comparison sheets inspected. Remaining gaps: crowd diversity/poses, actor proportions/profile performance, phone/city, mechanism diagram, light/torch interaction, inventory text, captions and scratch voice performance. No 1:1 or listening sign-off.
+- Planted-foot v7 gait interval inspected. Button reaches down contact by 8% of insert rather than 45%; click moved 52.72?52.23 s. Shutter metal changed from green to cool gray. TypeScript passes.
+- Full-resolution ReferenceAssisted v7 export started; protected EP3 is unchanged. Default Python lacked edge_tts; used existing .venv, no package installation.
+- Brain complete dialogue/checklist/handoff checkpoint pushed b17fb57 to verified private Lemonef/SecondBrain (ADMIN). Installed skill refreshed and validates.

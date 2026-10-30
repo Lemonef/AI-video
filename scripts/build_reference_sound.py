@@ -101,7 +101,7 @@ def main():
     for sec in [18.2,18.6,26.8,27.2]:click(sec,'foot contact',.035)
     tt=np.arange(round(6*SR))/SR
     add(19.8,np.sin(2*np.pi*(560*tt-150/(2*np.pi)*np.cos(2*np.pi*.6*tt)))*np.sin(np.pi*tt/6)**2,.013,pan=.4,name='distant siren')
-    click(52.72,'shutter button contact',.1)
+    click(52.23,'shutter button contact',.1)
     tt=np.arange(round(1.10*SR))/SR
     motor=(np.sin(2*np.pi*115*tt)+.25*np.sin(2*np.pi*230*tt)+rng.normal(0,.1,len(tt)))*np.minimum(tt*18,1)
     add(53.54,motor,.044,name='shutter motor until jam')
