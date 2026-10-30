@@ -79,7 +79,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
   {withSound?<Html5Audio src={staticFile('reference-study/study-sound.wav')}/>:null}
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
    <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient></defs>
-   <g transform={cameraTransform}>
+   <g transform={cameraTransform} style={shot.id===10&&local<7?{filter:`blur(${18*(1-local/7)}px)`}:undefined}>
     <FidelityStage crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
    </g>
    {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={p*.45}/>:null}

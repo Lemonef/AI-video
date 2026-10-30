@@ -49,10 +49,10 @@ const Car:React.FC<{x:number;y:number;s?:number;c:string;flip?:boolean}>=({x,y,s
 // Prop anchors and limb endpoints share local rig space.
 const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotion?:string;lean?:number}>=({x,y,s=1,f,pose='rest',emotion='calm',lean=0})=>{
  ({x,y,s}=actorLayout(x,y,s,pose,f,lean,React.useContext(HeadTargetContext)));
- const profile=pose==='pull'||pose==='keys';
+ const profile=pose==='pull'||pose==='keys'||pose==='walk';
  const gait=walkCycle(f);
  const step=pose==='walk'?gait.swing:0,pull=pose==='pull'?Math.sin(f/3.9):0,headY=-175;
- const bodyBob=pose==='walk'?gait.bob*GAIT_SCALE*.86:0;
+ const bodyBob=pose==='walk'?gait.bob*GAIT_SCALE:0;
  const handR=pose==='pull'?[RIG.pullHandX,-113+pull*20]:pose==='phone'?[17,-102]:pose==='light'?[37,-100]:pose==='alert'?[25,-95]:[28,-97];
  const handL=pose==='alert'?[25,-125]:pose==='keys'?[-31,-107]:[-24,-81];
  const faceOffset=pose==='pull'?12:pose==='keys'?9:pose==='phone'?5:0;
@@ -65,9 +65,9 @@ const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotio
   const walking=pose==='walk';
   const hipX=walking?leg.hipX*GAIT_SCALE:side*(profile?4:6);
   const kneeX=walking?leg.kneeX*GAIT_SCALE:side*(profile?4:6)+(profile?8:0);
-  const kneeY=walking?((leg.kneeY+390)*GAIT_SCALE)*.86-64:-36;
+  const kneeY=walking?(leg.kneeY+390)*GAIT_SCALE-64:-36;
   const ankleX=walking?leg.ankleX*GAIT_SCALE:side*(profile?4:6)+(profile?7:0);
-  const ankleY=walking?((leg.ankleY+390)*GAIT_SCALE)*.86-64:-11;
+  const ankleY=walking?(leg.ankleY+390)*GAIT_SCALE-64:-11;
   return <g key={side}><path d={`M${hipX},-64 L${kneeX},${kneeY} L${ankleX},${ankleY}`} fill="none" stroke={side===-1?'#a3a079':'#bbb78c'} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankleX+1} cy={ankleY+3} rx="6.5" ry={2.9-(walking?leg.lift/70:0)} fill="#3c4436"/></g>;
  })}
  <g transform={profile?'translate(7 0) skewX(3) scale(.65 1)':undefined}><path d="M-17,-143 Q0,-148 17,-141 L13,-63 H-13Z" fill="#2e5a3c"/><path d="M-9,-130 H11 L14,-47 H-11Z" fill="#1b3033"/><rect x="-6" y="-67" width="14" height="6" rx="1.5" fill="#34484b"/><path d="M-14,-80 V-49 H-3 V-80" fill="#263c36"/>
