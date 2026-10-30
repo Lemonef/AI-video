@@ -30,3 +30,24 @@ def test_removing_runtime_cap_keeps_visual_stagnation_checks():
     ep = {"scenes": [{"id": "hook", "say": "hook", "title": "hook"}, {"id": "static", "say": "long"}]}
     findings = retention.check(ep, {"hook": {"duration": 3}, "static": {"duration": 30}})
     assert any(f.scene == "static" and f.level == "FAIL" for f in findings)
+
+
+def test_pause_cuts_keep_guards_inside_measured_quiet_intervals():
+    from repair_delivery_pauses import plan_cuts
+    gaps=[(1.0,1.6),(3.0,3.3)]
+    cuts=plan_cuts(gaps,30,300)
+    assert cuts
+    for a,b in cuts:
+        assert any(a/30>=lo+.04 and b/30<=hi-.04 for lo,hi in gaps)
+        assert b>a
+
+
+def test_pause_repair_preserves_protected_reveal_hold():
+    from repair_delivery_pauses import plan_cuts
+    cuts=plan_cuts([(1.0,1.8)],30,300,[(.9,1.9,.8)])
+    assert cuts==[]
+
+
+def test_pause_repair_leaves_short_breaths_alone():
+    from repair_delivery_pauses import plan_cuts
+    assert plan_cuts([(1.0,1.1)],30,300)==[]
