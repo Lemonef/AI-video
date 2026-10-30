@@ -194,3 +194,9 @@ Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-a
 - Planted-foot v7 gait interval inspected. Button reaches down contact by 8% of insert rather than 45%; click moved 52.72?52.23 s. Shutter metal changed from green to cool gray. TypeScript passes.
 - Full-resolution ReferenceAssisted v7 export started; protected EP3 is unchanged. Default Python lacked edge_tts; used existing .venv, no package installation.
 - Brain complete dialogue/checklist/handoff checkpoint pushed b17fb57 to verified private Lemonef/SecondBrain (ADMIN). Installed skill refreshed and validates.
+
+### M38 ? v7 full-size progress delivery
+- Delivered `out\drafts\reference-study\DegJCmXtbGj\practice-v7-assisted.mp4`: 1080x1920,9:16,30fps,2799 picture frames,93.300 s with audio. SHA256 d37a8c95bbce961d8deb21f8f67c984aa26e7f4e460f60f080f2e2be8f25c1dc.
+- 105 whole-film samples: MAE 22.014,SSIM 0.7298. Slight aggregate regression versus v6 despite contact/material corrections; do not claim global fidelity gain. Changed button/shutter comparison page5 inspected. All v6 sheets reviewed before integration.
+- Export audio measured -14.47 LUFS/-1.17 dBTP; listening and voice suitability still open. Cached 33 voice lines reused. Comparison runs under system Python (cv2); sound uses .venv (edge_tts).
+- Code local3074e24. Public-origin push held after approval review; no source-derived media uploaded. Literal1:1 remains open; this file is a private source-assisted progress copy.
