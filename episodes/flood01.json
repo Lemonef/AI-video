@@ -7,7 +7,7 @@
   "engine": "gemini",
   "voice": "Iapetus",
   "voiceModel": "gemini-2.5-flash-preview-tts",
-  "tempo": 1.05,
+  "tempo": 1.155,
   "handheld": false,
   "grain": false,
   "mix": {
