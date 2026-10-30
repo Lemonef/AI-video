@@ -43,7 +43,11 @@ def main() -> None:
     engine = get_engine(episode.get("engine", "edge"))
     episode["take"] = engine.whole_take
     public = ROOT / "public"
-    final = ROOT / "out" / "final" / args.episode  # one folder per episode: only what gets posted
+    story = episode.get("seriesSlug", "ghost" if args.episode in ("ep01", "ep02", "ep03") else args.episode)
+    release_episode = episode.get("releaseEpisode", args.episode)
+    if any(Path(part).name != part or part in (".", "..") for part in (story, release_episode)):
+        raise ValueError("release story/episode must be simple folder names")
+    final = ROOT / "out" / "final" / story / release_episode
     if args.publish:
         versions.publish(versions.latest(ROOT, args.episode), final / "video.mp4")
         print(f"done: {final / 'video.mp4'}")

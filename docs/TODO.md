@@ -1,6 +1,9 @@
 # TODO — the only place live status lives
 
 ## NOW (2026-10-30) — read this first
+- [ ] URGENT new survival story: research/premise/hooks/causal escalation/climax/earned choice BEFORE voice/render; docs/story-survival-2026-10-30.md. Three Wishes stopped by owner; not release-approved.
+- [x] Group existing final arc as out/final/ghost/ep01–ep03; approved ep03 bytes/hash preserved.
+- [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
 - [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
