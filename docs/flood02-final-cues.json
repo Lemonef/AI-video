@@ -1,0 +1,224 @@
+{
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "hook",
+      "source_start_frame": 0,
+      "final_start_frame": 0,
+      "native_frames": 78
+    },
+    {
+      "id": "route",
+      "source_start_frame": 78,
+      "final_start_frame": 78,
+      "native_frames": 109
+    },
+    {
+      "id": "passage",
+      "source_start_frame": 187,
+      "final_start_frame": 187,
+      "native_frames": 62
+    },
+    {
+      "id": "group",
+      "source_start_frame": 249,
+      "final_start_frame": 247,
+      "native_frames": 99
+    },
+    {
+      "id": "chair",
+      "source_start_frame": 348,
+      "final_start_frame": 343,
+      "native_frames": 114
+    },
+    {
+      "id": "barricade",
+      "source_start_frame": 462,
+      "final_start_frame": 457,
+      "native_frames": 60
+    },
+    {
+      "id": "record",
+      "source_start_frame": 522,
+      "final_start_frame": 517,
+      "native_frames": 82
+    },
+    {
+      "id": "retreat",
+      "source_start_frame": 604,
+      "final_start_frame": 596,
+      "native_frames": 137
+    },
+    {
+      "id": "rear",
+      "source_start_frame": 741,
+      "final_start_frame": 730,
+      "native_frames": 128
+    },
+    {
+      "id": "surrounded",
+      "source_start_frame": 869,
+      "final_start_frame": 858,
+      "native_frames": 147
+    },
+    {
+      "id": "demand",
+      "source_start_frame": 1016,
+      "final_start_frame": 1003,
+      "native_frames": 91
+    },
+    {
+      "id": "rescue",
+      "source_start_frame": 1107,
+      "final_start_frame": 1086,
+      "native_frames": 145
+    },
+    {
+      "id": "battery",
+      "source_start_frame": 1252,
+      "final_start_frame": 1230,
+      "native_frames": 147
+    },
+    {
+      "id": "pressure",
+      "source_start_frame": 1399,
+      "final_start_frame": 1374,
+      "native_frames": 72
+    },
+    {
+      "id": "end",
+      "source_start_frame": 1471,
+      "final_start_frame": 1443,
+      "native_frames": 203
+    }
+  ],
+  "sound_cues": [
+    {
+      "scene": "hook",
+      "sound": "heartbeat",
+      "kind": "hits",
+      "source_frame": 0,
+      "final_frame": 0,
+      "volume": null,
+      "rate": 1
+    },
+    {
+      "scene": "passage",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 205,
+      "final_frame": 205,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "passage",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 223,
+      "final_frame": 223,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "barricade",
+      "sound": "floodScrape",
+      "kind": "sfx",
+      "source_frame": 473,
+      "final_frame": 468,
+      "volume": 0.15,
+      "rate": 1.599
+    },
+    {
+      "scene": "retreat",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 716,
+      "final_frame": 705,
+      "volume": 0.18,
+      "rate": 1
+    },
+    {
+      "scene": "retreat",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 734,
+      "final_frame": 723,
+      "volume": 0.23,
+      "rate": 1
+    },
+    {
+      "scene": "rear",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 795,
+      "final_frame": 784,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "rear",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 813,
+      "final_frame": 802,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "rear",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 831,
+      "final_frame": 820,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "rear",
+      "sound": "floodStep",
+      "kind": "sfx",
+      "source_frame": 849,
+      "final_frame": 838,
+      "volume": 0.13,
+      "rate": 1
+    },
+    {
+      "scene": "rear",
+      "sound": "heartbeat",
+      "kind": "hits",
+      "source_frame": 791,
+      "final_frame": 780,
+      "volume": null,
+      "rate": 1
+    },
+    {
+      "scene": "pressure",
+      "sound": "floodScrape",
+      "kind": "sfx",
+      "source_frame": 1413,
+      "final_frame": 1385,
+      "volume": 0.09,
+      "rate": 3.5
+    },
+    {
+      "scene": "pressure",
+      "sound": "floodScrape",
+      "kind": "sfx",
+      "source_frame": 1447,
+      "final_frame": 1419,
+      "volume": 0.1,
+      "rate": 3.5
+    },
+    {
+      "scene": "pressure",
+      "sound": "heartbeat",
+      "kind": "hits",
+      "source_frame": 1419,
+      "final_frame": 1391,
+      "volume": null,
+      "rate": 1
+    }
+  ],
+  "note": "Frame placements from authored scene clock, remapped with the exact quiet-cut plan; perceptual sound/taste approval remains separate."
+}

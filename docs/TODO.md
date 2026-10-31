@@ -1,5 +1,19 @@
 # TODO — the only place live status lives
 
+## CURRENT — 2026-10-31 Bangkok flood Part2
+- [x] Owner confirmed B: join the other residents; Thai-first story and three hooks reviewed before voice.
+- [x] Capture/review29 reference posts in the brain:26videos,2carousels,1restricted; preserve271returned comments,approximateASR,upstreamskilltexts and localmedia hashes. Seven later URLs remain queued.
+- [x] Use actual content-principles/ig-reel/earshot guidance; no English-only numeric score or fixed runtime imposed on Thai.
+- [x] Produce15-scene original continuation,8-person group, readable route, chair handoff, cabinet load, phone recording and rear-door flank.
+- [x] Address plain preview: distinct lived-in room606, motivated lantern/cool emergency light, set depth, purposeful framing and fixed-length contact IK.
+- [x] ElevenLabs stock audition rejected; native voice-design API blocked on Free. Owner selected established Iapetus tonight; ElevenLabs improvement remains separate.
+- [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
+- [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
+- [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
+- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/bangkok-flood/ep02/video.mp4` path.54.866667s/1646frames/1440×2560/30fps; actualmix-14.30LUFS/-1.85dBTP.39pytest+2gaitchecks/TypeScriptpass.
+- [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
+- [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
+
 ## NOW (2026-10-30) — read this first
 - [x] New survival story Part1 built/reviewed: out/final/bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
 - [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.

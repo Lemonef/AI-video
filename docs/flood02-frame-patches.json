@@ -1,0 +1,26 @@
+{
+  "source": "out/drafts/flood02/video.mp4",
+  "patches": [
+    {
+      "scene": "passage",
+      "start": 187,
+      "end": 249,
+      "file": ".build/flood02-passage-patch.mp4"
+    },
+    {
+      "scene": "rear",
+      "start": 741,
+      "end": 869,
+      "file": ".build/flood02-rear-patch.mp4"
+    },
+    {
+      "scene": "pressure/end",
+      "start": 1399,
+      "end": 1674,
+      "file": ".build/flood02-pressure-end-patch.mp4"
+    }
+  ],
+  "result": "out\\drafts\\bangkok-flood\\ep02\\source-before-flow.mp4",
+  "result_sha256": "04c466544a0774e06d7c60d313dc89083e1dddfc15b15e6ad7aa4e2a47536a2d",
+  "note": "Only affected picture ranges replaced; original mixed audio copied. Native film clock preserved."
+}

@@ -18,6 +18,10 @@ class TtsEngine(Protocol):
 
 
 def get_engine(name: str) -> TtsEngine:
+    if name == "elevenlabs":
+        from .elevenlabs_engine import ElevenLabsTtsEngine
+
+        return ElevenLabsTtsEngine()
     if name == "edge":
         from .edge_engine import EdgeTtsEngine
 
@@ -26,7 +30,7 @@ def get_engine(name: str) -> TtsEngine:
         from .gemini_engine import GeminiTtsEngine
 
         return GeminiTtsEngine()
-    raise ValueError(f"unknown TTS engine {name!r} (known: edge, gemini)")
+    raise ValueError(f"unknown TTS engine {name!r} (known: edge, gemini, elevenlabs)")
 
 
 __all__ = ["TtsEngine", "Word", "get_engine"]

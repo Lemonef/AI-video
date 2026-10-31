@@ -1,0 +1,578 @@
+{
+  "id": "flood02",
+  "title": "กรุงเทพจมน้ำ — คลิปที่ยังไม่ได้ส่ง",
+  "seriesSlug": "bangkok-flood",
+  "releaseEpisode": "ep02",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "tempo": 1.15,
+  "handheld": false,
+  "grain": false,
+  "mix": {
+    "beds": [
+      "wind",
+      "drone",
+      "rain"
+    ],
+    "duck": 0.5,
+    "bedVolume": 0.55,
+    "real": true
+  },
+  "post": {
+    "series": "กรุงเทพจมน้ำ",
+    "part": 2,
+    "total": 3,
+    "coverHook": "หนีมา…ถูกล้อม",
+    "hook": "กรุงเทพจมน้ำ ตอน 2 — ทุกคนเลือก B จ๊าบไปหาเพื่อนบ้าน แต่โจรกลับมาทั้งสองฝั่ง",
+    "question": "A ยอมส่งของตามที่โจรขอ หรือ B ถ่วงเวลาแล้วแอบส่งคลิปกับตำแหน่ง?",
+    "next": "ตอนจบ จ๊าบทำตามเสียงส่วนใหญ่",
+    "coverFrame": 35,
+    "hashtags": [
+      "#น้ำท่วม",
+      "#เรื่องเอาชีวิตรอด",
+      "#เรื่องเล่า",
+      "#การ์ตูนไทย",
+      "#jaabstory"
+    ],
+    "publishNow": true,
+    "coverBg": "floodRescue",
+    "keyword": "น้ำท่วมคอนโด"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bg": "floodEvidence",
+      "say": "โจรจะเอามือถือทุกเครื่อง แต่จ๊าบเพิ่งถ่ายหน้ามันไว้",
+      "caption": "โจรจะเอา มือถือทุกเครื่อง แต่จ๊าบเพิ่ง ถ่ายหน้ามันไว้",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.035,
+          "x": 540,
+          "y": 1230
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.065,
+          "x": 540,
+          "y": 1230
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.3,
+        "rain": 0.35
+      },
+      "title": "*ส่งมือถือมาให้หมด*",
+      "hits": [
+        {
+          "at": 0,
+          "sound": "heartbeat",
+          "strength": 5
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "route",
+      "bg": "floodRoute",
+      "say": "ทุกคนเลือกบี จ๊าบเลยอ้อมประตูบริการหลังห้อง ไปหาเพื่อนบ้าน",
+      "caption": "ทุกคนเลือกบี จ๊าบเลยอ้อม ประตูบริการหลังห้อง ไปหาเพื่อนบ้าน",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.25,
+        "rain": 0.3
+      },
+      "chip": "B ชนะ · ไปสมทบเพื่อนบ้าน",
+      "bedsFade": 0.45
+    },
+    {
+      "id": "passage",
+      "bg": "floodPassage",
+      "say": "ทางเดินด้านหลัง เชื่อมไปห้องหกร้อยหก",
+      "caption": "ทางเดินด้านหลัง เชื่อมไปห้อง หกร้อยหก",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.12,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.27,
+        "rain": 0.48
+      },
+      "chip": "ชั้นหก · ทางเดินบริการ",
+      "sfx": [
+        {
+          "at": 0.294611,
+          "sound": "floodStep",
+          "volume": 0.13
+        },
+        {
+          "at": 0.589222,
+          "sound": "floodStep",
+          "volume": 0.13
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "group",
+      "bg": "floodGroup",
+      "say": "ในห้องมีคนหลบอยู่เจ็ดคน รวมป้าที่เขาเพิ่งเตือนไว้ด้วย",
+      "caption": "ในห้องมีคนหลบอยู่ เจ็ดคน รวมป้าที่เขา เพิ่งเตือนไว้ด้วย",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.13,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.13,
+        "rain": 0.24
+      },
+      "chip": "ห้อง 606 · รวมจ๊าบเป็น 8 คน",
+      "bedsFade": 0.45
+    },
+    {
+      "id": "chair",
+      "bg": "floodChair",
+      "say": "ป้ายกเก้าอี้ให้ จ๊าบนึกว่าจะให้นั่ง ป้าบอก เอาไปขวางประตู!",
+      "caption": "ป้ายกเก้าอี้ให้ จ๊าบนึกว่า จะให้นั่ง ป้าบอก เอาไปขวางประตู!",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.18,
+          "x": 520,
+          "y": 1260
+        },
+        {
+          "at": 0.53,
+          "zoom": 1.24,
+          "x": 520,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.12,
+        "rain": 0.24
+      },
+      "tone": "quick conversational storytelling, brief dry smile on the misunderstanding",
+      "bedsFade": 0.45
+    },
+    {
+      "id": "barricade",
+      "bg": "floodBarricade",
+      "say": "พวกเขาช่วยกันดันตู้ปิดทางเดิน",
+      "caption": "พวกเขาช่วยกันดันตู้ปิดทางเดิน",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.2,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.24,
+        "rain": 0.27
+      },
+      "sfx": [
+        {
+          "at": 0.18,
+          "sound": "floodScrape",
+          "volume": 0.15,
+          "rate": 1.599
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "record",
+      "bg": "floodRecord",
+      "say": "จ๊าบยกมือถือถ่ายคนเสื้อแดง ที่ยังงัดห้องเขาอยู่",
+      "caption": "จ๊าบยกมือถือ ถ่ายคนเสื้อแดง ที่ยังงัด ห้องเขาอยู่",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        0.35
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.015,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.3,
+        "rain": 0.3
+      },
+      "bedsFade": 0.45
+    },
+    {
+      "id": "retreat",
+      "bg": "floodRecord",
+      "say": "พอเห็นกล้อง มันก็ถอยไป จ๊าบกำลังจะโล่งใจ แต่เสียงฝีเท้ากลับดังมาจากข้างหลัง",
+      "caption": "พอเห็นกล้อง มันก็ถอยไป จ๊าบกำลังจะโล่งใจ แต่เสียงฝีเท้า กลับดังมาจาก ข้างหลัง",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0.35,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.015,
+          "x": 540,
+          "y": 1260
+        },
+        {
+          "at": 0.72,
+          "zoom": 1.07,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.18,
+        "rain": 0.3
+      },
+      "sfx": [
+        {
+          "at": 0.82,
+          "sound": "floodStep",
+          "volume": 0.18
+        },
+        {
+          "at": 0.95,
+          "sound": "floodStep",
+          "volume": 0.23
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "rear",
+      "bg": "floodRearDoor",
+      "say": "คนเสื้อเขียวโผล่จากประตูบริการ บานเดียวกับที่จ๊าบเพิ่งผ่าน และลืมปิด",
+      "caption": "คนเสื้อเขียวโผล่ จากประตูบริการ บานเดียวกับที่ จ๊าบเพิ่งผ่าน และลืมปิด",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.14,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.43,
+        "rain": 0.35
+      },
+      "hits": [
+        {
+          "at": 0.39,
+          "word": "เสื้อเขียว",
+          "sound": "heartbeat",
+          "strength": 5
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.42504,
+          "sound": "floodStep",
+          "volume": 0.13
+        },
+        {
+          "at": 0.56672,
+          "sound": "floodStep",
+          "volume": 0.13
+        },
+        {
+          "at": 0.7084,
+          "sound": "floodStep",
+          "volume": 0.13
+        },
+        {
+          "at": 0.85008,
+          "sound": "floodStep",
+          "volume": 0.13
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "surrounded",
+      "bg": "floodSurrounded",
+      "say": "เสื้อแดงกลับมาที่หน้าตู้ อีกคนคุมทางหลัง พวกมันไม่ได้หนี แต่มาล้อม",
+      "caption": "เสื้อแดงกลับมา ที่หน้าตู้ อีกคนคุมทางหลัง พวกมันไม่ได้หนี แต่มาล้อม",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        1,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.025,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.4,
+        "rain": 0.3
+      },
+      "chip": "หน้าตู้ / ประตูบริการ · ถูกปิดทั้งสองทาง",
+      "bedsFade": 0.45
+    },
+    {
+      "id": "demand",
+      "bg": "floodExtort",
+      "say": "เอามือถือกับของมีค่าออกมา แล้วกูจะเปิดทางให้",
+      "caption": "เอามือถือ กับของมีค่าออกมา แล้วกูจะเปิดทางให้",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.12,
+        "rain": 0.18
+      },
+      "padAfter": 0.15,
+      "tone": "quiet controlled human menace, restrained, not slow, no growl",
+      "camera": {
+        "from": 1.12,
+        "to": 1.12,
+        "x": 540,
+        "y": 1260
+      },
+      "bedsFade": 0.22
+    },
+    {
+      "id": "rescue",
+      "bg": "floodRescue",
+      "say": "ป้ากำมือถือแน่น ไม่มีใครขยับ ข้างล่าง แสงจากเรือกู้ภัยกำลังกวาดผ่านตึก",
+      "caption": "ป้ากำมือถือแน่น ไม่มีใครขยับ ข้างล่าง แสงจากเรือกู้ภัย กำลังกวาดผ่านตึก",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        1,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "floodGroup"
+        },
+        {
+          "at": 0.4,
+          "zoom": 1,
+          "x": 540,
+          "y": 960,
+          "bg": "floodRescue"
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.21,
+        "rain": 0.5
+      },
+      "bedsFade": 0.45
+    },
+    {
+      "id": "battery",
+      "bg": "floodBattery",
+      "say": "แบตจ๊าบเหลือสิบเอ็ดเปอร์เซ็นต์ คลิปยังไม่ได้ส่ง ถ้ายื่นมือถือไป หลักฐานก็ไปด้วย",
+      "caption": "แบตจ๊าบเหลือ สิบเอ็ดเปอร์เซ็นต์ คลิปยังไม่ได้ส่ง ถ้ายื่นมือถือไป หลักฐานก็ไปด้วย",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.015,
+          "x": 540,
+          "y": 1260
+        },
+        {
+          "at": 0.56,
+          "zoom": 1.045,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.36,
+        "rain": 0.32
+      },
+      "bedsFade": 0.45
+    },
+    {
+      "id": "pressure",
+      "bg": "floodPressure",
+      "say": "โจรเริ่มดันตู้ จ๊าบต้องตัดสินใจแล้ว",
+      "caption": "โจรเริ่มดันตู้ จ๊าบต้องตัดสินใจแล้ว",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.16,
+          "x": 540,
+          "y": 1260
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.45,
+        "rain": 0.33
+      },
+      "hits": [
+        {
+          "at": 0.28,
+          "sound": "heartbeat",
+          "strength": 6
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "sound": "floodScrape",
+          "volume": 0.09,
+          "rate": 3.5
+        },
+        {
+          "at": 0.67,
+          "sound": "floodScrape",
+          "volume": 0.1,
+          "rate": 3.5
+        }
+      ],
+      "bedsFade": 0.45
+    },
+    {
+      "id": "end",
+      "bg": "floodPressure",
+      "say": "เอ ยอมส่งของให้มัน หรือบี ถ่วงเวลา แอบส่งคลิปกับตำแหน่ง แต่เสี่ยงโดนเห็น คุณเลือกอะไร",
+      "caption": "เอ ยอมส่งของให้มัน หรือบี ถ่วงเวลา แอบส่งคลิปกับตำแหน่ง แต่เสี่ยงโดนเห็น คุณเลือกอะไร",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        1,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "beds": {
+        "wind": 0.1,
+        "drone": 0.35,
+        "rain": 0.3
+      },
+      "type": "endcard",
+      "a": "ยอมส่งของ ตามที่โจรขอ",
+      "b": "ถ่วงเวลา แอบส่งคลิป",
+      "prompt": "จ๊าบควรเลือกทางไหน?",
+      "footer": "A หรือ B · ตอนจบตามเสียงส่วนใหญ่",
+      "showCaptions": false,
+      "padAfter": 0.4,
+      "bedsFade": 0.45
+    }
+  ],
+  "narrationJoin": " ",
+  "narrationDirection": "Perform this original Thai suspense story as a native Bangkok Thai man telling an urgent incident to a friend. Use the same warm male narrator identity throughout. Keep connected, brisk conversational phrasing and varied stress; do not pause at each input scene or speak with the same rise/fall on each phrase. Start immediately with the phone/evidence dilemma. Flow through the escape geography without list-like cadence. In the chair misunderstanding allow a brief dry amused turn, then move on. The apparent retreat has a small moment of relief, interrupted by the rear footsteps. Make the threat quietly controlled and human, not a monster or movie-trailer bass. Build urgency toward the unsent clip and the difficult choice. Use natural thought-group breaths, avoid long empty gaps. No requested total duration. Read only the provided Thai text; do not speak these instructions or bracketed delivery tags."
+}

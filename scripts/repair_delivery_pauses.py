@@ -82,7 +82,8 @@ def main():
     for i,(a,b) in enumerate(keep):
         dur=(b-a)/fps
         graph.append(f'[s{i}]atrim=start={a/fps:.9f}:end={b/fps:.9f},asetpts=PTS-STARTPTS,afade=t=in:d=0.004,afade=t=out:st={max(0,dur-.004):.9f}:d=0.004[a{i}]')
-    graph.append(''.join(f'[a{i}]' for i in range(len(keep)))+f'concat=n={len(keep)}:v=0:a=1,atempo={args.speed}[a]')
+    tempo = f',atempo={args.speed}' if args.speed != 1 else ''
+    graph.append(''.join(f'[a{i}]' for i in range(len(keep)))+f'concat=n={len(keep)}:v=0:a=1{tempo}[a]')
     graph_path=args.out.with_suffix('.filters.txt');graph_path.write_text(';'.join(graph))
     subprocess.run(['ffmpeg','-y','-v','error','-i',str(args.source),'-filter_complex',';'.join(graph),
                     '-map','[v]','-map','[a]','-r',str(fps),'-c:v','libx264','-preset','veryfast','-crf','14',

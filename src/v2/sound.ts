@@ -5,6 +5,10 @@ import type {Episode, Scene} from '../types';
 // Synthetic files from scripts/pipeline/foley.py (+ v1/v2 pop/tick/whoosh by sfx.py), or, with
 // mix.real, the recorded CC0 library from scripts/pipeline/freesound.py under the same names.
 const REAL: Record<string, string> = {
+    floodStep: 'flood02_step',
+    floodScrape: 'flood02_scrape',
+    floodChair: 'flood02_chair',
+    floodLatch: 'flood02_door',
 	crickets: 'forest_night',
 	wind: 'wind',
 	rain: 'rain',

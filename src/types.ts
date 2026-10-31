@@ -111,8 +111,10 @@ export type SceneTiming = {
 export type Episode = {
 	id: string;
 	title: string;
-	engine?: string; // TTS engine: "gemini" (one expressive take) or "edge" (per line)
+	engine?: string; // gemini / elevenlabs (whole take) or edge (per line)
 	voice: string;
+	voiceModel?: string;
+	voiceSettings?: Record<string, number | boolean>;
 	narrationDirection?: string; // performance instructions, included in the voice cache key
 	narrationJoin?: string; // scene boundaries need not impose spoken paragraph breaks
 	voiceClips?: string; // approved per-scene speech repairs, manifest relative to public/

@@ -33,13 +33,13 @@ const outline = (px: number, color = '#0B0E18') => ({
 export const Cover: React.FC<CoverProps> = ({episode}) => {
 	const post = episode.post ?? {};
 	const Env = ENV5[String(post.coverBg ?? 'forestPath')] ?? ENV5.forestPath;
- const flood = post.coverBg === 'floodWide';
+ const flood = String(post.coverBg ?? '').startsWith('flood');
 	const hook = String(post.coverHook ?? '');
 	return (
 		<AbsoluteFill style={{background: '#000'}}>
 			<svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', filter: 'saturate(0.85) brightness(0.92)'}}>
 				<Env frame={flood?-1:0} scroll={0} fireflies={false} density={1} />
-				<g transform={flood?"translate(170 1950) scale(1.1)":"translate(150 1640) scale(1.25)"} opacity={0.95}>
+				<g transform={flood?"translate(170 1950) scale(1.1)":"translate(150 1640) scale(1.25)"} opacity={flood ? 1 : 0.95}>
 					{flood?<Character2 look={CAST2.floodThug} pose="armsCrossed" expr="angry" turn={.3} frame={8} torch={false}/>:React.createElement(PROPS2.watcher, {frame: 9})}
 				</g>
 				{/* the hero, big and scared: the face carries the cover */}

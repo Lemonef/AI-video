@@ -1,0 +1,536 @@
+{
+  "episode": "flood02",
+  "fps": 30,
+  "total_frames": 1674,
+  "film_seconds": 55.8,
+  "original_take_duration_sec": 54.978833,
+  "voice_path": ".build\\flood02-aligned-voice.wav",
+  "voice_sha256": "6b0fa4353a4f173d1674a1b60ce32cf58e2b3727875f2cc920ba90154a0b84b5",
+  "measurement": "isolated voice at -45dBFS; silence>=.32s; only gaps>=.4s eligible; minimum retained .24s everywhere plus mapped protected beats; 40ms guards; no extra speed",
+  "source_sha256": "04c466544a0774e06d7c60d313dc89083e1dddfc15b15e6ad7aa4e2a47536a2d",
+  "gaps": [
+    [
+      8.084333,
+      8.518437
+    ],
+    [
+      19.911833,
+      20.363375
+    ],
+    [
+      28.632938,
+      29.039417
+    ],
+    [
+      33.613021,
+      34.101958
+    ],
+    [
+      36.49325,
+      37.078604
+    ],
+    [
+      38.94825,
+      39.339417
+    ],
+    [
+      41.527417,
+      41.924062
+    ],
+    [
+      44.100062,
+      44.467
+    ],
+    [
+      46.412646,
+      46.868354
+    ],
+    [
+      48.804021,
+      49.256958
+    ],
+    [
+      54.392271,
+      54.764021
+    ],
+    [
+      55.263167,
+      55.8
+    ]
+  ],
+  "safe_gaps": [
+    [
+      8.084333,
+      8.518437
+    ],
+    [
+      19.911833,
+      20.363375
+    ],
+    [
+      33.613021,
+      34.101958
+    ],
+    [
+      36.49325,
+      37.078604
+    ],
+    [
+      46.412646,
+      46.868354
+    ]
+  ],
+  "protected": [
+    [
+      0,
+      55.8,
+      0.24
+    ],
+    [
+      28.165521000000005,
+      29.397291666666664,
+      0.36
+    ],
+    [
+      31.397291666666664,
+      32.19729166666667,
+      0.34
+    ],
+    [
+      33.397291666666675,
+      37.369375000000005,
+      0.34
+    ]
+  ],
+  "original_take_protected": [
+    [
+      28,
+      29.2,
+      0.36
+    ],
+    [
+      31.2,
+      32,
+      0.34
+    ],
+    [
+      33.2,
+      37,
+      0.34
+    ]
+  ],
+  "proposed_cut_checks": [
+    {
+      "frames": [
+        247,
+        252
+      ],
+      "seconds": [
+        8.233333333333333,
+        8.4
+      ],
+      "removed_sec": 0.16666666666666666,
+      "voice_peak_dbfs": -52.54679395983368,
+      "gap": [
+        8.084333,
+        8.518437
+      ],
+      "guard_before_sec": 0.14900033333333162,
+      "guard_after_sec": 0.11843700000000013
+    },
+    {
+      "frames": [
+        601,
+        607
+      ],
+      "seconds": [
+        20.033333333333335,
+        20.233333333333334
+      ],
+      "removed_sec": 0.2,
+      "voice_peak_dbfs": -48.760469474284704,
+      "gap": [
+        19.911833,
+        20.363375
+      ],
+      "guard_before_sec": 0.12150033333333354,
+      "guard_after_sec": 0.13004166666666706
+    },
+    {
+      "frames": [
+        865,
+        866
+      ],
+      "seconds": [
+        28.833333333333332,
+        28.866666666666667
+      ],
+      "removed_sec": 0.03333333333333333,
+      "voice_peak_dbfs": -49.04376490757506,
+      "gap": [
+        28.632938,
+        29.039417
+      ],
+      "guard_before_sec": 0.20039533333333281,
+      "guard_after_sec": 0.17275033333333312
+    },
+    {
+      "frames": [
+        1014,
+        1018
+      ],
+      "seconds": [
+        33.8,
+        33.93333333333333
+      ],
+      "removed_sec": 0.13333333333333333,
+      "voice_peak_dbfs": -52.084051373493594,
+      "gap": [
+        33.613021,
+        34.101958
+      ],
+      "guard_before_sec": 0.1869789999999938,
+      "guard_after_sec": 0.1686246666666733
+    },
+    {
+      "frames": [
+        1101,
+        1108
+      ],
+      "seconds": [
+        36.7,
+        36.93333333333333
+      ],
+      "removed_sec": 0.23333333333333334,
+      "voice_peak_dbfs": -51.48307307817514,
+      "gap": [
+        36.49325,
+        37.078604
+      ],
+      "guard_before_sec": 0.20674999999999955,
+      "guard_after_sec": 0.14527066666666855
+    },
+    {
+      "frames": [
+        1396,
+        1402
+      ],
+      "seconds": [
+        46.53333333333333,
+        46.733333333333334
+      ],
+      "removed_sec": 0.2,
+      "voice_peak_dbfs": -48.65527518041806,
+      "gap": [
+        46.412646,
+        46.868354
+      ],
+      "guard_before_sec": 0.12068733333332915,
+      "guard_after_sec": 0.13502066666666224
+    },
+    {
+      "frames": [
+        1468,
+        1474
+      ],
+      "seconds": [
+        48.93333333333333,
+        49.13333333333333
+      ],
+      "removed_sec": 0.2,
+      "voice_peak_dbfs": -49.338444807010966,
+      "gap": [
+        48.804021,
+        49.256958
+      ],
+      "guard_before_sec": 0.12931233333333125,
+      "guard_after_sec": 0.1236246666666645
+    },
+    {
+      "frames": [
+        1662,
+        1670
+      ],
+      "seconds": [
+        55.4,
+        55.666666666666664
+      ],
+      "removed_sec": 0.26666666666666666,
+      "voice_peak_dbfs": -200.0,
+      "gap": [
+        55.263167,
+        55.8
+      ],
+      "guard_before_sec": 0.13683299999999576,
+      "guard_after_sec": 0.13333333333333286
+    }
+  ],
+  "proposed_removed_seconds": 1.4333333333333333,
+  "scenes": [
+    {
+      "id": "hook",
+      "film_start": 0.0,
+      "film_end": 2.6,
+      "voice_start": 0.0,
+      "original_take_start": 0,
+      "original_take_end": 2.594333,
+      "frames": 78,
+      "clip_decoded_seconds": 2.594,
+      "clip_timing_seconds": 2.594333,
+      "say": "โจรจะเอามือถือทุกเครื่อง แต่จ๊าบเพิ่งถ่ายหน้ามันไว้",
+      "asr_approximate": "โจ้นจะเอามือถือทุกเครื่องแต่จับเพิ่งถ่ายหน้ามันไว้"
+    },
+    {
+      "id": "route",
+      "film_start": 2.6,
+      "film_end": 6.233333333333333,
+      "voice_start": 2.6,
+      "original_take_start": 2.594333,
+      "original_take_end": 6.210437499999999,
+      "frames": 109,
+      "clip_decoded_seconds": 3.616,
+      "clip_timing_seconds": 3.6161044999999996,
+      "say": "ทุกคนเลือกบี จ๊าบเลยอ้อมประตูบริการหลังห้อง ไปหาเพื่อนบ้าน",
+      "asr_approximate": "ทุกคนเลือกบีจับเลยอ้อมประตูบริการหลังห้องไปหาเพื่อนบ้าน"
+    },
+    {
+      "id": "passage",
+      "film_start": 6.233333333333333,
+      "film_end": 8.3,
+      "voice_start": 6.233333333333333,
+      "original_take_start": 6.210437499999999,
+      "original_take_end": 8.247021,
+      "frames": 62,
+      "clip_decoded_seconds": 2.037,
+      "clip_timing_seconds": 2.0365835000000008,
+      "say": "ทางเดินด้านหลัง เชื่อมไปห้องหกร้อยหก",
+      "asr_approximate": "ทางเดินตั้งหลังเชื่อมไปห้อง606"
+    },
+    {
+      "id": "group",
+      "film_start": 8.3,
+      "film_end": 11.6,
+      "voice_start": 8.3,
+      "original_take_start": 8.247021,
+      "original_take_end": 11.523979,
+      "frames": 99,
+      "clip_decoded_seconds": 3.277,
+      "clip_timing_seconds": 3.2769580000000005,
+      "say": "ในห้องมีคนหลบอยู่เจ็ดคน รวมป้าที่เขาเพิ่งเตือนไว้ด้วย",
+      "asr_approximate": "ในห้องมีคนลบอยู่7คนร่วมป่าที่เขาเพิ่งเตือนไว้ด้วย"
+    },
+    {
+      "id": "chair",
+      "film_start": 11.6,
+      "film_end": 15.4,
+      "voice_start": 11.6,
+      "original_take_start": 11.523979,
+      "original_take_end": 15.2946875,
+      "frames": 114,
+      "clip_decoded_seconds": 3.771,
+      "clip_timing_seconds": 3.7707084999999996,
+      "say": "ป้ายกเก้าอี้ให้ จ๊าบนึกว่าจะให้นั่ง ป้าบอก เอาไปขวางประตู!",
+      "asr_approximate": "ป่ายกเกียวอี้ให้จับนึกว่าจะให้นั่งป่าบอกเอาไปขวางประตู"
+    },
+    {
+      "id": "barricade",
+      "film_start": 15.4,
+      "film_end": 17.4,
+      "voice_start": 15.4,
+      "original_take_start": 15.2946875,
+      "original_take_end": 17.262853999999997,
+      "frames": 60,
+      "clip_decoded_seconds": 1.968,
+      "clip_timing_seconds": 1.968166499999997,
+      "say": "พวกเขาช่วยกันดันตู้ปิดทางเดิน",
+      "asr_approximate": "พวกเขาช่วยกันดันตู้ปิดทางเดิน"
+    },
+    {
+      "id": "record",
+      "film_start": 17.4,
+      "film_end": 20.133333333333333,
+      "voice_start": 17.4,
+      "original_take_start": 17.262853999999997,
+      "original_take_end": 19.9834375,
+      "frames": 82,
+      "clip_decoded_seconds": 2.72,
+      "clip_timing_seconds": 2.7205835000000036,
+      "say": "จ๊าบยกมือถือถ่ายคนเสื้อแดง ที่ยังงัดห้องเขาอยู่",
+      "asr_approximate": "จับยกมือถือถ้ายคล้นเสือแดงที่ยังนัดห้องเขาอยู่เพ"
+    },
+    {
+      "id": "retreat",
+      "film_start": 20.133333333333333,
+      "film_end": 24.7,
+      "voice_start": 20.133333333333333,
+      "original_take_start": 19.9834375,
+      "original_take_end": 24.534478999999997,
+      "frames": 137,
+      "clip_decoded_seconds": 4.551,
+      "clip_timing_seconds": 4.551041499999997,
+      "say": "พอเห็นกล้อง มันก็ถอยไป จ๊าบกำลังจะโล่งใจ แต่เสียงฝีเท้ากลับดังมาจากข้างหลัง",
+      "asr_approximate": "ราะเห็นกล้องมันก็ถอยไปจับกำลังจะลงใจแต่เสียงฟีทัพรับดังมาจากข้างหลัง"
+    },
+    {
+      "id": "rear",
+      "film_start": 24.7,
+      "film_end": 28.966666666666665,
+      "voice_start": 24.7,
+      "original_take_start": 24.534478999999997,
+      "original_take_end": 28.769375,
+      "frames": 128,
+      "clip_decoded_seconds": 4.235,
+      "clip_timing_seconds": 4.234896000000003,
+      "say": "คนเสื้อเขียวโผล่จากประตูบริการ บานเดียวกับที่จ๊าบเพิ่งผ่าน และลืมปิด",
+      "asr_approximate": "คนเสือเขียวโปรดจากประตูบริการบานเดียวกับที่จับพึงผ่านแล้วลืมปิด"
+    },
+    {
+      "id": "surrounded",
+      "film_start": 28.966666666666665,
+      "film_end": 33.86666666666667,
+      "voice_start": 28.966666666666665,
+      "original_take_start": 28.769375,
+      "original_take_end": 33.6500415,
+      "frames": 147,
+      "clip_decoded_seconds": 4.881,
+      "clip_timing_seconds": 4.8806665,
+      "say": "เสื้อแดงกลับมาที่หน้าตู้ อีกคนคุมทางหลัง พวกมันไม่ได้หนี แต่มาล้อม",
+      "asr_approximate": "เสือแดงกลับมาที่หน้าตู้อีกคนคุ้มทางหลังพวกมันไม่ได้นี้แต่มาร้อม"
+    },
+    {
+      "id": "demand",
+      "film_start": 33.86666666666667,
+      "film_end": 36.9,
+      "voice_start": 33.86666666666667,
+      "original_take_start": 33.6500415,
+      "original_take_end": 36.530625,
+      "frames": 91,
+      "clip_decoded_seconds": 2.881,
+      "clip_timing_seconds": 2.8805835,
+      "say": "เอามือถือกับของมีค่าออกมา แล้วกูจะเปิดทางให้",
+      "asr_approximate": "เอามือถือกับของมีข้าออกมาแล้วกูจะเปิดทางให้"
+    },
+    {
+      "id": "rescue",
+      "film_start": 36.9,
+      "film_end": 41.733333333333334,
+      "voice_start": 36.9,
+      "original_take_start": 36.530625,
+      "original_take_end": 41.3552915,
+      "frames": 145,
+      "clip_decoded_seconds": 4.824,
+      "clip_timing_seconds": 4.824666499999999,
+      "say": "ป้ากำมือถือแน่น ไม่มีใครขยับ ข้างล่าง แสงจากเรือกู้ภัยกำลังกวาดผ่านตึก",
+      "asr_approximate": "ป้ากับมือถือแน่นไม่มีใครขยับข้างล่างแสงจากเรือกูภายกำลังกวาดผ่านตึก"
+    },
+    {
+      "id": "battery",
+      "film_start": 41.733333333333334,
+      "film_end": 46.63333333333333,
+      "voice_start": 41.733333333333334,
+      "original_take_start": 41.3552915,
+      "original_take_end": 46.2520205,
+      "frames": 147,
+      "clip_decoded_seconds": 4.897,
+      "clip_timing_seconds": 4.8967290000000006,
+      "say": "แบตจ๊าบเหลือสิบเอ็ดเปอร์เซ็นต์ คลิปยังไม่ได้ส่ง ถ้ายื่นมือถือไป หลักฐานก็ไปด้วย",
+      "asr_approximate": "แบดจ้าบเหลือ11%คลิปยังไม่ได้ส่งถ้ายื่นมือถือไปหลักทานก็ไปด้วย"
+    },
+    {
+      "id": "pressure",
+      "film_start": 46.63333333333333,
+      "film_end": 49.03333333333333,
+      "voice_start": 46.63333333333333,
+      "original_take_start": 46.2520205,
+      "original_take_end": 48.638146,
+      "frames": 72,
+      "clip_decoded_seconds": 2.386,
+      "clip_timing_seconds": 2.3861254999999986,
+      "say": "โจรเริ่มดันตู้ จ๊าบต้องตัดสินใจแล้ว",
+      "asr_approximate": "โจนเริ่มดานตู้จับต้องตัดสินใจแล้ว"
+    },
+    {
+      "id": "end",
+      "film_start": 49.03333333333333,
+      "film_end": 55.8,
+      "voice_start": 49.03333333333333,
+      "original_take_start": 48.638146,
+      "original_take_end": 54.978833,
+      "frames": 203,
+      "clip_decoded_seconds": 6.340833333333333,
+      "clip_timing_seconds": 6.340687000000003,
+      "say": "เอ ยอมส่งของให้มัน หรือบี ถ่วงเวลา แอบส่งคลิปกับตำแหน่ง แต่เสี่ยงโดนเห็น คุณเลือกอะไร",
+      "asr_approximate": "A.ยอมส่งของให้มันB.ทวงเวลาแอบส่งคลิปกับตำแหน่งแต่เสียงโดนเห็นคุณเลือกอะไร"
+    }
+  ],
+  "limits": "Not applied. Before AV editing set source_sha256 to the exact source video. ASR is approximate Thai; no auditory performance approval.",
+  "take_audio_metrics": {
+    "input_i": "-18.94",
+    "input_tp": "-0.91",
+    "input_lra": "2.30",
+    "input_thresh": "-29.31",
+    "output_i": "-15.23",
+    "output_tp": "-1.50",
+    "output_lra": "1.70",
+    "output_thresh": "-25.60",
+    "normalization_type": "dynamic",
+    "target_offset": "1.23"
+  },
+  "take_sha256": "1de9e2af287e8e651f40ebc0ec72a74a0d97d7c2fe540f4f94c82dc20839e6c6",
+  "recommended_safe_gaps": [
+    [
+      8.084333,
+      8.518437
+    ],
+    [
+      19.911833,
+      20.363375
+    ],
+    [
+      33.613021,
+      34.101958
+    ],
+    [
+      36.49325,
+      37.078604
+    ],
+    [
+      46.412646,
+      46.868354
+    ],
+    [
+      48.804021,
+      49.256958
+    ]
+  ],
+  "recommended_cut_frame_ranges": [
+    [
+      247,
+      252
+    ],
+    [
+      601,
+      607
+    ],
+    [
+      1014,
+      1018
+    ],
+    [
+      1101,
+      1108
+    ],
+    [
+      1396,
+      1402
+    ],
+    [
+      1468,
+      1474
+    ]
+  ],
+  "recommended_removed_seconds": 1.1333333333333333,
+  "recommendation": "Prefer 6 ordinary/internal cuts only; leave final endcard pad and skip the 1-frame reveal cut. This retains intentional reading/reaction room. Copy recommended_safe_gaps to safe_gaps only if approved for the actual source video.",
+  "content_coverage_note": "All 15 scene transcripts are nonempty and broadly cover the intended sequence, including demand, 11% battery and both end choices. Frequent Thai ASR misspellings prevent certification of exact pronunciation. Record/retreat ASR splits a possible ????? across the scene boundary; inspect that seam before retiming.",
+  "selection_note": "Keep final A/B entrance animation and end hold; omit one-frame reveal edit. Five conservative internal quiet centers only; no extra speed."
+}

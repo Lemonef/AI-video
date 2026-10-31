@@ -1,0 +1,80 @@
+{
+  "source_sha256": "04c466544a0774e06d7c60d313dc89083e1dddfc15b15e6ad7aa4e2a47536a2d",
+  "source": "out\\drafts\\bangkok-flood\\ep02\\source-before-flow.mp4",
+  "fps": 30.0,
+  "source_frames": 1674,
+  "speed": 1.0,
+  "cut_frame_ranges": [
+    [
+      247,
+      252
+    ],
+    [
+      601,
+      607
+    ],
+    [
+      1014,
+      1018
+    ],
+    [
+      1101,
+      1108
+    ],
+    [
+      1396,
+      1402
+    ]
+  ],
+  "keep_frame_ranges": [
+    [
+      0,
+      247
+    ],
+    [
+      252,
+      601
+    ],
+    [
+      607,
+      1014
+    ],
+    [
+      1018,
+      1101
+    ],
+    [
+      1108,
+      1396
+    ],
+    [
+      1402,
+      1674
+    ]
+  ],
+  "removed_quiet_seconds": 0.9333333333333333,
+  "expected_seconds": 54.86666666666667,
+  "protected": [
+    [
+      0,
+      55.8,
+      0.24
+    ],
+    [
+      28.165521000000005,
+      29.397291666666664,
+      0.36
+    ],
+    [
+      31.397291666666664,
+      32.19729166666667,
+      0.34
+    ],
+    [
+      33.397291666666675,
+      37.369375000000005,
+      0.34
+    ]
+  ],
+  "note": "Only measured quiet centers removed; preserve source for review. Listening acceptance separate."
+}

@@ -1,0 +1,128 @@
+{
+  "episode": "flood02",
+  "captured_date": "2026-10-31",
+  "assets": {
+    "step": {
+      "id": 479138,
+      "name": "SQUEEKY SNEAKERS ON TILE",
+      "username": "klangfabrik",
+      "url": "https://freesound.org/people/klangfabrik/sounds/479138/",
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "duration": 27.118,
+      "local_path": "public/sfx/real/flood02_step.mp3",
+      "source_preview_path": "public/sfx/real/flood02-step-479138-source.mp3",
+      "source_sha256": "fafdb486a4191ecbb84dc0ec2767ecf998513e1854a821931b0d52fe268830d9",
+      "output_sha256": "05860b17143c33352e098f8611bf27cf073c55ee911edd50c0f93b0949206c49",
+      "source_trim_seconds": [
+        0.18,
+        0.85
+      ],
+      "processing": "Source trim -> existing freesound._finish one-shot -45dB leading trim / -14LUFS target / -1.5dBTP -> reduce decoded peaks above -3dBFS -> 3ms attack and short tail fades;48kHz stereo MP3 192k.",
+      "role": "A sneaker-on-linoleum footfall/rubber scuff; not leaves.",
+      "approximation": "Linoleum stands in for the fictional hard corridor floor; the recording includes sneaker squeak.",
+      "metrics": {
+        "decoded_duration_sec": 0.6443333333333333,
+        "peak_dbfs": -3.3429060027062993,
+        "rms_dbfs": -13.134587684797406,
+        "onset_absolute_minus40_dbfs_sec": 0.0,
+        "onset_relative_minus25_db_sec": 0.0,
+        "first_5ms_rms_dbfs": -22.092837232845692,
+        "last_5ms_rms_dbfs": -43.22742283053365,
+        "clip_sample_count": 0,
+        "measurement_note": "Waveform/decode evidence; not human listening or a perceptual quality approval."
+      }
+    },
+    "scrape": {
+      "id": 485142,
+      "name": "Wooden Chair Dragged Across Floor 3_1",
+      "username": "Joao_Janz",
+      "url": "https://freesound.org/people/Joao_Janz/sounds/485142/",
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "duration": 1.92844,
+      "local_path": "public/sfx/real/flood02_scrape.mp3",
+      "source_preview_path": "public/sfx/real/flood02-scrape-485142-source.mp3",
+      "source_sha256": "955cf9d558d473f78656b375c5efa5a671b4b4738d95c63353e09b4b74111780",
+      "output_sha256": "cb32277c5926717a6959528d9dbdf372454f256b56982e97b54980d55dea7bf0",
+      "source_trim_seconds": [
+        0.04,
+        1.928
+      ],
+      "processing": "Source trim -> existing freesound._finish one-shot -45dB leading trim / -14LUFS target / -1.5dBTP -> reduce decoded peaks above -3dBFS -> 3ms attack and short tail fades;48kHz stereo MP3 192k.",
+      "role": "Wooden furniture scrape during the cabinet push.",
+      "approximation": "The source is a wooden chair on ceramic flooring, used as a cabinet-drag material substitute.",
+      "metrics": {
+        "decoded_duration_sec": 1.7618958333333334,
+        "peak_dbfs": -3.295442127020905,
+        "rms_dbfs": -13.972357299888662,
+        "onset_absolute_minus40_dbfs_sec": 0.0,
+        "onset_relative_minus25_db_sec": 0.005,
+        "first_5ms_rms_dbfs": -35.35324987686319,
+        "last_5ms_rms_dbfs": -120.4280115814706,
+        "clip_sample_count": 0,
+        "measurement_note": "Waveform/decode evidence; not human listening or a perceptual quality approval."
+      }
+    },
+    "chair": {
+      "id": 161225,
+      "name": "Plastic chair dragged on stone outside.wav",
+      "username": "lolamadeus",
+      "url": "https://freesound.org/people/lolamadeus/sounds/161225/",
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "duration": 3.26102,
+      "local_path": "public/sfx/real/flood02_chair.mp3",
+      "source_preview_path": "public/sfx/real/flood02-chair-161225-source.mp3",
+      "source_sha256": "bb32ff4397fb4f0f65ba0c51408e97458a65ad30fac16392f336da001a150a4c",
+      "output_sha256": "8d48d270751f7861bb3283c85d236fce46789d76c3d90a55465a0d7ca20b9dcd",
+      "source_trim_seconds": [
+        0.02,
+        1.55
+      ],
+      "processing": "Source trim -> existing freesound._finish one-shot -45dB leading trim / -14LUFS target / -1.5dBTP -> reduce decoded peaks above -3dBFS -> 3ms attack and short tail fades;48kHz stereo MP3 192k.",
+      "role": "First isolated plastic-chair drag; second drag excluded.",
+      "approximation": "Recorded outside on stone; use quietly for the hard-floor chair move, not as an interior ambience.",
+      "metrics": {
+        "decoded_duration_sec": 1.53,
+        "peak_dbfs": -3.2563059975864963,
+        "rms_dbfs": -19.849314710210454,
+        "onset_absolute_minus40_dbfs_sec": 0.055,
+        "onset_relative_minus25_db_sec": 0.07,
+        "first_5ms_rms_dbfs": -57.012724398123524,
+        "last_5ms_rms_dbfs": -65.31510168446842,
+        "clip_sample_count": 0,
+        "measurement_note": "Waveform/decode evidence; not human listening or a perceptual quality approval."
+      }
+    },
+    "door": {
+      "id": 481789,
+      "name": "Metallic latch release.wav",
+      "username": "Crinkem",
+      "url": "https://freesound.org/people/Crinkem/sounds/481789/",
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "duration": 0.475896,
+      "local_path": "public/sfx/real/flood02_door.mp3",
+      "source_preview_path": "public/sfx/real/flood02-door-481789-source.mp3",
+      "source_sha256": "6be8b0e548f45f9574fcaa2d77571371224898e5512fe2f16db91890856273c9",
+      "output_sha256": "559f15e5eb5cf13d4b0b7b8631aa3fa83d08975877a709d3dfb1db01efdb9f3c",
+      "source_trim_seconds": [
+        0.0,
+        0.4
+      ],
+      "processing": "Source trim -> existing freesound._finish one-shot -45dB leading trim / -14LUFS target / -1.5dBTP -> reduce decoded peaks above -3dBFS -> 3ms attack and short tail fades;48kHz stereo MP3 192k.",
+      "role": "Single metallic door-latch release at the service-door opening.",
+      "approximation": "Latch release only, not a complete hinge swing or door slam.",
+      "metrics": {
+        "decoded_duration_sec": 0.38864583333333336,
+        "peak_dbfs": -3.547735259882514,
+        "rms_dbfs": -30.53979231555423,
+        "onset_absolute_minus40_dbfs_sec": 0.07,
+        "onset_relative_minus25_db_sec": 0.07,
+        "first_5ms_rms_dbfs": -49.96728060828463,
+        "last_5ms_rms_dbfs": -69.75098084278306,
+        "clip_sample_count": 0,
+        "measurement_note": "Waveform/decode evidence; not human listening or a perceptual quality approval."
+      }
+    }
+  },
+  "provenance_note": "Primary Freesound API metadata checked per pinned id via _sound; downloaded HQ previews remain local. CC0 is asset-specific, not inferred from a search label.",
+  "limits": "Source/material identification plus waveform/decode checks. Human listening/earshot semantic checks have not been performed. Mix volume and final picture sync remain production integration work."
+}

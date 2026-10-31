@@ -124,9 +124,14 @@ def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
     lines = [_line(s) for s in episode["scenes"]]
     script = episode.get("narrationJoin", "\n").join(lines)
     direction = episode.get("narrationDirection")
+    if direction and engine.name == "elevenlabs":
+        raise ValueError("ElevenLabs direction must use supported inline audio tags, not a spoken instruction preamble")
     if direction:
         script = f"{direction}\n\nRead only this Thai story, exactly as written:\n{script}"
-    voice_key = _key(engine.name, episode["voice"], script)  # the quota'd part: only re-voice when this changes
+    voice_key = _key(engine.name, episode["voice"], script)
+    if engine.name == "elevenlabs":
+        voice_key = _key(voice_key, episode.get("voiceModel", ""),
+                         json.dumps(episode.get("voiceSettings", {}), sort_keys=True))
     return lines, script, voice_key
 
 
@@ -266,16 +271,24 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         tmp = ep_dir / "take.tmp.mp3"
         if hasattr(engine, "model"):
             engine.model = episode.get("voiceModel")  # no silent fallback to a different-sounding model
+        if hasattr(engine, "settings"):
+            engine.settings = episode.get("voiceSettings")
         engine.synthesize(script, voice, "", tmp)
         tmp.replace(raw)
+        alignment = tmp.with_suffix(".alignment.json")
+        if alignment.exists():
+            alignment.replace(raw.with_suffix(".alignment.json"))
     if take_meta.get("key") == key and take.exists() and take_meta.get("tempo"):
         words = [Word(**w) for w in take_meta["words"]]
         print("  = take alignment (cached)")
     else:
         media.tempo(raw, speed, take)
-        print(f"  > take: tempo x{speed}, aligning with Whisper…", flush=True)
+        print(f"  > take: tempo x{speed}, aligning speech…", flush=True)
         try:
-            words = whisper.words(str(take))
+            provider_words = engine.cached_words(raw, speed) if hasattr(engine, "cached_words") else []
+            words = provider_words or whisper.words(str(take))
+            if provider_words:
+                print("    using provider character timings (independent speech check remains separate)")
         except (ImportError, OSError) as e:
             # e.g. Windows Smart App Control blocking faster-whisper's native DLLs. Fall back to cuts
             # placed by script length and snapped to the take's real pauses; captions spread per line.

@@ -80,6 +80,8 @@ export const ContactShadow: React.FC<{x: number; y: number; rx: number; ry: numb
  */
 export type CastLight = {brightness: number; saturate: number; rim: string; dx: number; dy: number};
 export const CAST_LIGHT: Record<string, CastLight> = {
+ floodPassage: {brightness:.8,saturate:.8,rim:'rgba(136,180,217,.5)',dx:-4,dy:-3},
+ floodGroup: {brightness:.86,saturate:.85,rim:'rgba(216,181,128,.4)',dx:-3,dy:-3},
  floodHall: {brightness:.8,saturate:.78,rim:'rgba(136,180,217,.6)',dx:-4,dy:-3},
  floodCarry: {brightness:.8,saturate:.78,rim:'rgba(136,180,217,.6)',dx:-4,dy:-3},
 	houseOutside: {brightness: 0.88, saturate: 0.9, rim: "rgba(255,184,102,0.55)", dx: -3, dy: -3},

@@ -23,7 +23,7 @@ from pipeline.tts import get_engine  # noqa: E402
 def main() -> None:
     ap = argparse.ArgumentParser(description="Build one episode from episodes/<id>.json")
     ap.add_argument("episode", help="episode id, e.g. ep01")
-    ap.add_argument("--engine", help="TTS engine, overrides the episode's (edge | gemini)")
+    ap.add_argument("--engine", help="TTS engine, overrides the episode's (edge | gemini | elevenlabs)")
     ap.add_argument("--voice", help="override the episode's voice")
     ap.add_argument("--force", action="store_true", help="re-voice every line, ignore cache")
     ap.add_argument("--no-render", action="store_true", help="voice + captions only")

@@ -1,0 +1,68 @@
+{
+  "final": "D:\\AI-video\\out\\final\\bangkok-flood\\ep02\\video.mp4",
+  "sha256": "488f6f953d0b84d74258da7997e86e5d5c7ad7e980b66d0fa461debb1059c03a",
+  "version": "D:\\AI-video\\out\\versions\\flood02\\2026-10-31_215153.mp4",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_type": "video",
+        "width": 1440,
+        "height": 2560,
+        "r_frame_rate": "30/1",
+        "duration": "54.866667",
+        "nb_frames": "1646",
+        "side_data_list": [
+          {}
+        ]
+      },
+      {
+        "codec_type": "audio",
+        "r_frame_rate": "0/0",
+        "duration": "54.866667",
+        "nb_frames": "2572"
+      }
+    ],
+    "format": {
+      "duration": "54.866667"
+    }
+  },
+  "audio_actual": {
+    "integrated_lufs": -14.3,
+    "true_peak_dbtp": -1.85,
+    "lra_lu": 2.1
+  },
+  "pause_edit": {
+    "source_sha256": "04c466544a0774e06d7c60d313dc89083e1dddfc15b15e6ad7aa4e2a47536a2d",
+    "cuts": [
+      [
+        247,
+        252
+      ],
+      [
+        601,
+        607
+      ],
+      [
+        1014,
+        1018
+      ],
+      [
+        1101,
+        1108
+      ],
+      [
+        1396,
+        1402
+      ]
+    ],
+    "removed_seconds": 0.9333333333333333,
+    "speed": 1
+  },
+  "protected_part1_sha256": "4991bbecde018c791b688e5853d4d2b45e5e6c44ba20c07bc0022e5c6a6796ff",
+  "protected_ghost_ep03_sha256": "c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee",
+  "owner_voice_selection": "Iapetus tonight; ElevenLabs separate after rejected audition",
+  "owner_final_acceptance": "not yet confirmed for Part2",
+  "social_posted": false
+}
