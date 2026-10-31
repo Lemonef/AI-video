@@ -5,91 +5,106 @@
       "id": "hook",
       "source_start_frame": 0,
       "final_start_frame": 0,
-      "native_frames": 78
+      "native_frames": 78,
+      "prior_delivery_start_frame": 0
     },
     {
       "id": "route",
       "source_start_frame": 78,
-      "final_start_frame": 78,
-      "native_frames": 109
+      "final_start_frame": 81,
+      "native_frames": 109,
+      "prior_delivery_start_frame": 78
     },
     {
       "id": "passage",
       "source_start_frame": 187,
-      "final_start_frame": 187,
-      "native_frames": 62
+      "final_start_frame": 195,
+      "native_frames": 62,
+      "prior_delivery_start_frame": 187
     },
     {
       "id": "group",
       "source_start_frame": 249,
-      "final_start_frame": 247,
-      "native_frames": 99
+      "final_start_frame": 257,
+      "native_frames": 99,
+      "prior_delivery_start_frame": 247
     },
     {
       "id": "chair",
       "source_start_frame": 348,
-      "final_start_frame": 343,
-      "native_frames": 114
+      "final_start_frame": 357,
+      "native_frames": 114,
+      "prior_delivery_start_frame": 343
     },
     {
       "id": "barricade",
       "source_start_frame": 462,
-      "final_start_frame": 457,
-      "native_frames": 60
+      "final_start_frame": 476,
+      "native_frames": 60,
+      "prior_delivery_start_frame": 457
     },
     {
       "id": "record",
       "source_start_frame": 522,
-      "final_start_frame": 517,
-      "native_frames": 82
+      "final_start_frame": 539,
+      "native_frames": 82,
+      "prior_delivery_start_frame": 517
     },
     {
       "id": "retreat",
       "source_start_frame": 604,
-      "final_start_frame": 596,
-      "native_frames": 137
+      "final_start_frame": 621,
+      "native_frames": 137,
+      "prior_delivery_start_frame": 596
     },
     {
       "id": "rear",
       "source_start_frame": 741,
-      "final_start_frame": 730,
-      "native_frames": 128
+      "final_start_frame": 760,
+      "native_frames": 128,
+      "prior_delivery_start_frame": 730
     },
     {
       "id": "surrounded",
       "source_start_frame": 869,
-      "final_start_frame": 858,
-      "native_frames": 147
+      "final_start_frame": 894,
+      "native_frames": 147,
+      "prior_delivery_start_frame": 858
     },
     {
       "id": "demand",
       "source_start_frame": 1016,
-      "final_start_frame": 1003,
-      "native_frames": 91
+      "final_start_frame": 1045,
+      "native_frames": 91,
+      "prior_delivery_start_frame": 1003
     },
     {
       "id": "rescue",
       "source_start_frame": 1107,
-      "final_start_frame": 1086,
-      "native_frames": 145
+      "final_start_frame": 1131,
+      "native_frames": 145,
+      "prior_delivery_start_frame": 1086
     },
     {
       "id": "battery",
       "source_start_frame": 1252,
-      "final_start_frame": 1230,
-      "native_frames": 147
+      "final_start_frame": 1281,
+      "native_frames": 147,
+      "prior_delivery_start_frame": 1230
     },
     {
       "id": "pressure",
       "source_start_frame": 1399,
-      "final_start_frame": 1374,
-      "native_frames": 72
+      "final_start_frame": 1431,
+      "native_frames": 72,
+      "prior_delivery_start_frame": 1374
     },
     {
       "id": "end",
       "source_start_frame": 1471,
-      "final_start_frame": 1443,
-      "native_frames": 203
+      "final_start_frame": 1503,
+      "native_frames": 203,
+      "prior_delivery_start_frame": 1443
     }
   ],
   "sound_cues": [
@@ -100,125 +115,141 @@
       "source_frame": 0,
       "final_frame": 0,
       "volume": null,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 0
     },
     {
       "scene": "passage",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 205,
-      "final_frame": 205,
+      "final_frame": 214,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 205
     },
     {
       "scene": "passage",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 223,
-      "final_frame": 223,
+      "final_frame": 232,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 223
     },
     {
       "scene": "barricade",
       "sound": "floodScrape",
       "kind": "sfx",
       "source_frame": 473,
-      "final_frame": 468,
+      "final_frame": 488,
       "volume": 0.15,
-      "rate": 1.599
+      "rate": 1.599,
+      "prior_delivery_frame": 468
     },
     {
       "scene": "retreat",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 716,
-      "final_frame": 705,
+      "final_frame": 734,
       "volume": 0.18,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 705
     },
     {
       "scene": "retreat",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 734,
-      "final_frame": 723,
+      "final_frame": 753,
       "volume": 0.23,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 723
     },
     {
       "scene": "rear",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 795,
-      "final_frame": 784,
+      "final_frame": 817,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 784
     },
     {
       "scene": "rear",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 813,
-      "final_frame": 802,
+      "final_frame": 835,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 802
     },
     {
       "scene": "rear",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 831,
-      "final_frame": 820,
+      "final_frame": 854,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 820
     },
     {
       "scene": "rear",
       "sound": "floodStep",
       "kind": "sfx",
       "source_frame": 849,
-      "final_frame": 838,
+      "final_frame": 873,
       "volume": 0.13,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 838
     },
     {
       "scene": "rear",
       "sound": "heartbeat",
       "kind": "hits",
       "source_frame": 791,
-      "final_frame": 780,
+      "final_frame": 812,
       "volume": null,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 780
     },
     {
       "scene": "pressure",
       "sound": "floodScrape",
       "kind": "sfx",
       "source_frame": 1413,
-      "final_frame": 1385,
+      "final_frame": 1443,
       "volume": 0.09,
-      "rate": 3.5
+      "rate": 3.5,
+      "prior_delivery_frame": 1385
     },
     {
       "scene": "pressure",
       "sound": "floodScrape",
       "kind": "sfx",
       "source_frame": 1447,
-      "final_frame": 1419,
+      "final_frame": 1478,
       "volume": 0.1,
-      "rate": 3.5
+      "rate": 3.5,
+      "prior_delivery_frame": 1419
     },
     {
       "scene": "pressure",
       "sound": "heartbeat",
       "kind": "hits",
       "source_frame": 1419,
-      "final_frame": 1391,
+      "final_frame": 1449,
       "volume": null,
-      "rate": 1
+      "rate": 1,
+      "prior_delivery_frame": 1391
     }
   ],
-  "note": "Frame placements from authored scene clock, remapped with the exact quiet-cut plan; perceptual sound/taste approval remains separate."
+  "note": "Current owner-requested delivery retimed uniformly0.96speed; final_frame values below remapped by1/.96, rounded to30fps. source_frame remains on originalnativeclock.",
+  "prior_clock_note": "Frame placements from authored scene clock, remapped with the exact quiet-cut plan; perceptual sound/taste approval remains separate.",
+  "delivery_retime_factor": 0.96
 }

@@ -1,5 +1,13 @@
 # Flood Part2 release receipt — 2026-10-31
 
+## CURRENT — slightly eased after owner heard rushing
+
+Owner felt the new take was a little rushed. Retimed the complete reviewed delivery to0.96speed, pitch preserved; picture/captions/foley share the same clock. No new TTS or generated assets. **CURRENT final57.166667s /1715frames /1440×2560 /30fps**, same finalpath. SHA256 `b041e3bcf6a736d636a95c957964216a8f0b8de0f5b12f8a0050c8192e885b8c`; latestversion `out/versions/flood02/2026-10-31_215931.mp4`. Actualmix **-14.21LUFS/-1.83dBTP/LRA2.00**. Picture/audio both57.166667s; three mapped chair/rear/ending frames inspected at `out/drafts/bangkok-flood/ep02/pace-eased-review.jpg`. Unique current copy `out/drafts/bangkok-flood/ep02/pace-eased.mp4`.
+
+Prior54.866667sfinal and kit preserved intact in `out/drafts/bangkok-flood/ep02/previous-115-final/`. Canonical episode tempo now1.104 (=1.15×.96); a native rebuild can differ in fixed holds/frame rounding and still needs the documented quiet edit. To replay the delivered revision, retime the archived priorfinal uniformly with setpts/0.96 and atempo0.96, then pad/trim to57.166667s at30fps. Owner subjective listening/visual acceptance and posting remain OPEN.
+
+The receipt below describes the first54.866667sdelivery and how it was produced; current values above and machine receipt supersede its output hash/clock. Source patches/quiet-gap evidence remain valid on the prior delivery clock; remap timestamps by1/.96 for the new delivery. Sound-cue JSON preserves prior-clock values alongside remapped final frames.
+
 Final file: `D:/AI-video/out/final/bangkok-flood/ep02/video.mp4`.
 SHA256: `488f6f953d0b84d74258da7997e86e5d5c7ad7e980b66d0fa461debb1059c03a`.
 Version: `out/versions/flood02/2026-10-31_215153.mp4`.

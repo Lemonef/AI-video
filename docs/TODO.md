@@ -10,7 +10,7 @@
 - [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
 - [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
 - [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
-- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/bangkok-flood/ep02/video.mp4` path.54.866667s/1646frames/1440×2560/30fps; actualmix-14.30LUFS/-1.85dBTP.39pytest+2gaitchecks/TypeScriptpass.
+- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
 - [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
 - [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
 
