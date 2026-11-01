@@ -1,0 +1,532 @@
+{
+  "id": "flood03",
+  "title": "กรุงเทพจมน้ำ — ตอนจบ",
+  "seriesSlug": "bangkok-flood",
+  "releaseEpisode": "ep03",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "tempo": 1.104,
+  "handheld": false,
+  "grain": false,
+  "mix": {
+    "beds": [
+      "drone"
+    ],
+    "duck": 0.12,
+    "bedVolume": 0.3,
+    "real": true
+  },
+  "post": {
+    "series": "กรุงเทพจมน้ำ",
+    "part": 3,
+    "total": 3,
+    "coverHook": "มือถือดัง ต่อหน้าโจร",
+    "hook": "ทุกคนเลือก B จ๊าบถ่วงเวลา แอบส่งคลิปกับตำแหน่ง จนเรือกู้ภัยหันกลับมา",
+    "question": "ถ้าเป็นคุณ คุณจะกล้ายกมือถือถ่ายหน้าโจรแบบจ๊าบไหม",
+    "next": "จบซีซั่น · กรุงเทพจมน้ำ",
+    "coverFrame": 35,
+    "hashtags": [
+      "#น้ำท่วม",
+      "#เรื่องเอาชีวิตรอด",
+      "#เรื่องเล่า",
+      "#การ์ตูนไทย",
+      "#jaabstory"
+    ],
+    "publishNow": false,
+    "coverBg": "floodRescue",
+    "keyword": "น้ำท่วมคอนโด",
+    "pin": "ถ้าเป็นคุณ คุณจะกล้ายกมือถือถ่ายหน้าโจรแบบจ๊าบไหม"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "bg": "floodRing",
+      "say": "มือถือในเสื้อจ๊าบดังขึ้น ต่อหน้าโจร ทั้งที่คลิปยังส่งไม่ถึงครึ่ง",
+      "caption": "มือถือในเสื้อจ๊าบดังขึ้น ต่อหน้าโจร ทั้งที่คลิปยังส่งไม่ถึงครึ่ง",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.06,
+          "x": 600,
+          "y": 950
+        },
+        {
+          "at": 0.3,
+          "zoom": 1.12,
+          "x": 600,
+          "y": 950
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12,
+      "title": "*มือถือดัง ต่อหน้าโจร*",
+      "sfx": [
+        {
+          "at": 0.12,
+          "sound": "floodRing",
+          "volume": 0.16
+        }
+      ]
+    },
+    {
+      "id": "rewind",
+      "bg": "floodRewind",
+      "say": "ย้อนไปสองนาที ทุกคนเลือกบี จ๊าบตัดสินใจถ่วงเวลา",
+      "caption": "ย้อนไปสองนาที ทุกคนเลือกบี จ๊าบตัดสินใจถ่วงเวลา",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12,
+      "chip": "สองนาทีก่อน"
+    },
+    {
+      "id": "stall",
+      "bg": "floodStall",
+      "say": "จ๊าบบอกโจร ของมีค่าอยู่ในถุงนี้หมดแล้ว ขอเวลาเก็บมือถือให้ครบ",
+      "caption": "จ๊าบบอกโจร ของมีค่าอยู่ในถุงนี้หมดแล้ว ขอเวลาเก็บมือถือให้ครบ",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "decoy",
+      "bg": "floodDecoy",
+      "say": "ป้ายื่นมือถือเครื่องเก่าที่จอแตกใส่ถุง ส่วนเครื่องจริงของจ๊าบ ถูกซุกไว้ใต้เสื้อ",
+      "caption": "ป้ายื่นมือถือ เครื่องเก่า ที่จอแตก ใส่ถุง ส่วนเครื่องจริง ของจ๊าบ ถูกซุกไว้ ใต้เสื้อ",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "upload",
+      "bg": "floodUpload",
+      "say": "คลิปหน้าโจรกับตำแหน่งตึก กำลังส่งเข้ากลุ่มกู้ภัย สัญญาณขึ้นขีดเดียว",
+      "caption": "คลิปหน้าโจรกับตำแหน่งตึก กำลังส่งเข้ากลุ่มกู้ภัย สัญญาณขึ้นขีดเดียว",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "count",
+      "bg": "floodCount",
+      "say": "หัวโจกนับมือถือในถุง แล้วหยุด… ขาดไปเครื่องนึง",
+      "caption": "หัวโจกนับมือถือในถุง แล้วหยุด… ขาดไปเครื่องนึง",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0.18
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "ring",
+      "bg": "floodRing",
+      "say": "แล้วมือถือของจ๊าบก็ดัง เรือกู้ภัยโทรกลับมา",
+      "caption": "แล้วมือถือของจ๊าบก็ดัง เรือกู้ภัยโทรกลับมา",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0.18
+      },
+      "bedsFade": 0.12,
+      "sfx": [
+        {
+          "at": 0.12,
+          "sound": "floodRing",
+          "volume": 0.16
+        }
+      ]
+    },
+    {
+      "id": "chair",
+      "bg": "floodChairSwing",
+      "say": "หัวโจกพุ่งเข้ามา แต่ป้ายกเก้าอี้ตัวเดิม ฟาดขวางประตูไว้ทัน",
+      "caption": "หัวโจกพุ่งเข้ามา แต่ป้ายกเก้าอี้ตัวเดิม ฟาดขวางประตูไว้ทัน",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0.18
+      },
+      "bedsFade": 0.12,
+      "hits": [
+        {
+          "at": 0.47,
+          "strength": 5,
+          "sound": "floodChair"
+        }
+      ]
+    },
+    {
+      "id": "door",
+      "bg": "floodDoorLatch",
+      "say": "จ๊าบวิ่งไปที่ประตูบริการ บานที่เขาเคยลืมปิด คราวนี้เขาปิดมัน แล้วลงกลอน",
+      "caption": "จ๊าบวิ่งไปที่ประตูบริการ บานที่เขาเคยลืมปิด คราวนี้เขาปิดมัน แล้วลงกลอน",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12,
+      "sfx": [
+        {
+          "at": 0.66,
+          "sound": "floodLatch",
+          "volume": 0.12
+        },
+        {
+          "at": 0.82,
+          "sound": "click",
+          "volume": 0.1
+        }
+      ]
+    },
+    {
+      "id": "signal",
+      "bg": "floodWindowSignal",
+      "say": "จ๊าบปีนไปที่หน้าต่าง เปิดไฟฉายกระพริบสู้แสงเรือกู้ภัย",
+      "caption": "จ๊าบปีนไป ที่หน้าต่าง เปิดไฟฉาย กระพริบสู้แสง เรือกู้ภัย",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "turn",
+      "bg": "floodSearchlight",
+      "say": "แสงเรือหยุด แล้วหันกลับมาที่หน้าต่างของเขา",
+      "caption": "แสงเรือหยุด แล้วหันกลับมาที่หน้าต่างของเขา",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "caught",
+      "bg": "floodArrest",
+      "say": "โจรสองคนกระโดดลงน้ำหนี แต่เรือตำรวจรออยู่ข้างล่าง พร้อมทีวีที่พวกมันขโมยไป",
+      "caption": "โจรสองคนกระโดดลงน้ำหนี แต่เรือตำรวจรออยู่ข้างล่าง พร้อมทีวีที่พวกมันขโมยไป",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "sent",
+      "bg": "floodBatteryDie",
+      "say": "คลิปส่งถึงพอดี ตอนแบตเหลือหนึ่งเปอร์เซ็นต์ แล้วจอก็ดับไป",
+      "caption": "คลิปส่งถึงพอดี ตอนแบตเหลือหนึ่งเปอร์เซ็นต์ แล้วจอก็ดับไป",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "end",
+      "bg": "floodDawnChair",
+      "say": "ป้ายกเก้าอี้ตัวเดิมมาให้อีกครั้ง คราวนี้ให้จ๊าบนั่งจริงๆ",
+      "caption": "ป้ายกเก้าอี้ตัวเดิมมาให้อีกครั้ง คราวนี้ให้จ๊าบนั่งจริงๆ",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12
+    },
+    {
+      "id": "outro",
+      "bg": "floodFinale",
+      "say": "ถ้าเป็นคุณ คุณจะกล้ายกมือถือถ่ายหน้าโจรแบบจ๊าบไหม",
+      "caption": "ถ้าเป็นคุณ คุณจะกล้า ยกมือถือ ถ่ายหน้าโจร แบบจ๊าบไหม",
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.52,
+          "zoom": 1.025,
+          "x": 525,
+          "y": 970
+        }
+      ],
+      "beds": {
+        "drone": 0
+      },
+      "bedsFade": 0.12,
+      "chip": "คุณจะกล้ายกมือถือถ่ายหน้าโจรไหม"
+    }
+  ],
+  "narrationJoin": " ",
+  "narrationDirection": "Same warm Bangkok male narrator (Iapetus), brisk connected storytelling. Hook urgent and low. Rewind lighter. Count = held breath, slower. Ring = sudden. Chair = quick, a hint of triumph. Door callback = small satisfied beat. Signal/turn = rising hope. Caught = brisk. Sent = quiet. End = warm, gentle smile. Outro = direct question to the viewer. Read only the supplied Thai narration, verbatim. No monster voice. Maintain connected natural Bangkok Thai phrasing."
+}

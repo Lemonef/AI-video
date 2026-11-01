@@ -1,3 +1,4 @@
+import {FloodRing,FloodRewind,FloodStall,FloodDecoy,FloodUpload,FloodCount,FloodChairSwing,FloodDoorLatch,FloodWindowSignal,FloodSearchlight,FloodArrest,FloodBatteryDie,FloodDawnChair,FloodFinale} from '../v7/FloodFinale';
 import {FloodWide,FloodHall,FloodCarry,FloodBoat,FloodPhone,FloodLock,FloodWindow} from '../v7/Flood';
 import {FloodEvidence,FloodRoute,FloodPassage,FloodGroup,FloodChair,FloodBarricade,FloodRecord,FloodRearDoor,FloodSurrounded,FloodExtort,FloodRescue,FloodBattery,FloodPressure} from '../v7/FloodEscape';
 import React from 'react';
@@ -233,6 +234,7 @@ export const ForestSide: React.FC<EnvProps> = ({frame, scroll, fireflies}) => (
 );
 
 export const ENV5: Record<string, React.FC<EnvProps>> = {
+ floodRing:FloodRing,floodRewind:FloodRewind,floodStall:FloodStall,floodDecoy:FloodDecoy,floodUpload:FloodUpload,floodCount:FloodCount,floodChairSwing:FloodChairSwing,floodDoorLatch:FloodDoorLatch,floodWindowSignal:FloodWindowSignal,floodSearchlight:FloodSearchlight,floodArrest:FloodArrest,floodBatteryDie:FloodBatteryDie,floodDawnChair:FloodDawnChair,floodFinale:FloodFinale,
  floodEvidence:FloodEvidence,floodRoute:FloodRoute,floodPassage:FloodPassage,floodGroup:FloodGroup,floodChair:FloodChair,floodBarricade:FloodBarricade,floodRecord:FloodRecord,floodRearDoor:FloodRearDoor,floodSurrounded:FloodSurrounded,floodExtort:FloodExtort,floodRescue:FloodRescue,floodBattery:FloodBattery,floodPressure:FloodPressure,
  floodWide:FloodWide,floodHall:FloodHall,floodCarry:FloodCarry,floodBoat:FloodBoat,floodPhone:FloodPhone,floodLock:FloodLock,floodWindow:FloodWindow,
 	forestDepth: ForestDepth,

@@ -30,6 +30,7 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
     nxt = post.get("next", "ตอนต่อไปมาแน่")
     # only an episode that ends on a choice asks for A/B; a finale asks an open question
     vote = bool(end.get("a") and end.get("b"))
+    finale = bool(part and part == post.get("total") and not vote)
     pin = post.get("pin") or (
         f"📌 A = {end.get('a', '')} · B = {end.get('b', '')}\nคนส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น! {nxt}" if vote else f"📌 {question}\n{nxt}"
     )
@@ -41,9 +42,9 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
     lines = [
         "1) PASTE INTO 'DESCRIPTION' (whole block):",
         "",
-        f"{first + ' · ' if first else ''}{hook.replace('*', '')}",
-        question,
-        f"คอมเมนต์ A หรือ B 👇 {nxt}" if vote else nxt,
+        hook.replace('*', '') if finale else f"{first + ' · ' if first else ''}{hook.replace('*', '')}",
+        nxt if finale else question,
+        question if finale else (f"คอมเมนต์ A หรือ B 👇 {nxt}" if vote else nxt),
         " ".join(tags),
         "",
         "2) ON THE UPLOAD PAGE:",
@@ -57,7 +58,7 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         pin,
         "",
         "4) THEN:",
-        *[f"[ ] {c}" for c in CHECKLIST if not c.startswith(("Cover", "Pin"))],
+        *[f"[ ] {c}" for c in CHECKLIST if not c.startswith(("Cover", "Pin")) and not (finale and c.startswith("Next part"))],
         "",
         "5) INSTAGRAM REELS via Meta Business Suite (business.facebook.com -> Create reel; same video.mp4, same time):",
         "- Post to: Instagram only (untick Facebook unless you want it there too)",
@@ -70,7 +71,7 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "",
         "6) YOUTUBE SHORTS (same video.mp4 - the original, never a TikTok download: watermarks get buried):",
         f"- Title: {' · '.join(x for x in (post.get('series'), label) if x)} · {hook.replace('*', '')}"[:100 + len("- Title: ")],
-        "- Description: lines 2-4 of the block in 1) (question, A/B + next time, hashtags)",
+        "- Description: the complete description block in 1)" if finale else "- Description: lines 2-4 of the block in 1) (question, A/B + next time, hashtags)",
         "- Audience: No, it's not made for kids (horror; 'for kids' turns comments off)",
         "- Thumbnail (mobile): the opening title frame or the red scare frame",
     ]
@@ -89,7 +90,7 @@ def write_script(folder: Path, episode: dict) -> Path:
         lines.append(f"- พูด: {s['say']}")
         if s.get("caption") and s["caption"] != s["say"]:
             lines.append(f"- ซับ: {s['caption'].replace('*', '')}")
-        if s.get("type") == "endcard":
+        if s.get("type") == "endcard" and s.get("a") and s.get("b"):
             lines.append(f"- A: {s.get('a', '')}")
             lines.append(f"- B: {s.get('b', '')}")
         lines.append("")

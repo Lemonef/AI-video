@@ -8,12 +8,12 @@ import type {Expr, Pose} from '../types';
 const font = {fontFamily: 'Sarabun, sans-serif'};
 const clamp = (x: number) => Math.min(1, Math.max(0, x));
 const ease = (x: number) => {const t = clamp(x); return t * t * (3 - 2 * t);};
-const phase = (p: number, a: number, b: number) => ease((p - a) / (b - a));
-const mix = (a: number, b: number, p: number) => a + (b - a) * p;
-const label = (x: number, y: number, text: string, size = 32, color = '#e2dfce') => <text x={x} y={y} textAnchor="middle" fontSize={size} fontWeight="700" fill={color}>{text}</text>;
+export const phase = (p: number, a: number, b: number) => ease((p - a) / (b - a));
+export const mix = (a: number, b: number, p: number) => a + (b - a) * p;
+export const label = (x: number, y: number, text: string, size = 32, color = '#e2dfce') => <text x={x} y={y} textAnchor="middle" fontSize={size} fontWeight="700" fill={color}>{text}</text>;
 
 const WarmLight = React.createContext(false);
-const Set: React.FC<{warm?: boolean; children?: React.ReactNode}> = ({warm, children}) => <WarmLight.Provider value={!!warm}><g style={font}>
+export const Set: React.FC<{warm?: boolean; children?: React.ReactNode}> = ({warm, children}) => <WarmLight.Provider value={!!warm}><g style={font}>
   <defs>
     <linearGradient id="f2-wall" x2="0" y2="1"><stop stopColor={warm ? '#3e4449' : '#1c2d40'}/><stop offset="1" stopColor={warm ? '#67635a' : '#435c6c'}/></linearGradient>
     <linearGradient id="f2-floor" x2="0" y2="1"><stop stopColor={warm ? '#797466' : '#687d87'}/><stop offset="1" stopColor="#1e3347"/></linearGradient>
@@ -80,12 +80,12 @@ const Set: React.FC<{warm?: boolean; children?: React.ReactNode}> = ({warm, chil
   {children}
 </g></WarmLight.Provider>;
 
-const Actor: React.FC<{who?: string; look?: Look2; x: number; y: number; s?: number; f: number; pose?: Pose; expr?: Expr; turn?: number; walk?: boolean; back?: boolean}> = ({who = 'jaab', look, x, y, s = .6, f, pose = 'idle', expr = 'sweat', turn = 0, walk, back}) => {const warm = React.useContext(WarmLight); return <g transform={`translate(${x} ${y}) scale(${s})`}>
+export const Actor: React.FC<{who?: string; look?: Look2; x: number; y: number; s?: number; f: number; pose?: Pose; expr?: Expr; turn?: number; walk?: boolean; back?: boolean}> = ({who = 'jaab', look, x, y, s = .6, f, pose = 'idle', expr = 'sweat', turn = 0, walk, back}) => {const warm = React.useContext(WarmLight); return <g transform={`translate(${x} ${y}) scale(${s})`}>
   <ellipse cy="1" rx="94" ry="17" fill="#081622" opacity=".45"/>
   <g style={{filter: warm ? 'brightness(.94) saturate(.92) drop-shadow(-3px -2px 0 rgba(224,186,119,.32))' : 'brightness(.87) saturate(.86) drop-shadow(3px -3px 0 rgba(149,190,204,.3))'}}><Character2 look={look ?? CAST2[who]} pose={pose} expr={expr} turn={turn} frame={f} walking={walk} back={back} torch={false}/></g>
 </g>;};
 
-const Door: React.FC<{x: number; y: number; w?: number; h?: number; number?: string; open?: number}> = ({x, y, w = 240, h = 510, number, open = 0}) => <g>
+export const Door: React.FC<{x: number; y: number; w?: number; h?: number; number?: string; open?: number}> = ({x, y, w = 240, h = 510, number, open = 0}) => <g>
   <rect x={x - 4} y={y + 3} width={w + 35} height={h + 26} fill="#081725" opacity=".5"/>
   <rect x={x - 20} y={y - 19} width={w + 40} height={h + 30} fill="#425663" stroke="#839395" strokeWidth="3"/>
   <rect x={x - 12} y={y - 13} width={w + 24} height={h + 20} fill="#111e2d"/>
@@ -100,7 +100,7 @@ const Door: React.FC<{x: number; y: number; w?: number; h?: number; number?: str
   </g>
 </g>;
 
-const residents: Look2[] = [CAST2.mum,
+export const residents: Look2[] = [CAST2.mum,
   {...CAST2.runner, top: '#486d8b', hair: '#777a7d', hairHi: '#a4a4a3'},
   {...CAST2.friend, top: '#b48050', topShade: '#7c583c', style: 'short'},
   {...CAST2.runner, top: '#658576', topShade: '#3c6154', skin: '#b88868', skinShade: '#906349'},
@@ -109,7 +109,7 @@ const residents: Look2[] = [CAST2.mum,
   {...CAST2.friend, top: '#596480', topShade: '#39445e', skin: '#e1b48a', style: 'short'},
 ];
 
-const PhoneFrame: React.FC<{children: React.ReactNode; recording?: boolean}> = ({children, recording}) => <g>
+export const PhoneFrame: React.FC<{children: React.ReactNode; recording?: boolean}> = ({children, recording}) => <g>
   <rect x="264" y="440" width="552" height="840" rx="52" fill="#111d2b" stroke="#9fadb3" strokeWidth="7"/>
   <rect x="285" y="490" width="510" height="700" rx="17" fill="#253b4d"/>
   <defs><clipPath id="f2-phone-clip"><rect x="285" y="490" width="510" height="700" rx="17"/></clipPath></defs>
@@ -191,7 +191,7 @@ const armElbow = (shoulder: number[], wrist: number[], bend: number): number[] =
 };
 
 // Contact actors use the original head/legs and world-space grip targets.
-const Worker: React.FC<{id: string; who: string; x: number; y: number; s: number; f: number; hands: [[number, number], [number, number]]; lean?: number; expr?: Expr}> = ({id, who, x, y, s, f, hands, lean = 0, expr = 'sweat'}) => {
+export const Worker: React.FC<{id: string; who: string; x: number; y: number; s: number; f: number; hands: [[number, number], [number, number]]; lean?: number; expr?: Expr}> = ({id, who, x, y, s, f, hands, lean = 0, expr = 'sweat'}) => {
   const look = CAST2[who];
   const warm = React.useContext(WarmLight);
   const hand = (i: number) => [(hands[i][0] - x) / s, (hands[i][1] - y) / s];
@@ -209,7 +209,7 @@ const Worker: React.FC<{id: string; who: string; x: number; y: number; s: number
     </g>;})}
   </g>;
 };
-const Chair: React.FC<{x: number; y: number}> = ({x, y}) => <g transform={`translate(${x} ${y})`}><path d="M-70,90 V-45 Q0,-72 70,-45 V90 M-48,10 H48 M-68,95 L-80,210 M65,95 L80,210" fill="none" stroke="#8e7762" strokeWidth="17" strokeLinecap="round"/><path d="M-85,78 L50,60 L87,95 L-58,112Z" fill="#b09a7a" stroke="#594a3d" strokeWidth="7"/></g>;
+export const Chair: React.FC<{x: number; y: number}> = ({x, y}) => <g transform={`translate(${x} ${y})`}><path d="M-70,90 V-45 Q0,-72 70,-45 V90 M-48,10 H48 M-68,95 L-80,210 M65,95 L80,210" fill="none" stroke="#8e7762" strokeWidth="17" strokeLinecap="round"/><path d="M-85,78 L50,60 L87,95 L-58,112Z" fill="#b09a7a" stroke="#594a3d" strokeWidth="7"/></g>;
 export const FloodChair: React.FC<EnvProps> = ({frame, progress = 0}) => {
   const transfer = phase(progress, .18, .62); const release = phase(progress, .64, .82);
   const x = mix(445, 525, transfer); const y = 1000 - Math.sin(transfer * Math.PI) * 25;
@@ -221,7 +221,7 @@ export const FloodChair: React.FC<EnvProps> = ({frame, progress = 0}) => {
   </Set>;
 };
 
-const Cabinet: React.FC<{x: number; y?: number}> = ({x, y = 980}) => <g transform={`translate(${x} ${y})`}>
+export const Cabinet: React.FC<{x: number; y?: number}> = ({x, y = 980}) => <g transform={`translate(${x} ${y})`}>
   <ellipse cy="280" rx="235" ry="25" fill="#081a26" opacity=".5"/>
   <path d="M-220,0 L180,-32 L235,0 L-170,34Z" fill="#bfa17c"/>
   <path d="M-220,0 L-170,34 V280 L-220,240Z" fill="#685642"/>

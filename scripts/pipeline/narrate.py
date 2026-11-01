@@ -301,7 +301,12 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
     pauses = media.silences(take)
-    line_starts = None
+    # A reviewed alignment belongs to this exact voice/tempo cache key only.
+    line_starts = take_meta.get("reviewed_line_starts") if take_meta.get("key") == key else None
+    if line_starts:
+        if len(line_starts) != len(lines) or any(b <= a for a, b in zip(line_starts, line_starts[1:])):
+            raise ValueError("reviewed line starts must cover every scene in increasing order")
+        timing["_take"]["reviewed_line_starts"] = line_starts
     if not words:  # no transcript: ask Gemini when each line starts (cached with the alignment)
         line_starts = take_meta.get("line_starts") if take_meta.get("key") == key else None
         line_starts = line_starts or gemini_align.line_starts(take, lines)
