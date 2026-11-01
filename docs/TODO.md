@@ -3,12 +3,12 @@
 ## QUEUE (owner order, 2026-11-01)
 1. [x] Pipeline v1 shipped (brain a8fe06f)
 2. [x] 3 practice jobs: 2 free passes, trap caught
-3. [ ] Mine all 36 reels (29 + batch-2 #30-36) via pipeline: tools for frames/ASR, Codex Sol/Astra for OCR+vision, free models text-only w/ source, Claude writes craft lessons
+3. [~] Mine all 36 reels (extraction DONE: OCR 35+16 long parts, speech refs 33, craft notes 35, repos verified; OPEN: top-15 lessons synthesis) (29 + batch-2 #30-36) via pipeline: tools for frames/ASR, Codex Sol/Astra for OCR+vision, free models text-only w/ source, Claude writes craft lessons
 4. [ ] Brain update + make Codex/OpenCode/Gemini read the brain; session handoff hardening
 5. [ ] AgentsRoom via our own local MCP (investigate)
 6. [ ] Brain cleanup/refactor (own plan)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
-8. [ ] Flood ep 3 (Part 3) - branch B (audience voted B)
+8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
