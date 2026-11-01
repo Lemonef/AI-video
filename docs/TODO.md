@@ -1,5 +1,15 @@
 # TODO — the only place live status lives
 
+## QUEUE (owner order, 2026-11-01)
+1. [ ] Pipeline v1 fixes -> Claude verify -> commit (brain tools/pipeline.py)
+2. [ ] 3 practice jobs (mech / normal / planted-bug trap)
+3. [ ] Mine all 36 reels (29 + batch-2 #30-36) via pipeline: tools for frames/ASR, Codex Sol/Astra for OCR+vision, free models text-only w/ source, Claude writes craft lessons
+4. [ ] Brain update + make Codex/OpenCode/Gemini read the brain; session handoff hardening
+5. [ ] AgentsRoom via our own local MCP (investigate)
+6. [ ] Brain cleanup/refactor (own plan)
+7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
+8. [ ] Flood ep 3 (Part 3) - branch B (audience voted B)
+
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
   - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
