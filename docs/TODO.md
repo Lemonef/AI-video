@@ -12,7 +12,13 @@
    - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
    - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
    - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
-   - [ ] Character score: actor-box crop MAE/SSIM in review + gate (whole frame blind to acting, actor ~5% of frame)
+   - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); scripts/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
+   - [ ] Tool trials (local, zero tokens while running)
+     - [x] Free vision (Gemini 2.5 flash) for joint coords: FAILS (generic skeleton); pose description OK -> hand-marking stays
+     - [x] Blender 5.2.3 headless Grease Pencil v3 smoke render works (stroke + plane visible; materials need show_stroke=True)
+     - [ ] SAM 2 CPU install (D:/tools/sam2, ckpt sam2.1_hiera_tiny) -> actor masks timing test on one shot
+     - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
+     - [ ] OpenCV optical flow for walking shots (later)
    - [ ] H4 shots 2/3 pose with IK (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
    - [ ] J1 shot 6 plate + shot 20 crowd via pipeline normal ladder; full v13 render; J2-J4 grades/lighting
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
