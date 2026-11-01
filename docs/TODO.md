@@ -5,7 +5,7 @@
 2. [x] 3 practice jobs: 2 free passes, trap caught
 3. [x] Mine all 36 reels: extraction + top-15 lessons (brain research/reel-top15-lessons-2026-11-01.md, cinematic-guide §4)
 4. [x] Brain update + other agents read the brain: global block (brain docs/global-agents-md.md, tools/install_agent_globals.py), builder guard, doctor check; Codex+OpenCode live-tested; RAG auto-rebuild confirmed
-5. [ ] AgentsRoom via our own local MCP (investigate)
+5. [~] AgentsRoom via own MCP: brain tools/agentsroom_mcp.py proxy (13 of 175 tools) registered, read verified; OPEN: spawn test with app open
 6. [ ] Brain cleanup/refactor (own plan)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
