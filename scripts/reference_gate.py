@@ -37,6 +37,9 @@ COMPOSITION = 'ReferenceAssisted'
 # Render settings and sample phases are part of the baseline: changing them
 # invalidates every cached control (checked below), so they live here only.
 RENDER_ARGS = ['--scale=0.5', '--crf=20', '--concurrency=4']
+# Offline fonts keep renders free of network font loading, so two runs of the
+# same code draw identical captions.
+RENDER_ENV = {'REMOTION_OFFLINE_FONTS': '1'}
 PHASES = [round(.05 + .1*i, 2) for i in range(10)]  # .05 .. .95, ten per shot
 # Unchanged code measures bit-identical (self-test 2026-11-01), so any gain is
 # real; this floor only rejects gains too small to see in a side-by-side.
@@ -62,8 +65,8 @@ def study_shots():
 
 def fps(path):
     out = subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries',
-                          'stream=r_frame_rate', '-of', 'csv=p=0', str(path)],
-                         capture_output=True, text=True).stdout.strip()
+                          'stream=r_frame_rate', '-of', 'default=noprint_wrappers=1:nokey=1', str(path)],
+                         capture_output=True, text=True).stdout.split()[0]
     num, _, den = out.partition('/')
     return float(num)/float(den or 1)
 
@@ -76,7 +79,8 @@ def render(shot, out):
     out.parent.mkdir(parents=True, exist_ok=True)
     run = subprocess.run([npx, 'remotion', 'render', 'src/index.ts', COMPOSITION, str(out),
                           f"--frames={s['start']}-{s['end']-1}", '--overwrite', *RENDER_ARGS],
-                         cwd=REPO, stdin=subprocess.DEVNULL, capture_output=True, text=True)
+                         cwd=REPO, stdin=subprocess.DEVNULL, capture_output=True, text=True,
+                         env={**os.environ, **RENDER_ENV})
     if run.returncode:
         fail(f'render failed for shot {shot}:\n{run.stderr[-2000:]}')
     if abs(fps(out) - fps(STUDY_DIR/'source.mp4')) > 1e-6:
@@ -101,7 +105,7 @@ def measure(shot, clip, start, out_dir):
 def fingerprint():
     return {'source_sha256': sha(STUDY_DIR/'source.mp4'),
             'shots_sha256': sha(STUDY_DIR/'shot-review.json'),
-            'render_args': RENDER_ARGS, 'phases': PHASES,
+            'render_args': RENDER_ARGS, 'render_env': RENDER_ENV, 'phases': PHASES,
             # Decoder/scaler version can shift metrics, so it is part of the baseline.
             'ffmpeg': subprocess.run(['ffmpeg', '-version'], capture_output=True,
                                      text=True).stdout.splitlines()[0]}
