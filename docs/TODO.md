@@ -1,5 +1,19 @@
 # TODO — the only place live status lives
 
+## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
+- [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
+  - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
+  - [x] Guided-loop handoff written: docs/handoff-gemini-reference-loop.md (reusable by any builder).
+- [ ] Reel mining (both batches, 29 + 7): handoff docs/handoff-gemini-reel-mining.md; sent to Antigravity agent 2026-11-01 (result unverified).
+- [ ] Agent pipeline (owner talks only to Claude; Claude launches builders via `bash D:/second-brain/tools/run_agent.sh <codex|gemini|antigravity> <repo> <handoff> <log> [model]`)
+  - [x] AgentsRoom installed (free): projects D:\ + D:\AI-video
+  - [ ] Add agents in AgentsRoom; check if it can start agents from the command line
+  - [ ] Retest OpenCode free builders (config ~/.config/opencode/opencode.json: NVIDIA GLM 5.3 / DeepSeek / Kimi K3, Mistral Devstral/Codestral, OpenRouter Nemotron) - first test gave empty output
+  - [ ] Design tiered pipeline (plan Opus -> build Codex sol/terra/luna | OpenCode free | Antigravity -> verify other company + free legs -> escalate on gate failure) and get owner approval before building
+- [ ] Flood Part 3 finale: waits for the real Part 2 A/B count
+- [ ] Untracked draft episodes/wishes01.json + src/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
+
+
 ## CURRENT — 2026-10-31 Bangkok flood Part2
 - [x] Owner confirmed B: join the other residents; Thai-first story and three hooks reviewed before voice.
 - [x] Capture/review29 reference posts in the brain:26videos,2carousels,1restricted; preserve271returned comments,approximateASR,upstreamskilltexts and localmedia hashes. Seven later URLs remain queued.
