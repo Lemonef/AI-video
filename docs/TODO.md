@@ -4,7 +4,7 @@
 1. [x] Pipeline v1 shipped (brain a8fe06f)
 2. [x] 3 practice jobs: 2 free passes, trap caught
 3. [x] Mine all 36 reels: extraction + top-15 lessons (brain research/reel-top15-lessons-2026-11-01.md, cinematic-guide §4)
-4. [ ] Brain update + make Codex/OpenCode/Gemini read the brain; session handoff hardening
+4. [x] Brain update + other agents read the brain: global block (brain docs/global-agents-md.md, tools/install_agent_globals.py), builder guard, doctor check; Codex+OpenCode live-tested; RAG auto-rebuild confirmed
 5. [ ] AgentsRoom via our own local MCP (investigate)
 6. [ ] Brain cleanup/refactor (own plan)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
