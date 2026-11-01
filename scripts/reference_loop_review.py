@@ -57,6 +57,8 @@ def main():
     p.add_argument('--shot-ids', type=int, nargs='+', help='Original one-based shot IDs')
     p.add_argument('--shots', type=Path, required=True)
     p.add_argument('--out', type=Path, required=True)
+    p.add_argument('--phases', type=float, nargs='+', default=[.1, .5, .9],
+                   help='Sample positions within each shot, 0..1')
     args = p.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     shots = json.loads(args.shots.read_text(encoding='utf-8'))['shots']
@@ -67,7 +69,7 @@ def main():
         shots = [s for i,s in enumerate(all_shots,1) if i in args.shot_ids]
     # Beginning/middle/end catches transitions and acting omitted by a midpoint-only check.
     samples = sorted({int(s['start']+(s['end']-s['start']-1)*t)
-                      for s in shots for t in [.1, .5, .9]})
+                      for s in shots for t in args.phases})
     if not samples or min(samples) < args.render_start_frame or (args.baseline and min(samples) < args.baseline_start_frame):
         p.error('Selected samples precede a supplied render/baseline offset, or selection is empty')
     ref, study = frames(args.source, samples), frames(args.render, [i-args.render_start_frame for i in samples])
@@ -82,7 +84,7 @@ def main():
         rows.append(row)
     # One row per shot, three phases per row, reference left / reconstruction right.
     for page in range((len(shots)+4)//5):
-        sheet = Image.new('RGB', (3*360, min(5,len(shots)-page*5)*346), '#181a1c')
+        sheet = Image.new('RGB', (len(args.phases)*360, min(5,len(shots)-page*5)*346), '#181a1c')
         draw = ImageDraw.Draw(sheet)
         for slot, shot in enumerate(shots[page*5:page*5+5]):
             sid = all_shots.index(shot)+1
