@@ -216,3 +216,35 @@ Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-a
 ### M41 ? stride regression caught before integration
 - Reviewed walk-v8-review.jpg across7 phases. Shared shortened walking shins made the already simplified stride too small; reverted walking knee/ankle and bob scaling to the verified production mapping. Shortened resting stance remains. Narrowed walk torso to side profile and restored brief opening focus blur as a separate camera effect.
 - Updated interval walk-v8-profile-test.mp4 renders/typechecks; temporal inspection of this last revision remains next. Full93.3-second v8 withheld until visual action review passes.
+
+### M42 - reference work resumed overnight, 2026-10-31 / Nov1
+- Owner paused the flood finale until tomorrow, resumed autonomous reference matching, and explicitly said not to wait for permission while he sleeps. Existing final releases stay protected. Picture/animation first remains the latest voice direction.
+- AFTER matching, investigate BOTH reel batches: all useful speech, on-screen OCR, referenced GitHub repos/skills/tools and source receipts. The prior29-post partial library and seven queued links do not constitute exhaustive extraction. This research waits while matching is unfinished.
+- Parallel bounded work: root lead/contact/camera/integration, crowd actor work, source insert audit/rebuild, brain/caption-OCR capture. Workers later reported an account usage limit; root continued with saved assets/code. No extra subscriptions purchased.
+
+### M43 - measured lead performance and shutter contact
+- Source-coordinate grid and bounded skin-color diagnostics revealed old walk guides underestimated horizontal travel (~52 to122 vs58 to86) and head radius. Existing depth gait is inappropriate for this lateral source performance.
+- Added `LeadPerformance.tsx`: manually inspected screen-space head/hip/knee/ankle/elbow/wrist keys for shots10/24/26, interpolated separately from the calibrated background camera. This is approximate manual rotoscoping of drawn landmarks, not automatic motion capture. Actual code-generated actor; no source-film frames substituted.
+- Rendered/inspected `lead-v9-measured-test.mp4`, `pull-v9-measured-test.mp4`, `pull-v9-shutter-test.mp4`, walk/pull comparison strips. Corrected curtain left jamb, bottom perspective,46 slat gradients and architecture-anchored chain; chain length corrected after inspecting the first preview. Hand/chain performance remains approximate.
+- Counter4/5/7/9 head guides revised against labelled source grids; closed lids/scanner/arms, collar/badge and alarm skin color revised. First whole-frame red wash tinted the green cap brown: rejected after full comparison, replaced with actor-skin tint for v10.
+
+### M44 - crowd and source-measured inserts
+- Crowd wide/close cast now preserves human/zombie costume changes, white-vest thin profile, folded arm, hair/hat/gaze, measured front feet, runner direction, depth bias and foreground jamb/sign occlusion. Metadata is retained through inverse-camera mapping.
+- `crowd-v9-depth-test.mp4`149frames/596-744, hash eb7fe660a6795d45d57bc4615c15798266d6b2916b75b16f8981781f05daf4fa. Six source samples: mean no-caption MAE11.046(v8)→9.629; front-actor ROI33.015→20.559. Not a match percentage. Actual comparison/depth strips inspected.
+- `ReferenceInserts.tsx` independently draws measured phone/UI, city map, mechanism, controls, moving gap/hands, map annotations, inventory typing, countdown/pull badge and end card. Fixed phone→city cut375, hand release1941 and gap edge motion. No original source images embedded in these vector inserts.
+- Full comparison caught an unintended default SVG fill producing black triangles in the city: fixed with fill=none for v10. Torch wrist/lens moved from low outstretched arm to measured chest-level contact; beam origin derives from the actual rig and camera.
+
+### M45 - shot-specific dark prop plate
+- Original bright prop plate did not contain the right/top field of view for shots32/34; fitting alone exposed borders. One new built-in imagegen caption-removal edit made `public/reference-study/dark-prop-clean-v9.png` from source frame2460. Bag, radio and set retain source design. Clearly SOURCE-ASSISTED, not an independent replica. Original source video is not relabeled as a rebuild.
+- Exact prompt saved BEFORE generation in `docs/reference-v9-dark-prop-prompt.txt`; source/output paths and hashes appended to asset manifest. Inspected caption removal and preserved silhouettes; shading/floor changes remain differences.
+- Camera fitter now accepts --shot-ids without renumbering original shots;39 dark-prop fits accepted, median matched-landmark residual0.612reviewpx. This describes matched points only. New radio comparison in full v9 shows border removed; LED/camera/grade still approximate.
+
+### M46 - full v9 integrated comparison
+- `out/drafts/reference-study/DegJCmXtbGj/practice-v9-integrated-preview.mp4`: full2799frames/93.3s,540x960,30fps, cached scratch audio. SHA256 e73e0648431d88906d3c952bedb0bbc3442b49552cd6af45573fe0af48eb5141.
+- All seven `review-v9/compare-*.jpg` inspected:105 synchronized samples, MAE19.284 vs v7 22.014; SSIM.7687 vs.7298. A real measured improvement, NOT exactness or owner acceptance.
+- Visible OPEN: source-specific caption timing/wording, lead poses13/14/22/27/28/29-33, foreground phone alarm, torch/local lighting, crowd phases not keyed, map/camera/plate details, countdown freeze/color and exact type. Scratch voice/sound not matched; voice still deferred.
+
+### M47 - v10 corrective pass in progress
+- Cached WinRT OCR:187 coarse and560 dense caption crops, manually inspected eight proof sheets; ASR only secondary evidence. Curated93 private source-caption chunks,89 measured OCR layouts. `private-caption-layout.json` retains proof frame/file and explicit±5frame timing uncertainty. This is reference analytical lettering, not a new Jaab script or exact font certification. The scratch audio remains different.
+- `SourceCaptions.tsx` uses measured width/baseline/capital height and source emphasis; source-assisted benchmark now separates lettering from scratch-narration timing. Corrected DON'T callout, shop-rule placard, selected pull counts and countdown freeze; source ceiling extended where the camera revealed absent plate area.
+- v10 preview rendering. Its changed skin tint/torch/captions/city fixes are NOT yet verified in the integrated export. Next: inspect every sheet and dense action transitions, fix largest visible discrepancies, preserve notes and private artifacts. Do not promote this practice film as a production final.

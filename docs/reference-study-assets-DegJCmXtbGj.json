@@ -172,6 +172,20 @@
       "provenance": "source-assisted object-removal edit; not independent background recreation",
       "prompt_verbatim_captured": false,
       "normalized_prompt_spec": "Edit this supplied portrait illustration into one clean animation background plate. Remove cashier/cap/face/body/limbs/torch/beam,narration caption; reconstruct shelves,pillar,night window,cars,counter/bag,retain dark illumination. Preserve exact framing,perspective,positions,scale,palette and illustrated style. Seamlessly reconstruct removed areas. No redesign,crop,extra people,objects or text. Maximum input fidelity. Private source-assisted animation study."
+    },
+    {
+      "id": "dark-prop-v9",
+      "source_still": "out/drafts/reference-study/DegJCmXtbGj/dark-prop-reference-v9.png",
+      "extraction_seconds": 82,
+      "source_still_sha256": "990da6b285851b667af8a6a87e43457c0afcd0cf71ad305db3651aea74dc1748",
+      "generated_original": "C:/Users/user/.codex/generated_images/01a186bc-0236-7993-80f6-27c73d6b8c1c/exec-9675f42b-445c-4819-aa9b-7ebbe95f22a5.png",
+      "generated_sha256": "bf12bb094558ab7eb3dfe730d81eaf162aa090c4a7af4efa98c0a34777fe0049",
+      "project_copy": "public\\reference-study\\dark-prop-clean-v9.png",
+      "prompt_verbatim_captured": true,
+      "prompt_path": "docs/reference-v9-dark-prop-prompt.txt",
+      "provenance": "Source-assisted imagegen caption removal, bag/radio/counter retained from source design; not independent background recreation.",
+      "inspected": true,
+      "inspection": "Caption removed. Major silhouettes and darkness preserved; shading/floor lines changed, not exact pixels. 39 SIFT camera fits accepted for shots32/34; median residual0.612reviewpx, not wholeframecertification."
     }
   ]
 }

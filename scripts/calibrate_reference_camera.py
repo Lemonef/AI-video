@@ -19,11 +19,12 @@ def main():
     p.add_argument('--plates',type=Path,required=True)
     p.add_argument('--out',type=Path,required=True)
     p.add_argument('--stride',type=int,default=5)
+    p.add_argument('--shot-ids',type=int,nargs='+',help='Fit only these original shot numbers; preserve global IDs.')
     args=p.parse_args()
     shots=json.loads(args.shots.read_text())['shots']
     stage_files={'counter':'counter','door':'door','chain':'door','aisle':'aisle',
                  'dark':'aisle','parking':'parking','exterior':'exterior',
-                 'radio':'prop','map':'map','map-parking':'map-parking','dark-face':'dark-face'}
+                 'radio':'prop','map':'map','map-parking':'map-parking','dark-face':'dark-face','dark-prop':'dark-prop'}
     cv2.setNumThreads(2)
     sift=cv2.SIFT_create(nfeatures=1000,contrastThreshold=.018)
     matcher=cv2.FlannBasedMatcher(dict(algorithm=1,trees=4),dict(checks=40))
@@ -31,12 +32,12 @@ def main():
     def gray(x):return clahe.apply(cv2.cvtColor(x,cv2.COLOR_RGB2GRAY))
     plates={}
     for stage,name in stage_files.items():
-        path=args.plates/f'{name}-clean-v1.png'
+        path=args.plates/(f'{name}-clean-v9.png' if name=='dark-prop' else f'{name}-clean-v1.png')
         if not path.exists():continue
         image=cv2.cvtColor(cv2.resize(cv2.imread(str(path)),(270,480)),cv2.COLOR_BGR2RGB)
         kp,desc=sift.detectAndCompute(gray(image),None)
         plates[stage]=(name,kp,desc)
-    samples=sorted({f for s in shots if s['stage'] in plates
+    samples=sorted({f for sid,s in enumerate(shots,1) if s['stage'] in plates and (not args.shot_ids or sid in args.shot_ids)
                     for f in [s['start'],*range(s['start']+2,s['end'],args.stride),s['end']-1]})
     source=frames(args.source,samples)
     rows=[]
@@ -48,6 +49,7 @@ def main():
         sid=shots.index(shot)+1
         if sid==16 or (sid==15 and frame>=885):stage='map-parking'
         if sid==33:stage='dark-face'
+        if sid in (32,34) and 'dark-prop' in plates:stage='dark-prop'
         if stage not in plates:continue
         name,kp0,d0=plates[stage]
         mask=np.full((480,270),255,np.uint8)

@@ -8,6 +8,9 @@ import calibration from './calibration.json';
 import actorBlocking from './actor-blocking.json';
 import {crowdAt} from './crowd-blocking';
 import {FidelityStage} from './FidelityScenes';
+import {LeadPerformance,hasMeasuredLead} from './LeadPerformance';
+import {ReferencePhoneInsert,ReferenceMechanism,ReferenceMapOverlay,ReferenceInventory,ReferenceTorchBeam,ReferenceStudyEnd,ReferenceCountdown,ReferenceControls,ReferenceGap,ReferencePullBadge} from './ReferenceInserts';
+import {SourceCaptions} from './SourceCaptions';
 import {shotAt,STUDY_FPS} from './shots';
 
 const STUDY_FONT=loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
@@ -39,7 +42,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  const focusX=(shot.id===15&&local>=33?135:c[2])*4;
  const focusY=(shot.id===15&&local>=33?240:shot.id===17?interpolate(local,[0,12,58,290,350,385],[240,220,100,100,-100,-120]):c[3])*4;
  // Geometry-only landmark registration is enabled only for the clearly labeled assisted study.
- const plate=shot.id===33?'dark-face':shot.id===16||(shot.id===15&&local>=33)?'map-parking':({dark:'aisle',chain:'door',radio:'prop'} as Record<string,string>)[shot.stage]??shot.stage;
+ const plate=shot.id===32||shot.id===34?'dark-prop':shot.id===33?'dark-face':shot.id===16||(shot.id===15&&local>=33)?'map-parking':({dark:'aisle',chain:'door',radio:'prop'} as Record<string,string>)[shot.stage]??shot.stage;
  const keys=calibration.samples.filter(k=>k.shot===shot.id&&k.plate===plate);
  const past=keys.filter(k=>k.frame<=frame);
  const before=past[past.length-1]??keys[0];
@@ -68,28 +71,38 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  }
  const crowdTargets=crowdAt(shot.id,frame)?.map(k=>{
   const [[a,c,tx],[b,d,ty]]=appliedMatrix,det=a*d-b*c;
-  return {n:k.n,x:(d*(k.x-tx)-c*(k.y-ty))/det,y:(-b*(k.x-tx)+a*(k.y-ty))/det,r:k.r/Math.hypot(a,b)};
+  return {...k,n:k.n,x:(d*(k.x-tx)-c*(k.y-ty))/det,y:(-b*(k.x-tx)+a*(k.y-ty))/det,r:k.r/Math.hypot(a,b)};
  });
  const fullSec=frame/STUDY_FPS;
  const remaining=Math.max(0,299-Math.floor(fullSec-47.0));
  const timer=`${Math.floor(remaining/60).toString().padStart(2,'0')}:${(remaining%60).toString().padStart(2,'0')}`;
  const caption=captions.find(c=>frame>=c.start&&frame<c.end);
- const count=shot.id===24?Math.floor(interpolate(p,[0,.12,.45,.6,1],[6,8,38,39,39])):shot.id===25?39:40;
+ const count=shot.id===24?Math.floor(interpolate(frame,[1799,1807,1810,1823,1837,1868,1885],[0,8,11,24,38,39,39],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})):shot.id===25?39:40;
+ const fullInsert=sourceAssisted&&[8,21,23,25,35].includes(shot.id);
+ let torchOrigin:{x:number;y:number}|undefined;
+ if(actorTarget){
+  const s=actorTarget.r/30,wx=actorTarget.x+34*s,wy=actorTarget.y+36*s;
+  torchOrigin={x:appliedMatrix[0][0]*wx+appliedMatrix[0][1]*wy+appliedMatrix[0][2],y:appliedMatrix[1][0]*wx+appliedMatrix[1][1]*wy+appliedMatrix[1][2]};
+ }
  return <AbsoluteFill style={{background:'#071218',overflow:'hidden'}}>
   {withSound?<Html5Audio src={staticFile('reference-study/study-sound.wav')}/>:null}
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
    <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient></defs>
-   <g transform={cameraTransform} style={shot.id===10&&local<7?{filter:`blur(${18*(1-local/7)}px)`}:undefined}>
-    <FidelityStage crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
-   </g>
-   {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={p*.45}/>:null}
+   {!fullInsert?<g transform={cameraTransform} style={shot.id===10&&local<7?{filter:`blur(${18*(1-local/7)}px)`}:shot.id===18&&local<13?{filter:`blur(${18*(1-local/13)}px)`}:undefined}>
+    <FidelityStage hideLead={sourceAssisted&&hasMeasuredLead(shot.id)} crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
+   </g>:null}
+   {fullInsert?<g transform="scale(4)">{shot.id===8?<ReferencePhoneInsert frame={frame}/>:shot.id===21?<ReferenceControls frame={frame} showTimer={false}/>:shot.id===23?<ReferenceMechanism frame={frame}/>:shot.id===25?<ReferenceGap frame={frame} showHud={false}/>:<ReferenceStudyEnd frame={frame}/>}</g>:null}
+   {sourceAssisted?<LeadPerformance frame={frame} shot={shot.id}/>:null}
+   {sourceAssisted?<g transform="scale(4)">{shot.id===17?<ReferenceMapOverlay frame={frame}/>:null}{shot.id===30?<ReferenceInventory frame={frame}/>:null}{shot.id===31?<ReferenceTorchBeam frame={frame} origin={torchOrigin}/>:null}</g>:null}
+   {sourceAssisted&&shot.id===20&&local<10?<rect width={W} height={H} fill="#fff" opacity={.65*(1-local/10)}/>:null}
+   {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={sourceAssisted?.35+.2*Math.max(0,1-local/20):p*.45}/>:null}
    <rect width={W} height={H} fill="url(#study-vignette)"/>
-   {shot.id>=18&&shot.id<=28?<g><rect x={25} y={330} width={145} height={65} rx={15} fill="#172221" opacity={.94}/><text x={98} y={379} textAnchor="middle" fontFamily="monospace" fontSize={44} fontWeight={800} fill={shot.id>=27?'#82AE79':'#D4503F'}>{timer}</text></g>:null}
-   {shot.stage==='chain'||shot.stage==='gap'||shot.id===27?<g><rect x={805} y={330} width={225} height={63} rx={8} fill={count===40?'#436A40':'#E1E2CC'}/><text x={917} y={374} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={34} fontWeight={800} fill={count===40?'#ECEDD6':'#25362C'}>PULL {count} / 40</text></g>:null}
-   {caption&&withSound&&shot.id!==35?<text x={W/2} y={shot.id===3?1280:1272} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={caption.text.length>25?46:54} fill={/OUTBREAK|PULL|STOP|SHUT/.test(caption.text)?'#d5b240':'#e5e3d3'} stroke="#17221f" strokeWidth={2.4} paintOrder="stroke" style={{filter:'drop-shadow(0 2px 2px #17221f88)'}}>{caption.text}</text>:null}
-   {shot.id===15&&local<33?<text x={620} y={1530} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={210} fill="#bb392c" transform="rotate(-3 620 1530)">STOP.</text>:null}
-   {shot.id===3&&local>=15?<g><rect x={417} y={203} width={250} height={28} fill="#a83727"/><text x={542} y={226} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={22} fill="#f0e6c4">OUTBREAK ? FIRST SHIFT</text><text x={540} y={304} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={88} fill="#eeead5">DAY 1</text></g>:null}
-   {shot.id===28?<g><rect x={97} y={402} width={860} height={188} rx={7} fill="#e4e1cb"/><text x={527} y={444} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={22} fill="#b5442c">RULE ONE</text><text x={527} y={507} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={40} fill="#27342c">STAY HIDDEN. CUT THE LIGHTS.</text><text x={527} y={553} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={23} fill="#73795f">DARKNESS BUYS TIME</text></g>:null}
+   {shot.id>=18&&shot.id<=28&&!(sourceAssisted&&shot.id===23)?sourceAssisted?<g transform="scale(4)"><ReferenceCountdown frame={frame} value={shot.id===27?'04:40':undefined}/></g>:<g><rect x={25} y={330} width={145} height={65} rx={15} fill="#172221" opacity={.94}/><text x={98} y={379} textAnchor="middle" fontFamily="monospace" fontSize={44} fontWeight={800} fill={shot.id>=27?'#82AE79':'#D4503F'}>{timer}</text></g>:null}
+   {shot.stage==='chain'||shot.stage==='gap'||shot.id===27?sourceAssisted?<g transform="scale(4)"><ReferencePullBadge count={count}/></g>:<g><rect x={805} y={330} width={225} height={63} rx={8} fill={count===40?'#436A40':'#E1E2CC'}/><text x={917} y={374} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={34} fontWeight={800} fill={count===40?'#ECEDD6':'#25362C'}>PULL {count} / 40</text></g>:null}
+   {sourceAssisted?<SourceCaptions frame={frame} font={STUDY_FONT}/>:caption&&withSound&&shot.id!==35?<text x={W/2} y={shot.id===3?1280:1272} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={caption.text.length>25?46:54} fill={/OUTBREAK|PULL|STOP|SHUT/.test(caption.text)?'#d5b240':'#e5e3d3'} stroke="#17221f" strokeWidth={2.4} paintOrder="stroke" style={{filter:'drop-shadow(0 2px 2px #17221f88)'}}>{caption.text}</text>:null}
+   {shot.id===15&&local<33?<text x={620} y={1530} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={210} fill="#bb392c" transform="rotate(-3 620 1530)">{sourceAssisted?"DON'T.":'STOP.'}</text>:null}
+   {shot.id===3&&local>=15?<g><rect x={417} y={203} width={250} height={28} fill="#a83727"/><text x={542} y={226} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={22} fill="#f0e6c4">ZOMBIE OUTBREAK</text><text x={540} y={304} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={88} fill="#eeead5">DAY 1</text></g>:null}
+   {shot.id===28?<g opacity={Math.min(1,(local+1)/8)}><rect x={152} y={616} width={776} height={256} rx={7} fill="#eeecdc"/><rect x={456} y={641} width={168} height={21} rx={5} fill="#be3f38"/><text x={540} y={657} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={15} fill="#f1ede0">SHOP RULE #1</text><text x={540} y={721} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={43} fill="#232a21">IF THEY CAN SEE YOU, THEY</text><text x={540} y={769} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={43} fill="#232a21">COME</text><text x={540} y={819} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={17} letterSpacing={2} fill="#656956">LIGHTS OFF ? NO NOISE</text></g>:null}
    {showStudyLabels&&shot.stage!=='end'?<text x={W/2} y={1380} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={shot.label.length>29?34:40} fontWeight={800} fill="#EEEBD5" stroke="#17272C" strokeWidth={6} paintOrder="stroke">{shot.label.toUpperCase()}</text>:null}
    {showStudyLabels?<g><rect x={665} y={55} width={330} height={52} rx={12} fill="#0A191E" opacity={.72}/><text x={830} y={90} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={23} fontWeight={600} fill="#C2CCB9">PRIVATE STUDY  /  {shot.id.toString().padStart(2,'0')}</text></g>:null}
   </svg>

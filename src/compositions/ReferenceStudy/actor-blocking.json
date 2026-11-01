@@ -1,5 +1,5 @@
 {
-  "method": "Manually inspected source head guides; door guides revised against full270x480 source frames and bounded skin components; approximate, not mocap.",
+  "method": "Manually inspected source head guides; door guides revised against full270x480 source frames and bounded skin components; approximate, not mocap. Counter4/5/7/9 guides revised from labelled source coordinate grids 2026-10-31; manual estimates, review still required.",
   "coordinate_plane": [
     270,
     480
@@ -15,22 +15,22 @@
     {
       "frame": 200,
       "shot": 4,
-      "x": 180,
-      "y": 252,
-      "r": 31
+      "x": 177,
+      "y": 244,
+      "r": 33
     },
     {
       "frame": 221,
       "shot": 4,
-      "x": 180,
-      "y": 249,
-      "r": 31
+      "x": 177,
+      "y": 234,
+      "r": 33
     },
     {
       "frame": 233,
       "shot": 5,
       "x": 145,
-      "y": 234,
+      "y": 211,
       "r": 54
     },
     {
@@ -44,50 +44,50 @@
       "frame": 273,
       "shot": 5,
       "x": 146,
-      "y": 222,
+      "y": 211,
       "r": 56
     },
     {
       "frame": 315,
       "shot": 7,
       "x": 146,
-      "y": 234,
+      "y": 214,
       "r": 78
     },
     {
       "frame": 321,
       "shot": 7,
       "x": 146,
-      "y": 230,
+      "y": 214,
       "r": 78
     },
     {
       "frame": 327,
       "shot": 7,
       "x": 147,
-      "y": 232,
+      "y": 211,
       "r": 78
     },
     {
       "frame": 458,
       "shot": 9,
-      "x": 146,
-      "y": 239,
-      "r": 54
+      "x": 160,
+      "y": 205,
+      "r": 65
     },
     {
       "frame": 493,
       "shot": 9,
-      "x": 146,
-      "y": 232,
-      "r": 57
+      "x": 160,
+      "y": 204,
+      "r": 67
     },
     {
       "frame": 527,
       "shot": 9,
-      "x": 147,
-      "y": 229,
-      "r": 59
+      "x": 162,
+      "y": 202,
+      "r": 69
     },
     {
       "frame": 542,
@@ -239,44 +239,44 @@
     {
       "frame": 2005,
       "shot": 27,
-      "x": 34,
-      "y": 247,
-      "r": 36
+      "x": 38,
+      "y": 242,
+      "r": 34
     },
     {
       "frame": 2019,
       "shot": 27,
-      "x": 35,
-      "y": 245,
-      "r": 36
+      "x": 38,
+      "y": 242,
+      "r": 34
     },
     {
       "frame": 2032,
       "shot": 27,
-      "x": 35,
-      "y": 245,
-      "r": 36
+      "x": 38,
+      "y": 242,
+      "r": 34
     },
     {
       "frame": 2048,
       "shot": 28,
-      "x": 39,
-      "y": 282,
-      "r": 32
+      "x": 44,
+      "y": 254,
+      "r": 34
     },
     {
       "frame": 2093,
       "shot": 28,
-      "x": 40,
-      "y": 280,
-      "r": 31
+      "x": 47,
+      "y": 239,
+      "r": 35
     },
     {
       "frame": 2138,
       "shot": 28,
-      "x": 40,
-      "y": 281,
-      "r": 31
+      "x": 47,
+      "y": 239,
+      "r": 35
     },
     {
       "frame": 2190,

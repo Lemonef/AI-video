@@ -7,6 +7,9 @@ import type {CrowdTarget} from './crowd-blocking';
 // Art coordinates follow the 270 x 480 reference review plane; camera transforms stay outside.
 type HeadTarget={x:number;y:number;r:number};
 const HeadTargetContext=React.createContext<HeadTarget|undefined>(undefined);
+const HideLeadContext=React.createContext(false);
+const HeadTiltContext=React.createContext(0);
+const SkinColorContext=React.createContext<string|undefined>(undefined);
 const actorLayout=(x:number,y:number,s:number,pose:string,f:number,lean:number,target?:HeadTarget)=>{
  if(!target)return {x,y,s};
  const theta=lean*Math.PI/180;
@@ -27,6 +30,7 @@ const Defs=()=> <defs>
  <linearGradient id="f-floor" x2="0.25" y2="1"><stop stopColor="#e0dac2"/><stop offset="1" stopColor="#a39c85"/></linearGradient>
  <linearGradient id="f-glass" x2="1" y2="1"><stop stopColor="#15323b" stopOpacity=".1"/><stop offset="1" stopColor="#a2aaa1" stopOpacity=".12"/></linearGradient>
  <linearGradient id="f-metal" x2="0" y2="1"><stop stopColor="#c6cbcc"/><stop offset=".5" stopColor="#a7afb4"/><stop offset="1" stopColor="#6d7b83"/></linearGradient>
+ <linearGradient id="f-slat" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#72828b"/><stop offset=".17" stopColor="#aab4ba"/><stop offset=".52" stopColor="#c0c7ca"/><stop offset=".88" stopColor="#a8b2b8"/><stop offset="1" stopColor="#74858e"/></linearGradient>
  <linearGradient id="f-cap" x2=".6" y2="1"><stop stopColor="#3d724d"/><stop offset="1" stopColor="#294b35"/></linearGradient>
  <radialGradient id="f-lamp"><stop stopColor="#ffe0a0" stopOpacity=".3"/><stop offset="1" stopColor="#ffc270" stopOpacity="0"/></radialGradient>
  <filter id="f-soft"><feGaussianBlur stdDeviation="1.8"/></filter>
@@ -48,16 +52,21 @@ const Car:React.FC<{x:number;y:number;s?:number;c:string;flip?:boolean}>=({x,y,s
 
 // Prop anchors and limb endpoints share local rig space.
 const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotion?:string;lean?:number}>=({x,y,s=1,f,pose='rest',emotion='calm',lean=0})=>{
+ const hidden=React.useContext(HideLeadContext);
+ const sourceSkin=React.useContext(SkinColorContext);
+ const skin=sourceSkin??P.skin;
+ const headTilt=React.useContext(HeadTiltContext);
  ({x,y,s}=actorLayout(x,y,s,pose,f,lean,React.useContext(HeadTargetContext)));
- const profile=pose==='pull'||pose==='keys'||pose==='walk';
+ if(hidden)return null;
+ const profile=pose==='pull'||pose==='keys'||pose==='walk'||pose==='recover';
  const gait=walkCycle(f);
  const step=pose==='walk'?gait.swing:0,pull=pose==='pull'?Math.sin(f/3.9):0,headY=-175;
  const bodyBob=pose==='walk'?gait.bob*GAIT_SCALE:0;
- const handR=pose==='pull'?[RIG.pullHandX,-113+pull*20]:pose==='phone'?[17,-102]:pose==='light'?[37,-100]:pose==='alert'?[25,-95]:[28,-97];
- const handL=pose==='alert'?[25,-125]:pose==='keys'?[-31,-107]:[-24,-81];
+ const handR=pose==='pull'?[RIG.pullHandX,-113+pull*20]:pose==='phone'?[3,-112]:pose==='light'?[19,-139]:pose==='alert'?[23,-107]:pose==='recover'?[22,-104]:[28,-97];
+ const handL=pose==='alert'?[-27,-103]:pose==='keys'?[-31,-107]:pose==='rest'?[-42,-101]:pose==='light'?[26,-110]:pose==='recover'?[-17,-103]:[-24,-81];
  const faceOffset=pose==='pull'?12:pose==='keys'?9:pose==='phone'?5:0;
- const eyeY=headY+4,blink=emotion==='tired'||(f%127>=90&&f%127<94);
- const arm=(side:number,hand:number[])=>{const root=[side*12,-135],elbow=pose==='alert'?[side*32,-124]:side===1&&pose==='pull'?[31,-130+pull*8]:[side*28,-116];return <g><path d={`M${root} L${elbow}`} fill="none" stroke={P.green} strokeWidth="10" strokeLinecap="round"/><path d={`M${elbow} L${hand}`} fill="none" stroke="#29422e" strokeWidth="5.7" strokeLinecap="round"/><circle cx={hand[0]} cy={hand[1]} r="3.6" fill={P.skin}/>{side===1&&pose==='phone'?<g transform={`translate(${hand[0]} ${hand[1]}) rotate(8)`}><rect x="-4" y="-10" width="8" height="16" rx="1.2" fill="#202b27"/><rect x="-3" y="-8" width="6" height="11" fill="#b84131"/></g>:null}{side===-1&&pose==='keys'?<g transform={`translate(${hand[0]} ${hand[1]+4})`}><circle r="3" fill="none" stroke="#b8c5ad"/><path d="M0,3 v8 m0,-3 h4" stroke="#c5c6ad" strokeWidth="1.4"/></g>:null}{side===1&&pose==='light'?<g transform={`translate(${hand[0]} ${hand[1]})`}><path d="M0,-3 H13 V3 H0Z" fill="#233333"/><rect x="10" y="-4" width="5" height="8" fill="#c5cabc"/></g>:null}</g>};
+ const eyeY=headY+4,blink=emotion==='tired'||(pose==='rest'&&emotion==='calm')||(f%127>=90&&f%127<94);
+ const arm=(side:number,hand:number[])=>{const root=[pose==='light'?-side*12:side*12,-135],elbow=pose==='light'?(side===1?[8,-138]:[29,-130]):pose==='alert'?[side*34,-126]:side===1&&pose==='pull'?[31,-130+pull*8]:pose==='rest'?[side*31,side<0?-119:-127]:pose==='recover'?[side*28,-123]:[side*28,-116];return <g><path d={`M${root} L${elbow}`} fill="none" stroke={P.green} strokeWidth="10" strokeLinecap="round"/><path d={`M${elbow} L${hand}`} fill="none" stroke="#293027" strokeWidth="5.7" strokeLinecap="round"/><circle cx={hand[0]} cy={hand[1]} r="3.6" fill="#293027"/>{side===1&&pose==='phone'?<g transform={`translate(${hand[0]} ${hand[1]}) rotate(8)`}><ellipse cy="0" rx="19" ry="24" fill="#d1392e" opacity=".12"/><rect x="-6" y="-12" width="12" height="23" rx="2" fill="#202b27"/><rect x="-4.2" y="-9" width="8.4" height="17" rx=".7" fill="#d52b27"/></g>:null}{side===-1&&pose==='keys'?<g transform={`translate(${hand[0]} ${hand[1]+4})`}><circle r="3" fill="none" stroke="#b8c5ad"/><path d="M0,3 v8 m0,-3 h4" stroke="#c5c6ad" strokeWidth="1.4"/></g>:null}{side===1&&pose==='rest'?<g transform={`translate(${hand[0]} ${hand[1]}) rotate(16)`}><rect x="-4" y="-1" width="8" height="13" rx="1" fill="#c84435"/><rect x="-4" y="3" width="8" height="4" fill="#e5d9b9"/></g>:null}{side===1&&pose==='light'?<g transform={`translate(${hand[0]} ${hand[1]})`}><g transform="rotate(17 14 2)"><rect x="12" y="4" width="6" height="24" rx="1.5" fill="#18272f"/><rect x="9" y="-4" width="12" height="10" rx="2" fill="#475861"/><path d="M10,-3 H20" stroke="#6d7a7d" strokeWidth="1.5"/></g></g>:null}</g>};
  return <g transform={`translate(${x} ${y}) scale(${s})`}><ellipse cx="4" cy="-6" rx="17" ry="3.9" fill="#172322" opacity=".3"/>
  <g transform={`rotate(${lean} 0 -65) translate(0 ${bodyBob})`}>
  {[-1,1].map(side=>{
@@ -71,11 +80,11 @@ const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotio
   return <g key={side}><path d={`M${hipX},-64 L${kneeX},${kneeY} L${ankleX},${ankleY}`} fill="none" stroke={side===-1?'#a3a079':'#bbb78c'} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankleX+1} cy={ankleY+3} rx="6.5" ry={2.9-(walking?leg.lift/70:0)} fill="#3c4436"/></g>;
  })}
  <g transform={profile?'translate(7 0) skewX(3) scale(.65 1)':undefined}><path d="M-17,-143 Q0,-148 17,-141 L13,-63 H-13Z" fill="#2e5a3c"/><path d="M-9,-130 H11 L14,-47 H-11Z" fill="#1b3033"/><rect x="-6" y="-67" width="14" height="6" rx="1.5" fill="#34484b"/><path d="M-14,-80 V-49 H-3 V-80" fill="#263c36"/>
- </g>{arm(-1,handL)}{arm(1,handR)}<rect x="-3.5" y="-152" width="7" height="13" fill={P.skin}/><path d="M-7,-140 L0,-120 L7,-140" fill="none" stroke="#a1b09a" strokeWidth="1.3"/><rect x="-4" y="-122" width="8" height="6" rx="1" fill="#9aaa92"/><rect x="-13" y="-98" width="7" height="15" rx="1" fill="#1b2a25"/><rect x="-12" y="-96" width="5" height="10" fill="#bb3a2e"/>
- <circle cy={headY} r="30" fill={P.skin}/><path d={`M-28,${headY-4} Q-28,${headY+26} 0,${headY+30} Q-22,${headY+20} -19,${headY-3}Z`} fill="#c3c5b5" opacity=".15"/>
+ </g>{arm(-1,handL)}{arm(1,handR)}<rect x="-3.5" y="-152" width="7" height="13" fill={skin}/><path d="M-4,-139 Q0,-144 5,-139" fill="none" stroke="#183b31" strokeWidth="2"/><path d="M3,-125 v6 h9 v-3" fill="none" stroke="#d8dccb" strokeWidth="2.2" strokeLinejoin="round"/>{pose==='walk'?<><rect x="-13" y="-98" width="7" height="15" rx="1" fill="#1b2a25"/><rect x="-12" y="-96" width="5" height="10" fill="#bb3a2e"/></>:null}
+ <g transform={`rotate(${headTilt} 0 ${headY})`}><circle cy={headY} r="30" fill={skin}/><path d={`M-28,${headY-4} Q-28,${headY+26} 0,${headY+30} Q-22,${headY+20} -19,${headY-3}Z`} fill="#c3c5b5" opacity=".15"/>
  {[-9,9].map(baseX=>{const dx=baseX+faceOffset;return <g key={baseX}>{emotion==='panic'?<circle cx={dx} cy={eyeY} r="6.9" fill="none" stroke={P.ink} strokeWidth="1.7"/>:null}{blink&&emotion!=='panic'?<path d={`M${dx-3},${eyeY} h6`} stroke={P.ink} strokeWidth="1.7" strokeLinecap="round"/>:<ellipse cx={dx} cy={eyeY} rx={emotion==='panic'?2.6:2.4} ry={emotion==='panic'?2.8:3.1} fill={P.ink}/>}</g>;})}
- <g transform={`translate(${faceOffset} 0)`}>{emotion==='panic'?<ellipse cy={headY+18} rx="3.5" ry="4.8" fill={P.ink}/>:emotion==='worried'?<path d={`M-5,${headY+19} q2,-5 5,-1 q3,4 5,-1`} stroke={P.ink} strokeWidth="1.9" fill="none" strokeLinecap="round"/>:<path d={`M-4,${headY+18} h8`} stroke={P.ink} strokeWidth="1.8" strokeLinecap="round"/>}</g>
- <path d={`M-30,${headY-8} Q-30,${headY-34} -2,${headY-35} Q26,${headY-36} 30,${headY-8}Z`} fill="url(#f-cap)"/><ellipse cx="2" cy={headY-8} rx="33" ry="5.1" fill="#315c3d"/><circle cy={headY-35} r="1.6" fill="#456c46"/>
+ <g transform={`translate(${faceOffset} 0)`}>{(emotion==='panic'||(emotion==='tired'&&pose==='alert'))?<ellipse cy={headY+18} rx="3.5" ry="4.8" fill={P.ink}/>:emotion==='worried'?<path d={`M-5,${headY+19} q2,-5 5,-1 q3,4 5,-1`} stroke={P.ink} strokeWidth="1.9" fill="none" strokeLinecap="round"/>:<path d={`M-4,${headY+18} h8`} stroke={P.ink} strokeWidth="1.8" strokeLinecap="round"/>}</g>
+ <path d={`M-30,${headY-8} Q-30,${headY-34} -2,${headY-35} Q26,${headY-36} 30,${headY-8}Z`} fill={sourceSkin?'#2e533a':'url(#f-cap)'}/><ellipse cx="0" cy={headY-8} rx="30" ry="5.1" fill={sourceSkin?'#25462f':'#315c3d'}/><circle cy={headY-35} r="1.6" fill="#456c46"/></g>
  </g></g>;
 };
 
@@ -91,18 +100,19 @@ const Storefront:React.FC<{f:number}>=({f})=><g>
  <rect x="114" y="277" width="50" height="42" fill="#d8c9a3"/><rect x="118" y="282" width="42" height="33" fill="#eddfb6"/><path d="M139,282 V315 M118,300 H160" stroke="#a79c80" strokeWidth="2"/><path d="M112,273 H166 V280 H112Z" fill="#894c3b"/><path d="M112,272 H166" stroke="#a8664b" strokeWidth="1.6"/>
  <Cashier x={96} y={305} s={.12} f={f} pose="walk" lean={10}/>{range(6).map(i=><Cart key={i} x={176+i*12} y={314} s={.48}/>)}<rect x="0" y="318" width="290" height="4" fill="#9c9985"/>
  </g>;
-const Outside:React.FC<{f:number;crowd?:boolean;assisted?:boolean}>=({f,crowd=false,assisted=false})=>assisted?<g><image href={staticFile('reference-study/exterior-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/><Cashier x={94} y={306} s={.12} f={f} pose="walk" lean={17}/>{crowd?<><Threat x={37} y={383} s={.83} f={f} n={1}/><Threat x={106} y={421} s={1.2} f={f} n={0}/><Threat x={204} y={411} s={1.05} f={f} n={2}/></>:null}</g>:<g><rect width="270" height="480" fill="url(#f-sky)"/><Roofs/>
+const Outside:React.FC<{f:number;crowd?:boolean;assisted?:boolean;targets?:CrowdTarget[]}>=({f,crowd=false,assisted=false,targets})=>assisted?<g><image href={staticFile('reference-study/exterior-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{!crowd?<Cashier x={94} y={306} s={.12} f={f} pose="walk" lean={17}/>:null}{crowd? <>{[...(targets??[])].sort((a,b)=>(a.y+a.r*6)-(b.y+b.r*6)).map(t=><Threat key={t.n} target={t} x={0} y={0} s={1} f={f} n={t.n}/>)}</>:null}</g>:<g><rect width="270" height="480" fill="url(#f-sky)"/><Roofs/>
  {[[2,241,1],[32,246,.5],[201,244,.95],[245,251,.65],[267,242,1]].map(([x,y,s],i)=><Tree key={i} x={x} y={y} s={s} pine={i===2}/>)}
  <rect y="318" width="270" height="162" fill="#303b40"/><path d="M0,321 H270 M0,334 L45,321 M0,353 L65,322 M0,377 L84,322 M176,322 L217,480 M205,323 L270,432" stroke="#7f8078" strokeWidth="1.2" opacity=".55"/>{range(5).map(i=><path key={i} d={`M${180+i*6},${335+i*26} H270`} stroke="#8b8a7e" strokeWidth="1.1" opacity=".45"/>)}
  <Storefront f={f}/><Lamp x={38} y={312} h={92}/><Lamp x={247} y={314} h={107}/><Car x={2} y={318} c="#29383c" s={.65}/><Car x={271} y={327} c="#202e32" s={1}/>
  {crowd?<><Threat x={37} y={383} s={.83} f={f} n={1}/><Threat x={106} y={421} s={1.2} f={f} n={0}/><Threat x={204} y={411} s={1.05} f={f} n={2}/></>:null}<path d="M26,321 H170 L232,444 H0Z" fill="#e4ce9f" opacity=".04"/></g>;
 
 // Each shelf's package scale and baseline use the same depth parameter as its board edges.
-const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean}>=({f,dark=0,actor=false,assisted=false})=>assisted?<g>
+const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean;tired?:boolean}>=({f,dark=0,actor=false,assisted=false,tired=false})=>assisted?<g>
+ <rect x="-300" y="-500" width="870" height="500" fill="#18201f"/><path d="M123,-300 H137 V0 H123Z" fill="#e5e5cf"/>
  <image href={staticFile('reference-study/aisle-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
  {!actor?<Cashier x={133} y={287} s={.30} f={f} pose="walk" lean={17}/>:null}
  {dark>0?<rect width="270" height="480" fill="#051013" opacity={dark}/>:null}
- {actor?<><path d="M136,354 L270,372 V471Z" fill="#e5dfc2" opacity=".15" filter="url(#f-soft)"/><g opacity=".65"><Cashier x={102} y={450} s={.93} f={f} pose="light" emotion="worried"/></g></>:null}
+ {actor?<><g opacity=".65"><Cashier x={102} y={450} s={.93} f={f} pose="light" emotion={tired?'tired':'worried'}/></g></>:null}
  </g>:<g>
  <rect width="270" height="480" fill="#343d3d"/><path d="M0,480 H270 L164,253 H105Z" fill="url(#f-floor)"/><rect x="100" y="139" width="68" height="116" fill="#272e2c"/>
  {range(5).map(row=><g key={row}><rect x="100" y={165+row*20} width="68" height="3" fill="#c3bda7"/>{range(10).map(k=><Product key={k} x={105+k*6} y={165+row*20} s={.30} seed={row+k}/>)}</g>)}
@@ -116,12 +126,12 @@ const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean}>=(
  </g>)}
  <path d="M18,14 H252 M59,77 H210 M87,120 H182" stroke="#738079" strokeWidth="1" opacity=".5"/><path d="M121,3 L138,3 L135,48 H125Z M125,55 H136 L134,78 H128Z M127,87 H135 L134,102 H129Z" fill="#e7e7cd"/><path d="M59,83 H209" stroke="#cbd0b9" strokeWidth="5"/>
  <Cart x={109} y={284} s={.73}/><path d="M94,256 H119 V275 H94Z" fill="#c4a41b"/><path d="M95,241 H118 V255 H95Z" fill="#b8baa0"/>
- {actor?<Cashier x={102} y={450} s={.93} f={f} pose="light" emotion="worried"/>:<Cashier x={130+Math.sin(f/25)*1.5} y={287} s={.30} f={f} pose="walk" lean={17}/>}
- {dark>0?<><rect width="270" height="480" fill="#071013" opacity={dark}/>{actor?<><path d="M137,354 L270,373 V471Z" fill="#e1dfbf" opacity=".11" filter="url(#f-soft)"/><g opacity=".65"><Cashier x={102} y={450} s={.93} f={f} pose="light" emotion="worried"/></g></>:null}</>:null}
+ {actor?<Cashier x={102} y={450} s={.93} f={f} pose="light" emotion={tired?'tired':'worried'}/>:<Cashier x={130+Math.sin(f/25)*1.5} y={287} s={.30} f={f} pose="walk" lean={17}/>}
+ {dark>0?<><rect width="270" height="480" fill="#071013" opacity={dark}/>{actor?<><path d="M137,354 L270,373 V471Z" fill="#e1dfbf" opacity=".11" filter="url(#f-soft)"/><g opacity=".65"><Cashier x={102} y={450} s={.93} f={f} pose="light" emotion={tired?'tired':'worried'}/></g></>:null}</>:null}
  </g>;
 
 const Counter:React.FC<{f:number;pose:string;emotion:string;assisted?:boolean}>=({f,pose,emotion,assisted=false})=>assisted?<g>
- <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
+ <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{pose==='phone'||emotion==='panic'?<><rect width="270" height="480" fill="#be2024" opacity=".14"/><rect width="270" height="480" fill="#000" opacity=".06"/></>:null}
  <defs><mask id="counter-rig-mask"><rect width="270" height="480" fill="white"/><path d="M0,344 L181,347 L224,350 V480 H0Z" fill="black"/><path d="M130,324 L139,311 L158,313 L164,374 L134,375Z" fill="black"/></mask></defs>
  <g mask="url(#counter-rig-mask)"><Cashier x={180} y={432} s={1} f={f} pose={pose} emotion={emotion}/></g>
  </g>:<g>
@@ -143,37 +153,68 @@ const Counter:React.FC<{f:number;pose:string;emotion:string;assisted?:boolean}>=
  <Bag x={154} y={374} s={.97}/><Radio x={201} y={365} s={.77} f={f}/>
  </g>;
 
-// Crowd acting uses separate running and reaching silhouettes on a shared contact clock.
+// Head circles stay on their measured screen-space tracks: pose rotation never offsets a guide.
 const Threat:React.FC<{x:number;y:number;s:number;f:number;n:number;target?:CrowdTarget}>=({x,y,s,f,n,target})=>{
- if(target){s=target.r/9.5;x=target.x;y=target.y+69*s;}
- const running=n>=2&&n<=5,phase=f*(running?.28:.14)+n*1.7;
- const swing=Math.sin(phase),bounce=Math.abs(Math.sin(phase))* (running?2.3:.6);
- const skin=running?'#ddd9c6':'#a3ac78',shirt=['#d5d4af','#b9532c','#3c6745','#b8a64e','#c6c3a6','#973f31','#b8a64e'][n%7];
- const legs=[-1,1].map(side=>{
-  const q=Math.sin(phase+(side<0?Math.PI:0)),lift=Math.max(0,q);
-  return {side,kx:side*3+q*(running?7:3),ky:-27-lift*(running?5:1),ax:side*3+q*(running?10:4),ay:-14-lift*(running?10:3)};
+ const look=target?.look??(n===0?'white-vest':n===1?'orange':n===3?'hardhat':n===2?'cap':'backpack');
+ const human=target?.human??false,dir=target?.facing??1;
+ if(target){s=target.r/9.5;x=target.x;y=target.y;}else y-=69*s;
+ const running=human,cycle=(f-674)*(running?.32:.105)+n*.8;
+ const skin=human?'#d5d8cd':'#829473',hair=human?'#424133':'#3b352f';
+ const shirt=look==='white-vest'||look==='bald-vest'?'#c7ccc1':look==='orange'?'#b54f27':look==='hardhat'||look==='raincoat'?'#c8bc2b':look==='suit'?'#344d59':'#416641';
+ const pants=look==='white-vest'||look==='bald-vest'||look==='orange'?'#3d5c71':look==='suit'?'#344d59':'#8d895b';
+ const sneaker=look==='cap'||look==='orange',hipY=look==='raincoat'?36:34;
+ const bodyScale=target?.bodyRatio?target.bodyRatio/(55/9.5):1;
+ const noticed=target?.notice??0;
+ const gait=(side:number)=>{
+  const q=Math.sin(cycle+(side<0?Math.PI:0));
+  if(target?.notice!==undefined)return {x:side<0?-2:4,y:55};
+  return {x:(running?-3:5)+side*4+q*(running?10:5),y:55-Math.max(0,q)*(running?9:2)};
+ };
+ // The front zombie's source stride is not the same generic loop as the fleeing civilians.
+ const feet=([-1,1] as const).map(side=>{
+  const k=gait(side);
+  if(n===0&&target){
+   const keys:[[number,number,number],[number,number,number],[number,number,number],[number,number,number],[number,number,number]]=[[674,1,15],[681,1,12],[708,3,11],[735,-4,12],[745,-5,15]];
+   if(f>=674&&f<=745){const before=[...keys].reverse().find(v=>v[0]<=f)??keys[0],after=keys.find(v=>v[0]>=f)??keys[4];const t=before[0]===after[0]?0:(f-before[0])/(after[0]-before[0]);k.x=mix(before[side<0?1:2],after[side<0?1:2],t);k.y=side<0?54:55;}
+  }
+  const hipX=target?.notice!==undefined?2:running?-3:5,dx=k.x-hipX,dy=k.y-hipY,d=Math.hypot(dx,dy),l=13;
+  const h=Math.sqrt(Math.max(0,l*l-Math.min(l,d/2)**2));
+  return {...k,kx:hipX+dx/2-dy/Math.max(.01,d)*h,ky:hipY+dy/2+dx/Math.max(.01,d)*h,hipX};
  });
- return <g transform={`translate(${x+Math.sin(f/38+n)*1.7} ${y}) scale(${s})`}>
-  <ellipse cy="-12" rx="10" ry="2.5" fill="#22302e" opacity=".35"/>
-  <g transform={`translate(0 ${-bounce}) rotate(${running?-9:4} 0 -32)`}>
-   {legs.map(l=><g key={l.side}><path d={`M${l.side*3},-38 L${l.kx},${l.ky} L${l.ax},${l.ay+bounce}`} stroke={n%2?'#9e9b65':'#5c7483'} strokeWidth="4.6" fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d={`M${l.ax-2},${l.ay+bounce} h6`} stroke="#34413e" strokeWidth="3" strokeLinecap="round"/></g>)}
-   <path d="M-7,-59 H7 L8,-38 H-7Z" fill={shirt}/>
-   {[-1,1].map(side=>{
-    const q=swing*side;
-    const ex=running?side*9+q*5:side*(n===0?7:9),ey=running?-47-q*5:(n===0?-48:-45);
-    const wx=running?side*5+q*9:side*(n===0?3:9),wy=running?-54-q*8:(n===0?-54:-36)+Math.sin(phase+side)*1;
-    return <g key={side}><path d={`M${side*6},-56 L${ex},${ey}`} stroke={shirt} strokeWidth="4" fill="none" strokeLinecap="round"/><path d={`M${ex},${ey} L${wx},${wy}`} stroke={skin} strokeWidth="3.2" fill="none" strokeLinecap="round"/><circle cx={wx} cy={wy} r="1.9" fill={skin}/></g>;
-   })}
-   <circle cy="-69" r="9.5" fill={skin}/>
-   {n===3?<><path d="M-10,-73 Q-10,-84 0,-84 Q10,-84 10,-73Z" fill="#cfb536"/><path d="M-12,-73 H12" stroke="#d2bc4b" strokeWidth="2"/></>:<path d="M-9,-74 l2,-8 l4,6 l3,-9 l3,8 l6,-4 l-1,7" fill="#394935"/>}
-   {[-3.5,3.5].map(dx=><g key={dx}>{!running?<circle cx={dx} cy="-69" r="2.8" fill="#d9dfb7"/>:null}<circle cx={dx} cy="-69" r={running?1.2:1} fill="#24342a"/></g>)}
-   {running?<path d="M-2,-62 h4" stroke="#26372b" strokeWidth="1.2"/>:<ellipse cy="-62" rx="2" ry="2.6" fill="#26372b"/>}
+ return <g transform={`translate(${x} ${y}) scale(${s})`}>
+  <ellipse cx="5" cy={56.5*bodyScale} rx={running?10:9} ry="1.8" fill="#233532" opacity=".25"/>
+  <g transform={`scale(${dir} 1)`}>
+   <g transform={`scale(1 ${bodyScale})`}>
+   {feet.map((l,i)=><g key={i}><path d={`M${l.hipX},${hipY} L${l.kx},${l.ky} L${l.x},${l.y}`} stroke={pants} strokeWidth={human?3.4:3.1} fill="none" strokeLinecap="round" strokeLinejoin="round"/><path d={`M${l.x-2},${l.y+.5} h4`} stroke={sneaker?'#cbd0c9':'#7e8688'} strokeWidth="1.8" strokeLinecap="round"/></g>)}
+   {look==='backpack'?<rect x="-5" y="16" width="6" height="15" rx="1" fill="#bca13a"/>:null}
+   {look==='raincoat'?<path d="M-5,10 Q4,7 8,13 L9,39 H-7Z" fill={shirt}/>:<path d={`M${running?-5:mix(2,-3,noticed)},12 Q${running?0:5},10 ${running?3:6},13 L${running?1:8},${hipY} H${running?-7:mix(2,-3,noticed)}Z`} fill={look==='hardhat'?'#737f69':shirt}/>}
+   {look==='hardhat'?<><path d="M1,14 l-1,20 M7,14 l3,20" stroke="#c4bd33" strokeWidth="3.4"/><path d="M0,25 h9" stroke="#d6d4aa" strokeWidth="1.8"/></>:null}
+   {!human&&(noticed>0||target?.lowArms)?[-1,1].map(side=>{
+    const shoulder=[side<0?mix(3,-3,noticed):6,14];
+    const elbow=[side<0?mix(2,-9,noticed):mix(12,14,noticed),side<0?mix(27,23,noticed):mix(25,22,noticed)];
+    const wrist=[side<0?mix(1,-2,noticed):mix(11,8,noticed),side<0?mix(32,31,noticed):mix(32,31,noticed)];
+    return <g key={side}><path d={`M${shoulder} L${elbow} L${wrist}`} stroke={look==='white-vest'?'#29382e':shirt} strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>{side>0&&look==='white-vest'?<path d={`M${elbow} L${wrist}`} stroke="#cbd0c4" strokeWidth="2.2" strokeLinecap="round"/>:null}</g>;
+   }):human?[-1,1].map(side=>{const q=Math.sin(cycle)*side,ex=side*6+q*4,ey=20-q*4,wx=side*3+q*8,wy=15-q*6;return <g key={side}><path d={`M${side*2},14 L${ex},${ey}`} stroke={shirt} strokeWidth="3.3" fill="none" strokeLinecap="round"/><path d={`M${ex},${ey} L${wx},${wy}`} stroke={skin} strokeWidth="2.7" fill="none" strokeLinecap="round"/><circle cx={wx} cy={wy} r="1.6" fill={skin}/></g>;}):<g>
+    <path d="M4,15 L-2,22 L-5,14.5" fill="none" stroke={look==='white-vest'||look==='bald-vest'?'#29382e':shirt} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M-2,22 L-5,14.5" stroke={look==='white-vest'||look==='bald-vest'?'#cbd0c4':'#b5b69d'} strokeWidth="2.2" strokeLinecap="round"/>
+    <circle cx="-5.2" cy="12.4" r="1.15" fill="#2d3e30"/>
+   </g>}
+   </g>
+   {look==='raincoat'?<ellipse cy="-1" rx="12" ry="13.5" fill="#c7b52c"/>:null}
+   <circle r="9.5" fill={skin}/>
+   {look==='hardhat'?<><path d="M-10,-4 Q-10,-15 0,-15 Q10,-15 10,-4Z" fill="#b7a12d"/><path d="M-11,-4 H12" stroke="#d0bb46" strokeWidth="2.3"/><path d="M-3,-14 V-6" stroke="#d0bb46" strokeWidth="1.3"/></>:look==='cap'?<><path d="M-9,-4 Q-8,-14 2,-13 Q10,-12 9,-3Z" fill="#b64035"/><path d="M-13,-2 L9,-4" stroke="#ba3f34" strokeWidth="2.5"/></>:look==='bald-vest'?<path d="M-9,-5 l1,-3 M2,-9 l2,-2" stroke={hair} strokeWidth="1.2"/>:human?<path d="M-9,-4 Q-11,-11 -2,-12 Q8,-14 10,-5 L6,-7 L1,-5 L-3,-7Z" fill={hair}/>:<path d="M-9,-5 L-8,-11 L-5,-8 L-2,-13 L1,-9 L4,-12 L5,-6Z" fill={hair}/>}
+   {[mix(-4.2,-3.2,noticed),mix(1.4,3.2,noticed)].map((dx,i)=><g key={dx}><circle cx={dx} cy={i?-2:-.2} r={human?2.2:2.6} fill="#d3d9c5" stroke="#26352c" strokeWidth={human?.65:.8}/><circle cx={dx-.35} cy={i?-2:-.2} r={human?.65:.9} fill="#202e25"/></g>)}
+   {look==='cap'?<path d="M-6,-1 h4 M1,-2 h5 M-2,-1 h3" stroke="#26322a" strokeWidth="2.5"/>:null}
+   {!human?<path d="M-7,-5 l2,1 M4,-7 l-.7,2" stroke="#2d3b2c" strokeWidth="1" strokeLinecap="round"/>:null}
+   {human?<path d="M-2,6 h4" stroke="#394539" strokeWidth="1"/>:<ellipse cx="-1.4" cy="6" rx="1.7" ry="2.1" fill="#3a3d25"/>}
   </g>
  </g>;
 };
 const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean;targets?:CrowdTarget[]}>=({f,close=false,assisted=false,targets})=>assisted?<g>
  <image href={staticFile('reference-study/parking-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
- {targets?.map(t=><Threat key={t.n} target={t} x={0} y={0} s={1} f={f} n={t.n}/>)}
+ {[...(targets??[])].sort((a,b)=>(a.y+a.r*6-(a.human?12:0))-(b.y+b.r*6-(b.human?12:0))).map(t=><Threat key={t.n} target={t} x={0} y={0} s={1} f={f} n={t.n}/>)}
+ <defs><clipPath id="parking-crowd-foreground"><path d="M13.5,0 H28.5 V411 H13.5Z M38.5,294 H110.5 V403 H38.5Z"/></clipPath></defs>
+ <image href={staticFile('reference-study/parking-clean-v1.png')} width="270" height="480" preserveAspectRatio="none" clipPath="url(#parking-crowd-foreground)"/>
  </g>:<g>
  <rect width="270" height="480" fill="url(#f-sky)"/><path d="M0,158 L20,150 L31,160 L49,143 L68,152 L84,142 L103,151 L117,140 L138,153 L153,137 L171,150 L193,136 L215,150 L237,140 L270,153 V227 H0Z" fill="#112c2b"/>
  <path d="M0,229 H270 V480 H0Z" fill="#5c6b6f"/><path d="M0,219 H270 V238 H0Z" fill="#4a575b"/><path d="M0,226 H270" stroke="#c2bf98" strokeWidth="1.3"/><path d="M0,216 H270" stroke="#687466" strokeWidth="3"/><path d="M0,203 H270" stroke="#889084" strokeWidth="1.2"/><path d="M0,210 H270" stroke="#c8bca1" strokeWidth=".6" strokeDasharray="15 12"/>
@@ -187,16 +228,16 @@ const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean;targets?:CrowdTarg
 const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,assisted=false})=>{
  const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?.75*smooth(p/.55):pull?(id===26?.97+.03*p:.75+.22*p):0;
  const x=id===10?mix(82,57,smooth(p)):id===13?100:id===14?mix(100,65,smooth(p)):id===15?32:38;
- const pose=id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone';
+ const pose=id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone';
  const resolved=actorLayout(x,437,RIG.scale,pose,f,id===10?7:0,React.useContext(HeadTargetContext));
- const chainX=resolved.x+RIG.pullHandX*resolved.s;
+ const chainX=assisted?103:resolved.x+RIG.pullHandX*resolved.s;
  if(assisted)return <g>
  <image href={staticFile('reference-study/door-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
  <defs><clipPath id="door-glass"><path d="M108,158 L270,141 V375 L108,353Z"/></clipPath></defs>
  {id>=15&&id<29?<g clipPath="url(#door-glass)" opacity=".58"><Threat x={168} y={316} s={.7} f={f} n={0}/><Threat x={230} y={305} s={.66} f={f} n={3}/><Threat x={136} y={330} s={.8} f={f} n={1}/></g>:null}
- {down>0?<g><polygon points={pts([[107,158],[270,141],[270,141+232*down],[107,158+195*down]])} fill="url(#f-metal)"/>{range(Math.floor(32*down)).map(i=><path key={i} d={`M107,${161+i*6.1} L270,${144+i*7.25}`} stroke={i%2?'#c9ced0':'#79858e'} strokeWidth={i%2?.7:1.25}/>)}<path d={`M107,${158+195*down} L270,${141+232*down}`} stroke="#586e69" strokeWidth="4"/></g>:null}
- <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
- {pull?<g><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#334a41" strokeWidth="1.8" fill="none"/><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#acb5a2" strokeWidth=".7" strokeDasharray="2 2" strokeDashoffset={-f*.8} fill="none"/></g>:null}
+ {down>0?<g><defs><clipPath id="measured-curtain"><polygon points={pts([[120,153],[270,141],[270,141+252*down],[120,153+207*down]])}/></clipPath></defs><g clipPath="url(#measured-curtain)">{range(46).map(i=><polygon key={i} points={pts([[120,153+i*4.5],[270,141+i*252/46],[270,141+(i+1)*252/46],[120,153+(i+1)*4.5]])} fill="url(#f-slat)"/>)}</g><path d={`M120,${153+207*down} L270,${141+252*down}`} stroke="#586e69" strokeWidth="3"/></g>:null}
+ <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
+ {pull?<g>{range(50).map(i=><ellipse key={i} cx={chainX+(i%2?.25:-.25)} cy={139+i*3.6} rx="1.3" ry="2.4" stroke="#97a7a7" strokeWidth=".65" fill="none"/>)}</g>:null}
  </g>;
 
  return <g><rect width="270" height="480" fill="#17313a"/>
@@ -207,14 +248,14 @@ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,as
  <rect x="125" y="192" width="29" height="59" fill="#e3e3c2"/><path d="M154,200 L270,192" stroke="#75857b" strokeWidth="1.5"/><path d="M191,193 v60" stroke="#263e3b" strokeWidth="1.5"/><path d="M160,204 H205 V234 H160 M165,204 V234 M176,204 V234 M188,204 V234 M200,204 V234 M159,213 H207 M158,223 H205" stroke="#b1c1b7" strokeWidth="1.4" fill="none"/><path d="M160,203 H202" stroke="#be3c29" strokeWidth="2"/>
  <path d="M183,254 V279 M197,252 V277" stroke="#c0c9b8" strokeWidth="6"/><Cart x={18} y={371} s={1.47}/><Cart x={2} y={356} s={1.5}/><Baskets x={93} y={368} s={1.18}/><Baskets x={268} y={424} s={1.25}/>
  {down>0?<g><polygon points={pts([[107,158],[270,141],[270,141+232*down],[107,158+195*down]])} fill="url(#f-metal)"/>{range(Math.floor(32*down)).map(i=><path key={i} d={`M107,${161+i*6.1} L270,${144+i*7.25}`} stroke={i%2?'#c9ced0':'#79858e'} strokeWidth={i%2?.7:1.25}/>)}<path d={`M107,${158+195*down} L270,${141+232*down}`} stroke="#586e69" strokeWidth="4"/></g>:null}
- <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'rest':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
+ <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
  {pull?<g><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#334a41" strokeWidth="1.8" fill="none"/><path d={`M${chainX},150 V429 Q${chainX},438 ${chainX-8},432 V152`} stroke="#acb5a2" strokeWidth=".7" strokeDasharray="2 2" strokeDashoffset={-f*.8} fill="none"/></g>:null}
  </g>;
 };
 
-const PropInsert:React.FC<{f:number;dark?:boolean;assisted?:boolean}>=({f,dark=false,assisted=false})=>assisted?<g><image href={staticFile('reference-study/prop-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{dark?<rect width="270" height="480" fill="#020d11" opacity={.73}/>:null}<circle cx="222" cy="208" r="1.7" fill={f%41<12?'#c3442c':'#344536'}/></g>:<g><rect width="270" height="480" fill="#ccc6ac"/><path d="M0,54 L183,98 V132 L0,101Z" fill="#d8d0b4"/>{range(10).map(i=><Product key={i} x={i*20} y={mix(91,125,i/10)} s={2.1-i*.09} seed={i}/>)}<path d="M0,104 L185,139 L181,147 L0,113Z" fill="#6b755d"/>
+const PropInsert:React.FC<{f:number;dark?:boolean;assisted?:boolean}>=({f,dark=false,assisted=false})=>assisted?<g><image href={staticFile(`reference-study/${dark?'dark-prop-clean-v9':'prop-clean-v1'}.png`)} width="270" height="480" preserveAspectRatio="none"/><circle cx={dark?172.5:222} cy={dark?220:208} r={dark?1.5:1.7} fill={f%41<12?'#b52b2d':'#6c2525'}/></g>:<g><rect width="270" height="480" fill="#ccc6ac"/><path d="M0,54 L183,98 V132 L0,101Z" fill="#d8d0b4"/>{range(10).map(i=><Product key={i} x={i*20} y={mix(91,125,i/10)} s={2.1-i*.09} seed={i}/>)}<path d="M0,104 L185,139 L181,147 L0,113Z" fill="#6b755d"/>
  <path d="M0,263 L211,225 L284,387 L0,454Z" fill="#8b9e8c"/><path d="M0,454 L284,387 V480 H0Z" fill="#31514c"/><path d="M0,308 L213,274 L243,358 L0,402Z" fill="#304b43"/><Bag x={88} y={326} s={2.12}/><path d="M-10,331 L53,319 L64,364 L-6,379Z" fill="#1c3532"/><Radio x={215} y={350} s={1.88} f={f}/>{dark?<rect width="270" height="480" fill="#020d11" opacity=".73"/>:null}</g>;
-const Map:React.FC<{f:number;p:number;assisted?:boolean;parking?:boolean}>=({f,p,assisted=false,parking=false})=>assisted?<g><rect x="-500" y="-900" width="1300" height="2400" fill="#263b33"/><image href={staticFile(`reference-study/${parking?'map-parking':'map'}-clean-v1.png`)} width="270" height="480" preserveAspectRatio="none"/>{p>.3?<g><rect x="82" y="164" width="110" height="15" rx="6" fill="#e5dfc4"/><text x="137" y="175" textAnchor="middle" fontSize="7" fontWeight="800">FOOD AND WATER</text></g>:null}</g>:<g>
+const Map:React.FC<{f:number;p:number;assisted?:boolean;parking?:boolean}>=({f,p,assisted=false,parking=false})=>assisted?<g><rect x="-500" y="-900" width="1300" height="2400" fill="#263b33"/><image href={staticFile(`reference-study/${parking?'map-parking':'map'}-clean-v1.png`)} width="270" height="480" preserveAspectRatio="none"/>{!assisted&&p>.3?<g><rect x="82" y="164" width="110" height="15" rx="6" fill="#e5dfc4"/><text x="137" y="175" textAnchor="middle" fontSize="7" fontWeight="800">FOOD AND WATER</text></g>:null}</g>:<g>
  <rect x="-100" y="-700" width="470" height="1400" fill="#223a32"/>
  <rect x="-8" y="-298" width="285" height="310" fill="#899991" stroke="#536a64" strokeWidth="4"/>
  {[[40,-243],[143,-229],[106,-110],[219,-154]].map(([x,y],i)=><g key={i}><rect x={x} y={y} width="25" height="21" fill="#5c7470"/>{range(2).map(j=><g key={j}><circle cx={x+6+j*12} cy={y+10} r="4.7" fill="#344d4b"/><path d={`M${x+2+j*12},${y+6} l8,8 m0,-8 l-8,8`} stroke="#91a196" strokeWidth="1"/></g>)}</g>)}
@@ -232,18 +273,18 @@ const Controls:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fil
 const Mechanism:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d6d3ba"/><text x="208" y="155" fontSize="7" fill="#73836d">MOTOR</text><rect x="48" y="164" width="206" height="47" rx="4" fill="#a7b2a9" stroke="#3d5354" strokeWidth="1.7"/><circle cx="128" cy="187" r="16" fill="none" stroke="#3e5553" strokeWidth="1.5"/>{range(6).map(i=><path key={i} transform={`rotate(${i*60+p*16} 128 187)`} d="M128,187 L128,173" stroke="#4a5f58"/>)}<rect x="174" y="175" width="52" height="26" rx="3" fill="#879991"/><rect x="54" y="212" width="145" height="188" fill="#b5bfb0"/>{range(16).map(i=><path key={i} d={`M54,${215+i*12} H199`} stroke="#677e75" strokeWidth="1.4"/>)}<path d="M49,208 V397 Q41,413 33,396 V192" stroke="#516851" strokeWidth="1.5" strokeDasharray="2 3" fill="none"/></g>;
 const Gap:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d1c9ab"/><rect width="270" height="284" fill="url(#f-metal)"/>{range(26).map(i=><path key={i} d={`M0,${i*11} H270`} stroke="#6b8077" strokeWidth="1.3"/>)}<path d="M0,281 H270 V350 H0Z" fill="#21332c"/>{[80,130,184].map((x,i)=><g key={x} transform={`translate(${x} ${284+smooth(p)*4})`}><path d={`M0,0 L${Math.sin(p*10+i)*4},43`} stroke="#849468" strokeWidth="6" strokeLinecap="round"/><ellipse rx="7" ry="4" fill="#a0ac79"/>{[-4,-1,2,5].map(dx=><path key={dx} d={`M${dx},-1 v-6`} stroke="#a0ac79" strokeWidth="1.7"/>)}</g>)}<path d="M0,347 H270" stroke="#8f9275" strokeWidth="2"/></g>;
 
-export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget;crowdTargets?:CrowdTarget[]}>=({shot,local,p,sourceAssisted=false,actorTarget,crowdTargets})=>{
+export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget;crowdTargets?:CrowdTarget[];hideLead?:boolean}>=({shot,local,p,sourceAssisted=false,actorTarget,crowdTargets,hideLead=false})=>{
  const id=shot.id;let content:React.ReactNode;
  if(id===33&&sourceAssisted)content=<g>
  <defs><linearGradient id="portrait-body-shade"><stop stopColor="#000" stopOpacity=".78"/><stop offset=".45" stopColor="#000" stopOpacity=".65"/><stop offset=".56" stopColor="#000" stopOpacity="0"/></linearGradient><clipPath id="portrait-rig-shade"><circle cx={actorTarget?.x??145} cy={actorTarget?.y??228} r={actorTarget?.r??75}/><path d={`M${(actorTarget?.x??145)-30},${(actorTarget?.y??228)+65} h60 l12,210 h-90Z`}/></clipPath></defs>
  <image href={staticFile('reference-study/dark-face-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
  <Cashier x={145} y={648} s={2.4} f={local} pose="light" emotion={p>.35?'panic':'worried'}/>
- <rect width="270" height="480" fill="url(#portrait-body-shade)" opacity=".7" clipPath="url(#portrait-rig-shade)"/>
+ <rect width="270" height="480" fill="url(#portrait-body-shade)" opacity="1" clipPath="url(#portrait-rig-shade)"/>
  </g>;
  else if(id===29&&local>=31)content=<Aisle assisted={sourceAssisted} f={local} dark={.77} actor/>;
- else if(shot.stage==='exterior')content=<Outside assisted={sourceAssisted} f={local} crowd={id===18}/>;
+ else if(shot.stage==='exterior')content=<Outside targets={crowdTargets} assisted={sourceAssisted} f={shot.start+local} crowd={id===18}/>;
  else if(shot.stage==='aisle')content=<Aisle assisted={sourceAssisted} f={local} dark={0}/>;
- else if(shot.stage==='counter')content=<Counter assisted={sourceAssisted} f={local} pose={id===9?'phone':id===5||id===7?'alert':'rest'} emotion={id===7?'panic':id===5&&p<.7?'tired':id===9?'worried':'calm'}/>;
+ else if(shot.stage==='counter')content=<Counter assisted={sourceAssisted} f={local} pose={id===9?'phone':id===5||id===7?'alert':'rest'} emotion={id===7?'panic':id===5&&p<.7?'tired':id===9?(p>.73?'panic':'worried'):'calm'}/>;
  else if(id===15&&local>=33)content=<Map assisted={sourceAssisted} parking f={local} p={0}/>;
  else if(shot.stage==='door'||shot.stage==='chain')content=<Door assisted={sourceAssisted} f={local} p={p} id={id}/>;
  else if(shot.stage==='parking')content=<Lot targets={crowdTargets} assisted={sourceAssisted} f={shot.start+local} close={id!==11}/>;
@@ -252,8 +293,8 @@ export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTar
  else if(shot.stage==='control')content=<Controls p={p}/>;
  else if(shot.stage==='mechanism')content=<Mechanism p={p}/>;
  else if(shot.stage==='gap')content=<Gap p={p}/>;
- else if(shot.stage==='dark')content=<><Aisle assisted={sourceAssisted} f={local} dark={.77} actor/>{id===30?<g transform="translate(160 260) rotate(-3)"><rect x="-94" y="-30" width="188" height="70" fill="#e8e8d3"/><text x="-86" y="-15" fontSize="9" fontWeight="800">DAY 1 · SUPPLIES</text>{range(3).map(i=><path key={i} d={`M-86,${-8+i*17} H84`} stroke="#acb4a3" strokeWidth=".5"/>)}<text x="-84" y="7" fontSize="7">Food</text></g>:null}</>;
+ else if(shot.stage==='dark')content=<><Aisle assisted={sourceAssisted} f={local} dark={.77} actor tired={id===31&&local>20}/>{id===30&&!sourceAssisted?<g transform="translate(160 260) rotate(-3)"><rect x="-94" y="-30" width="188" height="70" fill="#e8e8d3"/><text x="-86" y="-15" fontSize="9" fontWeight="800">DAY 1 · SUPPLIES</text>{range(3).map(i=><path key={i} d={`M-86,${-8+i*17} H84`} stroke="#acb4a3" strokeWidth=".5"/>)}<text x="-84" y="7" fontSize="7">Food</text></g>:null}</>;
  else if(shot.stage==='phone')content=p>.375?<g><rect width="270" height="480" fill="#192e32"/>{range(9).map(i=><g key={i}><path d={`M${i*38-20},0 L${i*38+20},480 M0,${i*65} H270`} stroke="#3f5551" strokeWidth="8"/>{range(8).map(j=><rect key={j} x={i*38} y={j*65+9} width="20" height="37" fill={(i+j)%3?'#2a4141':'#354c44'}/>)}</g>)}<path d="M120,0 Q220,90 175,210 T120,480" stroke="#355d70" strokeWidth="22" fill="none"/><circle cx="141" cy="170" r={45+p*23} fill="#963e32" opacity=".37"/></g>:<g><rect width="270" height="480" fill="#443a2e"/><ellipse cx="135" cy="230" rx="165" ry="210" fill="#8f3929" opacity=".23"/><rect x="20" y="56" width="231" height="377" rx="24" fill="#111c1d" stroke="#414c43" strokeWidth="3"/><rect x="29" y="67" width="213" height="355" rx="16" fill="#462b29"/><text x="135" y="96" textAnchor="middle" fontSize="9" fill="#e5deca">10:52</text><rect x="45" y="171" width="183" height="146" rx="10" fill="#713b32"/><text x="59" y="196" fontSize="8" fill="#d2c8a8" letterSpacing="1">⚠ EMERGENCY ALERT</text><text x="59" y="224" fontSize="17" fontWeight="900" fill="#eee9d2">OUTBREAK</text><text x="59" y="244" fontSize="8" fill="#e0d8bc">Remain indoors. Avoid the streets.</text><rect x="60" y="282" width="153" height="21" rx="5" fill="#9c8d73"/><text x="136" y="296" fontSize="8" textAnchor="middle" fill="#e9dfc7">OK</text></g>;
  else content=<g><rect width="270" height="480" fill="#101b1d"/><text x="135" y="269" textAnchor="middle" fontFamily="Impact, sans-serif" fontSize="29" fontWeight="900" fill="#dddccc">PART 2</text><path d="M96,279 H176" stroke="#934c35" strokeWidth="1.5"/></g>;
- return <HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" fontFamily="Arial, sans-serif"><Defs/>{content}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider>;
+ return <HeadTiltContext.Provider value={sourceAssisted?(id===7?7:id===9?6:0):0}><SkinColorContext.Provider value={sourceAssisted&&(id===7||id===9)?id===7?'#e4b6af':'#dda7a2':undefined}><HideLeadContext.Provider value={hideLead}><HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" fontFamily="Arial, sans-serif"><Defs/>{content}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider></HideLeadContext.Provider></SkinColorContext.Provider></HeadTiltContext.Provider>;
 };
