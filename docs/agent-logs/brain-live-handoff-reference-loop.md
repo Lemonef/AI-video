@@ -1,0 +1,7 @@
+# LIVE HANDOFF - 2026-11-01: private reference loop v12, five accepted shots; integration/commits blocked
+
+Latest gated preview: D:/AI-video/out/drafts/reference-study/DegJCmXtbGj/practice-v12-gated-preview.mp4, SHA25656f7ff0d441c174d6fa4d9b77559f6a131abc468052371dc8884aec927606ae9.105samples17.505 MAE/.7813 SSIM vs v10 18.792/.7769; no shot regressed; all7 sheets read. Five accepted shots7/9/15/19/22. Discarded timer27 and shutter22 try1. v11 full code render18.619/.7780 REJECTED for regressions6/20; v12 integrates only accepted generated intervals over v10 and keeps its audio. No source-film frames substituted; original source-assisted plate provenance remains. Whole-code reproducibility still OPEN.
+
+Durable log/receipt/patch: D:/AI-video/docs/agent-logs/codex-reference-loop.md, reference-loop-v12-receipt.json, reference-loop-accepted.patch. Ledger M48 has details. Main source changes were externally reverted; isolated accepted source is out/drafts/reference-loop-work/src. Resolve checkout ownership, apply/check patch, commit, and repair full-code integration before claiming code completion. Git writes and brain writes were blocked by this session permissions; nothing committed/pushed. This text is prepared locally for transfer, NOT already installed in the brain.
+
+Still unfinished: actor poses/head/hand contacts, crowd phases, shutter geometry, map/camera/ceiling, caption timing/opacity, torch/material lighting; voice/sound deferred and unchanged. Preserve episodes/finals and other brain research. No1:1, production promotion or posting approval.

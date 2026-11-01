@@ -1,0 +1,90 @@
+{
+  "baseline": "practice-v10-picture-preview.mp4",
+  "inputs": [
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\practice-v10-picture-preview.mp4",
+      "sha256": "a525c7c089813be60079cc0d7b8a93c5f24eaf16eca109e4cd692e0d6604e547"
+    },
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\loop-shot07-light-try1.mp4",
+      "sha256": "ae764738827d90423fdcdca9d178124972c44fb7bec37a6bfdac7f5edef2f5f5"
+    },
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\loop-shot09-light-try1.mp4",
+      "sha256": "9c38d7513b1769c6c453112931445ad5ef5bd18043abd4ec254f6d8be84b9d66"
+    },
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\loop-shot15-light-try1.mp4",
+      "sha256": "af3b26893208148728dfb805f624056d4ae24224b1c435ecb7632d481af39634"
+    },
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\loop-shot19-ceiling-try1.mp4",
+      "sha256": "01e3e2966bce843ab95c3a04c4bfc8a631d025202caa291c417c2f5c9607f304"
+    },
+    {
+      "path": "out\\drafts\\reference-study\\DegJCmXtbGj\\loop-shot22-curtain-try2.mp4",
+      "sha256": "36436f0428dd963db3f027d075119ce2139a058f1b1f163aa0fe128b65da623f"
+    }
+  ],
+  "segments": [
+    [
+      0,
+      0,
+      314
+    ],
+    [
+      1,
+      null,
+      null
+    ],
+    [
+      0,
+      330,
+      450
+    ],
+    [
+      2,
+      null,
+      null
+    ],
+    [
+      0,
+      537,
+      852
+    ],
+    [
+      3,
+      null,
+      null
+    ],
+    [
+      0,
+      971,
+      1479
+    ],
+    [
+      4,
+      null,
+      null
+    ],
+    [
+      0,
+      1526,
+      1605
+    ],
+    [
+      5,
+      null,
+      null
+    ],
+    [
+      0,
+      1692,
+      2799
+    ]
+  ],
+  "filter": "[0:v]trim=start_frame=0:end_frame=314,setpts=PTS-STARTPTS[v0];\n[1:v]setpts=PTS-STARTPTS[v1];\n[0:v]trim=start_frame=330:end_frame=450,setpts=PTS-STARTPTS[v2];\n[2:v]setpts=PTS-STARTPTS[v3];\n[0:v]trim=start_frame=537:end_frame=852,setpts=PTS-STARTPTS[v4];\n[3:v]setpts=PTS-STARTPTS[v5];\n[0:v]trim=start_frame=971:end_frame=1479,setpts=PTS-STARTPTS[v6];\n[4:v]setpts=PTS-STARTPTS[v7];\n[0:v]trim=start_frame=1526:end_frame=1605,setpts=PTS-STARTPTS[v8];\n[5:v]setpts=PTS-STARTPTS[v9];\n[0:v]trim=start_frame=1692:end_frame=2799,setpts=PTS-STARTPTS[v10];\n[v0][v1][v2][v3][v4][v5][v6][v7][v8][v9][v10]concat=n=11:v=1:a=0[out]",
+  "output": "out\\drafts\\reference-study\\DegJCmXtbGj\\practice-v12-gated-preview.mp4",
+  "output_sha256": "56f7ff0d441c174d6fa4d9b77559f6a131abc468052371dc8884aec927606ae9",
+  "provenance": "Five accepted code-generated shot clips integrated over unchanged accepted v10 reconstruction. No original source-film frames substituted. Original source-assisted set provenance remains. v10 audio copied unchanged. Lossless yuv420p output preserves unchanged shot diagnostics."
+}

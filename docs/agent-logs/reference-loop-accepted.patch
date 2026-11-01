@@ -1,0 +1,28 @@
+--- a/src/compositions/ReferenceStudy/FidelityScenes.tsx
++++ b/src/compositions/ReferenceStudy/FidelityScenes.tsx
+@@ -131,7 +131,7 @@
+  </g>;
+ 
+ const Counter:React.FC<{f:number;pose:string;emotion:string;assisted?:boolean}>=({f,pose,emotion,assisted=false})=>assisted?<g>
+- <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{pose==='phone'||emotion==='panic'?<><rect width="270" height="480" fill="#be2024" opacity=".14"/><rect width="270" height="480" fill="#000" opacity=".06"/></>:null}
++ <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{pose==='phone'||emotion==='panic'?<><rect width="270" height="480" fill="#be2024" opacity=".28"/><rect width="270" height="480" fill="#000" opacity=".14"/></>:null}
+  <defs><mask id="counter-rig-mask"><rect width="270" height="480" fill="white"/><path d="M0,344 L181,347 L224,350 V480 H0Z" fill="black"/><path d="M130,324 L139,311 L158,313 L164,374 L134,375Z" fill="black"/></mask></defs>
+  <g mask="url(#counter-rig-mask)"><Cashier x={180} y={432} s={1} f={f} pose={pose} emotion={emotion}/></g>
+  </g>:<g>
+@@ -226,7 +226,7 @@
+  {!close?<><path d="M0,6 H270 V20 H0Z" fill="#183231"/><path d="M0,0 H13 V480 H0Z M257,0 H270 V480 H257Z" fill="#243d3e"/><path d="M0,432 H270 V449 H0Z" fill="#203a3b"/><path d="M0,425 H270" stroke="#7e9087" strokeWidth="2"/><rect x="17" y="326" width="48" height="83" fill="#2c4648"/><rect x="22" y="332" width="38" height="70" fill="#b6c1ae"/></>:null}
+  </g>;
+ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,assisted=false})=>{
+- const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?.75*smooth(p/.55):pull?(id===26?.97+.03*p:.75+.22*p):0;
++ const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?.75*smooth(p/.35):pull?(id===26?.97+.03*p:.75+.22*p):0;
+  const x=id===10?mix(82,57,smooth(p)):id===13?100:id===14?mix(100,65,smooth(p)):id===15?32:38;
+  const pose=id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone';
+  const resolved=actorLayout(x,437,RIG.scale,pose,f,id===10?7:0,React.useContext(HeadTargetContext));
+@@ -296,5 +296,5 @@
+  else if(shot.stage==='dark')content=<><Aisle assisted={sourceAssisted} f={local} dark={.77} actor tired={id===31&&local>20}/>{id===30&&!sourceAssisted?<g transform="translate(160 260) rotate(-3)"><rect x="-94" y="-30" width="188" height="70" fill="#e8e8d3"/><text x="-86" y="-15" fontSize="9" fontWeight="800">DAY 1 · SUPPLIES</text>{range(3).map(i=><path key={i} d={`M-86,${-8+i*17} H84`} stroke="#acb4a3" strokeWidth=".5"/>)}<text x="-84" y="7" fontSize="7">Food</text></g>:null}</>;
+  else if(shot.stage==='phone')content=p>.375?<g><rect width="270" height="480" fill="#192e32"/>{range(9).map(i=><g key={i}><path d={`M${i*38-20},0 L${i*38+20},480 M0,${i*65} H270`} stroke="#3f5551" strokeWidth="8"/>{range(8).map(j=><rect key={j} x={i*38} y={j*65+9} width="20" height="37" fill={(i+j)%3?'#2a4141':'#354c44'}/>)}</g>)}<path d="M120,0 Q220,90 175,210 T120,480" stroke="#355d70" strokeWidth="22" fill="none"/><circle cx="141" cy="170" r={45+p*23} fill="#963e32" opacity=".37"/></g>:<g><rect width="270" height="480" fill="#443a2e"/><ellipse cx="135" cy="230" rx="165" ry="210" fill="#8f3929" opacity=".23"/><rect x="20" y="56" width="231" height="377" rx="24" fill="#111c1d" stroke="#414c43" strokeWidth="3"/><rect x="29" y="67" width="213" height="355" rx="16" fill="#462b29"/><text x="135" y="96" textAnchor="middle" fontSize="9" fill="#e5deca">10:52</text><rect x="45" y="171" width="183" height="146" rx="10" fill="#713b32"/><text x="59" y="196" fontSize="8" fill="#d2c8a8" letterSpacing="1">⚠ EMERGENCY ALERT</text><text x="59" y="224" fontSize="17" fontWeight="900" fill="#eee9d2">OUTBREAK</text><text x="59" y="244" fontSize="8" fill="#e0d8bc">Remain indoors. Avoid the streets.</text><rect x="60" y="282" width="153" height="21" rx="5" fill="#9c8d73"/><text x="136" y="296" fontSize="8" textAnchor="middle" fill="#e9dfc7">OK</text></g>;
+  else content=<g><rect width="270" height="480" fill="#101b1d"/><text x="135" y="269" textAnchor="middle" fontFamily="Impact, sans-serif" fontSize="29" fontWeight="900" fill="#dddccc">PART 2</text><path d="M96,279 H176" stroke="#934c35" strokeWidth="1.5"/></g>;
+- return <HeadTiltContext.Provider value={sourceAssisted?(id===7?7:id===9?6:0):0}><SkinColorContext.Provider value={sourceAssisted&&(id===7||id===9)?id===7?'#e4b6af':'#dda7a2':undefined}><HideLeadContext.Provider value={hideLead}><HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" fontFamily="Arial, sans-serif"><Defs/>{content}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider></HideLeadContext.Provider></SkinColorContext.Provider></HeadTiltContext.Provider>;
+-};
++ return <HeadTiltContext.Provider value={sourceAssisted?(id===7?7:id===9?6:0):0}><SkinColorContext.Provider value={sourceAssisted&&(id===7||id===9)?id===7?'#e4b6af':'#dda7a2':undefined}><HideLeadContext.Provider value={hideLead}><HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" overflow={id===19?'visible':undefined} fontFamily="Arial, sans-serif"><Defs/>{content}{sourceAssisted&&id===15&&local<33?<rect width="270" height="480" fill="#071218" opacity=".18"/>:null}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider></HideLeadContext.Provider></SkinColorContext.Provider></HeadTiltContext.Provider>;
++};

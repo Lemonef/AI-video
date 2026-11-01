@@ -248,3 +248,26 @@ Canonical natural-Thai/voice-flow reference: `D:/second-brain/skills/reference-a
 - Cached WinRT OCR:187 coarse and560 dense caption crops, manually inspected eight proof sheets; ASR only secondary evidence. Curated93 private source-caption chunks,89 measured OCR layouts. `private-caption-layout.json` retains proof frame/file and explicit±5frame timing uncertainty. This is reference analytical lettering, not a new Jaab script or exact font certification. The scratch audio remains different.
 - `SourceCaptions.tsx` uses measured width/baseline/capital height and source emphasis; source-assisted benchmark now separates lettering from scratch-narration timing. Corrected DON'T callout, shop-rule placard, selected pull counts and countdown freeze; source ceiling extended where the camera revealed absent plate area.
 - v10 preview rendering. Its changed skin tint/torch/captions/city fixes are NOT yet verified in the integrated export. Next: inspect every sheet and dense action transitions, fix largest visible discrepancies, preserve notes and private artifacts. Do not promote this practice film as a production final.
+
+
+### M48 - Codex guided measured loop, 2026-11-01
+
+- Read requested handoff, ledger, brain live handoff and canonical/installed reference-animation-rebuild skill. Preserved production episodes/finals and other research. Started a59d6e2 with v10 baseline18.792/.7769.
+- Five distinct targeted acceptances: shot7 alarm plate30.678/.5945 (v10 49.259/.5405); shot9 phone plate23.829/.7481 (43.055/.6839); shot15 early warning grade21.338/.7250 (26.004/.7118); shot19 nested-SVG ceiling extension24.482/.7256 (26.862/.7040); shot22 descent timing27.863/.6197 (28.057/.6185 control). All3 phases/shot inspected and types pass. Independent unchanged-code controls separate new fixes from prior WIP.
+- Discarded: shot27 green timer (SSIM regressed against unchanged-code control), shot22 try1 lower stopping edge (both metrics regressed). Precise diffs, paths, metrics and intended commits in docs/agent-logs/codex-reference-loop.md.
+- Separate scripts/reference_loop_review.py handles original shot IDs and source/baseline offsets for partial clips; lossless synthetic video verifies exact source/baseline alignment, preserved ID3 and invalid-offset rejection. Existing timeline test and root/isolated TypeScript pass.
+- Full practice-v11-codex-loop-preview.mp4:105 samples18.619/.7780. All7 sheets inspected. REJECTED integration: shot6 early plate missing and shot20 crowd regression, plus prior WIP changes in other intervals. Aggregate improvement does not pass the no-regression rule.
+- Shared tracked files were externally reverted during work. Continued safely in out/drafts/reference-loop-work/src. Accepted implementation patch: docs/agent-logs/reference-loop-accepted.patch. Required parent integration/reproducibility review remains OPEN. Git add/commit blocked by .git/index.lock permission denied; cannot even stage. No public push.
+- Brain filesystem outside allowed write root; top-line receipt will be staged locally, not falsely reported synced. No voice generation or listening approval. Literal matching remains unfinished.
+
+| Export | Mean MAE | Mean SSIM | Gate |
+|---|---:|---:|---|
+| v10 accepted starting preview |18.792|.7769|existing baseline |
+| v11 Codex full render |18.619|.7780|REJECTED: some shots regress |
+
+| v12 gated integration |17.505|.7813|PASS diagnostic gate: no shot regressed across105 samples |
+
+- v12: out/drafts/reference-study/DegJCmXtbGj/practice-v12-gated-preview.mp4; SHA25656f7ff0d441c174d6fa4d9b77559f6a131abc468052371dc8884aec927606ae9. Uses accepted code-generated shots7/9/15/19/22 and unchanged v10 intervals, with lossless picture encoding and copied v10 audio. No original-film frames substituted. This is an integrated render artifact, NOT proof that the current whole-code render passes. v11 whole-code candidate remains rejected.
+- All7 v12 sheets inspected; all105 samples measured. No per-shot MAE or SSIM regression versus v10; five targeted gains reproduce exactly. Full recipe/input hashes: docs/agent-logs/reference-loop-v12-receipt.json and scripts/reference_loop_integrate.py.
+- OPEN biggest gaps: shot7 head/arms/red window, shot27 tired leaning actor/timer and shutter geometry, shot22 panicked pose/contact/apron/crowd, shot23 background values, shot34 radio lighting, shot3/19 camera/parallax/ceiling and stray actor; caption phases/opacity and whole-film motion remain approximate. Audio unchanged/deferred. No1:1 or owner acceptance claim.
+- Parent must apply/check accepted patch after resolving shared ownership, commit locally, integrate valid full-code rendering (including image readiness/shot6 and pending crowd changes), and transfer brain top line from docs/agent-logs/brain-live-handoff-reference-loop.md. Current environment blocks git writes and all brain writes/push, so this handoff is not complete end-to-end.
