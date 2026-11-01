@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Html5Audio,staticFile,interpolate,useCurrentFrame} from 'remotion';
 import {W,H} from '../../lib/tokens';
-import {FONT_CAPTION} from '../../lib/fonts';
+import {FONT_CAPTION,OFFLINE_FONTS} from '../../lib/fonts';
 import {loadFont} from '@remotion/google-fonts/Anton';
 import captions from './captions.json';
 import calibration from './calibration.json';
@@ -13,7 +13,7 @@ import {ReferencePhoneInsert,ReferenceMechanism,ReferenceMapOverlay,ReferenceInv
 import {SourceCaptions} from './SourceCaptions';
 import {shotAt,STUDY_FPS} from './shots';
 
-const STUDY_FONT=loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
+const STUDY_FONT=OFFLINE_FONTS?'Arial':loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
 
 export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolean;sourceAssisted?:boolean}> = ({showStudyLabels=false,withSound=true,sourceAssisted=false}) => {
  const frame=useCurrentFrame();
