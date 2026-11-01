@@ -1,8 +1,8 @@
 # TODO — the only place live status lives
 
 ## QUEUE (owner order, 2026-11-01)
-1. [ ] Pipeline v1 fixes -> Claude verify -> commit (brain tools/pipeline.py)
-2. [ ] 3 practice jobs (mech / normal / planted-bug trap)
+1. [x] Pipeline v1 shipped (brain a8fe06f)
+2. [x] 3 practice jobs: 2 free passes, trap caught
 3. [ ] Mine all 36 reels (29 + batch-2 #30-36) via pipeline: tools for frames/ASR, Codex Sol/Astra for OCR+vision, free models text-only w/ source, Claude writes craft lessons
 4. [ ] Brain update + make Codex/OpenCode/Gemini read the brain; session handoff hardening
 5. [ ] AgentsRoom via our own local MCP (investigate)
