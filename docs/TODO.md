@@ -8,6 +8,15 @@
 5. [x] AgentsRoom via own MCP: brain tools/agentsroom_mcp.py proxy (13 of 175 tools), spawn + live status verified with app open; results come back via docs/agent-logs files (wait/get refuse non-AgentsRoom callers)
 6. [x] Brain cleanup: research/ 124->53 items (c1c3f17), paper-trades price log archived 595->473 KB (85c6273); v2 shadow skill kept; memory/ + AGENT.md renames skipped (cross-repo churn, cosmetic)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
+   - [x] Measured gate scripts/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
+   - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
+   - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
+   - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
+   - [ ] Character score: actor-box crop MAE/SSIM in review + gate (whole frame blind to acting, actor ~5% of frame)
+   - [ ] H4 shots 2/3 pose with IK (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
+   - [ ] J1 shot 6 plate + shot 20 crowd via pipeline normal ladder; full v13 render; J2-J4 grades/lighting
+   - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
+   - [ ] Owner: drop stash@{0}; AI-video repo cleanup plan (needs approval); English-channel monetization answer
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
