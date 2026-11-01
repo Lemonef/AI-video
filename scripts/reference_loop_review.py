@@ -47,6 +47,24 @@ def metrics(a, b):
             'luma_delta': round(float(y.mean()-x.mean()), 3)}
 
 
+def actor_box(boxes, shot, frame):
+    """Actor box at `frame`, linear between box keys, held past the ends."""
+    keys = boxes.get(str(shot), {}).get('keys')
+    if not keys:
+        return None
+    a = max((k for k in keys if k[0] <= frame), default=keys[0], key=lambda k: k[0])
+    b = min((k for k in keys if k[0] >= frame), default=keys[-1], key=lambda k: k[0])
+    t = 0 if a[0] == b[0] else (frame-a[0])/(b[0]-a[0])
+    return [a[i]+(b[i]-a[i])*t for i in range(1, 5)]
+
+
+def crop(pixels, b):
+    h, w = pixels.shape[:2]
+    x0, y0 = max(0, int(b[0])), max(0, int(b[1]))
+    x1, y1 = min(w, int(round(b[2]))), min(h, int(round(b[3])))
+    return pixels[y0:y1, x0:x1]
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--source', type=Path, required=True)
@@ -57,6 +75,8 @@ def main():
     p.add_argument('--shot-ids', type=int, nargs='+', help='Original one-based shot IDs')
     p.add_argument('--shots', type=Path, required=True)
     p.add_argument('--out', type=Path, required=True)
+    p.add_argument('--actor-boxes', type=Path,
+                   help='actor-boxes.json; adds an actor-crop score for shots that have boxes')
     p.add_argument('--phases', type=float, nargs='+', default=[.1, .5, .9],
                    help='Sample positions within each shot, 0..1')
     args = p.parse_args()
@@ -74,6 +94,7 @@ def main():
         p.error('Selected samples precede a supplied render/baseline offset, or selection is empty')
     ref, study = frames(args.source, samples), frames(args.render, [i-args.render_start_frame for i in samples])
     old = frames(args.baseline, [i-args.baseline_start_frame for i in samples]) if args.baseline else None
+    boxes = json.loads(args.actor_boxes.read_text(encoding='utf-8'))['boxes'] if args.actor_boxes else {}
     rows = []
     for i, frame in enumerate(samples):
         shot = next(s for s in shots if s['start'] <= frame < s['end'])
@@ -81,6 +102,12 @@ def main():
                'current': metrics(ref[i], study[i])}
         if old is not None:
             row['baseline'] = metrics(ref[i], old[i])
+        b = actor_box(boxes, row['shot'], frame)
+        if b:
+            row['actor_box'] = [round(v, 1) for v in b]
+            row['actor'] = metrics(crop(ref[i], b), crop(study[i], b))
+            if old is not None:
+                row['actor_baseline'] = metrics(crop(ref[i], b), crop(old[i], b))
         rows.append(row)
     # One row per shot, three phases per row, reference left / reconstruction right.
     for page in range((len(shots)+4)//5):
@@ -93,6 +120,10 @@ def main():
                 draw.text((x+5,y+5), f'{sid:02} frame {samples[i]} / ref | reconstruction', fill='white')
                 for col, pixels in enumerate((ref[i],study[i])):
                     sheet.paste(Image.fromarray(pixels).resize((180,320)), (x+col*180,y+22))
+                    if 'actor_box' in rows[i]:
+                        # 180/270 = sheet tile scale; outline shows what the actor score covers.
+                        draw.rectangle([x+col*180+v*180/270 if j%2==0 else y+22+v*320/480
+                                        for j, v in enumerate(rows[i]['actor_box'])], outline='#ff3df2')
         sheet.save(args.out/f'compare-{page+1}.jpg', quality=90)
     report = {'source': str(args.source), 'render': str(args.render),
               'render_start_frame': args.render_start_frame,
@@ -102,6 +133,11 @@ def main():
               'mean_ssim': round(float(np.mean([r['current']['ssim'] for r in rows])),4),
               'mean_mae_255': round(float(np.mean([r['current']['mae_255'] for r in rows])),3),
               'acceptance': 'Not a match certification. Inspect the images and log remaining gaps.'}
+    actor_rows = [r for r in rows if 'actor' in r]
+    if actor_rows:
+        report['actor_samples'] = len(actor_rows)
+        report['actor_mean_ssim'] = round(float(np.mean([r['actor']['ssim'] for r in actor_rows])),4)
+        report['actor_mean_mae_255'] = round(float(np.mean([r['actor']['mae_255'] for r in actor_rows])),3)
     if old is not None:
         report['baseline_mean_ssim'] = round(float(np.mean([r['baseline']['ssim'] for r in rows])),4)
         report['baseline_mean_mae_255'] = round(float(np.mean([r['baseline']['mae_255'] for r in rows])),3)

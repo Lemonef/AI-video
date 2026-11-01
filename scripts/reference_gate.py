@@ -9,8 +9,12 @@ not measure as unchanged.
   python scripts/reference_gate.py --make-baseline --shots 6 7 20
   python scripts/reference_gate.py --shots 23
 
-Target shots must lower MAE by at least MIN_MAE_GAIN and must not lower SSIM.
-Guard shots must not get worse on either metric beyond measured render noise. Every shot on the same stage
+Each shot is scored twice: whole frame, and a crop around the source actor
+(actor-boxes.json, scripts/actor_boxes.py) where that shot has boxes. The actor
+is ~5% of the frame, so acting changes are invisible to the whole-frame score.
+A target passes when one score lowers MAE by at least MIN_MAE_GAIN without
+lowering SSIM and the other score does not regress. Guard shots must not
+regress on either score beyond measured render noise. Every shot on the same stage
 (shared set/components, from shot-review.json) is guarded automatically; extra
 guards can be added, none can be removed.
 Exit code 0 = keep, 1 = discard, 2 = usage/setup error.
@@ -50,6 +54,9 @@ MIN_MAE_GAIN = 0.05
 # real regression still fails. Re-measure if a guard flips on unchanged code.
 NOISE_MAE = 0.005
 NOISE_SSIM = 0.0002
+# Actor crops reuse the frame noise allowance: the measured lead shots (10/13/14)
+# re-rendered bit-identical. Re-measure before boxing a shot that wobbles (28).
+ACTOR_BOXES = STUDY_DIR/'actor-boxes.json'
 
 
 def sha(path):
@@ -99,13 +106,23 @@ def measure(shot, clip, start, out_dir):
                           '--source', str(STUDY_DIR/'source.mp4'), '--render', str(clip),
                           '--render-start-frame', str(start), '--shot-ids', str(shot),
                           '--shots', str(STUDY_DIR/'shot-review.json'), '--out', str(out_dir),
-                          '--phases', *map(str, PHASES)],
+                          '--phases', *map(str, PHASES), '--actor-boxes', str(ACTOR_BOXES)],
                          cwd=REPO, stdin=subprocess.DEVNULL, capture_output=True, text=True)
     if run.returncode:
         fail(f'review failed for shot {shot}:\n{run.stderr[-2000:]}')
     rows = json.loads((out_dir/'metrics.json').read_text(encoding='utf-8'))['rows']
     # Unrounded means, so the comparison is not decided by display rounding.
-    return {k: sum(r['current'][k] for r in rows)/len(rows) for k in ('mae_255', 'ssim')}
+    mean = lambda key, rs: {k: sum(r[key][k] for r in rs)/len(rs) for k in ('mae_255', 'ssim')}
+    actor = [r for r in rows if 'actor' in r]
+    return {'frame': mean('current', rows), 'actor': mean('actor', actor) if actor else None}
+
+
+def improves(base, cand):
+    return base['mae_255'] - cand['mae_255'] >= MIN_MAE_GAIN and cand['ssim'] >= base['ssim'] - NOISE_SSIM
+
+
+def holds(base, cand):
+    return cand['mae_255'] <= base['mae_255'] + NOISE_MAE and cand['ssim'] >= base['ssim'] - NOISE_SSIM
 
 
 def fingerprint():
@@ -125,7 +142,7 @@ def make_baseline(shots, base_dir):
         if meta.exists():
             fail(f'baseline for shot {shot} exists; delete it deliberately to rebuild')
         clip = base_dir/f'shot{shot:02}.mp4'
-        metrics = measure(shot, clip, render(shot, clip), base_dir/f'shot{shot:02}-review')
+        metrics = measure(shot, clip, render(shot, clip), base_dir/f'shot{shot:02}-review')['frame']
         meta.write_text(json.dumps({'shot': shot, 'commit': git('rev-parse', 'HEAD'),
                                     'clip_sha256': sha(clip), **fingerprint(), **metrics},
                                    indent=2), encoding='utf-8')
@@ -169,28 +186,35 @@ def main():
     guards = [g for g in dict.fromkeys(same_stage+args.guard) if g not in args.shots]
     verdicts, ok = [], True
     for shot in args.shots+guards:
-        base = load_baseline(shot, args.baseline_dir)
+        meta = load_baseline(shot, args.baseline_dir)
+        # The baseline clip is re-measured every run (cheap, deterministic decode),
+        # so editing actor boxes never leaves a stale cached score.
+        base = measure(shot, args.baseline_dir/f'shot{shot:02}.mp4', shots[shot-1]['start'],
+                       args.out/f'shot{shot:02}-baseline-review')
         clip = args.out/f'shot{shot:02}.mp4'
         cand = measure(shot, clip, render(shot, clip), args.out/f'shot{shot:02}-review')
+        scores = [k for k in ('frame', 'actor') if base[k]]
         if shot in args.shots:
-            passed = (base['mae_255'] - cand['mae_255'] >= MIN_MAE_GAIN
-                      and cand['ssim'] >= base['ssim'] - NOISE_SSIM)
-            rule = f'target: MAE down >= {MIN_MAE_GAIN}, SSIM not down'
+            passed = any(improves(base[k], cand[k]) and all(holds(base[o], cand[o]) for o in scores if o != k)
+                         for k in scores)
+            rule = f'target: frame or actor MAE down >= {MIN_MAE_GAIN} with SSIM held, other score held'
         else:
-            passed = (cand['mae_255'] <= base['mae_255'] + NOISE_MAE
-                      and cand['ssim'] >= base['ssim'] - NOISE_SSIM)
-            rule = 'guard: no regression beyond render noise'
+            passed = all(holds(base[k], cand[k]) for k in scores)
+            rule = 'guard: frame and actor held within render noise'
         ok &= passed
-        verdicts.append({'shot': shot, 'rule': rule, 'pass': passed, 'baseline_commit': base['commit'],
-                         'baseline': {k: base[k] for k in ('mae_255', 'ssim')}, 'candidate': cand,
+        verdicts.append({'shot': shot, 'rule': rule, 'pass': passed, 'baseline_commit': meta['commit'],
+                         'baseline': base, 'candidate': cand,
                          'sheet': str(args.out/f'shot{shot:02}-review/compare-1.jpg')})
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out/'gate.json').write_text(json.dumps({'keep': ok, 'commit': git('rev-parse', 'HEAD'),
                                                   'shots': verdicts}, indent=2), encoding='utf-8')
     for v in verdicts:
-        print(f"shot {v['shot']:>2} {'PASS' if v['pass'] else 'FAIL'} ({v['rule']}) "
-              f"MAE {v['baseline']['mae_255']:.3f} -> {v['candidate']['mae_255']:.3f}, "
-              f"SSIM {v['baseline']['ssim']:.4f} -> {v['candidate']['ssim']:.4f}")
+        print(f"shot {v['shot']:>2} {'PASS' if v['pass'] else 'FAIL'} ({v['rule']})")
+        for k in ('frame', 'actor'):
+            b, c = v['baseline'][k], v['candidate'][k]
+            if b:
+                print(f"   {k:5} MAE {b['mae_255']:.3f} -> {c['mae_255']:.3f}, "
+                      f"SSIM {b['ssim']:.4f} -> {c['ssim']:.4f}")
     print('KEEP' if ok else 'DISCARD')
     sys.exit(0 if ok else 1)
 
