@@ -16,7 +16,8 @@
    - [ ] Tool trials (local, zero tokens while running)
      - [x] Free vision (Gemini 2.5 flash) for joint coords: FAILS (generic skeleton); pose description OK -> hand-marking stays
      - [x] Blender 5.2.3 headless Grease Pencil v3 smoke render works (stroke + plane visible; materials need show_stroke=True)
-     - [ ] SAM 2 CPU install (D:/tools/sam2, ckpt sam2.1_hiera_tiny) -> actor masks timing test on one shot
+     - [x] SAM 2 CPU (D:/tools/sam2, hiera_tiny): shot 2 = 52 frames in ~2.3 min (2.6 s/frame, 540x960), clean full-body masks; MUST prompt on a sharp frame (box + torso point, propagate both ways) - frame-0 focus blur sent the track onto the pink window
+     - [ ] Gemini joints retry, done right: SAM crop + native pointing format [y,x] 0-1000, one name per joint (scratchpad joints.py); blocked 2026-11-02 by free-tier 429 on gemini-2.5-flash -> rerun after quota reset
      - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
      - [ ] OpenCV optical flow for walking shots (later)
    - [ ] H4 shots 2/3 pose with IK (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
