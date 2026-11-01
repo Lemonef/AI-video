@@ -30,6 +30,10 @@ When rules conflict, give up the lower ones first (Walter Murch's Rule of Six): 
 14. **Hits land on words**, via `word` cues on the Whisper timings, not on a guessed fraction of the line.
 15. **Captions** appear as the words are spoken, short enough to read (about 12–15 characters per second for Latin script; Thai reads more slowly, so keep chunks short), with a gap of about 0.125s between them, and never starting or ending exactly on a cut.
 
+## 4. Reel lessons (2026-11-01)
+
+16. Fifteen shot-level rules mined from the owner's 35 reference reels, each with a runnable check: brain `research/reel-top15-lessons-2026-11-01.md`. Scene briefs cite lesson numbers so reviewers check against named rules.
+
 ## Sources
 
 - [Walter Murch's Rule of Six (No Film School)](https://nofilmschool.com/2016/11/6-rules-good-cutting-according-oscar-winning-editor-walter-murch) · [Musicbed](https://wpengine.fm.co/musicbed/filmmaking/editing/rule-of-six/) · [Theseus thesis](https://www.theseus.fi/handle/10024/341190)

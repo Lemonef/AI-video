@@ -3,7 +3,7 @@
 ## QUEUE (owner order, 2026-11-01)
 1. [x] Pipeline v1 shipped (brain a8fe06f)
 2. [x] 3 practice jobs: 2 free passes, trap caught
-3. [~] Mine all 36 reels (extraction DONE: OCR 35+16 long parts, speech refs 33, craft notes 35, repos verified; OPEN: top-15 lessons synthesis) (29 + batch-2 #30-36) via pipeline: tools for frames/ASR, Codex Sol/Astra for OCR+vision, free models text-only w/ source, Claude writes craft lessons
+3. [x] Mine all 36 reels: extraction + top-15 lessons (brain research/reel-top15-lessons-2026-11-01.md, cinematic-guide §4)
 4. [ ] Brain update + make Codex/OpenCode/Gemini read the brain; session handoff hardening
 5. [ ] AgentsRoom via our own local MCP (investigate)
 6. [ ] Brain cleanup/refactor (own plan)
