@@ -62,7 +62,7 @@ const Car:React.FC<{x:number;y:number;s?:number;c:string;flip?:boolean}>=({x,y,s
 // alert elbows/hands (the head has a separately measured scale, so it cannot be the ruler):
 // upper arms near-flat out from the shoulder, forearms hanging inward. [left, right].
 type ArmPose={elbow:[number[],number[]];hand:[number[],number[]]};
-const SHOT7_ARMS:ArmPose={elbow:[[-38,-122],[34,-130]],hand:[[-32,-101],[20,-101]]};
+const SHOT7_ARMS:ArmPose={elbow:[[-38,-122],[34,-130]],hand:[[-27,-109],[19,-109]]};
 const Cashier:React.FC<{x:number;y:number;s?:number;f:number;pose?:string;emotion?:string;lean?:number;arms?:ArmPose}>=({x,y,s=1,f,pose='rest',emotion='calm',lean=0,arms})=>{
  const hidden=React.useContext(HideLeadContext);
  const sourceSkin=React.useContext(SkinColorContext);
