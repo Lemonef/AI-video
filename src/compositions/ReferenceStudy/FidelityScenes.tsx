@@ -230,6 +230,9 @@ const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean;targets?:CrowdTarg
  <Cart x={66} y={346} s={.9}/><Threat x={66} y={337} s={.78} f={f} n={1}/><Threat x={112} y={393} s={1.13} f={f} n={0}/><Threat x={142} y={325} s={.71} f={f} n={3}/><Threat x={235} y={379} s={1.03} f={f} n={2}/><Threat x={24} y={367} s={.91} f={f} n={3}/>
  {!close?<><path d="M0,6 H270 V20 H0Z" fill="#183231"/><path d="M0,0 H13 V480 H0Z M257,0 H270 V480 H257Z" fill="#243d3e"/><path d="M0,432 H270 V449 H0Z" fill="#203a3b"/><path d="M0,425 H270" stroke="#7e9087" strokeWidth="2"/><rect x="17" y="326" width="48" height="83" fill="#2c4648"/><rect x="22" y="332" width="38" height="70" fill="#b6c1ae"/></>:null}
  </g>;
+// Closed shutter (27+) reads darker in the source than the shared slat gradient: shot 27 frame 2010,
+// shutter box x140-260 y110-300, mean RGB source 143.9 vs render 165.2 -> black overlay 1-143.9/165.2.
+const CLOSED_CURTAIN_SHADE=1-143.9/165.2;
 const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,assisted=false})=>{
  const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?(assisted?interpolate(f,[0,4,12,30,47,86],[0,0,.25,.67,.75,.75],{extrapolateLeft:'clamp',extrapolateRight:'clamp'}):.75*smooth(p/.35)):pull?(id===26?.97+.03*p:.75+.22*p):0;
  const x=id===10?mix(82,57,smooth(p)):id===13?100:id===14?mix(100,65,smooth(p)):id===15?32:38;
@@ -240,7 +243,7 @@ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,as
  <image href={staticFile('reference-study/door-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
  <defs><clipPath id="door-glass"><path d="M108,158 L270,141 V375 L108,353Z"/></clipPath></defs>
  {id>=15&&id<29?<g clipPath="url(#door-glass)" opacity=".58"><Threat x={168} y={316} s={.7} f={f} n={0}/><Threat x={230} y={305} s={.66} f={f} n={3}/><Threat x={136} y={330} s={.8} f={f} n={1}/></g>:null}
- {down>0?<g><defs><clipPath id="measured-curtain"><polygon points={pts([[120,153],[270,141],[270,141+252*down],[120,153+207*down]])}/></clipPath></defs><g clipPath="url(#measured-curtain)">{range(46).map(i=><polygon key={i} points={pts([[120,153+i*4.5],[270,141+i*252/46],[270,141+(i+1)*252/46],[120,153+(i+1)*4.5]])} fill="url(#f-slat)"/>)}</g><path d={`M120,${153+207*down} L270,${141+252*down}`} stroke="#586e69" strokeWidth="3"/></g>:null}
+ {down>0?<g><defs><clipPath id="measured-curtain"><polygon points={pts([[120,153],[270,141],[270,141+252*down],[120,153+207*down]])}/></clipPath></defs><g clipPath="url(#measured-curtain)">{range(46).map(i=><polygon key={i} points={pts([[120,153+i*4.5],[270,141+i*252/46],[270,141+(i+1)*252/46],[120,153+(i+1)*4.5]])} fill="url(#f-slat)"/>)}{closed?<rect width="270" height="480" fill="#000" opacity={CLOSED_CURTAIN_SHADE}/>:null}</g><path d={`M120,${153+207*down} L270,${141+252*down}`} stroke="#586e69" strokeWidth="3"/></g>:null}
  <Cashier x={x} y={437} s={RIG.scale} f={f} pose={id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone'} emotion={id===15?'panic':pull?'calm':closed?'tired':'worried'} lean={id===10?7:0}/>
  {pull?<g>{range(50).map(i=><ellipse key={i} cx={chainX+(i%2?.25:-.25)} cy={139+i*3.6} rx="1.3" ry="2.4" stroke="#97a7a7" strokeWidth=".65" fill="none"/>)}</g>:null}
  </g>;
