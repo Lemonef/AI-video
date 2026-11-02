@@ -80,6 +80,16 @@ export const ContactShadow: React.FC<{x: number; y: number; rx: number; ry: numb
  */
 export type CastLight = {brightness: number; saturate: number; rim: string; dx: number; dy: number};
 export const CAST_LIGHT: Record<string, CastLight> = {
+ liftJolt: {brightness:.88,saturate:.9,rim:'rgba(220,235,255,.5)',dx:0,dy:-4},
+ liftDoors: {brightness:.9,saturate:.9,rim:'rgba(220,235,255,.5)',dx:0,dy:-4},
+ liftRecognize: {brightness:.9,saturate:.9,rim:'rgba(220,235,255,.5)',dx:0,dy:-4},
+ liftAwkward: {brightness:.9,saturate:.9,rim:'rgba(220,235,255,.5)',dx:0,dy:-4},
+ liftPanel: {brightness:.55,saturate:.75,rim:'rgba(255,70,60,.45)',dx:5,dy:-2},
+ lobbyGuard: {brightness:.88,saturate:.9,rim:'rgba(255,205,140,.45)',dx:-3,dy:-3},
+ liftBicker: {brightness:.55,saturate:.75,rim:'rgba(255,70,60,.45)',dx:5,dy:-2},
+ lobbyCrowd: {brightness:.88,saturate:.9,rim:'rgba(255,205,140,.45)',dx:-3,dy:-3},
+ liftQuestion: {brightness:.55,saturate:.75,rim:'rgba(255,70,60,.45)',dx:5,dy:-2},
+ liftPressure: {brightness:.5,saturate:.75,rim:'rgba(255,70,60,.45)',dx:5,dy:-2},
  floodPassage: {brightness:.8,saturate:.8,rim:'rgba(136,180,217,.5)',dx:-4,dy:-3},
  floodGroup: {brightness:.86,saturate:.85,rim:'rgba(216,181,128,.4)',dx:-3,dy:-3},
  floodHall: {brightness:.8,saturate:.78,rim:'rgba(136,180,217,.6)',dx:-4,dy:-3},
