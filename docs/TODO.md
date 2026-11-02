@@ -18,12 +18,14 @@
      - [x] Blender 5.2.3 headless Grease Pencil v3 smoke render works (stroke + plane visible; materials need show_stroke=True)
      - [x] SAM 2 CPU (D:/tools/sam2, hiera_tiny): shot 2 = 52 frames in ~2.3 min (2.6 s/frame, 540x960), clean full-body masks; MUST prompt on a sharp frame (box + torso point, propagate both ways) - frame-0 focus blur sent the track onto the pink window
      - [ ] Joint pipeline (owner-agreed 2026-11-02): SAM mask -> Gemini points -> auto-check (point outside mask, limb length jump vs neighbours) -> Claude hand-marks ONLY flagged joints
-     - [ ] SAM shot 3 masks (D:/tools/sam2/trial/track.py, generic tracker; PAUSED by owner 2026-11-02 00:3x, rerun from scratch)
+       - [x] Shot 2: 10 frames pointed, check.py --sheet review, joints2keys.py (flagged joint = neighbour mean, focus-blur frame dropped) -> gate KEEP actor MAE 30.19->27.28 SSIM .566->.607 (4d80b9d)
+       - [ ] Shot 3: SAM masks done (62 frames, prompted abs 142; mask = person + pink cart, wide shot); Gemini joints 3/11, free quota stalled ~12:12 (resets ~15:00 BKK)
+     - [x] SAM shot 3 masks (D:/tools/sam2/trial/track.py): 62 frames 175 s
      - [x] Gemini joints on SAM crops, shot 2 frames 5/25/51 (gemini-3-flash-preview; 2.5-flash 429, 3.7/3.8-flash time out, gemini-4-argon listed but 429 = no free quota): head/wrists/ankles/toes good, hips/knees weak
-     - [x] Auto-check D:/tools/sam2/trial/check.py (off-mask + bone length vs median): flags 4-7 of 15 per frame, catches the visible knee/hip misses; arm-length rule over-flags foreshortened reaching arms; misses frame-25 high hip with only 3 frames (median weak)
+     - [x] Auto-check D:/tools/sam2/trial/check.py <shot_dir> [--sheet] (off-mask + leg/torso/head bone length vs median; arms exempt): flags 4-7 of 15 per frame, catches the visible knee/hip misses; arm-length rule over-flags foreshortened reaching arms; misses frame-25 high hip with only 3 frames (median weak)
      - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
      - [ ] OpenCV optical flow for walking shots (later)
-   - [ ] H4 shots 2/3 pose with IK (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
+   - [ ] H4 shots 2/3 pose (shot 2 done 4d80b9d, shot 3 waiting on Gemini quota) (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
    - [ ] J1 shot 6 plate + shot 20 crowd via pipeline normal ladder; full v13 render; J2-J4 grades/lighting
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [ ] Owner: drop stash@{0}; AI-video repo cleanup plan (needs approval); English-channel monetization answer
