@@ -19,13 +19,18 @@
      - [x] SAM 2 CPU (D:/tools/sam2, hiera_tiny): shot 2 = 52 frames in ~2.3 min (2.6 s/frame, 540x960), clean full-body masks; MUST prompt on a sharp frame (box + torso point, propagate both ways) - frame-0 focus blur sent the track onto the pink window
      - [ ] Joint pipeline (owner-agreed 2026-11-02): SAM mask -> Gemini points -> auto-check (point outside mask, limb length jump vs neighbours) -> Claude hand-marks ONLY flagged joints
        - [x] Shot 2: 10 frames pointed, check.py --sheet review, joints2keys.py (flagged joint = neighbour mean, focus-blur frame dropped) -> gate KEEP actor MAE 30.19->27.28 SSIM .566->.607 (4d80b9d)
-       - [ ] Shot 3: SAM masks done (62 frames, prompted abs 142; mask = person + pink cart, wide shot); Gemini joints 3/11, free quota stalled ~12:12 (resets ~15:00 BKK)
+       - [x] Shot 3: 11 frames pointed, keys in LeadPerformance -> gate KEEP (6593a42)
+       - [x] Shot 7: joint route does NOT fit a front close-up (9/15 joints, invented legs, arms mostly flagged); joints.py now drops a null point instead of crashing. Arms hand-measured instead (see H1)
      - [x] SAM shot 3 masks (D:/tools/sam2/trial/track.py): 62 frames 175 s
      - [x] Gemini joints on SAM crops, shot 2 frames 5/25/51 (gemini-3-flash-preview; 2.5-flash 429, 3.7/3.8-flash time out, gemini-4-argon listed but 429 = no free quota): head/wrists/ankles/toes good, hips/knees weak
      - [x] Auto-check D:/tools/sam2/trial/check.py <shot_dir> [--sheet] (off-mask + leg/torso/head bone length vs median; arms exempt): flags 4-7 of 15 per frame, catches the visible knee/hip misses; arm-length rule over-flags foreshortened reaching arms; misses frame-25 high hip with only 3 frames (median weak)
      - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
      - [ ] OpenCV optical flow for walking shots (later)
-   - [ ] H4 shots 2/3 pose (shot 2 done 4d80b9d, shot 3 waiting on Gemini quota) (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
+   - [ ] Character acting H1-H4
+     - [x] H4 shots 2/3 pose (4d80b9d, 6593a42)
+     - [x] H1 shot 7 alarm arms, shot-7-only override (ed33fd5: MAE 29.124->28.974, SSIM .6612->.6613; head-as-ruler try measured worse, discarded); baseline rebuilt at ed33fd5
+     - [x] H2 shot 22 shutter timing + lead pose (a8042c6)
+     - [ ] H3 shot 27 shutter geometry + leaning actor (grade alone kept b72e578), then 24/26/28
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
      - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
