@@ -38,7 +38,8 @@
          - [x] Pull badge green at 40 (34d6ca9: 26 16.07->15.05, 27 23.22->22.19); 26 actor +0.013 kept by hand as encoder spill
          - [x] 28 rule card above grade + fade timing + no clock (8217b3e: 15.72->12.16, SSIM .701->.715)
          - [ ] Later: shot 28 lead pose (source arms behind back), shot 22 shutter light
-       - [ ] Gate flaw: crf20 encode spreads any local change over the whole frame (1.0-1.4 MAE between renders whose SVG differs only in a badge), so actor sub-scores can fail on spill. Fix: lossless gate renders (crf 0 or PNG) + rebuild all baselines once
+       - [x] Gate flaw: crf20 encode spill. Gate now renders ProRes 4444 (d0b13eb; badge-only edit on shot 26: 61% of outside pixels changed at crf20, 0% ProRes; h264 floor is crf 1). All 35 baselines rebuilt at d0b13eb (old set in gate-baseline-crf20-archive/). Self-test: unchanged code on 28/7/26 + 10 guards bit-identical, targets DISCARD. Known-pass half comes with the next real fix
+       - [ ] 1:1 loop on ProRes numbers: 7 (28.14), 22 (26.83), 9 (23.61), 27 (23.21), 15 (20.35); next = shot 15 plate overshoot (right +52 / top +64)
        - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.

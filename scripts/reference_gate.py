@@ -57,6 +57,8 @@ MIN_MAE_GAIN = 0.05
 # MAE 0.0007 / SSIM 0.00002 between identical runs (2026-11-01). The noise
 # allowance is ~7-10x that measurement and stays 10x below MIN_MAE_GAIN, so a
 # real regression still fails. Re-measure if a guard flips on unchanged code.
+# Under ProRes (d0b13eb) shot 28 and 12 other shots re-rendered bit-identical, so the
+# allowance is now pure headroom; kept rather than zeroed in case a future shot wobbles.
 NOISE_MAE = 0.005
 NOISE_SSIM = 0.0002
 # Actor crops reuse the frame noise allowance: the measured lead shots (10/13/14)
