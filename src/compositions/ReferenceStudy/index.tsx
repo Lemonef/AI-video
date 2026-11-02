@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Html5Audio,Img,staticFile,interpolate,useCurrentFrame} from 'remotion';
 import {W,H} from '../../lib/tokens';
-import {FONT_CAPTION,OFFLINE_FONTS} from '../../lib/fonts';
+import {FONT_CAPTION,OFFLINE_FONTS,localFont} from '../../lib/fonts';
 import {loadFont} from '@remotion/google-fonts/Anton';
 import captions from './captions.json';
 import calibration from './calibration.json';
@@ -13,7 +13,7 @@ import {ReferencePhoneInsert,ReferenceMechanism,ReferenceMapOverlay,ReferenceInv
 import {SourceCaptions} from './SourceCaptions';
 import {shotAt,STUDY_FPS} from './shots';
 
-const STUDY_FONT=OFFLINE_FONTS?'Arial':loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
+const STUDY_FONT=OFFLINE_FONTS?localFont('Anton','fonts/Anton-Regular.ttf'):loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
 // Per-local-frame overlay opacities measured from the source cut (luma); local frame = frame - shot.start.
 // Only gate-kept shots: 8/9/23 gained < the gate's noise bar, 28 already carries its own dark grade (doubled = worse).
 const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
