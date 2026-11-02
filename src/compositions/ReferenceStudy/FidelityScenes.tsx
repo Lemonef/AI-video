@@ -122,6 +122,7 @@ const Outside:React.FC<{f:number;crowd?:boolean;assisted?:boolean;targets?:Crowd
 // (scripts/extend_clean_plate.py) fills those margins from the source itself, v1 unchanged inside.
 const AISLE_PLATE=plateExtents.aisle;
 const MAP_PARKING_PLATE=plateExtents['map-parking'];
+const DOOR_PLATE=plateExtents.door;
 // Each shelf's package scale and baseline use the same depth parameter as its board edges.
 const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean;tired?:boolean}>=({f,dark=0,actor=false,assisted=false,tired=false})=>assisted?<g>
  <rect x="-300" y="-500" width="870" height="500" fill="#18201f"/><path d="M123,-300 H137 V0 H123Z" fill="#e5e5cf"/>
@@ -254,7 +255,7 @@ const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,as
  const resolved=actorLayout(x,437,RIG.scale,pose,f,id===10?7:0,React.useContext(HeadTargetContext));
  const chainX=assisted?103:resolved.x+RIG.pullHandX*resolved.s;
  if(assisted)return <g>
- <image href={staticFile('reference-study/door-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
+ <image href={staticFile(`reference-study/${DOOR_PLATE.file}`)} x={DOOR_PLATE.x} y={DOOR_PLATE.y} width={DOOR_PLATE.width} height={DOOR_PLATE.height} preserveAspectRatio="none"/>
  <defs><clipPath id="door-glass"><path d="M108,158 L270,141 V375 L108,353Z"/></clipPath></defs>
  {id>=15&&id<29?<g clipPath="url(#door-glass)" opacity=".58"><Threat x={168} y={316} s={.7} f={f} n={0}/><Threat x={230} y={305} s={.66} f={f} n={3}/><Threat x={136} y={330} s={.8} f={f} n={1}/></g>:null}
  {down>0?<g><defs><clipPath id="measured-curtain"><polygon points={pts([[120,153],[270,141],[270,141+252*down],[120,153+207*down]])}/></clipPath></defs><g clipPath="url(#measured-curtain)">{range(46).map(i=><polygon key={i} points={pts([[120,153+i*4.5],[270,141+i*252/46],[270,141+(i+1)*252/46],[120,153+(i+1)*4.5]])} fill="url(#f-slat)"/>)}{closed||pull?<rect width="270" height="480" fill="#000" opacity={closed?CLOSED_CURTAIN_SHADE:PULL_CURTAIN_SHADE}/>:null}</g><path d={`M120,${153+207*down} L270,${141+252*down}`} stroke="#586e69" strokeWidth="3"/></g>:null}
@@ -297,8 +298,9 @@ const Gap:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d
 
 export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget;crowdTargets?:CrowdTarget[];hideLead?:boolean}>=({shot,local,p,sourceAssisted=false,actorTarget,crowdTargets,hideLead=false})=>{
  const id=shot.id;let content:React.ReactNode;
- // The nested svg clips to one frame; an extended plate (aisle, map-parking) must show past it where the fitted camera pulls back.
- const onExtendedPlate=sourceAssisted&&(shot.stage==='aisle'||shot.stage==='dark'||id===16||(id===15&&local>=33));
+ // The nested svg clips to one frame; an extended plate (aisle, map-parking, door) must show past it where the fitted camera pulls back.
+ const onMapParking=id===16||(id===15&&local>=33);
+ const onExtendedPlate=sourceAssisted&&(shot.stage==='aisle'||shot.stage==='dark'||onMapParking||shot.stage==='door'||shot.stage==='chain');
  if(id===33&&sourceAssisted)content=<g>
  <defs><linearGradient id="portrait-body-shade"><stop stopColor="#000" stopOpacity=".78"/><stop offset=".45" stopColor="#000" stopOpacity=".65"/><stop offset=".56" stopColor="#000" stopOpacity="0"/></linearGradient><clipPath id="portrait-rig-shade"><circle cx={actorTarget?.x??145} cy={actorTarget?.y??228} r={actorTarget?.r??75}/><path d={`M${(actorTarget?.x??145)-30},${(actorTarget?.y??228)+65} h60 l12,210 h-90Z`}/></clipPath></defs>
  <image href={staticFile('reference-study/dark-face-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>

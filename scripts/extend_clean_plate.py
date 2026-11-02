@@ -48,7 +48,9 @@ CAPTION_BOX = (50, 290, 220, 340)  # burned-in captions, every shot
 # (shot, first local frame, end local frame or None = to the shot end). Shot 15 opens on the door
 # plate and cuts to map-parking at source frame 894 (calibration.json), so its span starts there.
 DEFAULT_SPANS = {'aisle': [(3, 0, None), (19, 0, None), (29, 0, 31)],
-                 'map-parking': [(15, 42, None), (16, 0, None)]}
+                 'map-parking': [(15, 42, None), (16, 0, None)],
+                 'door': [(10, 0, None), (13, 0, None), (14, 0, None), (15, 0, 42), (22, 0, None),
+                          (24, 0, None), (26, 0, None), (27, 0, None), (28, 0, None)]}
 
 
 def matrix_at(samples, frame):
