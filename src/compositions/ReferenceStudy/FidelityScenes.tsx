@@ -3,6 +3,7 @@ import {interpolate,staticFile} from 'remotion';
 import {walkCycle} from '../../lib/walkCycle';
 import type {StageProps} from './Stages';
 import type {CrowdTarget} from './crowd-blocking';
+import plateExtents from './plate-extents.json';
 
 // Art coordinates follow the 270 x 480 reference review plane; camera transforms stay outside.
 type HeadTarget={x:number;y:number;r:number};
@@ -111,12 +112,15 @@ const Outside:React.FC<{f:number;crowd?:boolean;assisted?:boolean;targets?:Crowd
  <Storefront f={f}/><Lamp x={38} y={312} h={92}/><Lamp x={247} y={314} h={107}/><Car x={2} y={318} c="#29383c" s={.65}/><Car x={271} y={327} c="#202e32" s={1}/>
  {crowd?<><Threat x={37} y={383} s={.83} f={f} n={1}/><Threat x={106} y={421} s={1.2} f={f} n={0}/><Threat x={204} y={411} s={1.05} f={f} n={2}/></>:null}<path d="M26,321 H170 L232,444 H0Z" fill="#e4ce9f" opacity=".04"/></g>;
 
+// The fitted source camera pulls back past one frame in shots 3/19/29; the extended plate
+// (scripts/extend_clean_plate.py) fills those margins from the source itself, v1 unchanged inside.
+const AISLE_PLATE=plateExtents.aisle;
 // Each shelf's package scale and baseline use the same depth parameter as its board edges.
 const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean;tired?:boolean}>=({f,dark=0,actor=false,assisted=false,tired=false})=>assisted?<g>
  <rect x="-300" y="-500" width="870" height="500" fill="#18201f"/><path d="M123,-300 H137 V0 H123Z" fill="#e5e5cf"/>
- <image href={staticFile('reference-study/aisle-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
+ <image href={staticFile(`reference-study/${AISLE_PLATE.file}`)} x={AISLE_PLATE.x} y={AISLE_PLATE.y} width={AISLE_PLATE.width} height={AISLE_PLATE.height} preserveAspectRatio="none"/>
  {!actor?<Cashier x={133} y={287} s={.30} f={f} pose="walk" lean={17}/>:null}
- {dark>0?<rect width="270" height="480" fill="#051013" opacity={dark}/>:null}
+ {dark>0?<rect x={AISLE_PLATE.x} y={AISLE_PLATE.y} width={AISLE_PLATE.width} height={AISLE_PLATE.height} fill="#051013" opacity={dark}/>:null}
  {actor?<><g opacity=".65"><Cashier x={102} y={450} s={.93} f={f} pose="light" emotion={tired?'tired':'worried'}/></g></>:null}
  </g>:<g>
  <rect width="270" height="480" fill="#343d3d"/><path d="M0,480 H270 L164,253 H105Z" fill="url(#f-floor)"/><rect x="100" y="139" width="68" height="116" fill="#272e2c"/>
@@ -286,6 +290,8 @@ const Gap:React.FC<{p:number}>=({p})=><g><rect width="270" height="480" fill="#d
 
 export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTarget?:HeadTarget;crowdTargets?:CrowdTarget[];hideLead?:boolean}>=({shot,local,p,sourceAssisted=false,actorTarget,crowdTargets,hideLead=false})=>{
  const id=shot.id;let content:React.ReactNode;
+ // The nested svg clips to one frame; the extended aisle plate must show past it where the fitted camera pulls back.
+ const onAislePlate=sourceAssisted&&(shot.stage==='aisle'||shot.stage==='dark');
  if(id===33&&sourceAssisted)content=<g>
  <defs><linearGradient id="portrait-body-shade"><stop stopColor="#000" stopOpacity=".78"/><stop offset=".45" stopColor="#000" stopOpacity=".65"/><stop offset=".56" stopColor="#000" stopOpacity="0"/></linearGradient><clipPath id="portrait-rig-shade"><circle cx={actorTarget?.x??145} cy={actorTarget?.y??228} r={actorTarget?.r??75}/><path d={`M${(actorTarget?.x??145)-30},${(actorTarget?.y??228)+65} h60 l12,210 h-90Z`}/></clipPath></defs>
  <image href={staticFile('reference-study/dark-face-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>
@@ -307,5 +313,5 @@ export const FidelityStage:React.FC<StageProps&{sourceAssisted?:boolean;actorTar
  else if(shot.stage==='dark')content=<><Aisle assisted={sourceAssisted} f={local} dark={.77} actor tired={id===31&&local>20}/>{id===30&&!sourceAssisted?<g transform="translate(160 260) rotate(-3)"><rect x="-94" y="-30" width="188" height="70" fill="#e8e8d3"/><text x="-86" y="-15" fontSize="9" fontWeight="800">DAY 1 · SUPPLIES</text>{range(3).map(i=><path key={i} d={`M-86,${-8+i*17} H84`} stroke="#acb4a3" strokeWidth=".5"/>)}<text x="-84" y="7" fontSize="7">Food</text></g>:null}</>;
  else if(shot.stage==='phone')content=p>.375?<g><rect width="270" height="480" fill="#192e32"/>{range(9).map(i=><g key={i}><path d={`M${i*38-20},0 L${i*38+20},480 M0,${i*65} H270`} stroke="#3f5551" strokeWidth="8"/>{range(8).map(j=><rect key={j} x={i*38} y={j*65+9} width="20" height="37" fill={(i+j)%3?'#2a4141':'#354c44'}/>)}</g>)}<path d="M120,0 Q220,90 175,210 T120,480" stroke="#355d70" strokeWidth="22" fill="none"/><circle cx="141" cy="170" r={45+p*23} fill="#963e32" opacity=".37"/></g>:<g><rect width="270" height="480" fill="#443a2e"/><ellipse cx="135" cy="230" rx="165" ry="210" fill="#8f3929" opacity=".23"/><rect x="20" y="56" width="231" height="377" rx="24" fill="#111c1d" stroke="#414c43" strokeWidth="3"/><rect x="29" y="67" width="213" height="355" rx="16" fill="#462b29"/><text x="135" y="96" textAnchor="middle" fontSize="9" fill="#e5deca">10:52</text><rect x="45" y="171" width="183" height="146" rx="10" fill="#713b32"/><text x="59" y="196" fontSize="8" fill="#d2c8a8" letterSpacing="1">⚠ EMERGENCY ALERT</text><text x="59" y="224" fontSize="17" fontWeight="900" fill="#eee9d2">OUTBREAK</text><text x="59" y="244" fontSize="8" fill="#e0d8bc">Remain indoors. Avoid the streets.</text><rect x="60" y="282" width="153" height="21" rx="5" fill="#9c8d73"/><text x="136" y="296" fontSize="8" textAnchor="middle" fill="#e9dfc7">OK</text></g>;
  else content=<g><rect width="270" height="480" fill="#101b1d"/><text x="135" y="269" textAnchor="middle" fontFamily="Impact, sans-serif" fontSize="29" fontWeight="900" fill="#dddccc">PART 2</text><path d="M96,279 H176" stroke="#934c35" strokeWidth="1.5"/></g>;
- return <HeadTiltContext.Provider value={sourceAssisted?(id===7?7:id===9?6:0):0}><SkinColorContext.Provider value={sourceAssisted&&(id===7||id===9)?id===7?'#e4b6af':'#dda7a2':undefined}><HideLeadContext.Provider value={hideLead}><HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" overflow={id===19?'visible':undefined} fontFamily="Arial, sans-serif"><Defs/>{content}{sourceAssisted&&id===15&&local<33?<rect width="270" height="480" fill="#071218" opacity=".18"/>:null}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider></HideLeadContext.Provider></SkinColorContext.Provider></HeadTiltContext.Provider>;
+ return <HeadTiltContext.Provider value={sourceAssisted?(id===7?7:id===9?6:0):0}><SkinColorContext.Provider value={sourceAssisted&&(id===7||id===9)?id===7?'#e4b6af':'#dda7a2':undefined}><HideLeadContext.Provider value={hideLead}><HeadTargetContext.Provider value={sourceAssisted?actorTarget:undefined}><svg width="1080" height="1920" viewBox="0 0 270 480" overflow={onAislePlate?'visible':undefined} fontFamily="Arial, sans-serif"><Defs/>{content}{sourceAssisted&&id===15&&local<33?<rect width="270" height="480" fill="#071218" opacity=".18"/>:null}<rect width="270" height="480" fill="url(#f-grain)" opacity=".5"/></svg></HeadTargetContext.Provider></HideLeadContext.Provider></SkinColorContext.Provider></HeadTiltContext.Provider>;
 };
