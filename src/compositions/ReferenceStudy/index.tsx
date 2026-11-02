@@ -23,7 +23,7 @@ const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
  };
 // Linear slope = source mean luma / render mean luma per shot (first six frames skipped).
 // Gate-kept only: 3 (1.21) and 19 (1.10) got worse, their error is local, not global brightness.
-const SHOT_GRADE:Record<number,number>={23:1.12,28:.85,32:.79,34:.63};
+const SHOT_GRADE:Record<number,number>={23:1.12,27:.925,28:.85,32:.79,34:.63};
 
 export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolean;sourceAssisted?:boolean}> = ({showStudyLabels=false,withSound=true,sourceAssisted=false}) => {
  const frame=useCurrentFrame();
