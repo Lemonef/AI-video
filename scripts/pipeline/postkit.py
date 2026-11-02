@@ -21,6 +21,31 @@ CHECKLIST = [
     "Reply to the first comments within 30-60 min",
     "Next part = reply-to-comment video on the winning choice",
 ]
+# Ready replies for the comments that come up on every post, in jaab's voice. Gender-neutral
+# on purpose (no ครับ/ค่ะ): the account speaks as the series, not as one person. An episode
+# overrides or adds lines with post.replies {"<when someone comments...>": "<reply>"}.
+VOTE_REPLIES = {
+    "A": "ทีม A +1 แล้ว 😆 ตอนนี้ใครนำอยู่น้า รอดูตอนหน้าเลย",
+    "B": "ทีม B +1 แล้ว 😆 ตอนนี้ใครนำอยู่น้า รอดูตอนหน้าเลย",
+    "a different idea / both": "ไอเดียนี้ก็เด็ดนะ 😂 แต่รอบนี้ต้องเลือก A หรือ B นะ เลือกให้หน่อย",
+}
+FINALE_REPLIES = {
+    "guessed the ending": "เดาเก่งมาก 👀 ดูออกตั้งแต่ตอนไหนเนี่ย",
+    "wants more / a new story": "เรื่องใหม่กำลังมา กดติดตามไว้ก่อนนะ 🔔",
+}
+COMMON_REPLIES = {
+    "when is the next part?": "ตอนต่อไปมาเร็ว ๆ นี้ กดติดตามไว้ก่อนนะ 🔔",
+    "is this AI? / how is it made?": "ใช้ AI ช่วยทำภาพกับเสียง ส่วนเรื่องคิดเองทั้งหมดนะ 🙏",
+    "laughing / praise": "ขอบคุณที่ดูนะ 🥹 ฝากแชร์ให้เพื่อนดูด้วยน้า",
+    "tags a friend": "เพื่อนคนนี้เลือก A หรือ B ล่ะ? 👀",
+    "story idea": "ไอเดียดีมาก! ขอเก็บไว้ก่อน อาจได้เห็นในตอนต่อไป 👀",
+    "fair criticism (voice, quality, too long)": "ขอบคุณที่บอกนะ จดไว้แล้ว ตอนหน้าจะทำให้ดีขึ้น 🙏",
+}
+REPLY_RULES = [
+    "Like every comment; reply to as many as you can in the first 30-60 min",
+    "Troll / hate: no reply. Hide it (long-press -> Hide/Delete); answer only real feedback",
+    "Never promise a date you have not scheduled",
+]
 
 
 def write(final_dir: Path, episode: dict, render_still) -> Path:
@@ -78,12 +103,29 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "- Description: the complete description block in 1)" if finale else "- Description: lines 2-4 of the block in 1) (question, A/B + next time, hashtags)",
         "- Audience: No, it's not made for kids ('for kids' turns comments off)",
         "- Thumbnail (mobile): the opening title frame or the cover frame",
+        "",
+        "7) COMMENT REPLIES (copy, tweak a word so they do not all look identical):",
+        *[f"- {when}: {reply}" for when, reply in replies(post, vote, finale).items()],
+        *[f"  ! {rule}" for rule in REPLY_RULES],
     ]
     out = final_dir / "post.txt"
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     write_script(final_dir, episode)
     render_still(final_dir / "cover.png", post.get("coverFrame", 45))
     return out
+
+
+def replies(post: dict, vote: bool, finale: bool) -> dict:
+    base = dict(VOTE_REPLIES) if vote else {}
+    if finale:
+        base.update(FINALE_REPLIES)
+    base.update({k: v for k, v in COMMON_REPLIES.items() if vote or k != "tags a friend"})
+    if not vote:
+        base["tags a friend"] = "แท็กเพื่อนมาดูด้วยกันเลย 😂"
+    if post.get("nextWhen"):
+        base["when is the next part?"] = f"{post['nextWhen']} กดติดตามไว้ก่อนนะ 🔔"
+    base.update(post.get("replies", {}))
+    return base
 
 
 def write_script(folder: Path, episode: dict) -> Path:
