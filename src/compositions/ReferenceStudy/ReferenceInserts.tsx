@@ -15,23 +15,27 @@ const rnd = (n: number) => {const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; 
 type FrameProps = {frame: number};
 
 const SEGMENTS = ['abcedf', 'bc', 'abged', 'abgcd', 'fgbc', 'afgcd', 'afgecd', 'abc', 'abcdefg', 'abfgcd'];
-const Digit: React.FC<{value: string; x: number; y: number; h: number}> = ({value, x, y, h}) => {
+// Clock palettes. 'safe' = the frozen green clock of shot 27 (source frame 2019 digit mean RGB 81,193,107;
+// fill set so it lands there after that shot's grade, measured on our own render of the red fill).
+const CLOCK_TONES = {alarm: {lit: '#d23f45', unlit: '#442c2c', edge: '#954047'}, safe: {lit: '#5fd268', unlit: '#27402d', edge: '#3f8a55'}};
+type ClockTone = keyof typeof CLOCK_TONES;
+const Digit: React.FC<{value: string; x: number; y: number; h: number; tone: ClockTone}> = ({value, x, y, h, tone}) => {
  const w = h * .47, t = h * .105, mid = h / 2;
  const horizontal = (yy: number) => `${t},${yy} ${w-t},${yy} ${w},${yy+t/2} ${w-t},${yy+t} ${t},${yy+t} 0,${yy+t/2}`;
  const vertical = (xx: number, yy: number) => `${xx},${yy+t} ${xx+t/2},${yy} ${xx+t},${yy+t} ${xx+t},${yy+mid-t} ${xx+t/2},${yy+mid} ${xx},${yy+mid-t}`;
  const shapes: Record<string, string> = {a: horizontal(0), g: horizontal(mid-t/2), d: horizontal(h-t), f: vertical(0,0), b: vertical(w-t,0), e: vertical(0,mid), c: vertical(w-t,mid)};
- return <g transform={`translate(${x} ${y}) skewX(-5)`}>{Object.entries(shapes).map(([key, points]) => <polygon key={key} points={points} fill={SEGMENTS[Number(value)]?.includes(key) ? '#d23f45' : '#442c2c'} />)}</g>;
+ return <g transform={`translate(${x} ${y}) skewX(-5)`}>{Object.entries(shapes).map(([key, points]) => <polygon key={key} points={points} fill={SEGMENTS[Number(value)]?.includes(key) ? CLOCK_TONES[tone].lit : CLOCK_TONES[tone].unlit} />)}</g>;
 };
 
 /** Count formatting matches the source; no extra wall clock or timer is implied. */
-export const ReferenceCountdown: React.FC<FrameProps & {x?: number; y?: number; scale?: number; value?: string}> = ({frame, x=10, y=73, scale=1, value}) => {
+export const ReferenceCountdown: React.FC<FrameProps & {x?: number; y?: number; scale?: number; value?: string; tone?: ClockTone}> = ({frame, x=10, y=73, scale=1, value, tone='alarm'}) => {
  const seconds = Math.max(0, 299 - Math.floor(frame / 30 - 47));
  const digits = (value ?? `${Math.floor(seconds/60).toString().padStart(2,'0')}:${(seconds%60).toString().padStart(2,'0')}`);
  return <g transform={`translate(${x} ${y}) scale(${scale})`}>
-  <rect width="53" height="21" rx="3" fill="#211e20" stroke="#954047" strokeWidth=".8" />
-  <g opacity=".22" style={{filter:'blur(1.2px)'}}>{digits.replace(':','').split('').map((d,i) => <Digit key={i} value={d} x={4+i*11.5+(i>1?2:0)} y={3} h={15}/>)}</g>
-  {digits.replace(':','').split('').map((d,i) => <Digit key={i} value={d} x={4+i*11.5+(i>1?2:0)} y={3} h={15}/>)}
-  <circle cx="26.3" cy="8" r=".9" fill="#d23f45"/><circle cx="26.3" cy="13.5" r=".9" fill="#d23f45"/>
+  <rect width="53" height="21" rx="3" fill="#211e20" stroke={CLOCK_TONES[tone].edge} strokeWidth=".8" />
+  <g opacity=".22" style={{filter:'blur(1.2px)'}}>{digits.replace(':','').split('').map((d,i) => <Digit key={i} value={d} x={4+i*11.5+(i>1?2:0)} y={3} h={15} tone={tone}/>)}</g>
+  {digits.replace(':','').split('').map((d,i) => <Digit key={i} value={d} x={4+i*11.5+(i>1?2:0)} y={3} h={15} tone={tone}/>)}
+  <circle cx="26.3" cy="8" r=".9" fill={CLOCK_TONES[tone].lit}/><circle cx="26.3" cy="13.5" r=".9" fill={CLOCK_TONES[tone].lit}/>
  </g>;
 };
 
