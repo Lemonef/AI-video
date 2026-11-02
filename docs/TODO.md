@@ -33,7 +33,12 @@
      - [ ] H3 shot 27 shutter + actor, then 24/26/28
        - [x] Closed-shutter shade overlay from region means (2cc27f3: 27 MAE 26.26->23.74, 28 18.17->15.72); sawtooth slats tried and discarded (groove phase off 4-8 px, MAE up)
        - [x] Shot 27 side-view lead hold, hand-measured (30a37fa: MAE 23.739->23.224, SSIM .5231->.5257); baseline rebuilt at 30a37fa
-       - [ ] Shots 24 / 26 / 28 error-map pass
+       - [x] Shots 24 / 26 / 28 error-map pass
+         - [x] 24/26 shutter shade, curtain only (8135d5c: 22.27->16.22, 23.01->16.07); whole-frame and stage-only grades both failed on the actor box
+         - [x] Pull badge green at 40 (34d6ca9: 26 16.07->15.05, 27 23.22->22.19); 26 actor +0.013 kept by hand as encoder spill
+         - [x] 28 rule card above grade + fade timing + no clock (8217b3e: 15.72->12.16, SSIM .701->.715)
+         - [ ] Later: shot 28 lead pose (source arms behind back), shot 22 shutter light
+       - [ ] Gate flaw: crf20 encode spreads any local change over the whole frame (1.0-1.4 MAE between renders whose SVG differs only in a badge), so actor sub-scores can fail on spill. Fix: lossless gate renders (crf 0 or PNG) + rebuild all baselines once
        - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
