@@ -36,4 +36,9 @@ export const CAST2: Record<string, Look2> = {
 	// Jaab's mum: older, hair in a bun, a faded sarong-coloured top
 	mum: {skin: '#D9AA85', skinShade: '#B98A67', hair: '#3A3436', hairHi: '#55494C', top: '#7A4E6E', topShade: '#5E3B55', pants: '#4A3A44', pantsShade: '#382B33', style: 'long'},
 	runner: {skin: '#D9A77F', skinShade: '#B9875F', hair: '#1E1A1C', hairHi: '#36303A', top: '#3E6FA8', topShade: '#2F5684', pants: '#2C3140', pantsShade: '#21252F', style: 'mochi'},
+	// lift story: Fon (Jaab's ex) in office clothes, long hair; the lobby night guard and two cleaners
+	fon: {skin: '#E8B996', skinShade: '#C79574', hair: '#2B1D1A', hairHi: '#4A332C', top: '#E7E1D6', topShade: '#BDB5A8', pants: '#2E3445', pantsShade: '#1F2433', style: 'long'},
+	liftGuard: {skin: '#C79A74', skinShade: '#A57A57', hair: '#1A1A1D', hairHi: '#33333A', top: '#3D4A66', topShade: '#2B354B', pants: '#252A36', pantsShade: '#191D26', style: 'short'},
+	cleaner: {skin: '#D6A47E', skinShade: '#B5845F', hair: '#2E2427', hairHi: '#4A3B3F', top: '#5F9C8E', topShade: '#467568', pants: '#3A3F4A', pantsShade: '#2A2E37', style: 'long'},
+	cleaner2: {skin: '#C99271', skinShade: '#A87152', hair: '#3B3134', hairHi: '#574A4E', top: '#5F9C8E', topShade: '#467568', pants: '#3A3F4A', pantsShade: '#2A2E37', style: 'mochi'},
 };
