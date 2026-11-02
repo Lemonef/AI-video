@@ -19,3 +19,6 @@ public/wishes*/
 .agentsroom/transfer-context-*.txt
 .agents/mcp_config.json
 docs/agent-logs/*.log
+
+# AgentsRoom app local state
+.agentsroom/
