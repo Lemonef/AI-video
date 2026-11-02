@@ -30,7 +30,8 @@
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
      - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
      - [x] Pipeline job ref-cut-transitions: all 3 rungs built it right (nemotron + terra identical gate numbers); brief numbers partly wrong. Kept 31/32 (c348cc3: 16.60->15.02, 17.70->16.42), dropped 8/9/23 (< 0.05 bar) and 28 (doubled its own dark grade, worse). Baselines 31/32 rebuilt at c348cc3
-     - [ ] Pipeline job ref-shot-grade (per-shot linear grade 3/19/23/28/32/34) - running
+     - [x] Pipeline job ref-shot-grade: kept 23/28/32/34 (b754ced: 25.97->17.52, 24.46->18.16, 16.42->5.16, 25.19->7.99), dropped 3/19 (local mismatch, global slope worse). Baselines rebuilt at b754ced
+     - [ ] Shots 3/19 local brightness (region, not global) - after shot 3 pose
      - [ ] Full v14 render
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [x] stash@{0} dropped (saved out/drafts/stash0-codex-shot7-lighting-wip.patch); wishes01 + download_batch2 parked on branch park/wishes01-and-batch2; .agentsroom/ ignored
