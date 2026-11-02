@@ -14,11 +14,20 @@ import {SourceCaptions} from './SourceCaptions';
 import {shotAt,STUDY_FPS} from './shots';
 
 const STUDY_FONT=OFFLINE_FONTS?'Arial':loadFont('normal',{weights:['400'],subsets:['latin']}).fontFamily;
+// Per-local-frame overlay opacities measured from the source cut (luma); local frame = frame - shot.start.
+// Only gate-kept shots: 8/9/23 gained < the gate's noise bar, 28 already carries its own dark grade (doubled = worse).
+const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
+ 20:{fill:'#fff',opacity:[.82,.55,.27]},
+ 31:{fill:'#000',opacity:[.78,.68,.58,.48,.38,.30,.22,.12,.02]},
+ 32:{fill:'#000',opacity:[.75,.61,.50,.36,.25,.14,.05]},
+ };
 
 export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolean;sourceAssisted?:boolean}> = ({showStudyLabels=false,withSound=true,sourceAssisted=false}) => {
  const frame=useCurrentFrame();
  const shot=shotAt(frame);
  const local=frame-shot.start;
+ const fx=CUT_FX[shot.id];
+ const value=fx?.opacity[local];
  const p=Math.max(0,Math.min(1,local/Math.max(1,shot.end-shot.start-1)));
  // Camera landmarks in the same 270 x 480 plane as the reconstructed sets.
  const camera:Record<number,[number,number,number,number]>={
@@ -94,7 +103,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
    {fullInsert?<g transform="scale(4)">{shot.id===8?<ReferencePhoneInsert frame={frame}/>:shot.id===21?<ReferenceControls frame={frame} showTimer={false}/>:shot.id===23?<ReferenceMechanism frame={frame}/>:shot.id===25?<ReferenceGap frame={frame} showHud={false}/>:<ReferenceStudyEnd frame={frame}/>}</g>:null}
    {sourceAssisted?<LeadPerformance frame={frame} shot={shot.id}/>:null}
    {sourceAssisted?<g transform="scale(4)">{shot.id===17?<ReferenceMapOverlay frame={frame}/>:null}{shot.id===30?<ReferenceInventory frame={frame}/>:null}{shot.id===31?<ReferenceTorchBeam frame={frame} origin={torchOrigin}/>:null}</g>:null}
-   {/* source cut flash: luma +135/+89/+44 over the plate on frames 1526-1528, gone by 1529 */}{sourceAssisted&&shot.id===20&&local<3?<rect width={W} height={H} fill="#fff" opacity={.82*(1-local/3)}/>:null}
+   {sourceAssisted&&fx&&typeof value==='number'&&value>0?<rect width={W} height={H} fill={fx.fill} opacity={value}/>:null}
    {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={sourceAssisted?.35+.2*Math.max(0,1-local/20):p*.45}/>:null}
    <rect width={W} height={H} fill="url(#study-vignette)"/>
    {/* the source clock leaves shot 20 at frame 1537 (local 11) */}{shot.id>=18&&shot.id<=28&&!(sourceAssisted&&(shot.id===23||shot.id===20&&local>=11))?sourceAssisted?<g transform="scale(4)"><ReferenceCountdown frame={frame} value={shot.id===27?'04:40':undefined}/></g>:<g><rect x={25} y={330} width={145} height={65} rx={15} fill="#172221" opacity={.94}/><text x={98} y={379} textAnchor="middle" fontFamily="monospace" fontSize={44} fontWeight={800} fill={shot.id>=27?'#82AE79':'#D4503F'}>{timer}</text></g>:null}
