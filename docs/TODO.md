@@ -39,7 +39,8 @@
          - [x] 28 rule card above grade + fade timing + no clock (8217b3e: 15.72->12.16, SSIM .701->.715)
          - [ ] Later: shot 28 lead pose (source arms behind back), shot 22 shutter light
        - [x] Gate flaw: crf20 encode spill. Gate now renders ProRes 4444 (d0b13eb; badge-only edit on shot 26: 61% of outside pixels changed at crf20, 0% ProRes; h264 floor is crf 1). All 35 baselines rebuilt at d0b13eb (old set in gate-baseline-crf20-archive/). Self-test: unchanged code on 28/7/26 + 10 guards bit-identical, targets DISCARD. Known-pass half comes with the next real fix
-       - [ ] 1:1 loop on ProRes numbers: 7 (28.14), 22 (26.83), 9 (23.61), 27 (23.21), 15 (20.35); next = shot 15 plate overshoot (right +52 / top +64)
+       - [ ] 1:1 loop on ProRes numbers: 7 (28.14), 22 (26.83), 9 (23.61), 27 (23.21), 15 (20.35 -> 15.09 KEEP); next = shot 7
+         - [x] shot 15/16 map-parking plate extended (map-parking-clean-v2, unclipped svg): gate KEEP, 15 MAE 20.35->15.09 SSIM .754->.828, 16 MAE 10.66->10.25 SSIM .817->.825, guards bit-identical
        - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
