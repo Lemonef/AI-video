@@ -18,6 +18,8 @@ const STUDY_FONT=OFFLINE_FONTS?'Arial':loadFont('normal',{weights:['400'],subset
 // Only gate-kept shots: 8/9/23 gained < the gate's noise bar, 28 already carries its own dark grade (doubled = worse).
 const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
  20:{fill:'#fff',opacity:[.82,.55,.27]},
+ // 27: source holds a flat light step for local 0-5 (luma 142 vs 123 after), a=(src-ours)/(255-ours).
+ 27:{fill:'#fff',opacity:[.15,.155,.15,.155,.155,.15]},
  31:{fill:'#000',opacity:[.78,.68,.58,.48,.38,.30,.22,.12,.02]},
  32:{fill:'#000',opacity:[.75,.61,.50,.36,.25,.14,.05]},
  };
@@ -25,7 +27,7 @@ const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
 // Gate-kept only: 3 (1.21) and 19 (1.10) got worse, their error is local, not global brightness.
 // Spike (scripts/spikes/gp_shot2.py): shot-2 lead as a Blender Grease Pencil render instead of SVG.
 const GP_SHOT2=process.env.REMOTION_GP_SHOT2==='1';
-const SHOT_GRADE:Record<number,number>={23:1.12,27:.925,28:.85,32:.79,34:.63};
+const SHOT_GRADE:Record<number,number>={23:1.12,27:.98,28:.85,32:.79,34:.63};
 // Shot 28 rule card sits above the shot's dark overlay and grade in the source: it fades in on source frames
 // 2045-2048 (local 8-11) to RGB 243,242,233 sampled inside the card. The source has no countdown clock in 28.
 const RULE_CARD_FADE=[8,11];
