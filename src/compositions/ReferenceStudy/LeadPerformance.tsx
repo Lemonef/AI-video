@@ -61,10 +61,24 @@ const shot2:Key[]=[
  {f:107,h:[103,194],r:12,hip:[92,228],lk:[88,238],la:[79,251],rk:[95,238],ra:[93,251],le:[108,210],lw:[113,209],re:[105,212],rw:[109,211]},
  {f:110,h:[104,194],r:12,hip:[92,228],lk:[89,237],la:[81,251],rk:[96,239],ra:[94,251],le:[107,213],lw:[115,212],re:[107,212],rw:[115,209]},
 ];
-export const hasMeasuredLead=(id:number)=>[2,10,13,14,24,26].includes(id);
+// Shot 3: same route; leg length flags ignored (crouched behind the cart, check.py tuned on upright).
+const shot3:Key[]=[
+{f:111,h:[142,237],r:11,hip:[128,268],lk:[133,275],la:[134,286],rk:[127,277],ra:[124,286],le:[140,258],lw:[151,259],re:[140,258],rw:[148,258]},
+ {f:117,h:[142,236],r:10,hip:[127,266],lk:[133,275],la:[124,282],rk:[128,272],ra:[121,280],le:[143,254],lw:[151,257],re:[141,253],rw:[149,256]},
+ {f:123,h:[141,245],r:10,hip:[131,273],lk:[131,279],la:[124,287],rk:[133,282],ra:[126,289],le:[141,260],lw:[148,264],re:[140,260],rw:[147,263]},
+ {f:129,h:[141,251],r:10,hip:[131,279],lk:[134,285],la:[137,295],rk:[132,288],ra:[126,295],le:[144,268],lw:[150,271],re:[140,269],rw:[146,269]},
+ {f:135,h:[141,257],r:9,hip:[131,284],lk:[133,287],la:[124,300],rk:[135,292],ra:[131,300],le:[142,274],lw:[147,275],re:[138,276],rw:[146,274]},
+ {f:142,h:[141,261],r:9,hip:[126,287],lk:[130,296],la:[124,303],rk:[134,296],ra:[130,303],le:[143,277],lw:[145,279],re:[143,279],rw:[145,279]},
+ {f:148,h:[141,263],r:9,hip:[132,289],lk:[131,296],la:[124,303],rk:[134,296],ra:[128,303],le:[141,279],lw:[142,280],re:[140,279],rw:[143,283]},
+ {f:154,h:[141,265],r:9,hip:[126,298],lk:[132,293],la:[125,300],rk:[134,299],ra:[130,306],le:[144,283],lw:[148,284],re:[140,282],rw:[145,282]},
+ {f:160,h:[142,265],r:9,hip:[131,292],lk:[131,300],la:[124,306],rk:[134,300],ra:[129,306],le:[143,282],lw:[145,283],re:[140,281],rw:[145,283]},
+ {f:166,h:[141,266],r:9,hip:[129,292],lk:[132,297],la:[130,303],rk:[133,300],ra:[125,306],le:[143,281],lw:[149,283],re:[142,280],rw:[148,282]},
+ {f:172,h:[142,266],r:9,hip:[128,292],lk:[134,299],la:[135,306],rk:[129,300],ra:[125,306],le:[140,280],lw:[146,283],re:[140,280],rw:[146,283]},
+];
+export const hasMeasuredLead=(id:number)=>[2,3,10,13,14,24,26].includes(id);
 export const LeadPerformance:React.FC<{frame:number;shot:number}>=({frame,shot})=>{
  if(!hasMeasuredLead(shot))return null;
- const k=at(shot===2?shot2:shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===26?lastPull:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
+ const k=at(shot===2?shot2:shot===3?shot3:shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===26?lastPull:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
  const shoulder:P=[x-4*s,y+40*s];
  const path=(a:P,b:P,c:P)=>`M${a} L${b} L${c}`;
  const leg=(knee:P,ankle:P,color:string,side:number)=><g><path d={path([k.hip[0]+side*3*s,k.hip[1]],knee,ankle)} fill="none" stroke={color} strokeWidth={9*s} strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankle[0]+2*s} cy={ankle[1]+1*s} rx={8*s} ry={3.4*s} fill="#303a36"/></g>;
