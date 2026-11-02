@@ -30,7 +30,11 @@
      - [x] H4 shots 2/3 pose (4d80b9d, 6593a42)
      - [x] H1 shot 7 alarm arms, shot-7-only override (ed33fd5: MAE 29.124->28.974, SSIM .6612->.6613; head-as-ruler try measured worse, discarded); baseline rebuilt at ed33fd5
      - [x] H2 shot 22 shutter timing + lead pose (a8042c6)
-     - [ ] H3 shot 27 shutter geometry + leaning actor (grade alone kept b72e578), then 24/26/28
+     - [ ] H3 shot 27 shutter + actor, then 24/26/28
+       - [x] Closed-shutter shade overlay from region means (2cc27f3: 27 MAE 26.26->23.74, 28 18.17->15.72); sawtooth slats tried and discarded (groove phase off 4-8 px, MAE up)
+       - [x] Shot 27 side-view lead hold, hand-measured (30a37fa: MAE 23.739->23.224, SSIM .5231->.5257); baseline rebuilt at 30a37fa
+       - [ ] Shots 24 / 26 / 28 error-map pass
+       - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
      - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
@@ -38,6 +42,8 @@
      - [x] Pipeline job ref-shot-grade: kept 23/28/32/34 (b754ced: 25.97->17.52, 24.46->18.16, 16.42->5.16, 25.19->7.99), dropped 3/19 (local mismatch, global slope worse). Baselines rebuilt at b754ced
      - [ ] Shots 3/19 local brightness (region, not global) - after shot 3 pose
      - [ ] Full v14 render
+     - [ ] Umbrella video-maker skill (owner ask: same animation level + quality on new stories) - right after v14
+     - [ ] Update skills/reference-animation-rebuild/SKILL.md lessons (shade overlay from region means, sawtooth needs phase fit, Gemini joints unreliable -> hand-measure with rig head geometry)
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [x] stash@{0} dropped (saved out/drafts/stash0-codex-shot7-lighting-wip.patch); wishes01 + download_batch2 parked on branch park/wishes01-and-batch2; .agentsroom/ ignored
    - [ ] Owner: AI-video repo cleanup plan (needs approval); English-channel monetization answer
