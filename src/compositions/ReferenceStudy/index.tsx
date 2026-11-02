@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill,Html5Audio,staticFile,interpolate,useCurrentFrame} from 'remotion';
+import {AbsoluteFill,Html5Audio,Img,staticFile,interpolate,useCurrentFrame} from 'remotion';
 import {W,H} from '../../lib/tokens';
 import {FONT_CAPTION,OFFLINE_FONTS} from '../../lib/fonts';
 import {loadFont} from '@remotion/google-fonts/Anton';
@@ -23,6 +23,8 @@ const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
  };
 // Linear slope = source mean luma / render mean luma per shot (first six frames skipped).
 // Gate-kept only: 3 (1.21) and 19 (1.10) got worse, their error is local, not global brightness.
+// Spike (scripts/spikes/gp_shot2.py): shot-2 lead as a Blender Grease Pencil render instead of SVG.
+const GP_SHOT2=process.env.REMOTION_GP_SHOT2==='1';
 const SHOT_GRADE:Record<number,number>={23:1.12,27:.925,28:.85,32:.79,34:.63};
 // Shot 28 rule card sits above the shot's dark overlay and grade in the source: it fades in on source frames
 // 2045-2048 (local 8-11) to RGB 243,242,233 sampled inside the card. The source has no countdown clock in 28.
@@ -110,7 +112,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
     <FidelityStage hideLead={sourceAssisted&&hasMeasuredLead(shot.id)} crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
    </g>:null}
    {fullInsert?<g transform="scale(4)">{shot.id===8?<ReferencePhoneInsert frame={frame}/>:shot.id===21?<ReferenceControls frame={frame} showTimer={false}/>:shot.id===23?<ReferenceMechanism frame={frame}/>:shot.id===25?<ReferenceGap frame={frame} showHud={false}/>:<ReferenceStudyEnd frame={frame}/>}</g>:null}
-   {sourceAssisted?<LeadPerformance frame={frame} shot={shot.id}/>:null}
+   {sourceAssisted?GP_SHOT2&&shot.id===2?<foreignObject width={W} height={H}><Img src={staticFile(`reference-study/gp-shot2/${String(frame).padStart(5,'0')}.png`)} style={{width:W,height:H}}/></foreignObject>:<LeadPerformance frame={frame} shot={shot.id}/>:null}
    {sourceAssisted?<g transform="scale(4)">{shot.id===17?<ReferenceMapOverlay frame={frame}/>:null}{shot.id===30?<ReferenceInventory frame={frame}/>:null}{shot.id===31?<ReferenceTorchBeam frame={frame} origin={torchOrigin}/>:null}</g>:null}
    {sourceAssisted&&fx&&typeof value==='number'&&value>0?<rect width={W} height={H} fill={fx.fill} opacity={value}/>:null}
    {shot.id===28?<rect width={W} height={H} fill="#071318" opacity={sourceAssisted?.35+.2*Math.max(0,1-local/20):p*.45}/>:null}
