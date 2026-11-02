@@ -48,10 +48,23 @@ const at=(keys:Key[],f:number):Key=>{
  for(const name of ['h','hip','lk','la','rk','ra','le','lw','re','rw'] as const)out[name]=[lerp(a[name][0],b[name][0],t),lerp(a[name][1],b[name][1],t)];
  return out;
 };
-export const hasMeasuredLead=(id:number)=>[10,13,14,24,26].includes(id);
+// Shot 2: Gemini-pointed joints on SAM 2 crops (tools/sam2/trial), auto-checked.
+const shot2:Key[]=[
+ {f:59,h:[91,208],r:10,hip:[81,238],lk:[77,246],la:[72,257],rk:[85,245],ra:[83,256],le:[90,221],lw:[92,221],re:[90,224],rw:[92,223]},
+ {f:65,h:[91,208],r:10,hip:[81,238],lk:[77,246],la:[72,257],rk:[85,245],ra:[83,256],le:[90,221],lw:[92,221],re:[90,224],rw:[92,223]},
+ {f:71,h:[98,204],r:10,hip:[87,234],lk:[88,244],la:[89,255],rk:[82,244],ra:[77,255],le:[105,218],lw:[108,217],re:[100,220],rw:[109,219]},
+ {f:77,h:[101,200],r:10,hip:[92,232],lk:[86,244],la:[80,252],rk:[96,243],ra:[93,252],le:[104,218],lw:[113,218],re:[104,217],rw:[111,215]},
+ {f:83,h:[103,197],r:11,hip:[90,232],lk:[87,242],la:[79,252],rk:[95,240],ra:[93,251],le:[110,212],lw:[115,213],re:[100,213],rw:[106,214]},
+ {f:89,h:[102,196],r:11,hip:[91,231],lk:[87,240],la:[77,253],rk:[93,243],ra:[92,253],le:[106,212],lw:[107,212],re:[105,214],rw:[107,214]},
+ {f:95,h:[102,195],r:12,hip:[91,229],lk:[88,238],la:[81,250],rk:[94,237],ra:[92,250],le:[104,213],lw:[109,214],re:[104,213],rw:[109,211]},
+ {f:101,h:[102,194],r:11,hip:[91,230],lk:[86,239],la:[79,251],rk:[94,238],ra:[92,251],le:[102,209],lw:[110,209],re:[103,212],rw:[110,211]},
+ {f:107,h:[103,194],r:12,hip:[92,228],lk:[88,238],la:[79,251],rk:[95,238],ra:[93,251],le:[108,210],lw:[113,209],re:[105,212],rw:[109,211]},
+ {f:110,h:[104,194],r:12,hip:[92,228],lk:[89,237],la:[81,251],rk:[96,239],ra:[94,251],le:[107,213],lw:[115,212],re:[107,212],rw:[115,209]},
+];
+export const hasMeasuredLead=(id:number)=>[2,10,13,14,24,26].includes(id);
 export const LeadPerformance:React.FC<{frame:number;shot:number}>=({frame,shot})=>{
  if(!hasMeasuredLead(shot))return null;
- const k=at(shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===26?lastPull:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
+ const k=at(shot===2?shot2:shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===26?lastPull:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
  const shoulder:P=[x-4*s,y+40*s];
  const path=(a:P,b:P,c:P)=>`M${a} L${b} L${c}`;
  const leg=(knee:P,ankle:P,color:string,side:number)=><g><path d={path([k.hip[0]+side*3*s,k.hip[1]],knee,ankle)} fill="none" stroke={color} strokeWidth={9*s} strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankle[0]+2*s} cy={ankle[1]+1*s} rx={8*s} ry={3.4*s} fill="#303a36"/></g>;
