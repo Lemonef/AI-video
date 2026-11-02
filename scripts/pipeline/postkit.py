@@ -7,11 +7,13 @@ import shutil
 import subprocess
 from pathlib import Path
 
-# Hashtags are a minor search signal now: 3-5 specific Thai tags beat broad English ones
-# (#animation reaches the wrong audience; #จ๊าบ is also slang for "cool"). The caption's first
-# ~50 characters carry the search phrase instead (docs/growth-playbook.md, Captions and search).
-DEFAULT_TAGS = ["#jaabstory"]
-MAX_TAGS = 5
+# Hashtags: Thai tags with measured volume (YouTube /hashtag counts in the brain,
+# corrections/2026-11-02-hashtags-picked-without-volume.md), listed per episode biggest-first.
+# Broad English tags reach the wrong audience; #จ๊าบ is also slang for "cool". The series tag
+# always goes first so every part links together, even though its own pool is small.
+SERIES_TAG = "#jaabstory"
+IG_MAX_TAGS = 5    # Instagram cap since Dec 2025 (caption + comments count together)
+YT_MAX_TAGS = 15   # YouTube ignores ALL hashtags when there are more than 15
 CHECKLIST = [
     "Cover = the -cover.png (also the playlist thumbnail)",
     "Add to the arc's playlist, in order",
@@ -34,9 +36,10 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
     pin = post.get("pin") or (
         f"📌 A = {end.get('a', '')} · B = {end.get('b', '')}\nคนส่วนใหญ่เลือกอะไร จ๊าบทำตามนั้น! {nxt}" if vote else f"📌 {question}\n{nxt}"
     )
-    tags = post.get("hashtags", DEFAULT_TAGS)
-    if len(tags) > MAX_TAGS:
-        raise ValueError(f"{len(tags)} hashtags; keep {MAX_TAGS} or fewer, specific ones")
+    tags = [SERIES_TAG] + [t for t in post.get("hashtags", []) if t != SERIES_TAG]
+    if len(tags) > YT_MAX_TAGS:
+        raise ValueError(f"{len(tags)} hashtags; YouTube drops them all above {YT_MAX_TAGS}")
+    ig_tags = tags[:IG_MAX_TAGS]  # the episode lists tags biggest-first, so the cut keeps the strongest
     label = f"ตอน {part}/{post['total']}" if part and post.get("total") else (f"ตอน {part}" if part else "")
     first = " · ".join(x for x in (post.get("keyword"), label) if x)  # search phrase inside the first ~50 chars
     lines = [
@@ -62,7 +65,8 @@ def write(final_dir: Path, episode: dict, render_still) -> Path:
         "",
         "5) INSTAGRAM REELS via Meta Business Suite (business.facebook.com -> Create reel; same video.mp4, same time):",
         "- Post to: Instagram only (untick Facebook unless you want it there too)",
-        "- Video: video.mp4 · Caption: the same block as 1)",
+        f"- Video: video.mp4 · Caption: the block in 1), but swap its hashtag line for this one (Instagram allows {IG_MAX_TAGS}):",
+        f"  {' '.join(ig_tags)}",
         "- Cover: cover.png (it is kept inside IG's 3:4 profile-grid crop)",
         "- AI label: ON · Auto captions: OFF (the video has its own)",
         "- Schedule -> 20:00, the same time as TikTok",
