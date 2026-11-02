@@ -1,6 +1,6 @@
 # Bangkok flood Part 2 — B continuation, pre-voice review
 
-2026-10-31. Owner confirmed B: join other residents. Part1 is approved and protected at `out/final/bangkok-flood/ep01/video.mp4`. No fixed runtime. This original continuation does not reuse reference stories, casts, images or recordings.
+2026-10-31. Owner confirmed B: join other residents. Part1 is approved and protected at `out/final/02-bangkok-flood/ep01/video.mp4`. No fixed runtime. This original continuation does not reuse reference stories, casts, images or recordings.
 
 ## Story decisions before voice generation
 

@@ -8,7 +8,7 @@ Prior54.866667sfinal and kit preserved intact in `out/drafts/bangkok-flood/ep02/
 
 The receipt below describes the first54.866667sdelivery and how it was produced; current values above and machine receipt supersede its output hash/clock. Source patches/quiet-gap evidence remain valid on the prior delivery clock; remap timestamps by1/.96 for the new delivery. Sound-cue JSON preserves prior-clock values alongside remapped final frames.
 
-Final file: `D:/AI-video/out/final/bangkok-flood/ep02/video.mp4`.
+Final file: `D:/AI-video/out/final/02-bangkok-flood/ep02/video.mp4`.
 SHA256: `488f6f953d0b84d74258da7997e86e5d5c7ad7e980b66d0fa461debb1059c03a`.
 Version: `out/versions/flood02/2026-10-31_215153.mp4`.
 Picture and audio: **54.866667s**, **1646picture frames**, **1440×2560**, **30fps**, H.264/AAC,9:16.
@@ -19,8 +19,8 @@ Kit in the same final directory: `cover.png`, `post.txt`, `script.md`.
 
 Original Bangkok flood/condo-looter arc, Part2of3. Owner confirmed **B: join the other residents**. The ghost trilogy is complete; the older1:1 practice remains paused and unfinished. Owner asked that the29reference posts and actual useful GitHub skills inform story/hook/graphics/retention BEFORE speech generation. No fixed total-duration target or cap. Chat English, story Thai. Later seven URLs are explicitly watch-later, after this release.
 
-Part1 remains byte-identical: `out/final/bangkok-flood/ep01/video.mp4`, SHA256 `4991bbecde018c791b688e5853d4d2b45e5e6c44ba20c07bc0022e5c6a6796ff`.
-GhostPart3 remains byte-identical: `out/final/ghost/ep03/video.mp4`, SHA256 `c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee`.
+Part1 remains byte-identical: `out/final/02-bangkok-flood/ep01/video.mp4`, SHA256 `4991bbecde018c791b688e5853d4d2b45e5e6c44ba20c07bc0022e5c6a6796ff`.
+GhostPart3 remains byte-identical: `out/final/01-ghost/ep03/video.mp4`, SHA256 `c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee`.
 
 ## Story and source lessons applied
 

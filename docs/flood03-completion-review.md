@@ -1,6 +1,6 @@
 # Flood03 completion review
 
-Export: `out/final/bangkok-flood/ep03/video.mp4`.
+Export: `out/final/02-bangkok-flood/ep03/video.mp4`.
 Version: `out/versions/flood03/2026-11-01_195924.mp4`.
 SHA-256: `5ef89352f1877eb7c1a6f8ea566f83e78dceff10ec16b7427901a59c7e9ab36a`.
 

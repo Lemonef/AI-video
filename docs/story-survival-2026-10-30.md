@@ -1,6 +1,6 @@
 # Today's new story — survival development, 2026-10-30
 
-Status: STORY DEVELOPMENT, not approved or voiced. User stopped Three Wishes and asked to find a good survival story first. Reference recreation is PAUSED, unfinished. No more Three Wishes voice/render work. Ghost arc finished; final kits moved under out/final/ghost/ep01–ep03, preserving EP3 hash.
+Status: STORY DEVELOPMENT, not approved or voiced. User stopped Three Wishes and asked to find a good survival story first. Reference recreation is PAUSED, unfinished. No more Three Wishes voice/render work. Ghost arc finished; final kits moved under out/final/01-ghost/ep01–ep03, preserving EP3 hash.
 
 ## What must be preserved
 
@@ -127,7 +127,7 @@ P3: coordinated evacuation, payoff of an earlier useful item/decision, emotional
 
 ### Visual/audio requirements carried forward
 
-Keep Jaab's approved identity; design Khem distinctly (own person, no real-person face/voice imitation). Geographic wide → load/hand inserts → full-body stair motion → two-shot reaction → restrained close-up for fear reveal. Water/reflections follow floor planes; rain only where visible. Source of light and wet/dry levels consistent. Natural Thai, continuous performance/edit flow, intelligible dialogue, quiet beds and contact-synced effects. Validate bounds/overlap/captions/exports and actually review each scene/motion before final. Final release will go in `out/final/bangkok-flood/ep01/`; no such finished video exists yet.
+Keep Jaab's approved identity; design Khem distinctly (own person, no real-person face/voice imitation). Geographic wide → load/hand inserts → full-body stair motion → two-shot reaction → restrained close-up for fear reveal. Water/reflections follow floor planes; rain only where visible. Source of light and wet/dry levels consistent. Natural Thai, continuous performance/edit flow, intelligible dialogue, quiet beds and contact-synced effects. Validate bounds/overlap/captions/exports and actually review each scene/motion before final. Final release will go in `out/final/02-bangkok-flood/ep01/`; no such finished video exists yet.
 
 
 ## LATEST OWNER CORRECTION — thugs are the antagonists
@@ -183,11 +183,11 @@ P1 identify looters, warn neighbors, become target.
 P2 follow selected defensive/collective route; the others Jaab warned can help, repaying that earlier choice. Solve a concrete escape/confrontation problem before adding one complication.
 P3 coordinated escape/verified help; earlier recognition/boat/neighbor details pay off. Jaab survives through observation and community, not becoming an invincible fighter. Close the arc with a brief comic release after danger ends.
 
-Production remains paused at STORY FIRST. Need concise final script and coherent shot map, then make the actual flood sets/cast/voice, review scenes and actions, and release under out/final/bangkok-flood/ep01. No finished flood video yet.
+Production remains paused at STORY FIRST. Need concise final script and coherent shot map, then make the actual flood sets/cast/voice, review scenes and actions, and release under out/final/02-bangkok-flood/ep01. No finished flood video yet.
 
 
 ## BUILT — owner said finish/build now
-User supplied exact flood/condo opening and then explicitly instructed to finish/build quickly. Final10-scene45s episode: episodes/flood01.json; new Flood.tsx/cast; out/final/bangkok-flood/ep01/video.mp4 +cover/post/script. Full actual review/evidence: docs/flood01-release-review.md. No longer waiting on premise approval. Reference remains paused, Three Wishes canceled. No social post performed.
+User supplied exact flood/condo opening and then explicitly instructed to finish/build quickly. Final10-scene45s episode: episodes/flood01.json; new Flood.tsx/cast; out/final/02-bangkok-flood/ep01/video.mp4 +cover/post/script. Full actual review/evidence: docs/flood01-release-review.md. No longer waiting on premise approval. Reference remains paused, Three Wishes canceled. No social post performed.
 
 
 ## Later explicit owner pacing override

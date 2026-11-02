@@ -1,6 +1,6 @@
 # Bangkok flood Part1 — release receipt, 2026-10-30
 
-Final: D:/AI-video/out/final/bangkok-flood/ep01/video.mp4
+Final: D:/AI-video/out/final/02-bangkok-flood/ep01/video.mp4
 45.000s container /1347 pictureframes /30fps /1440x2560 /SAR1:1 /9:16.
 SHA256 c335fc288fc66f65c5d1336dd898d1d5c4c654fd5b4b0ac9c902154f358841a0.
 Kit alongside: cover.png,post.txt,script.md. Post now after owner's review; no social post performed.
@@ -20,7 +20,7 @@ User explicitly requested finish/build quickly after refining: “จะเก�
 - Cover inspected. Labels/captions at sampled frames within canvas; no visible overlap/clipped face in those samples. Phone/boat/TV inserts explain the relevant beats. Indoor rain not drawn; outdoor flood scene has rain and water motion. Blackout corridor cast dimmed/rim-lit.
 - Actual final audio measured -13.75LUFS,-1.49dBTP,LRA3.0. Background beds quiet/ducked and continuous. This meter/transcript check does NOT substitute for a full human listening/performance sign-off; that remains OPEN.
 - Final code/source uses new Flood.tsx and two distinct looter looks. Source reference study and copied plates are NOT used for this original release.
-- Ghost finale moved per explicit owner ask to out/final/ghost/ep03/video.mp4; hash unchanged c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee. All ghost ep01–03 kits grouped intact.
+- Ghost finale moved per explicit owner ask to out/final/01-ghost/ep03/video.mp4; hash unchanged c176f122392eb23ffbc925f05fff1a3351f40c819f6e7b0ec152e26ac249e5ee. All ghost ep01–03 kits grouped intact.
 
 ## Practical limits / follow-up
 
@@ -37,7 +37,7 @@ Owner heard fast,monotone,repeated pacing, then explicitly said video can be as 
 
 A genuinely fresh Iapetus performance (same Gemini2.5model) was generated with episode-level natural/story-specific direction,joined scene text,tempo1.0 instead of1.03,more varied natural Thai syntax and purposeful recognition/threat holds. No instructed runtime. Transcript covers the whole revised script and complete final villain dialogue, with no spoken English direction. Source take72.922875s. Camera cuts retimed around the performance.
 
-New promoted final: SAME out/final/bangkok-flood/ep01/video.mp4,74.500s container,2233pictureframes,1440x2560,30fps. SHA256 dccad60c4c1217077aa6f8b925849c86971c19269e584179f65cf5b893d33c22. Distinct review copy out/drafts/bangkok-flood/ep01/natural-pacing.mp4; isolated performance natural-narration.mp3. Cover/post/script updated alongside final.
+New promoted final: SAME out/final/02-bangkok-flood/ep01/video.mp4,74.500s container,2233pictureframes,1440x2560,30fps. SHA256 dccad60c4c1217077aa6f8b925849c86971c19269e584179f65cf5b893d33c22. Distinct review copy out/drafts/bangkok-flood/ep01/natural-pacing.mp4; isolated performance natural-narration.mp3. Cover/post/script updated alongside final.
 
 All10new scene stills and12action phases inspected in ep01-natural-review. Actual new mix -13.02LUFS/-1.49dBTP,LRA2.6. Output is not speed-stretched to an artificial duration.31pytest pass (new tests ensure long stories allowed,visual checks preserved,performance direction invalidates voice cache without changing alignment lines); TypeScript pass. Threat's4.6s held visual reported as WARN, intentional quiet build,not a blocked duration check.
 

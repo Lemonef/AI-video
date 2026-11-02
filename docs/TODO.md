@@ -52,12 +52,15 @@
      - [ ] Update skills/reference-animation-rebuild/SKILL.md lessons (shade overlay from region means, sawtooth needs phase fit, Gemini joints unreliable -> hand-measure with rig head geometry)
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [x] stash@{0} dropped (saved out/drafts/stash0-codex-shot7-lighting-wip.patch); wishes01 + download_batch2 parked on branch park/wishes01-and-batch2; .agentsroom/ ignored
-   - [ ] Owner: English-channel monetization answer
+   - [x] Owner: English-channel answer (2026-11-03): yes, English re-voice of the same episodes on a separate 2nd account. Not built yet; needs an English stock voice + English captions, queued after the 1:1 work
+   - [x] Story numbering (owner 2026-11-03): out/final/<NN>-<slug>/ - 01-ghost, 02-bangkok-flood, 03-lift-ex; next story = 04. Folders renamed, docs/scripts paths updated
+   - [ ] Owner: wishes01 (ตะกรุดสามคำขอ, monkey's-paw amulet story) keep as story 04 or drop
    - [ ] LAST in queue (owner 2026-11-02: "add the repo clean up at last, rn its so messy"): AI-video repo cleanup - re-check the plan against the repo as it stands then, show it, then execute
 9. [ ] Upload quality (owner 2026-11-02: "ppl say video quality is bad")
+   - [x] Posted copies measured (lift ep1, 2026-11-03): TikTok 576x1024 h264 ~301 kbps + aac 128k; IG 1080x1920 ~398 kbps + audio ~49 kbps. Copies in D:/Documents/Downloads/ (Download.mp4, ig/lift-ep1-ig.mp4)
    - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
-8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
+8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
@@ -83,14 +86,14 @@
 - [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
 - [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
 - [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
-- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
+- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
 - [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
 - [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
 
 ## NOW (2026-10-30) — read this first
-- [x] New survival story Part1 built/reviewed: out/final/bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
+- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
 - [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.
-- [x] Group existing final arc as out/final/ghost/ep01–ep03; approved ep03 bytes/hash preserved.
+- [x] Group existing final arc as out/final/01-ghost/ep01–ep03; approved ep03 bytes/hash preserved.
 - [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
 - [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series

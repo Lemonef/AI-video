@@ -27,7 +27,7 @@ def main():
     m=json.loads(meter[meter.rfind('{'):meter.rfind('}')+1])
     filt=f"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true,apad=whole_dur=74,atrim=duration=74"
     subprocess.run(['ffmpeg','-v','error','-y','-i',str(joined),'-af',filt,'-c:v','copy','-c:a','aac','-b:a','192k','-ar','48000','-t','74','-movflags','+faststart',str(version)],check=True)
-    final=ROOT/'out/final/bangkok-flood/ep03/video.mp4'
+    final=ROOT/'out/final/02-bangkok-flood/ep03/video.mp4'
     shutil.copy2(version,final)
     print(version)
 

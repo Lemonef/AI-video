@@ -14,7 +14,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     props = json.loads((ROOT / '.build/flood03.raw.props.json').read_text(encoding='utf-8'))
     ep = props['episode']
-    video = ROOT / 'out/final/bangkok-flood/ep03/video.mp4'
+    video = ROOT / 'out/final/02-bangkok-flood/ep03/video.mp4'
     frame = 0
     rows = []
     for i, scene in enumerate(ep['scenes']):
