@@ -1,5 +1,5 @@
 import React from 'react';
-import {staticFile} from 'remotion';
+import {interpolate,staticFile} from 'remotion';
 import {walkCycle} from '../../lib/walkCycle';
 import type {StageProps} from './Stages';
 import type {CrowdTarget} from './crowd-blocking';
@@ -226,7 +226,7 @@ const Lot:React.FC<{f:number;close?:boolean;assisted?:boolean;targets?:CrowdTarg
  {!close?<><path d="M0,6 H270 V20 H0Z" fill="#183231"/><path d="M0,0 H13 V480 H0Z M257,0 H270 V480 H257Z" fill="#243d3e"/><path d="M0,432 H270 V449 H0Z" fill="#203a3b"/><path d="M0,425 H270" stroke="#7e9087" strokeWidth="2"/><rect x="17" y="326" width="48" height="83" fill="#2c4648"/><rect x="22" y="332" width="38" height="70" fill="#b6c1ae"/></>:null}
  </g>;
 const Door:React.FC<{f:number;p:number;id:number;assisted?:boolean}>=({f,p,id,assisted=false})=>{
- const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?.75*smooth(p/.35):pull?(id===26?.97+.03*p:.75+.22*p):0;
+ const pull=id===24||id===26,closed=id>=27,down=closed?1:id===22?(assisted?interpolate(f,[0,4,12,30,47,86],[0,0,.25,.67,.75,.75],{extrapolateLeft:'clamp',extrapolateRight:'clamp'}):.75*smooth(p/.35)):pull?(id===26?.97+.03*p:.75+.22*p):0;
  const x=id===10?mix(82,57,smooth(p)):id===13?100:id===14?mix(100,65,smooth(p)):id===15?32:38;
  const pose=id===10?'walk':pull?'pull':id===14?'keys':closed?'recover':'phone';
  const resolved=actorLayout(x,437,RIG.scale,pose,f,id===10?7:0,React.useContext(HeadTargetContext));
