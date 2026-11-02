@@ -21,6 +21,9 @@ const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
  31:{fill:'#000',opacity:[.78,.68,.58,.48,.38,.30,.22,.12,.02]},
  32:{fill:'#000',opacity:[.75,.61,.50,.36,.25,.14,.05]},
  };
+// Linear slope = source mean luma / render mean luma per shot (first six frames skipped).
+// Gate-kept only: 3 (1.21) and 19 (1.10) got worse, their error is local, not global brightness.
+const SHOT_GRADE:Record<number,number>={23:1.12,28:.85,32:.79,34:.63};
 
 export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolean;sourceAssisted?:boolean}> = ({showStudyLabels=false,withSound=true,sourceAssisted=false}) => {
  const frame=useCurrentFrame();
@@ -88,6 +91,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  const caption=captions.find(c=>frame>=c.start&&frame<c.end);
  const count=shot.id===24?Math.floor(interpolate(frame,[1799,1807,1810,1823,1837,1868,1885],[0,8,11,24,38,39,39],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})):shot.id===25?39:40;
  const fullInsert=sourceAssisted&&[8,21,23,25,35].includes(shot.id);
+ const grade=sourceAssisted?SHOT_GRADE[shot.id]:undefined;
  let torchOrigin:{x:number;y:number}|undefined;
  if(actorTarget){
   const s=actorTarget.r/30,wx=actorTarget.x+34*s,wy=actorTarget.y+36*s;
@@ -96,7 +100,8 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  return <AbsoluteFill style={{background:'#071218',overflow:'hidden'}}>
   {withSound?<Html5Audio src={staticFile('reference-study/study-sound.wav')}/>:null}
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
-   <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient></defs>
+   <defs><radialGradient id="study-vignette"><stop offset=".42" stopColor="#000" stopOpacity={0}/><stop offset="1" stopColor="#000" stopOpacity={sourceAssisted?.12:.35}/></radialGradient>{grade?<filter id="shot-grade" colorInterpolationFilters="sRGB" x="0" y="0" width="100%" height="100%" filterUnits="userSpaceOnUse"><feComponentTransfer><feFuncR type="linear" slope={grade}/><feFuncG type="linear" slope={grade}/><feFuncB type="linear" slope={grade}/></feComponentTransfer></filter>:null}</defs>
+   <g filter={grade?'url(#shot-grade)':undefined}>
    {!fullInsert?<g transform={cameraTransform} style={shot.id===10&&local<7?{filter:`blur(${18*(1-local/7)}px)`}:shot.id===18&&local<13?{filter:`blur(${18*(1-local/13)}px)`}:undefined}>
     <FidelityStage hideLead={sourceAssisted&&hasMeasuredLead(shot.id)} crowdTargets={crowdTargets} actorTarget={actorTarget} sourceAssisted={sourceAssisted} shot={shot} frame={frame} local={local} p={p}/>
    </g>:null}
@@ -114,6 +119,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
    {shot.id===28?<g opacity={Math.min(1,(local+1)/8)}><rect x={152} y={616} width={776} height={256} rx={7} fill="#eeecdc"/><rect x={456} y={641} width={168} height={21} rx={5} fill="#be3f38"/><text x={540} y={657} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={15} fill="#f1ede0">SHOP RULE #1</text><text x={540} y={721} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={43} fill="#232a21">IF THEY CAN SEE YOU, THEY</text><text x={540} y={769} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={43} fill="#232a21">COME</text><text x={540} y={819} textAnchor="middle" fontFamily={STUDY_FONT} fontSize={17} letterSpacing={2} fill="#656956">LIGHTS OFF ? NO NOISE</text></g>:null}
    {showStudyLabels&&shot.stage!=='end'?<text x={W/2} y={1380} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={shot.label.length>29?34:40} fontWeight={800} fill="#EEEBD5" stroke="#17272C" strokeWidth={6} paintOrder="stroke">{shot.label.toUpperCase()}</text>:null}
    {showStudyLabels?<g><rect x={665} y={55} width={330} height={52} rx={12} fill="#0A191E" opacity={.72}/><text x={830} y={90} textAnchor="middle" fontFamily={FONT_CAPTION} fontSize={23} fontWeight={600} fill="#C2CCB9">PRIVATE STUDY  /  {shot.id.toString().padStart(2,'0')}</text></g>:null}
+   </g>
   </svg>
  </AbsoluteFill>;
 };
