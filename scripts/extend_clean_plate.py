@@ -45,7 +45,10 @@ OVERLAYS = {
 }
 CAPTION_BOX = (50, 290, 220, 340)  # burned-in captions, every shot
 # Bright-lit spans only: the plate is the lit aisle, dark/torch frames would pull it down.
-DEFAULT_SPANS = {'aisle': [(3, None), (19, None), (29, 31)]}  # (shot, end local frame or None = whole shot)
+# (shot, first local frame, end local frame or None = to the shot end). Shot 15 opens on the door
+# plate and cuts to map-parking at source frame 894 (calibration.json), so its span starts there.
+DEFAULT_SPANS = {'aisle': [(3, 0, None), (19, 0, None), (29, 0, 31)],
+                 'map-parking': [(15, 42, None), (16, 0, None)]}
 
 
 def matrix_at(samples, frame):
@@ -98,14 +101,15 @@ def main():
     mi = np.nonzero(margin)
     Xm, Ym = X[mi], Y[mi]
     stack = []
-    for shot_id, end_local in DEFAULT_SPANS[a.plate]:
+    for shot_id, start_local, end_local in DEFAULT_SPANS[a.plate]:
         s = shots[shot_id - 1]
+        start = s['start'] + start_local
         end = s['end'] if end_local is None else s['start'] + end_local
         samples = [k for k in plate_samples if k['shot'] == shot_id]
         boxes = OVERLAYS.get(shot_id, []) + [CAPTION_BOX]
-        frames = read_frames(s['start'], end)
+        frames = read_frames(start, end)
         for i in range(0, len(frames), FRAME_STRIDE):
-            m = matrix_at(samples, s['start'] + i)
+            m = matrix_at(samples, start + i)
             fx = (m[0, 0]*Xm + m[0, 1]*Ym + m[0, 2])
             fy = (m[1, 0]*Xm + m[1, 1]*Ym + m[1, 2])
             ok = (fx >= 0) & (fx < UNITS[0]) & (fy >= 0) & (fy < UNITS[1])
