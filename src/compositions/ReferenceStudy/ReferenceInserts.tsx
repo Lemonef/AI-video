@@ -187,10 +187,16 @@ export const ReferenceControls:React.FC<FrameProps&{showTimer?:boolean}>=({frame
  </g>;
 };
 
-export const ReferencePullBadge:React.FC<{count?:number;x?:number;y?:number}>=({count=39,x=198,y=73})=><g transform={`translate(${x} ${y})`}>
- <rect width="61" height="23" rx="3" fill="#eeeada" stroke="#c7c6b9" strokeWidth=".5"/>
- <text x="5" y="14.2" fontFamily={BODY} fontSize="3.7" letterSpacing=".5" fill="#73786b">PULLS</text><text x="33" y="16.6" textAnchor="middle" fontFamily={F} fontSize="11.2" fill="#1e2925">{count}</text><text x="45" y="15.7" fontFamily={BODY} fontSize="6.5" fill="#555e50">/ 40</text>
+// The source badge turns green the frame the count reaches 40 (1964) and stays green; colours sampled on
+// source frame 2005: fill RGB 48,146,72, text brightest pixels 216-233 (count), /40 dimmer.
+const PULL_DONE={fill:'#30924a',label:'#d4ecd7',count:'#e8efe7',total:'#c0e2c3'};
+export const ReferencePullBadge:React.FC<{count?:number;x?:number;y?:number}>=({count=39,x=198,y=73})=>{
+ const done=count>=40;
+ return <g transform={`translate(${x} ${y})`}>
+ <rect width="61" height="23" rx="3" fill={done?PULL_DONE.fill:'#eeeada'} stroke={done?'none':'#c7c6b9'} strokeWidth=".5"/>
+ <text x="5" y="14.2" fontFamily={BODY} fontSize="3.7" letterSpacing=".5" fill={done?PULL_DONE.label:'#73786b'}>PULLS</text><text x="33" y="16.6" textAnchor="middle" fontFamily={F} fontSize="11.2" fill={done?PULL_DONE.count:'#1e2925'}>{count}</text><text x="45" y="15.7" fontFamily={BODY} fontSize="6.5" fill={done?PULL_DONE.total:'#555e50'}>/ 40</text>
  </g>;
+};
 
 /** Screen-space low insert. Hands attach to the moving lower edge, then release. */
 export const ReferenceGap:React.FC<FrameProps&{showHud?:boolean}>=({frame,showHud=true})=>{
