@@ -40,7 +40,12 @@ STUDY_DIR = Path(os.environ.get('REFERENCE_STUDY_DIR',
 COMPOSITION = 'ReferenceAssisted'
 # Render settings and sample phases are part of the baseline: changing them
 # invalidates every cached control (checked below), so they live here only.
-RENDER_ARGS = ['--scale=0.5', '--crf=20', '--concurrency=4']
+# ProRes 4444, not h264: a badge-only edit on shot 26 changed 61% of the pixels
+# outside the badge at crf20 (mean 1.65, max 59) and none at ProRes (2026-11-03),
+# so local fixes no longer fail on encoder spill. Remotion 4.0.539's h264 floor is
+# crf 1, so true-lossless h264 is not available.
+RENDER_ARGS = ['--scale=0.5', '--codec=prores', '--prores-profile=4444', '--concurrency=4']
+CLIP_EXT = 'mov'   # must match the codec above; Remotion rejects a mismatched extension
 # Offline fonts keep renders free of network font loading, so two runs of the
 # same code draw identical captions.
 RENDER_ENV = {'REMOTION_OFFLINE_FONTS': '1'}
@@ -141,7 +146,7 @@ def make_baseline(shots, base_dir):
         meta = base_dir/f'shot{shot:02}.json'
         if meta.exists():
             fail(f'baseline for shot {shot} exists; delete it deliberately to rebuild')
-        clip = base_dir/f'shot{shot:02}.mp4'
+        clip = base_dir/f'shot{shot:02}.{CLIP_EXT}'
         metrics = measure(shot, clip, render(shot, clip), base_dir/f'shot{shot:02}-review')['frame']
         meta.write_text(json.dumps({'shot': shot, 'commit': git('rev-parse', 'HEAD'),
                                     'clip_sha256': sha(clip), **fingerprint(), **metrics},
@@ -158,7 +163,7 @@ def load_baseline(shot, base_dir):
     for key, value in fingerprint().items():
         if base.get(key) != value:
             fail(f'baseline for shot {shot} is stale: {key} changed since it was made')
-    if sha(base_dir/f'shot{shot:02}.mp4') != base['clip_sha256']:
+    if sha(base_dir/f'shot{shot:02}.{CLIP_EXT}') != base['clip_sha256']:
         fail(f'baseline clip for shot {shot} was modified')
     return base
 
@@ -189,9 +194,9 @@ def main():
         meta = load_baseline(shot, args.baseline_dir)
         # The baseline clip is re-measured every run (cheap, deterministic decode),
         # so editing actor boxes never leaves a stale cached score.
-        base = measure(shot, args.baseline_dir/f'shot{shot:02}.mp4', shots[shot-1]['start'],
+        base = measure(shot, args.baseline_dir/f'shot{shot:02}.{CLIP_EXT}', shots[shot-1]['start'],
                        args.out/f'shot{shot:02}-baseline-review')
-        clip = args.out/f'shot{shot:02}.mp4'
+        clip = args.out/f'shot{shot:02}.{CLIP_EXT}'
         cand = measure(shot, clip, render(shot, clip), args.out/f'shot{shot:02}-review')
         scores = [k for k in ('frame', 'actor') if base[k]]
         if shot in args.shots:
