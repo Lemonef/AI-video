@@ -19,7 +19,8 @@
      - [x] SAM 2 CPU (D:/tools/sam2, hiera_tiny): shot 2 = 52 frames in ~2.3 min (2.6 s/frame, 540x960), clean full-body masks; MUST prompt on a sharp frame (box + torso point, propagate both ways) - frame-0 focus blur sent the track onto the pink window
      - [ ] Joint pipeline (owner-agreed 2026-11-02): SAM mask -> Gemini points -> auto-check (point outside mask, limb length jump vs neighbours) -> Claude hand-marks ONLY flagged joints
      - [ ] SAM shot 3 masks (D:/tools/sam2/trial/track.py, generic tracker; PAUSED by owner 2026-11-02 00:3x, rerun from scratch)
-     - [ ] Gemini joints retry, done right: SAM crop + native pointing format [y,x] 0-1000, one name per joint (D:/tools/sam2/trial/joints.py, masks in trial/shot02-masks); blocked 2026-11-02 by free-tier 429 on gemini-2.5-flash -> rerun after quota reset
+     - [x] Gemini joints on SAM crops, shot 2 frames 5/25/51 (gemini-3-flash-preview; 2.5-flash 429, 3.7/3.8-flash time out, gemini-4-argon listed but 429 = no free quota): head/wrists/ankles/toes good, hips/knees weak
+     - [x] Auto-check D:/tools/sam2/trial/check.py (off-mask + bone length vs median): flags 4-7 of 15 per frame, catches the visible knee/hip misses; arm-length rule over-flags foreshortened reaching arms; misses frame-25 high hip with only 3 frames (median weak)
      - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
      - [ ] OpenCV optical flow for walking shots (later)
    - [ ] H4 shots 2/3 pose with IK (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
