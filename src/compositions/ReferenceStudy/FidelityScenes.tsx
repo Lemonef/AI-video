@@ -26,7 +26,13 @@ const smooth=(x:number)=>{const t=Math.max(0,Math.min(1,x));return t*t*(3-2*t);}
 const mix=(a:number,b:number,t:number)=>a+(b-a)*t;
 const pts=(a:number[][])=>a.map(p=>p.join(',')).join(' ');
 const COLORS=['#b33221','#debc38','#355d42','#d9d5b6','#37717a','#7f2834','#d16b28'];
+// Warm-dark grade the source applies to the counter plate in the alarm shots (7, 9). Per-channel
+// gain/offset least-squares fit of source vs plate on background pixels (actor and caption masked),
+// pooled over shots 7 and 9; it replaced a red+black wash and cut background MAE ~23 -> ~13.
+const COUNTER_ALARM_GRADE={r:[.74,6.5],g:[.60,-1],b:[.59,-1.3]};
+const gradeRow=([gain,offset]:number[],channel:number)=>[0,1,2].map(i=>i===channel?gain:0).concat(0,offset/255).join(' ');
 const Defs=()=> <defs>
+ <filter id="counter-alarm-grade" colorInterpolationFilters="sRGB"><feColorMatrix type="matrix" values={[gradeRow(COUNTER_ALARM_GRADE.r,0),gradeRow(COUNTER_ALARM_GRADE.g,1),gradeRow(COUNTER_ALARM_GRADE.b,2),'0 0 0 1 0'].join(' ')}/></filter>
  <linearGradient id="f-sky" x2="0" y2="1"><stop stopColor="#0b1720"/><stop offset="1" stopColor="#253b45"/></linearGradient>
  <linearGradient id="f-floor" x2="0.25" y2="1"><stop stopColor="#e0dac2"/><stop offset="1" stopColor="#a39c85"/></linearGradient>
  <linearGradient id="f-glass" x2="1" y2="1"><stop stopColor="#15323b" stopOpacity=".1"/><stop offset="1" stopColor="#a2aaa1" stopOpacity=".12"/></linearGradient>
@@ -141,7 +147,7 @@ const Aisle:React.FC<{f:number;dark?:number;actor?:boolean;assisted?:boolean;tir
  </g>;
 
 const Counter:React.FC<{f:number;pose:string;emotion:string;assisted?:boolean;arms?:ArmPose}>=({f,pose,emotion,assisted=false,arms})=>assisted?<g>
- <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none"/>{pose==='phone'||emotion==='panic'?<><rect width="270" height="480" fill="#be2024" opacity=".28"/><rect width="270" height="480" fill="#000" opacity=".14"/></>:null}
+ <image href={staticFile('reference-study/counter-clean-v1.png')} width="270" height="480" preserveAspectRatio="none" filter={pose==='phone'||emotion==='panic'?'url(#counter-alarm-grade)':undefined}/>
  <defs><mask id="counter-rig-mask"><rect width="270" height="480" fill="white"/><path d="M0,344 L181,347 L224,350 V480 H0Z" fill="black"/><path d="M130,324 L139,311 L158,313 L164,374 L134,375Z" fill="black"/></mask></defs>
  <g mask="url(#counter-rig-mask)"><Cashier x={180} y={432} s={1} f={f} pose={pose} emotion={emotion} arms={arms}/></g>
  </g>:<g>
