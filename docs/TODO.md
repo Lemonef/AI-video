@@ -24,7 +24,7 @@
      - [x] SAM shot 3 masks (D:/tools/sam2/trial/track.py): 62 frames 175 s
      - [x] Gemini joints on SAM crops, shot 2 frames 5/25/51 (gemini-3-flash-preview; 2.5-flash 429, 3.7/3.8-flash time out, gemini-4-argon listed but 429 = no free quota): head/wrists/ankles/toes good, hips/knees weak
      - [x] Auto-check D:/tools/sam2/trial/check.py <shot_dir> [--sheet] (off-mask + leg/torso/head bone length vs median; arms exempt): flags 4-7 of 15 per frame, catches the visible knee/hip misses; arm-length rule over-flags foreshortened reaching arms; misses frame-25 high hip with only 3 frames (median weak)
-     - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
+     - [x] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version — KEEP (actor MAE 30.19->27.03, SSIM .566->.608; frame MAE 12.04->11.91; guards identical; 0164d26, flag REMOTION_GP_SHOT2=1)
      - [ ] OpenCV optical flow for walking shots (later)
    - [ ] Character acting H1-H4
      - [x] H4 shots 2/3 pose (4d80b9d, 6593a42)
