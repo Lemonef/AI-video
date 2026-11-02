@@ -47,3 +47,8 @@ export const CAPTION_TOP = 1330; // below the floor line, above TikTok's bottom 
 
 // Procedural sound effects written by scripts/pipeline/sfx.py (licence-free).
 export const SFX = {pop: 'sfx/pop.wav', tick: 'sfx/tick.wav', whoosh: 'sfx/whoosh.wav'} as const;
+
+// Anti-banding grain over the whole frame. Flat-colour gradients band badly once TikTok
+// re-encodes them; a faint fixed noise pattern dithers the steps. Fixed seed on purpose:
+// per-frame noise would spend the platform's bitrate on the grain itself.
+export const GRAIN = {opacity: 0.035, frequency: 0.9, seed: 7} as const;

@@ -4,6 +4,7 @@ import {bedLevel, hushLevel, hushWindows, sceneSpans, sfxFile, speechEnvelope, s
 import {SFX} from '../../lib/tokens';
 import {sceneFrames} from '../../lib/timing';
 import type {Episode as EpisodeT} from '../../types';
+import {Grain} from '../../components/Grain';
 import {Scene} from '../Scene';
 import {SceneV2} from '../SceneV2';
 
@@ -49,6 +50,7 @@ export const Episode: React.FC<EpisodeProps> = ({episode}) => {
 					</Sequence>
 				);
 			})}
+			<Grain />
 		</AbsoluteFill>
 	);
 };
