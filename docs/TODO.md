@@ -29,11 +29,12 @@
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
      - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
-     - [ ] Pipeline job ref-cut-transitions (shots 8/9/23/28/31/32 measured flash/fade tables) - running
-     - [ ] Pipeline job ref-shot-grade (per-shot linear grade 3/19/23/28/32/34) - after the first merges
+     - [x] Pipeline job ref-cut-transitions: all 3 rungs built it right (nemotron + terra identical gate numbers); brief numbers partly wrong. Kept 31/32 (c348cc3: 16.60->15.02, 17.70->16.42), dropped 8/9/23 (< 0.05 bar) and 28 (doubled its own dark grade, worse). Baselines 31/32 rebuilt at c348cc3
+     - [ ] Pipeline job ref-shot-grade (per-shot linear grade 3/19/23/28/32/34) - running
      - [ ] Full v14 render
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
-   - [ ] Owner: drop stash@{0}; AI-video repo cleanup plan (needs approval); English-channel monetization answer
+   - [x] stash@{0} dropped (saved out/drafts/stash0-codex-shot7-lighting-wip.patch); wishes01 + download_batch2 parked on branch park/wishes01-and-batch2; .agentsroom/ ignored
+   - [ ] Owner: AI-video repo cleanup plan (needs approval); English-channel monetization answer
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
