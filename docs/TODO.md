@@ -26,7 +26,12 @@
      - [ ] Blender GP spike: shot 2 as GP rig render, gate vs IK SVG version
      - [ ] OpenCV optical flow for walking shots (later)
    - [ ] H4 shots 2/3 pose (shot 2 done 4d80b9d, shot 3 waiting on Gemini quota) (owner: "start a bit weird"), then H1 shot 7, H2 shot 22, H3 shot 27 (+24/26/28)
-   - [ ] J1 shot 6 plate + shot 20 crowd via pipeline normal ladder; full v13 render; J2-J4 grades/lighting
+   - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
+     - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
+     - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
+     - [ ] Pipeline job ref-cut-transitions (shots 8/9/23/28/31/32 measured flash/fade tables) - running
+     - [ ] Pipeline job ref-shot-grade (per-shot linear grade 3/19/23/28/32/34) - after the first merges
+     - [ ] Full v14 render
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [ ] Owner: drop stash@{0}; AI-video repo cleanup plan (needs approval); English-channel monetization answer
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
