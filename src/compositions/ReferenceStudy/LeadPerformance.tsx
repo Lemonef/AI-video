@@ -83,10 +83,13 @@ const shutter:Key[]=[
  {f:1652,h:[15,265],r:32,hip:[22,389],lk:[23,413],la:[15,436],rk:[29,413],ra:[33,436],le:[2,315],lw:[15,331],re:[24,315],rw:[25,335]},
  {f:1682,h:[14,262],r:32,hip:[21,388],lk:[22,412],la:[14,435],rk:[28,412],ra:[32,435],le:[1,312],lw:[14,328],re:[23,312],rw:[24,332]},
 ];
-export const hasMeasuredLead=(id:number)=>[2,3,10,13,14,22,24,26].includes(id);
+// Shot 27: static side-view hold after the shutter closes, hand-measured on source frame 2020 overlay
+// (Gemini joints unreliable here); head sized by the rig's own cap-top/chin geometry, not as a limb ruler.
+const closedHold:Key[]=[{f:2002,h:[37.5,236],r:34,hip:[40,355],lk:[43,397],la:[34,424],rk:[53,400],ra:[58,426],le:[39,333],lw:[44,362],re:[16,315],rw:[53,352]}];
+export const hasMeasuredLead=(id:number)=>[2,3,10,13,14,22,24,26,27].includes(id);
 export const LeadPerformance:React.FC<{frame:number;shot:number}>=({frame,shot})=>{
  if(!hasMeasuredLead(shot))return null;
- const k=at(shot===2?shot2:shot===3?shot3:shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===22?shutter:shot===26?lastPull:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
+ const k=at(shot===2?shot2:shot===3?shot3:shot===10?walk:shot===13?hesitate:shot===14?keysWalk:shot===22?shutter:shot===26?lastPull:shot===27?closedHold:pull,frame),[x,y]=k.h,s=k.r/30,walking=shot===10,holdingKeys=shot===13||shot===14;
  const shoulder:P=[x-4*s,y+40*s];
  const path=(a:P,b:P,c:P)=>`M${a} L${b} L${c}`;
  const leg=(knee:P,ankle:P,color:string,side:number)=><g><path d={path([k.hip[0]+side*3*s,k.hip[1]],knee,ankle)} fill="none" stroke={color} strokeWidth={9*s} strokeLinecap="round" strokeLinejoin="round"/><ellipse cx={ankle[0]+2*s} cy={ankle[1]+1*s} rx={8*s} ry={3.4*s} fill="#303a36"/></g>;
