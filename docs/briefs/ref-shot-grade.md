@@ -1,5 +1,5 @@
 ---json
-{"id":"ref-shot-grade","type":"normal","risk":"low","repo":"D:/AI-video","gates":["if not exist node_modules mklink /J node_modules D:\\AI-video\\node_modules >nul","if not exist public\\reference-study mklink /J public\\reference-study D:\\AI-video\\public\\reference-study >nul","set PYTHONUTF8=1&& set REMOTION_OFFLINE_FONTS=1&& set REFERENCE_STUDY_DIR=D:\\AI-video\\out\\drafts\\reference-study\\DegJCmXtbGj&& python scripts/reference_gate.py --shots 3 19 23 28 32 34"],"protected":["scripts/**","out/**","public/**","package.json","package-lock.json","src/compositions/ReferenceStudy/shots.ts","src/compositions/ReferenceStudy/*.json","docs/**"],"context_files":["src/compositions/ReferenceStudy/index.tsx"]}
+{"id": "ref-shot-grade", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python scripts/gate_in_worktree.py --shots 3 19 23 28 32 34"], "protected": ["scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "src/compositions/ReferenceStudy/shots.ts", "src/compositions/ReferenceStudy/*.json", "docs/**"], "context_files": ["src/compositions/ReferenceStudy/index.tsx"]}
 ---
 # Goal
 Match each listed shot's overall brightness to the source in the `ReferenceAssisted` render with one per-shot linear grade. Slopes are measured (source mean luma / render mean luma over the shot, first 6 frames skipped); do not re-measure.
