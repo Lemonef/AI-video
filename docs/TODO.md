@@ -46,7 +46,8 @@
      - [ ] Update skills/reference-animation-rebuild/SKILL.md lessons (shade overlay from region means, sawtooth needs phase fit, Gemini joints unreliable -> hand-measure with rig head geometry)
    - [ ] V1/V2 ElevenLabs stock voice; M1 original music bed (never the source song), -14 LUFS; F final
    - [x] stash@{0} dropped (saved out/drafts/stash0-codex-shot7-lighting-wip.patch); wishes01 + download_batch2 parked on branch park/wishes01-and-batch2; .agentsroom/ ignored
-   - [ ] Owner: AI-video repo cleanup plan (needs approval); English-channel monetization answer
+   - [ ] Owner: English-channel monetization answer
+   - [ ] LAST in queue (owner 2026-11-02: "add the repo clean up at last, rn its so messy"): AI-video repo cleanup - re-check the plan against the repo as it stands then, show it, then execute
 9. [ ] Upload quality (owner 2026-11-02: "ppl say video quality is bad")
    - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
