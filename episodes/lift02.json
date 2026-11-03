@@ -1,0 +1,345 @@
+{
+  "id": "lift02",
+  "title": "ติดลิฟต์กับแฟนเก่า — ตอน 2",
+  "seriesSlug": "lift-ex",
+  "releaseEpisode": "ep02",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "tempo": 1.08,
+  "handheld": false,
+  "grain": false,
+  "mix": {
+    "beds": [],
+    "duck": 0.5,
+    "bedVolume": 0.45,
+    "real": true
+  },
+  "post": {
+    "series": "ติดลิฟต์กับแฟนเก่า",
+    "part": 2,
+    "total": 3,
+    "coverHook": "บอกความจริงแล้ว… มือถือดัง",
+    "hook": "ติดลิฟต์กับแฟนเก่า ตอน 2 — คนส่วนใหญ่เลือกให้จ๊าบพูดความจริง เรื่องที่เก็บไว้แปดเดือน แต่ยังไม่ทันได้คำตอบ มือถือแพรวก็ดังขึ้น",
+    "question": "A ถามตรงๆ ว่าที่รักคือใคร หรือ B ทำเป็นไม่สน ให้แพรวรับสายเอง?",
+    "next": "ตอนจบ ตามเสียงส่วนใหญ่",
+    "coverFrame": 30,
+    "hashtags": [
+      "#ตลก",
+      "#เรื่องเล่า",
+      "#ละครสั้น",
+      "#การ์ตูน",
+      "#แฟนเก่า",
+      "#เรื่องตลก",
+      "#การ์ตูนไทย"
+    ],
+    "publishNow": true,
+    "coverBg": "liftEmpty",
+    "keyword": "ติดลิฟต์กับแฟนเก่า",
+    "coverCast": [
+      {
+        "look": "fon",
+        "pose": "hold",
+        "expr": "flat",
+        "turn": -0.45,
+        "x": 820,
+        "y": 2050,
+        "scale": 1.25
+      },
+      {
+        "look": "jaab",
+        "pose": "shock",
+        "expr": "sweat",
+        "turn": 0.35,
+        "x": 330,
+        "y": 2330,
+        "scale": 1.7
+      }
+    ]
+  },
+  "narrationJoin": " ",
+  "narrationDirection": "Perform this original Thai romantic comedy as a native Bangkok Thai man telling a friend an embarrassing true story, half laughing at himself. Same warm male narrator as Part 1. Brisk, connected conversational phrasing with varied stress; never the same rise and fall on each phrase. Open firm and a little nervous: he has decided to tell the truth. The false starts are dry and funny. The lobby lines lean in conspiratorially. The cafe memory is sincere and quiet, the confession a little ashamed, never melodramatic. When the phone rings, a quick jolt, then a stunned beat on the name. The lobby gasp is a comedy peak. The final question is direct to the viewer. Natural thought-group breaths, no long gaps. Read only the provided Thai text; do not speak these instructions or bracketed delivery tags.",
+  "scenes": [
+    {
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0.8,
+        1
+      ],
+      "id": "hook",
+      "bg": "liftAwkward",
+      "say": "คนส่วนใหญ่เลือกเอ จ๊าบตัดสินใจแล้ว จะพูดความจริงทั้งหมด ต่อให้มันน่าอายแค่ไหนก็ตาม",
+      "caption": "คนส่วนใหญ่เลือก A จ๊าบตัดสินใจแล้ว จะพูดความจริงทั้งหมด ต่อให้มันน่าอายแค่ไหนก็ตาม",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.55,
+          "x": 300,
+          "y": 880
+        },
+        {
+          "at": 0.6,
+          "zoom": 1.4,
+          "x": 320,
+          "y": 900
+        }
+      ],
+      "hits": [
+        {
+          "at": 0,
+          "sound": "pop",
+          "strength": 2
+        }
+      ],
+      "chip": "✅ เสียงส่วนใหญ่ · A ความจริง"
+    },
+    {
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0.8,
+        1
+      ],
+      "id": "breath",
+      "bg": "liftAwkward",
+      "say": "เขาอ้าปาก แล้วก็หุบ อ้าปากอีกที แล้วก็หุบอีก แพรวบอกว่า จะพูดก็พูดมาเถอะ ลิฟต์ไม่ไปไหนหรอก",
+      "caption": "เขาอ้าปาก แล้วก็หุบ อ้าปากอีกที แล้วก็หุบอีก แพรวบอกว่า จะพูดก็พูดมาเถอะ ลิฟต์ไม่ไปไหนหรอก",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.3,
+          "x": 760,
+          "y": 900
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.6,
+          "sound": "pop",
+          "strength": 1
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "whip",
+      "progress": [
+        0,
+        1
+      ],
+      "id": "lobby3",
+      "bg": "lobbyHold",
+      "say": "ข้างล่าง ช่างซ่อมลิฟต์โทรกลับมาพอดี ยามรับสาย กระซิบว่า รอแป๊บพี่ กำลังถึงตอนสำคัญ แล้วก็กดพักสายไว้เฉยเลย",
+      "caption": "ข้างล่าง ช่างซ่อมลิฟต์ โทรกลับมาพอดี ยามรับสาย กระซิบว่า รอแป๊บพี่ กำลังถึงตอนสำคัญ แล้วก็กดพักสายไว้เฉยเลย",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.45,
+          "zoom": 1.3,
+          "x": 600,
+          "y": 1000
+        }
+      ],
+      "chip": "ล็อบบี้ · ชั้น G",
+      "hits": [
+        {
+          "at": 0.45,
+          "sound": "click",
+          "strength": 2
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "fade",
+      "progress": [
+        0,
+        1
+      ],
+      "id": "truth1",
+      "bg": "liftCafe",
+      "say": "จ๊าบเล่าว่า แปดเดือนก่อน ที่ร้านกาแฟ ตอนแพรวลุกไปสั่งเครื่องดื่ม มือถือที่วางหงายบนโต๊ะก็สว่างขึ้น ชื่อที่โชว์คือ ที่รัก",
+      "caption": "แปดเดือนก่อน ที่ร้านกาแฟ ตอนแพรวลุกไปสั่งเครื่องดื่ม มือถือที่วางหงายบนโต๊ะ ก็สว่างขึ้น ชื่อที่โชว์คือ ที่รัก",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.32,
+          "zoom": 1.2,
+          "x": 380,
+          "y": 900
+        },
+        {
+          "at": 0.62,
+          "zoom": 1.5,
+          "x": 560,
+          "y": 1040
+        }
+      ],
+      "chip": "แปดเดือนก่อน"
+    },
+    {
+      "cast": [],
+      "transition": "fade",
+      "progress": [
+        0,
+        0.5
+      ],
+      "id": "truth2",
+      "bg": "liftBicker",
+      "say": "เขาไม่กล้าถาม เก็บไว้คนเดียวสองอาทิตย์ แล้วก็ขอเลิก โดยอ้างว่างานยุ่ง เพราะไม่อยากเป็นฝ่ายที่โดนทิ้งก่อน",
+      "caption": "เขาไม่กล้าถาม เก็บไว้คนเดียว สองอาทิตย์ แล้วก็ขอเลิก โดยอ้างว่างานยุ่ง เพราะไม่อยากเป็นฝ่าย ที่โดนทิ้งก่อน",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.15,
+          "x": 400,
+          "y": 900
+        },
+        {
+          "at": 0.6,
+          "zoom": 1.3,
+          "x": 380,
+          "y": 860
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        1,
+        1
+      ],
+      "id": "praew",
+      "bg": "liftQuestion",
+      "say": "แพรวเงียบไปนาน แล้วก็อ้าปาก กำลังจะตอบ",
+      "caption": "แพรวเงียบไปนาน แล้วก็อ้าปาก กำลังจะตอบ…",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.2,
+          "x": 700,
+          "y": 860
+        },
+        {
+          "at": 0.5,
+          "zoom": 1.4,
+          "x": 720,
+          "y": 820
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        0,
+        1
+      ],
+      "id": "ring",
+      "bg": "liftRing",
+      "say": "แล้วมือถือของแพรว ที่เหลือสองเปอร์เซ็นต์ ก็ดังขึ้น หน้าจอขึ้นชื่อเดิม ที่รัก กำลังโทรมา",
+      "caption": "แล้วมือถือของแพรว ที่เหลือสองเปอร์เซ็นต์ ก็ดังขึ้น หน้าจอขึ้นชื่อเดิม ที่รัก กำลังโทรมา",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.35,
+          "x": 700,
+          "y": 1000
+        }
+      ],
+      "title": "*ตื๊ด ตื๊ด!*",
+      "hits": [
+        {
+          "at": 0,
+          "sound": "impact",
+          "strength": 2
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "whip",
+      "progress": [
+        0,
+        1
+      ],
+      "id": "lobby4",
+      "bg": "lobbyPeak",
+      "say": "ที่ล็อบบี้ ตอนนี้มีพนักงานกะดึก ถือถุงขนมมานั่งฟังเพิ่มอีกคน ทุกคนร้องเฮือกพร้อมกัน ยามทำกาแฟหกเต็มพื้น",
+      "caption": "ที่ล็อบบี้ ตอนนี้มีพนักงานกะดึก ถือถุงขนมมานั่งฟังเพิ่ม ทุกคนร้องเฮือกพร้อมกัน ยามทำกาแฟหกเต็มพื้น",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.0,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.2,
+          "x": 600,
+          "y": 1000
+        }
+      ],
+      "hits": [
+        {
+          "at": 0.55,
+          "sound": "pop",
+          "strength": 3
+        }
+      ]
+    },
+    {
+      "cast": [],
+      "transition": "cut",
+      "progress": [
+        1,
+        1
+      ],
+      "id": "end",
+      "bg": "liftPressure",
+      "say": "เอ ถามแพรวตรงๆ ว่าที่รักคือใคร หรือบี ทำเป็นไม่สนใจ ปล่อยให้แพรวรับสายเอง คุณเลือกอะไร",
+      "caption": "เอ ถามตรงๆ ว่าที่รักคือใคร หรือบี ทำเป็นไม่สน ปล่อยให้แพรวรับสาย คุณเลือกอะไร",
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        }
+      ],
+      "type": "endcard",
+      "a": "ถามตรงๆ ว่า ที่รักคือใคร",
+      "b": "ทำเป็นไม่สน ให้แพรวรับสาย",
+      "prompt": "จ๊าบควรทำยังไง?",
+      "footer": "A หรือ B · ตอนจบ ตามเสียงส่วนใหญ่",
+      "showCaptions": false,
+      "padAfter": 0.4
+    }
+  ]
+}
