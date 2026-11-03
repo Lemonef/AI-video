@@ -81,8 +81,13 @@
    - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
    - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
    - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
-   - [ ] Pipeline build lift02-sets (lobbyHold, liftCafe, liftRing, lobbyPeak) - running, verify diff + stills before merge
-   - [ ] make.py lift02 --draft; check stills per scene (cat-ear case + hair readable in ring), audio -14 LUFS, release checklist
+   - [x] Pipeline build lift02-sets (deepseek-flash-free, cohere review PASS), merged e1aedf9
+   - [x] Draft 1 rendered (out/drafts/lift02/video.mp4); stills read: 7/9 scenes OK
+   - [ ] Fix round 1 (docs/briefs/lift02-fix1.md): ring phone looks pasted, hand + cat hair hidden; lobby4 guard/chair/cup off right edge
+     - [x] Pipeline crash on cp874 decode of Thai diff fixed (brain 7010d1e, 42 tests pass)
+     - [ ] Pipeline rebuild running; verify diff + stills, merge
+     - [ ] Pipeline bug: --resume after a crash re-adds an existing worktree (exit 255); crashed attempt not checkpointed
+   - [ ] Draft 2 render; re-check ring + lobby4 stills; loudness (draft 1 measured -12.9 LUFS vs -14 target); release checklist
    - [ ] Publish out/final/03-lift-ex/ep02 + post kit (part 2/3); posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
