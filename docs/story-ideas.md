@@ -102,6 +102,13 @@ Before writing, every answer must be yes:
 9. Is this part's own story strong, not just a bridge to the next part?
    (7-9 from owner feedback on lift-ex Part 2, 2026-11-03: hook weak, needs Part 1 to follow,
    story not strong enough.)
+10. Are beats linked by "but" or "therefore", never "and then"? (Parker/Stone rule.) Write the beat
+    list with the link word in front of each beat; an "and then" beat gets cut or rewritten.
+11. Do the lead's own choices cause the trouble (a lie, pride, greed, a joke wish), not just things
+    happening to him? Plant the flaw early so the price is his fault.
+12. Does every big moment get a reaction beat (relief, fear, a decision) before the next event? A
+    shock followed straight by the next event does not land. Parts may run ~80-120 s to fit this.
+   (10-12 from owner feedback 2026-11-04: stories feel short, rushed, low on drive.)
 
 After posting (TikTok Studio): still watching at 3 s > 60%; average watch > 50%; finished > 20%;
 comments per 1,000 views > 10; Part 2 views / Part 1 views > 50%. The retention graph's steepest
