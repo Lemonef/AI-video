@@ -99,9 +99,9 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  const timer=`${Math.floor(remaining/60).toString().padStart(2,'0')}:${(remaining%60).toString().padStart(2,'0')}`;
  const caption=captions.find(c=>frame>=c.start&&frame<c.end);
  const count=shot.id===24?Math.floor(interpolate(frame,[1799,1807,1810,1823,1837,1868,1885],[0,8,11,24,38,39,39],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})):shot.id===25?39:40;
-const fullInsert=sourceAssisted&&[8,21,23,25,35].includes(shot.id);
-  // The curve wins over the static slope; fitted by scripts/fit_grade_curve.py
-  const grade=sourceAssisted?((gradeCurves as Record<string,number[]>)[shot.id]?.[local]??SHOT_GRADE[shot.id]):undefined;
+ const fullInsert=sourceAssisted&&[8,21,23,25,35].includes(shot.id);
+ // The curve wins over the static slope; fitted by scripts/fit_grade_curve.py.
+ const grade=sourceAssisted?((gradeCurves as Record<string,number[]>)[shot.id]?.[local]??SHOT_GRADE[shot.id]):undefined;
  let torchOrigin:{x:number;y:number}|undefined;
  if(actorTarget){
   const s=actorTarget.r/30,wx=actorTarget.x+34*s,wy=actorTarget.y+36*s;

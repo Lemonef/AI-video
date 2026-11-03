@@ -49,7 +49,7 @@ def fail(msg: str) -> NoReturn:
 
 
 def main():
-    from reference_gate import study_shots, gray_frames, STUDY_DIR
+    from reference_gate import REVIEW_SIZE, STUDY_DIR, gray_frames, study_shots
 
     p = argparse.ArgumentParser()
     p.add_argument('--shot', type=int, required=True, help='One-based shot ID')
@@ -67,8 +67,8 @@ def main():
     src_path = STUDY_DIR / 'source.mp4'
     render_path = args.baseline_dir / f'shot{args.shot:02}.mov'
 
-    src_frames = gray_frames(src_path, shot['start'], count, size=(270, 480))
-    our_frames = gray_frames(render_path, 0, count, size=(270, 480))
+    src_frames = gray_frames(src_path, shot['start'], count, size=REVIEW_SIZE)
+    our_frames = gray_frames(render_path, 0, count, size=REVIEW_SIZE)
 
     src_luma = src_frames.mean(axis=(1, 2)).tolist()
     our_luma = our_frames.mean(axis=(1, 2)).tolist()
