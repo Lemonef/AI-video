@@ -171,11 +171,12 @@ export const LiftRing:React.FC<EnvProps>=({frame,progress:p=0})=>{const buzz=Mat
       {/* arcs hug the case's left edge so they pulse into the gap between the two characters */}
       {[0,1,2].map(i=><path key={i} d={`M${785-i*20},${990-i*16} q${-34-i*8},34 0,68`} fill="none" stroke="#bcdcff" strokeWidth="5" opacity={.25+.5*Math.abs(Math.sin(frame*.25-i*.7))}/>)}
     </g>
-    {/* the hand comes after the case: only the fingertips lap its bottom bezel, so the call text stays clean */}
+    {/* her forearm grows out of the blouse from the elbow tucked into her hip up to the wrist, so the hand is attached to her, not floating beside her: the wider shade stroke underneath reads as the sleeve's outline */}
+    <path d="M834,1252 Q846,1216 868,1188" fill="none" stroke="#a9a196" strokeWidth="72" strokeLinecap="round"/>
+    <path d="M834,1252 Q846,1216 868,1188" fill="none" stroke="#E7E1D6" strokeWidth="64" strokeLinecap="round"/>
+    {/* the hand comes after the case and the sleeve: only the fingertips lap its bottom bezel, so the call text stays clean */}
     <Hand x={865} y={1170} s={.8} r={-6}/>
-    {/* a cream cuff under the wrist ties the hand to her, and gives the cat hair something to sit on */}
-    <rect x="827" y="1238" width="76" height="86" rx="12" fill="#E7E1D6" stroke="#a9a196" strokeWidth="3"/>
-    {/* the cat-hair clue sits on the cuff, below the phone and outside its box: visible, never labelled */}
+    {/* the cat-hair clue runs down the sleeve's cream cuff, below the phone and outside its box: visible, never labelled */}
     {[[0,0,9,-3],[14,10,10,4],[-8,22,8,6],[10,32,11,-2],[-4,44,9,5],[16,52,8,-4]].map(([hx,hy,ex,ey],k)=><path key={k} d={`M${848+hx},${1252+hy} q${ex},${ey} ${ex*1.8},${ey*1.4}`} fill="none" stroke="#dfd8cf" strokeWidth="3" strokeLinecap="round" opacity={.85}/>)}
   </g>
 </LiftInterior>};
@@ -188,8 +189,8 @@ export const LobbyPeak:React.FC<EnvProps>=({frame,progress:p=0})=>{const walked=
     <Cast who="cleaner2" x={mix(720,690,lean)} y={1300} s={.47} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'smile'} turn={-.6}/>
     <SnackBag x={mix(-60,300,walked)+44} y={1205}/>
     <Cast who="runner" x={mix(mix(-60,300,walked),326,lean)} y={1300} s={.46} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'flat'} turn={gasp?.6:0} walk={p<.35}/>
-    {/* the coffee starts on the counter by his hand, then tips in front of the counter so it lands on screen and reads as a spill */}
-    <CoffeeCup x={mix(735,760,drop)} y={mix(984,1236,drop)} r={mix(0,120,drop)}/>
-    {drop>.9?<g opacity={Math.min(1,(drop-.9)*10)}><ellipse cx={760} cy={1244} rx={46} ry={11} fill="#5a3320" opacity=".8"/>{[[-34,-4],[-14,-10],[12,-8],[30,-2]].map(([sx,sy],k)=><circle key={k} cx={760+sx} cy={1244+sy} r={4-k*.4} fill="#6b3a22"/>)}</g>:null}
+    {/* the coffee starts on the counter right of every head so it never sits on cleaner2's face, then tips in front of the counter so it lands on screen and reads as a spill */}
+    <CoffeeCup x={mix(850,845,drop)} y={mix(984,1236,drop)} r={mix(0,120,drop)}/>
+    {drop>.9?<g opacity={Math.min(1,(drop-.9)*10)}><ellipse cx={845} cy={1244} rx={46} ry={11} fill="#5a3320" opacity=".8"/>{[[-34,-4],[-14,-10],[12,-8],[30,-2]].map(([sx,sy],k)=><circle key={k} cx={845+sx} cy={1244+sy} r={4-k*.4} fill="#6b3a22"/>)}</g>:null}
   </Lobby>
 </g>};
