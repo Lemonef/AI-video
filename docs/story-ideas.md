@@ -10,9 +10,10 @@ in "How to judge a story" below before writing.
 
 1. กฎเข้าป่า 2/3, 3/3 (horror, in progress)
 2. #14 ติดลิฟต์กับแฟนเก่า (funny) - outline below
-3. #21 เลี้ยงแมวของคนตาย (strange job, creepy)
-4. #25 เลขบนหัว (weird world, romance)
-5. #1 ติดในห้าง (survival)
+3. #17 ตะกรุดสามคำขอ = story 04 (owner 2026-11-03: keep; rewrite tone + parts 2-3; draft ep01 on branch park/wishes01-and-batch2, see docs/three-wishes-paused.md)
+4. #21 เลี้ยงแมวของคนตาย (strange job, creepy)
+5. #25 เลขบนหัว (weird world, romance)
+6. #1 ติดในห้าง (survival)
 
 ## Formulas mined from references (2026-10-28)
 
