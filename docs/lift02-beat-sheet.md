@@ -12,7 +12,7 @@ Status: DRAFT for owner approval. Vote result from Part 1: **A, tell the whole t
 
 ## Part 3 payoff planted here
 
-Part 3 reveals that "ที่รัก ❤️" is แพรว's cat (the contact is her pet-camera app). Part 2
+Part 3 reveals that "ที่รัก ❤️" is แพรว's cat: the cat's name is ที่รัก, and the call is her pet-camera app. Part 2
 must show the clue without explaining it: a cat-ear phone case and cat hair on her sleeve,
 both visible in the ring shot, never mentioned in narration.
 
