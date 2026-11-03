@@ -39,6 +39,8 @@ both visible in the ring shot, never mentioned in narration.
 Both lead into the cat reveal: A, she laughs and shows him; B, she answers on speaker and the whole
 lobby hears a cat. Footer: "A หรือ B · ตอนจบ ตามเสียงส่วนใหญ่".
 
+Vote tally (update as comments come in): 2026-11-04 A 1 ("เอออออ" = stretched "A") · B 0.
+
 ## Review log
 
 Free-leg story review 2026-11-03 (multi_ai_check --skip-codex; 7 of 10 answered): opening on a
