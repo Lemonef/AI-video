@@ -85,8 +85,17 @@ Before writing, every answer must be yes:
 4. Is there an early clue that pays off at the end?
 5. Is the A/B choice hard (both options tempting or both scary)?
 6. Would you comment if you were watching?
-7. Does a Part 2/3 stand alone? A stranger who never saw Part 1 must get the situation from the
-   hook itself (who, where, what is at stake) in the first ~5 s, without going back.
+7. Does a Part 2/3 stand alone? A stranger who never saw Part 1 must get the situation (who, where,
+   what is at stake) in the first ~5 s, without going back. A recap is only one way; pick per part:
+   - **Situation shot:** open on a frame that explains itself (two exes in a dark stuck lift, her
+     phone lighting up "ที่รัก ❤️"). Default choice.
+   - **Context line:** one spoken or on-screen line that carries the premise
+     ("ติดลิฟต์กับแฟนเก่ามาชั่วโมงนึงแล้ว...").
+   - **Standalone question hook:** a question that works with zero context ("ถ้าแฟนเก่าที่ติดลิฟต์ด้วย
+     ได้สายจาก 'ที่รัก'...").
+   - **Flash recap:** 2-3 s montage of the previous part's key frames. Fallback only: it delays the
+     new jolt.
+   - **Self-contained arc:** the part has its own setup, turn and payoff; the cliffhanger is extra.
 8. Does the hook catch in the first 1-2 s? It is the strongest jolt or question of the part, not a
    vote result chip or a slow lead-in.
 9. Is this part's own story strong, not just a bridge to the next part?
