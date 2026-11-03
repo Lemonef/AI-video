@@ -72,3 +72,121 @@ export const LiftQuestion:React.FC<EnvProps>=({frame,progress:p=0})=><LiftInteri
 export const LiftPressure:React.FC<EnvProps>=()=> <g><LiftInterior id="lift-liftPressure" lit={0}><Cast x={290} y={980} s={.45} f={0} lit={0} expr="sweat" turn={.4}/><Cast who="fon" x={750} y={980} s={.45} f={0} lit={0} expr="flat" turn={-.5}/></LiftInterior><defs><linearGradient id="lift-liftPressure-calm" x2="0" y2="1"><stop stopColor="#171923" stopOpacity="0"/><stop offset=".2" stopColor="#171923" stopOpacity=".64"/><stop offset=".8" stopColor="#171923" stopOpacity=".64"/><stop offset="1" stopColor="#171923" stopOpacity="0"/></linearGradient></defs><rect y="560" width="1080" height="1080" fill="url(#lift-liftPressure-calm)"/><defs><clipPath id="lift-liftPressure-inset"><rect x="650" y="1550" width="380" height="300" rx="35"/></clipPath></defs><g clipPath="url(#lift-liftPressure-inset)"><rect x="650" y="1550" width="380" height="300" fill="#766044"/><g transform="translate(460 1270) scale(.55)"><Cast who="cleaner" x={450} y={1020} s={.44} f={0} warm expr="smile" turn={.6}/><Cast who="liftGuard" x={710} y={990} s={.43} f={0} warm expr="smile" turn={-.4}/><Cast who="cleaner2" x={890} y={1020} s={.44} f={0} warm expr="talk" turn={-.6}/><path d="M350,1010 H1050 V1100 H350Z" fill="#b49970"/><Speaker id="lift-liftPressure-inset" frame={0}/></g></g><rect x="650" y="1550" width="380" height="300" rx="35" fill="none" stroke="#c2a57e" strokeWidth="6"/></g>;
 // cast-free lit lift: the cover draws its own big actors on top
 export const LiftEmpty:React.FC<EnvProps>=()=> <LiftInterior id="lift-liftEmpty"/>;
+
+// ---- Part 2 sets (docs/lift02-beat-sheet.md) ----
+// Handset + base of the desk phone at the guard desk. The receiver only leaves the base after .45,
+// because the whole beat is "he put the technician on hold".
+const Handset:React.FC<{x:number;y:number;r?:number}> = ({x,y,r=-3})=><g transform={`translate(${x} ${y}) rotate(${r})`}><rect x="-38" y="-9" width="76" height="18" rx="9" fill="#39454f" stroke="#95a0a6" strokeWidth="3"/><rect x="-38" y="-16" width="22" height="32" rx="9" fill="#485560" stroke="#95a0a6" strokeWidth="3"/><rect x="16" y="-16" width="22" height="32" rx="9" fill="#485560" stroke="#95a0a6" strokeWidth="3"/></g>;
+const DeskPhone:React.FC<{id:string;frame:number;ringing:boolean;hop:number}> = ({id,frame,ringing,hop})=><g>
+  <ellipse cx="512" cy="1008" rx="54" ry="10" fill="#1d1712" opacity=".5"/>
+  <rect x="470" y="972" width="86" height="34" rx="7" fill="#303b45" stroke="#8e999f" strokeWidth="4"/>
+  {[0,1,2].map(i=><circle key={i} cx={492+i*18} cy={991} r="4.5" fill="#7d888f"/>)}
+  {/* the amber hold lamp blinks 10 frames on, 10 off, so it reads as a deliberate hold */}
+  <circle cx="546" cy="991" r="4.5" fill={!ringing&&frame%20<10?'#ffb347':'#5a4a37'}/>
+  {!ringing&&frame%20<10?<Glow id={`${id}-led`} x={546} y={991} r={26} color="#ffb347" strength={.5}/>:null}
+  {ringing?<g><g transform={`translate(0 ${-hop})`}><Handset x={513} y={958}/></g>{[0,1,2].map(i=><path key={i} d={`M${468-i*15},${940-i*9} q${-26-i*8},26 0,52`} fill="none" stroke="#efce8b" strokeWidth="5" opacity={.35+.45*Math.abs(Math.sin(frame*.35-i*.6))}/>)}</g>:<Handset x={444} y={1006} r={-8}/>}
+</g>;
+// Pink cat-ear case shared by the cafe flashback and the ring insert: the clue must be identical.
+const CatPhone:React.FC<{id:string;x:number;y:number;s:number;glow?:string;strength?:number;children?:React.ReactNode}> = ({id,x,y,s,glow='#ffd0b0',strength=.6,children})=><g transform={`translate(${x} ${y}) scale(${s})`}>
+  <Glow id={id} x={0} y={0} r={86} color={glow} strength={strength}/>
+  <path d="M-20,-56 L-16,-78 L-4,-57Z M4,-57 L16,-78 L20,-56Z" fill="#e9a3b6" stroke="#c9808f" strokeWidth="2.5"/>
+  <rect x="-31" y="-56" width="62" height="113" rx="11" fill="#e9a3b6" stroke="#c9808f" strokeWidth="2.5"/>
+  <rect x="-24" y="-48" width="48" height="97" rx="5" fill="#f6efe6"/>
+  {children}
+</g>;
+const SnackBag:React.FC<{x:number;y:number}> = ({x,y})=><g transform={`translate(${x} ${y})`}>
+  <path d="M-22,-30 H22 L18,34 Q0,42 -18,34Z" fill="#f2efe7" stroke="#b9b3a5" strokeWidth="3"/>
+  <path d="M-10,-30 q0,-14 10,-14 q10,0 10,14" fill="none" stroke="#b9b3a5" strokeWidth="3"/>
+  <path d="M-14,-26 L-6,-52 L16,-50 L18,-26Z" fill="#d8643a" stroke="#a2452a" strokeWidth="2.5"/>
+  <path d="M-6,-52 L-3,-58 L2,-52 L7,-58 L12,-52 L16,-50" fill="#f0c14b"/>
+  <path d="M-16,-8 H16 M-17,4 H17" stroke="#d8d2c4" strokeWidth="3"/>
+</g>;
+const CoffeeCup:React.FC<{x:number;y:number;r:number}> = ({x,y,r})=><g transform={`translate(${x} ${y}) rotate(${r})`}>
+  <path d="M-15,-20 H15 L12,12 Q0,19 -12,12Z" fill="#ece7dc" stroke="#a79f90" strokeWidth="3"/>
+  <path d="M15,-12 q13,4 0,18" fill="none" stroke="#a79f90" strokeWidth="4"/>
+  <ellipse cx="0" cy="-20" rx="15" ry="5" fill="#6b3a22"/>
+</g>;
+const CafeCup:React.FC<{x:number;y:number}> = ({x,y})=><g transform={`translate(${x} ${y})`}>
+  <ellipse cx="0" cy="18" rx="26" ry="8" fill="#5b3a22" opacity=".35"/>
+  <path d="M-22,-18 H22 L17,12 Q0,22 -17,12Z" fill="#efe7da" stroke="#b3a692" strokeWidth="3"/>
+  <ellipse cx="0" cy="-18" rx="22" ry="7" fill="#6b3a22"/>
+  <path d="M22,-10 q16,5 0,20" fill="none" stroke="#b3a692" strokeWidth="4"/>
+</g>;
+
+export const LobbyHold:React.FC<EnvProps>=({frame,progress:p=0})=>{const ringing=p<.45;const hop=Math.abs(Math.sin(frame*.55))*6;return <Lobby id="lift-lobbyHold" frame={frame} active behind={<Cast who="liftGuard" x={775} y={ringing?1240:1180} s={.48} f={frame} warm pose={ringing?'idle':'hold'} expr={ringing?'talk':'smile'} turn={ringing?-.72:-.55}/>}><DeskPhone id="lift-lobbyHold-desk" frame={frame} ringing={ringing} hop={hop}/></Lobby>};
+
+export const LiftCafe:React.FC<EnvProps>=({frame,progress:p=0})=><g style={{fontFamily:'Sarabun, sans-serif'}}>
+  <defs>
+    <linearGradient id="lift-liftCafe-wall" x2="0" y2="1"><stop stopColor="#c49a6f"/><stop offset="1" stopColor="#a37a52"/></linearGradient>
+    <linearGradient id="lift-liftCafe-wood" x2="0" y2="1"><stop stopColor="#c08a52"/><stop offset="1" stopColor="#8a5a30"/></linearGradient>
+    <radialGradient id="lift-liftCafe-vig" cx=".5" cy=".48" r=".78"><stop offset=".52" stopColor="#2a1a10" stopOpacity="0"/><stop offset="1" stopColor="#2a1a10" stopOpacity=".6"/></radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#lift-liftCafe-wall)"/>
+  <rect y="700" width="1080" height="26" fill="#8a6544"/>
+  <rect y="1130" width="1080" height="790" fill="#7c5f45"/>
+  <g><rect x="70" y="300" width="260" height="380" fill="#f4dcae" stroke="#7a5a3c" strokeWidth="14"/><path d="M200,300 V680 M70,490 H330" stroke="#7a5a3c" strokeWidth="9"/><path d="M86,316 L150,470 M186,316 L250,470" stroke="#e6c48d" strokeWidth="8" opacity=".55"/></g>
+  {/* menu board, no lettering: the cafe reads from the chalk shapes alone */}
+  <g><rect x="760" y="280" width="280" height="360" rx="8" fill="#2f2c24" stroke="#7a5c3e" strokeWidth="12"/>{[0,1,2,3,4,5].map(i=><path key={i} d={`M790,${330+i*42} H${980-(i%3)*40}`} stroke="#cfc7b0" strokeWidth="5" opacity=".45"/>)}<path d="M900,570 h34 l-5,22 h-24Z" fill="none" stroke="#cfc7b0" strokeWidth="4" opacity=".5"/></g>
+  <path d="M540,0 V232" stroke="#4b3a28" strokeWidth="7"/><path d="M500,232 H580 L566,282 H514Z" fill="#384349" stroke="#71808a" strokeWidth="4"/>
+  <Darkness id="lift-liftCafe-dark" color="#3a2415" opacity={.28} lights={[{x:540,y:290,reach:900},{x:200,y:500,reach:640},{x:880,y:840,reach:620}]}/>
+  <Glow id="lift-liftCafe-lamp" x={540} y={296} r={330} color="#ffdba0" strength={.5}/>
+  {/* Fon keeps her back to us so the phone, not her face, is this shot's subject */}
+  <Cast who="fon" x={860} y={1150} s={.38} f={frame} warm pose="point" expr="talk" turn={-.9}/>
+  <g>
+    <rect x="700" y="930" width="380" height="360" fill="#8a5f3c"/><rect x="678" y="906" width="424" height="40" rx="6" fill="#d8b083" stroke="#7a4e2c" strokeWidth="6"/><rect x="700" y="946" width="380" height="16" fill="#6d4a2e" opacity=".6"/>
+    <rect x="930" y="842" width="130" height="66" rx="8" fill="#6b6f72" stroke="#4a4f52" strokeWidth="5"/><rect x="946" y="856" width="46" height="30" rx="4" fill="#8f9496"/><rect x="1004" y="858" width="30" height="10" rx="4" fill="#b9bcbe"/>
+    {[0,1,2,3].map(i=><circle key={i} cx={754+i*34} cy={896} r={9} fill="#c98d5e" stroke="#8a5f3c" strokeWidth="2"/>)}
+  </g>
+  <Cast x={300} y={1230} s={.7} f={frame} warm pose="idle" expr={p>.5?'sweat':'flat'} turn={.5}/>
+  <g>
+    <ellipse cx="540" cy="1100" rx="400" ry="168" fill="#6b4426"/>
+    <ellipse cx="540" cy="1050" rx="400" ry="170" fill="url(#lift-liftCafe-wood)" stroke="#7a4e2c" strokeWidth="6"/>
+    <ellipse cx="540" cy="1050" rx="330" ry="128" fill="none" stroke="#d9a86c" strokeWidth="3" opacity=".5"/>
+    <CafeCup x={300} y={990}/><CafeCup x={790} y={1000}/>
+  </g>
+  {/* flashback treatment; the phone is redrawn after it so the screen is the hottest thing in frame */}
+  <rect width="1080" height="1920" fill="#c9a878" opacity=".4" style={{mixBlendMode:'multiply'}}/>
+  <rect width="1080" height="1920" fill="url(#lift-liftCafe-vig)"/>
+  <CatPhone id="lift-liftCafe-phone" x={540} y={1085} s={3} glow="#ffd7a8" strength={.6}>
+    <rect x="-18" y="-44" width="36" height="8" rx="4" fill="#ded3c6"/><circle cx="-12" cy="-40" r="2" fill="#c3a68f"/><rect x="-4" y="-42" width="18" height="4" rx="2" fill="#cbb9a6"/>
+    {label(0,-4,'ที่รัก ❤️',13,'#6b4f44')}
+    <rect x="-16" y="14" width="32" height="9" rx="4.5" fill="#ece1d4"/><rect x="-9" y="28" width="25" height="9" rx="4.5" fill="#e2d5c6"/>
+  </CatPhone>
+</g>;
+
+export const LiftRing:React.FC<EnvProps>=({frame,progress:p=0})=>{const buzz=Math.sin(frame*2.2)*4;const px=730,py=1075;return <LiftInterior id="lift-liftRing" lit={0}>
+  <Glow id="lift-liftRing-key" x={px} y={py} r={520} color="#8fc4ff" strength={.55}/>
+  <Cast x={340} y={1510} s={.88} f={frame} lit={1} expr={p<.35?'shock':'sweat'} turn={.35}/>
+  <Cast who="fon" x={740} y={1510} s={.88} f={frame} lit={1} expr={p<.2?'shock':'flat'} turn={-.3}/>
+  {/* the phone is the key: a blue wash over the cast so both faces go cool on its side */}
+  <Glow id="lift-liftRing-faces" x={px} y={py-70} r={540} color="#8fc4ff" strength={.22}/>
+  <g>
+    {/* her hand grips from below and stays behind the case, keeping the screen clean */}
+    <Hand x={795} y={1120} s={.8} r={-16}/>
+    <g transform={`translate(${buzz} 0)`}>
+      <CatPhone id="lift-liftRing-phone" x={px} y={py} s={2.6} glow="#bcd9ff" strength={.7}>
+        {label(0,-10,'ที่รัก ❤️',10,'#5b4a4a')}
+        {label(0,8,'กำลังโทร…',7,'#8c7f74')}
+        <rect x="11" y="-51" width="10" height="6" rx="1.5" fill="#b42d3b"/><rect x="21" y="-49" width="2.5" height="2" fill="#b42d3b"/>
+        {label(4,-44,'2%',7,'#b42d3b')}
+      </CatPhone>
+      {[0,1,2].map(i=><path key={i} d={`M${648-i*20},${936-i*16} q${-34-i*8},34 0,68`} fill="none" stroke="#bcdcff" strokeWidth="5" opacity={.25+.5*Math.abs(Math.sin(frame*.25-i*.7))}/>)}
+    </g>
+    {/* the cat-hair clue on the sleeve: visible, never labelled */}
+    {[[0,0,9,-3],[14,10,10,4],[-8,22,8,6],[10,32,11,-2],[-4,44,9,5],[16,52,8,-4]].map(([hx,hy,ex,ey],k)=><path key={k} d={`M${800+hx},${1230+hy} q${ex},${ey} ${ex*1.8},${ey*1.4}`} fill="none" stroke="#dfd8cf" strokeWidth="2.5" strokeLinecap="round" opacity={.85}/>)}
+  </g>
+</LiftInterior>};
+
+export const LobbyPeak:React.FC<EnvProps>=({frame,progress:p=0})=>{const walked=phase(p,0,.35),gasp=p>=.55,lean=phase(p,.55,.7),drop=phase(p,.55,.7);return <g transform="translate(-95 -125) scale(1.16)">
+  <Lobby id="lift-lobbyPeak" frame={frame} active behind={<Cast who="liftGuard" x={mix(862,846,lean)} y={1260} s={.48} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'smile'} turn={gasp?-.5:0}/>}>
+    <Mops p={1}/>
+    <Chair x={950} y={1270}/>
+    <Cast who="cleaner" x={mix(380,412,lean)} y={1260} s={.46} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'talk'} turn={.6}/>
+    <Cast who="cleaner2" x={mix(720,690,lean)} y={1300} s={.47} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'smile'} turn={-.6}/>
+    <SnackBag x={mix(-60,300,walked)+44} y={1205}/>
+    <Cast who="runner" x={mix(mix(-60,300,walked),326,lean)} y={1300} s={.46} f={frame} warm pose={gasp?'shock':'idle'} expr={gasp?'shock':'flat'} turn={gasp?.6:0} walk={p<.35}/>
+    {/* the coffee goes over the counter edge as the gasp lands, with the splash timed to touch-down */}
+    <CoffeeCup x={mix(970,992,drop)} y={mix(984,1236,drop)} r={mix(0,120,drop)}/>
+    {drop>.9?<g opacity={Math.min(1,(drop-.9)*10)}><ellipse cx={992} cy={1244} rx={46} ry={11} fill="#5a3320" opacity=".8"/>{[[-34,-4],[-14,-10],[12,-8],[30,-2]].map(([sx,sy],k)=><circle key={k} cx={992+sx} cy={1244+sy} r={4-k*.4} fill="#6b3a22"/>)}</g>:null}
+  </Lobby>
+</g>};
