@@ -85,6 +85,13 @@ Before writing, every answer must be yes:
 4. Is there an early clue that pays off at the end?
 5. Is the A/B choice hard (both options tempting or both scary)?
 6. Would you comment if you were watching?
+7. Does a Part 2/3 stand alone? A stranger who never saw Part 1 must get the situation from the
+   hook itself (who, where, what is at stake) in the first ~5 s, without going back.
+8. Does the hook catch in the first 1-2 s? It is the strongest jolt or question of the part, not a
+   vote result chip or a slow lead-in.
+9. Is this part's own story strong, not just a bridge to the next part?
+   (7-9 from owner feedback on lift-ex Part 2, 2026-11-03: hook weak, needs Part 1 to follow,
+   story not strong enough.)
 
 After posting (TikTok Studio): still watching at 3 s > 60%; average watch > 50%; finished > 20%;
 comments per 1,000 views > 10; Part 2 views / Part 1 views > 50%. The retention graph's steepest

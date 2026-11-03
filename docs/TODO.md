@@ -77,18 +77,20 @@
    - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
-10. [ ] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/lift02-beat-sheet.md v2
+10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/lift02-beat-sheet.md v2
    - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
    - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
    - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
    - [x] Pipeline build lift02-sets (deepseek-flash-free, cohere review PASS), merged e1aedf9
    - [x] Draft 1 rendered (out/drafts/lift02/video.mp4); stills read: 7/9 scenes OK
-   - [ ] Fix round 1 (docs/briefs/lift02-fix1.md): ring phone looks pasted, hand + cat hair hidden; lobby4 guard/chair/cup off right edge
-     - [x] Pipeline crash on cp874 decode of Thai diff fixed (brain 7010d1e, 42 tests pass)
-     - [ ] Pipeline rebuild running; verify diff + stills, merge
-     - [ ] Pipeline bug: --resume after a crash re-adds an existing worktree (exit 255); crashed attempt not checkpointed
-   - [ ] Draft 2 render; re-check ring + lobby4 stills; loudness (draft 1 measured -12.9 LUFS vs -14 target); release checklist
-   - [ ] Publish out/final/03-lift-ex/ep02 + post kit (part 2/3); posting = owner
+   - [x] Fix round 1 (docs/briefs/lift02-fix1.md), merged e63e37c; pipeline cp874 decode fix (brain 7010d1e)
+   - [x] Fix round 2 (docs/briefs/lift02-fix2.md: forearm sleeve, cup clear of faces), merged 171fff1; verified by remotion stills + final-render frames
+   - [x] Two-pass loudness master (869b0d5): draft 3 = -13.8 LUFS vs -14
+   - [x] Published out/final/03-lift-ex/ep02 (video, cover, post.txt); posting = owner
+   - [ ] Owner feedback after viewing (2026-11-03, NOT fixed on purpose, apply from ep 3): hook not catchy; a Part 2 must make sense without Part 1 (recap inside the hook); story not strong enough. Rules added to docs/story-ideas.md "How to judge a story" 7-9
+   - [ ] Pipeline bug: --resume after a crash re-adds an existing worktree (exit 255); crashed attempt not checkpointed
+   - [ ] post-kit bug: description repeats the series title ("ติดลิฟต์กับแฟนเก่า · ตอน 2/3 · ติดลิฟต์กับแฟนเก่า ตอน 2"); YouTube title cut mid-word
+   - [ ] make.py --publish uses seriesSlug "lift-ex", not the "03-lift-ex" folder ep 1 lives in (moved by hand)
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.

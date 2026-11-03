@@ -46,6 +46,12 @@ static vote card loses the first 3 s; the shower detail made him a snoop; three 
 sagged the middle; "grab the phone" undid his redemption. All four fixed above. Split verdict on
 "ที่รัก" as a cat contact name: kept, Part 3 makes it the cat's real name.
 
+## Owner feedback after viewing (2026-11-03, kept as posted, apply from Part 3)
+
+- The hook is not catchy.
+- A viewer who skipped Part 1 cannot follow: the hook must recap the situation itself.
+- The story is not strong enough on its own.
+
 ## Escalation check (story-ideas "How to judge a story")
 
 - Part 1 was awkward and petty. Part 2 turns sincere (the truth) and then lands a bigger jolt (the same "ที่รัก" again). The trick is not repeated.
