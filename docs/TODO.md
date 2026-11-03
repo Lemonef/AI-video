@@ -93,7 +93,7 @@
    - [ ] Owner feedback after viewing (2026-11-03, NOT fixed on purpose, apply from ep 3): hook not catchy; a Part 2 must make sense without Part 1 (recap inside the hook); story not strong enough. Rules added to docs/story-ideas.md "How to judge a story" 7-9
    - [ ] Pipeline bug: --resume after a crash re-adds an existing worktree (exit 255); crashed attempt not checkpointed
    - [ ] post-kit bug: description repeats the series title ("ติดลิฟต์กับแฟนเก่า · ตอน 2/3 · ติดลิฟต์กับแฟนเก่า ตอน 2"); YouTube title cut mid-word
-   - [ ] post-kit: 3 reply variants per comment type, not one fixed line (owner 2026-11-04: same reply every time feels stale). Variants differ in opener and emoji; one echoes the commenter's own word. Pipeline job, free rung.
+   - [ ] post-kit: for EACH vote option (A, B, other idea) give 3 reply styles - hype / tease / hint at next part without spoiling - not one fixed line (owner 2026-11-04: same reply feels stale). Pipeline job, free rung.
    - [ ] make.py --publish uses seriesSlug "lift-ex", not the "03-lift-ex" folder ep 1 lives in (moved by hand)
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
