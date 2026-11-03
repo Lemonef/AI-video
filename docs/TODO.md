@@ -44,8 +44,11 @@
          - [x] Shot 19 camera keys densified (pipeline: zen deepseek-v4.1-flash built, groq reviewed; merged): MAE 27.07 -> 13.09, SSIM .695 -> .941 KEEP; guards 3/29 held
          - [x] Densify other moving shots: 26-shot motion-aware gate, KEEP 17 (1 2 3 4 5 6 7 10 15 16 17 18 20 22 24 26 27; e.g. 6 15.93->12.56, 16 10.33->8.24, 27 18.69->16.94), reverted 9 (wobble) + 11/12/28/29/31/32/33/34 (MAE flat) (402e23d); baselines re-made, deterministic
          - [x] Motion score in gate + side-by-side for failed targets (pipeline zen deepseek, groq review; 9254672)
-         - [ ] MAE-flat review lane: Gemini vision opinion on shotNN-side.mp4, Zen decides (candidates 29 motion 3.26->2.65, 28, 11, 31)
-         - [ ] Worst now: 7 (24.24 head/hands/arms), 29 (21.69 brightness ratio .796), 9 (21.70), 4 (17.99), 22 (18.15), 33 (17.22)
+         - [ ] MAE-flat review lane: Gemini vision opinion on shotNN-side.mp4, Zen decides (candidates 28, 11, 31; 29 solved by grade curve)
+         - [x] Shot 29 per-frame grade curve (pipeline: nim nemotron-3-ultra built, cohere reviewed; scripts/fit_grade_curve.py -> grade-curves.json): MAE 21.72 -> 12.34, SSIM .768 -> .862, motion 3.26 -> 2.38 KEEP (dd5f54d); guards 3/19/28/30 held; baseline 29 rebuilt
+         - [ ] Check gate motion on shot 3: guard motion 4.93 -> 1.61 with frame MAE identical (baseline vs candidate should be bit-identical)
+         - [ ] Try grade curve on other brightness-ratio shots (35/4/25/6), one gate each
+         - [ ] Worst now: 7 (24.24 head/hands/arms), 9 (21.70), 22 (18.15), 4 (17.99), 33 (17.22)
          - [ ] Small brief: calibrate script prints "Accepted N of M" with M = stride count; gate subprocess encoding=utf-8 (cp874 crash without PYTHONUTF8)
          - [x] shot 15/16 map-parking plate extended (map-parking-clean-v2, unclipped svg): gate KEEP, 15 MAE 20.35->15.09 SSIM .754->.828, 16 MAE 10.66->10.25 SSIM .817->.825, guards bit-identical
          - [x] shots 7/9 counter alarm grade: red+black wash -> fitted per-channel feColorMatrix; 7 MAE 28.14->25.46 SSIM .664->.685, 9 MAE 23.61->21.74 SSIM .733->.757. Left on 7: arms raised to chest in ref (ours at sides), head/eyes size, caption weight, first ~10% brighter in source
