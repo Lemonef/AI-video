@@ -1,6 +1,9 @@
 # TODO — the only place live status lives
 
 ## QUEUE (owner order, 2026-11-01)
+0. Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
+   Heartbeat cron stopped; 1:1 loop PAUSED until the episode ships. Next episode first.
+   - [ ] Story skill (later, owner call): turn docs/story-ideas.md "How to judge a story" + the standalone-part methods into a reusable skill when the next story starts
 1. [x] Pipeline v1 shipped (brain a8fe06f)
 2. [x] 3 practice jobs: 2 free passes, trap caught
 3. [x] Mine all 36 reels: extraction + top-15 lessons (brain research/reel-top15-lessons-2026-11-01.md, cinematic-guide §4)
