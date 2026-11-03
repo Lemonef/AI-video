@@ -77,6 +77,13 @@
    - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
+10. [ ] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/lift02-beat-sheet.md v2
+   - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
+   - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
+   - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
+   - [ ] Pipeline build lift02-sets (lobbyHold, liftCafe, liftRing, lobbyPeak) - running, verify diff + stills before merge
+   - [ ] make.py lift02 --draft; check stills per scene (cat-ear case + hair readable in ring), audio -14 LUFS, release checklist
+   - [ ] Publish out/final/03-lift-ex/ep02 + post kit (part 2/3); posting = owner
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
