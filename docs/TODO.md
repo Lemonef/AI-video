@@ -42,7 +42,11 @@
        - [ ] 1:1 loop on ProRes numbers: 7 (28.14), 22 (26.83), 9 (23.61), 27 (23.21), 15 (20.35 -> 15.09 KEEP), 7 (-> 25.46 KEEP), 9 (-> 21.74 KEEP), 22 (-> 18.06 KEEP), 7 hands (-> 24.84 KEEP f196227), 27 green clock + grade + flash (-> 18.67 KEEP 69f72d3/25d9712); worst now 7 (24.84), 9 (21.74), 27 (18.67), 22 (18.06); next = shot 29 brightness (ratio .796), then 35/4/25/6 ratios, 22 shutter/face/caption, 7 head
          - [x] Gate captions now draw vendored Anton (2e3fa89); all 35 baselines re-made. Anton-honest worst: 19 (27.07), 7 (24.68), 29 (21.72), 9 (21.70), 27 (18.69), 4 (18.68), 22 (18.28)
          - [x] Shot 19 camera keys densified (pipeline: zen deepseek-v4.1-flash built, groq reviewed; merged): MAE 27.07 -> 13.09, SSIM .695 -> .941 KEEP; guards 3/29 held
-         - [ ] Densify other moving shots (--shot-ids per shot, gate each); next worst 7 (24.68), 29 (21.72), 9 (21.70)
+         - [x] Densify other moving shots: 26-shot motion-aware gate, KEEP 17 (1 2 3 4 5 6 7 10 15 16 17 18 20 22 24 26 27; e.g. 6 15.93->12.56, 16 10.33->8.24, 27 18.69->16.94), reverted 9 (wobble) + 11/12/28/29/31/32/33/34 (MAE flat) (402e23d); baselines re-made, deterministic
+         - [x] Motion score in gate + side-by-side for failed targets (pipeline zen deepseek, groq review; 9254672)
+         - [ ] MAE-flat review lane: Gemini vision opinion on shotNN-side.mp4, Zen decides (candidates 29 motion 3.26->2.65, 28, 11, 31)
+         - [ ] Worst now: 7 (24.24 head/hands/arms), 29 (21.69 brightness ratio .796), 9 (21.70), 4 (17.99), 22 (18.15), 33 (17.22)
+         - [ ] Small brief: calibrate script prints "Accepted N of M" with M = stride count; gate subprocess encoding=utf-8 (cp874 crash without PYTHONUTF8)
          - [x] shot 15/16 map-parking plate extended (map-parking-clean-v2, unclipped svg): gate KEEP, 15 MAE 20.35->15.09 SSIM .754->.828, 16 MAE 10.66->10.25 SSIM .817->.825, guards bit-identical
          - [x] shots 7/9 counter alarm grade: red+black wash -> fitted per-channel feColorMatrix; 7 MAE 28.14->25.46 SSIM .664->.685, 9 MAE 23.61->21.74 SSIM .733->.757. Left on 7: arms raised to chest in ref (ours at sides), head/eyes size, caption weight, first ~10% brighter in source
          - [x] door plate extended (door-clean-v2, all door/chain shots): 22 MAE 26.83->18.06 SSIM .621->.744; every other door shot improved slightly. Left on 22: shutter too pale (ref mid-grey), face angry vs ref alarmed, JAMS yellow vs ref red
