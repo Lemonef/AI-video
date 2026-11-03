@@ -14,30 +14,37 @@ Status: DRAFT for owner approval. Vote result from Part 1: **A, tell the whole t
 
 Part 3 reveals that "ที่รัก ❤️" is แพรว's cat (the contact is her pet-camera app). Part 2
 must show the clue without explaining it: a cat-ear phone case and cat hair on her sleeve,
-both visible in the phone-glow shot, never mentioned in narration.
+both visible in the ring shot, never mentioned in narration.
 
-## Beats (target 55-62 s, ten scenes like Part 1)
+## Beats (target 55-62 s, nine scenes)
 
 | # | Scene | Beat | Tone | Set |
 |---|---|---|---|---|
-| 1 | vote | On screen: "✅ คนส่วนใหญ่เลือก A · บอกความจริง". Spoken: จ๊าบตัดสินใจ พูดความจริงทั้งหมด | quick, warm | liftQuestion (reuse) |
-| 2 | breath | จ๊าบ takes a breath in the dark, starts, stops, starts again | dry comedy | liftAwkward (reuse) |
-| 3 | lobby3 | Lobby: the technician calls the guard back; the guard says "รอแป๊บพี่ กำลังถึงตอนสำคัญ" and puts him on hold (the reason they stay stuck) | conspiratorial | lobbyGuard (reuse + phone) |
-| 4 | truth1 | Truth: eight months ago he saw her phone light up, "ที่รัก ❤️", while she was in the shower | sincere | NEW liftPhoneGlow (flashback tint) |
-| 5 | truth2 | He thought there was someone else, and left first so he would not be the one dumped | sincere, a bit pathetic | liftAwkward close |
-| 6 | lobby4 | Lobby: cleaners gasp, one grabs the guard's arm; a third night-shift worker arrives with snacks | comedy | lobbyCrowd (reuse + 1 extra) |
-| 7 | praew | แพรว goes quiet. She opens her mouth to answer... | held beat | liftRecognize (reuse) |
-| 8 | ring | Her phone, at 2%, lights up the whole lift: "ที่รัก ❤️ กำลังโทร". Cat-ear case visible | jolt | NEW liftPhoneGlow |
-| 9 | lobby5 | Lobby: the guard drops his coffee; everybody leans at the speaker | comedy peak | lobbyCrowd |
-| 10 | end | Question to the viewer, A/B card | direct | liftPressure (reuse) |
+| 1 | hook | Tight on จ๊าบ's face in the red emergency light, mouth open to speak. Overlay chip "✅ คนส่วนใหญ่เลือก A · บอกความจริง"; spoken: จ๊าบตัดสินใจ พูดความจริงทั้งหมด | tense, warm | liftAwkward close (reuse) |
+| 2 | breath | He starts, stops, starts again | dry comedy, short | liftAwkward (reuse) |
+| 3 | lobby3 | Lobby: the technician calls back; the guard says "รอแป๊บพี่ กำลังถึงตอนสำคัญ" and puts him on hold (why they stay stuck) | conspiratorial, short | lobbyGuard (reuse + phone) |
+| 4 | truth1 | Eight months ago her phone lit up face-up on a cafe table while she went to order: "ที่รัก ❤️". He only glanced | sincere | NEW liftPhoneGlow (flashback tint) |
+| 5 | truth2 | He never dared ask; kept it two weeks, then broke up saying work was too busy, so he would not be the one left | sincere, ashamed | liftAwkward close |
+| 6 | praew | แพรว goes quiet. She opens her mouth to answer... | held beat | liftRecognize (reuse) |
+| 7 | ring | Her phone, at 2%, lights their faces: "ที่รัก ❤️ กำลังโทร". Cat-ear case visible | jolt | NEW liftPhoneGlow |
+| 8 | lobby4 | Lobby peak: crowd has grown (a night-shift worker with snacks); cleaners gasp, the guard drops his coffee, everybody leans at the speaker | comedy peak | lobbyCrowd (reuse + 1 extra) |
+| 9 | end | Question to the viewer, A/B card | direct | liftPressure (reuse) |
 
-## Part 3 vote (beat 10)
+## Part 3 vote (beat 9)
 
 **จ๊าบควรทำยังไง?**
-- **A:** ถามแพรวตรงๆ ว่าที่รักคือใคร
-- **B:** แย่งโทรศัพท์มากดรับเอง
+- **A:** ถามแพรวตรงๆ ว่าที่รักคือใคร (brave)
+- **B:** ทำเป็นไม่สนใจ ปล่อยให้แพรวรับสายเอง (proud)
 
-Both are tempting, and both lead into the cat reveal. Footer: "A หรือ B · ตอนจบ ตามเสียงส่วนใหญ่".
+Both lead into the cat reveal: A, she laughs and shows him; B, she answers on speaker and the whole
+lobby hears a cat. Footer: "A หรือ B · ตอนจบ ตามเสียงส่วนใหญ่".
+
+## Review log
+
+Free-leg story review 2026-11-03 (multi_ai_check --skip-codex; 7 of 10 answered): opening on a
+static vote card loses the first 3 s; the shower detail made him a snoop; three lobby cutaways
+sagged the middle; "grab the phone" undid his redemption. All four fixed above. Split verdict on
+"ที่รัก" as a cat contact name: kept, Part 3 makes it the cat's real name.
 
 ## Escalation check (story-ideas "How to judge a story")
 
