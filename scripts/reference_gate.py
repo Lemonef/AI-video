@@ -14,7 +14,11 @@ Each shot is scored twice: whole frame, and a crop around the source actor
 is ~5% of the frame, so acting changes are invisible to the whole-frame score.
 A target passes when one score lowers MAE by at least MIN_MAE_GAIN without
 lowering SSIM and the other score does not regress. Guard shots must not
-regress on either score beyond measured render noise. Every shot on the same stage
+regress on either score beyond measured render noise. Every shot also scores
+motion (source frame-to-frame change vs ours), so camera wobble or jerky
+timing that the per-frame scores barely see still fails. A failed target gets
+a source | baseline | candidate review clip for judging it by eye.
+Every shot on the same stage
 (shared set/components, from shot-review.json) is guarded automatically; extra
 guards can be added, none can be removed.
 Exit code 0 = keep, 1 = discard, 2 = usage/setup error.
@@ -33,6 +37,8 @@ import shutil
 import subprocess
 import sys
 from typing import NoReturn
+
+import numpy as np
 
 REPO = Path(__file__).resolve().parents[1]
 STUDY_DIR = Path(os.environ.get('REFERENCE_STUDY_DIR',
@@ -61,9 +67,18 @@ MIN_MAE_GAIN = 0.05
 # allowance is now pure headroom; kept rather than zeroed in case a future shot wobbles.
 NOISE_MAE = 0.005
 NOISE_SSIM = 0.0002
+# Motion compares frame-to-frame change instead of each frame alone, so camera
+# wobble and jerky timing show up even when MAE/SSIM do not. Re-rendering unchanged
+# code is bit-identical under ProRes (same self-test as NOISE_MAE), so this
+# allowance is pure headroom rather than an expected difference; kept nonzero in
+# case a future shot wobbles. Well below the wobble the score is meant to catch.
+NOISE_MOTION = 0.005
 # Actor crops reuse the frame noise allowance: the measured lead shots (10/13/14)
 # re-rendered bit-identical. Re-measure before boxing a shot that wobbles (28).
 ACTOR_BOXES = STUDY_DIR/'actor-boxes.json'
+# Review plane used by reference_loop_review.py; motion decodes at half that size.
+REVIEW_SIZE = (270, 480)   # (width, height)
+MOTION_SIZE = (135, 240)   # (width, height)
 
 
 def sha(path):
@@ -108,6 +123,31 @@ def render(shot, out):
     return s['start']
 
 
+def gray_frames(path, start, count, size=MOTION_SIZE):
+    """Decode `count` consecutive frames from `path` from `start`, as gray float pixels."""
+    w, h = size
+    process = subprocess.run([
+        'ffmpeg', '-v', 'error', '-i', str(path), '-vf',
+        f"select='between(n,{start},{start+count-1})',scale={w}:{h}",
+        '-fps_mode', 'vfr', '-f', 'rawvideo', '-pix_fmt', 'gray', '-',
+    ], capture_output=True)
+    if process.returncode:
+        fail(f'decode failed for {path}:\n{process.stderr.decode(errors="replace")[-2000:]}')
+    raw = np.frombuffer(process.stdout, np.uint8)
+    if raw.size != count*w*h:
+        fail(f'{path}: expected {count} frames at {w}x{h}, decoded {raw.size//(w*h)}')
+    return raw.reshape((count, h, w)).astype(np.float32)
+
+
+def motion_error(src, ours):
+    """Mean |source frame-to-frame change - our frame-to-frame change| over frames and pixels.
+
+    A constant brightness offset cancels in the per-frame difference, so it scores 0.
+    """
+    delta = np.diff(src.astype(np.float32), axis=0) - np.diff(ours.astype(np.float32), axis=0)
+    return 0.0 if delta.size == 0 else float(np.abs(delta).mean())
+
+
 def measure(shot, clip, start, out_dir):
     run = subprocess.run([sys.executable, str(REPO/'scripts/reference_loop_review.py'),
                           '--source', str(STUDY_DIR/'source.mp4'), '--render', str(clip),
@@ -121,7 +161,14 @@ def measure(shot, clip, start, out_dir):
     # Unrounded means, so the comparison is not decided by display rounding.
     mean = lambda key, rs: {k: sum(r[key][k] for r in rs)/len(rs) for k in ('mae_255', 'ssim')}
     actor = [r for r in rows if 'actor' in r]
-    return {'frame': mean('current', rows), 'actor': mean('actor', actor) if actor else None}
+    # Motion needs every frame of the shot, not the sampled phases: decode the
+    # shot's whole range from both files and compare their frame-to-frame deltas.
+    s = study_shots()[shot-1]
+    count = s['end'] - start
+    motion = motion_error(gray_frames(STUDY_DIR/'source.mp4', start, count),
+                          gray_frames(clip, 0, count))
+    return {'frame': mean('current', rows), 'actor': mean('actor', actor) if actor else None,
+            'motion': motion}
 
 
 def improves(base, cand):
@@ -130,6 +177,18 @@ def improves(base, cand):
 
 def holds(base, cand):
     return cand['mae_255'] <= base['mae_255'] + NOISE_MAE and cand['ssim'] >= base['ssim'] - NOISE_SSIM
+
+
+def judge(base, cand, target):
+    """Keep/discard one shot's scores. Target: one score improves, the other holds.
+    Guard: both scores hold. Every shot must also hold motion within NOISE_MOTION."""
+    scores = [k for k in ('frame', 'actor') if base[k]]
+    motion_holds = cand['motion'] <= base['motion'] + NOISE_MOTION
+    if target:
+        return motion_holds and any(
+            improves(base[k], cand[k]) and all(holds(base[o], cand[o]) for o in scores if o != k)
+            for k in scores)
+    return motion_holds and all(holds(base[k], cand[k]) for k in scores)
 
 
 def fingerprint():
@@ -170,6 +229,27 @@ def load_baseline(shot, base_dir):
     return base
 
 
+def side_by_side(shot, baseline, candidate, out):
+    """Write source | baseline | candidate for one shot, for judging motion by eye."""
+    s = study_shots()[shot-1]
+    w, h = REVIEW_SIZE
+    graph = (
+        f"[0:v]select='between(n,{s['start']},{s['end']-1})',setpts=N/FRAME_RATE/TB,"
+        f"scale={w}:{h},setsar=1[a];"
+        f"[1:v]setpts=N/FRAME_RATE/TB,scale={w}:{h},setsar=1[b];"
+        f"[2:v]setpts=N/FRAME_RATE/TB,scale={w}:{h},setsar=1[c];"
+        f"[a][b][c]hstack=inputs=3[out]")
+    process = subprocess.run([
+        'ffmpeg', '-y', '-v', 'error',
+        '-i', str(STUDY_DIR/'source.mp4'), '-i', str(baseline), '-i', str(candidate),
+        '-filter_complex', graph, '-map', '[out]',
+        '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', str(out),
+    ], capture_output=True, text=True)
+    if process.returncode:
+        fail(f'side-by-side failed for shot {shot}:\n{process.stderr[-2000:]}')
+    return out
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--shots', type=int, nargs='+', required=True, help='One-based target shot IDs')
@@ -200,18 +280,21 @@ def main():
                        args.out/f'shot{shot:02}-baseline-review')
         clip = args.out/f'shot{shot:02}.{CLIP_EXT}'
         cand = measure(shot, clip, render(shot, clip), args.out/f'shot{shot:02}-review')
-        scores = [k for k in ('frame', 'actor') if base[k]]
-        if shot in args.shots:
-            passed = any(improves(base[k], cand[k]) and all(holds(base[o], cand[o]) for o in scores if o != k)
-                         for k in scores)
+        target = shot in args.shots
+        passed = judge(base, cand, target)
+        if target:
             rule = f'target: frame or actor MAE down >= {MIN_MAE_GAIN} with SSIM held, other score held'
         else:
-            passed = all(holds(base[k], cand[k]) for k in scores)
             rule = 'guard: frame and actor held within render noise'
+        verdict = {'shot': shot, 'rule': rule, 'pass': passed, 'baseline_commit': meta['commit'],
+                   'baseline': base, 'candidate': cand,
+                   'sheet': str(args.out/f'shot{shot:02}-review/compare-1.jpg')}
+        if target and not passed:
+            review = side_by_side(shot, args.baseline_dir/f'shot{shot:02}.{CLIP_EXT}', clip,
+                                  args.out/f'shot{shot:02}-side.mp4')
+            verdict['review_clip'] = str(review)
         ok &= passed
-        verdicts.append({'shot': shot, 'rule': rule, 'pass': passed, 'baseline_commit': meta['commit'],
-                         'baseline': base, 'candidate': cand,
-                         'sheet': str(args.out/f'shot{shot:02}-review/compare-1.jpg')})
+        verdicts.append(verdict)
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out/'gate.json').write_text(json.dumps({'keep': ok, 'commit': git('rev-parse', 'HEAD'),
                                                   'shots': verdicts}, indent=2), encoding='utf-8')
@@ -222,6 +305,7 @@ def main():
             if b:
                 print(f"   {k:5} MAE {b['mae_255']:.3f} -> {c['mae_255']:.3f}, "
                       f"SSIM {b['ssim']:.4f} -> {c['ssim']:.4f}")
+        print(f"   motion {v['baseline']['motion']:.4f} -> {v['candidate']['motion']:.4f}")
     print('KEEP' if ok else 'DISCARD')
     sys.exit(0 if ok else 1)
 
