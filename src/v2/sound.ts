@@ -22,6 +22,16 @@ const REAL: Record<string, string> = {
 	riser: 'riser',
 	heartbeat: 'heartbeat',
 	click: 'flashlight_click',
+	// lift-ex finale foley (recorded only: no synthetic twin, so these need mix.real)
+	phoneBuzz: 'phone_buzz',
+	shush: 'shush',
+	meow: 'cat_meow',
+	laugh: 'crowd_laugh',
+	powerDown: 'power_down',
+	liftDing: 'lift_ding',
+	liftDoor: 'lift_door',
+	gasp: 'crowd_gasp',
+	cheer: 'crowd_cheer',
 };
 export const sfxFile = (name: string, real = false) => (real && REAL[name] ? `sfx/real/${REAL[name]}.mp3` : `sfx/${name}.wav`);
 

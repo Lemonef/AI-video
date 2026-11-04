@@ -30,6 +30,16 @@ LIBRARY = {
     "riser": ("horror riser tension", 2, 12),
     "stinger": ("horror stinger scare", 1, 8),
     "whoosh": ("whoosh swish transition", 0.2, 3),
+    # lift-ex finale (owner 2026-11-04: synthetic pops/impacts sounded bad, real foley instead)
+    "cat_meow": ("cute kitten meow", 0.3, 3),
+    "lift_ding": ("elevator ping", 0.3, 4),
+    "lift_door": ("automatic elevator door", 1, 6),
+    "crowd_gasp": ("crowd shock gasp", 0.5, 5),
+    "crowd_cheer": ("short crowd cheer", 2, 10),
+    "crowd_laugh": ("crowd laugh", 1, 6),
+    "shush": ("shh voice", 0.3, 3),
+    "phone_buzz": ("phone short buzz", 0.3, 4),
+    "power_down": ("machine power off", 0.5, 4),
 }
 
 
@@ -47,6 +57,15 @@ PINNED = {
     "whoosh": 683096,  # airy soft woosh
     "heartbeat": 249716,  # slow heartbeat
     "riser": 840719,  # simple tension riser
+    "cat_meow": 448084,  # cute kitten meow
+    "lift_ding": 459349,  # elevator ping
+    "lift_door": 233307,  # automatic elevator door
+    "crowd_gasp": 324898,  # crowd shock
+    "crowd_cheer": 182571,  # short crowd cheer
+    "crowd_laugh": 324894,  # crowd laugh
+    "shush": 701175,  # voice shh
+    "phone_buzz": 476836,  # phone short buzz
+    "power_down": 395378,  # machine power off
 }
 
 BEDS = {"forest_night", "wind", "rain", "dark_drone", "steps_leaves"}
