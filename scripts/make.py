@@ -20,6 +20,23 @@ from pipeline.render import render  # noqa: E402
 from pipeline.tts import get_engine  # noqa: E402
 
 
+def story_folder(final_root: Path, slug: str) -> str:
+    """Series folders are numbered by release order (03-lift-ex) while episodes carry the bare slug.
+
+    Reuse the existing numbered folder; a new series gets the next number, so a slug never
+    produces a second, unnumbered folder beside the real one.
+    """
+    if final_root.is_dir():
+        for d in sorted(final_root.iterdir()):
+            head, _, tail = d.name.partition("-")
+            if d.is_dir() and (d.name == slug or (head.isdigit() and tail == slug)):
+                return d.name
+        numbers = [int(d.name.partition("-")[0]) for d in final_root.iterdir() if d.name.partition("-")[0].isdigit()]
+    else:
+        numbers = []
+    return f"{max(numbers, default=0) + 1:02d}-{slug}"
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Build one episode from episodes/<id>.json")
     ap.add_argument("episode", help="episode id, e.g. ep01")
@@ -47,7 +64,7 @@ def main() -> None:
     release_episode = episode.get("releaseEpisode", args.episode)
     if any(Path(part).name != part or part in (".", "..") for part in (story, release_episode)):
         raise ValueError("release story/episode must be simple folder names")
-    final = ROOT / "out" / "final" / story / release_episode
+    final = ROOT / "out" / "final" / story_folder(ROOT / "out" / "final", story) / release_episode
     if args.publish:
         versions.publish(versions.latest(ROOT, args.episode), final / "video.mp4")
         print(f"done: {final / 'video.mp4'}")
@@ -69,7 +86,6 @@ def main() -> None:
     if args.no_render:
         return
     # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
-    final.mkdir(parents=True, exist_ok=True)
     destination = ROOT / "out" / "drafts" / args.episode if args.draft else final
     destination.mkdir(parents=True, exist_ok=True)
     out = destination / "video.mp4"
