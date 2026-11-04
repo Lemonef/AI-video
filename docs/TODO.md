@@ -7,6 +7,9 @@
      - [x] A1 resume check: v14 artifacts + 35 baselines present; gate re-run on shot 7 unchanged = bit-identical (24.244, guards 4/5/9 held)
      - [ ] A2 picture loop: shot 7 head/hands/arms, 9, 22; grade curve on 35/4/25/6 (pipeline free legs, gate verifies)
      - [ ] A3 voice: ElevenLabs stock voice timed to source (never clone the creator)
+       - [x] voice pick: Daniel (speech-to-speech A/B, owner "so close"; Callum backup)
+       - [x] full narration re-voiced: out/drafts/reference-study/DegJCmXtbGj/narration/daniel-sts-full.mp3 (93.30 s vs 93.32 s, ASR 98% word match)
+       - [ ] owner listens full take; check 'rolls' and 'shutters' spots
      - [ ] A4 SFX: event map of source sounds -> CC0/toon clips -> listening preview for owner BEFORE mixing
      - [ ] A5 music: original bed (never the source song), -14 LUFS
      - [ ] A6 v15 full render + side-by-side video+audio vs source -> owner watches/listens
