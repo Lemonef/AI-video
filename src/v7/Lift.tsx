@@ -1,5 +1,7 @@
 import React from 'react';
 import type {EnvProps} from '../v2/Forest';
+import type {Pose} from '../types';
+import {handAt} from '../v2/Character';
 import {Actor, phase, mix, label} from './FloodEscape';
 import {Darkness, Glow, Shaft, ContactShadow} from './light';
 
@@ -32,7 +34,11 @@ const LiftInterior: React.FC<SetProps & {floor?:string}> = ({id,lit=1,floor,chil
 </g>;
 // The inherited actor has a cool base; the outer treatment supplies the practical's local rim.
 const Cast: React.FC<React.ComponentProps<typeof Actor> & {lit?:number; warm?:boolean}> = ({lit=1,warm,...props}) => <g style={{filter:warm?'brightness(1.05) drop-shadow(-3px -3px 0 rgba(255,205,140,.45))':lit?'brightness(1.05) drop-shadow(0 -4px 0 rgba(220,235,255,.5))':'brightness(.86) sepia(.3) saturate(1.15) drop-shadow(0 -4px 0 rgba(255,195,125,.5))'}}><Actor {...props}/></g>;
-const Phone: React.FC<{x:number;y:number;id:string; low?:boolean}> = ({x,y,id,low}) => <g transform={`translate(${x} ${y})`}><Glow id={id} x={0} y={-8} r={100} color="#b8d9ef" strength={.2}/><rect x="-31" y="-62" width="62" height="113" rx="10" fill="#15222e" stroke="#a2acb2" strokeWidth="4"/><rect x="-24" y="-49" width="48" height="85" rx="3" fill="#b9cbd3"/>{low?<><rect x="-18" y="-35" width="36" height="14" fill="#403941"/><rect x="-16" y="-33" width="6" height="10" fill="#dc444a"/>{label(0,10,'3%',24,'#b42d3b')}</>:null}</g>;
+// Maps a handAt() point through an Actor's placement so a prop can sit in the hand. The Actor
+// never mirrors on turn, so no flip is needed here.
+type Placed = {x:number;y:number;s?:number};
+const placeHand = (h: {x:number;y:number}, a: Placed) => {const s = a.s ?? 1; return {x: a.x + h.x * s, y: a.y + h.y * s};};
+const Phone: React.FC<{x:number;y:number;id:string; low?:boolean; s?:number}> = ({x,y,id,low,s=1}) => <g transform={`translate(${x} ${y}) scale(${s})`}><Glow id={id} x={0} y={-8} r={100} color="#b8d9ef" strength={.2}/><rect x="-31" y="-62" width="62" height="113" rx="10" fill="#15222e" stroke="#a2acb2" strokeWidth="4"/><rect x="-24" y="-49" width="48" height="85" rx="3" fill="#b9cbd3"/>{low?<><rect x="-18" y="-35" width="36" height="14" fill="#403941"/><rect x="-16" y="-33" width="6" height="10" fill="#dc444a"/>{label(0,10,'3%',24,'#b42d3b')}</>:null}</g>;
 const Speaker: React.FC<{id:string;frame:number;active?:boolean}> = ({id,frame,active=true}) => <g><rect x="530" y="896" width="170" height="115" rx="13" fill="#34414b" stroke="#a89d83" strokeWidth="5"/>{active?<Glow id={`${id}-speaker`} x={615} y={950} r={160} color="#ffd28a" strength={.4+.15*Math.sin(frame*.5)}/>:null}{[0,1,2,3,4,5].map(i=><path key={i} d={`M552,${918+i*14} H678`} stroke={active?'#e7bc79':'#7a807d'} strokeWidth="5" opacity={active?.7+.25*Math.sin(frame*.5):.5}/>)}<circle cx="684" cy="910" r="5" fill={active?'#f3bb68':'#6b655e'}/></g>;
 const Lobby: React.FC<{id:string;frame:number;active?:boolean;children?:React.ReactNode;behind?:React.ReactNode}> = ({id,frame,active=true,children,behind}) => <g>
   <defs><linearGradient id={`${id}-floor`} x2="0" y2="1"><stop stopColor="#8c7c69"/><stop offset="1" stopColor="#28323e"/></linearGradient></defs>
@@ -53,20 +59,20 @@ const Mops:React.FC<{p:number}> = ({p})=><g transform={`rotate(${mix(0,14,p)} 16
 const Chair:React.FC<{x:number;y:number}> = ({x,y})=><g transform={`translate(${x} ${y})`}><rect x="-52" y="-140" width="104" height="105" rx="16" fill="#afbbb1" stroke="#596d70" strokeWidth="7"/><path d="M-60,-35 H60 V-5 H-60Z" fill="#d0d5c5"/><path d="M-45,-5 L-56,80 M45,-5 L56,80" stroke="#a9b8af" strokeWidth="13"/></g>;
 
 // an open palm seen from inside, fingers up, cuff of her cream blouse below: reads as "a hand stopped the doors"
-const Hand: React.FC<{x:number;y:number;s?:number;r?:number}> = ({x,y,s=1,r=-8}) => <g transform={`translate(${x} ${y}) scale(${s}) rotate(${r})`} stroke="#9c6f55" strokeWidth="4" strokeLinejoin="round">
-  <rect x="-46" y="70" width="92" height="120" rx="14" fill="#e7e1d6" stroke="#a9a196"/><rect x="-46" y="70" width="92" height="20" fill="#bdb5a8" stroke="none"/>
-  <rect x="-40" y="-20" width="80" height="100" rx="30" fill="#e8b996"/>
-  {[[-30,-78,52],[-10,-92,64],[10,-90,62],[30,-72,48]].map(([fx,fy,h],k)=><rect key={k} x={fx-9} y={fy} width="18" height={h+20} rx="9" fill="#e8b996"/>)}
-  <rect x="34" y="0" width="18" height="52" rx="9" fill="#e8b996" transform="rotate(30 43 26)"/>
-  <path d="M-24,40 Q0,52 24,40" fill="none" stroke="#c79574" strokeWidth="3"/>
+const Hand: React.FC<{x:number;y:number;s?:number;r?:number;skin?:string;skinShade?:string;outline?:string;cuff?:string;cuffShade?:string;cuffStroke?:string}> = ({x,y,s=1,r=-8,skin='#e8b996',skinShade='#c79574',outline='#9c6f55',cuff='#e7e1d6',cuffShade='#bdb5a8',cuffStroke='#a9a196'}) => <g transform={`translate(${x} ${y}) scale(${s}) rotate(${r})`} stroke={outline} strokeWidth="4" strokeLinejoin="round">
+  <rect x="-46" y="70" width="92" height="120" rx="14" fill={cuff} stroke={cuffStroke}/><rect x="-46" y="70" width="92" height="20" fill={cuffShade} stroke="none"/>
+  <rect x="-40" y="-20" width="80" height="100" rx="30" fill={skin}/>
+  {[[-30,-78,52],[-10,-92,64],[10,-90,62],[30,-72,48]].map(([fx,fy,h],k)=><rect key={k} x={fx-9} y={fy} width="18" height={h+20} rx="9" fill={skin}/>)}
+  <rect x="34" y="0" width="18" height="52" rx="9" fill={skin} transform="rotate(30 43 26)"/>
+  <path d="M-24,40 Q0,52 24,40" fill="none" stroke={skinShade} strokeWidth="3"/>
 </g>;
-export const LiftJolt:React.FC<EnvProps>=({frame,progress:p=0})=>{const shake=frame<10?(1-frame/10)*Math.sin(frame*2.7)*15:0;const lit=p<.03?1:p<.15?(frame%4<2?1:0):.6;return <g transform={`translate(${shake} ${shake*.4})`}><LiftInterior id="lift-liftJolt" lit={lit}><Cast x={270} y={1250} s={.62} f={frame} lit={lit} pose={p<.5?'shock':'idle'} expr={p<.5?'shock':'sweat'} turn={p<.5?0:.6}/><Cast who="fon" x={810} y={1250} s={.62} f={frame} lit={lit} pose={p<.5?'shock':'hold'} expr={p<.5?'shock':'flat'}/><Phone x={800} y={945} id="lift-liftJolt-phone"/></LiftInterior></g>};
+export const LiftJolt:React.FC<EnvProps>=({frame,progress:p=0})=>{const shake=frame<10?(1-frame/10)*Math.sin(frame*2.7)*15:0;const lit=p<.03?1:p<.15?(frame%4<2?1:0):.6;const fpose:Pose=p<.5?'shock':'hold';const fHand=placeHand(handAt(fpose,'r'),{x:810,y:1250,s:.62});return <g transform={`translate(${shake} ${shake*.4})`}><LiftInterior id="lift-liftJolt" lit={lit}><Cast x={270} y={1250} s={.62} f={frame} lit={lit} pose={p<.5?'shock':'idle'} expr={p<.5?'shock':'sweat'} turn={p<.5?0:.6}/><Cast who="fon" x={810} y={1250} s={.62} f={frame} lit={lit} pose={fpose} expr={p<.5?'shock':'flat'}/><Phone x={fHand.x-10} y={fHand.y-26} s={.62} id="lift-liftJolt-phone"/></LiftInterior></g>};
 export const LiftDoors:React.FC<EnvProps>=({frame,progress:p=0})=>{const close=mix(0,1,phase(p,.35,.75))-.16*phase(p,.75,.83);return <LiftInterior id="lift-liftDoors"><rect x="200" y="300" width="680" height="970" fill="#111d29"/><path d="M200,300 L460,600 H620 L880,300 M200,1270 L460,890 H620 L880,1270" fill="#293b47"/><rect x="485" y="632" width="110" height="45" fill="#28694f"/>{label(540,663,'EXIT',29,'#c7ffe0')}<Glow id="lift-liftDoors-exit" x={540} y={650} r={140} color="#75efa2" strength={.3}/><rect x={-480+680*close/2} y="300" width="680" height="980" fill="#889aa4" stroke="#c1cacc" strokeWidth="10"/><rect x={880-680*close/2} y="300" width="680" height="980" fill="#889aa4" stroke="#c1cacc" strokeWidth="10"/>{/* the arm reaches in from behind the left door and grips the right one: clipped at the left door's edge so it never floats */}{p>.75?<g><defs><clipPath id="lift-liftDoors-reach"><rect x={200+340*close} y="300" width="700" height="980"/></clipPath></defs><g clipPath="url(#lift-liftDoors-reach)"><Hand x={572} y={880} r={84}/></g></g>:null}<Cast x={230} y={1320} s={.8} f={frame} pose={p>.75?'shock':'idle'} expr={p>.75?'shock':'flat'}/></LiftInterior>};
 export const LiftRecognize:React.FC<EnvProps>=({frame,progress:p=0})=><LiftInterior id="lift-liftRecognize"><Cast x={360} y={1510} s={.95} f={frame} expr={p>.4?'sweat':'shock'} turn={.4}/><Cast who="fon" x={mix(720,700,phase(p,0,.65))} y={1510} s={.95} f={frame} expr="flat" turn={-.5}/><Phone x={mix(704,684,phase(p,0,.65))} y={1050} id="lift-liftRecognize-phone"/></LiftInterior>;
-export const LiftAwkward:React.FC<EnvProps>=({frame,progress:p=0})=>{const lit=p<.72?1:0;return <LiftInterior id="lift-liftAwkward" lit={lit}><Cast x={185} y={1260} s={.59} f={frame} lit={lit} pose="armsCrossed" expr="flat"/><Cast who="fon" x={845} y={1260} s={.59} f={frame} lit={lit} pose="hold" expr="flat"/><Phone x={835} y={975} id="lift-liftAwkward-phone"/></LiftInterior>};
+export const LiftAwkward:React.FC<EnvProps>=({frame,progress:p=0})=>{const lit=p<.72?1:0;const fHand=placeHand(handAt('hold','r'),{x:845,y:1260,s:.59});return <LiftInterior id="lift-liftAwkward" lit={lit}><Cast x={185} y={1260} s={.59} f={frame} lit={lit} pose="idle" expr="flat"/><Cast who="fon" x={845} y={1260} s={.59} f={frame} lit={lit} pose="hold" expr="flat"/><Phone x={fHand.x-10} y={fHand.y-26} s={.62} id="lift-liftAwkward-phone"/></LiftInterior>};
 export const LiftPanel:React.FC<EnvProps>=({frame,progress:p=0})=>{const pressFrames=p>0?frame/p*.5:1;const jab=p<.5?Math.max(0,Math.sin((frame/Math.max(1,pressFrames))*Math.PI*8)):0;return <g><rect width="1080" height="1920" fill="#152531"/><g transform="translate(300 220) scale(2.35 1.7)"><Panel id="lift-liftPanel-panel"/></g><Darkness id="lift-liftPanel-dark" color="#180d1b" opacity={.85} lights={[{x:636,y:1180,reach:480},{x:510,y:660,reach:400}]}/><Glow id="lift-liftPanel-red" x={636} y={1180} r={530} color="#ff5545" strength={.7}/><Glow id="lift-liftPanel-buttons" x={510} y={660} r={400} color="#b3d6ee" strength={.15}/><g transform={`translate(${-35+jab*42} ${jab*10})`}><path d="M-50,1340 L320,1135" stroke="#4a7159" strokeWidth="145" strokeLinecap="round"/><path d="M320,1135 L475,1030 L510,1026" fill="none" stroke="#e3b18c" strokeWidth="67" strokeLinecap="round"/></g></g>};
 export const LobbyGuard:React.FC<EnvProps>=({frame,progress:p=0})=><Lobby id="lift-lobbyGuard" frame={frame} active={p>.4} behind={<Cast who="liftGuard" x={775} y={p>.4?1180:1240} s={.48} f={frame} warm pose={p>.4?'shock':'yawn'} expr={p>.4?'shock':'sleepy'} turn={p>.4?-.55:0}/>} >{p>.4?[0,1,2].map(i=><path key={i} d={`M${510-i*25},${920-i*15} q${-35-i*9},32 0,64`} fill="none" stroke="#efce8b" strokeWidth="5" opacity={.8-i*.15}/>):null}</Lobby>;
-export const LiftBicker:React.FC<EnvProps>=({frame,progress:p=0})=><LiftInterior id="lift-liftBicker" lit={0}><Cast x={320} y={1470} s={.82} f={frame} lit={0} pose="armsCrossed" expr={p>.55?'shock':'flat'} turn={.35}/><Cast who="fon" x={760} y={1470} s={.82} f={frame} lit={0} pose={p>.55?'point':'hold'} expr={p>.55?'angry':'talk'} turn={-.5}/>{/* the 3% beat lands before the point; after it the phone is lowered out of frame instead of floating */}{p>.55?null:<Phone x={784} y={1000} id="lift-liftBicker-phone" low/>}</LiftInterior>;
+export const LiftBicker:React.FC<EnvProps>=({frame,progress:p=0})=>{const fHand=placeHand(handAt('hold','r'),{x:760,y:1470,s:.82});return <LiftInterior id="lift-liftBicker" lit={0}><Cast x={320} y={1470} s={.82} f={frame} lit={0} pose="idle" expr={p>.55?'shock':'flat'} turn={.35}/><Cast who="fon" x={760} y={1470} s={.82} f={frame} lit={0} pose={p>.55?'point':'hold'} expr={p>.55?'angry':'talk'} turn={-.5}/>{/* the 3% beat lands before the point; after it the phone is lowered out of frame instead of floating */}{p>.55?null:<Phone x={fHand.x-10} y={fHand.y-26} s={.62} id="lift-liftBicker-phone" low/>}</LiftInterior>};
 export const LobbyCrowd:React.FC<EnvProps>=({frame,progress:p=0})=>{const t=phase(p,.2,.55),chair=phase(p,.6,.9);return <g transform="translate(-95 -125) scale(1.16)"><Lobby id="lift-lobbyCrowd" frame={frame} behind={<Cast who="liftGuard" x={mix(980,800,chair)} y={1260} s={.48} f={frame} warm pose={p>.6&&p<.9?'hold':'idle'} expr="smile" turn={-.5} walk={p>.6&&p<.9}/> }><Mops p={phase(p,0,.3)}/><Cast who="cleaner" x={mix(170,420,t)} y={1260} s={.46} f={frame} warm expr="smile" turn={.6} walk={p>.2&&p<.55}/><Cast who="cleaner2" x={mix(290,770,t)} y={1300} s={.47} f={frame} warm expr="talk" turn={-.6} walk={p>.2&&p<.55}/>{p>.6?<Chair x={mix(1030,875,chair)} y={mix(1090,1270,chair)}/>:null}</Lobby></g>};
 export const LiftQuestion:React.FC<EnvProps>=({frame,progress:p=0})=><LiftInterior id="lift-liftQuestion" lit={0}><Cast x={340} y={1510} s={.88} f={frame} lit={0} pose={p<.4?'shock':'idle'} expr={p<.4?'shock':'sweat'} turn={.3}/><g transform={`rotate(${mix(7,0,phase(p,.1,.6))} 740 780)`}><Cast who="fon" x={740} y={1510} s={.88} f={frame} lit={0} expr="flat" turn={mix(0,-.6,phase(p,.25,.65))}/></g></LiftInterior>;
 export const LiftPressure:React.FC<EnvProps>=()=> <g><LiftInterior id="lift-liftPressure" lit={0}><Cast x={290} y={980} s={.45} f={0} lit={0} expr="sweat" turn={.4}/><Cast who="fon" x={750} y={980} s={.45} f={0} lit={0} expr="flat" turn={-.5}/></LiftInterior><defs><linearGradient id="lift-liftPressure-calm" x2="0" y2="1"><stop stopColor="#171923" stopOpacity="0"/><stop offset=".2" stopColor="#171923" stopOpacity=".64"/><stop offset=".8" stopColor="#171923" stopOpacity=".64"/><stop offset="1" stopColor="#171923" stopOpacity="0"/></linearGradient></defs><rect y="560" width="1080" height="1080" fill="url(#lift-liftPressure-calm)"/><defs><clipPath id="lift-liftPressure-inset"><rect x="650" y="1550" width="380" height="300" rx="35"/></clipPath></defs><g clipPath="url(#lift-liftPressure-inset)"><rect x="650" y="1550" width="380" height="300" fill="#766044"/><g transform="translate(460 1270) scale(.55)"><Cast who="cleaner" x={450} y={1020} s={.44} f={0} warm expr="smile" turn={.6}/><Cast who="liftGuard" x={710} y={990} s={.43} f={0} warm expr="smile" turn={-.4}/><Cast who="cleaner2" x={890} y={1020} s={.44} f={0} warm expr="talk" turn={-.6}/><path d="M350,1010 H1050 V1100 H350Z" fill="#b49970"/><Speaker id="lift-liftPressure-inset" frame={0}/></g></g><rect x="650" y="1550" width="380" height="300" rx="35" fill="none" stroke="#c2a57e" strokeWidth="6"/></g>;
@@ -114,6 +120,23 @@ const CafeCup:React.FC<{x:number;y:number}> = ({x,y})=><g transform={`translate(
 </g>;
 
 export const LobbyHold:React.FC<EnvProps>=({frame,progress:p=0})=>{const ringing=p<.45;const hop=Math.abs(Math.sin(frame*.55))*6;return <Lobby id="lift-lobbyHold" frame={frame} active behind={<Cast who="liftGuard" x={775} y={ringing?1240:1180} s={.48} f={frame} warm pose={ringing?'idle':'hold'} expr={ringing?'talk':'smile'} turn={ringing?-.72:-.55}/>}><DeskPhone id="lift-lobbyHold-desk" frame={frame} ringing={ringing} hop={hop}/></Lobby>};
+
+// The climax: he calls her from the open lift in front of the frozen lobby. He is the only lit
+// figure because the car behind him is the source; she is centre-right, still with her back to him.
+export const LobbyGesture:React.FC<EnvProps>=({frame,progress:p=0})=><Lobby id="lift-lobbyGesture" frame={frame} active={p<.9} behind={<Cast who="liftGuard" x={775} y={1180} s={.48} f={frame} warm pose="idle" expr="shock" turn={-.55}/>}>
+  {/* the lift doors are open: a warm car interior in the doorway, with the strip light that lights him */}
+  <rect x="94" y="384" width="282" height="646" fill="#241a13"/>
+  <rect x="112" y="400" width="246" height="614" fill="#6b4f36" opacity=".55"/>
+  <rect x="132" y="412" width="206" height="26" rx="6" fill="#ffe0a0" opacity=".65"/>
+  <Glow id="lift-lobbyGesture-door" x={235} y={760} r={450} color="#ffcf89" strength={.42}/>
+  <Mops p={1}/>
+  <Cast x={235} y={1230} s={.55} f={frame} warm pose="point" expr={p<.6?'talk':'sweat'} turn={.35}/>
+  <Cast who="cleaner" x={380} y={1260} s={.45} f={frame} warm pose="idle" expr="shock" turn={-.45}/>
+  <Cast who="cleaner2" x={495} y={1280} s={.46} f={frame} warm pose="idle" expr="shock" turn={-.4}/>
+  <SnackBag x={642} y={1200}/>
+  <Cast who="runner" x={600} y={1262} s={.45} f={frame} warm pose="idle" expr="shock" turn={-.35}/>
+  <Cast who="fon" x={700} y={1260} s={.6} f={frame} warm back turn={p>.7?-.3:0}/>
+</Lobby>;
 
 export const LiftCafe:React.FC<EnvProps>=({frame,progress:p=0})=><g style={{fontFamily:'Sarabun, sans-serif'}}>
   <defs>
@@ -386,6 +409,10 @@ export const LobbyDoorsOpen:React.FC<EnvProps>=({frame,progress:p=0})=>{
 export const LiftDoorsStop:React.FC<EnvProps>=({frame,progress:p=0})=>{
   const close=mix(0,1,phase(p,.1,.7))-.16*phase(p,.72,.82);
   const edge=880-340*close;
+  // from .62 he steps across to the closing gap, so his own pointing arm reaches the door edge
+  const step=phase(p,.62,.72);
+  const hisX=mix(230,edge-272,step);
+  const grip=placeHand(handAt('point','r'),{x:hisX,y:1320,s:.8});
   return <LiftInterior id="lift-liftDoorsStop">
     {/* the lit lobby beyond the gap; fon is already out, back to us */}
     <rect x="200" y="300" width="680" height="970" fill="#33251a"/>
@@ -399,19 +426,9 @@ export const LiftDoorsStop:React.FC<EnvProps>=({frame,progress:p=0})=>{
     <rect x={880-680*close/2} y="300" width="680" height="980" fill="#889aa4" stroke="#c1cacc" strokeWidth="10"/>
     <path d={`M${200+340*close},310 V1270`} stroke="#e7b47c" strokeWidth="5" opacity={phase(p,.1,.7)}/>
     <path d={`M${880-340*close},310 V1270`} stroke="#e7b47c" strokeWidth="5" opacity={phase(p,.1,.7)}/>
-    {/* his arm shoots in and stops the right panel; clipped at the left panel's edge so the sleeve
-        never floats over the closing door */}
-    {p>=.7?<g>
-      <defs><clipPath id="lift-liftDoorsStop-reach"><rect x={200+340*close} y="300" width="720" height="980"/></clipPath></defs>
-      <g clipPath="url(#lift-liftDoorsStop-reach)">
-        <path d="M-90,1580 L540,940" stroke="#4a7159" strokeWidth="150" strokeLinecap="round"/>
-        <path d="M540,940 L600,905" stroke="#e3b18c" strokeWidth="64" strokeLinecap="round"/>
-        <Hand x={edge+8} y={900} s={.82} r={38}/>
-        {/* repaint the shared hand's cream cuff green: this is his sleeve, not hers */}
-        <g transform={`translate(${edge+8} 900) scale(.82) rotate(38)`}><rect x="-46" y="70" width="92" height="120" rx="14" fill="#4a7159" stroke="#35513f" strokeWidth="4"/></g>
-      </g>
-    </g>:null}
-    <Cast x={230} y={1320} s={.8} f={frame} pose={p>.7&&p<.82?'shock':'idle'} expr={p<.7?'sweat':p<.82?'shock':'flat'} turn={.25}/>
+    <Cast x={hisX} y={1320} s={.8} f={frame} pose={p>=.62?'point':'idle'} expr={p<.62?'sweat':'flat'} turn={p>=.62?.55:.25}/>
+    {/* his own hand lands on the door edge; the doors' bounce carries it back open */}
+    {p>=.62?<Hand x={grip.x} y={grip.y} s={.78} r={90} skin="#F2C9A5" skinShade="#D9A47F" outline="#B9875F" cuff="#2FA595" cuffShade="#1F7A6E" cuffStroke="#1F7A6E"/>:null}
   </LiftInterior>;
 };
 

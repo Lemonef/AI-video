@@ -55,6 +55,19 @@ const POSES: Record<Pose, {l: ArmPose; r: ArmPose; torch?: boolean}> = {
 	hold: {l: [-25, -70], r: [25, 70]},
 };
 
+/** Where a hand sits relative to the feet for a named pose and side, for placing a prop in it.
+ *  Same maths and constants as <Limb> and torchLens(): the hanging vector (0, 1) rotated by a
+ *  becomes (-sin a, cos a), and the forearm adds the elbow angle to the shoulder angle. */
+export const handAt = (pose: Pose, side: 'l' | 'r'): {x: number; y: number} => {
+	const [a1, a2] = POSES[pose][side];
+	const shoulderX = side === 'l' ? -SHOULDER_X : SHOULDER_X;
+	const r1 = (a1 * Math.PI) / 180;
+	const r2 = ((a1 + a2) * Math.PI) / 180;
+	const ex = shoulderX - Math.sin(r1) * UPPER_ARM;
+	const ey = SHOULDER_Y + Math.cos(r1) * UPPER_ARM;
+	return {x: ex - Math.sin(r2) * FOREARM, y: ey + Math.cos(r2) * FOREARM};
+};
+
 type Props = {
 	look: Look2;
 	pose: Pose;

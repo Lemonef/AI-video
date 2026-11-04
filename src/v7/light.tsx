@@ -86,6 +86,7 @@ export const CAST_LIGHT: Record<string, CastLight> = {
  liftAwkward: {brightness:.9,saturate:.9,rim:'rgba(220,235,255,.5)',dx:0,dy:-4},
  liftPanel: {brightness:.8,saturate:.75,rim:'rgba(255,195,125,.45)',dx:5,dy:-2},
  lobbyGuard: {brightness:.88,saturate:.9,rim:'rgba(255,205,140,.45)',dx:-3,dy:-3},
+ lobbyGesture: {brightness:.88,saturate:.9,rim:'rgba(255,205,140,.45)',dx:-3,dy:-3},
  liftBicker: {brightness:.8,saturate:.75,rim:'rgba(255,195,125,.45)',dx:5,dy:-2},
 	lobbyCrowd: {brightness:.88,saturate:.9,rim:'rgba(255,205,140,.45)',dx:-3,dy:-3},
 	liftQuestion: {brightness:.8,saturate:.75,rim:'rgba(255,195,125,.45)',dx:5,dy:-2},
