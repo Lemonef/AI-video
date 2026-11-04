@@ -194,3 +194,241 @@ export const LobbyPeak:React.FC<EnvProps>=({frame,progress:p=0})=>{const walked=
     {drop>.9?<g opacity={Math.min(1,(drop-.9)*10)}><ellipse cx={845} cy={1244} rx={46} ry={11} fill="#5a3320" opacity=".8"/>{[[-34,-4],[-14,-10],[12,-8],[30,-2]].map(([sx,sy],k)=><circle key={k} cx={845+sx} cy={1244+sy} r={4-k*.4} fill="#6b3a22"/>)}</g>:null}
   </Lobby>
 </g>};
+
+// ---- Part 3 sets (docs/lift03-beat-sheet.md) ----
+// A pet-camera feed: a warped room behind a fill-the-frame cat face. Only the cat is in focus, so
+// the screen reads as a live call, not a photo.
+const CatCam:React.FC<{p:number;frame:number}> = ({p,frame}) => {
+  const meow=p<.4?0:p<.65?phase(p,.4,.65):Math.max(0,1-phase(p,.65,.8));
+  const flick=Math.sin(frame*.5)*4;
+  return <g>
+    <defs>
+      <clipPath id="lift-liftCatCall-screen"><rect x="-23" y="-47" width="46" height="94" rx="4"/></clipPath>
+      <radialGradient id="lift-liftCatCall-room" cx=".5" cy=".45" r=".75"><stop stopColor="#3d4c58"/><stop offset="1" stopColor="#151d24"/></radialGradient>
+      <radialGradient id="lift-liftCatCall-fish" cx=".5" cy=".5" r=".7"><stop offset=".5" stopColor="#000" stopOpacity="0"/><stop offset="1" stopColor="#05080b" stopOpacity=".6"/></radialGradient>
+    </defs>
+    <g clipPath="url(#lift-liftCatCall-screen)">
+      <rect x="-23" y="-47" width="46" height="94" fill="url(#lift-liftCatCall-room)"/>
+      <rect x="-7" y="-34" width="14" height="26" rx="1" fill="#121920"/><rect x="-4" y="-23" width="8" height="8" fill="#3a4a55"/>
+      <path d="M-23,25 Q0,16 23,25 V47 H-23Z" fill="#262e34"/>
+      <rect x="-23" y="-47" width="46" height="94" fill="url(#lift-liftCatCall-fish)"/>
+      {/* ears flick on a slow sine: the cat is alive, the room is not */}
+      <g transform={`rotate(${flick} -13 -19)`}><path d="M-21,-17 L-18,-39 L-4,-24Z" fill="#e08a3c" stroke="#a95f26" strokeWidth="1.2"/><path d="M-18,-22 L-16,-32 L-9,-25Z" fill="#f0b9a0"/></g>
+      <g transform={`rotate(${-flick} 13 -19)`}><path d="M21,-17 L18,-39 L4,-24Z" fill="#e08a3c" stroke="#a95f26" strokeWidth="1.2"/><path d="M18,-22 L16,-32 L9,-25Z" fill="#f0b9a0"/></g>
+      <ellipse cx="0" cy="0" rx="23" ry="30" fill="#e08a3c"/>
+      <path d="M-6,-26 q2,8 0,14 M6,-26 q-2,8 0,14" stroke="#b5682a" strokeWidth="2.2" fill="none" opacity=".7"/>
+      <path d="M-22,-21 q9,-5 17,-1 M5,-22 q9,-4 17,1" stroke="#b5682a" strokeWidth="2.4" fill="none" opacity=".8"/>
+      <ellipse cx="0" cy="8" rx="14" ry="10" fill="#f4d4b2"/>
+      <ellipse cx="-9" cy="-4" rx="4.6" ry="5.4" fill="#2b211c"/><ellipse cx="9" cy="-4" rx="4.6" ry="5.4" fill="#2b211c"/>
+      <circle cx="-10.2" cy="-6" r="1.5" fill="#fff"/><circle cx="7.8" cy="-6" r="1.5" fill="#fff"/>
+      <path d="M-3,2.5 H3 L0,6Z" fill="#c06a5a"/>
+      <ellipse cx="0" cy="11.5" rx={mix(3,8.5,meow)} ry={mix(1.4,7,meow)} fill="#6c2f39"/>
+      <ellipse cx="0" cy="14.5" rx={mix(2,6,meow)} ry={mix(.8,4.5,meow)} fill="#d9808c"/>
+      <path d="M-12,5 L-22,3 M-12,8 L-22,9 M12,5 L22,3 M12,8 L22,9" stroke="#f6e6d2" strokeWidth=".9" opacity=".75"/>
+      {/* a red dot and a red 1%: the generic cam UI, no app branding */}
+      <circle cx="-18" cy="-42" r="2.1" fill="#ff4b4b"/>
+      <rect x="11" y="-45" width="9" height="4.6" rx="1" fill="none" stroke="#ff6a62" strokeWidth=".9"/>
+      <rect x="20" y="-44" width="1.4" height="2.6" fill="#ff6a62"/><rect x="12" y="-44" width="2.2" height="2.4" fill="#ff4b4b"/>
+      {label(16,-39,'1%',4.2,'#ff6a62')}
+      <path d="M-23,-30 L-6,-47 H2 L-23,-9Z" fill="#fff" opacity=".06"/>
+    </g>
+  </g>;
+};
+
+export const LiftCatCall:React.FC<EnvProps>=({frame,progress:p=0})=>{
+  const lean=phase(p,.4,.75);
+  return <LiftInterior id="lift-liftCatCall" lit={0}>
+    <Darkness id="lift-liftCatCall-dark" color="#101421" opacity={.32} lights={[{x:650,y:960,reach:800},{x:540,y:240,reach:520}]}/>
+    <Glow id="lift-liftCatCall-key" x={650} y={960} r={560} color="#8fc4ff" strength={.55}/>
+    <Cast x={mix(340,392,lean)} y={1510} s={.88} f={frame} lit={1} expr={p<.4?'sweat':p<.75?'shock':'flat'} turn={p<.4?.12:.3}/>
+    <Cast who="fon" x={740} y={1510} s={.88} f={frame} lit={1} expr={p<.6?'flat':'smile'} turn={-.3}/>
+    <Glow id="lift-liftCatCall-faces" x={650} y={890} r={520} color="#8fc4ff" strength={.2}/>
+    <CatPhone id="lift-liftCatCall-phone" x={650} y={960} s={3.6} glow="#bcd9ff" strength={.8}><CatCam p={p} frame={frame}/></CatPhone>
+    {/* the arcs live in the gap between them, only while the mouth is open */}
+    {p>.4&&p<.72?[0,1,2].map(i=><path key={i} d={`M${516-i*19},${900-i*34} q${-36-i*9},34 0,68`} fill="none" stroke="#bcdcff" strokeWidth="6" opacity={.25+.5*Math.abs(Math.sin(frame*.4-i*.7))}/>):null}
+  </LiftInterior>;
+};
+
+// A memory of a stray by a cafe door: small, warm and a little washed out.
+const Kitten:React.FC<{x:number;y:number}> = ({x,y}) => <g transform={`translate(${x} ${y}) scale(1.3)`}>
+  <ellipse cx="0" cy="0" rx="30" ry="8" fill="#101418" opacity=".5"/>
+  <path d="M18,-16 q22,6 12,18" fill="none" stroke="#c9cecd" strokeWidth="7" strokeLinecap="round"/>
+  <ellipse cx="0" cy="-20" rx="19" ry="21" fill="#ccd1d0"/>
+  <ellipse cx="0" cy="-14" rx="12" ry="14" fill="#e6e8e5"/>
+  <path d="M-8,-35 L-11,-54 L2,-42Z M8,-35 L11,-54 L-2,-42Z" fill="#ccd1d0" stroke="#a3adae" strokeWidth="1.5"/>
+  <path d="M-7,-38 L-9,-47 L-1,-41Z M7,-38 L9,-47 L1,-41Z" fill="#e7b7b3"/>
+  <circle cx="0" cy="-50" r="17" fill="#dadfdd"/>
+  <path d="M-11,-58 q6,-3 10,0 M1,-58 q6,-3 10,0" stroke="#9aa5a6" strokeWidth="2.6" fill="none" opacity=".7"/>
+  <ellipse cx="-6" cy="-52" rx="3.4" ry="4" fill="#28313a"/><ellipse cx="6" cy="-52" rx="3.4" ry="4" fill="#28313a"/>
+  <circle cx="-7" cy="-53.4" r="1.1" fill="#fff"/><circle cx="5" cy="-53.4" r="1.1" fill="#fff"/>
+  <path d="M-2,-47 H2 L0,-45Z" fill="#d99a9a"/>
+  <path d="M-14,-48 L-23,-50 M-14,-45 L-23,-44 M14,-48 L23,-50 M14,-45 L23,-44" stroke="#eef0ec" strokeWidth="1.1" opacity=".9"/>
+  <path d="M-9,-38 q9,5 18,0" stroke="#a7b1b2" strokeWidth="1.6" fill="none" opacity=".7"/>
+</g>;
+
+export const LiftCafeKitten:React.FC<EnvProps>=({frame,progress:p=0})=>{
+  const first=p<.5;
+  return <g style={{fontFamily:'Sarabun, sans-serif'}}>
+    <defs>
+      <linearGradient id="lift-liftCafeKitten-sky" x2="0" y2="1"><stop stopColor="#243544"/><stop offset="1" stopColor="#121a23"/></linearGradient>
+      <linearGradient id="lift-liftCafeKitten-glass" x2="0" y2="1"><stop stopColor="#ffe0a2"/><stop offset="1" stopColor="#d08d4c"/></linearGradient>
+      <linearGradient id="lift-liftCafeKitten-wall" x2="0" y2="1"><stop stopColor="#3b2b20"/><stop offset="1" stopColor="#241a15"/></linearGradient>
+      <linearGradient id="lift-liftCafeKitten-table" x2="0" y2="1"><stop stopColor="#8a6544"/><stop offset="1" stopColor="#4d3524"/></linearGradient>
+      <radialGradient id="lift-liftCafeKitten-vig" cx=".5" cy=".48" r=".78"><stop offset=".5" stopColor="#2a1a10" stopOpacity="0"/><stop offset="1" stopColor="#2a1a10" stopOpacity=".62"/></radialGradient>
+    </defs>
+    {first?<g>
+      <rect width="1080" height="1920" fill="#1a232c"/>
+      <rect width="1080" height="1240" fill="url(#lift-liftCafeKitten-sky)"/>
+      {/* the street is almost featureless so the cafe glass is the only warm thing */}
+      <rect x="0" y="150" width="560" height="1030" fill="#1f2a33"/>
+      {[0,1,2,3,4].map(i=><g key={i}><rect x={70+i*96} y={230+i%2*90} width="52" height="72" fill={i%2?'#33404a':'#2b3741'}/><rect x={70+i*96} y={400+i%2*110} width="52" height="72" fill={i%3?'#2b3741':'#3a4650'}/></g>)}
+      <rect y="1180" width="1080" height="740" fill="#20262c"/>
+      <path d="M0,1180 H1080" stroke="#3a444c" strokeWidth="9"/>
+      <path d="M0,1370 L1080,1300 M0,1570 L1080,1490 M0,1800 L1080,1710" stroke="#2a3238" strokeWidth="5"/>
+      <Darkness id="lift-liftCafeKitten-dark" color="#0c131b" opacity={.5} lights={[{x:256,y:584,reach:430},{x:800,y:840,reach:560},{x:580,y:1100,reach:420}]}/>
+      <path d="M160,1180 V580" stroke="#3f4b54" strokeWidth="11"/>
+      <path d="M160,590 q40,-42 86,-24" fill="none" stroke="#3f4b54" strokeWidth="9"/>
+      <rect x="228" y="552" width="58" height="26" rx="10" fill="#4a565f"/>
+      <Glow id="lift-liftCafeKitten-lamp" x={256} y={584} r={330} color="#ffd9a0" strength={.6}/>
+      <ellipse cx="258" cy="596" rx="34" ry="9" fill="#fff1c9"/>
+      <rect x="600" y="400" width="400" height="840" rx="10" fill="#241a14" stroke="#4d3a2a" strokeWidth="14"/>
+      <rect x="620" y="420" width="360" height="820" rx="4" fill="url(#lift-liftCafeKitten-glass)"/>
+      <path d="M800,420 V1240 M620,830 H980" stroke="#7a5534" strokeWidth="12"/>
+      <path d="M636,436 L742,780 M952,436 L846,780" stroke="#fff1c8" strokeWidth="8" opacity=".28"/>
+      <rect x="930" y="840" width="12" height="70" rx="6" fill="#8a6a3f"/>
+      <Glow id="lift-liftCafeKitten-door" x={800} y={840} r={520} color="#ffcf89" strength={.55}/>
+      {/* blank hanging sign (a cup, no lettering) */}
+      <path d="M770,300 V332 M860,300 V332" stroke="#5a4a3a" strokeWidth="5"/>
+      <rect x="752" y="330" width="148" height="88" rx="8" fill="#f0d39a" stroke="#5d4830" strokeWidth="7"/>
+      <path d="M806,378 h44 l-6,22 h-32Z" fill="none" stroke="#7a5836" strokeWidth="5"/><path d="M850,382 q14,6 0,16" fill="none" stroke="#7a5836" strokeWidth="4"/>
+      <g transform="rotate(7 360 1270)"><Cast x={360} y={1270} s={.6} f={frame} warm expr="smile" turn={.5}/></g>
+      <g transform="rotate(4 470 1270)"><Cast who="fon" x={470} y={1270} s={.6} f={frame} warm expr="smile" turn={.4}/></g>
+      <Kitten x={560} y={1190}/>
+    </g>:<g>
+      <rect width="1080" height="1920" fill="url(#lift-liftCafeKitten-wall)"/>
+      <rect y="1220" width="1080" height="700" fill="#33241a"/>
+      <ellipse cx="540" cy="1240" rx="500" ry="70" fill="url(#lift-liftCafeKitten-table)"/>
+      <path d="M402,770 q138,-142 276,0" fill="none" stroke="#5a4739" strokeWidth="24"/>
+      <rect x="200" y="760" width="680" height="480" rx="28" fill="#8b7360" stroke="#554238" strokeWidth="9"/>
+      <rect x="244" y="812" width="592" height="360" rx="16" fill="#17130f"/>
+      {/* cat face first, grille second: the bars sit in front of the fur */}
+      <ellipse cx="540" cy="1010" rx="150" ry="140" fill="#e08a3c"/>
+      <path d="M414,900 L436,812 L526,890Z M666,900 L644,812 L554,890Z" fill="#e08a3c" stroke="#a95f26" strokeWidth="7"/>
+      <path d="M470,870 q10,50 0,88 M610,870 q-10,50 0,88 M540,872 q4,52 0,92" stroke="#b5682a" strokeWidth="13" fill="none" opacity=".7"/>
+      <ellipse cx="540" cy="1078" rx="92" ry="62" fill="#f4d4b2"/>
+      <ellipse cx="490" cy="990" rx="26" ry="31" fill="#2b211c"/><ellipse cx="590" cy="990" rx="26" ry="31" fill="#2b211c"/>
+      <circle cx="482" cy="978" r="9" fill="#fff"/><circle cx="582" cy="978" r="9" fill="#fff"/>
+      <path d="M524,1046 H556 L540,1068Z" fill="#c06a5a"/>
+      <path d="M520,1084 q20,16 40,0" stroke="#8d5a4a" strokeWidth="7" fill="none"/>
+      {[0,1,2,3,4,5,6,7,8,9].map(i=><path key={i} d={`M${284+i*58},812 V1172`} stroke="#4a3a30" strokeWidth="11"/>)}
+      <path d="M244,872 H836 M244,990 H836 M244,1110 H836" stroke="#4a3a30" strokeWidth="9"/>
+      <rect x="244" y="812" width="592" height="360" rx="16" fill="none" stroke="#3a2c24" strokeWidth="10"/>
+      <rect x="760" y="930" width="86" height="26" rx="6" fill="#6c5644" stroke="#3d2f27" strokeWidth="4"/>
+      <rect x="222" y="1180" width="636" height="66" rx="14" fill="#6c5644" stroke="#42332a" strokeWidth="6"/>
+      <ellipse cx="540" cy="1258" rx="380" ry="34" fill="#1c140f" opacity=".55"/>
+    </g>}
+    {/* flashback treatment; in the gift half the bow and card are repainted after it */}
+    <rect width="1080" height="1920" fill="#c9a878" opacity=".42" style={{mixBlendMode:'multiply'}}/>
+    <rect width="1080" height="1920" fill="url(#lift-liftCafeKitten-vig)"/>
+    {first?null:<g>
+      <path d="M540,758 C466,692 420,724 444,772 C466,816 518,792 540,758Z" fill="#d8433c" stroke="#9e2c2a" strokeWidth="5"/>
+      <path d="M540,758 C614,692 660,724 636,772 C614,816 562,792 540,758Z" fill="#d8433c" stroke="#9e2c2a" strokeWidth="5"/>
+      <path d="M520,770 L492,858 L522,840 L540,772Z" fill="#c23a34" stroke="#9e2c2a" strokeWidth="4"/>
+      <path d="M560,770 L588,858 L558,840 L540,772Z" fill="#c23a34" stroke="#9e2c2a" strokeWidth="4"/>
+      <ellipse cx="540" cy="766" rx="23" ry="19" fill="#e25548" stroke="#a8302c" strokeWidth="4"/>
+      <path d="M462,738 q20,-22 48,-10 M618,738 q-20,-22 -48,-10" stroke="#ff9a86" strokeWidth="6" fill="none" opacity=".55"/>
+      <g transform="rotate(-9 776 1178)">
+        <rect x="688" y="1108" width="176" height="128" rx="7" fill="#fff6e4" stroke="#d8c2a2" strokeWidth="5"/>
+        <rect x="702" y="1122" width="148" height="100" rx="3" fill="none" stroke="#ecdcc4" strokeWidth="3"/>
+        {label(776,1170,'ให้จ๊าบ ❤️',30,'#c2453f')}
+        <path d="M776,1192 q10,-8 20,0" fill="none" stroke="#d9a3a0" strokeWidth="3"/>
+      </g>
+    </g>}
+  </g>;
+};
+
+export const LobbyDoorsOpen:React.FC<EnvProps>=({frame,progress:p=0})=>{
+  const open=phase(p,0,.3), split=phase(p,.55,.8), out=phase(p,.5,1);
+  return <g style={{fontFamily:'Sarabun, sans-serif'}}>
+    <defs>
+      <clipPath id="lift-lobbyDoorsOpen-door"><rect x="200" y="300" width="680" height="980"/></clipPath>
+      <linearGradient id="lift-lobbyDoorsOpen-steel" x2="0" y2="1"><stop stopColor="#7b8d98"/><stop offset=".5" stopColor="#aab7bb"/><stop offset="1" stopColor="#687983"/></linearGradient>
+      <pattern id="lift-lobbyDoorsOpen-speckle" width="47" height="39" patternUnits="userSpaceOnUse"><rect width="47" height="39" fill="#36434d"/><circle cx="8" cy="12" r="2" fill="#73808a"/><circle cx="35" cy="29" r="1.5" fill="#182933"/></pattern>
+    </defs>
+    <rect width="1080" height="1920" fill="#56646c"/>
+    {/* what is outside the car, clipped to the doorway */}
+    <g clipPath="url(#lift-lobbyDoorsOpen-door)">
+      <Lobby id="lift-lobbyDoorsOpen" frame={frame} active={false}>
+        <Cast who="cleaner" x={mix(356,280,split)} y={1250} s={.5} f={frame} warm expr={p<.6?'shock':'sweat'} turn={.35}/>
+        <Cast who="liftGuard" x={mix(540,610,split)} y={1248} s={.5} f={frame} warm expr={p<.6?'shock':'sweat'} turn={0}/>
+        <Cast who="cleaner2" x={mix(700,780,split)} y={1252} s={.5} f={frame} warm expr={p<.6?'shock':'flat'} turn={-.35}/>
+        <SnackBag x={mix(596,650,split)} y={1190}/>
+        <Cast who="runner" x={mix(636,700,split)} y={1254} s={.5} f={frame} warm expr={p<.6?'shock':'flat'} turn={-.2}/>
+      </Lobby>
+    </g>
+    {/* the panels part and slide behind the walls, which are painted after them */}
+    <rect x={200-340*open} y="300" width="340" height="980" fill="url(#lift-lobbyDoorsOpen-steel)" stroke="#c6ced0" strokeWidth="7"/>
+    <rect x={540+340*open} y="300" width="340" height="980" fill="url(#lift-lobbyDoorsOpen-steel)" stroke="#c6ced0" strokeWidth="7"/>
+    <path d="M0,0 L200,300 V1280 L0,1600Z M1080,0 L880,300 V1280 L1080,1600Z" fill="#738691"/>
+    <path d="M0,0 H1080 L880,300 H200Z" fill="#465967"/>
+    <path d="M200,1280 H880 L1080,1600 V1920 H0 V1600Z" fill="url(#lift-lobbyDoorsOpen-speckle)"/>
+    <path d="M0,1560 L200,1240 M1080,1560 L880,1240" stroke="#d2d7d5" strokeWidth="9" opacity=".6"/>
+    <rect x="360" y="140" width="360" height="86" rx="8" fill="#ecf6f7" stroke="#293c49" strokeWidth="11"/>
+    <Glow id="lift-lobbyDoorsOpen-ceiling" x={540} y={250} r={620} color="#dcecff" strength={.32}/>
+    <Shaft id="lift-lobbyDoorsOpen-shaft" points={[[380,240],[700,240],[940,1280],[140,1280]]} from={[540,240]} to={[540,1280]} color="#dcecff" opacity={.12}/>
+    <rect x="200" y="300" width="680" height="980" fill="none" stroke="#3f4e58" strokeWidth="14"/>
+    {/* her back and her shrinking size carry the exit; the crowd steps aside as she passes */}
+    {p>=.4?<Cast who="fon" x={mix(540,556,out)} y={mix(1640,1330,out)} s={mix(.92,.72,out)} f={frame} warm back turn={1} walk={p>=.5}/>:null}
+    <Cast x={170} y={1580} s={.95} f={frame} expr="flat" turn={.5}/>
+  </g>;
+};
+
+export const LiftDoorsStop:React.FC<EnvProps>=({frame,progress:p=0})=>{
+  const close=mix(0,1,phase(p,.1,.7))-.16*phase(p,.72,.82);
+  const edge=880-340*close;
+  return <LiftInterior id="lift-liftDoorsStop">
+    {/* the lit lobby beyond the gap; fon is already out, back to us */}
+    <rect x="200" y="300" width="680" height="970" fill="#33251a"/>
+    <rect x="200" y="300" width="680" height="580" fill="#8a6a47"/>
+    <rect x="200" y="860" width="680" height="410" fill="#5a3e2b"/>
+    <path d="M200,860 H880 M200,1000 H880" stroke="#6d5138" strokeWidth="6" opacity=".7"/>
+    <rect x="740" y="430" width="140" height="430" fill="#ffe0a0" opacity=".3"/>
+    <Glow id="lift-liftDoorsStop-lobby" x={540} y={780} r={430} color="#ffcf89" strength={.6}/>
+    <Cast who="fon" x={560} y={1190} s={.4} f={frame} warm back turn={1}/>
+    <rect x={-480+680*close/2} y="300" width="680" height="980" fill="#889aa4" stroke="#c1cacc" strokeWidth="10"/>
+    <rect x={880-680*close/2} y="300" width="680" height="980" fill="#889aa4" stroke="#c1cacc" strokeWidth="10"/>
+    <path d={`M${200+340*close},310 V1270`} stroke="#e7b47c" strokeWidth="5" opacity={phase(p,.1,.7)}/>
+    <path d={`M${880-340*close},310 V1270`} stroke="#e7b47c" strokeWidth="5" opacity={phase(p,.1,.7)}/>
+    {/* his arm shoots in and stops the right panel; clipped at the left panel's edge so the sleeve
+        never floats over the closing door */}
+    {p>=.7?<g>
+      <defs><clipPath id="lift-liftDoorsStop-reach"><rect x={200+340*close} y="300" width="720" height="980"/></clipPath></defs>
+      <g clipPath="url(#lift-liftDoorsStop-reach)">
+        <path d="M-90,1580 L540,940" stroke="#4a7159" strokeWidth="150" strokeLinecap="round"/>
+        <path d="M540,940 L600,905" stroke="#e3b18c" strokeWidth="64" strokeLinecap="round"/>
+        <Hand x={edge+8} y={900} s={.82} r={38}/>
+        {/* repaint the shared hand's cream cuff green: this is his sleeve, not hers */}
+        <g transform={`translate(${edge+8} 900) scale(.82) rotate(38)`}><rect x="-46" y="70" width="92" height="120" rx="14" fill="#4a7159" stroke="#35513f" strokeWidth="4"/></g>
+      </g>
+    </g>:null}
+    <Cast x={230} y={1320} s={.8} f={frame} pose={p>.7&&p<.82?'shock':'idle'} expr={p<.7?'sweat':p<.82?'shock':'flat'} turn={.25}/>
+  </LiftInterior>;
+};
+
+export const LobbyExit:React.FC<EnvProps>=({frame,progress:p=0})=>{
+  const walk=phase(p,.3,1);
+  const bob=(i:number)=>Math.sin(frame*.28+i*1.7)*7;
+  const cheer=p<.8?1:mix(1,0,phase(p,.8,.85));
+  return <Lobby id="lift-lobbyExit" frame={frame} active={p<.8} behind={<Cast who="liftGuard" x={775} y={1180} s={.48} f={frame} warm pose="hold" expr={p<.5?'talk':'smile'} turn={-.55}/>}>
+    <DeskPhone id="lift-lobbyExit-desk" frame={frame} ringing={p<.5} hop={0}/>
+    <g opacity={cheer}>
+      <Cast who="cleaner" x={250} y={1250+bob(0)} s={.46} f={frame} warm pose="wave" expr="smile" turn={.5}/>
+      <Cast who="cleaner2" x={360} y={1290+bob(1)} s={.47} f={frame} warm pose="wave" expr="smile" turn={.3}/>
+      <SnackBag x={430} y={1200}/>
+      <Cast who="runner" x={470} y={1270+bob(2)} s={.46} f={frame} warm pose="wave" expr="smile" turn={-.2}/>
+    </g>
+    {/* backs to us, walking out left: the last image leaves the guard alone with the speaker */}
+    <Cast x={mix(520,-420,walk)} y={1500} s={.75} f={frame} warm back turn={1} walk={p>.3}/>
+    <Cast who="fon" x={mix(620,-320,walk)} y={1500} s={.75} f={frame} warm back turn={1} walk={p>.3}/>
+  </Lobby>;
+};
