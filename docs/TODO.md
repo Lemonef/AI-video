@@ -1,7 +1,11 @@
 # TODO — the only place live status lives
 
 ## QUEUE (owner order, 2026-11-01)
-0. Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
+-1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
+   - [ ] A. Finish 1:1 DegJCmXtbGj (item 7 below): remaining loop shots, v15 render, V1/V2 voice + M1 music, owner side-by-side approval
+   - [ ] B. Skill work: reference-study rename, seed craft skills with 1:1 lessons, strip-mine github.com/mromidev/claude-animated-shorts (MIT; method only, never its reference frames)
+   - [ ] C. Story 04 ตะกรุดสามคำขอ using A + B
+0. [superseded 2026-11-04 by NOW] Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
    Heartbeat cron stopped; 1:1 loop PAUSED until the episode ships. Next episode first.
    - [ ] Story skill (later, owner call): turn docs/story-ideas.md "How to judge a story" + the standalone-part methods into a reusable skill when the next story starts
 1. [x] Pipeline v1 shipped (brain a8fe06f)
