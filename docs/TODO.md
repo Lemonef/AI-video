@@ -4,7 +4,7 @@
 -1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
    - [ ] A. Finish 1:1 DegJCmXtbGj (item 7 below): remaining loop shots, v15 render, V1/V2 voice + M1 music, owner side-by-side approval
      DONE BAR (owner 2026-11-04): owner's eyes AND ears on a side-by-side - picture + voice + music + SFX + extra sound all matched; numbers are diagnostics only
-     - [ ] A1 resume check: v14 artifacts + gate still run
+     - [x] A1 resume check: v14 artifacts + 35 baselines present; gate re-run on shot 7 unchanged = bit-identical (24.244, guards 4/5/9 held)
      - [ ] A2 picture loop: shot 7 head/hands/arms, 9, 22; grade curve on 35/4/25/6 (pipeline free legs, gate verifies)
      - [ ] A3 voice: ElevenLabs stock voice timed to source (never clone the creator)
      - [ ] A4 SFX: event map of source sounds -> CC0/toon clips -> listening preview for owner BEFORE mixing
