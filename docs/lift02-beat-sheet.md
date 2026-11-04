@@ -39,7 +39,7 @@ both visible in the ring shot, never mentioned in narration.
 Both lead into the cat reveal: A, she laughs and shows him; B, she answers on speaker and the whole
 lobby hears a cat. Footer: "A หรือ B · ตอนจบ ตามเสียงส่วนใหญ่".
 
-Vote tally (update as comments come in): 2026-11-04 A 1 ("เอออออ" = stretched "A") · B 0.
+Vote tally (update as comments come in): 2026-11-04 A 1 ("เอออออ" = stretched "A") · B 0. Later 2026-11-04: many more comments, **A majority** (owner count). Part 3 = A, see docs/lift03-beat-sheet.md.
 
 ## Review log
 
