@@ -3,6 +3,13 @@
 ## QUEUE (owner order, 2026-11-01)
 -1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
    - [ ] A. Finish 1:1 DegJCmXtbGj (item 7 below): remaining loop shots, v15 render, V1/V2 voice + M1 music, owner side-by-side approval
+     DONE BAR (owner 2026-11-04): owner's eyes AND ears on a side-by-side - picture + voice + music + SFX + extra sound all matched; numbers are diagnostics only
+     - [ ] A1 resume check: v14 artifacts + gate still run
+     - [ ] A2 picture loop: shot 7 head/hands/arms, 9, 22; grade curve on 35/4/25/6 (pipeline free legs, gate verifies)
+     - [ ] A3 voice: ElevenLabs stock voice timed to source (never clone the creator)
+     - [ ] A4 SFX: event map of source sounds -> CC0/toon clips -> listening preview for owner BEFORE mixing
+     - [ ] A5 music: original bed (never the source song), -14 LUFS
+     - [ ] A6 v15 full render + side-by-side video+audio vs source -> owner watches/listens
    - [ ] B. Skill work: reference-study rename, seed craft skills with 1:1 lessons, strip-mine github.com/mromidev/claude-animated-shorts (MIT; method only, never its reference frames)
    - [ ] C. Story 04 ตะกรุดสามคำขอ using A + B
 0. [superseded 2026-11-04 by NOW] Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
