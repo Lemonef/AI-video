@@ -16,8 +16,8 @@ Build them so the episode renders. Room descriptions + the lead's look: `docs/ta
    hard-code), centre-cropped, saved as PNG. Pillow is installed.
 2. Run it to create `public/takrut01/find.png`, `ancient.png`, `reset.png` from the beat-sheet room
    notes (same room, same camera, wide eye-level view; warm-cool fluorescent + blue window light;
-   flat illustrated storybook style; NO people, NO text, NO logos). Copy
-   `D:/AI-video/out/drafts/takrut01-test/coinflood-bg-cf2-9x16.png` to `public/takrut01/coinflood.png`.
+   flat illustrated storybook style; NO people, NO text, NO logos). `public/takrut01/coinflood.png`
+   is already committed - do not regenerate or replace it.
 3. `src/v2/cast.ts` - add `takrutLead` (Look2, style per beat sheet: dark wavy hair, brick-orange
    tee, cream open shirt; slim). Match existing entry format.
 4. New `src/v7/Takrut.tsx`: four `React.FC<BgProps>` components `TakrutRoomFind`, `TakrutRoomAncient`,
@@ -29,6 +29,7 @@ Build them so the episode renders. Room descriptions + the lead's look: `docs/ta
    `takrutRoomFind`, `takrutRoomAncient`, `takrutRoomCoinFlood`, `takrutRoomReset`.
 
 # Done when
+- Work only inside the repo you were started in; never read or write paths outside it.
 - `python -m pytest -q tests/test_takrut01_assets.py` passes and `python scripts/tsc_in_worktree.py` passes.
 - The test file is the contract: do not edit it; if an assertion is wrong, STOP and report.
-- Diff touches only: scripts/gen_bg_flux.py, public/takrut01/*, src/v2/cast.ts, src/v7/Takrut.tsx, src/v5/Forest.tsx.
+- Diff touches only: scripts/gen_bg_flux.py, public/takrut01/{find,ancient,reset}.png, src/v2/cast.ts, src/v7/Takrut.tsx, src/v5/Forest.tsx.
