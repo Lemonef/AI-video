@@ -14,6 +14,17 @@
      - [ ] A5 music: original bed (never the source song), -14 LUFS
      - [ ] A6 v15 full render + side-by-side video+audio vs source -> owner watches/listens
    - [ ] B. Skill work: reference-study rename, seed craft skills with 1:1 lessons, strip-mine github.com/mromidev/claude-animated-shorts (MIT; method only, never its reference frames)
+     - [x] B-gaps1 (2026-11-05, brain 69f399b/057457f): hook, background, ending skills + A/B policy in video-maker + skill map
+     - [ ] B-gaps2 TO BUILD (skill-gap cross-check 2026-11-05, 7 free legs; votes in brackets):
+       - [ ] editing-pacing skill: cut rhythm, scene length, transitions, beat sync to voice [3 legs]
+       - [ ] series-continuity skill: series bible - cast, props, open threads, callbacks across parts [4 legs]
+       - [ ] storyboard/animatic skill: beats -> rough frames before render [1 leg + Claude: saves re-renders]
+       - [ ] fold motion fundamentals (timing, easing, anticipation) into character skill [2 legs]
+       - [ ] add locked series style bible line to background skill [1 leg]
+       - [ ] update skill-map.md + skills.md + video-maker call list; features-log line
+       - parked (owner 2026-11-05): analytics/retention (Claude pulls public numbers only, rare), trend radar
+       - also raised, not picked: AI-voice post-processing (script-voice covers), asset ops, legal/copyright check (release covers)
+     - [ ] More reels from owner coming later -> reference-study lessons
    - [ ] B2. 3D look test (owner OK 2026-11-04): rebuild ONE existing set (lift interior) in the claude-animated-shorts three.js template, 3-4 camera angles, side-by-side vs our 2D; owner judges. 3D fixes set variety/depth/light, NOT poses/SFX/story. Win -> story 04/05 goes 3D
    - [ ] C. Story 04 ตะกรุดสามคำขอ using A + B
 0. [superseded 2026-11-04 by NOW] Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
