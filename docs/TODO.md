@@ -19,8 +19,8 @@
        - [ ] editing-pacing skill: cut rhythm, scene length, transitions, beat sync to voice [3 legs]
        - [ ] series-continuity skill: series bible - cast, props, open threads, callbacks across parts [4 legs]
        - [ ] storyboard/animatic skill: beats -> rough frames before render [1 leg + Claude: saves re-renders]
-       - [ ] fold motion fundamentals (timing, easing, anticipation) into character skill [2 legs]
-       - [ ] add locked series style bible line to background skill [1 leg]
+       - [x] fold motion fundamentals (timing, easing, anticipation) into character skill [2 legs]
+       - [x] add locked series style bible line to background skill [1 leg]
        - [ ] update skill-map.md + skills.md + video-maker call list; features-log line
        - parked (owner 2026-11-05): analytics/retention (Claude pulls public numbers only, rare), trend radar
        - also raised, not picked: AI-voice post-processing (script-voice covers), asset ops, legal/copyright check (release covers)
