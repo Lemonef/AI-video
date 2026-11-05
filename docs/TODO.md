@@ -99,7 +99,7 @@
    - [x] Owner: English-channel answer (2026-11-03): yes, English re-voice of the same episodes on a separate 2nd account. Not built yet; needs an English stock voice + English captions, queued after the 1:1 work
    - [x] Story numbering (owner 2026-11-03): out/final/<NN>-<slug>/ - 01-ghost, 02-bangkok-flood, 03-lift-ex; next story = 04. Folders renamed, docs/scripts paths updated
    - [x] Owner: wishes01 KEEP as story 04 (2026-11-03). Branch park/wishes01-and-batch2 stays; repo cleanup must not delete it
-   - [ ] Story 04 wishes (ตะกรุดสามคำขอ): before production pick tone (horror vs lighter), plot parts 2-3, re-record voice with UTF-8 stdin fix. Queued after the 1:1 list
+   - [ ] Story 04 wishes (ตะกรุดสามคำขอ): TONE = FUNNY (owner 2026-11-05: trend now is funny what-ifs, e.g. "what if Gojo in Thailand", "what if everybody became เด็กช่าง"); next idea queued: ถ้าทุกคนกลายเป็นเด็กช่าง (comedy, no fights); IP characters (Gojo) -> original lookalike-free character only. Was: pick tone (horror vs lighter), plot parts 2-3, re-record voice with UTF-8 stdin fix. Queued after the 1:1 list
    - [ ] LAST in queue (owner 2026-11-02: "add the repo clean up at last, rn its so messy"): AI-video repo cleanup - re-check the plan against the repo as it stands then, show it, then execute
 9. [ ] Upload quality (owner 2026-11-02: "ppl say video quality is bad")
    - [x] Posted copies measured (lift ep1, 2026-11-03): TikTok 576x1024 h264 ~301 kbps + aac 128k; IG 1080x1920 ~398 kbps + audio ~49 kbps. Copies in D:/Documents/Downloads/ (Download.mp4, ig/lift-ep1-ig.mp4)
