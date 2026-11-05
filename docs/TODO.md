@@ -211,3 +211,5 @@
 - [ ] Whisper re-check of the final MP4 (catch mispronounced words)
 - [ ] Evaluate official Remotion agent skills (github.com/remotion-dev/skills)
 - [ ] vitest for `src/lib/castState.ts`
+
+- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.

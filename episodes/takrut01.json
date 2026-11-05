@@ -1,0 +1,248 @@
+{
+  "id": "takrut01",
+  "title": "ตะกรุดสามคำขอ",
+  "seriesSlug": "takrut",
+  "releaseEpisode": "ep01",
+  "style": "v6",
+  "engine": "gemini",
+  "voice": "Iapetus",
+  "voiceModel": "gemini-2.5-flash-preview-tts",
+  "tempo": 1.08,
+  "handheld": false,
+  "grain": false,
+  "mix": {
+    "beds": [],
+    "duck": 0.5,
+    "bedVolume": 0.45,
+    "real": true
+  },
+  "post": {
+    "series": "ตะกรุดสามคำขอ",
+    "part": 1,
+    "total": 1,
+    "coverHook": "ขอให้รวย... ได้เหรียญสลึง",
+    "hook": "คนถังแตกเจอตะกรุดให้พรสามข้อ แต่ทุกคำขอเป็นจริงแบบตรงเกินไป จนพรสุดท้ายเหลือกำไรให้เขาแค่ยี่สิบห้าสตางค์",
+    "question": "ถ้ามีสามพร คุณจะพูดข้อแรกว่าอะไร?",
+    "next": "ติดตามเรื่องต่อไป",
+    "coverFrame": 24,
+    "hashtags": [
+      "#ตลก",
+      "#เรื่องเล่า",
+      "#ละครสั้น",
+      "#การ์ตูน",
+      "#ตะกรุด",
+      "#สามคำขอ",
+      "#การ์ตูนไทย"
+    ],
+    "publishNow": true,
+    "coverBg": "takrutRoomCoinFlood",
+    "keyword": "ตะกรุดสามคำขอ",
+    "coverCast": [
+      {
+        "look": "takrutLead",
+        "pose": "shock",
+        "expr": "sweat",
+        "turn": -0.2,
+        "x": 540,
+        "y": 2180,
+        "scale": 1.45
+      }
+    ]
+  },
+  "narrationJoin": " ",
+  "narrationDirection": "Perform this original Thai weird comedy as a native Bangkok Thai man telling one friend about an absurd thing that really happened. Warm, dry, conversational delivery with connected phrasing and varied sentence length. Open immediately and stress ศูนย์บาท. Treat the old takrut with a little respect; the joke is Boom's careless wording, never the object or religion. Wish one begins with real wonder, then turns flat on the bank balance. Wish two accelerates into breathless chaos. The third wish is shouted in panic, followed by a short earned quiet before the single coin reveal. In the convenience-store ending, become calm and understated so the scan beep, coin clink, missing seventy-five satang, and final coin fall land the joke. Read only the provided Thai text; do not speak these instructions or bracketed delivery tags.",
+  "scenes": [
+    {
+      "id": "hook",
+      "bg": "takrutRoomFind",
+      "say": "สิ้นเดือน บูมเหลือเงินศูนย์บาท แต่ตอนล้วงใต้เตียงหาเศษเหรียญ เขาดันเจอตะกรุดเก่า ที่กระซิบว่า ขอพรได้สามข้อ",
+      "caption": "สิ้นเดือน บูมเหลือเงินศูนย์บาท แต่ตอนล้วงใต้เตียงหาเศษเหรียญ เขาดันเจอตะกรุดเก่า ที่กระซิบว่า ขอพรได้สามข้อ",
+      "transition": "cut",
+      "progress": [0, 0.72],
+      "cast": [
+        {"who": "takrutLead", "x": 500, "y": 1510, "scale": 0.9, "pose": "think", "expr": "flat", "turn": -0.25}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.35, "x": 720, "y": 900},
+        {"at": 0.32, "zoom": 1.0, "x": 540, "y": 960},
+        {"at": 0.72, "zoom": 1.3, "x": 430, "y": 1080}
+      ],
+      "title": "ยอดเงินคงเหลือ · ศูนย์บาท",
+      "sfx": [
+        {"at": 0.82, "word": "กระซิบ", "sound": "whisper", "volume": 0.45}
+      ]
+    },
+    {
+      "id": "wish1",
+      "bg": "takrutRoomFind",
+      "say": "บูมพนมมืออย่างดี แล้วขอข้อแรก ขอให้รวย ตะกรุดสั่นกึก ไฟกะพริบ แล้วอะไรแข็ง ๆ ก็ตกใส่หัวเขา",
+      "caption": "บูมพนมมืออย่างดี แล้วขอข้อแรก ขอให้รวย ตะกรุดสั่นกึก ไฟกะพริบ แล้วอะไรแข็ง ๆ ก็ตกใส่หัวเขา",
+      "transition": "cut",
+      "progress": [0.72, 1],
+      "cast": [
+        {"who": "takrutLead", "x": 520, "y": 1510, "scale": 0.9, "pose": "hold", "expr": "smile", "keys": [{"at": 0.72, "pose": "shock", "expr": "shock"}]}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.05, "x": 540, "y": 960},
+        {"at": 0.66, "zoom": 1.3, "x": 520, "y": 820}
+      ],
+      "sfx": [
+        {"at": 0.55, "word": "สั่นกึก", "sound": "rattle", "volume": 0.65},
+        {"at": 0.88, "word": "ตกใส่หัว", "sound": "coinClink", "volume": 0.75}
+      ]
+    },
+    {
+      "id": "ancient",
+      "bg": "takrutRoomAncient",
+      "say": "ปุ๊บ เงินพดด้วงกับเบี้ยหอยเทลงมาเต็มห้อง บูมร้อง รวยแล้วโว้ย แต่พอเปิดแอปธนาคาร ยอดก็ยังศูนย์บาท รวยนะ แค่ใช้ตอนนี้ไม่ได้",
+      "caption": "ปุ๊บ เงินพดด้วงกับเบี้ยหอยเทลงมาเต็มห้อง บูมร้อง รวยแล้วโว้ย แต่พอเปิดแอปธนาคาร ยอดก็ยังศูนย์บาท รวยนะ แค่ใช้ตอนนี้ไม่ได้",
+      "transition": "cut",
+      "progress": [0, 1],
+      "cast": [
+        {"who": "takrutLead", "x": 500, "y": 1490, "scale": 0.88, "pose": "hold", "expr": "smile", "keys": [{"at": 0.58, "pose": "think", "expr": "flat"}]}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.0, "x": 540, "y": 960},
+        {"at": 0.25, "zoom": 1.18, "x": 470, "y": 1030},
+        {"at": 0.62, "zoom": 1.45, "x": 720, "y": 880}
+      ],
+      "title": "ยอดเงินคงเหลือ · ศูนย์บาท",
+      "sfx": [
+        {"at": 0.05, "sound": "coinRain", "volume": 0.7}
+      ]
+    },
+    {
+      "id": "wish2",
+      "bg": "takrutRoomAncient",
+      "say": "เขาเลยแก้คำขอให้รัดกุม ข้อสอง ขอเงินที่ใช้ได้จริง คราวนี้ไม่มีเสียงตูม มีแค่เสียงกริ๊งเบา ๆ จากเพดาน",
+      "caption": "เขาเลยแก้คำขอให้รัดกุม ข้อสอง ขอเงินที่ใช้ได้จริง คราวนี้ไม่มีเสียงตูม มีแค่เสียงกริ๊งเบา ๆ จากเพดาน",
+      "transition": "cut",
+      "progress": [0.6, 1],
+      "cast": [
+        {"who": "takrutLead", "x": 510, "y": 1490, "scale": 0.88, "pose": "point", "expr": "smile", "keys": [{"at": 0.75, "pose": "think", "expr": "sweat"}]}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.15, "x": 500, "y": 900},
+        {"at": 0.7, "zoom": 1.35, "x": 540, "y": 520}
+      ],
+      "sfx": [
+        {"at": 0.82, "word": "กริ๊ง", "sound": "coinClink", "volume": 0.38}
+      ]
+    },
+    {
+      "id": "coinFlood",
+      "bg": "takrutRoomCoinFlood",
+      "say": "คราวนี้เหรียญยี่สิบห้าสตางค์ทะลักเหมือนเขื่อนแตก ถูกกฎหมายทุกเหรียญ ใช้ได้จริงทุกเหรียญ และกำลังจะฝังเขาถึงเพดานจริง ๆ",
+      "caption": "คราวนี้เหรียญยี่สิบห้าสตางค์ทะลักเหมือนเขื่อนแตก ถูกกฎหมายทุกเหรียญ ใช้ได้จริงทุกเหรียญ และกำลังจะฝังเขาถึงเพดานจริง ๆ",
+      "transition": "cut",
+      "progress": [0, 0.88],
+      "cast": [
+        {"who": "takrutLead", "x": 610, "y": 1350, "scale": 0.78, "pose": "shock", "expr": "shock", "action": "shake"}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.0, "x": 540, "y": 960},
+        {"at": 0.35, "zoom": 1.2, "x": 570, "y": 1000},
+        {"at": 0.72, "zoom": 1.35, "x": 610, "y": 720}
+      ],
+      "sfx": [
+        {"at": 0, "sound": "coinRain", "volume": 0.9}
+      ],
+      "shake": 7
+    },
+    {
+      "id": "wish3",
+      "bg": "takrutRoomCoinFlood",
+      "say": "บูมโผล่มาได้แค่หน้า รีบชูตะกรุดแล้วตะโกนข้อสุดท้าย ขอให้ทุกอย่างกลับเหมือนเดิม เดี๋ยวนี้",
+      "caption": "บูมโผล่มาได้แค่หน้า รีบชูตะกรุดแล้วตะโกนข้อสุดท้าย ขอให้ทุกอย่างกลับเหมือนเดิม เดี๋ยวนี้",
+      "transition": "cut",
+      "progress": [0.88, 1],
+      "cast": [
+        {"who": "takrutLead", "x": 560, "y": 1180, "scale": 0.72, "pose": "hold", "expr": "sweat", "action": "shake"}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.2, "x": 560, "y": 780},
+        {"at": 0.45, "zoom": 1.5, "x": 560, "y": 700}
+      ],
+      "sfx": [
+        {"at": 0.92, "word": "เดี๋ยวนี้", "sound": "powerDown", "volume": 0.8}
+      ]
+    },
+    {
+      "id": "reset",
+      "bg": "takrutRoomReset",
+      "say": "ทุกอย่างหายวับ ห้องกลับมารก แอปยังศูนย์บาท เหลือแค่เหรียญยี่สิบห้าสตางค์หนึ่งเหรียญกลางพื้น บูมยิ้ม อย่างน้อยก็กำไร",
+      "caption": "ทุกอย่างหายวับ ห้องกลับมารก แอปยังศูนย์บาท เหลือแค่เหรียญยี่สิบห้าสตางค์หนึ่งเหรียญกลางพื้น บูมยิ้ม อย่างน้อยก็กำไร",
+      "transition": "cut",
+      "progress": [0, 1],
+      "cast": [
+        {"who": "takrutLead", "x": 520, "y": 1510, "scale": 0.9, "pose": "shock", "expr": "flat", "keys": [{"at": 0.68, "pose": "hold", "expr": "smile"}]}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.0, "x": 540, "y": 960},
+        {"at": 0.48, "zoom": 1.65, "x": 540, "y": 1390},
+        {"at": 0.78, "zoom": 1.2, "x": 510, "y": 900}
+      ],
+      "sfx": [
+        {"at": 0.58, "word": "หนึ่งเหรียญ", "sound": "coinClink", "volume": 0.55}
+      ]
+    },
+    {
+      "id": "store",
+      "bg": "storeInside",
+      "say": "เขาเลยกำกำไรทั้งหมด เดินเข้าร้านสะดวกซื้อ หยิบลูกอมชิ้นเล็กที่สุด แล้ววางบนเคาน์เตอร์อย่างคนชนะชีวิต",
+      "caption": "เขาเลยกำกำไรทั้งหมด เดินเข้าร้านสะดวกซื้อ หยิบลูกอมชิ้นเล็กที่สุด แล้ววางบนเคาน์เตอร์อย่างคนชนะชีวิต",
+      "transition": "cut",
+      "cast": [
+        {"who": "takrutLead", "x": 390, "y": 1500, "scale": 0.88, "pose": "hold", "expr": "smile", "action": "walk", "toX": 570, "toY": 1450},
+        {"who": "cleaner", "x": 760, "y": 1370, "scale": 0.78, "pose": "idle", "expr": "flat", "turn": -0.4}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.0, "x": 540, "y": 960},
+        {"at": 0.55, "zoom": 1.25, "x": 640, "y": 1040}
+      ],
+      "chip": "ร้านสะดวกซื้อ · หลังเที่ยงคืน"
+    },
+    {
+      "id": "price",
+      "bg": "storeInside",
+      "say": "เครื่องคิดเงินดังติ๊ด หนึ่งบาท บูมวางเหรียญดัง กริ๊ง พนักงานชี้ยอดแล้วบอก ยังขาดอีกเจ็ดสิบห้าสตางค์ค่ะ",
+      "caption": "เครื่องคิดเงินดังติ๊ด หนึ่งบาท บูมวางเหรียญดัง กริ๊ง พนักงานชี้ยอดแล้วบอก ยังขาดอีกเจ็ดสิบห้าสตางค์ค่ะ",
+      "transition": "cut",
+      "cast": [
+        {"who": "takrutLead", "x": 500, "y": 1480, "scale": 0.9, "pose": "hold", "expr": "smile", "keys": [{"at": 0.5, "pose": "shock", "expr": "flat"}]},
+        {"who": "cleaner", "x": 760, "y": 1370, "scale": 0.78, "pose": "point", "expr": "talk", "turn": -0.45}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.5, "x": 650, "y": 1120},
+        {"at": 0.35, "zoom": 1.7, "x": 560, "y": 1180},
+        {"at": 0.62, "zoom": 1.2, "x": 650, "y": 900}
+      ],
+      "title": "หนึ่งบาท",
+      "sfx": [
+        {"at": 0.1, "word": "ติ๊ด", "sound": "beep", "volume": 0.75},
+        {"at": 0.42, "word": "กริ๊ง", "sound": "coinClink", "volume": 0.85}
+      ]
+    },
+    {
+      "id": "end",
+      "bg": "storeInside",
+      "say": "บูมหันกลับไป ตะกรุดก็หายแล้ว ลูกอมถูกเก็บคืน เหลือเหรียญหมุนติ้ว ก่อนล้มแปะ ถ้ามีสามพร คุณจะพูดข้อแรกว่าอะไร",
+      "caption": "บูมหันกลับไป ตะกรุดก็หายแล้ว ลูกอมถูกเก็บคืน เหลือเหรียญหมุนติ้ว ก่อนล้มแปะ ถ้ามีสามพร คุณจะพูดข้อแรกว่าอะไร",
+      "transition": "cut",
+      "cast": [
+        {"who": "takrutLead", "x": 500, "y": 1480, "scale": 0.9, "pose": "think", "expr": "flat"},
+        {"who": "cleaner", "x": 760, "y": 1370, "scale": 0.78, "pose": "idle", "expr": "flat", "turn": -0.45}
+      ],
+      "shots": [
+        {"at": 0, "zoom": 1.2, "x": 520, "y": 900},
+        {"at": 0.42, "zoom": 1.8, "x": 610, "y": 1180},
+        {"at": 0.78, "zoom": 1.0, "x": 540, "y": 960}
+      ],
+      "padAfter": 0.4,
+      "title": "*แปะ*",
+      "sfx": [
+        {"at": 0.6, "word": "แปะ", "sound": "coinDrop", "volume": 0.9}
+      ]
+    }
+  ]
+}
