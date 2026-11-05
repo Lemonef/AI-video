@@ -26,7 +26,7 @@
        - also raised, not picked: AI-voice post-processing (script-voice covers), asset ops, legal/copyright check (release covers)
      - [ ] More reels from owner coming later -> reference-study lessons
    - [ ] B2. 3D look test (owner OK 2026-11-04): rebuild ONE existing set (lift interior) in the claude-animated-shorts three.js template, 3-4 camera angles, side-by-side vs our 2D; owner judges. 3D fixes set variety/depth/light, NOT poses/SFX/story. Win -> story 04/05 goes 3D
-   - [ ] C. Story 04 ตะกรุดสามคำขอ using A + B
+   - [ ] C. Next video (owner 2026-11-05): ONE standalone funny what-if, own premise (not ตะกรุด - parked; not Gojo/เด็กช่าง - others videos). Premise pick pending
 0. [superseded 2026-11-04 by NOW] Token budget mode (owner 2026-11-03): weekly Claude quota low, keep it for this week's next episode.
    Heartbeat cron stopped; 1:1 loop PAUSED until the episode ships. Next episode first.
    - [ ] Story skill (later, owner call): turn docs/story-ideas.md "How to judge a story" + the standalone-part methods into a reusable skill when the next story starts
