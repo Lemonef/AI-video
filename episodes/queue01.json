@@ -10,7 +10,12 @@
   "tempo": 1.08,
   "handheld": false,
   "grain": false,
-  "mix": {"beds": [], "duck": 0.5, "bedVolume": 0.45, "real": true},
+  "mix": {
+    "beds": [],
+    "duck": 0.5,
+    "bedVolume": 0.45,
+    "real": true
+  },
   "post": {
     "series": "ลูกเจ้าของร้าน",
     "part": 1,
@@ -20,13 +25,35 @@
     "question": "เจอคนแซงคิวแบบนี้ คุณจะพูดว่าอะไร?",
     "next": "ติดตามเรื่องต่อไป",
     "coverFrame": 24,
-    "hashtags": ["#เรื่องเล่า", "#ตลก", "#ละครสั้น", "#การ์ตูนไทย", "#แซงคิว"],
+    "hashtags": [
+      "#เรื่องเล่า",
+      "#ตลก",
+      "#ละครสั้น",
+      "#การ์ตูนไทย",
+      "#แซงคิว"
+    ],
     "publishNow": false,
     "coverBg": "storeInside",
     "keyword": "ลูกเจ้าของร้าน",
     "coverCast": [
-      {"look": "jaab", "pose": "point", "expr": "smile", "turn": -0.25, "x": 720, "y": 2180, "scale": 1.4},
-      {"look": "runner", "pose": "shock", "expr": "sweat", "turn": 0.25, "x": 340, "y": 2110, "scale": 1.3}
+      {
+        "look": "jaab",
+        "pose": "point",
+        "expr": "smile",
+        "turn": -0.25,
+        "x": 720,
+        "y": 2180,
+        "scale": 1.4
+      },
+      {
+        "look": "runner",
+        "pose": "shock",
+        "expr": "sweat",
+        "turn": 0.25,
+        "x": 340,
+        "y": 2110,
+        "scale": 1.3
+      }
     ]
   },
   "narrationJoin": " ",
@@ -40,10 +67,33 @@
       "transition": "cut",
       "title": "ลูกเจ้าของร้าน?",
       "cast": [
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "shock", "expr": "flat", "turn": -0.35},
-        {"who": "runner", "x": 650, "y": 1610, "scale": 0.8, "pose": "point", "expr": "smile", "turn": 0.3}
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "shock",
+          "expr": "flat",
+          "turn": -0.35
+        },
+        {
+          "who": "runner",
+          "x": 650,
+          "y": 1610,
+          "scale": 0.8,
+          "pose": "point",
+          "expr": "smile",
+          "turn": 0.3
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1.22, "x": 650, "y": 1120}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.22,
+          "x": 650,
+          "y": 1120
+        }
+      ]
     },
     {
       "id": "queue",
@@ -53,11 +103,51 @@
       "transition": "cut",
       "chip": "ก่อนหน้านั้น · ร้านปากซอย",
       "cast": [
-        {"who": "mum", "x": 230, "y": 1500, "scale": 0.75, "pose": "idle", "expr": "flat", "turn": 0.35},
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "idle", "expr": "flat", "turn": -0.35},
-        {"who": "runner", "x": 980, "y": 1740, "scale": 0.8, "pose": "idle", "expr": "smile", "turn": -0.35, "action": "walk", "toX": 650, "toY": 1610}
+        {
+          "who": "mum",
+          "x": 230,
+          "y": 1500,
+          "scale": 0.75,
+          "pose": "idle",
+          "expr": "flat",
+          "turn": 0.35
+        },
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "idle",
+          "expr": "flat",
+          "turn": -0.35
+        },
+        {
+          "who": "runner",
+          "x": 860,
+          "y": 1740,
+          "scale": 0.8,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": -0.35,
+          "action": "walk",
+          "toX": 650,
+          "toY": 1610
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1, "x": 540, "y": 960}, {"at": 0.55, "zoom": 1.18, "x": 600, "y": 1120}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.18,
+          "x": 600,
+          "y": 1120
+        }
+      ]
     },
     {
       "id": "claim",
@@ -66,10 +156,39 @@
       "caption": "จ๊าบบอก ผมมาก่อนนะครับ เขาหัวเราะ ร้านแม่ผมเองน้อง ซื้อทุกวัน ไม่ต้องต่อหรอก",
       "transition": "cut",
       "cast": [
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "point", "expr": "talk", "turn": -0.35},
-        {"who": "runner", "x": 650, "y": 1610, "scale": 0.8, "pose": "idle", "expr": "smile", "turn": 0.35}
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "point",
+          "expr": "talk",
+          "turn": -0.35
+        },
+        {
+          "who": "runner",
+          "x": 650,
+          "y": 1610,
+          "scale": 0.8,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": 0.35
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1.32, "x": 760, "y": 1090}, {"at": 0.45, "zoom": 1.32, "x": 620, "y": 1000}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.32,
+          "x": 760,
+          "y": 1090
+        },
+        {
+          "at": 0.45,
+          "zoom": 1.32,
+          "x": 620,
+          "y": 1000
+        }
+      ]
     },
     {
       "id": "request",
@@ -78,10 +197,46 @@
       "caption": "จ๊าบเลยยิ้ม งั้นพี่ช่วยแม่คิดเงินหน่อยสิครับ ลูกค้ารออยู่ แม่พี่จะได้พักบ้าง",
       "transition": "cut",
       "cast": [
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "point", "expr": "smile", "turn": -0.35},
-        {"who": "runner", "x": 650, "y": 1610, "scale": 0.8, "pose": "idle", "expr": "smile", "turn": 0.35, "keys": [{"at": 0.55, "pose": "think", "expr": "sweat"}]}
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "point",
+          "expr": "smile",
+          "turn": -0.35
+        },
+        {
+          "who": "runner",
+          "x": 650,
+          "y": 1610,
+          "scale": 0.8,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": 0.35,
+          "keys": [
+            {
+              "at": 0.55,
+              "pose": "think",
+              "expr": "sweat"
+            }
+          ]
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1.22, "x": 750, "y": 1100}, {"at": 0.65, "zoom": 1.4, "x": 650, "y": 1000}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.22,
+          "x": 750,
+          "y": 1100
+        },
+        {
+          "at": 0.65,
+          "zoom": 1.4,
+          "x": 650,
+          "y": 1000
+        }
+      ]
     },
     {
       "id": "caught",
@@ -90,11 +245,48 @@
       "caption": "พนักงานเงยหน้าทันที เออ ตี๋ มาพอดีเลย แม่ยังไม่ได้กินข้าว เขาหน้าซีด แม่ ผมจะไปเตะบอล",
       "transition": "cut",
       "cast": [
-        {"who": "mum", "x": 230, "y": 1500, "scale": 0.75, "pose": "point", "expr": "talk", "turn": 0.35},
-        {"who": "runner", "x": 650, "y": 1610, "scale": 0.8, "pose": "shock", "expr": "sweat", "turn": -0.35},
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "think", "expr": "smile", "turn": -0.35}
+        {
+          "who": "mum",
+          "x": 230,
+          "y": 1500,
+          "scale": 0.75,
+          "pose": "point",
+          "expr": "talk",
+          "turn": 0.35
+        },
+        {
+          "who": "runner",
+          "x": 650,
+          "y": 1610,
+          "scale": 0.8,
+          "pose": "shock",
+          "expr": "sweat",
+          "turn": -0.35
+        },
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "think",
+          "expr": "smile",
+          "turn": -0.35
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1.18, "x": 300, "y": 1000}, {"at": 0.63, "zoom": 1.4, "x": 650, "y": 1000}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.18,
+          "x": 300,
+          "y": 1000
+        },
+        {
+          "at": 0.63,
+          "zoom": 1.4,
+          "x": 650,
+          "y": 1000
+        }
+      ]
     },
     {
       "id": "shift",
@@ -103,11 +295,48 @@
       "caption": "แม่ชี้หลังเคาน์เตอร์ เตะพรุ่งนี้ วันนี้ช่วยจนปิดร้าน เพิ่งอวดเองไม่ใช่เหรอ ว่าร้านแม่",
       "transition": "cut",
       "cast": [
-        {"who": "mum", "x": 230, "y": 1500, "scale": 0.75, "pose": "point", "expr": "talk", "turn": 0.35},
-        {"who": "runner", "x": 650, "y": 1610, "scale": 0.8, "pose": "think", "expr": "sweat", "turn": -0.35},
-        {"who": "jaab", "x": 770, "y": 1690, "scale": 0.82, "pose": "idle", "expr": "smile", "turn": -0.35}
+        {
+          "who": "mum",
+          "x": 230,
+          "y": 1500,
+          "scale": 0.75,
+          "pose": "point",
+          "expr": "talk",
+          "turn": 0.35
+        },
+        {
+          "who": "runner",
+          "x": 650,
+          "y": 1610,
+          "scale": 0.8,
+          "pose": "think",
+          "expr": "sweat",
+          "turn": -0.35
+        },
+        {
+          "who": "jaab",
+          "x": 770,
+          "y": 1690,
+          "scale": 0.82,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": -0.35
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1, "x": 540, "y": 960}, {"at": 0.55, "zoom": 1.25, "x": 320, "y": 1020}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.55,
+          "zoom": 1.25,
+          "x": 320,
+          "y": 1020
+        }
+      ]
     },
     {
       "id": "service",
@@ -117,11 +346,48 @@
       "transition": "cut",
       "chip": "ไม่ถึงนาทีต่อมา",
       "cast": [
-        {"who": "runner", "x": 230, "y": 1500, "scale": 0.75, "pose": "hold", "expr": "sweat", "turn": 0.35},
-        {"who": "jaab", "x": 650, "y": 1640, "scale": 0.82, "pose": "idle", "expr": "smile", "turn": -0.35},
-        {"who": "mum", "x": 930, "y": 1570, "scale": 0.72, "pose": "idle", "expr": "smile", "turn": -0.35}
+        {
+          "who": "runner",
+          "x": 230,
+          "y": 1500,
+          "scale": 0.75,
+          "pose": "hold",
+          "expr": "sweat",
+          "turn": 0.35
+        },
+        {
+          "who": "jaab",
+          "x": 650,
+          "y": 1640,
+          "scale": 0.82,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": -0.35
+        },
+        {
+          "who": "mum",
+          "x": 860,
+          "y": 1570,
+          "scale": 0.72,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": -0.35
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1, "x": 540, "y": 960}, {"at": 0.6, "zoom": 1.3, "x": 300, "y": 1000}]
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.6,
+          "zoom": 1.3,
+          "x": 300,
+          "y": 1000
+        }
+      ]
     },
     {
       "id": "punchline",
@@ -130,11 +396,61 @@
       "caption": "จ๊าบบอก ไม่รับครับ แม่ตะโกนจากข้างหลัง แต่ลูกแม่รับไม้ถูพื้นด้วย ห้องน้ำยังไม่ได้ล้าง",
       "transition": "cut",
       "cast": [
-        {"who": "runner", "x": 230, "y": 1500, "scale": 0.75, "pose": "hold", "expr": "sweat", "turn": 0.35, "keys": [{"at": 0.7, "pose": "shock", "expr": "flat"}]},
-        {"who": "jaab", "x": 650, "y": 1640, "scale": 0.82, "pose": "idle", "expr": "smile", "turn": -0.35},
-        {"who": "mum", "x": 930, "y": 1570, "scale": 0.72, "pose": "point", "expr": "talk", "turn": -0.35}
+        {
+          "who": "runner",
+          "x": 230,
+          "y": 1500,
+          "scale": 0.75,
+          "pose": "hold",
+          "expr": "sweat",
+          "turn": 0.35,
+          "keys": [
+            {
+              "at": 0.7,
+              "pose": "shock",
+              "expr": "flat"
+            }
+          ]
+        },
+        {
+          "who": "jaab",
+          "x": 650,
+          "y": 1640,
+          "scale": 0.82,
+          "pose": "idle",
+          "expr": "smile",
+          "turn": -0.35
+        },
+        {
+          "who": "mum",
+          "x": 860,
+          "y": 1570,
+          "scale": 0.72,
+          "pose": "point",
+          "expr": "talk",
+          "turn": -0.35
+        }
       ],
-      "shots": [{"at": 0, "zoom": 1.18, "x": 640, "y": 1080}, {"at": 0.3, "zoom": 1, "x": 540, "y": 960}, {"at": 0.75, "zoom": 1.4, "x": 260, "y": 940}],
+      "shots": [
+        {
+          "at": 0,
+          "zoom": 1.18,
+          "x": 640,
+          "y": 1080
+        },
+        {
+          "at": 0.3,
+          "zoom": 1,
+          "x": 540,
+          "y": 960
+        },
+        {
+          "at": 0.75,
+          "zoom": 1.4,
+          "x": 260,
+          "y": 940
+        }
+      ],
       "padAfter": 0.3
     }
   ]
