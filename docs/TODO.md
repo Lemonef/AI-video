@@ -214,18 +214,34 @@
 
 - 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
 
-## NOW 2026-11-06 (owner asks, one tree)
-- [ ] Sukuna shrine ep01 (one episode, NO A/B)
-  - [x] Premise + story beats agreed (shrine-vs-temple, lotus ending)
-  - [x] Script, episode JSON, 2D scenes (Codex, quota-stopped then resumed)
-  - [ ] Free cross-check of script + fixes (Codex resume running)
-  - [ ] 4 stills -> Claude review -> owner sees frames
-  - [ ] Voice + 2D render (= baseline)
-  - [ ] 3D version (B2 un-parked): clone claude-animated-shorts + npm three/@remotion/three/@react-three/fiber (needs owner OK), rebuild sets as 2D cards in 3D, angle switching/light per reference study
-  - [ ] Owner picks 2D vs 3D, final render, post.txt
-- [ ] IG reference https://www.instagram.com/p/DfWxbmMSP5D/ - owner says what to take from it
-- [ ] Dahl: wire MiniMax-M2.7 as free leg (key live; GLM/DeepSeek 429 free tier); call weekly so grant does not burn
-- [ ] Flint: add OpenRouter recursive/flint-v1.0:free to multi_ai_check (already on OpenCode zen)
-- [ ] Rename handle @jaabstory -> @jaabjaab (owner does in app), then update post.txt files
-- [ ] Owner's open question: title says ไทย by default, Bangkok only when joke needs the city?
-- [ ] Older: 1:1 DegJCmXtbGj (v10 unfinished), takrut01, DeepSeek top-up wiring, groq 403, reel research
+## NOW 2026-11-06 (owner asks 11-05 + 11-06, full tree rebuilt from chat log)
+- [ ] 1. Sukuna shrine ep01 "ถ้า Sukuna มาไทย แล้วเดินเข้าวัด" (ONE ep, NO A/B, others build, Claude reviews only)
+  - [x] brief + script + episode json + 2D scenes (Codex terra)
+  - [x] 4 stills reviewed by Claude: FAIL (temple = house, weak Sukuna, flat centred static, domain = black box)
+  - [ ] voice: Gemini TTS outside Codex sandbox (no network inside)
+  - [ ] 3D rebuild (B2 un-parked; needs owner OK to clone claude-animated-shorts + npm three/@remotion/three/@react-three/fiber)
+  - [ ] use EVERYTHING learned: three.js skill, angle switching, light, reference-study lessons, retention rules
+  - [ ] IG ref DfWxbmMSP5D: owner says what to take (IG blocks fetch)
+  - [ ] cast may include anime characters (friend's Light Yagami court + Ryuk example), don't copy friend
+  - [ ] final render, cover, post.txt; owner posts
+- [ ] 2. Story direction (owner 11-05)
+  - [x] ONE ep per premise, NO A/B, no "next ep is X" lock-in end cards
+  - [x] Jaab dropped, own cast per premise
+  - [ ] premise style = one-sentence what-if, not only Bangkok/anime: hulk in TH, gojo next door, whole world turns doctor, hear everyone's thoughts, city of blind people; funny OR weird, not only funny
+  - [ ] title: ไทย vs Bangkok (owner open question)
+  - [ ] handle rename @jaabstory -> @jaabjaab (owner in app), then update post.txt files; channel name เรื่องจ๊าบๆ idea
+  - [ ] ตะกรุดสามคำขอ: owner felt locked in by end card; keep as option, not forced
+- [ ] 3. Method research (owner 11-05: "figure out how he actually did it", 1:1 grind may be wrong tool)
+  - [ ] find real stack of the creators (tools, skill, image gen, TTS) before more 1:1 work
+  - [ ] judge: does 1:1 transfer anything; stop grinding if not
+  - [ ] skill-gap research: what other creators' skills have that ours miss (B-gaps2 list) + more reels coming from owner
+- [ ] 4. Image generation (owner 11-05): GPT image / Gemini Flash image are best; check access (Flash out of quota then); Gemini inside Antigravity?
+- [ ] 5. Agent stack (owner 11-05/06)
+  - [x] cross-agent on at every chat start + tick-box stack check in chat (playbook rule)
+  - [x] dashboard PARKED (too long, unusable) - find replacement later
+  - [~] fix legs: NVIDIA deepseek-v4.1-flash timeout (dropped), Mistral 429 (account side), OmniRoute READY mismatch (prefix strip done) - recheck live
+  - [x] benchmark-gate every tier choice (cross-agent skill 1.8); Sol vs Astra, Opus vs Fable by benchmark not habit
+  - [ ] ladders: add every Antigravity model (own free quotas), Qwen + all OmniRoute models, Codex luna, Claude sonnet/haiku tiers; brief cross-check with best model (Sol) not Astra by default - verify ladders.json now
+  - [ ] Dahl MiniMax-M2.7 as free leg; call weekly so 100M grant does not burn (7 idle days)
+  - [ ] Flint (OpenRouter recursive/flint-v1.0:free) into multi_ai_check
+- [ ] 6. Older queue still open: 1:1 v10 (paused, see item 3), takrut01, DeepSeek/Mistral top-up (owner), groq 403, reel mining both batches, browser eyes, story-mode social mining, repo cleanup LAST
