@@ -213,3 +213,19 @@
 - [ ] vitest for `src/lib/castState.ts`
 
 - 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
+
+## NOW 2026-11-06 (owner asks, one tree)
+- [ ] Sukuna shrine ep01 (one episode, NO A/B)
+  - [x] Premise + story beats agreed (shrine-vs-temple, lotus ending)
+  - [x] Script, episode JSON, 2D scenes (Codex, quota-stopped then resumed)
+  - [ ] Free cross-check of script + fixes (Codex resume running)
+  - [ ] 4 stills -> Claude review -> owner sees frames
+  - [ ] Voice + 2D render (= baseline)
+  - [ ] 3D version (B2 un-parked): clone claude-animated-shorts + npm three/@remotion/three/@react-three/fiber (needs owner OK), rebuild sets as 2D cards in 3D, angle switching/light per reference study
+  - [ ] Owner picks 2D vs 3D, final render, post.txt
+- [ ] IG reference https://www.instagram.com/p/DfWxbmMSP5D/ - owner says what to take from it
+- [ ] Dahl: wire MiniMax-M2.7 as free leg (key live; GLM/DeepSeek 429 free tier); call weekly so grant does not burn
+- [ ] Flint: add OpenRouter recursive/flint-v1.0:free to multi_ai_check (already on OpenCode zen)
+- [ ] Rename handle @jaabstory -> @jaabjaab (owner does in app), then update post.txt files
+- [ ] Owner's open question: title says ไทย by default, Bangkok only when joke needs the city?
+- [ ] Older: 1:1 DegJCmXtbGj (v10 unfinished), takrut01, DeepSeek top-up wiring, groq 403, reel research
