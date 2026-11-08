@@ -13,7 +13,7 @@
      - [ ] A4 SFX: event map of source sounds -> CC0/toon clips -> listening preview for owner BEFORE mixing
      - [ ] A5 music: original bed (never the source song), -14 LUFS
      - [ ] A6 v15 full render + side-by-side video+audio vs source -> owner watches/listens
-   - [ ] B. Skill work: reference-study rename, seed craft skills with 1:1 lessons, strip-mine github.com/mromidev/claude-animated-shorts (MIT; method only, never its reference frames)
+   - [ ] B. Skill work — LIVE PLAN: D:/second-brain/skills/video-maker/skill-plan.md (single source, 2026-11-09). Old notes: reference-study rename, seed craft skills with 1:1 lessons, strip-mine github.com/mromidev/claude-animated-shorts (MIT; method only, never its reference frames)
      - [x] B-gaps1 (2026-11-05, brain 69f399b/057457f): hook, background, ending skills + A/B policy in video-maker + skill map
      - [ ] B-gaps2 TO BUILD (skill-gap cross-check 2026-11-05, 7 free legs; votes in brackets):
        - [ ] editing-pacing skill: cut rhythm, scene length, transitions, beat sync to voice [3 legs]
