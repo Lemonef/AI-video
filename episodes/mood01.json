@@ -1,0 +1,246 @@
+{
+ "id": "mood01",
+ "title": "ฟ้าตามอารมณ์",
+ "seriesSlug": "mood",
+ "releaseEpisode": "ep01",
+ "style": "jaab3d",
+ "engine": "gemini",
+ "voice": "Iapetus",
+ "voiceModel": "gemini-2.5-flash-preview-tts",
+ "tempo": 1.08,
+ "handheld": false,
+ "grain": false,
+ "mix": {
+  "beds": [],
+  "duck": 0.5,
+  "bedVolume": 0.45,
+  "real": true
+ },
+ "narrationJoin": " ",
+ "narrationDirection": "Read this original Thai what-if story as a calm, warm Bangkok Thai male narrator telling a friend something strange but true. Normal speaking volume, not whispered, not dramatic. Relaxed and a little amused in the first half. Slightly faster and tighter through the traffic-jam storm. Slow down with short natural pauses on the realisation line and the last two lines, which are quiet and sincere. Connected sentences, no long silences. Read only the provided Thai text, never these instructions.",
+ "post": {
+  "series": "ฟ้าตามอารมณ์",
+  "part": 1,
+  "total": 1,
+  "coverHook": "อารมณ์กลายเป็นฟ้า",
+  "hook": "จะเกิดอะไรขึ้นถ้า อารมณ์ของคุณ กลายเป็นสภาพอากาศเหนือหัว",
+  "question": "ถ้าเป็นแบบนี้จริง เหนือหัวคุณวันนี้ ฝนตกหรือแดดออก?",
+  "next": "เรื่องจ๊าบๆ เรื่องต่อไปเร็วๆ นี้",
+  "publishNow": false,
+  "keyword": "ฟ้าตามอารมณ์",
+  "hashtags": [
+   "#เรื่องจ๊าบๆ",
+   "#จะเกิดอะไรขึ้นถ้า",
+   "#กรุงเทพ",
+   "#รถติด",
+   "#การ์ตูน"
+  ]
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "say": "จะเกิดอะไรขึ้นถ้า อารมณ์ของคุณ กลายเป็นฟ้าเหนือหัว",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ],
+   "title": "ถ้าอารมณ์ กลายเป็นฟ้า?",
+   "sfx": [
+    {
+     "at": 0.02,
+     "sound": "boom"
+    }
+   ]
+  },
+  {
+   "id": "morning",
+   "say": "เช้าวันจันทร์ กรุงเทพตื่นมาแบบนั้นจริงๆ",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "rules",
+   "say": "คนอารมณ์ดี มีแดดอ่อนๆ ส่องตามตัว คนที่ยังไม่ได้กินกาแฟ มีเมฆก้อนเล็กๆ ลอยตามทั้งวัน",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "nohide",
+   "say": "ไม่มีใครซ่อนอารมณ์ได้อีกแล้ว ป้าขายหมูปิ้ง รู้ทันทีว่าใครเพิ่งโดนเจ้านายด่ามา",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "forecast",
+   "say": "แอปพยากรณ์อากาศ กลายเป็นแอปพยากรณ์อารมณ์ คนเดินอ้อมตึกที่ฝนตกทั้งออฟฟิศ",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "secret",
+   "say": "แต่ยังไม่มีใครรู้ ว่าเมฆของแต่ละคน รวมกันได้",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "jam",
+   "say": "เย็นวันศุกร์ แยกอโศก รถติดมาสี่สิบนาที",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "horn",
+   "say": "แตรดังขึ้นหนึ่งครั้ง เมฆก้อนแรกก็ใหญ่ขึ้น",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "merge",
+   "say": "แตรคันที่สอง คันที่สาม คนเริ่มลงจากรถมาเถียงกัน แล้วเมฆทุกก้อน ก็ไหลเข้าหากัน",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "storm",
+   "say": "จนกลายเป็นพายุลูกเดียว คลุมทั้งแยก ฟ้าผ่าลงกลางถนน น้ำเริ่มท่วมถึงข้อเท้า",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "realise",
+   "say": "ทุกคนเงยหน้าขึ้นพร้อมกัน แล้วเพิ่งเห็นครั้งแรก ว่าพายุลูกนี้ ไม่ใช่ของใครคนเดียว",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.333
+    },
+    {
+     "at": 0.667
+    }
+   ]
+  },
+  {
+   "id": "umbrella",
+   "say": "พี่วินคนหนึ่ง ดับเครื่อง แล้วยื่นร่มให้คนที่เพิ่งตะโกนใส่เขาเมื่อกี้",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "light",
+   "say": "แดดเล็กๆ ส่องลงมาตรงนั้นหนึ่งจุด แล้วอีกจุด แล้วก็อีกจุด",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "clear",
+   "say": "พายุค่อยๆ แตกออก เหลือฟ้าเย็นสีส้ม เหนือแยกที่รถยังติดเหมือนเดิม",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "say": "รถยังติดอยู่นะ แต่ฟ้าเหนือหัวเรา เราสร้างมันขึ้นมาด้วยกันมาตลอด",
+   "shots": [
+    {
+     "at": 0.0
+    },
+    {
+     "at": 0.5
+    }
+   ]
+  }
+ ]
+}

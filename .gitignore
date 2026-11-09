@@ -22,3 +22,6 @@ docs/agent-logs/*.log
 
 # AgentsRoom app local state
 .agentsroom/
+
+# jaab3d: mirror of public/sfx (itself ignored); rebuilt locally
+public3d/sfx/

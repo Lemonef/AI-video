@@ -1,5 +1,14 @@
 # TODO — the only place live status lives
 
+## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
+- [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `src/jaab3d/`
+- [x] mood01 built: no main character, simple end question, no A/B; 84.7 s 1080x1920
+- [x] Render path while Smart App Control blocks Remotion ffprobe: `--props='{"audio":false}' --muted`,
+      cue sheet `MOOD01_AUDIO` dumped via esbuild -> ffmpeg mix -> master.py (-14.0 LUFS, TP -1.3)
+- [x] Final: `out/final/mood/ep01/video.mp4`; QA contact sheet + end card read
+- [ ] Zen posts (IG + TikTok @jaabjaab); collect views / retention
+- [ ] Cue-sheet mixer lives in scratchpad; promote to `scripts/pipeline/mixcues.py` next episode
+
 ## QUEUE (owner order, 2026-11-01)
 -1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
    - [ ] A. Finish 1:1 DegJCmXtbGj (item 7 below): remaining loop shots, v15 render, V1/V2 voice + M1 music, owner side-by-side approval
