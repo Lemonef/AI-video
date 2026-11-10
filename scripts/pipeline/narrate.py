@@ -23,9 +23,56 @@ MIN_LINE_SEC = 0.5  # a line start this close to the end of the take cannot be r
 BREATH_BEFORE_SEC = 0.5  # how far before a letter-position estimate a breath may end and still be "its" breath
 BREATH_AFTER_SEC = 0.35  # ...and how far after (estimates run early as often as late)
 
+TAKE_CHUNK_LINES = 5  # max lines per TTS chunk; episode override 'voiceChunkLines'
+MAX_TAIL_SILENCE_SEC = 2.0  # trailing silence longer than this means the model stopped talking
+TRUNCATION_RETRIES = 1  # re-voice a truncated chunk this many times before giving up
+MAX_LINE_PAUSE_SEC = 0.5  # pauses longer than this are shortened; episode override 'maxPauseSec'
+
 
 def _key(*parts: str) -> str:
     return hashlib.sha1("|".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+def take_chunks(lines: list, max_lines: int) -> list[list]:
+    """Split lines into fewest chunks of <= max_lines, sizes balanced (diff <= 1, larger first)."""
+    n = len(lines)
+    if n <= max_lines:
+        return [lines]
+    num_chunks = (n + max_lines - 1) // max_lines
+    base_size = n // num_chunks
+    extra = n % num_chunks
+    chunks = []
+    idx = 0
+    for i in range(num_chunks):
+        size = base_size + (1 if i < extra else 0)
+        chunks.append(lines[idx:idx + size])
+        idx += size
+    return chunks
+
+
+def tail_silence(pauses: list[tuple[float, float]], take_sec: float) -> float:
+    """Length of the pause that ends at take_sec (end within 0.05 s), else 0.0."""
+    for a, b in pauses:
+        if abs(b - take_sec) <= 0.05:
+            return b - a
+    return 0.0
+
+
+def squeeze_segments(pauses: list[tuple[float, float]], take_sec: float, max_pause: float) -> list[tuple[float, float]]:
+    """Keep-segments where every pause > max_pause is cut to max_pause, keeping max_pause/2 on each side."""
+    if not pauses:
+        return [(0.0, take_sec)]
+    segments = []
+    cursor = 0.0
+    half = max_pause / 2.0
+    for a, b in pauses:
+        pause_len = b - a
+        if pause_len <= max_pause:
+            continue
+        segments.append((cursor, a + half))
+        cursor = b - half
+    segments.append((cursor, take_sec))
+    return segments
 
 
 def _line(scene: dict) -> str:
@@ -258,8 +305,11 @@ def speech_span(start: float, end: float, pauses: list[tuple[float, float]]) -> 
 
 def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
     voice = episode["voice"]
-    lines, script, voice_key = _take_keys(episode, engine)
+    lines, _, voice_key = _take_keys(episode, engine)
     speed = float(episode.get("tempo", 1.0))
+    chunk_lines = int(episode.get("voiceChunkLines", TAKE_CHUNK_LINES))
+    max_pause = float(episode.get("maxPauseSec", MAX_LINE_PAUSE_SEC))
+    voice_key = _key(voice_key, str(chunk_lines))
     key = _key(voice_key, str(speed))
     raw = ep_dir / "take.raw.mp3"
     take = ep_dir / "take.mp3"
@@ -267,15 +317,37 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     if take_meta.get("voice_key") == voice_key and raw.exists():
         print("  = take voice (cached)")
     else:
-        print(f"  > take: voicing {len(lines)} lines in one request…", flush=True)
-        tmp = ep_dir / "take.tmp.mp3"
-        if hasattr(engine, "model"):
-            engine.model = episode.get("voiceModel")  # no silent fallback to a different-sounding model
-        if hasattr(engine, "settings"):
-            engine.settings = episode.get("voiceSettings")
-        engine.synthesize(script, voice, "", tmp)
-        tmp.replace(raw)
-        alignment = tmp.with_suffix(".alignment.json")
+        chunks = take_chunks(lines, chunk_lines)
+        print(f"  > take: voicing {len(lines)} lines in {len(chunks)} chunk(s)…", flush=True)
+        chunk_paths = []
+        for i, chunk in enumerate(chunks):
+            chunk_script = episode.get("narrationJoin", "\n").join(chunk)
+            direction = episode.get("narrationDirection")
+            if direction and engine.name == "elevenlabs":
+                raise ValueError("ElevenLabs direction must use supported inline audio tags, not a spoken instruction preamble")
+            if direction:
+                chunk_script = f"{direction}\n\nRead only this Thai story, exactly as written:\n{chunk_script}"
+            chunk_path = ep_dir / f"take.chunk{i}.mp3"
+            for attempt in range(TRUNCATION_RETRIES + 1):
+                tmp = ep_dir / f"take.chunk{i}.tmp.mp3"
+                if hasattr(engine, "model"):
+                    engine.model = episode.get("voiceModel")
+                if hasattr(engine, "settings"):
+                    engine.settings = episode.get("voiceSettings")
+                engine.synthesize(chunk_script, voice, "", tmp)
+                tmp.replace(chunk_path)
+                pauses = media.silences(chunk_path)
+                dur = media.duration(chunk_path)
+                tail = tail_silence(pauses, dur)
+                if tail > MAX_TAIL_SILENCE_SEC:
+                    if attempt < TRUNCATION_RETRIES:
+                        print(f"    chunk {i}: tail silence {tail:.2f}s > {MAX_TAIL_SILENCE_SEC}s, re-voicing (attempt {attempt + 1}/{TRUNCATION_RETRIES})")
+                        continue
+                    raise RuntimeError(f"chunk {i} truncated after {TRUNCATION_RETRIES} retries (tail silence {tail:.2f}s)")
+                break
+            chunk_paths.append(chunk_path)
+        media.join(chunk_paths, raw)
+        alignment = raw.with_suffix(".alignment.json")
         if alignment.exists():
             alignment.replace(raw.with_suffix(".alignment.json"))
     if take_meta.get("key") == key and take.exists() and take_meta.get("tempo"):
@@ -284,23 +356,24 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     else:
         media.tempo(raw, speed, take)
         print(f"  > take: tempo x{speed}, aligning speech…", flush=True)
+        pauses = media.silences(take)
+        segments = squeeze_segments(pauses, media.duration(take), max_pause)
+        media.keep(take, segments, take)
         try:
             provider_words = engine.cached_words(raw, speed) if hasattr(engine, "cached_words") else []
             words = provider_words or whisper.words(str(take))
             if provider_words:
                 print("    using provider character timings (independent speech check remains separate)")
         except (ImportError, OSError) as e:
-            # e.g. Windows Smart App Control blocking faster-whisper's native DLLs. Fall back to cuts
-            # placed by script length and snapped to the take's real pauses; captions spread per line.
             print(f"  ! Whisper unavailable ({type(e).__name__}): aligning by pauses only, word cues placed by letter position")
             words = []
+    take_sec = media.duration(take)
+    pauses = media.silences(take)
     heard = sum(spoken_len(w.text) for w in words)
     expected = sum(spoken_len(line) for line in lines)
     if words and heard < MIN_COVERAGE * expected:
         raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
-    take_sec = media.duration(take)
     timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
-    pauses = media.silences(take)
     # A reviewed alignment belongs to this exact voice/tempo cache key only.
     line_starts = take_meta.get("reviewed_line_starts") if take_meta.get("key") == key else None
     if line_starts:
@@ -313,8 +386,6 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         timing["_take"]["line_starts"] = line_starts
     cuts = scene_cuts(lines, words, take_sec, pauses)
     if line_starts:
-        # Gemini can invent a time (ep02: 104 s in a 71 s take): keep only starts that fall inside
-        # the take, after the previous line; any other line keeps its pause-based cut.
         fixed, bad = _repair_starts(line_starts, [spoken_len(line) for line in lines], take_sec, pauses)
         cuts = _cuts_from_starts(fixed, take_sec, pauses)
         print(f"  = cuts from Gemini line starts, snapped to pauses ({bad} implausible start(s) replaced by the pause guess)")
@@ -324,16 +395,15 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         clip_words = words_in(words, start, end)
         speech = None if words else speech_span(start, end, pauses)
         cue_times: dict[str, float] = {}
-        if speech:  # word cues are placed by letter position across the spoken part (see src/lib/cueAt.ts)...
-            # ...refined: a word that follows a breath starts where that breath ends
+        if speech:
             clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
             cue_times = {w: snap_to_breath(t, clip_pauses) for w in cue_words(scene) if (t := word_start(scene["say"], w, [], speech)) is not None}
         length = end - start
-        if scene.get("monster"):  # the creature's own words only; the narrator goes on in his own voice
+        if scene.get("monster"):
             word = scene["monster"]
             at = cue_times.get(word)
             at = at if at is not None else word_start(scene["say"], word, clip_words, speech)
-            if word == scene["say"]:  # a complete dialogue line, even if Whisper spells a word differently
+            if word == scene["say"]:
                 at = clip_words[0].start if clip_words else (speech[0] if speech else 0.0)
             if at is not None:
                 spoken_end = speech[1] if speech else (clip_words[-1].end if clip_words else end - start)
@@ -342,9 +412,8 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
                 preserve = bool(scene.get("monsterPreserveTiming"))
                 length = media.monster(mp3, at, word_end, preserve_timing=preserve)
                 grown = 0.0 if preserve else (word_end - at) * (1 / media.MONSTER_PITCH - 1)
-                # everything after the creature's words moves later by what the slowing added
                 cue_times = {w: t + grown if t >= word_end else t for w, t in cue_times.items()}
-                cue_times[f"{word}:end"] = word_end + grown  # cue a hit AFTER the word, not over it
+                cue_times[f"{word}:end"] = word_end + grown
                 if speech:
                     speech = [speech[0], round(spoken_end + grown, 3)]
         timing[scene["id"]] = _entry(episode, scene, key, clip_words, length, speech)
@@ -352,6 +421,6 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
             timing[scene["id"]].update(say=scene["say"], speech=speech)
         if cue_times:
             timing[scene["id"]]["cueTimes"] = cue_times
-        print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
+        print(f"  OK {scene['id']}: {start:5.2f}-{end:5.2f}s")
     _save(timing_path, timing)
     return {s["id"]: timing[s["id"]] for s in episode["scenes"]}

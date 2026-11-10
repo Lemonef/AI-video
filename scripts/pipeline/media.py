@@ -89,3 +89,38 @@ def silences(path: Path) -> list[tuple[float, float]]:
 def tempo(src: Path, factor: float, out: Path) -> None:
     """Speed speech up/down without changing pitch (ffmpeg atempo)."""
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-af", f"atempo={factor}", str(out)], check=True)
+
+
+def join(paths: list[Path], out: Path) -> None:
+    """Concatenate audio files in order using ffmpeg concat demuxer."""
+    if not paths:
+        raise ValueError("join: no input paths")
+    list_file = out.with_suffix(".concat.txt")
+    list_file.write_text("\n".join(f"file '{p}'" for p in paths), encoding="utf-8")
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", str(list_file), "-c", "copy", str(out)],
+            check=True,
+        )
+    finally:
+        if list_file.exists():
+            list_file.unlink()
+
+
+def keep(src: Path, segments: list[tuple[float, float]], out: Path) -> None:
+    """Keep only the given segments (start, end) from src, concatenated into out."""
+    if not segments:
+        raise ValueError("keep: no segments")
+    parts = []
+    for i, (a, b) in enumerate(segments):
+        if b <= a:
+            continue
+        part = out.with_suffix(f".part{i}.mp3")
+        cut(src, a, b, part)
+        parts.append(part)
+    try:
+        join(parts, out)
+    finally:
+        for p in parts:
+            if p.exists():
+                p.unlink()
