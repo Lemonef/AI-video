@@ -18,11 +18,24 @@ UPLOAD_COLOUR = ["--pixel-format=yuv420p", "--color-space=bt709"]
 RENDER_CONCURRENCY = "75%"
 
 
+def render_target(episode: dict) -> tuple[str, str, str | None]:
+    """Keep legacy episodes byte-for-byte on the legacy root; 3D shorts opt in by style."""
+    if episode.get("style") == "jaab3d":
+        return ("src/jaab3d/index.tsx", episode.get("compositionId", episode["id"].title()), "public3d")
+    return (ENTRY, COMPOSITION, None)
+
+
+def render_command(episode: dict, props_path: Path, out_mp4: Path, npx: str) -> list[str]:
+    entry, composition, public_dir = render_target(episode)
+    public_arg = [f"--public-dir={public_dir}"] if public_dir else []
+    return [npx, "remotion", "render", entry, composition, str(out_mp4), f"--props={props_path}", *public_arg, f"--scale={UPLOAD_SCALE}", f"--crf={UPLOAD_CRF}", *UPLOAD_COLOUR, f"--concurrency={RENDER_CONCURRENCY}"]
+
+
 def render(root: Path, episode: dict, timing: dict, out_mp4: Path) -> None:
     props_path = out_mp4.with_suffix(".props.json")
     props_path.write_text(json.dumps({"episode": {**episode, "timing": timing}}, ensure_ascii=False), encoding="utf-8")
     npx = shutil.which("npx") or "npx"
     subprocess.run(
-        [npx, "remotion", "render", ENTRY, COMPOSITION, str(out_mp4), f"--props={props_path}", f"--scale={UPLOAD_SCALE}", f"--crf={UPLOAD_CRF}", *UPLOAD_COLOUR, f"--concurrency={RENDER_CONCURRENCY}"],
+        render_command(episode, props_path, out_mp4, npx),
         cwd=root, check=True,
     )

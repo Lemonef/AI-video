@@ -121,12 +121,12 @@ export type Episode = {
 	rate?: string;
 	take?: boolean; // set by make.py when the narration is one continuous take
 	tempo?: number; // whole-take speed factor (pitch kept), e.g. 1.15
-	style?: 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD. v5 = v3 sound/shots + redrawn chibi cast + perspective forest. v6 = v3 cast + v5-quality side forest
+	style?: 'v1' | 'v2' | 'v3' | 'v4' | 'v5' | 'v6' | 'jaab3d'; // visual style; default v1. v3 = v2 + dust, rain, grade. v4 = v3 + silhouette cast, dark grade, minimal HUD. v5 = v3 sound/shots + redrawn chibi cast + perspective forest. v6 = v3 cast + v5-quality side forest
 	rules?: {title: string; items: string[]}; // v2: the episode's rules, tracked across scenes
 	handheld?: boolean; // constant handheld drift (default on for v3-v5; v6 episodes lock the camera)
 	post?: {part?: number; total?: number; series?: string; coverHook?: string; [k: string]: unknown}; // posting metadata (post kit, cover, part badge)
 	grain?: boolean; // animated film grain (default on for v2-v5; v6/v1-release off: it wrecks re-encoded uploads)
-	mix?: {beds: string[]; duck?: number; bedVolume?: number; real?: boolean}; // real = recorded CC0 library (public/sfx/real) // v3 sound design: looping beds + auto foley
+	mix?: {beds: string[]; duck?: number; bedVolume?: number; real?: boolean; realSfx?: string[]; music?: {name: string; volume_lufs: number; duck_db: number; events: Array<{at: number; action: 'swell' | 'drop' | 'out'}>}}; // real = recorded CC0 library (public/sfx/real) // v3 sound design: looping beds + auto foley
 	scenes: Scene[];
 	timing?: Record<string, SceneTiming>;
 };

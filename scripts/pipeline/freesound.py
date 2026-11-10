@@ -69,6 +69,11 @@ PINNED = {
 }
 
 BEDS = {"forest_night", "wind", "rain", "dark_drone", "steps_leaves"}
+MUSIC_LIBRARY = {
+    "nolie01_truth_pulse": ("minimal suspense pulse ambient", 45, 180),
+    "nolie01_truth_strings": ("gentle cinematic tension strings", 45, 180),
+    "nolie01_truth_release": ("warm hopeful ambient piano", 45, 180),
+}
 # One-shots whose recording holds more than one event: keep only the first. heartbeat's 2nd
 # lub-dub sits 2.5 s in, so every cue fired a stray beat wherever that happened to land.
 CUT_SEC = {"heartbeat": 1.0}
@@ -77,13 +82,13 @@ BED_LUFS = -24  # beds sit under the voice
 HIT_LUFS = -14  # one-shots punch at voice level
 
 
-def _finish(raw: Path, out: Path, bed: bool, cut: float | None = None) -> None:
+def _finish(raw: Path, out: Path, bed: bool, cut: float | None = None, lufs: float | None = None) -> None:
     """Normalise loudness so every clip mixes predictably; one-shots get leading silence trimmed
     so a cue lands exactly on its word, and `cut` keeps only the first `cut` seconds (faded)."""
     trim = [] if bed else ["silenceremove=start_periods=1:start_threshold=-45dB"]
     if cut:
         trim += [f"atrim=0:{cut}", f"afade=t=out:st={cut - CUT_FADE_SEC}:d={CUT_FADE_SEC}"]
-    af = ",".join(trim + [f"loudnorm=I={BED_LUFS if bed else HIT_LUFS}:TP=-1.5"])
+    af = ",".join(trim + [f"loudnorm=I={lufs if lufs is not None else (BED_LUFS if bed else HIT_LUFS)}:TP=-1.5"])
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(raw), "-af", af, "-ar", "48000", "-ac", "2", "-b:a", "192k", str(out)], check=True)
 
 
@@ -152,5 +157,36 @@ def ensure(public_dir: Path, names: list[str] | None = None) -> dict:
         if name in CUT_SEC:
             credits[name]["cut"] = CUT_SEC[name]
         print(f"  ♪ {name}: {best['name'][:50]} by {best['username']} ({best['duration']:.0f}s)")
+        credits_path.write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf-8")
+    return credits
+
+
+def ensure_music(public_dir: Path, names: list[str] | None = None, volume_lufs: float | None = None) -> dict:
+    """Fetch CC0 score candidates into the renderer's public/music directory.
+
+    Unlike effects, music is deliberately not fetched by ``ensure`` for every episode.
+    The caller opts in with its configured candidate name.
+    """
+    out_dir = public_dir / "music"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    credits_path = out_dir / "credits.json"
+    credits = json.loads(credits_path.read_text(encoding="utf-8")) if credits_path.exists() else {}
+    for name in names or list(MUSIC_LIBRARY):
+        if name not in MUSIC_LIBRARY:
+            raise KeyError(f"unknown music candidate: {name}")
+        target = out_dir / f"{name}.mp3"
+        if target.exists() and name in credits:
+            continue
+        query, lo, hi = MUSIC_LIBRARY[name]
+        results = _search(query, lo, hi)
+        if not results:
+            raise RuntimeError(f"no CC0 music result for {name!r} ({query})")
+        best = max(results, key=_score)
+        raw = out_dir / f"{name}.download.mp3"
+        with urllib.request.urlopen(best["previews"]["preview-hq-mp3"], timeout=120) as r:
+            raw.write_bytes(r.read())
+        _finish(raw, target, bed=True, lufs=volume_lufs)
+        raw.unlink()
+        credits[name] = {k: best[k] for k in ("id", "name", "username", "url", "license", "duration")}
         credits_path.write_text(json.dumps(credits, ensure_ascii=False, indent=1), encoding="utf-8")
     return credits

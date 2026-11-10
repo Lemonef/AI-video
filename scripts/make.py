@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from pipeline import postkit, retention, sfx, versions  # noqa: E402
+from pipeline import freesound, postkit, retention, sfx, versions  # noqa: E402
 from pipeline.master import master  # noqa: E402
 from pipeline.narrate import measured_rate, narrate, needs_voicing  # noqa: E402
 from pipeline.render import render  # noqa: E402
@@ -59,7 +59,8 @@ def main() -> None:
         episode["voice"] = args.voice
     engine = get_engine(episode.get("engine", "edge"))
     episode["take"] = engine.whole_take
-    public = ROOT / "public"
+    # jaab3d compositions are rendered with their isolated public directory.
+    public = ROOT / ("public3d" if episode.get("style") == "jaab3d" else "public")
     story = episode.get("seriesSlug", "ghost" if args.episode in ("ep01", "ep02", "ep03") else args.episode)
     release_episode = episode.get("releaseEpisode", args.episode)
     if any(Path(part).name != part or part in (".", "..") for part in (story, release_episode)):
@@ -82,7 +83,10 @@ def main() -> None:
     if not retention.report(retention.check(episode, timing)) and not args.allow_retention and not args.no_render:
         raise SystemExit("retention lint failed: fix the episode (or pass --allow-retention on purpose)")
     print("[2/4] sound effects")
-    sfx.ensure(public)
+    sfx.ensure(public, episode.get("mix", {}).get("realSfx") or None)
+    music = episode.get("mix", {}).get("music")
+    if music:
+        freesound.ensure_music(public, [music["name"]], music.get("volume_lufs"))
     if args.no_render:
         return
     # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.

@@ -3,11 +3,13 @@ import React from "react";
 import { Composition, registerRoot } from "remotion";
 import { Smoke } from "./Smoke";
 import { Mood01, MOOD01_FRAMES, FPS } from "./Mood01";
+import { Nolie01, nolieFrames } from "./Nolie01";
 
 const Root: React.FC = () => (
   <>
     <Composition id="Smoke" component={Smoke} durationInFrames={30} fps={30} width={1080} height={1920} />
     <Composition id="Mood01" component={Mood01} durationInFrames={MOOD01_FRAMES} fps={FPS} width={1080} height={1920} />
+    <Composition id="Nolie01" component={Nolie01} durationInFrames={1} fps={FPS} width={1080} height={1920} calculateMetadata={({props}) => ({durationInFrames: nolieFrames((props as {episode?: {timing?: Record<string, {duration: number; cues: []}>}}).episode?.timing ?? {})})} />
   </>
 );
 registerRoot(Root);
