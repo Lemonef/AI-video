@@ -179,6 +179,9 @@ def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
     if engine.name == "elevenlabs":
         voice_key = _key(voice_key, episode.get("voiceModel", ""),
                          json.dumps(episode.get("voiceSettings", {}), sort_keys=True))
+    # chunk size changes what the model hears, so it is part of the voice cache key (single source:
+    # needs_voicing and _narrate_take must agree, or a "cached" take silently spends a TTS request)
+    voice_key = _key(voice_key, str(int(episode.get("voiceChunkLines", TAKE_CHUNK_LINES))))
     return lines, script, voice_key
 
 
@@ -309,7 +312,6 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
     speed = float(episode.get("tempo", 1.0))
     chunk_lines = int(episode.get("voiceChunkLines", TAKE_CHUNK_LINES))
     max_pause = float(episode.get("maxPauseSec", MAX_LINE_PAUSE_SEC))
-    voice_key = _key(voice_key, str(chunk_lines))
     key = _key(voice_key, str(speed))
     raw = ep_dir / "take.raw.mp3"
     take = ep_dir / "take.mp3"
