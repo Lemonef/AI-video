@@ -20,6 +20,17 @@ from pipeline.render import render  # noqa: E402
 from pipeline.tts import get_engine  # noqa: E402
 
 
+def ensure_sound(episode: dict, public: Path) -> None:
+    mix = episode.get("mix", {})
+    if mix.get("real"):
+        freesound.ensure(public, mix.get("realSfx") or None)
+    else:
+        sfx.ensure(public)
+    music = mix.get("music")
+    if music:
+        freesound.ensure_music(public, [music["name"]], music.get("volume_lufs"))
+
+
 def story_folder(final_root: Path, slug: str) -> str:
     """Series folders are numbered by release order (03-lift-ex) while episodes carry the bare slug.
 
@@ -83,10 +94,7 @@ def main() -> None:
     if not retention.report(retention.check(episode, timing)) and not args.allow_retention and not args.no_render:
         raise SystemExit("retention lint failed: fix the episode (or pass --allow-retention on purpose)")
     print("[2/4] sound effects")
-    sfx.ensure(public, episode.get("mix", {}).get("realSfx") or None)
-    music = episode.get("mix", {}).get("music")
-    if music:
-        freesound.ensure_music(public, [music["name"]], music.get("volume_lufs"))
+    ensure_sound(episode, public)
     if args.no_render:
         return
     # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
