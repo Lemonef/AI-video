@@ -74,6 +74,11 @@ MUSIC_LIBRARY = {
     "nolie01_truth_strings": ("gentle cinematic tension strings", 45, 180),
     "nolie01_truth_release": ("warm hopeful ambient piano", 45, 180),
 }
+
+# Hand-checked CC0 id wins over search. One-line comment per entry: # <vibe>, CC0, <duration> s, covers <reel length>
+MUSIC_PINNED = {
+    "nolie01_truth_pulse": 819108,  # soft slow piano, CC0, 88.6 s, covers the ~85 s reel
+}
 # One-shots whose recording holds more than one event: keep only the first. heartbeat's 2nd
 # lub-dub sits 2.5 s in, so every cue fired a stray beat wherever that happened to land.
 CUT_SEC = {"heartbeat": 1.0}
@@ -175,13 +180,18 @@ def ensure_music(public_dir: Path, names: list[str] | None = None, volume_lufs: 
         if name not in MUSIC_LIBRARY:
             raise KeyError(f"unknown music candidate: {name}")
         target = out_dir / f"{name}.mp3"
-        if target.exists() and name in credits:
+        pinned = MUSIC_PINNED.get(name)
+        fresh = name in credits and target.exists() and (pinned is None or credits[name].get("id") == pinned)
+        if fresh:
             continue
-        query, lo, hi = MUSIC_LIBRARY[name]
-        results = _search(query, lo, hi)
-        if not results:
-            raise RuntimeError(f"no CC0 music result for {name!r} ({query})")
-        best = max(results, key=_score)
+        if pinned:
+            best = _sound(pinned)
+        else:
+            query, lo, hi = MUSIC_LIBRARY[name]
+            results = _search(query, lo, hi)
+            if not results:
+                raise RuntimeError(f"no CC0 music result for {name!r} ({query})")
+            best = max(results, key=_score)
         raw = out_dir / f"{name}.download.mp3"
         with urllib.request.urlopen(best["previews"]["preview-hq-mp3"], timeout=120) as r:
             raw.write_bytes(r.read())
