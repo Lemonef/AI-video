@@ -51,6 +51,21 @@ const angles: Record<string, Shot[]> = {
   crisis: angle({pos: [-4, 3, 10], look: [0, 1.1, 0], fov: 46}, {pos: [-1, 2.1, 5.5], look: [0, 1.1, 0], fov: 55}),
   choice: angle({pos: [0, 1.8, 4.6], look: [0, 1.15, 0], fov: 56}), action: angle({pos: [0, 8, 11], look: [0, 0, 0], fov: 48}),
   payoff: angle({pos: [0, 2.3, 6], look: [0, 1.1, 0], fov: 50}), resolution: angle({pos: [0, 2.4, 7], look: [0, 1.2, 0], fov: 48}),
+  marketWide: angle({pos: [-7, 3.8, 12], look: [0, 1.2, 0], fov: 39}), marketClose: angle({pos: [-1.8, 2.1, 4.8], look: [0, 1.3, 0], fov: 57}),
+  costWide: angle({pos: [7, 3.4, 12], look: [0.5, 1.25, 0], fov: 40}), costOverShoulder: angle({pos: [2.8, 2.15, 5.3], look: [0, 1.35, 0], fov: 55}),
+  ruleWide: angle({pos: [-4.8, 3.3, 9], look: [0, 1.35, 0], fov: 43}), ruleClose: angle({pos: [0.8, 1.9, 4.1], look: [0, 1.45, 0], fov: 60}),
+  heartWide: angle({pos: [-5.5, 3.1, 9.5], look: [0.7, 1.05, 0], fov: 44}), heartOverShoulder: angle({pos: [-1.2, 1.75, 4.2], look: [1.65, 1.05, -0.8], fov: 58}),
+  crisisWide: angle({pos: [-7, 4.5, 13], look: [0, 1, 0], fov: 40}), crisisClose: angle({pos: [1.7, 1.9, 4.5], look: [1.9, 1.05, -0.8], fov: 58}),
+  choiceWide: angle({pos: [-5.2, 3.1, 9], look: [0.8, 1.05, 0], fov: 44}), choiceOverShoulder: angle({pos: [-1.1, 1.75, 4], look: [1.8, 1.05, -0.8], fov: 60}),
+  actionWide: angle({pos: [-7, 7, 12], look: [0, 0.7, 0], fov: 42}), actionClose: angle({pos: [-2, 2.1, 5.2], look: [0.6, 1.15, 0], fov: 55}),
+  payoffWide: angle({pos: [-5.5, 3.5, 10], look: [0.8, 1, 0], fov: 42}), payoffClose: angle({pos: [1.4, 1.85, 4.3], look: [1.6, 1.05, -0.8], fov: 59}),
+  resolutionWide: angle({pos: [-6.5, 3.6, 11], look: [0.7, 1.1, 0], fov: 42}), resolutionOverShoulder: angle({pos: [-1.2, 1.9, 4.4], look: [1.8, 1.05, -0.8], fov: 58}), resolutionClose: angle({pos: [1.1, 1.85, 4], look: [1.8, 1.1, -0.8], fov: 62}),
+};
+const angleNames: Record<string, string[]> = {
+  hook: ["hook"], market: ["market", "marketWide", "marketClose"], cost: ["cost", "costWide", "costOverShoulder"],
+  rule: ["rule", "ruleWide", "ruleClose"], heart: ["heart", "heartWide", "heartOverShoulder"], crisis: ["crisis", "crisisWide", "crisisClose"],
+  choice: ["choice", "choiceWide", "choiceOverShoulder"], action: ["action", "actionWide", "actionClose"], payoff: ["payoff", "payoffWide", "payoffClose"],
+  resolution: ["resolution", "resolutionWide", "resolutionOverShoulder", "resolutionClose"],
 };
 
 const CameraRig: React.FC<{pose: ReturnType<typeof solveCamera>}> = ({pose}) => {
@@ -59,9 +74,13 @@ const CameraRig: React.FC<{pose: ReturnType<typeof solveCamera>}> = ({pose}) => 
   return null;
 };
 
-const World: React.FC<{id: string; local: number; frame: number}> = ({id, local, frame}) => {
+const World: React.FC<{id: string; local: number; duration: number; frame: number}> = ({id, local, duration, frame}) => {
   const rainy = ["crisis", "choice", "action", "payoff"].includes(id);
-  const camera = solveCamera(angles[id] ?? angles.hook, Math.round(local * FPS));
+  const marks = episode.scenes.find((scene) => scene.id === id)?.shots?.map((shot) => shot.at).sort((a, b) => a - b) ?? [0];
+  const shotIndex = Math.max(0, marks.filter((at) => at <= local).length - 1);
+  const shotStart = marks[shotIndex] ?? 0;
+  const angleName = angleNames[id]?.[shotIndex] ?? angleNames[id]?.[0] ?? "hook";
+  const camera = solveCamera(angles[angleName] ?? angles.hook, Math.round((local - shotStart) * duration * FPS));
   const kid = id === "heart" ? NID : PLOY;
   return <ThreeCanvas width={1080} height={1920} camera={{position: camera.pos, fov: camera.fov}} onCreated={({gl}) => { gl.toneMapping = THREE.NeutralToneMapping; }}>
     <CameraRig pose={camera} />
@@ -77,7 +96,7 @@ export const Nolie01: React.FC<Props> = ({episode: input, audio = true}) => {
   const current = spans.find((span) => t >= span.start && t < span.start + span.duration) ?? spans[spans.length - 1]!;
   const local = Math.max(0, Math.min(1, (t - current.start) / Math.max(current.duration, 0.01)));
   const last = spans[spans.length - 1]!; const voiceEnd = last.start + last.duration; const mix = episode.mix.music as unknown as MusicMix;
-  return <AbsoluteFill style={{background: "#101827"}}><World id={current.id} local={local} frame={frame} />
+  return <AbsoluteFill style={{background: "#101827"}}><World id={current.id} local={local} duration={current.duration} frame={frame} />
     {t < 2.6 ? <div style={{position:"absolute",top:240,left:70,right:70,textAlign:"center",fontFamily:"Prompt, sans-serif",fontWeight:900,fontSize:76,lineHeight:1.12,color:"#fff",textShadow:"0 6px 20px #000"}}>ทั้งกรุงเทพ<br /><span style={{color:"#ffd35c"}}>โกหกไม่ได้?</span></div> : null}
     <div style={{position:"absolute",top:105,left:55,padding:"12px 22px",borderRadius:999,background:"rgba(8,14,26,.72)",color:"#fff",fontFamily:"Prompt, sans-serif",fontWeight:700,fontSize:30}}>{current.id === "rule" ? "กฎ: โกหกได้ 1 ครั้ง" : "เรื่องจ้าบ"}</div>
     <Captions2 cues={current.cues} t={Math.max(0, t - current.start)} />
