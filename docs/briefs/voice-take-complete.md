@@ -1,5 +1,5 @@
 ---json
-{"id":"voice-take-complete","type":"normal","risk":"medium","repo":"D:/AI-video-nolie01","gates":["python tests/gates/voice_take_complete.py"],"protected":["tests/**","conftest.py","**/conftest.py","pytest.ini","pyproject.toml","setup.cfg"],"context_files":["scripts/pipeline/narrate.py","scripts/pipeline/media.py","scripts/pipeline/tts/gemini_engine.py"]}
+{"id":"voice-take-complete","type":"normal","risk":"low","repo":"D:/AI-video-nolie01","gates":["python tests/gates/voice_take_complete.py"],"protected":["tests/**","conftest.py","**/conftest.py","pytest.ini","pyproject.toml","setup.cfg"],"context_files":["scripts/pipeline/narrate.py","scripts/pipeline/media.py","scripts/pipeline/tts/gemini_engine.py"]}
 ---
 # Brief: whole-take voice must hold every line, with no long dead air
 
