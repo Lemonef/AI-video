@@ -1,10 +1,10 @@
 ---json
-{"id": "lift03-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/v7/FloodEscape.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_sets.py"]}
+{"id": "lift03-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/**", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v2/cast.ts", "engine/legacy/v7/FloodEscape.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_sets.py"]}
 ---
 # Goal
 
 Part 3 (finale) of the original Thai rom-com "Stuck in a lift with my ex" (`docs/episodes/lift03/lift03-beat-sheet.md`)
-needs five new background sets. Parts 1-2 sets live in `src/v7/Lift.tsx`. Add the new five in the
+needs five new background sets. Parts 1-2 sets live in `engine/legacy/v7/Lift.tsx`. Add the new five in the
 same file and the same flat-vector style, reusing its shared pieces (`LiftInterior`, `Lobby`, `Cast`,
 `Phone`, `CatPhone`, `Speaker`, `Mops`, `Chair`, `Hand`, `DeskPhone`, `SnackBag`, `Glow`, `Darkness`,
 `label`, `mix`, `phase`). Each set is one `React.FC<EnvProps>` that draws the set AND its actors;
@@ -17,13 +17,13 @@ y 1300.
 
 Work only inside your current working directory (a throwaway worktree).
 
-1. `src/v7/Lift.tsx`: add the five exported sets below (names are fixed by the contract test).
-2. `src/v5/Forest.tsx`: import them and register them in the `ENV5` map, on the existing lift line.
-3. `src/v7/light.tsx`: one `CAST_LIGHT` entry per new bg id, beside the other lift entries.
+1. `engine/legacy/v7/Lift.tsx`: add the five exported sets below (names are fixed by the contract test).
+2. `engine/legacy/v5/Forest.tsx`: import them and register them in the `ENV5` map, on the existing lift line.
+3. `engine/legacy/v7/light.tsx`: one `CAST_LIGHT` entry per new bg id, beside the other lift entries.
 
-Change nothing else. Do not touch `tests/` (protected contract), `episodes/` or `src/v2/` (cast looks).
+Change nothing else. Do not touch `tests/` (protected contract), `episodes/` or `engine/legacy/v2/` (cast looks).
 
-# Characters (looks already exist in `src/v2/cast.ts`, pass via `who`)
+# Characters (looks already exist in `engine/legacy/v2/cast.ts`, pass via `who`)
 
 - default (no `who`): จ๊าบ, the lead.
 - `fon`: แพรว, his ex. Cream blouse (`#E7E1D6`), long hair.

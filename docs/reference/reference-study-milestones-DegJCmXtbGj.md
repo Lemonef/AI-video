@@ -122,7 +122,7 @@ All values below use the same105 synchronized samples at270x480. MAE lower is cl
 | skill-creator initializer/quick_validate | reusable skill creation/validation; installed copy in Codex skills |
 | Local HTML video player | synchronized private comparison,frame stepping,slow motion,audio switch,review notes |
 
-Project code: `src/compositions/ReferenceStudy/{shots.ts,FidelityScenes.tsx,index.tsx,calibration.json,captions.json}`. Legacy initial vector components remain in `Stages.tsx` for history/type compatibility. Utilities in `tools/episode/reference_study_review.py`, `tools/episode/calibrate_reference_camera.py`, `tools/episode/build_reference_sound.py`, `tools/episode/build_reference_player.py`.
+Project code: `engine/compositions/ReferenceStudy/{shots.ts,FidelityScenes.tsx,index.tsx,calibration.json,captions.json}`. Legacy initial vector components remain in `Stages.tsx` for history/type compatibility. Utilities in `tools/episode/reference_study_review.py`, `tools/episode/calibrate_reference_camera.py`, `tools/episode/build_reference_sound.py`, `tools/episode/build_reference_player.py`.
 
 Skill canonical home: `D:/second-brain/skills/reference-animation-rebuild/`; installed copy: `C:/Users/user/.codex/skills/reference-animation-rebuild/`. Future episode checklist is the skill's `references/episode-release-checklist.md`; create an evidence-filled per-episode review, not a permanently pre-checked template.
 
@@ -159,10 +159,10 @@ Skill canonical home: `D:/second-brain/skills/reference-animation-rebuild/`; ins
 ## Build/review commands used
 
 ```powershell
-npx remotion render src/index.ts ReferenceStudy out/drafts/reference-study/DegJCmXtbGj/practice-v3.mp4 --crf=18 --concurrency=4
-npx remotion render src/index.ts ReferenceAssisted out/drafts/reference-study/DegJCmXtbGj/practice-v5-calibrated-preview.mp4 --scale=0.5 --crf=20 --concurrency=4
+npx remotion render engine/index.ts ReferenceStudy out/drafts/reference-study/DegJCmXtbGj/practice-v3.mp4 --crf=18 --concurrency=4
+npx remotion render engine/index.ts ReferenceAssisted out/drafts/reference-study/DegJCmXtbGj/practice-v5-calibrated-preview.mp4 --scale=0.5 --crf=20 --concurrency=4
 python tools/episode/reference_study_review.py --source out/drafts/reference-study/DegJCmXtbGj/source.mp4 --render out/drafts/reference-study/DegJCmXtbGj/practice-v5-calibrated-preview.mp4 --baseline out/drafts/reference-study/DegJCmXtbGj/practice-v4-assisted-preview.mp4 --shots out/drafts/reference-study/DegJCmXtbGj/shot-review.json --out out/drafts/reference-study/DegJCmXtbGj/review-v5
-python tools/episode/calibrate_reference_camera.py --source out/drafts/reference-study/DegJCmXtbGj/source.mp4 --shots out/drafts/reference-study/DegJCmXtbGj/shot-review.json --plates public/reference-study --out src/compositions/ReferenceStudy/calibration.json --stride 10
+python tools/episode/calibrate_reference_camera.py --source out/drafts/reference-study/DegJCmXtbGj/source.mp4 --shots out/drafts/reference-study/DegJCmXtbGj/shot-review.json --plates public/reference-study --out engine/compositions/ReferenceStudy/calibration.json --stride 10
 .venv/Scripts/python.exe tools/episode/build_reference_sound.py --out out/drafts/reference-study/DegJCmXtbGj/sound-v3
 python tools/episode/build_reference_player.py --dir out/drafts/reference-study/DegJCmXtbGj --video practice-v3-mastered.mp4 --out compare-v3.html
 npx tsc --noEmit -p .

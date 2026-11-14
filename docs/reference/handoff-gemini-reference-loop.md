@@ -6,7 +6,7 @@ Agent: Gemini CLI. Private study only, never posted. Do not touch `episodes/`, `
 - `docs/reference/reference-study-milestones-DegJCmXtbGj.md` (ledger: open "Master continuation checklist", scorecard, lessons, commands)
 - `D:\second-brain\memory\live-handoff.md` (latest: v10 preview, v11 pose/arm tests started)
 - `D:\second-brain\skills\reference-animation-rebuild\SKILL.md`
-- Source: `out/drafts/reference-study/DegJCmXtbGj/source.mp4`; shots: `.../shot-review.json`; code: `src/compositions/ReferenceStudy/`
+- Source: `out/drafts/reference-study/DegJCmXtbGj/source.mp4`; shots: `.../shot-review.json`; code: `engine/compositions/ReferenceStudy/`
 
 ## The loop (one shot at a time, worst shot first)
 1. **Pick** the shot with the highest MAE in the latest review output (run `python tools/episode/reference_study_review.py ...` per the ledger commands, `--baseline` = the previous accepted render).

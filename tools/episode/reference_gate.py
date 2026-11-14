@@ -112,7 +112,7 @@ def render(shot, out):
     if not npx:
         fail('npx not found on PATH')
     out.parent.mkdir(parents=True, exist_ok=True)
-    run = subprocess.run([npx, 'remotion', 'render', 'src/index.ts', COMPOSITION, str(out),
+    run = subprocess.run([npx, 'remotion', 'render', 'engine/index.ts', COMPOSITION, str(out),
                           f"--frames={s['start']}-{s['end']-1}", '--overwrite', *RENDER_ARGS],
                          cwd=REPO, stdin=subprocess.DEVNULL, capture_output=True, text=True,
                          env={**os.environ, **RENDER_ENV})

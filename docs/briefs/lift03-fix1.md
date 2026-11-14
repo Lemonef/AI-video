@@ -1,5 +1,5 @@
 ---json
-{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/cast.ts", "src/v2/ui.tsx", "src/v2/Forest.tsx", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v7/FloodEscape.tsx", "src/v2/Character.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
+{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/cast.ts", "engine/legacy/v2/ui.tsx", "engine/legacy/v2/Forest.tsx", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v7/FloodEscape.tsx", "engine/legacy/v2/Character.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
 ---
 # Goal
 
@@ -8,11 +8,11 @@ the existing flat-vector style. Frame 1080x1920; keep faces and key props above 
 
 # Fixes
 
-1. **Hand helper (`src/v2/Character.tsx`).** Add and export `handAt(pose, side)` returning the hand
+1. **Hand helper (`engine/legacy/v2/Character.tsx`).** Add and export `handAt(pose, side)` returning the hand
    point `{x, y}` in the character's local (unscaled) coordinates for a named pose and `'l' | 'r'`,
    using the SAME maths and constants as `<Limb>` and `torchLens()` (shoulder position, `UPPER_ARM`,
    `FOREARM`, the pose's `[shoulder, elbow]` angles). Change nothing else in that file. In
-   `src/v7/Lift.tsx` add a small wrapper that maps it through an `Actor`'s `x`, `y`, `s` (and the
+   `engine/legacy/v7/Lift.tsx` add a small wrapper that maps it through an `Actor`'s `x`, `y`, `s` (and the
    mirror that `turn` < 0 applies, if the Actor flips) so a prop can be placed in a hand.
 
 2. **No crossed arms.** The `armsCrossed` pose reads as a weird X on the chest. In `LiftAwkward`,
@@ -48,7 +48,7 @@ the existing flat-vector style. Frame 1080x1920; keep faces and key props above 
 
 - Lighting as the other lift sets: lit colours, `Darkness` before actors, every glow has a source.
 - SVG ids prefixed `lift-<bg>-`. No new text in frame. No new dependencies. Do not render.
-- Do not edit tests, episodes, the cast looks (`src/v2/cast.ts`) or the pose table.
+- Do not edit tests, episodes, the cast looks (`engine/legacy/v2/cast.ts`) or the pose table.
 - If an API you need does not exist, STOP and report instead of editing protected files.
 
 # Done when

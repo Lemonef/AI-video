@@ -196,7 +196,7 @@ def snap_to_breath(t: float, pauses: list[tuple[float, float]]) -> float:
 
 def word_start(say: str, word: str, words: list[Word], speech: list[float] | None) -> float | None:
     """Seconds into the clip where `word` begins: from Whisper's words when present (matched on
-    joined letters, as src/lib/cueAt.ts does), else by its letter position across the spoken span."""
+    joined letters, as engine/lib/cueAt.ts does), else by its letter position across the spoken span."""
     target = _norm(word)
     if words:
         joined, starts = "", []
@@ -324,7 +324,7 @@ def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: P
         clip_words = words_in(words, start, end)
         speech = None if words else speech_span(start, end, pauses)
         cue_times: dict[str, float] = {}
-        if speech:  # word cues are placed by letter position across the spoken part (see src/lib/cueAt.ts)...
+        if speech:  # word cues are placed by letter position across the spoken part (see engine/lib/cueAt.ts)...
             # ...refined: a word that follows a breath starts where that breath ends
             clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
             cue_times = {w: snap_to_breath(t, clip_pauses) for w in cue_words(scene) if (t := word_start(scene["say"], w, [], speech)) is not None}

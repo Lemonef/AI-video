@@ -1,9 +1,9 @@
 ---json
-{"id": "lift02-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json", "src/v5/**", "src/v7/light.tsx"], "context_files": ["src/v7/Lift.tsx", "docs/briefs/lift02-sets.md"]}
+{"id": "lift02-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/**", "engine/types.ts", "tsconfig.json", "engine/legacy/v5/**", "engine/legacy/v7/light.tsx"], "context_files": ["engine/legacy/v7/Lift.tsx", "docs/briefs/lift02-sets.md"]}
 ---
 # Goal
 
-Fix round 1 on two Part 2 sets in `src/v7/Lift.tsx`, found by reading rendered stills of the draft.
+Fix round 1 on two Part 2 sets in `engine/legacy/v7/Lift.tsx`, found by reading rendered stills of the draft.
 Edit ONLY the bodies of `LiftRing` and `LobbyPeak`. Change nothing else in the file or the repo.
 
 Frame is 1080x1920. Captions cover about y 1350-1700.

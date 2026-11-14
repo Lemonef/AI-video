@@ -1,7 +1,7 @@
 {
   "_why": "Canonical list for the layout guard. ARCHITECTURE.md '## Folders' must list exactly these dirs; tests/test_architecture.py enforces it.",
   "top_level_dirs": {
-    "src": {"depth": 5, "ext": [".ts", ".tsx", ".json", ".css", ".svg"]},
+    "engine": {"depth": 5, "ext": [".ts", ".tsx", ".json", ".css", ".svg"]},
     "episodes": {"depth": 3, "ext": [".json"]},
     "public": {"depth": 4, "ext": null},
     "tools": {"depth": 4, "ext": [".py"]},
@@ -11,7 +11,7 @@
   "top_level_files": ["ARCHITECTURE.md", "README.md", "package.json", "package-lock.json", "tsconfig.json", "remotion.config.ts", ".gitignore"],
   "docs_loose_ext": [".md", ".txt"],
   "forbidden_src_top_prefixes": ["v", "jaab"],
-  "legacy_src_tops": ["v2", "v5", "v7"],
-  "_note_legacy": "Frozen list: pre-existing per-version folders awaiting the separate src/ restructure PR (plan sec 6). Never add to it; shrink it as they move.",
+  "legacy_src_tops": [],
+  "_note_legacy": "Frozen list: pre-existing per-version folders moved under engine/legacy/ (restructure phase 3), so nothing is exempt at the engine/ top any more. Never add to it.",
   "_note_depth": "depth = path parts of a tracked file incl. top dir. docs/episodes/<id>/x.md = 4 (the only 4-deep docs area); tools/episode/x.py = 3."
 }

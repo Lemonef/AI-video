@@ -5,7 +5,7 @@ import subprocess
 from pathlib import Path
 
 COMPOSITION = "Episode"
-ENTRY = "src/index.ts"
+ENTRY = "engine/index.ts"
 # Upload master: TikTok recommends 1080p/1440p/4K and re-encodes everything, so give it the cleanest
 # source we can. The art is vector, so 4/3 scale renders a native 1440x2560 (not an upscale).
 UPLOAD_SCALE = 4 / 3

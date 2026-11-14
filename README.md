@@ -26,7 +26,7 @@ Preview while editing: `npm run studio` (opens ep01 with estimated timing).
 
 ```
 episodes/        one JSON per episode (ep01 = v1, the current release)   archive/ = drafts
-src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
+engine/          Remotion code: compositions/, components/, legacy/v2/ (rig, forest, ui, sound), legacy/v5/ (forest art), lib/ (pure logic)
 tools/           make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
 out/final/epNN/  what gets posted, one folder per episode: video.mp4, cover.png, post.txt, script.md
@@ -52,11 +52,11 @@ Requires Node 18+, Python 3.11+, ffmpeg on PATH. Run `make.py` with the venv's P
 
 | Question | Go to |
 |---|---|
-| What fields does an episode have? | `src/types.ts` (`Scene`, `CastMember`, `BubbleItem`) |
-| Which characters exist / add one | `src/registry/cast.ts` |
-| Which backgrounds and props exist / add one | `src/registry/backgrounds.tsx`, `src/registry/props.tsx` |
-| Colours, safe zones, layout tokens | `src/lib/tokens.ts` |
-| How a scene is assembled | `src/compositions/Scene/index.tsx` |
+| What fields does an episode have? | `engine/types.ts` (`Scene`, `CastMember`, `BubbleItem`) |
+| Which characters exist / add one | `engine/registry/cast.ts` |
+| Which backgrounds and props exist / add one | `engine/registry/backgrounds.tsx`, `engine/registry/props.tsx` |
+| Colours, safe zones, layout tokens | `engine/lib/tokens.ts` |
+| How a scene is assembled | `engine/compositions/Scene/index.tsx` |
 | How captions are timed | `tools/pipeline/captions.py` (tested in `tests/`) |
 | Add a TTS engine (Google, F5-TTS-THAI…) | `tools/pipeline/tts/__init__.py` + one new engine file |
 | Ideas mined from references | `docs/references.md` |

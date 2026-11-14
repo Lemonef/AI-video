@@ -40,10 +40,10 @@ def test_docs_top_level_is_loose_guides_only():
 
 
 def test_src_top_has_no_version_or_style_folders():
-    tops = {p.parts[1] for p in tracked() if p.parts[0] == "src" and len(p.parts) > 2}
+    tops = {p.parts[1] for p in tracked() if p.parts[0] == "engine" and len(p.parts) > 2}
     legacy = set(SPEC["legacy_src_tops"])
     bad = [t for t in tops - legacy for pre in SPEC["forbidden_src_top_prefixes"] if re.fullmatch(rf"{pre}\d*\w*", t) and re.search(r"\d", t)]
-    assert not bad, f"per-version/style folders at src top: {bad}"
+    assert not bad, f"per-version/style folders at engine top: {bad}"
 
 
 def test_architecture_md_lists_every_declared_dir():
@@ -54,7 +54,7 @@ def test_architecture_md_lists_every_declared_dir():
 
 def test_legacy_src_entries_still_exist():
     # the frozen list must shrink as folders move; a stale entry hides a re-added one
-    tops = {p.parts[1] for p in tracked() if p.parts[0] == "src" and len(p.parts) > 2}
+    tops = {p.parts[1] for p in tracked() if p.parts[0] == "engine" and len(p.parts) > 2}
     stale = set(SPEC["legacy_src_tops"]) - tops
     assert not stale, f"remove from legacy_src_tops (already moved): {stale}"
 

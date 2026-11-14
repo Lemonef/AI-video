@@ -43,9 +43,9 @@ Status: DRAFT for owner approval. Standalone weird-comedy short, part one of one
 | 5 | `takrutRoomCoinFlood` | new | บูม | “คราวนี้เหรียญยี่สิบห้าสตางค์...” | 9 |
 | 6 | `takrutRoomCoinFlood` | new | บูม | “บูมโผล่มาได้แค่หน้า...” | 7 |
 | 7 | `takrutRoomReset` | new | บูม | “ทุกอย่างหายวับ...” | 7 |
-| 8 | `storeInside` | existing (`src/v7/Store.tsx`) | บูม, พนักงาน | “เขาเลยกำกำไรทั้งหมด...” | 7 |
-| 9 | `storeInside` | existing (`src/v7/Store.tsx`) | บูม, พนักงาน | “เครื่องคิดเงินดังติ๊ด...” | 9 |
-| 10 | `storeInside` | existing (`src/v7/Store.tsx`) | บูม, พนักงาน | “บูมหันกลับไป...” | 6 |
+| 8 | `storeInside` | existing (`engine/legacy/v7/Store.tsx`) | บูม, พนักงาน | “เขาเลยกำกำไรทั้งหมด...” | 7 |
+| 9 | `storeInside` | existing (`engine/legacy/v7/Store.tsx`) | บูม, พนักงาน | “เครื่องคิดเงินดังติ๊ด...” | 9 |
+| 10 | `storeInside` | existing (`engine/legacy/v7/Store.tsx`) | บูม, พนักงาน | “บูมหันกลับไป...” | 6 |
 |  |  |  |  | **Estimated total** | **72** |
 
 ## New sets needed

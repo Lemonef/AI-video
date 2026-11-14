@@ -17,7 +17,7 @@ Keep: the vote (most chose B: Jaab fetched the medicine first), the porch with t
 ## 2. Camera / staging pass (every scene)
 - Jaab **never dead-centre** for more than one shot: place him on thirds (x≈360 or ≈720), vary scale (wide 0.5 / medium 0.8 / close 1.2+).
 - **A camera change every 1.5-2.5 s** using `shots` (zoom/x/y; a shot keeps its x,y fixed on screen): wide → medium → close-up. Use inserts and close-ups (door lock, eyes, hands, feet, the bulb).
-- Add new insert environments if needed (pattern: `src/v7/HouseOutside.tsx` `InsertFeetTwo`; register in `src/v5/Forest.tsx` ENV5): e.g. door-lock close-up, mum's hand, eyes close-up.
+- Add new insert environments if needed (pattern: `engine/legacy/v7/HouseOutside.tsx` `InsertFeetTwo`; register in `engine/legacy/v5/Forest.tsx` ENV5): e.g. door-lock close-up, mum's hand, eyes close-up.
 - **Replace the stiff hug** with a close-up insert (arms around a back, mum's hand) rather than two standing figures.
 - Motion in every shot: cast `keys` (turn, pose, action), `toX/toY/toScale` walks, `back` view.
 - Keep: `shadows {x, wall:true}` for the shadow test, mum `noShadow:true` everywhere, quiet beds (no rain unless on screen, drone only when tense, `mix.bedVolume` 0.4).

@@ -19,7 +19,7 @@ import sys
 
 REPO = Path(__file__).resolve().parents[1]
 STUDY_DIR = Path(os.environ.get('REFERENCE_STUDY_DIR', REPO/'out/drafts/reference-study/DegJCmXtbGj'))
-RIG = REPO/'src/compositions/ReferenceStudy/LeadPerformance.tsx'
+RIG = REPO/'engine/compositions/ReferenceStudy/LeadPerformance.tsx'
 JOINTS = ('hip', 'lk', 'la', 'rk', 'ra', 'le', 'lw', 're', 'rw')
 # Extents in head units (s = r/30), copied from the drawing in LeadPerformance:
 # head circle r=30, hat brim to x+44, hat button at y-37, ground shadow rx=32

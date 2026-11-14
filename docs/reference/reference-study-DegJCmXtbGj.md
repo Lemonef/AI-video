@@ -8,11 +8,11 @@ Reconstruct framing, cut timing, subject placement, depth, light changes, insert
 
 ## Files and validation
 
-- `src/compositions/ReferenceStudy/shots.ts`: measured frame boundaries; single timeline source.
-- `src/compositions/ReferenceStudy/Stages.tsx`: original vector sets, props and a generic practice cashier.
-- `src/compositions/ReferenceStudy/index.tsx`: camera, light and staging orchestration.
-- `src/Root.tsx`: additional `ReferenceStudy` composition only; existing Episode stays unchanged.
-- Render: `npx remotion render src/index.ts ReferenceStudy out/drafts/reference-study/DegJCmXtbGj/practice.mp4 --crf=18`.
+- `engine/compositions/ReferenceStudy/shots.ts`: measured frame boundaries; single timeline source.
+- `engine/compositions/ReferenceStudy/Stages.tsx`: original vector sets, props and a generic practice cashier.
+- `engine/compositions/ReferenceStudy/index.tsx`: camera, light and staging orchestration.
+- `engine/Root.tsx`: additional `ReferenceStudy` composition only; existing Episode stays unchanged.
+- Render: `npx remotion render engine/index.ts ReferenceStudy out/drafts/reference-study/DegJCmXtbGj/practice.mp4 --crf=18`.
 - Verify timeline continuity, render the full composition, inspect each shot and selected movement sequences, and verify the approved EP3 final's SHA-256 stays unchanged.
 
 Story upgrades and a new publishable episode follow this exercise. This task does not replace the approved Jaab identity or change EP1-3.

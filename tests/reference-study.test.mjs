@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {STUDY_SHOTS,STUDY_FRAMES,shotAt} from '../src/compositions/ReferenceStudy/shots.ts';
+import {STUDY_SHOTS,STUDY_FRAMES,shotAt} from '../engine/compositions/ReferenceStudy/shots.ts';
 
 test('private-study cuts cover every output frame exactly once',()=>{
  assert.equal(STUDY_SHOTS.length,35);

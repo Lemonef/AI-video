@@ -13,7 +13,7 @@ that never left the plate renders bit-identical.
   python tools/extend_clean_plate.py            # aisle plate, default shots
 
 Writes public/reference-study/<plate>-clean-v2.png (gitignored, like v1) and
-src/compositions/ReferenceStudy/plate-extents.json (tracked: where the
+engine/compositions/ReferenceStudy/plate-extents.json (tracked: where the
 composition places the image). Margins are measured from calibration.json, so
 a recalibrated camera only needs a re-run.
 """
@@ -27,7 +27,7 @@ import numpy as np
 
 REPO = Path(__file__).resolve().parents[1]
 STUDY = REPO/'out/drafts/reference-study/DegJCmXtbGj'
-SCENE = REPO/'src/compositions/ReferenceStudy'
+SCENE = REPO/'engine/compositions/ReferenceStudy'
 PUBLIC = REPO/'public/reference-study'
 UNITS = (270, 480)       # study plane the calibration matrices map (calibration.json coordinate_plane)
 SOURCE_PX_PER_UNIT = 4   # source.mp4 is 1080x1920

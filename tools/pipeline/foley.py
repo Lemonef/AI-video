@@ -1,7 +1,7 @@
 """v3 sound library, procedural (numpy) and licence-free, written once into public/sfx/.
 
 Beds loop seamlessly (wind, crickets, drone, rain); one-shots punctuate beats (step, click,
-heartbeat, impact, boom, riser, stinger, swish). Episodes name them; src/v2/sound.ts maps names.
+heartbeat, impact, boom, riser, stinger, swish). Episodes name them; engine/legacy/v2/sound.ts maps names.
 """
 import wave
 from pathlib import Path

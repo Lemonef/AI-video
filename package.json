@@ -3,7 +3,7 @@
   "private": true,
   "description": "Data-driven Thai 'What If' TikTok series: episode JSON -> Thai TTS -> Remotion 9:16 MP4",
   "scripts": {
-    "studio": "remotion studio src/index.ts",
+    "studio": "remotion studio engine/index.ts",
     "ep": "python tools/make.py",
     "typecheck": "tsc --noEmit"
   },

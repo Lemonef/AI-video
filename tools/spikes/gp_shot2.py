@@ -15,7 +15,7 @@ from pathlib import Path
 import bpy
 
 REPO = Path(__file__).resolve().parents[2]
-TSX = REPO/'src/compositions/ReferenceStudy/LeadPerformance.tsx'
+TSX = REPO/'engine/compositions/ReferenceStudy/LeadPerformance.tsx'
 OUT = REPO/'public/reference-study/gp-shot2'
 UNIT = 4                       # LeadPerformance draws in the 270x480 plane under scale(4)
 W, H = 270*UNIT, 480*UNIT

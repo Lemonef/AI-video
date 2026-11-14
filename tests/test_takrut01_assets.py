@@ -1,5 +1,5 @@
 """Gate for the takrut01 asset build: every bg/cast id the episode names must be registered,
-and every room still must exist at the canvas size (read from src/lib/tokens.ts)."""
+and every room still must exist at the canvas size (read from engine/lib/tokens.ts)."""
 import json
 import re
 import struct
@@ -11,7 +11,7 @@ ROOMS = ["find", "ancient", "coinflood", "reset"]
 
 
 def _canvas():
-    tokens = (ROOT / "src" / "lib" / "tokens.ts").read_text(encoding="utf-8")
+    tokens = (ROOT / "engine" / "lib" / "tokens.ts").read_text(encoding="utf-8")
     w = int(re.search(r"\bW\s*=\s*(\d+)", tokens).group(1))
     h = int(re.search(r"\bH\s*=\s*(\d+)", tokens).group(1))
     return w, h
@@ -28,14 +28,14 @@ def _registered(source, key):
 
 
 def test_every_background_is_registered():
-    forest = (ROOT / "src" / "v5" / "Forest.tsx").read_text(encoding="utf-8")
+    forest = (ROOT / "engine" / "legacy" / "v5" / "Forest.tsx").read_text(encoding="utf-8")
     bgs = {s["bg"] for s in EP["scenes"]} | {EP.get("coverBg")} - {None}
     missing = [b for b in bgs if not _registered(forest, b)]
     assert not missing, missing
 
 
 def test_every_cast_member_is_registered():
-    cast = (ROOT / "src" / "v2" / "cast.ts").read_text(encoding="utf-8")
+    cast = (ROOT / "engine" / "legacy" / "v2" / "cast.ts").read_text(encoding="utf-8")
     who = {c["who"] for s in EP["scenes"] for c in s.get("cast", [])}
     who |= {EP.get("coverCast")} - {None}
     missing = [w for w in who if not _registered(cast, w)]

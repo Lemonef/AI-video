@@ -11,7 +11,7 @@ Original fictional Thai shop comedy, written for this handoff. The Reddit-story 
 
 ## Existing assets only
 
-- Background: `storeInside`, registered in `src/v5/Forest.tsx` under **ENV5** (the handoff calls this BACKGROUNDS; ENV5 is the actual export). Its art comes from `src/v7/Store.tsx`.
+- Background: `storeInside`, registered in `engine/legacy/v5/Forest.tsx` under **ENV5** (the handoff calls this BACKGROUNDS; ENV5 is the actual export). Its art comes from `engine/legacy/v7/Store.tsx`.
 - `jaab`: จ๊าบ, the customer and viewpoint character; unchanged existing lead.
 - `runner`: ตี๋, the queue jumper; existing look recast as the owner's son. His football plan is spoken; no ball or sports uniform is required.
 - `mum`: แม่ตี๋, the cashier and shop owner; existing look recast for this standalone story. She is not Jaab's mother in this episode.
@@ -34,7 +34,7 @@ The first two seconds start directly on the queue grievance, with Tee ahead of J
 
 ## Staging and voice
 
-The existing checkout is on the left of the frame (`Counter` in `src/v7/Store.tsx`, approximately x=-20..470). Mum starts at x=230, with customers to the right. Tee moves in front of Jaab during `queue`. A cut marked ไม่ถึงนาทีต่อมา puts Tee in Mum's checkout position and Mum away from the register: this avoids inventing an unsupported handover interaction. Omitted cast members in close shots are out of frame, not departing the shop.
+The existing checkout is on the left of the frame (`Counter` in `engine/legacy/v7/Store.tsx`, approximately x=-20..470). Mum starts at x=230, with customers to the right. Tee moves in front of Jaab during `queue`. A cut marked ไม่ถึงนาทีต่อมา puts Tee in Mum's checkout position and Mum away from the register: this avoids inventing an unsupported handover interaction. Omitted cast members in close shots are out of frame, not departing the shop.
 
 Use supported idle, point, think, hold and shock poses with expression changes. A hold pose is a generic hand gesture here, not a claim that the rig carries a bottle or bag. Camera reframes alternate the shop geography, Tee's confidence, Mum's reply and Tee's reaction. No extra sound effects are required for this dialogue joke.
 
@@ -43,7 +43,7 @@ Gemini / Iapetus / `gemini-2.5-flash-preview-tts`, tempo 1.08, matching the requ
 ## Validation and next action
 
 - JSON loaded successfully with Python. All eight scene backgrounds and every scene/cover cast id resolve against ENV5 / CAST2; captions equal spoken lines.
-- Scene ids are unique; pose, expression and action values checked against `src/types.ts`; shot/key fractions checked in [0,1].
+- Scene ids are unique; pose, expression and action values checked against `engine/types.ts`; shot/key fractions checked in [0,1].
 - 585 spoken letters using the pipeline's `spoken_len`. Existing cached narration measures approximately 10.373 letters/second at tempo 1.0, yielding **52.5 seconds estimated** at 1.08 including the 0.3-second final pad. This is a planning estimate across cached takes, not a measured Iapetus performance. Claude must confirm 45–60 seconds after TTS and adjust delivery or trim the script if needed.
 - No TS typecheck needed: no TS changes. No network calls, commits, rendering or new assets in this task. `post.publishNow` is false for the review handoff.
 - Claude next: review Thai delivery, generate the take, verify actual duration and hook timing, inspect checkout geometry/occlusion and character framing, then review the continuous render and commit. Pay particular attention to the static counter being drawn behind cast: the JSON positions establish a checkout role but do not create a foreground occlusion layer.

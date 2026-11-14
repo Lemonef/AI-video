@@ -15,7 +15,7 @@ def read(rel):
 
 
 def body(name):
-    src = read('src/v7/Lift.tsx')
+    src = read('engine/legacy/v7/Lift.tsx')
     m = re.search(rf'export const {name}\b(.*?)(?=\nexport const |\Z)', src, re.S)
     assert m, name
     return m.group(1)
@@ -23,7 +23,7 @@ def body(name):
 
 def test_hand_helper_exported():
     # props in a hand must follow the arm maths, not a hand-tuned coordinate
-    assert re.search(r'export const handAt\b', read('src/v2/Character.tsx'))
+    assert re.search(r'export const handAt\b', read('engine/legacy/v2/Character.tsx'))
 
 
 def test_no_crossed_arms_in_lift_sets():
@@ -42,10 +42,10 @@ def test_doors_stopped_by_his_own_arm():
 
 
 def test_climax_set_wired():
-    assert re.search(r'export const LobbyGesture\s*:\s*React\.FC<EnvProps>', read('src/v7/Lift.tsx'))
-    assert re.search(r'\blobbyGesture\s*:\s*LobbyGesture\b', read('src/v5/Forest.tsx'))
-    assert re.search(r'^\s*lobbyGesture\s*:\s*\{', read('src/v7/light.tsx'), re.M)
-    assert 'lift-lobbyGesture' in read('src/v7/Lift.tsx')
+    assert re.search(r'export const LobbyGesture\s*:\s*React\.FC<EnvProps>', read('engine/legacy/v7/Lift.tsx'))
+    assert re.search(r'\blobbyGesture\s*:\s*LobbyGesture\b', read('engine/legacy/v5/Forest.tsx'))
+    assert re.search(r'^\s*lobbyGesture\s*:\s*\{', read('engine/legacy/v7/light.tsx'), re.M)
+    assert 'lift-lobbyGesture' in read('engine/legacy/v7/Lift.tsx')
 
 
 def test_episode_climax_uses_it():

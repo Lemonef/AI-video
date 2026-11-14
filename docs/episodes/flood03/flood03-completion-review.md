@@ -21,7 +21,7 @@ Nothing posted; no `--publish` used. Changes remain uncommitted. The requested 1
 
 ## New scene components
 
-In src/v7/FloodFinale.tsx: FloodRing, FloodRewind, FloodStall, FloodDecoy, FloodUpload, FloodCount, FloodChairSwing, FloodDoorLatch, FloodWindowSignal, FloodSearchlight, FloodArrest, FloodBatteryDie, FloodDawnChair, FloodFinale. Shared Part 2 set/rig/prop helpers are exported from FloodEscape.tsx and registered in src/v5/Forest.tsx.
+In engine/legacy/v7/FloodFinale.tsx: FloodRing, FloodRewind, FloodStall, FloodDecoy, FloodUpload, FloodCount, FloodChairSwing, FloodDoorLatch, FloodWindowSignal, FloodSearchlight, FloodArrest, FloodBatteryDie, FloodDawnChair, FloodFinale. Shared Part 2 set/rig/prop helpers are exported from FloodEscape.tsx and registered in engine/legacy/v5/Forest.tsx.
 
 ## Per-scene still review
 
@@ -47,6 +47,6 @@ In src/v7/FloodFinale.tsx: FloodRing, FloodRewind, FloodStall, FloodDecoy, Flood
 
 No human audio audition was available in this tool environment. ASR, waveform timing and loudness checks do not certify Thai pronunciation or performance; owner listening remains open. The escape/arrest is the explicit visual approximation noted above. Midpoint inspection alone does not certify every in-between animation frame.
 
-Task files: episodes/flood03.json; src/v7/FloodFinale.tsx; src/v7/FloodEscape.tsx; src/v5/Forest.tsx; tools/episode/build_flood03_aligned.py; tools/episode/check_flood03_beds.py; tools/episode/finish_flood03.py; tools/episode/review_flood03.py; tools/pipeline/narrate.py; tools/pipeline/postkit.py; tests/test_narrate_cuts.py; this review. Generated take/timing, ringtone and export/review artifacts are under public/flood03, public/sfx/floodRing.wav and out/. Existing unrelated workspace changes were preserved.
+Task files: episodes/flood03.json; engine/legacy/v7/FloodFinale.tsx; engine/legacy/v7/FloodEscape.tsx; engine/legacy/v5/Forest.tsx; tools/episode/build_flood03_aligned.py; tools/episode/check_flood03_beds.py; tools/episode/finish_flood03.py; tools/episode/review_flood03.py; tools/pipeline/narrate.py; tools/pipeline/postkit.py; tests/test_narrate_cuts.py; this review. Generated take/timing, ringtone and export/review artifacts are under public/flood03, public/sfx/floodRing.wav and out/. Existing unrelated workspace changes were preserved.
 
 A concurrent process also worked on flood03 in the shared workspace; duplicate renders were stopped and this report identifies the exact final reviewed hash.

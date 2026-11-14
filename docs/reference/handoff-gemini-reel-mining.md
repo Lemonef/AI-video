@@ -1,6 +1,6 @@
 # Handoff: deep mining of the owner's Instagram reference reels (both batches)
 
-Agent: Gemini CLI (free). Do NOT touch `src/compositions/ReferenceStudy/` or the 1:1 reference study files (another agent owns them). No installs of new packages, no social posting, no comments/DMs, no paid services.
+Agent: Gemini CLI (free). Do NOT touch `engine/compositions/ReferenceStudy/` or the 1:1 reference study files (another agent owns them). No installs of new packages, no social posting, no comments/DMs, no paid services.
 
 ## Inputs
 - Existing partial review (read first): `D:\second-brain\research\instagram-reference-library-2026-10-31.md` (29 posts) and RAW `D:\second-brain\transcripts\2026-10-31-instagram-reference-library\library.md`.

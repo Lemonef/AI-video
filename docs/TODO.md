@@ -1,7 +1,7 @@
 # TODO — the only place live status lives
 
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
-- [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `src/jaab3d/`
+- [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `engine/jaab3d/`
 - [x] mood01 built: no main character, simple end question, no A/B; 84.7 s 1080x1920
 - [x] Render path while Smart App Control blocks Remotion ffprobe: `--props='{"audio":false}' --muted`,
       cue sheet `MOOD01_AUDIO` dumped via esbuild -> ffmpeg mix -> master.py (-14.0 LUFS, TP -1.3)
@@ -49,7 +49,7 @@
    - [x] Measured gate tools/episode/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
    - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
    - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
-   - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
+   - [x] IK lib engine/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
    - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); tools/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
    - [ ] Tool trials (local, zero tokens while running)
      - [x] Free vision (Gemini 2.5 flash) for joint coords: FAILS (generic skeleton); pose description OK -> hand-marking stays
@@ -112,7 +112,7 @@
    - [ ] LAST in queue (owner 2026-11-02: "add the repo clean up at last, rn its so messy"): AI-video repo cleanup - re-check the plan against the repo as it stands then, show it, then execute
 9. [ ] Upload quality (owner 2026-11-02: "ppl say video quality is bad")
    - [x] Posted copies measured (lift ep1, 2026-11-03): TikTok 576x1024 h264 ~301 kbps + aac 128k; IG 1080x1920 ~398 kbps + audio ~49 kbps. Copies in D:/Documents/Downloads/ (Download.mp4, ig/lift-ep1-ig.mp4)
-   - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
+   - [x] Static film grain overlay (engine/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
 10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/episodes/lift02/lift02-beat-sheet.md v2
@@ -142,7 +142,7 @@
   - [ ] Retest OpenCode free builders (config ~/.config/opencode/opencode.json: NVIDIA GLM 5.3 / DeepSeek / Kimi K3, Mistral Devstral/Codestral, OpenRouter Nemotron) - first test gave empty output
   - [ ] Design tiered pipeline (plan Opus -> build Codex sol/terra/luna | OpenCode free | Antigravity -> verify other company + free legs -> escalate on gate failure) and get owner approval before building
 - [ ] Flood Part 3 finale: waits for the real Part 2 A/B count
-- [ ] Untracked draft episodes/wishes01.json + src/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
+- [ ] Untracked draft episodes/wishes01.json + engine/legacy/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
 
 
 ## CURRENT — 2026-10-31 Bangkok flood Part2
@@ -185,10 +185,10 @@
     - [x] Short crowd v8 tests, measured head paths and source-frame proportion correction (not full-film acceptance)
     - [x] Reusable reference-animation-rebuild skill created/installed; keep enriching actual techniques
   - [ ] Future-film natural Thai/prosody/edit review: vary talk/pause/action rhythm; inspect actual whole-take flow and continuous beds; use docs/episode-release-checklist.md before final
-  - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
+  - [ ] Character7 (new simple Jaab, `engine/legacy/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
   - [ ] Camera vocabulary: over-the-shoulder, from behind, POV, low/high angle, mood shot first
   - [ ] Test a ChatGPT-generated background plate (Zen saves it to `assets/`) behind the animated cast
-  - [ ] Next story (zombie store story assets exist: `src/v7/Store*.tsx`; ideas in `docs/story-ideas.md`)
+  - [ ] Next story (zombie store story assets exist: `engine/legacy/v7/Store*.tsx`; ideas in `docs/story-ideas.md`)
 - [ ] TikTok reach: appeal if flagged; else keep posting on schedule
 
 ## Working rules
@@ -219,7 +219,7 @@
 - [ ] Cover still (`remotion still`) for the TikTok thumbnail
 - [ ] Whisper re-check of the final MP4 (catch mispronounced words)
 - [ ] Evaluate official Remotion agent skills (github.com/remotion-dev/skills)
-- [ ] vitest for `src/lib/castState.ts`
+- [ ] vitest for `engine/lib/castState.ts`
 
 - 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/episodes/takrut01/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
 

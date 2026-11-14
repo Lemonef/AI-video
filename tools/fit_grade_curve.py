@@ -76,7 +76,7 @@ def main():
 
     curve = fit_curve(src_luma, our_luma, base_slope=args.base_slope)
 
-    grade_curves_path = Path(__file__).resolve().parents[1] / 'src' / 'compositions' / 'ReferenceStudy' / 'grade-curves.json'
+    grade_curves_path = Path(__file__).resolve().parents[1] / 'engine' / 'compositions' / 'ReferenceStudy' / 'grade-curves.json'
     if grade_curves_path.exists():
         table = json.loads(grade_curves_path.read_text(encoding='utf-8'))
     else:

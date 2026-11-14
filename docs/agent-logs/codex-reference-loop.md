@@ -35,7 +35,7 @@ Scope: private source-assisted picture study. Preserve episodes/, out/final/ and
 - All3 source/candidate phases inspected: wall/counter darkness closer; window still overly red. TypeScript passed.
 - Intended commit fix(study): shot09 darken phone alarm background. Git permission blocker persists; unstaged.
 
-Use npx.cmd remotion render src/index.ts ReferenceAssisted <unique-output> --frames=<start>-<inclusive-end> --scale=0.5 --crf=20 --concurrency=4.
+Use npx.cmd remotion render engine/index.ts ReferenceAssisted <unique-output> --frames=<start>-<inclusive-end> --scale=0.5 --crf=20 --concurrency=4.
 Review with python tools/episode/reference_study_review.py --source <source.mp4> --render <partial.mp4> --render-start-frame <start> --shot-ids <original-id> --baseline <accepted-full.mp4> --shots <shot-review.json> --out <unique-review-dir>.
 Five accepted distinct shots require an integrated full preview and105-sample review; never infer full-film gains from partial renders.
 

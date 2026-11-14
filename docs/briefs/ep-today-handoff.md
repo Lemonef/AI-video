@@ -10,8 +10,8 @@ Owner dropped takrut01 (story too weak). Build a NEW short instead, today.
 - Read episodes/takrut01.json and docs/episodes/takrut01/takrut01-beat-sheet.md for format and tone only.
 
 ## Build (no new art: today only)
-- Reuse ONLY backgrounds already in the BACKGROUNDS object at the end of src/v5/Forest.tsx and
-  cast already in src/v2/cast.ts. Pick the story to fit the sets we have (store, lift, house, forest...).
+- Reuse ONLY backgrounds already in the BACKGROUNDS object at the end of engine/legacy/v5/Forest.tsx and
+  cast already in engine/legacy/v2/cast.ts. Pick the story to fit the sets we have (store, lift, house, forest...).
 - Write docs/<id>-beat-sheet.md and episodes/<id>.json (same schema/style v6 as takrut01, engine
   gemini, voice Iapetus). Pick a short id like `revenge01`.
 - Check it: `python tools/tsc_in_worktree.py` style typecheck not needed (no TS change);

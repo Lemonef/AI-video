@@ -6,7 +6,7 @@ One file that says where everything goes. `tests/test_architecture.py` fails if 
 
 | Dir | Owner / purpose | Rule |
 |---|---|---|
-| `src/` | Remotion code: `compositions/`, `components/`, `lib/`, `registry/`, `characters/<name>/` | code is shared; no per-version or per-style folder at the top of `src/` (characters go under `characters/<name>/`) |
+| `engine/` | Remotion code: `compositions/`, `components/`, `lib/`, `registry/`, `characters/<name>/` | code is shared; no per-version or per-style folder at the top of `engine/` (characters go under `characters/<name>/`) |
 | `episodes/` | one `<id>.json` per episode, `archive/` for retired drafts | data only |
 | `public/` | Remotion static assets, one subdir per episode id + `shared/` | `staticFile()` resolves only here; ignored assets move via a script that writes a manifest |
 | `tools/` | `make.py`, `pipeline/`, `episode/` (per-episode one-offs), `spikes/` | python only; max 4 levels (package dirs like pipeline/tts) |
@@ -28,5 +28,5 @@ One file that says where everything goes. `tests/test_architecture.py` fails if 
 | episode beat sheet / review | `docs/episodes/<id>/` |
 | one-off episode script | `tools/episode/` |
 | shared tool | `tools/` |
-| new character | `src/characters/<name>/` |
+| new character | `engine/characters/<name>/` |
 | brief for the pipeline | `docs/briefs/` |

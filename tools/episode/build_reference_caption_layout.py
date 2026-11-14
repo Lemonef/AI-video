@@ -136,7 +136,7 @@ def main():
                            timing_uncertainty_frames=5))
     result={'provenance':'Private reference-derived OCR/inspection. Source5-frame caption sampling; exact onset, font and animation remain open. Not original Jaab dialogue.',
             'coordinate_plane':[1080,1920],'chunks':chunks}
-    target=ROOT/'src/compositions/ReferenceStudy/private-caption-layout.json'
+    target=ROOT/'engine/compositions/ReferenceStudy/private-caption-layout.json'
     target.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(f'{len(chunks)} caption chunks; {sum(c["measured"] for c in chunks)} measured layouts; timing uncertainty explicit.')
 

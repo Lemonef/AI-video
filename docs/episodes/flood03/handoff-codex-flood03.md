@@ -6,7 +6,7 @@ Agent: Codex (gpt-6.1-sol). Repo D:\AI-video. Owner is away; the parent (Claude)
 1. `docs/episodes/flood03/flood03-story.md` — the approved story, 15 scenes, exact Thai narration (`say`) and the staging/camera plan per scene. Narration text is FINAL: use it verbatim.
 2. `episodes/flood02.json` — the episode format to copy (top-level fields, `post`, `narrationDirection`, scene fields `id,bg,say,caption,cast,transition,progress,shots,beds,sfx,hits,chip,inserts...`).
 3. `docs/episodes/flood02/flood02-release-review.md`, `docs/episodes/ep03/ep03-rewrite-review.md`, `docs/cinematic-guide.md` — what the owner liked (ghost Part 3: off-centre staging, wide/medium changes, back-view depth walks with toY/toScale, motivated inserts, modest pushes) and rejected (Jaab dead-centre, stiff poses, static camera, hug that looks fake, continuous rain/noise, monster voice on a whole line).
-4. Flood scene components: `src/v5/Forest.tsx` registry line ~236 (`floodEvidence ... floodPressure`) and their implementations; reuse sets/characters (room 606, cabinet barricade, service door, rescue boat light, aunt, thugs red/green shirts as VISUALS only).
+4. Flood scene components: `engine/legacy/v5/Forest.tsx` registry line ~236 (`floodEvidence ... floodPressure`) and their implementations; reuse sets/characters (room 606, cabinet barricade, service door, rescue boat light, aunt, thugs red/green shirts as VISUALS only).
 
 ## Build
 - `episodes/flood03.json`: id `flood03`, seriesSlug `bangkok-flood`, releaseEpisode `ep03`, same voice (Gemini `gemini-2.5-flash-preview-tts`, Iapetus), tempo as Part 2 (1.104) unless the measured take needs adjustment, `narrationDirection` from the story doc. `post`: part 3, total 3, finale wording, NO question/A-B pin (see story doc "Post kit").
