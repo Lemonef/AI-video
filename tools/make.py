@@ -1,8 +1,11 @@
 """make.py — one command per episode: voice -> captions -> sfx -> render -> loudness master -> post kit.
 
-    python tools/make.py ep01              # voice (cached) + render out/ep01.mp4
+    python tools/make.py ep01              # voice (cached) + render into the video's final/
     python tools/make.py ep02 --force      # re-voice every line
-    python tools/make.py ep02 --publish    # copy the newest version into out/final/ep02/ (after closing the player)
+    python tools/make.py ep02 --publish    # copy the newest version into the video's final/ (after closing the player)
+
+Every render reads one staged public dir (tools/pipeline/stage.py): engine/shared/, the channel's
+_shared/ and the video's assets/ hardlinked at its root, checked by the staticFile gate first.
     python tools/make.py ep01 --engine edge --voice th-TH-NiwatNeural   # override the episode's engine/voice
 """
 import argparse
@@ -13,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
-from pipeline import layout, postkit, retention, sfx, versions  # noqa: E402
+from pipeline import layout, postkit, retention, sfx, stage, versions  # noqa: E402
 from pipeline.master import master  # noqa: E402
 from pipeline.narrate import measured_rate, narrate, needs_voicing  # noqa: E402
 from pipeline.render import render  # noqa: E402
@@ -44,8 +47,8 @@ def main() -> None:
     ap.add_argument("--voice", help="override the episode's voice")
     ap.add_argument("--force", action="store_true", help="re-voice every line, ignore cache")
     ap.add_argument("--no-render", action="store_true", help="voice + captions only")
-    ap.add_argument("--draft", action="store_true", help="build into out/drafts/<ep>/ without changing the published final")
-    ap.add_argument("--publish", action="store_true", help="only copy the newest version into out/final/<ep>/")
+    ap.add_argument("--draft", action="store_true", help="build into the video's draft/ without changing the published final/")
+    ap.add_argument("--publish", action="store_true", help="only copy the newest version into the video's final/")
     ap.add_argument("--allow-retention", action="store_true", help="render even if the retention lint fails (deliberate exceptions only)")
     args = ap.parse_args()
     if args.draft and args.publish:
@@ -59,45 +62,46 @@ def main() -> None:
         episode["voice"] = args.voice
     engine = get_engine(episode.get("engine", "edge"))
     episode["take"] = engine.whole_take
-    public = ROOT / "public"
-    story = episode.get("seriesSlug", "ghost" if args.episode in ("ep01", "ep02", "ep03") else args.episode)
-    release_episode = episode.get("releaseEpisode", args.episode)
-    if any(Path(part).name != part or part in (".", "..") for part in (story, release_episode)):
-        raise ValueError("release story/episode must be simple folder names")
-    final = ROOT / "out" / "final" / story_folder(ROOT / "out" / "final", story) / release_episode
+    # Layout v2: the video's own folder is the release folder, so seriesSlug/releaseEpisode no
+    # longer pick an out/final/<NN-series>/<ep>/ path (story_folder is kept for its callers).
+    assets = layout.assets_dir(ROOT, args.episode)
+    final = layout.final_dir(ROOT, args.episode)
     if args.publish:
         versions.publish(versions.latest(ROOT, args.episode), final / "video.mp4")
         print(f"done: {final / 'video.mp4'}")
         return
 
-    if needs_voicing(episode, engine, public) and not args.allow_retention:
-        rate = measured_rate(public)
+    if needs_voicing(episode, engine, assets) and not args.allow_retention:
+        rate = measured_rate(*layout.asset_roots(ROOT))
         if rate:  # free-tier requests are scarce: lint the script on estimated timing before spending one
             print(f"    pre-voice retention estimate ({rate:.1f} letters/s measured)")
             if not retention.report(retention.check(episode, retention.estimate(episode, rate))):
                 raise SystemExit("estimated timing fails the retention lint: shorten the script before spending a voice request")
     print(f"[1/4] voice ({engine.name}, {episode['voice']})")
-    timing = narrate(episode, engine, public, force=args.force)
+    timing = narrate(episode, engine, assets, force=args.force)
     print("    retention check (docs/growth-playbook.md)")
     if not retention.report(retention.check(episode, timing)) and not args.allow_retention and not args.no_render:
         raise SystemExit("retention lint failed: fix the episode (or pass --allow-retention on purpose)")
     print("[2/4] sound effects")
-    sfx.ensure(public)
+    sfx.ensure(ROOT / layout.ENGINE_SHARED)
     if args.no_render:
         return
-    # out/final/<ep>/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
-    destination = ROOT / "out" / "drafts" / args.episode if args.draft else final
+    # final/ holds only what gets posted; intermediates live in the hidden .build/ at the repo root.
+    destination = layout.draft_dir(ROOT, args.episode) if args.draft else final
     destination.mkdir(parents=True, exist_ok=True)
     out = destination / "video.mp4"
-    build = ROOT / ".build"
+    build = ROOT / layout.BUILD
     build.mkdir(parents=True, exist_ok=True)
     raw = build / f"{args.episode}.raw.mp4"
+    public_dir = stage.stage(ROOT, args.episode)
+    if stage.gate(ROOT, public_dir, args.episode):
+        raise SystemExit(f"staticFile gate: paths missing from {public_dir.relative_to(ROOT)} (see MISSING above)")
     print(f"[3/4] render -> {raw.relative_to(ROOT)}")
-    render(ROOT, episode, timing, raw)
+    render(ROOT, episode, timing, raw, public_dir)
     version = versions.new_version(ROOT, args.episode)
     print(f"[4/4] loudness master -> {version.relative_to(ROOT)} -> {out.relative_to(ROOT)}")
     master(raw, version)
-    kit = postkit.write(destination, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json")))
+    kit = postkit.write(destination, episode, postkit.remotion_still(ROOT, raw.with_suffix(".props.json"), public_dir))
     versions.publish(version, out)
     print(f"done: {out}")
     print(f"post kit: {kit}")

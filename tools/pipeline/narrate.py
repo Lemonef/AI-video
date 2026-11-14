@@ -1,4 +1,4 @@
-"""Voice an episode and write public/<ep>/timing.json: {scene_id: {audio, duration, words, cues}}.
+"""Voice an episode and write <public_dir>/<ep>/timing.json: {scene_id: {audio, duration, words, cues}}.
 
 Two modes, chosen by the engine:
 - per line (edge): each scene voiced separately, cached by text, word timings from the engine.
@@ -149,10 +149,10 @@ def needs_voicing(episode: dict, engine: TtsEngine, public_dir: Path) -> bool:
     return cached.get("voice_key") != _take_keys(episode, engine)[2]
 
 
-def measured_rate(public_dir: Path) -> float | None:
+def measured_rate(*public_dirs: Path) -> float | None:
     """Spoken letters per second at tempo 1.0, measured across every voiced take on disk."""
     letters = seconds = 0.0
-    for path in public_dir.glob("*/timing.json"):
+    for path in (p for d in public_dirs for p in d.glob("*/timing.json")):
         timing = json.loads(path.read_text(encoding="utf-8"))
         tempo = timing.get("_take", {}).get("tempo")
         if not tempo:

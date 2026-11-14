@@ -1,23 +1,25 @@
-"""Every render is kept as a dated version; out/final/<ep>/ only ever holds the one to post.
+"""Every render is kept as a dated version; the video's final/ only ever holds the one to post.
 
-    out/versions/<ep>/2026-10-28_1710.mp4   every cut, for comparing
-    out/final/<ep>/video.mp4                the latest, nothing else
+    videos/<channel>/<video>/draft/versions/2026-10-28_1710.mp4   every cut, for comparing
+    videos/<channel>/<video>/final/video.mp4                      the latest, nothing else
 """
 import shutil
 from datetime import datetime
 from pathlib import Path
 
+from . import layout
+
 STAMP = "%Y-%m-%d_%H%M%S"
 
 
 def new_version(root: Path, episode_id: str) -> Path:
-    folder = root / "out" / "versions" / episode_id
+    folder = layout.versions_dir(root, episode_id)
     folder.mkdir(parents=True, exist_ok=True)
     return folder / f"{datetime.now().strftime(STAMP)}.mp4"
 
 
 def latest(root: Path, episode_id: str) -> Path:
-    cuts = sorted((root / "out" / "versions" / episode_id).glob("*.mp4"))
+    cuts = sorted(layout.versions_dir(root, episode_id).glob("*.mp4"))
     if not cuts:
         raise SystemExit(f"no versions of {episode_id} yet: run make.py {episode_id} first")
     return cuts[-1]

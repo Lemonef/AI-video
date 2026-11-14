@@ -29,11 +29,11 @@ list, clip or settings no longer match. Builders get the gate command from an
 immutable brief and never run --make-baseline.
 """
 import argparse
+import functools
 import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 from typing import NoReturn
@@ -41,6 +41,8 @@ from typing import NoReturn
 import numpy as np
 
 REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO/'tools'))
+from pipeline import remotion, stage  # noqa: E402
 STUDY_DIR = Path(os.environ.get('REFERENCE_STUDY_DIR',
                                 REPO/'out/drafts/reference-study/DegJCmXtbGj'))
 COMPOSITION = 'ReferenceAssisted'
@@ -106,14 +108,19 @@ def fps(path):
     return float(num)/float(den or 1)
 
 
+@functools.cache
+def public_dir():
+    """The shared trees, staged once per run (tools/pipeline/stage.py): every shot reads the same files."""
+    return stage.stage(REPO, None)
+
+
 def render(shot, out):
     s = study_shots()[shot-1]
-    npx = shutil.which('npx.cmd') or shutil.which('npx')
-    if not npx:
+    if not remotion.npx():
         fail('npx not found on PATH')
     out.parent.mkdir(parents=True, exist_ok=True)
-    run = subprocess.run([npx, 'remotion', 'render', 'engine/index.ts', COMPOSITION, str(out),
-                          f"--frames={s['start']}-{s['end']-1}", '--overwrite', *RENDER_ARGS],
+    run = subprocess.run(remotion.command('render', COMPOSITION, out, public_dir(),
+                                          f"--frames={s['start']}-{s['end']-1}", '--overwrite', *RENDER_ARGS),
                          cwd=REPO, stdin=subprocess.DEVNULL, capture_output=True, text=True,
                          env={**os.environ, **RENDER_ENV})
     if run.returncode:

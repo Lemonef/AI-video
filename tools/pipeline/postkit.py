@@ -1,11 +1,12 @@
 """Post kit: everything Zen needs to post an episode by hand (see docs/growth-playbook.md).
 
-Writes into the episode's own folder (out/final/<ep>/): post.txt (caption, pinned comment,
+Writes into the video's final/ (or draft/) folder: post.txt (caption, pinned comment,
 hashtags, posting checklist), cover.png (the hook frame) and script.md (readable script).
 """
-import shutil
 import subprocess
 from pathlib import Path
+
+from . import remotion
 
 # Hashtags: Thai tags with measured volume (YouTube /hashtag counts in the brain,
 # corrections/2026-11-02-hashtags-picked-without-volume.md), listed per episode biggest-first.
@@ -145,12 +146,11 @@ def write_script(folder: Path, episode: dict) -> Path:
     return path
 
 
-def remotion_still(root: Path, props: Path):
+def remotion_still(root: Path, props: Path, public_dir: Path):
     """Renders the series Cover template (engine/compositions/Cover) with the episode's props."""
-    npx = shutil.which("npx") or "npx"
 
     def render(png: Path, _frame: int) -> None:  # the Cover template is a still; frame kept for the call signature
-        subprocess.run([npx, "remotion", "still", "engine/index.ts", "Cover", str(png), f"--props={props}", "--log=error"], cwd=root, check=True)
+        subprocess.run(remotion.command("still", "Cover", png, public_dir, f"--props={props}", "--log=error"), cwd=root, check=True)
 
     return render
 
