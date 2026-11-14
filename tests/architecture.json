@@ -1,17 +1,23 @@
 {
-  "_why": "Canonical list for the layout guard. ARCHITECTURE.md '## Folders' must list exactly these dirs; tests/test_architecture.py enforces it.",
+  "_why": "Canonical list for the layout guard (layout v2). ARCHITECTURE.md '## Folders' must list exactly these dirs plus ignored_dirs; tests/test_architecture.py enforces it.",
   "top_level_dirs": {
     "engine": {"depth": 5, "ext": [".ts", ".tsx", ".json", ".css", ".svg"]},
-    "episodes": {"depth": 3, "ext": [".json"]},
-    "public": {"depth": 4, "ext": null},
     "tools": {"depth": 4, "ext": [".py"]},
+    "videos": {"depth": 7, "ext": null},
+    "docs": {"depth": 3, "ext": null},
     "tests": {"depth": 2, "ext": null},
-    "docs": {"depth": 4, "ext": null}
+    "_archive": {"depth": null, "ext": null}
   },
-  "top_level_files": ["ARCHITECTURE.md", "README.md", "package.json", "package-lock.json", "tsconfig.json", "remotion.config.ts", ".gitignore"],
+  "ignored_dirs": ["out"],
+  "top_level_files": ["ARCHITECTURE.md", "README.md", "CLAUDE.md", ".mcp.json", "package.json", "package-lock.json", "tsconfig.json", "remotion.config.ts", ".gitignore"],
+  "asset_subdirs": {"engine": ["shared"]},
   "docs_loose_ext": [".md", ".txt"],
   "forbidden_src_top_prefixes": ["v", "jaab"],
   "legacy_src_tops": [],
+  "render_entries": ["jaab3d"],
   "_note_legacy": "Frozen list: pre-existing per-version folders moved under engine/legacy/ (restructure phase 3), so nothing is exempt at the engine/ top any more. Never add to it.",
-  "_note_depth": "depth = path parts of a tracked file incl. top dir. docs/episodes/<id>/x.md = 4 (the only 4-deep docs area); tools/episode/x.py = 3."
+  "_note_render_entries": "Engine top folders that are a separate Remotion entry point (own index.tsx, own public dir), not a per-version/style copy of the main engine. jaab3d = the 3D shorts entry (engine/jaab3d/index.tsx). Add only for a real second entry point.",
+  "_note_asset_subdirs": "engine/shared/ holds the shared public-dir assets (fonts, sfx, reference-study) staged into every render, so the engine code-extension rule does not apply there.",
+  "_note_ignored_dirs": "Gitignored top-level dirs that still exist on disk: listed in ARCHITECTURE.md, never tracked. out/ goes away when the restructure's phase 8 migrates the old renders.",
+  "_note_depth": "depth = path parts of a tracked file incl. top dir; null = no limit (_archive is frozen data). videos/<channel>/<id>/assets/approved/<id>/x.mp3 = 7; tools/pipeline/tts/x.py = 4; docs/briefs/x.md = 3."
 }
