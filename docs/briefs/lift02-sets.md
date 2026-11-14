@@ -1,9 +1,9 @@
 ---json
-{"id": "lift02-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/v7/FloodEscape.tsx", "docs/lift02-beat-sheet.md", "tests/test_lift02_sets.py"]}
+{"id": "lift02-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/v7/FloodEscape.tsx", "docs/episodes/lift02/lift02-beat-sheet.md", "tests/test_lift02_sets.py"]}
 ---
 # Goal
 
-Part 2 of the original Thai rom-com "Stuck in a lift with my ex" (`docs/lift02-beat-sheet.md`)
+Part 2 of the original Thai rom-com "Stuck in a lift with my ex" (`docs/episodes/lift02/lift02-beat-sheet.md`)
 needs four new background sets. Part 1's ten sets live in `src/v7/Lift.tsx`. Add the new four in
 the same file and the same flat-vector style, reusing its shared pieces (`LiftInterior`, `Lobby`,
 `Cast`, `Phone`, `Speaker`, `Mops`, `Chair`, `Hand`, `Glow`, `Darkness`, `label`, `mix`, `phase`).

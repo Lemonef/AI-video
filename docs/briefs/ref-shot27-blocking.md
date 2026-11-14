@@ -13,7 +13,7 @@ Shot 27 ("Closed barrier, full body", source frames 2002-2036, door stage) in th
 Extract source frames yourself with ffmpeg from out/drafts/reference-study/DegJCmXtbGj/source.mp4 (read-only). Measure positions and mean brightness from frames; do not guess.
 
 # Do not run the gate yourself
-Do NOT run scripts/reference_gate.py or scripts/gate_in_worktree.py: your sandbox cannot reach the ffmpeg build the baselines were made with, so the gate reports "baseline is stale". The pipeline runs the gate after you finish. To check your work visually, render a still of the ReferenceAssisted composition at a frame inside the shot with `npx remotion still` (if that fails in the sandbox, reason from the code) and compare it with the same source frame; then finish.
+Do NOT run scripts/episode/reference_gate.py or scripts/gate_in_worktree.py: your sandbox cannot reach the ffmpeg build the baselines were made with, so the gate reports "baseline is stale". The pipeline runs the gate after you finish. To check your work visually, render a still of the ReferenceAssisted composition at a frame inside the shot with `npx remotion still` (if that fails in the sandbox, reason from the code) and compare it with the same source frame; then finish.
 
 # Files
 Only files under src/compositions/ReferenceStudy/ except shots.ts / calibration.json / captions.json. Keep CRLF line endings and the compact one-line JSX style. Changes must apply to shot 27 only (guard with id===27) so other door shots 10/13/14/15/22/28 render byte-identically. Note shot 28 shares `closed=id>=27` logic; do not change 28.

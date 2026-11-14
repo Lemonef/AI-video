@@ -4,7 +4,7 @@
 Write the script for ONE standalone Thai short titled **ตะกรุดสามคำขอ** (promised by the end card of the
 posted `lift03` episode). Output two files only:
 
-1. `docs/takrut01-beat-sheet.md` - same structure as `docs/lift03-beat-sheet.md`.
+1. `docs/episodes/takrut01/takrut01-beat-sheet.md` - same structure as `docs/episodes/lift03/lift03-beat-sheet.md`.
 2. `episodes/takrut01.json` - same schema as `episodes/lift03.json` (read it fully first; mirror every
    top-level key: style, engine, voice, voiceModel, tempo, mix, post, narrationJoin, narrationDirection, scenes).
 

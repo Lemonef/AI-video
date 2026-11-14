@@ -4,7 +4,7 @@ Scope: private source-assisted picture study. Preserve episodes/, out/final/ and
 
 ## Tooling
 
-- Added --shot-ids (preserves original IDs) and --render-start-frame to scripts/reference_study_review.py. Baseline remains a full absolute-frame render.
+- Added --shot-ids (preserves original IDs) and --render-start-frame to scripts/episode/reference_study_review.py. Baseline remains a full absolute-frame render.
 - PowerShell npx.ps1 is disabled; use npx.cmd. FFmpeg was absent from PATH; Remotion's reduced binary lacks rawvideo output. Downloaded official Gyan release essentials into ignored out/tools/ffmpeg. Prefix its directory to PATH for review commands.
 - Session allows writes only within D:/AI-video. Brain update/push cannot be completed here. Never stage unrelated pre-existing changes.
 
@@ -36,7 +36,7 @@ Scope: private source-assisted picture study. Preserve episodes/, out/final/ and
 - Intended commit fix(study): shot09 darken phone alarm background. Git permission blocker persists; unstaged.
 
 Use npx.cmd remotion render src/index.ts ReferenceAssisted <unique-output> --frames=<start>-<inclusive-end> --scale=0.5 --crf=20 --concurrency=4.
-Review with python scripts/reference_study_review.py --source <source.mp4> --render <partial.mp4> --render-start-frame <start> --shot-ids <original-id> --baseline <accepted-full.mp4> --shots <shot-review.json> --out <unique-review-dir>.
+Review with python scripts/episode/reference_study_review.py --source <source.mp4> --render <partial.mp4> --render-start-frame <start> --shot-ids <original-id> --baseline <accepted-full.mp4> --shots <shot-review.json> --out <unique-review-dir>.
 Five accepted distinct shots require an integrated full preview and105-sample review; never infer full-film gains from partial renders.
 
 
@@ -73,7 +73,7 @@ The accepted lighting changes and review script additions were reverted outside 
 - v12 gated integrated preview:17.505/.7813, SHA25656f7ff0d441c174d6fa4d9b77559f6a131abc468052371dc8884aec927606ae9. Five accepted generated shot clips inserted into prior accepted v10; all other intervals preserved, lossless yuv420p encoding, v10 audio copied. No source-film frame substitution.105 samples,35 per-shot gates: ZERO regressions. All7 sheets inspected.
 - Outputs in out/drafts/reference-study/DegJCmXtbGj; review-v12-gated/metrics.json and compare1?7 images. Receipt records every input hash, absolute source intervals and concat graph. Current code full rerender is still rejected; v12 requires interval integration recipe.
 - TypeScript passes root and isolated study, existing timeline node test passes. Synthetic lossless12-frame check verifies partial source+baseline offsets and original shot3 ID; invalid offset rejected. No extra voice/audio work.
-- Main tracked study code left at initial baseline after external revert/collision; accepted fixes are isolated in out/drafts/reference-loop-work/src and docs/agent-logs/reference-loop-accepted.patch. Parent should apply/check patch, NOT blindly copy the whole isolated source tree. New independent review tool scripts/reference_loop_review.py is usable without modifying shared original tool.
+- Main tracked study code left at initial baseline after external revert/collision; accepted fixes are isolated in out/drafts/reference-loop-work/src and docs/agent-logs/reference-loop-accepted.patch. Parent should apply/check patch, NOT blindly copy the whole isolated source tree. New independent review tool scripts/episode/reference_loop_review.py is usable without modifying shared original tool.
 - Commits/staging unavailable (.git/index.lock permission denied). Brain sync unavailable (outside writable root). No commit, push or source-code integration completion claimed. Locally prepared brain handoff is docs/agent-logs/brain-live-handoff-reference-loop.md.
 - Continue worst-first from accepted v12. Worst remaining: shot7~30.678,27~29.507,22~27.863,23~25.992,28~25.998,34~25.454,3~25.075. Investigate actor/arm silhouettes and local grades without accepting SSIM regressions. Resolve shared checkout owner before further main-code changes. Literal1:1 unfinished.
 
@@ -81,5 +81,5 @@ The accepted lighting changes and review script additions were reverted outside 
 Final verification: git apply --check docs/agent-logs/reference-loop-accepted.patch passed (patch not applied to shared checkout). Root and isolated npx.cmd tsc --noEmit pass. Review/integration Python scripts compile and CLI help runs. OpenCV decoded v12 metadata:2799frames,30fps,540x960 (93.3s picture),188474892bytes. Downloaded ffprobe.exe was blocked by Application Control; not retried/bypassed. Existing supported OpenCV reader supplied metadata. No auditory sign-off claimed.
 
 Reproduce gated integration from repo root:
-python scripts/reference_loop_integrate.py --receipt docs/agent-logs/reference-loop-v12-receipt.json --output out/drafts/reference-study/DegJCmXtbGj/practice-v12-reproduced.mp4
-It checks all input SHA256 values and refuses to overwrite an input/existing output. Then run scripts/reference_loop_review.py against source and accepted v10 as documented above.
+python scripts/episode/reference_loop_integrate.py --receipt docs/agent-logs/reference-loop-v12-receipt.json --output out/drafts/reference-study/DegJCmXtbGj/practice-v12-reproduced.mp4
+It checks all input SHA256 values and refuses to overwrite an input/existing output. Then run scripts/episode/reference_loop_review.py against source and accepted v10 as documented above.

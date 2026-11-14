@@ -1,9 +1,9 @@
 ---json
-{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/make.py", "scripts/pipeline/**", "scripts/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/types.ts", "tsconfig.json"], "context_files": ["episodes/takrut01.json", "docs/takrut01-beat-sheet.md", "src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
+{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/make.py", "scripts/pipeline/**", "scripts/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/types.ts", "tsconfig.json"], "context_files": ["episodes/takrut01.json", "docs/episodes/takrut01/takrut01-beat-sheet.md", "src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
 ---
 # Goal
 Episode `episodes/takrut01.json` names one cast member and four backgrounds that do not exist yet.
-Build them so the episode renders. Room descriptions + the lead's look: `docs/takrut01-beat-sheet.md`.
+Build them so the episode renders. Room descriptions + the lead's look: `docs/episodes/takrut01/takrut01-beat-sheet.md`.
 
 # Steps
 1. `scripts/gen_bg_flux.py` - CLI: `python scripts/gen_bg_flux.py <out.png> "<prompt>"`.

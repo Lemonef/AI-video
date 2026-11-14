@@ -7,7 +7,7 @@ Owner dropped takrut01 (story too weak). Build a NEW short instead, today.
   (r/tifu, r/AmItheAsshole, r/pettyrevenge, r/nosleep-lite: one clear setup, escalation, twist).
   Invent or heavily change it: Thai setting, Thai names, no real post copied, no real people.
 - 45-60 s, Thai narration, funny or twisty, a strong first-2-second hook, ends on a punchline.
-- Read episodes/takrut01.json and docs/takrut01-beat-sheet.md for format and tone only.
+- Read episodes/takrut01.json and docs/episodes/takrut01/takrut01-beat-sheet.md for format and tone only.
 
 ## Build (no new art: today only)
 - Reuse ONLY backgrounds already in the BACKGROUNDS object at the end of src/v5/Forest.tsx and

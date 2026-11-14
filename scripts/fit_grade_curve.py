@@ -49,6 +49,7 @@ def fail(msg: str) -> NoReturn:
 
 
 def main():
+    sys.path.insert(0, str(Path(__file__).resolve().parent / 'episode'))
     from reference_gate import REVIEW_SIZE, STUDY_DIR, gray_frames, study_shots
 
     p = argparse.ArgumentParser()

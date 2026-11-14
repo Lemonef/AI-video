@@ -46,7 +46,7 @@
 5. [x] AgentsRoom via own MCP: brain tools/agentsroom_mcp.py proxy (13 of 175 tools), spawn + live status verified with app open; results come back via docs/agent-logs files (wait/get refuse non-AgentsRoom callers)
 6. [x] Brain cleanup: research/ 124->53 items (c1c3f17), paper-trades price log archived 595->473 KB (85c6273); v2 shadow skill kept; memory/ + AGENT.md renames skipped (cross-repo churn, cosmetic)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
-   - [x] Measured gate scripts/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
+   - [x] Measured gate scripts/episode/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
    - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
    - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
    - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
@@ -115,7 +115,7 @@
    - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
-10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/lift02-beat-sheet.md v2
+10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/episodes/lift02/lift02-beat-sheet.md v2
    - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
    - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
    - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
@@ -133,9 +133,9 @@
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
-  - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
-  - [x] Guided-loop handoff written: docs/handoff-gemini-reference-loop.md (reusable by any builder).
-- [ ] Reel mining (both batches, 29 + 7): handoff docs/handoff-gemini-reel-mining.md; sent to Antigravity agent 2026-11-01 (result unverified).
+  - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
+  - [x] Guided-loop handoff written: docs/reference/handoff-gemini-reference-loop.md (reusable by any builder).
+- [ ] Reel mining (both batches, 29 + 7): handoff docs/reference/handoff-gemini-reel-mining.md; sent to Antigravity agent 2026-11-01 (result unverified).
 - [ ] Agent pipeline (owner talks only to Claude; Claude launches builders via `bash D:/second-brain/tools/run_agent.sh <codex|gemini|antigravity> <repo> <handoff> <log> [model]`)
   - [x] AgentsRoom installed (free): projects D:\ + D:\AI-video
   - [ ] Add agents in AgentsRoom; check if it can start agents from the command line
@@ -155,16 +155,16 @@
 - [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
 - [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
 - [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
-- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
+- [x] Verify final export/cover and write `docs/episodes/flood02/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
 - [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
 - [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
 
 ## NOW (2026-10-30) — read this first
-- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
+- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/episodes/flood01/flood01-release-review.md.
 - [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.
 - [x] Group existing final arc as out/final/01-ghost/ep01–ep03; approved ep03 bytes/hash preserved.
 - [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
-- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
+- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/episodes/ep03/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
   - [x] Part 2 posted (IG ~1.1K views first night, 2 real followers; TikTok stuck at ~3 views - check "not eligible" warning)
@@ -173,7 +173,7 @@
   - [ ] Collect numbers: views, avg watch time, retention graphs (IG + TikTok), comments
 - [ ] Upgrade phase (start in a NEW chat; Codex does the heavy work, Claude writes the contract + checks frames)
   - [ ] Read Part 2/3 retention graphs → where viewers drop
-  - [ ] Private visual reconstruction of reference reel IG DegJCmXtbGj (never posted; `docs/reference-study-DegJCmXtbGj.md`)
+  - [ ] Private visual reconstruction of reference reel IG DegJCmXtbGj (never posted; `docs/reference/reference-study-DegJCmXtbGj.md`)
     - [x] Download and inspect reference; measure 35 shot groups
     - [x] Rebuild isolated sets, poses, camera and lighting on the measured timeline
     - [x] Render and inspect every shot plus action sequences (93.3 s, 1080x1920, silent practice.mp4)
@@ -221,7 +221,7 @@
 - [ ] Evaluate official Remotion agent skills (github.com/remotion-dev/skills)
 - [ ] vitest for `src/lib/castState.ts`
 
-- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
+- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/episodes/takrut01/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
 
 ## NOW 2026-11-06 (owner asks 11-05 + 11-06, full tree rebuilt from chat log)
 - [ ] 1. Sukuna shrine ep01 "ถ้า Sukuna มาไทย แล้วเดินเข้าวัด" (ONE ep, NO A/B, others build, Claude reviews only)

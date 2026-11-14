@@ -6,8 +6,8 @@ accepted baseline code. Same settings matter: comparing a half-scale partial
 against a full-size export adds encoder/scale noise, so an unchanged shot would
 not measure as unchanged.
 
-  python scripts/reference_gate.py --make-baseline --shots 6 7 20
-  python scripts/reference_gate.py --shots 23
+  python scripts/episode/reference_gate.py --make-baseline --shots 6 7 20
+  python scripts/episode/reference_gate.py --shots 23
 
 Each shot is scored twice: whole frame, and a crop around the source actor
 (actor-boxes.json, scripts/actor_boxes.py) where that shot has boxes. The actor
@@ -40,7 +40,7 @@ from typing import NoReturn
 
 import numpy as np
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 STUDY_DIR = Path(os.environ.get('REFERENCE_STUDY_DIR',
                                 REPO/'out/drafts/reference-study/DegJCmXtbGj'))
 COMPOSITION = 'ReferenceAssisted'
@@ -149,7 +149,7 @@ def motion_error(src, ours):
 
 
 def measure(shot, clip, start, out_dir):
-    run = subprocess.run([sys.executable, str(REPO/'scripts/reference_loop_review.py'),
+    run = subprocess.run([sys.executable, str(REPO/'scripts/episode/reference_loop_review.py'),
                           '--source', str(STUDY_DIR/'source.mp4'), '--render', str(clip),
                           '--render-start-frame', str(start), '--shot-ids', str(shot),
                           '--shots', str(STUDY_DIR/'shot-review.json'), '--out', str(out_dir),

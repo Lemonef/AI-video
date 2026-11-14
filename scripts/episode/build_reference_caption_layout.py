@@ -8,7 +8,7 @@ import difflib
 import json
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 PROOF=ROOT/'out/drafts/reference-study/DegJCmXtbGj/caption-proof'
 # Inspected chunks. Last column marks emphasized source words, not voice cues.
 SPEC='''10|24|WHAT IF A|

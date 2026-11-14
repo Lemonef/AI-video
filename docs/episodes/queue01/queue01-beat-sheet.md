@@ -48,4 +48,4 @@ Gemini / Iapetus / `gemini-2.5-flash-preview-tts`, tempo 1.08, matching the requ
 - No TS typecheck needed: no TS changes. No network calls, commits, rendering or new assets in this task. `post.publishNow` is false for the review handoff.
 - Claude next: review Thai delivery, generate the take, verify actual duration and hook timing, inspect checkout geometry/occlusion and character framing, then review the continuous render and commit. Pay particular attention to the static counter being drawn behind cast: the JSON positions establish a checkout role but do not create a foreground occlusion layer.
 
-Files delivered: `episodes/queue01.json`, `docs/queue01-beat-sheet.md`. This local handoff also records the milestone for the next session; the brain vault is outside this task's writable sandbox.
+Files delivered: `episodes/queue01.json`, `docs/episodes/queue01/queue01-beat-sheet.md`. This local handoff also records the milestone for the next session; the brain vault is outside this task's writable sandbox.

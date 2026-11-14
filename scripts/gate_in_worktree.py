@@ -28,4 +28,4 @@ if HERE != MAIN:
         shutil.copytree(MAIN/'public/reference-study', assets)
 
 env = {**os.environ, 'PYTHONUTF8': '1', 'REMOTION_OFFLINE_FONTS': '1', 'REFERENCE_STUDY_DIR': str(STUDY)}
-sys.exit(subprocess.run([sys.executable, str(HERE/'scripts/reference_gate.py'), *sys.argv[1:]], cwd=HERE, env=env).returncode)
+sys.exit(subprocess.run([sys.executable, str(HERE/'scripts/episode/reference_gate.py'), *sys.argv[1:]], cwd=HERE, env=env).returncode)

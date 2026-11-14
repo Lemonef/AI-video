@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 import numpy as np
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 FF=ROOT/'.build/flood03-tools/ffmpeg.exe'
 def decode(path):
     return np.frombuffer(subprocess.run([str(FF),'-v','error','-i',str(path),'-f','f32le','-ac','1','-ar','16000','-'],capture_output=True,check=True).stdout,dtype=np.float32)

@@ -5,7 +5,7 @@ import math
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 TOOLS = ROOT / '.build/flood03-tools'
 OUT = ROOT / 'out/drafts/flood03-review'
 

@@ -13,7 +13,7 @@ Shot 22 ("Shutter begins to fall", source frames 1605-1691, door stage) in the `
 Extract source frames yourself: `ffmpeg -i out/drafts/reference-study/DegJCmXtbGj/source.mp4 -vf "select=eq(n\,1617)" -frames:v 1 x.png` (read-only use of out/). Measure positions from frames; do not guess.
 
 # Do not run the gate yourself
-Do NOT run scripts/reference_gate.py or scripts/gate_in_worktree.py: your sandbox cannot reach the ffmpeg build the baselines were made with, so the gate reports "baseline is stale". The pipeline runs the gate after you finish. To check your work visually, render a still of the ReferenceAssisted composition at a frame inside the shot with `npx remotion still` (if that fails in the sandbox, reason from the code) and compare it with the same source frame; then finish.
+Do NOT run scripts/episode/reference_gate.py or scripts/gate_in_worktree.py: your sandbox cannot reach the ffmpeg build the baselines were made with, so the gate reports "baseline is stale". The pipeline runs the gate after you finish. To check your work visually, render a still of the ReferenceAssisted composition at a frame inside the shot with `npx remotion still` (if that fails in the sandbox, reason from the code) and compare it with the same source frame; then finish.
 
 # Files
 Only files under src/compositions/ReferenceStudy/ except shots.ts / calibration.json / captions.json. Keep CRLF line endings and the compact one-line JSX style. Changes must apply to shot 22 only (shot ids are unique; guard with id===22) so other door shots 10/13/14/15/27/28 render byte-identically.

@@ -6,7 +6,7 @@ import shutil
 import subprocess
 import sys
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 os.environ['PATH']=str(ROOT/'.build/flood03-tools')+os.pathsep+os.environ['PATH']
 sys.path.insert(0,str(ROOT/'scripts'))
 from pipeline import versions

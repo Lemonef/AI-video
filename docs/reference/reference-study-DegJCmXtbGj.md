@@ -78,7 +78,7 @@ Iterations now exist beside the source:
 
 Source-assisted plates are explicitly derived from source stills through built-in imagegen object-removal edits. They are NOT independently authored background reproductions. Local files are ignored under `public/reference-study/`; original frames remain ignored in out/. Keep the separate `ReferenceStudy` (vector) and `ReferenceAssisted` compositions honest. No source footage or source audio is embedded as the delivered film.
 
-Utilities: `scripts/reference_study_review.py` (three phases/shot + metrics), `calibrate_reference_camera.py` (SIFT/ratio/similarity RANSAC; low-confidence fits omitted), `build_reference_sound.py` (cached original free Edge narration and procedural foley), `build_reference_player.py` (local synchronized side-by-side, frame stepping, slow motion, source/study audio switch). `compare-v3.html` is generated. All source/reference outputs are local, not social posts.
+Utilities: `scripts/episode/reference_study_review.py` (three phases/shot + metrics), `calibrate_reference_camera.py` (SIFT/ratio/similarity RANSAC; low-confidence fits omitted), `build_reference_sound.py` (cached original free Edge narration and procedural foley), `build_reference_player.py` (local synchronized side-by-side, frame stepping, slow motion, source/study audio switch). `compare-v3.html` is generated. All source/reference outputs are local, not social posts.
 
 Reusable skill canonical home: `D:/second-brain/skills/reference-animation-rebuild/`; installed copy `C:/Users/user/.codex/skills/reference-animation-rebuild/`. Skill scaffold validated; comparison helper exercised on the real film. Technique reference includes shot grammar, geometry, rig/action/contact, local light, typography, sound and failure ledger. Installation must be refreshed after further edits.
 
@@ -86,4 +86,4 @@ Current next corrections: finish source-assisted camera/rig review, add separate
 
 ## Complete milestone/checklist record
 
-See `docs/reference-study-milestones-DegJCmXtbGj.md` for every meaningful iteration,tools,comparisons,failures,steps and open matching checklist. Future original episode QA: `docs/episode-release-checklist.md` points to the canonical complete checklist in the skill.
+See `docs/reference/reference-study-milestones-DegJCmXtbGj.md` for every meaningful iteration,tools,comparisons,failures,steps and open matching checklist. Future original episode QA: `docs/episode-release-checklist.md` points to the canonical complete checklist in the skill.

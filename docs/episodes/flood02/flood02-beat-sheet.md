@@ -1,6 +1,6 @@
 # Flood02 — story, picture and sound beat sheet
 
-2026-10-31. Companion to `episodes/flood02.json` and `docs/flood02-story-review.md`. Absolute seconds/frames must come from the approved narration; fractions below describe scene progress, not a fixed running-time target.
+2026-10-31. Companion to `episodes/flood02.json` and `docs/episodes/flood02/flood02-story-review.md`. Absolute seconds/frames must come from the approved narration; fractions below describe scene progress, not a fixed running-time target.
 
 | Scene | Narration purpose / exact event | Picture and graphic | Motion / sound review target |
 |---|---|---|---|

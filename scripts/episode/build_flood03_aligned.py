@@ -8,7 +8,7 @@ import runpy
 import sys
 from pathlib import Path
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 os.chdir(ROOT)
 os.environ['PATH']=str(ROOT/'.build/flood03-tools')+os.pathsep+os.environ['PATH']
 sys.path.insert(0,str(ROOT/'scripts'))

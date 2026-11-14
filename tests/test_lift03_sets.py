@@ -1,4 +1,4 @@
-"""Contract for the lift-ex Part 3 sets (docs/lift03-beat-sheet.md).
+"""Contract for the lift-ex Part 3 sets (docs/episodes/lift03/lift03-beat-sheet.md).
 
 Each new bg id must be exported from src/v7/Lift.tsx, registered in the ENV5 map and given a
 CAST_LIGHT entry, or the episode renders an empty frame / flat-lit cast without any error.
