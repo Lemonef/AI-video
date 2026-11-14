@@ -48,7 +48,7 @@ def test_every_cast_member_is_registered():
 def test_room_stills_exist_at_canvas_size():
     size = _canvas()
     for room in ROOMS:
-        png = ROOT / "public" / "takrut01" / f"{room}.png"
+        png = layout.assets_dir(ROOT, "takrut01") / "takrut01" / f"{room}.png"
         assert png.exists(), png
         assert _png_size(png) == size, (png, _png_size(png), size)
 

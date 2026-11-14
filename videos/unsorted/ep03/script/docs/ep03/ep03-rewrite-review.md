@@ -26,7 +26,7 @@ The original `out/final/ep03/video.mp4` and final post kit remain untouched. Ori
 - `node --test tests/walk-cycle.test.mjs`: **2 passed**.
 - Reviewed all 21 scenes as midpoint stills and temporal samples, including targeted walk/blink/pull previews. Final extraction contains 126 temporal samples.
 - Waveform comparison of the complete final voice mix against every source scene: maximum offset 0.333 ms, minimum normalized correlation 0.9265. Evidence: `out/drafts/ep03-review3/audio-sync.json`.
-- The replacement full take failed completeness checking. Only its two fully transcribed opening lines were used; the incomplete remainder was rejected. Approved recordings and matching word timings are checked into `public/approved/ep03/` so builds are reproducible without another voice request.
+- The replacement full take failed completeness checking. Only its two fully transcribed opening lines were used; the incomplete remainder was rejected. Approved recordings and matching word timings are checked into `videos/unsorted/ep03/assets/approved/ep03/` so builds are reproducible without another voice request.
 - Final build used make.py; the corrected pull and caption shots were rendered from the same props, assembled at exact frame boundaries, and loudness-mastered.
 
 ## Scene list and final still paths

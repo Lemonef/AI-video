@@ -1,4 +1,5 @@
-// Entry for the jaab3d 3D shorts (2D cards in a 3D world). Rendered alone with --public-dir=public3d.
+// Entry for the jaab3d 3D shorts (2D cards in a 3D world). Rendered alone with its own public dir:
+// the video's assets/3d/ (was public3d/, e.g. videos/unsorted/mood01/assets/3d) plus engine/shared/sfx3d as sfx/.
 import React from "react";
 import { Composition, registerRoot } from "remotion";
 import { Smoke } from "./Smoke";

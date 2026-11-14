@@ -14,9 +14,9 @@ Build them so the episode renders. Room descriptions + the lead's look: `videos/
    (Bearer). Never print, log or write either value. Send a browser-like User-Agent.
    Output: square result scaled to cover W x H from `engine/lib/tokens.ts` (read the numbers, do not
    hard-code), centre-cropped, saved as PNG. Pillow is installed.
-2. Run it to create `public/takrut01/find.png`, `ancient.png`, `reset.png` from the beat-sheet room
+2. Run it to create `videos/unsorted/takrut01/assets/takrut01/find.png`, `ancient.png`, `reset.png` from the beat-sheet room
    notes (same room, same camera, wide eye-level view; warm-cool fluorescent + blue window light;
-   flat illustrated storybook style; NO people, NO text, NO logos). `public/takrut01/coinflood.png`
+   flat illustrated storybook style; NO people, NO text, NO logos). `videos/unsorted/takrut01/assets/takrut01/coinflood.png`
    is already committed - do not regenerate or replace it.
 3. `engine/legacy/v2/cast.ts` - add `takrutLead` (Look2, style per beat sheet: dark wavy hair, brick-orange
    tee, cream open shirt; slim). Match existing entry format.
@@ -32,4 +32,4 @@ Build them so the episode renders. Room descriptions + the lead's look: `videos/
 - Work only inside the repo you were started in; never read or write paths outside it.
 - `python -m pytest -q tests/test_takrut01_assets.py` passes and `python tools/tsc_in_worktree.py` passes.
 - The test file is the contract: do not edit it; if an assertion is wrong, STOP and report.
-- Diff touches only: tools/gen_bg_flux.py, public/takrut01/{find,ancient,reset}.png, engine/legacy/v2/cast.ts, engine/legacy/v7/Takrut.tsx, engine/legacy/v5/Forest.tsx.
+- Diff touches only: tools/gen_bg_flux.py, videos/unsorted/takrut01/assets/takrut01/{find,ancient,reset}.png, engine/legacy/v2/cast.ts, engine/legacy/v7/Takrut.tsx, engine/legacy/v5/Forest.tsx.
