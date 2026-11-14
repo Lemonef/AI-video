@@ -1,13 +1,16 @@
-"""Contract for the lift-ex Part 3 sets (docs/episodes/lift03/lift03-beat-sheet.md).
+"""Contract for the lift-ex Part 3 sets (videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md).
 
 Each new bg id must be exported from engine/legacy/v7/Lift.tsx, registered in the ENV5 map and given a
 CAST_LIGHT entry, or the episode renders an empty frame / flat-lit cast without any error.
 """
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / 'tools'))
+from pipeline import layout  # noqa: E402
 NEW_SETS = {'liftCatCall': 'LiftCatCall', 'liftCafeKitten': 'LiftCafeKitten',
             'lobbyDoorsOpen': 'LobbyDoorsOpen', 'liftDoorsStop': 'LiftDoorsStop', 'lobbyExit': 'LobbyExit'}
 
@@ -48,7 +51,7 @@ def test_gift_card_text_present():
 def test_episode_uses_only_known_sets():
     # every bg the episode asks for must exist in ENV5, else that scene renders blank
     env5 = read('engine/legacy/v5/Forest.tsx')
-    ep = json.loads(read('episodes/lift03.json'))
+    ep = json.loads(layout.script_json(ROOT, 'lift03').read_text(encoding='utf-8'))
     for s in ep['scenes']:
         bg = s.get('bg')
         if bg:

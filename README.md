@@ -5,7 +5,8 @@ Data-driven pipeline for a Thai TikTok "What If" series: flat-2D characters draw
 ## Make the next episode (one command)
 
 ```bash
-cp episodes/ep01.json episodes/ep02.json   # then edit the scenes (ep01 = current template)
+mkdir -p videos/unsorted/ep02/script
+cp videos/unsorted/ep01/script/ep01.json videos/unsorted/ep02/script/ep02.json   # then edit the scenes (ep01 = current template)
 .venv/Scripts/python tools/make.py ep02   # -> out/final/ep02/ (video, cover, post kit, script)
 ```
 
@@ -25,7 +26,8 @@ Preview while editing: `npm run studio` (opens ep01 with estimated timing).
 ## Folder layout
 
 ```
-episodes/        one JSON per episode (ep01 = v1, the current release)   archive/ = drafts
+videos/          one folder per video: <channel>/<NN-name>/script/<id>.json (+ docs/<id>/); unsorted/<id>/ until it has a channel
+_archive/        retired material, e.g. episodes/ (old drafts)
 engine/          Remotion code: compositions/, components/, legacy/v2/ (rig, forest, ui, sound), legacy/v5/ (forest art), lib/ (pure logic)
 tools/           make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)

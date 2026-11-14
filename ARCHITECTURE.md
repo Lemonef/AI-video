@@ -17,15 +17,15 @@ One file that says where everything goes. `tests/test_architecture.py` fails if 
 ## Practices
 - One place per thing. A new top-level dir needs a row above AND an entry in `tests/architecture.json`.
 - Outputs only in `out/`. Never commit renders.
-- Data, assets and outputs for an episode live in `episodes/<id>.json`, `public/<id>/`, `out/final/<id>/`; docs in `docs/episodes/<id>/`; one-off scripts in `tools/episode/`.
+- Data, assets and outputs for an episode live in `videos/<channel>/<video>/script/<id>.json`, `public/<id>/`, `out/final/<id>/`; docs in `videos/<channel>/<video>/script/docs/<id>/`; one-off scripts in `tools/episode/`.
 - Delete rejected experiments after logging why in `docs/`.
 - Pipeline briefs list `ARCHITECTURE.md` in `context_files`.
 
 ## Where does X go
 | X | Goes in |
 |---|---|
-| new episode data | `episodes/<id>.json` |
-| episode beat sheet / review | `docs/episodes/<id>/` |
+| new episode data | `videos/<channel>/<video>/script/<id>.json` |
+| episode beat sheet / review | `videos/<channel>/<video>/script/docs/<id>/` |
 | one-off episode script | `tools/episode/` |
 | shared tool | `tools/` |
 | new character | `engine/characters/<name>/` |

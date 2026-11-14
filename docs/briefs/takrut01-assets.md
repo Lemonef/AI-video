@@ -1,9 +1,9 @@
 ---json
-{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/make.py", "tools/pipeline/**", "tools/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/types.ts", "tsconfig.json"], "context_files": ["episodes/takrut01.json", "docs/episodes/takrut01/takrut01-beat-sheet.md", "engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v2/cast.ts", "engine/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
+{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/make.py", "tools/pipeline/**", "tools/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/types.ts", "tsconfig.json"], "context_files": ["videos/unsorted/takrut01/script/takrut01.json", "videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md", "engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v2/cast.ts", "engine/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
 ---
 # Goal
-Episode `episodes/takrut01.json` names one cast member and four backgrounds that do not exist yet.
-Build them so the episode renders. Room descriptions + the lead's look: `docs/episodes/takrut01/takrut01-beat-sheet.md`.
+Episode `videos/unsorted/takrut01/script/takrut01.json` names one cast member and four backgrounds that do not exist yet.
+Build them so the episode renders. Room descriptions + the lead's look: `videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md`.
 
 # Steps
 1. `tools/gen_bg_flux.py` - CLI: `python tools/gen_bg_flux.py <out.png> "<prompt>"`.

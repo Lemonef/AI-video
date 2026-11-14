@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
-from pipeline import postkit, retention, sfx, versions  # noqa: E402
+from pipeline import layout, postkit, retention, sfx, versions  # noqa: E402
 from pipeline.master import master  # noqa: E402
 from pipeline.narrate import measured_rate, narrate, needs_voicing  # noqa: E402
 from pipeline.render import render  # noqa: E402
@@ -38,7 +38,7 @@ def story_folder(final_root: Path, slug: str) -> str:
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Build one episode from episodes/<id>.json")
+    ap = argparse.ArgumentParser(description="Build one episode from videos/<channel>/<video>/script/<id>.json")
     ap.add_argument("episode", help="episode id, e.g. ep01")
     ap.add_argument("--engine", help="TTS engine, overrides the episode's (edge | gemini | elevenlabs)")
     ap.add_argument("--voice", help="override the episode's voice")
@@ -51,7 +51,7 @@ def main() -> None:
     if args.draft and args.publish:
         ap.error("--draft and --publish cannot be combined")
 
-    src = ROOT / "episodes" / f"{args.episode}.json"
+    src = layout.script_json(ROOT, args.episode)
     episode = json.loads(src.read_text(encoding="utf-8"))
     if args.engine:
         episode["engine"] = args.engine

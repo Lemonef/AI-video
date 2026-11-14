@@ -47,7 +47,7 @@ The chair joke comes from an urgent misunderstanding, not a friendly-thug gag. L
 
 - [x] Read actual upstream content/sound guidance and all accessible reference overview sheets before generating Part2 voice.
 - [x] Owner chose B.
-- [x] Final Thai script and exact group count reconciled in `episodes/flood02.json`: 15 scenes, 854 Thai characters. UTF-8 Thai input checked; no replacement-question-mark text. All cast arrays empty because the new environments own their actors.
+- [x] Final Thai script and exact group count reconciled in `videos/unsorted/flood02/script/flood02.json`: 15 scenes, 854 Thai characters. UTF-8 Thai input checked; no replacement-question-mark text. All cast arrays empty because the new environments own their actors.
 - [ ] Visual environments/actions implemented and short intervals inspected.
 - [ ] ElevenLabs private audition (owner Free account, key local only); account/voices/models read scopes initially missing. Screenshot confirms TTS access. No generation yet.
 - [ ] Publishing voice entitlement resolved; free plan is personal/non-commercial per official docs. No subscription purchase authorized.

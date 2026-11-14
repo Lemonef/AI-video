@@ -115,9 +115,9 @@
    - [x] Static film grain overlay (engine/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
-10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/episodes/lift02/lift02-beat-sheet.md v2
+10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet videos/unsorted/lift02/script/docs/lift02/lift02-beat-sheet.md v2
    - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
-   - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
+   - [x] Script videos/unsorted/lift02/script/lift02.json, pre-voice retention lint pass (6a5c920)
    - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
    - [x] Pipeline build lift02-sets (deepseek-flash-free, cohere review PASS), merged e1aedf9
    - [x] Draft 1 rendered (out/drafts/lift02/video.mp4); stills read: 7/9 scenes OK
@@ -142,7 +142,7 @@
   - [ ] Retest OpenCode free builders (config ~/.config/opencode/opencode.json: NVIDIA GLM 5.3 / DeepSeek / Kimi K3, Mistral Devstral/Codestral, OpenRouter Nemotron) - first test gave empty output
   - [ ] Design tiered pipeline (plan Opus -> build Codex sol/terra/luna | OpenCode free | Antigravity -> verify other company + free legs -> escalate on gate failure) and get owner approval before building
 - [ ] Flood Part 3 finale: waits for the real Part 2 A/B count
-- [ ] Untracked draft episodes/wishes01.json + engine/legacy/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
+- [ ] Untracked draft videos/unsorted/wishes01/script/wishes01.json + engine/legacy/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
 
 
 ## CURRENT — 2026-10-31 Bangkok flood Part2
@@ -155,16 +155,16 @@
 - [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
 - [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
 - [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
-- [x] Verify final export/cover and write `docs/episodes/flood02/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
+- [x] Verify final export/cover and write `videos/unsorted/flood02/script/docs/flood02/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
 - [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
 - [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
 
 ## NOW (2026-10-30) — read this first
-- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/episodes/flood01/flood01-release-review.md.
+- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. videos/unsorted/flood01/script/docs/flood01/flood01-release-review.md.
 - [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.
 - [x] Group existing final arc as out/final/01-ghost/ep01–ep03; approved ep03 bytes/hash preserved.
 - [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
-- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/episodes/ep03/ep03-rewrite-review.md`.
+- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `videos/unsorted/ep03/script/docs/ep03/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
   - [x] Part 2 posted (IG ~1.1K views first night, 2 real followers; TikTok stuck at ~3 views - check "not eligible" warning)
@@ -221,7 +221,7 @@
 - [ ] Evaluate official Remotion agent skills (github.com/remotion-dev/skills)
 - [ ] vitest for `engine/lib/castState.ts`
 
-- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/episodes/takrut01/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
+- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md, videos/unsorted/takrut01/script/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
 
 ## NOW 2026-11-06 (owner asks 11-05 + 11-06, full tree rebuilt from chat log)
 - [ ] 1. Sukuna shrine ep01 "ถ้า Sukuna มาไทย แล้วเดินเข้าวัด" (ONE ep, NO A/B, others build, Claude reviews only)

@@ -1,9 +1,9 @@
 ---json
-{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/cast.ts", "engine/legacy/v2/ui.tsx", "engine/legacy/v2/Forest.tsx", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v7/FloodEscape.tsx", "engine/legacy/v2/Character.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
+{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/cast.ts", "engine/legacy/v2/ui.tsx", "engine/legacy/v2/Forest.tsx", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v7/FloodEscape.tsx", "engine/legacy/v2/Character.tsx", "videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
 ---
 # Goal
 
-Owner review of lift-ex Part 3 (`docs/episodes/lift03/lift03-beat-sheet.md`) found four visual faults. Fix them in
+Owner review of lift-ex Part 3 (`videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md`) found four visual faults. Fix them in
 the existing flat-vector style. Frame 1080x1920; keep faces and key props above y 1300.
 
 # Fixes

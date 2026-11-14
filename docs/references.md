@@ -15,7 +15,7 @@ Dark, cinematic flat 2D. Silent hero Pip (yellow knitted scarf, glowing dot eyes
 
 ### Chandler (Claude Code + Remotion edit) — instagram.com/p/De8SPjEAuV0
 Talking-head edit built by Claude Code. Workflow, as he states it:
-- **Storyboard table first**: every line, what's on screen, which tool makes it. Fix the plan, then build. Our `episodes/*.json` plays this role; worth adding a human-readable table export for review.
+- **Storyboard table first**: every line, what's on screen, which tool makes it. Fix the plan, then build. Our `videos/*/*/script/*.json` plays this role; worth adding a human-readable table export for review.
 - **Whisper word timing** drives captions and card pop-ins. Ours comes from TTS word boundaries; Whisper is the verification pass (TODO).
 - Text-behind-head (segmentation), Remotion motion graphics, FFmpeg colour grades (warm with a slider reveal; moody with curves, lower saturation and a vignette), **whip-pan** transitions instead of recursive zoom. Adopt whip-pan + vignette.
 

@@ -1,9 +1,9 @@
 ---json
-{"id": "lift02-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/**", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v2/cast.ts", "engine/legacy/v7/FloodEscape.tsx", "docs/episodes/lift02/lift02-beat-sheet.md", "tests/test_lift02_sets.py"]}
+{"id": "lift02-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/**", "engine/types.ts", "tsconfig.json"], "context_files": ["engine/legacy/v7/Lift.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v5/Forest.tsx", "engine/legacy/v2/cast.ts", "engine/legacy/v7/FloodEscape.tsx", "videos/unsorted/lift02/script/docs/lift02/lift02-beat-sheet.md", "tests/test_lift02_sets.py"]}
 ---
 # Goal
 
-Part 2 of the original Thai rom-com "Stuck in a lift with my ex" (`docs/episodes/lift02/lift02-beat-sheet.md`)
+Part 2 of the original Thai rom-com "Stuck in a lift with my ex" (`videos/unsorted/lift02/script/docs/lift02/lift02-beat-sheet.md`)
 needs four new background sets. Part 1's ten sets live in `engine/legacy/v7/Lift.tsx`. Add the new four in
 the same file and the same flat-vector style, reusing its shared pieces (`LiftInterior`, `Lobby`,
 `Cast`, `Phone`, `Speaker`, `Mops`, `Chair`, `Hand`, `Glow`, `Darkness`, `label`, `mix`, `phase`).

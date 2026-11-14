@@ -5,12 +5,14 @@ from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'tools'))
 import make
+from pipeline import layout
 
 
 def test_draft_build_preserves_final_video_and_postkit(tmp_path, monkeypatch):
     episode = {'id': 'ep03', 'voice': 'Iapetus', 'scenes': []}
-    (tmp_path / 'episodes').mkdir()
-    (tmp_path / 'episodes/ep03.json').write_text(json.dumps(episode))
+    src = layout.script_json(tmp_path, 'ep03')
+    src.parent.mkdir(parents=True)
+    src.write_text(json.dumps(episode))
     final = tmp_path / 'out/final/ep03'
     final.mkdir(parents=True)
     (final / 'video.mp4').write_bytes(b'original final')

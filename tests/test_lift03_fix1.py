@@ -5,9 +5,12 @@ her hand, a detached second arm stops the doors, and the climax shows only the c
 """
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / 'tools'))
+from pipeline import layout  # noqa: E402
 
 
 def read(rel):
@@ -49,5 +52,5 @@ def test_climax_set_wired():
 
 
 def test_episode_climax_uses_it():
-    ep = json.loads(read('episodes/lift03.json'))
+    ep = json.loads(layout.script_json(ROOT, 'lift03').read_text(encoding='utf-8'))
     assert {s['id']: s['bg'] for s in ep['scenes']}['gesture'] == 'lobbyGesture'

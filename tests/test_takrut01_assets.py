@@ -3,10 +3,13 @@ and every room still must exist at the canvas size (read from engine/lib/tokens.
 import json
 import re
 import struct
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-EP = json.loads((ROOT / "episodes" / "takrut01.json").read_text(encoding="utf-8"))
+sys.path.insert(0, str(ROOT / "tools"))
+from pipeline import layout  # noqa: E402
+EP = json.loads(layout.script_json(ROOT, "takrut01").read_text(encoding="utf-8"))
 ROOMS = ["find", "ancient", "coinflood", "reset"]
 
 

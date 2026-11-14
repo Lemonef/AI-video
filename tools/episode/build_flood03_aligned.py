@@ -12,9 +12,9 @@ ROOT=Path(__file__).resolve().parents[2]
 os.chdir(ROOT)
 os.environ['PATH']=str(ROOT/'.build/flood03-tools')+os.pathsep+os.environ['PATH']
 sys.path.insert(0,str(ROOT/'tools'))
-from pipeline import narrate
+from pipeline import layout, narrate
 from pipeline.tts import get_engine
-ep=json.loads((ROOT/'episodes/flood03.json').read_text(encoding='utf-8'))
+ep=json.loads(layout.script_json(ROOT,'flood03').read_text(encoding='utf-8'))
 lines,_,voice_key=narrate._take_keys(ep,get_engine('gemini'))
 key=narrate._key(voice_key,str(float(ep['tempo'])))
 segments=json.loads((ROOT/'.build/flood03-transcript.json').read_text(encoding='utf-8'))

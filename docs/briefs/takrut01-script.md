@@ -4,8 +4,8 @@
 Write the script for ONE standalone Thai short titled **ตะกรุดสามคำขอ** (promised by the end card of the
 posted `lift03` episode). Output two files only:
 
-1. `docs/episodes/takrut01/takrut01-beat-sheet.md` - same structure as `docs/episodes/lift03/lift03-beat-sheet.md`.
-2. `episodes/takrut01.json` - same schema as `episodes/lift03.json` (read it fully first; mirror every
+1. `videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md` - same structure as `videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md`.
+2. `videos/unsorted/takrut01/script/takrut01.json` - same schema as `videos/unsorted/lift03/script/lift03.json` (read it fully first; mirror every
    top-level key: style, engine, voice, voiceModel, tempo, mix, post, narrationJoin, narrationDirection, scenes).
 
 Do not edit any other file. Do not run git. Do not run the renderer or TTS.
@@ -39,7 +39,7 @@ One sentence: **ถ้าตะกรุดให้รวยจริง... แ
   question = a comment prompt, hashtags like lift03 (Thai, 6-8).
 
 ## Done criteria
-- Both files exist; `python -c "import json;json.load(open('episodes/takrut01.json',encoding='utf-8'))"` passes.
+- Both files exist; `python -c "import json;json.load(open('videos/unsorted/takrut01/script/takrut01.json',encoding='utf-8'))"` passes.
 - Sum of narration reads at ~60-80 s at the lift03 tempo (state your estimate in the beat sheet).
 - Beat sheet ends with: scene table (scene, bg id, new/existing, cast, line, seconds) and "New sets needed".
 - Final report: list files written, scene count, estimated seconds, new set ids, and anything you were unsure of.

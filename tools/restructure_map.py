@@ -11,14 +11,12 @@ import argparse
 import json
 import re
 import subprocess
+import sys
 from pathlib import Path
 
-# Channel + folder per episode id. Single source for the mapping; ids not listed fall to unsorted.
-HISTORY = {"ink": "pastly-life/01-eiffel-ink"}
-UNSORTED_IDS = (
-    "ghost", "bangkok-flood", "lift01", "lift02", "lift03", "queue01", "mood01", "sukuna01",
-    "takrut01", "ep01", "ep02", "ep03", "flood01", "flood02", "flood03", "wishes01",
-)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pipeline.layout import UNSORTED_IDS, video_dir  # noqa: E402  single source of the per-video path rule
+
 EP_RE = re.compile("(" + "|".join(sorted(UNSORTED_IDS, key=len, reverse=True)) + ")")
 
 # First matching prefix wins; (source prefix, destination prefix). Order matters.
@@ -48,10 +46,6 @@ ROOT_KEEP = {"package.json", "package-lock.json", "remotion.config.ts", "tsconfi
              "README.md", "ARCHITECTURE.md", "CLAUDE.md", ".gitignore", ".mcp.json"}
 SKIP_TOPS = {".git", ".pipeline-worktrees", "node_modules", ".build", ".claude", ".venv", ".pytest_cache",
              ".agentsroom", ".agents"}  # tool/cache dirs: stay where they are
-
-
-def video_dir(episode_id: str) -> str:
-    return "videos/" + HISTORY.get(episode_id, f"unsorted/{episode_id}")
 
 
 def destination(rel: str) -> tuple[str | None, str]:

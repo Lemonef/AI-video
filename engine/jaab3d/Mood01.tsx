@@ -7,7 +7,7 @@ import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import timing from "../../public/mood01/timing.json";
-import ep from "../../episodes/mood01.json";
+import ep from "../../videos/unsorted/mood01/script/mood01.json";
 import { Card, Look, Pose } from "./engine/Card";
 import { CamPose, Shot, solveCamera } from "./engine/camera";
 import { clamp01, hash, lerp, lerp3, smoother, V3 } from "./engine/ease";

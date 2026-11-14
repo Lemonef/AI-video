@@ -1,4 +1,4 @@
-// Episode data model. One episodes/epNN.json = one video; tools/make.py adds `timing` and `take`.
+// Episode data model. One videos/<channel>/<video>/script/<id>.json = one video; tools/make.py adds `timing` and `take`.
 
 export type Pose = 'idle' | 'wave' | 'shock' | 'yawn' | 'armsCrossed' | 'point' | 'think' | 'hold';
 export type Expr = 'smile' | 'sleepy' | 'shock' | 'sweat' | 'flat' | 'angry' | 'gross' | 'talk';

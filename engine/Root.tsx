@@ -2,7 +2,7 @@ import React from 'react';
 import {Composition} from 'remotion';
 import {ReferenceStudy} from './compositions/ReferenceStudy';
 import {STUDY_FRAMES,STUDY_FPS} from './compositions/ReferenceStudy/shots';
-import current from '../episodes/ep01.json';
+import current from '../videos/unsorted/ep01/script/ep01.json';
 import {Avatar} from './compositions/Avatar';
 import {Cover} from './compositions/Cover';
 import {CharPreview} from './compositions/CharPreview';

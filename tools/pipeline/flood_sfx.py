@@ -16,11 +16,12 @@ import urllib.request
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from pipeline import layout  # noqa: E402
 from pipeline.freesound import _finish, _sound  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "public" / "sfx" / "real"
-MANIFEST = ROOT / "docs" / "episodes" / "flood02" / "flood02-sound-assets.json"
+MANIFEST = layout.script_docs(ROOT, "flood02") / "flood02-sound-assets.json"
 
 # Source ranges selected from 20 ms RMS envelopes, before a second event begins.
 # Ends lie in quiet gaps, with short edge fades after the existing normalizer.

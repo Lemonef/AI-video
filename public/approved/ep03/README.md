@@ -8,4 +8,4 @@ These small voice assets keep the reviewed Iapetus delivery reproducible without
 - `whisper.mp3` already contains the timing-preserving lower-pitch effect. The first mimic request and all narration use the normal voice.
 - `timing.json` records the matching script, voice/model/tempo, word timestamps and applied effects.
 
-`voiceClips` in `episodes/ep03.json` selects this manifest. The pipeline validates its text, voice, effects and timing, regenerates captions from the current episode, and fails if a clip has become stale. To change spoken text, replace and verify the corresponding recording and manifest entry. Caption-only changes do not require new speech.
+`voiceClips` in `videos/unsorted/ep03/script/ep03.json` selects this manifest. The pipeline validates its text, voice, effects and timing, regenerates captions from the current episode, and fails if a clip has become stale. To change spoken text, replace and verify the corresponding recording and manifest entry. Caption-only changes do not require new speech.

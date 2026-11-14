@@ -1,6 +1,6 @@
 # Handoff: rewrite + re-shoot Part 3 (ep03), post-ready by 19:30 today
 
-Repo `D:\AI-video` (Remotion 4 + Python pipeline). Read first: `docs/TODO.md` (NOW), `episodes/ep03.json` (current version), `episodes/ep02.json` (style reference), brain note `D:\second-brain\memory\tiktok-what-if-series.md` (FULL STATE SUMMARY + "Feedback after Part 3").
+Repo `D:\AI-video` (Remotion 4 + Python pipeline). Read first: `docs/TODO.md` (NOW), `videos/unsorted/ep03/script/ep03.json` (current version), `videos/unsorted/ep02/script/ep02.json` (style reference), brain note `D:\second-brain\memory\tiktok-what-if-series.md` (FULL STATE SUMMARY + "Feedback after Part 3").
 
 ## Why
 The owner's verdict on the current Part 3: Jaab always dead-centre, one camera angle, stiff, the hug is fake, attention does not hold, the story feels like every TikTok ghost story, and the "cinematic" look is weak.

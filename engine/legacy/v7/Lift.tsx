@@ -79,7 +79,7 @@ export const LiftPressure:React.FC<EnvProps>=()=> <g><LiftInterior id="lift-lift
 // cast-free lit lift: the cover draws its own big actors on top
 export const LiftEmpty:React.FC<EnvProps>=()=> <LiftInterior id="lift-liftEmpty"/>;
 
-// ---- Part 2 sets (docs/episodes/lift02/lift02-beat-sheet.md) ----
+// ---- Part 2 sets (videos/unsorted/lift02/script/docs/lift02/lift02-beat-sheet.md) ----
 // Handset + base of the desk phone at the guard desk. The receiver only leaves the base after .45,
 // because the whole beat is "he put the technician on hold".
 const Handset:React.FC<{x:number;y:number;r?:number}> = ({x,y,r=-3})=><g transform={`translate(${x} ${y}) rotate(${r})`}><rect x="-38" y="-9" width="76" height="18" rx="9" fill="#39454f" stroke="#95a0a6" strokeWidth="3"/><rect x="-38" y="-16" width="22" height="32" rx="9" fill="#485560" stroke="#95a0a6" strokeWidth="3"/><rect x="16" y="-16" width="22" height="32" rx="9" fill="#485560" stroke="#95a0a6" strokeWidth="3"/></g>;
@@ -218,7 +218,7 @@ export const LobbyPeak:React.FC<EnvProps>=({frame,progress:p=0})=>{const walked=
   </Lobby>
 </g>};
 
-// ---- Part 3 sets (docs/episodes/lift03/lift03-beat-sheet.md) ----
+// ---- Part 3 sets (videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md) ----
 // A pet-camera feed: a warped room behind a fill-the-frame cat face. Only the cat is in focus, so
 // the screen reads as a live call, not a photo.
 const CatCam:React.FC<{p:number;frame:number}> = ({p,frame}) => {
