@@ -3,7 +3,7 @@
 Same keys, same rig geometry as LeadPerformance.tsx (parsed from it, not copied),
 so a gate difference measures the renderer only: GP stroke/fill raster vs Chrome SVG.
 
-  blender -b --factory-startup --python scripts/spikes/gp_shot2.py
+  blender -b --factory-startup --python tools/spikes/gp_shot2.py
 
 Writes public/reference-study/gp-shot2/NNNNN.png (1080x1920 RGBA, gitignored).
 Composition picks them up when REMOTION_GP_SHOT2=1.

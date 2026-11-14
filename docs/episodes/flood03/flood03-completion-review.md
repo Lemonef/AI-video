@@ -11,7 +11,7 @@ Nothing posted; no `--publish` used. Changes remain uncommitted. The requested 1
 ## Verification
 
 - TypeScript passed with `npx.cmd tsc --noEmit -p .` (PowerShell blocks npx.ps1).
-- Normal make.py workflow ran with the requested model/voice, retention gate and framing checks. Reviewed ASR line starts were retained by scripts/episode/build_flood03_aligned.py; targeted replacement scenes were assembled with scripts/episode/finish_flood03.py.
+- Normal make.py workflow ran with the requested model/voice, retention gate and framing checks. Reviewed ASR line starts were retained by tools/episode/build_flood03_aligned.py; targeted replacement scenes were assembled with tools/episode/finish_flood03.py.
 - 21 focused alignment/build/caption tests passed. No lint was disabled.
 - Audited all 15 say strings against the approved story: exact match. Iapetus / gemini-2.5-flash-preview-tts / tempo 1.104 preserved.
 - Inspected every scene in the extracted final midpoint contact sheet; inspected the corrected escape frame separately, plus chair and seated temporal previews.
@@ -47,6 +47,6 @@ In src/v7/FloodFinale.tsx: FloodRing, FloodRewind, FloodStall, FloodDecoy, Flood
 
 No human audio audition was available in this tool environment. ASR, waveform timing and loudness checks do not certify Thai pronunciation or performance; owner listening remains open. The escape/arrest is the explicit visual approximation noted above. Midpoint inspection alone does not certify every in-between animation frame.
 
-Task files: episodes/flood03.json; src/v7/FloodFinale.tsx; src/v7/FloodEscape.tsx; src/v5/Forest.tsx; scripts/episode/build_flood03_aligned.py; scripts/episode/check_flood03_beds.py; scripts/episode/finish_flood03.py; scripts/episode/review_flood03.py; scripts/pipeline/narrate.py; scripts/pipeline/postkit.py; tests/test_narrate_cuts.py; this review. Generated take/timing, ringtone and export/review artifacts are under public/flood03, public/sfx/floodRing.wav and out/. Existing unrelated workspace changes were preserved.
+Task files: episodes/flood03.json; src/v7/FloodFinale.tsx; src/v7/FloodEscape.tsx; src/v5/Forest.tsx; tools/episode/build_flood03_aligned.py; tools/episode/check_flood03_beds.py; tools/episode/finish_flood03.py; tools/episode/review_flood03.py; tools/pipeline/narrate.py; tools/pipeline/postkit.py; tests/test_narrate_cuts.py; this review. Generated take/timing, ringtone and export/review artifacts are under public/flood03, public/sfx/floodRing.wav and out/. Existing unrelated workspace changes were preserved.
 
 A concurrent process also worked on flood03 in the shared workspace; duplicate renders were stopped and this report identifies the exact final reviewed hash.

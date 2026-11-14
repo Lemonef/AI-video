@@ -26,7 +26,7 @@ const CUT_FX:Record<number,{fill:string;opacity:number[]}>={
  };
 // Linear slope = source mean luma / render mean luma per shot (first six frames skipped).
 // Gate-kept only: 3 (1.21) and 19 (1.10) got worse, their error is local, not global brightness.
-// Spike (scripts/spikes/gp_shot2.py): shot-2 lead as a Blender Grease Pencil render instead of SVG.
+// Spike (tools/spikes/gp_shot2.py): shot-2 lead as a Blender Grease Pencil render instead of SVG.
 const GP_SHOT2=process.env.REMOTION_GP_SHOT2==='1';
 const SHOT_GRADE:Record<number,number>={23:1.12,27:.98,28:.85,32:.79,34:.63};
 // Shot 28 rule card sits above the shot's dark overlay and grade in the source: it fades in on source frames
@@ -100,7 +100,7 @@ export const ReferenceStudy:React.FC<{showStudyLabels?:boolean;withSound?:boolea
  const caption=captions.find(c=>frame>=c.start&&frame<c.end);
  const count=shot.id===24?Math.floor(interpolate(frame,[1799,1807,1810,1823,1837,1868,1885],[0,8,11,24,38,39,39],{extrapolateLeft:'clamp',extrapolateRight:'clamp'})):shot.id===25?39:40;
  const fullInsert=sourceAssisted&&[8,21,23,25,35].includes(shot.id);
- // The curve wins over the static slope; fitted by scripts/fit_grade_curve.py.
+ // The curve wins over the static slope; fitted by tools/fit_grade_curve.py.
  const grade=sourceAssisted?((gradeCurves as Record<string,number[]>)[shot.id]?.[local]??SHOT_GRADE[shot.id]):undefined;
  let torchOrigin:{x:number;y:number}|undefined;
  if(actorTarget){

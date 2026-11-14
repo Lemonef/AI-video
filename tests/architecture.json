@@ -4,7 +4,7 @@
     "src": {"depth": 5, "ext": [".ts", ".tsx", ".json", ".css", ".svg"]},
     "episodes": {"depth": 3, "ext": [".json"]},
     "public": {"depth": 4, "ext": null},
-    "scripts": {"depth": 4, "ext": [".py"]},
+    "tools": {"depth": 4, "ext": [".py"]},
     "tests": {"depth": 2, "ext": null},
     "docs": {"depth": 4, "ext": null}
   },
@@ -13,5 +13,5 @@
   "forbidden_src_top_prefixes": ["v", "jaab"],
   "legacy_src_tops": ["v2", "v5", "v7"],
   "_note_legacy": "Frozen list: pre-existing per-version folders awaiting the separate src/ restructure PR (plan sec 6). Never add to it; shrink it as they move.",
-  "_note_depth": "depth = path parts of a tracked file incl. top dir. docs/episodes/<id>/x.md = 4 (the only 4-deep docs area); scripts/episode/x.py = 3."
+  "_note_depth": "depth = path parts of a tracked file incl. top dir. docs/episodes/<id>/x.md = 4 (the only 4-deep docs area); tools/episode/x.py = 3."
 }

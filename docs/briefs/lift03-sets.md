@@ -1,5 +1,5 @@
 ---json
-{"id": "lift03-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_sets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/v7/FloodEscape.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_sets.py"]}
+{"id": "lift03-sets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/v7/FloodEscape.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_sets.py"]}
 ---
 # Goal
 
@@ -110,4 +110,4 @@ shock, sweat, flat, angry, gross, talk. A back view = `turn` near ±1.
 # Done when
 
 Both gates pass: `python -m pytest -q -p no:cacheprovider tests/test_lift03_sets.py` and
-`python scripts/tsc_in_worktree.py`.
+`python tools/tsc_in_worktree.py`.

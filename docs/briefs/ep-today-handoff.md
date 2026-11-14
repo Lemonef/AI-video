@@ -14,7 +14,7 @@ Owner dropped takrut01 (story too weak). Build a NEW short instead, today.
   cast already in src/v2/cast.ts. Pick the story to fit the sets we have (store, lift, house, forest...).
 - Write docs/<id>-beat-sheet.md and episodes/<id>.json (same schema/style v6 as takrut01, engine
   gemini, voice Iapetus). Pick a short id like `revenge01`.
-- Check it: `python scripts/tsc_in_worktree.py` style typecheck not needed (no TS change);
+- Check it: `python tools/tsc_in_worktree.py` style typecheck not needed (no TS change);
   validate JSON loads and every bg/cast id exists in the registries.
 - You cannot reach the network or commit; do not try. Claude runs the render and commits.
 

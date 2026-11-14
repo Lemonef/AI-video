@@ -7,8 +7,8 @@ come from the SOURCE landmarks: the crop asks "does the render match the actor
 where the source actor is". Shots without a measured rig get hand-measured boxes
 in the same file; this script only rewrites the shots it derives.
 
-  python scripts/actor_boxes.py            # update actor-boxes.json
-  python scripts/actor_boxes.py --check    # fail if the file is out of date
+  python tools/actor_boxes.py            # update actor-boxes.json
+  python tools/actor_boxes.py --check    # fail if the file is out of date
 """
 import argparse
 import json
@@ -73,7 +73,7 @@ def main():
         derived[str(shot)] = {'from': 'LeadPerformance keys', 'keys': inside}
     updated = {'plane': '270x480 review', 'boxes': {**current['boxes'], **derived}}
     if args.check:
-        sys.exit(0 if updated == current else 'actor-boxes.json is out of date; run scripts/actor_boxes.py')
+        sys.exit(0 if updated == current else 'actor-boxes.json is out of date; run tools/actor_boxes.py')
     path.write_text(json.dumps(updated, indent=1), encoding='utf-8')
     for shot, v in derived.items():
         print(shot, len(v['keys']), 'keys', v['keys'][0])

@@ -1,7 +1,7 @@
 import importlib.util
 from pathlib import Path
 
-spec = importlib.util.spec_from_file_location("rm", Path(__file__).parent.parent / "scripts" / "restructure_map.py")
+spec = importlib.util.spec_from_file_location("rm", Path(__file__).parent.parent / "tools" / "restructure_map.py")
 rm = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(rm)
 

@@ -1,6 +1,6 @@
 """Type-check from a throwaway pipeline worktree (links the main checkout's node_modules).
 
-  python scripts/tsc_in_worktree.py
+  python tools/tsc_in_worktree.py
 """
 from pathlib import Path
 import subprocess

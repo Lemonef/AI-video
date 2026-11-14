@@ -43,7 +43,7 @@ ElevenLabs Free stock George/v3 audition158characters succeeded. Owner rejected 
 
 Owner explicitly chose **the previous Iapetus narrator tonight**, with ElevenLabs improvement separate. One pinned Gemini2.5take was generated:63.210958s raw,54.978833s attempo1.15. Connected performance instructions vary urgency, brief dry humor, relief and controlled human threat. No monster pitch effect. All15sceneIDs aligned; later captions/camera/sound changes reused that take. ASR broadly covers the story, demand,11%and ending choices, with frequent Thai spelling errors. The possible record/retreat word split was treated as an ASR/alignment warning, not proof of mispronunciation or missing speech.
 
-Hard-floor sneaker recording replaces inappropriate woodland footsteps. Cabinet friction uses a CC0wooden-chair recording, explicitly a material substitute. Asset identities/licences/trims/hashes/onsets are in `docs/episodes/flood02/flood02-sound-assets.json`; deterministic builder `scripts/pipeline/flood_sfx.py`. Plastic-chair drag and metal-latch recordings were retained as candidates but not forced onto a lifted wooden chair or an already-ajar door. Voice remains foreground; continuous rain/tension beds develop and dip at the threat. Actual authored/remapped cue frames are in `docs/episodes/flood02/flood02-final-cues.json`.
+Hard-floor sneaker recording replaces inappropriate woodland footsteps. Cabinet friction uses a CC0wooden-chair recording, explicitly a material substitute. Asset identities/licences/trims/hashes/onsets are in `docs/episodes/flood02/flood02-sound-assets.json`; deterministic builder `tools/pipeline/flood_sfx.py`. Plastic-chair drag and metal-latch recordings were retained as candidates but not forced onto a lifted wooden chair or an already-ajar door. Voice remains foreground; continuous rain/tension beds develop and dip at the threat. Actual authored/remapped cue frames are in `docs/episodes/flood02/flood02-final-cues.json`.
 
 Five isolated-voice quiet centers were shortened, removing0.933333s, **no extra speed**. Global minimum retained silence.24s, with longer protected reveal/threat holds. End-card entrance and reading hold preserved. Every removed voice peak was<=-48.65dBFS; guards>=118ms. Source-matched measurement and plan: `docs/episodes/flood02/flood02-flow-measurement.json`, `docs/episodes/flood02/flood02-flow-edit.json`.
 
@@ -71,12 +71,12 @@ Stills, scripts and meters do not certify continuous-motion taste or human liste
 
 ## Reproduction and tracking
 
-`python -X utf8 scripts/make.py flood02 --draft` recreates the current native picture/voice/caption mix from the cached take and current code. It does not automatically apply delivery quiet cuts. The latest saved version is the reviewed delivery; `--publish` currently selects it. A fresh render has a new source hash and needs a new measured pause pass; never apply stale frame ranges to different media.
+`python -X utf8 tools/make.py flood02 --draft` recreates the current native picture/voice/caption mix from the cached take and current code. It does not automatically apply delivery quiet cuts. The latest saved version is the reviewed delivery; `--publish` currently selects it. A fresh render has a new source hash and needs a new measured pause pass; never apply stale frame ranges to different media.
 
 The preserved exact delivery source is `out/drafts/bangkok-flood/ep02/source-before-flow.mp4`, SHA256 `04c466544a0774e06d7c60d313dc89083e1dddfc15b15e6ad7aa4e2a47536a2d`. Replay:
 
 ```
-python -X utf8 scripts/episode/repair_delivery_pauses.py --source out/drafts/bangkok-flood/ep02/source-before-flow.mp4 --measurement docs/episodes/flood02/flood02-flow-measurement.json --speed 1 --out <flow.mp4>
+python -X utf8 tools/episode/repair_delivery_pauses.py --source out/drafts/bangkok-flood/ep02/source-before-flow.mp4 --measurement docs/episodes/flood02/flood02-flow-measurement.json --speed 1 --out <flow.mp4>
 ffmpeg -i <flow.mp4> -af loudnorm=I=-14:TP=-2.0:LRA=11,apad=whole_dur=54.866666667 -c:v copy -c:a aac -b:a 192k -ar 48000 -movflags +faststart -t 54.866666667 <final.mp4>
 ```
 

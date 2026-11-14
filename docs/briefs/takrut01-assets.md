@@ -1,12 +1,12 @@
 ---json
-{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/make.py", "scripts/pipeline/**", "scripts/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/types.ts", "tsconfig.json"], "context_files": ["episodes/takrut01.json", "docs/episodes/takrut01/takrut01-beat-sheet.md", "src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
+{"id": "takrut01-assets", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_takrut01_assets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/make.py", "tools/pipeline/**", "tools/tsc_in_worktree.py", "out/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/types.ts", "tsconfig.json"], "context_files": ["episodes/takrut01.json", "docs/episodes/takrut01/takrut01-beat-sheet.md", "src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v2/cast.ts", "src/lib/tokens.ts", "tests/test_takrut01_assets.py"]}
 ---
 # Goal
 Episode `episodes/takrut01.json` names one cast member and four backgrounds that do not exist yet.
 Build them so the episode renders. Room descriptions + the lead's look: `docs/episodes/takrut01/takrut01-beat-sheet.md`.
 
 # Steps
-1. `scripts/gen_bg_flux.py` - CLI: `python scripts/gen_bg_flux.py <out.png> "<prompt>"`.
+1. `tools/gen_bg_flux.py` - CLI: `python tools/gen_bg_flux.py <out.png> "<prompt>"`.
    Calls Cloudflare Workers AI `@cf/black-forest-labs/flux-1-schnell`
    (POST `https://api.cloudflare.com/client/v4/accounts/<id>/ai/run/@cf/black-forest-labs/flux-1-schnell`,
    JSON body `{"prompt": ..., "steps": 8}`, response JSON `result.image` = base64 JPEG/PNG).
@@ -30,6 +30,6 @@ Build them so the episode renders. Room descriptions + the lead's look: `docs/ep
 
 # Done when
 - Work only inside the repo you were started in; never read or write paths outside it.
-- `python -m pytest -q tests/test_takrut01_assets.py` passes and `python scripts/tsc_in_worktree.py` passes.
+- `python -m pytest -q tests/test_takrut01_assets.py` passes and `python tools/tsc_in_worktree.py` passes.
 - The test file is the contract: do not edit it; if an assertion is wrong, STOP and report.
-- Diff touches only: scripts/gen_bg_flux.py, public/takrut01/{find,ancient,reset}.png, src/v2/cast.ts, src/v7/Takrut.tsx, src/v5/Forest.tsx.
+- Diff touches only: tools/gen_bg_flux.py, public/takrut01/{find,ancient,reset}.png, src/v2/cast.ts, src/v7/Takrut.tsx, src/v5/Forest.tsx.

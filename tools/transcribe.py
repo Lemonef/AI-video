@@ -1,6 +1,6 @@
 """transcribe.py — hear what a voice actually said (Whisper), to catch misreads before posting.
 
-    python scripts/transcribe.py out/ep01.mp4 [more files...]
+    python tools/transcribe.py out/ep01.mp4 [more files...]
 """
 import sys
 from pathlib import Path

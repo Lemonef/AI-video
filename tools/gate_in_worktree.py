@@ -6,7 +6,7 @@ bundler symlinks public/ subfolders and Windows refuses that through a
 junction. Baselines and gate output stay in the main checkout's study folder,
 so every attempt is compared with the same cached controls.
 
-  python scripts/gate_in_worktree.py --shots 8 9 --guard 20
+  python tools/gate_in_worktree.py --shots 8 9 --guard 20
 """
 import os
 from pathlib import Path
@@ -28,4 +28,4 @@ if HERE != MAIN:
         shutil.copytree(MAIN/'public/reference-study', assets)
 
 env = {**os.environ, 'PYTHONUTF8': '1', 'REMOTION_OFFLINE_FONTS': '1', 'REFERENCE_STUDY_DIR': str(STUDY)}
-sys.exit(subprocess.run([sys.executable, str(HERE/'scripts/episode/reference_gate.py'), *sys.argv[1:]], cwd=HERE, env=env).returncode)
+sys.exit(subprocess.run([sys.executable, str(HERE/'tools/episode/reference_gate.py'), *sys.argv[1:]], cwd=HERE, env=env).returncode)

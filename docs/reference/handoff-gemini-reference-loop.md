@@ -9,7 +9,7 @@ Agent: Gemini CLI. Private study only, never posted. Do not touch `episodes/`, `
 - Source: `out/drafts/reference-study/DegJCmXtbGj/source.mp4`; shots: `.../shot-review.json`; code: `src/compositions/ReferenceStudy/`
 
 ## The loop (one shot at a time, worst shot first)
-1. **Pick** the shot with the highest MAE in the latest review output (run `python scripts/episode/reference_study_review.py ...` per the ledger commands, `--baseline` = the previous accepted render).
+1. **Pick** the shot with the highest MAE in the latest review output (run `python tools/episode/reference_study_review.py ...` per the ledger commands, `--baseline` = the previous accepted render).
 2. **Diagnose:** look at the source frame and our frame side by side (extract with ffmpeg). Write a precise diff list: pose/joint angles, hand contact, character position/scale, camera framing, light direction/darkness, colours, caption text/size/timing. Use the free text models for a second opinion when unsure: `python D:/second-brain/tools/multi_ai_check.py "<question>" --skip-codex`.
 3. **Fix** ONE item group with the smallest code/data change (calibration.json, actor-blocking.json, crowd-blocking.ts, LeadPerformance.tsx, inserts, captions).
 4. **Render only that shot's frame range** at 540x960 (`npx remotion render ... --frames=<start>-<end> --scale=0.5`).

@@ -6,7 +6,7 @@ Data-driven pipeline for a Thai TikTok "What If" series: flat-2D characters draw
 
 ```bash
 cp episodes/ep01.json episodes/ep02.json   # then edit the scenes (ep01 = current template)
-.venv/Scripts/python scripts/make.py ep02   # -> out/final/ep02/ (video, cover, post kit, script)
+.venv/Scripts/python tools/make.py ep02   # -> out/final/ep02/ (video, cover, post kit, script)
 ```
 
 `make.py` voices the episode (cached: an unchanged script is never re-voiced), builds word-timed captions, generates sound effects, renders with Remotion, and masters loudness to −14 LUFS. New episode = new data file, no new code.
@@ -18,7 +18,7 @@ cp episodes/ep01.json episodes/ep02.json   # then edit the scenes (ep01 = curren
 | `--no-render` | voice + captions only (fast check) |
 | `--engine edge` | TTS engine: `gemini` (default for v2) or `edge` (free, choppier) |
 
-Check what the voice actually said: `.venv/Scripts/python scripts/transcribe.py out/ep03.mp4`.
+Check what the voice actually said: `.venv/Scripts/python tools/transcribe.py out/ep03.mp4`.
 
 Preview while editing: `npm run studio` (opens ep01 with estimated timing).
 
@@ -27,7 +27,7 @@ Preview while editing: `npm run studio` (opens ep01 with estimated timing).
 ```
 episodes/        one JSON per episode (ep01 = v1, the current release)   archive/ = drafts
 src/             Remotion code: compositions/, components/, v2/ (rig, forest, ui, sound), v5/ (forest art), lib/ (pure logic)
-scripts/         make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
+tools/           make.py (one command) + pipeline/ (tts, align, captions, foley, freesound, render, master)
 public/          generated: voice takes per episode, sfx/ (synthetic + real/ CC0 recordings)
 out/final/epNN/  what gets posted, one folder per episode: video.mp4, cover.png, post.txt, script.md
 out/avatar/      profile picture (jaab-1080.jpg)
@@ -46,7 +46,7 @@ npm install
 python -m venv .venv && .venv/Scripts/pip install edge-tts faster-whisper pytest   # macOS/Linux: .venv/bin/pip
 ```
 
-Requires Node 18+, Python 3.11+, ffmpeg on PATH. Run `make.py` with the venv's Python (`.venv/Scripts/python scripts/make.py ep02`). Tests: `.venv/Scripts/python -m pytest tests` and `npx tsc --noEmit`.
+Requires Node 18+, Python 3.11+, ffmpeg on PATH. Run `make.py` with the venv's Python (`.venv/Scripts/python tools/make.py ep02`). Tests: `.venv/Scripts/python -m pytest tests` and `npx tsc --noEmit`.
 
 ## Where to look
 
@@ -57,8 +57,8 @@ Requires Node 18+, Python 3.11+, ffmpeg on PATH. Run `make.py` with the venv's P
 | Which backgrounds and props exist / add one | `src/registry/backgrounds.tsx`, `src/registry/props.tsx` |
 | Colours, safe zones, layout tokens | `src/lib/tokens.ts` |
 | How a scene is assembled | `src/compositions/Scene/index.tsx` |
-| How captions are timed | `scripts/pipeline/captions.py` (tested in `tests/`) |
-| Add a TTS engine (Google, F5-TTS-THAI…) | `scripts/pipeline/tts/__init__.py` + one new engine file |
+| How captions are timed | `tools/pipeline/captions.py` (tested in `tests/`) |
+| Add a TTS engine (Google, F5-TTS-THAI…) | `tools/pipeline/tts/__init__.py` + one new engine file |
 | Ideas mined from references | `docs/references.md` |
 | Open work | `docs/TODO.md` |
 
@@ -92,4 +92,4 @@ Fallback: edge-tts (`--engine edge`, free Microsoft voices, per line). It sounds
 
 ## Licences
 
-Remotion is free for individuals and companies of up to 3 people (remotion.dev/license). Fonts: Kanit and Mali (SIL OFL) via `@remotion/google-fonts`. Sound effects are generated procedurally by `scripts/pipeline/sfx.py`.
+Remotion is free for individuals and companies of up to 3 people (remotion.dev/license). Fonts: Kanit and Mali (SIL OFL) via `@remotion/google-fonts`. Sound effects are generated procedurally by `tools/pipeline/sfx.py`.

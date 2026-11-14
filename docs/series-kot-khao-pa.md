@@ -1,6 +1,6 @@
 # Series: กฎเข้าป่า (3 parts)
 
-The type is a thriller series. The lead is จ๊าบ. Every part follows `growth-playbook.md` (cold open, rules taught just in time, 35–45s) and has to pass `scripts/pipeline/retention.py`.
+The type is a thriller series. The lead is จ๊าบ. Every part follows `growth-playbook.md` (cold open, rules taught just in time, 35–45s) and has to pass `tools/pipeline/retention.py`.
 
 | Part | Story | Ends with |
 |---|---|---|

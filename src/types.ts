@@ -1,4 +1,4 @@
-// Episode data model. One episodes/epNN.json = one video; scripts/make.py adds `timing` and `take`.
+// Episode data model. One episodes/epNN.json = one video; tools/make.py adds `timing` and `take`.
 
 export type Pose = 'idle' | 'wave' | 'shock' | 'yawn' | 'armsCrossed' | 'point' | 'think' | 'hold';
 export type Expr = 'smile' | 'sleepy' | 'shock' | 'sweat' | 'flat' | 'angry' | 'gross' | 'talk';
@@ -80,7 +80,7 @@ export type Scene = {
 	bedsFade?: number; // seconds to glide into them (default 0.4; ~0.15 = sudden silence)
 	bedsLead?: number; // J-cut: this scene's beds start this many seconds BEFORE its picture
 	monsterPreserveTiming?: boolean; // pitch effect keeps the original word/caption timing
-	monster?: string; // from this word to the end of the line the voice is the creature's: pitched down (scripts/pipeline/media.py)
+	monster?: string; // from this word to the end of the line the voice is the creature's: pitched down (tools/pipeline/media.py)
 	hush?: {word: string; lead?: number; hold?: number}; // silence-before-the-hit: every bed drops to near zero `lead` s before the word, for `lead + hold` s
 	grade?: string; // colour script: CSS filter for this scene's world (v6)
 	sfx?: Array<{at: number; word?: string; sound: string; volume?: number; rate?: number; trimBefore?: number}>; // rate > 1 = faster (escalating heartbeat) // one-shots at fractions of the line

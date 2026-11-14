@@ -3,7 +3,7 @@
 Lists every file (tracked, untracked and gitignored) with its proposed destination.
 Read-only: this phase has no --apply; moves are done by later, reviewed phases.
 
-    python -I scripts/restructure_map.py [--root D:/AI-video] [--out .build/restructure-manifest.json]
+    python -I tools/restructure_map.py [--root D:/AI-video] [--out .build/restructure-manifest.json]
 """
 from __future__ import annotations
 

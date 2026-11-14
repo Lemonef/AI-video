@@ -1,6 +1,6 @@
 """Pinned CC0 floor/furniture/door recordings for flood02; explicit, cached build.
 
-Run: .venv/Scripts/python.exe scripts/pipeline/flood_sfx.py
+Run: .venv/Scripts/python.exe tools/pipeline/flood_sfx.py
 Source previews and final one-shots stay in ignored public/sfx/real/. The manifest
 records identity, licence, source trim, hashes and measured onset for cue placement.
 """

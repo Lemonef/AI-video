@@ -10,7 +10,7 @@ masks screen-space overlays (title, clock, captions), and takes a per-pixel
 median. The original plate is pasted back unchanged in the centre, so any frame
 that never left the plate renders bit-identical.
 
-  python scripts/extend_clean_plate.py            # aisle plate, default shots
+  python tools/extend_clean_plate.py            # aisle plate, default shots
 
 Writes public/reference-study/<plate>-clean-v2.png (gitignored, like v1) and
 src/compositions/ReferenceStudy/plate-extents.json (tracked: where the

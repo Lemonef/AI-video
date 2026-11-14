@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 os.chdir(ROOT)
 os.environ['PATH']=str(ROOT/'.build/flood03-tools')+os.pathsep+os.environ['PATH']
-sys.path.insert(0,str(ROOT/'scripts'))
+sys.path.insert(0,str(ROOT/'tools'))
 from pipeline import narrate
 from pipeline.tts import get_engine
 ep=json.loads((ROOT/'episodes/flood03.json').read_text(encoding='utf-8'))
@@ -26,5 +26,5 @@ cache.write_text(json.dumps({'_take':dict(key=key,voice_key=voice_key,tempo=ep['
 def reviewed_cuts(lines,words,duration,pauses):
     return narrate._cuts_from_starts(starts,duration,pauses)
 narrate.scene_cuts=reviewed_cuts
-sys.argv=['scripts/make.py','flood03']
-runpy.run_path(str(ROOT/'scripts/make.py'),run_name='__main__')
+sys.argv=['tools/make.py','flood03']
+runpy.run_path(str(ROOT/'tools/make.py'),run_name='__main__')

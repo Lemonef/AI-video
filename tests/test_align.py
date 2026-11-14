@@ -3,7 +3,7 @@ import sys
 import pytest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
 from pipeline.align import scene_cuts, snap, spoken_len, words_in  # noqa: E402
 from pipeline.tts import Word  # noqa: E402

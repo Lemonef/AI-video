@@ -31,6 +31,6 @@ def publish(version: Path, final: Path) -> None:
     except PermissionError:
         raise SystemExit(
             f"{final} is open in another program. Close it, then run:\n"
-            f"    python scripts/make.py {final.parent.name} --publish\n"
+            f"    python tools/make.py {final.parent.name} --publish\n"
             f"(the new cut is saved: {version})"
         )

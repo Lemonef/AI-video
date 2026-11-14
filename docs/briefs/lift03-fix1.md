@@ -1,5 +1,5 @@
 ---json
-{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/cast.ts", "src/v2/ui.tsx", "src/v2/Forest.tsx", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v7/FloodEscape.tsx", "src/v2/Character.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
+{"id": "lift03-fix1", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift03_fix1.py tests/test_lift03_sets.py tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/cast.ts", "src/v2/ui.tsx", "src/v2/Forest.tsx", "src/types.ts", "tsconfig.json"], "context_files": ["src/v7/Lift.tsx", "src/v7/light.tsx", "src/v5/Forest.tsx", "src/v7/FloodEscape.tsx", "src/v2/Character.tsx", "docs/episodes/lift03/lift03-beat-sheet.md", "tests/test_lift03_fix1.py"]}
 ---
 # Goal
 
@@ -53,4 +53,4 @@ the existing flat-vector style. Frame 1080x1920; keep faces and key props above 
 
 # Done when
 
-Both gates pass: the pytest gate in the header and `python scripts/tsc_in_worktree.py`.
+Both gates pass: the pytest gate in the header and `python tools/tsc_in_worktree.py`.

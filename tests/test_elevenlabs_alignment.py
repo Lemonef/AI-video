@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 from pipeline.narrate import _take_keys
 from pipeline.tts.elevenlabs_engine import alignment_words
 

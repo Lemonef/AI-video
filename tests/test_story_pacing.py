@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts" / "episode"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools" / "episode"))
 from types import SimpleNamespace
 from pipeline.narrate import _take_keys
 from pipeline import retention

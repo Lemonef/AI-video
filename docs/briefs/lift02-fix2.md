@@ -1,5 +1,5 @@
 ---json
-{"id": "lift02-fix2", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python scripts/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json", "src/v5/**", "src/v7/light.tsx"], "context_files": ["src/v7/Lift.tsx", "docs/briefs/lift02-fix1.md"]}
+{"id": "lift02-fix2", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py", "python tools/tsc_in_worktree.py"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json", "src/v5/**", "src/v7/light.tsx"], "context_files": ["src/v7/Lift.tsx", "docs/briefs/lift02-fix1.md"]}
 ---
 # Goal
 
@@ -41,4 +41,4 @@ Fix:
 # Done when
 
 Both gates pass: `python -m pytest -q -p no:cacheprovider tests/test_lift02_sets.py` and
-`python scripts/tsc_in_worktree.py`.
+`python tools/tsc_in_worktree.py`.

@@ -15,7 +15,7 @@ import type {Episode as EpisodeT} from './types';
 // JSON imports get a structural type TS can't compare with Episode (optional keys differ per scene).
 const CURRENT = current as unknown as EpisodeT;
 
-// scripts/make.py passes the episode (with TTS timing) via --props.
+// tools/make.py passes the episode (with TTS timing) via --props.
 // Studio previews the current episode (ep01 = v1) without audio, using estimated line lengths.
 export const RemotionRoot: React.FC = () => (
 	<>

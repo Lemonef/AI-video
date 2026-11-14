@@ -1,9 +1,9 @@
 """make.py — one command per episode: voice -> captions -> sfx -> render -> loudness master -> post kit.
 
-    python scripts/make.py ep01              # voice (cached) + render out/ep01.mp4
-    python scripts/make.py ep02 --force      # re-voice every line
-    python scripts/make.py ep02 --publish    # copy the newest version into out/final/ep02/ (after closing the player)
-    python scripts/make.py ep01 --engine edge --voice th-TH-NiwatNeural   # override the episode's engine/voice
+    python tools/make.py ep01              # voice (cached) + render out/ep01.mp4
+    python tools/make.py ep02 --force      # re-voice every line
+    python tools/make.py ep02 --publish    # copy the newest version into out/final/ep02/ (after closing the player)
+    python tools/make.py ep01 --engine edge --voice th-TH-NiwatNeural   # override the episode's engine/voice
 """
 import argparse
 import json
@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "scripts"))
+sys.path.insert(0, str(ROOT / "tools"))
 
 from pipeline import postkit, retention, sfx, versions  # noqa: E402
 from pipeline.master import master  # noqa: E402

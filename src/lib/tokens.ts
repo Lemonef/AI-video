@@ -45,7 +45,7 @@ export const SAFE = {top: 170, bottom: 1500, right: 940, left: VISIBLE.left + ED
 export const FLOOR_Y = 1260;
 export const CAPTION_TOP = 1330; // below the floor line, above TikTok's bottom UI (SAFE.bottom)
 
-// Procedural sound effects written by scripts/pipeline/sfx.py (licence-free).
+// Procedural sound effects written by tools/pipeline/sfx.py (licence-free).
 export const SFX = {pop: 'sfx/pop.wav', tick: 'sfx/tick.wav', whoosh: 'sfx/whoosh.wav'} as const;
 
 // Anti-banding grain over the whole frame. Flat-colour gradients band badly once TikTok

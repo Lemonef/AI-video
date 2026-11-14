@@ -28,7 +28,7 @@ Blocky low-poly **3D** characters (cube heads, rectangle eyes, ties) in warm-lit
 
 ## story-series-skill-pack (Instagram, local copy D:\Documents\Downloads\story-series-skill-pack-yoolaibeef)
 Thai-language Remotion + three.js pack for 9:16 "survival rule" series. **Licence is an unfilled DRAFT with "no redistribution"**, so no code is copied; ideas only.
-- Pipeline shape: edge-tts → faster-whisper transcribe/align (`overlaps: 0` gate) → splice pauses → render → mix (sidechain duck, −14 LUFS). **Adopted the idea** of −14 LUFS mastering (`scripts/pipeline/master.py`, own implementation).
+- Pipeline shape: edge-tts → faster-whisper transcribe/align (`overlaps: 0` gate) → splice pauses → render → mix (sidechain duck, −14 LUFS). **Adopted the idea** of −14 LUFS mastering (`tools/pipeline/master.py`, own implementation).
 - "Write for the ear": numbers as words, Thai ไม้ไต่คู้ for short vowels, listen to doubtful words because Whisper can't prove pronunciation. Folded into the README's episode-writing rules.
 - Re-voice one line without re-cutting the picture (keep slot lengths). Ours already caches per line; the picture re-times automatically.
 - Pause rules: +0.4–0.6 s after a punch line, +0.8–1.0 s before the twist. Applied via `padAfter`.

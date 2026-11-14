@@ -7,7 +7,7 @@
       cue sheet `MOOD01_AUDIO` dumped via esbuild -> ffmpeg mix -> master.py (-14.0 LUFS, TP -1.3)
 - [x] Final: `out/final/mood/ep01/video.mp4`; QA contact sheet + end card read
 - [ ] Zen posts (IG + TikTok @jaabjaab); collect views / retention
-- [ ] Cue-sheet mixer lives in scratchpad; promote to `scripts/pipeline/mixcues.py` next episode
+- [ ] Cue-sheet mixer lives in scratchpad; promote to `tools/pipeline/mixcues.py` next episode
 
 ## QUEUE (owner order, 2026-11-01)
 -1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
@@ -46,11 +46,11 @@
 5. [x] AgentsRoom via own MCP: brain tools/agentsroom_mcp.py proxy (13 of 175 tools), spawn + live status verified with app open; results come back via docs/agent-logs files (wait/get refuse non-AgentsRoom callers)
 6. [x] Brain cleanup: research/ 124->53 items (c1c3f17), paper-trades price log archived 595->473 KB (85c6273); v2 shadow skill kept; memory/ + AGENT.md renames skipped (cross-repo churn, cosmetic)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
-   - [x] Measured gate scripts/episode/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
+   - [x] Measured gate tools/episode/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
    - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
    - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
    - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
-   - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); scripts/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
+   - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); tools/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
    - [ ] Tool trials (local, zero tokens while running)
      - [x] Free vision (Gemini 2.5 flash) for joint coords: FAILS (generic skeleton); pose description OK -> hand-marking stays
      - [x] Blender 5.2.3 headless Grease Pencil v3 smoke render works (stroke + plane visible; materials need show_stroke=True)
@@ -83,7 +83,7 @@
          - [x] Densify other moving shots: 26-shot motion-aware gate, KEEP 17 (1 2 3 4 5 6 7 10 15 16 17 18 20 22 24 26 27; e.g. 6 15.93->12.56, 16 10.33->8.24, 27 18.69->16.94), reverted 9 (wobble) + 11/12/28/29/31/32/33/34 (MAE flat) (402e23d); baselines re-made, deterministic
          - [x] Motion score in gate + side-by-side for failed targets (pipeline zen deepseek, groq review; 9254672)
          - [ ] MAE-flat review lane: Gemini vision opinion on shotNN-side.mp4, Zen decides (candidates 28, 11, 31; 29 solved by grade curve)
-         - [x] Shot 29 per-frame grade curve (pipeline: nim nemotron-3-ultra built, cohere reviewed; scripts/fit_grade_curve.py -> grade-curves.json): MAE 21.72 -> 12.34, SSIM .768 -> .862, motion 3.26 -> 2.38 KEEP (dd5f54d); guards 3/19/28/30 held; baseline 29 rebuilt
+         - [x] Shot 29 per-frame grade curve (pipeline: nim nemotron-3-ultra built, cohere reviewed; tools/fit_grade_curve.py -> grade-curves.json): MAE 21.72 -> 12.34, SSIM .768 -> .862, motion 3.26 -> 2.38 KEEP (dd5f54d); guards 3/19/28/30 held; baseline 29 rebuilt
          - [ ] Check gate motion on shot 3: guard motion 4.93 -> 1.61 with frame MAE identical (baseline vs candidate should be bit-identical)
          - [ ] Try grade curve on other brightness-ratio shots (35/4/25/6), one gate each
          - [ ] Worst now: 7 (24.24 head/hands/arms), 9 (21.70), 22 (18.15), 4 (17.99), 33 (17.22)
@@ -94,10 +94,10 @@
        - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
-     - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
+     - [x] tools/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
      - [x] Pipeline job ref-cut-transitions: all 3 rungs built it right (nemotron + terra identical gate numbers); brief numbers partly wrong. Kept 31/32 (c348cc3: 16.60->15.02, 17.70->16.42), dropped 8/9/23 (< 0.05 bar) and 28 (doubled its own dark grade, worse). Baselines 31/32 rebuilt at c348cc3
      - [x] Pipeline job ref-shot-grade: kept 23/28/32/34 (b754ced: 25.97->17.52, 24.46->18.16, 16.42->5.16, 25.19->7.99), dropped 3/19 (local mismatch, global slope worse). Baselines rebuilt at b754ced
-     - [x] Shots 3/19 local brightness (region, not global): root cause was framing, not light. Fitted camera pulls back past the one-frame aisle plate (scale .87 / tilt +105) and the nested stage svg clipped at 270x480, leaving black bars. scripts/extend_clean_plate.py builds aisle-clean-v2 from source frames; assisted aisle/dark shots render unclipped (f43e95e: shot 3 22.46->14.67, 19 29.36->26.13, guard 29 22.90->22.26). Baselines 3/19/29/30/31/33 rebuilt at f43e95e
+     - [x] Shots 3/19 local brightness (region, not global): root cause was framing, not light. Fitted camera pulls back past the one-frame aisle plate (scale .87 / tilt +105) and the nested stage svg clipped at 270x480, leaving black bars. tools/extend_clean_plate.py builds aisle-clean-v2 from source frames; assisted aisle/dark shots render unclipped (f43e95e: shot 3 22.46->14.67, 19 29.36->26.13, guard 29 22.90->22.26). Baselines 3/19/29/30/31/33 rebuilt at f43e95e
        - [ ] Optional: shot 19 residual +10-34 at edges/ceiling during the tilt (source-median margins); same overshoot measured on other plates (units past the frame, calibration.json): door shot 22 right +47, map-parking shot 15 right +52 / top +64, parking shot 11 right +25, door 15 right +17, map 17 bottom +47, dark-prop 32 ~9. Next: add spans/overlays per plate to extend_clean_plate.py and gate each
      - [x] Full v14 render: out/drafts/reference-study/DegJCmXtbGj/practice-v14-gated-preview.mp4 (sha 6d158f6b9c18, +playable). vs v13: MAE 17.81->14.96, SSIM .783->.796, 13 shots better, 0 shots worse; one frame worse (27@2005). Worst left: 7 (30.7), 22 (26.0), 9 (23.9), 27 (23.2), 15 (21.4) -> 1:1 loop
      - [x] Skill family (owner-agreed 2026-11-03; DONE brain 9cbd8cc, installed to ~/.codex/skills), right after v14: video-maker (top, idea -> posted video) calls craft skills story / script-voice / character / camera / lighting / sound / captions / qa / release

@@ -119,7 +119,7 @@ const Outside:React.FC<{f:number;crowd?:boolean;assisted?:boolean;targets?:Crowd
  {crowd?<><Threat x={37} y={383} s={.83} f={f} n={1}/><Threat x={106} y={421} s={1.2} f={f} n={0}/><Threat x={204} y={411} s={1.05} f={f} n={2}/></>:null}<path d="M26,321 H170 L232,444 H0Z" fill="#e4ce9f" opacity=".04"/></g>;
 
 // The fitted source camera pulls back past one frame in shots 3/19/29; the extended plate
-// (scripts/extend_clean_plate.py) fills those margins from the source itself, v1 unchanged inside.
+// (tools/extend_clean_plate.py) fills those margins from the source itself, v1 unchanged inside.
 const AISLE_PLATE=plateExtents.aisle;
 const MAP_PARKING_PLATE=plateExtents['map-parking'];
 const DOOR_PLATE=plateExtents.door;

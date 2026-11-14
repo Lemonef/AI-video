@@ -8,7 +8,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[2]
 os.environ['PATH']=str(ROOT/'.build/flood03-tools')+os.pathsep+os.environ['PATH']
-sys.path.insert(0,str(ROOT/'scripts'))
+sys.path.insert(0,str(ROOT/'tools'))
 from pipeline import versions
 from pipeline.master import master
 

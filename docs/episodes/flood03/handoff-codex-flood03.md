@@ -16,7 +16,7 @@ Agent: Codex (gpt-6.1-sol). Repo D:\AI-video. Owner is away; the parent (Claude)
 
 ## Run + verify (all must pass before you report)
 - `npx tsc --noEmit -p .`
-- `python scripts/make.py flood03` (renders a version into `out/versions/flood03/`, latest copy in final per repo convention). If the TTS call fails on quota, stop and report it — do NOT switch voice or model.
+- `python tools/make.py flood03` (renders a version into `out/versions/flood03/`, latest copy in final per repo convention). If the TTS call fails on quota, stop and report it — do NOT switch voice or model.
 - Extract one still per scene (ffmpeg, mid-scene) into `out/drafts/flood03-review/` and LOOK at every one: check Jaab placement, poses, readable action, no clipping/overlap, captions inside safe area.
 - Run the repo's retention/framing lints if `make.py` does not already.
 - Do NOT run `--publish`; the parent publishes after review.

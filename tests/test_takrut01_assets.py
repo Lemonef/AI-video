@@ -51,6 +51,6 @@ def test_room_stills_exist_at_canvas_size():
 
 
 def test_flux_script_never_prints_keys():
-    src = (ROOT / "scripts" / "gen_bg_flux.py").read_text(encoding="utf-8")
+    src = (ROOT / "tools" / "gen_bg_flux.py").read_text(encoding="utf-8")
     assert ".secrets" in src
     assert not re.search(r"print\([^)]*(key|token)", src, re.I)
