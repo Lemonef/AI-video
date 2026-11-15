@@ -1,0 +1,51 @@
+{
+ "_doc": "p15 shot list. Same schema as p01.json. Frames from words/p15.json. Story: Lustig hinted the contract would go to the highest bidder -> Poisson understood, thought he was being smart -> the second hook: Poisson's wife grew suspicious, all too fast -> Lustig did not argue, he shifted the story: admitted with embarrassment a low-paid civil servant needs a little extra -> Poisson relaxed: a bribe made it feel real, corruption is something people already believe in -> the genius: not a lie, a small sin. f1 = p16 first word (12394) minus 15.",
+ "part": "p15",
+ "f0": 11245,
+ "f1": 12379,
+ "shots": [
+  {"f0": 11245, "f1": 11350, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.05], "origin": "50% 40%"},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_whisper.png", "x": 480, "y": 1000, "h": 660, "at": 11250},
+    {"t": "words", "text": "THE CONTRACT", "x": 1300, "y": 260, "size": 90, "at": 11283},
+    {"t": "tag", "text": "HIGHEST BIDDER", "x": 1300, "y": 480, "at": 11316}
+   ]},
+  {"f0": 11350, "f1": 11470, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_smart.png", "x": 1400, "y": 1000, "h": 660, "at": 11357},
+    {"t": "words", "text": "HE UNDERSTOOD", "x": 620, "y": 320, "size": 90, "at": 11366},
+    {"t": "words", "text": "SMART.", "x": 620, "y": 520, "size": 140, "color": "orange", "at": 11424},
+    {"t": "underline", "x": 620, "y": 600, "w": 460, "at": 11440}
+   ]},
+  {"f0": 11470, "f1": 11660, "bg": {"plate": "ink60full/plates/poisson_parlour_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "THE SECOND HOOK", "x": 960, "y": 170, "size": 90, "at": 11489},
+    {"t": "sprite", "src": "ink60/cast/poisson_wife_suspicious.png", "x": 1400, "y": 1000, "h": 660, "at": 11520},
+    {"t": "tag", "text": "HIS WIFE", "x": 600, "y": 400, "at": 11536},
+    {"t": "words", "text": "TOO FAST.", "x": 600, "y": 640, "size": 130, "color": "red", "at": 11611}
+   ]},
+  {"f0": 11660, "f1": 11955, "bg": {"plate": "ink60full/plates/hotel_suite_corner_34.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_embarrassed.png", "x": 480, "y": 1000, "h": 660, "at": 11672},
+    {"t": "words", "text": "NO ARGUMENT", "x": 1300, "y": 200, "size": 90, "at": 11687},
+    {"t": "words", "text": "NEW STORY", "x": 1300, "y": 380, "size": 90, "at": 11722},
+    {"t": "words", "text": "LOW-PAID", "x": 1300, "y": 580, "size": 100, "at": 11832},
+    {"t": "words", "text": "A LITTLE EXTRA", "x": 1300, "y": 780, "size": 110, "color": "orange", "at": 11892}
+   ]},
+  {"f0": 11955, "f1": 12165, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_handing_cash.png", "x": 460, "y": 1000, "h": 640, "at": 11964},
+    {"t": "stamp", "text": "BRIBE", "x": 1300, "y": 280, "rot": -8, "color": "red", "at": 12007},
+    {"t": "words", "text": "FEELS REAL", "x": 1300, "y": 520, "size": 110, "color": "orange", "at": 12037},
+    {"t": "words", "text": "EVERYONE BELIEVES IN CORRUPTION", "x": 1240, "y": 720, "size": 52, "at": 12090}
+   ]},
+  {"f0": 12165, "f1": 12379, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "THE GENIUS", "x": 960, "y": 170, "size": 110, "at": 12189},
+    {"t": "words", "text": "BELIEVE A LIE", "x": 960, "y": 470, "size": 100, "at": 12261},
+    {"t": "cross", "x": 960, "y": 470, "size": 280, "at": 12276},
+    {"t": "words", "text": "A SMALL SIN.", "x": 960, "y": 800, "size": 150, "color": "orange", "at": 12336},
+    {"t": "underline", "x": 960, "y": 890, "w": 900, "at": 12350}
+   ]}
+ ]
+}
