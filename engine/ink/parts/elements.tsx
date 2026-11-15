@@ -51,7 +51,11 @@ export const ChimneyElement: React.FC<Props<ChimneyEl>> = ({el, shotF0}) => {
   return <g><g opacity={1 - p} transform={`translate(${el.x} ${el.y}) scale(${1 - p * 0.5} 1)`}><Tower x={0} y={0} k={el.h / 430}/></g><g opacity={p} transform={`translate(${el.x} ${el.y})`}><path d={`M${-w / 2} 0 L${-el.h * 0.055} ${-el.h} L${el.h * 0.055} ${-el.h} L${w / 2} 0 Z`} fill={INK}/><rect x={-el.h * 0.065} y={-el.h} width={el.h * 0.13} height={20} fill={INK}/>{Array.from({length: 12}, (_, i) => <path key={i} d={`M${-w * (0.34 + i * 0.01)} ${-el.h + (i + 1) * el.h / 13} h${w * (0.68 + i * 0.02)}`} stroke={PAPER} strokeWidth={2} opacity={0.18}/>)}</g>{f >= el.done - shotF0 && Array.from({length: 4}, (_, i) => {const age = ((f - (el.done - shotF0) + i * 20) % 80) / 80; return <circle key={i} cx={el.x + Math.sin(age * 5 + i) * 25} cy={el.y - el.h - age * 240} r={15 + age * 60} fill="#6b6b70" opacity={(1 - age) * 0.55}/>;})}</g>;
 };
 export const RadioElement: React.FC<Props<RadioEl>> = ({el, shotF0}) => {
-  const f = useCurrentFrame() - delay(el, shotF0); return <g fill="none" stroke={ORANGE} strokeWidth={10} strokeLinecap="round">{f >= 0 && [0, 1, 2].flatMap(i => {const p = ((f + 30 - i * 10) % 30) / 30; const r = 35 + p * 180; return [-1, 1].map(s => <path key={`${i}-${s}`} d={`M${el.x + s * r * 0.65} ${el.y - r * 0.75} Q${el.x + s * r * 1.3} ${el.y} ${el.x + s * r * 0.65} ${el.y + r * 0.75}`} opacity={1 - p}/>);})}</g>;
+  // Arcs rise r*RISE above the source; a source near the frame top (antenna tip) shrinks the growth to the
+  // headroom so the outer wave never runs off-frame. Keep RISE in step with the 0.75 in the path below.
+  const R0 = 35, GROW = 180, RISE = 0.75, STROKE = 10, PERIOD = 30;
+  const span = Math.max(0, Math.min(GROW, (el.y - STROKE) / RISE - R0));
+  const f = useCurrentFrame() - delay(el, shotF0); return <g fill="none" stroke={ORANGE} strokeWidth={STROKE} strokeLinecap="round">{f >= 0 && [0, 1, 2].flatMap(i => {const p = ((f + PERIOD - i * 10) % PERIOD) / PERIOD; const r = R0 + p * span; return [-1, 1].map(s => <path key={`${i}-${s}`} d={`M${el.x + s * r * 0.65} ${el.y - r * 0.75} Q${el.x + s * r * 1.3} ${el.y} ${el.x + s * r * 0.65} ${el.y + r * 0.75}`} opacity={1 - p}/>);})}</g>;
 };
 export const Element: React.FC<Props<El>> = props => {
   const el = props.el; const common = {shotF0: props.shotF0, shotF1: props.shotF1};
