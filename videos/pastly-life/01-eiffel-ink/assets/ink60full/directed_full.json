@@ -313,10 +313,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.44,
      "focus": {
       "x": 0.323,
-      "y": 0.663
+      "y": 0.532
      }
     },
     "actors": [
@@ -439,10 +439,10 @@
     "plate": "paris_tower_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.61,
      "focus": {
       "x": 0.271,
-      "y": 0.667
+      "y": 0.551
      }
     },
     "actors": [
@@ -724,10 +724,10 @@
     "plate": "tower_radio_station",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.312,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -1051,10 +1051,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.333,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -1361,10 +1361,10 @@
     "plate": "paris_dusk",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.396,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -1469,10 +1469,10 @@
     "plate": "paris_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.469,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -1605,10 +1605,10 @@
     "fallback_plate": "paris_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.625,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -1876,10 +1876,10 @@
     "fallback_plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.48,
      "focus": {
       "x": 0.365,
-      "y": 0.65
+      "y": 0.523
      }
     },
     "actors": [
@@ -2084,10 +2084,10 @@
     "fallback_plate": "paris_dusk",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.271,
-      "y": 0.661
+      "y": 0.532
      }
     },
     "actors": [
@@ -2241,10 +2241,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.573,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -2462,10 +2462,10 @@
     "plate": "paris_tower_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.48,
      "focus": {
       "x": 0.292,
-      "y": 0.65
+      "y": 0.523
      }
     },
     "actors": [
@@ -2637,10 +2637,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.323,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -2775,10 +2775,10 @@
     "plate": "paris_tower_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.271,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -3075,10 +3075,10 @@
     "plate": "paris_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.427,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -3247,10 +3247,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.323,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -3376,10 +3376,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.615,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -3751,10 +3751,10 @@
     "plate": "paris_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.396,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -3905,10 +3905,10 @@
     "fallback_plate": "paris_dusk",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.25,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -4078,10 +4078,10 @@
     "plate": "paris_tower_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.3,
      "focus": {
       "x": 0.396,
-      "y": 0.641
+      "y": 0.495
      }
     },
     "actors": [
@@ -4186,10 +4186,10 @@
     "plate": "paris_tower_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.48,
      "focus": {
       "x": 0.156,
-      "y": 0.667
+      "y": 0.523
      }
     },
     "actors": [
@@ -4302,10 +4302,10 @@
     "fallback_plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.292,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -4439,10 +4439,10 @@
     "fallback_plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.599,
-      "y": 0.661
+      "y": 0.532
      }
     },
     "actors": [
@@ -4540,10 +4540,10 @@
     "plate": "paris_tower_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.365,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -4773,10 +4773,10 @@
     "plate": "paris_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.292,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -5061,10 +5061,10 @@
     "plate": "vienna_cafe_morning",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.396,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -5184,10 +5184,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.427,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -5364,10 +5364,10 @@
     "plate": "vienna_street_dusk",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.651,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -5638,10 +5638,10 @@
     "fallback_plate": "paris_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.599,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -5947,10 +5947,10 @@
     "plate": "paris_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.651,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -6203,10 +6203,10 @@
     "plate": "backroom_workshop_lamp",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.271,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -6361,10 +6361,10 @@
     "plate": "backroom_workshop_lamp",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.651,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -6497,10 +6497,10 @@
     "plate": "backroom_workshop_lamp",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.48,
      "focus": {
       "x": 0.469,
-      "y": 0.65
+      "y": 0.523
      }
     },
     "actors": [
@@ -6719,10 +6719,10 @@
     "plate": "chicago_street_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.4,
      "focus": {
       "x": 0.25,
-      "y": 0.656
+      "y": 0.505
      }
     },
     "actors": [
@@ -6920,10 +6920,10 @@
     "plate": "capone_office",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.3,
      "focus": {
       "x": 0.5,
-      "y": 0.661
+      "y": 0.477
      }
     },
     "actors": [
@@ -7132,10 +7132,10 @@
     "plate": "capone_office",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.333,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -7288,10 +7288,10 @@
     "plate": "capone_office",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.44,
      "focus": {
       "x": 0.427,
-      "y": 0.644
+      "y": 0.514
      }
     },
     "actors": [
@@ -7434,10 +7434,10 @@
     "plate": "capone_office",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.312,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -7752,10 +7752,10 @@
     "plate": "chicago_street_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.48,
      "focus": {
       "x": 0.547,
-      "y": 0.656
+      "y": 0.523
      }
     },
     "actors": [
@@ -7882,10 +7882,10 @@
     "fallback_plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.625,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -8066,10 +8066,10 @@
     "plate": "hotel_room_night",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.271,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
@@ -8180,10 +8180,10 @@
     "plate": "paris_tower_grey",
     "cam": {
      "move": "hold",
-     "zoom": 1.65,
+     "zoom": 1.52,
      "focus": {
       "x": 0.292,
-      "y": 0.656
+      "y": 0.532
      }
     },
     "actors": [
