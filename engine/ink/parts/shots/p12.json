@@ -1,0 +1,44 @@
+{
+ "_doc": "p12 shot list. Same schema as p01.json. Frames from words/p12.json. Story: Lustig closes the door and speaks quietly -> 'gentlemen, what I tell you is a state secret' -> the tower is too expensive to maintain -> the government has decided to demolish it -> but it cannot say so, the public would revolt -> so the sale must be kept confidential. f1 = p13 first word (9745) minus 15.",
+ "part": "p12",
+ "f0": 9056,
+ "f1": 9730,
+ "shots": [
+  {"f0": 9056, "f1": 9180, "bg": {"plate": "ink60full/plates/hotel_doorway_framed_view.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_murmur.png", "x": 1400, "y": 1000, "h": 680, "at": 9062},
+    {"t": "words", "text": "DOOR CLOSED.", "x": 620, "y": 320, "size": 110, "at": 9093},
+    {"t": "words", "text": "QUIETLY...", "x": 620, "y": 480, "size": 70, "at": 9127}
+   ]},
+  {"f0": 9180, "f1": 9320, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.06], "origin": "50% 40%"},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_seated.png", "x": 520, "y": 1000, "h": 560, "at": 9186},
+    {"t": "words", "text": "\"GENTLEMEN...\"", "x": 1260, "y": 260, "size": 100, "at": 9190},
+    {"t": "stamp", "text": "STATE SECRET", "x": 1260, "y": 560, "rot": -8, "color": "red", "at": 9268}
+   ]},
+  {"f0": 9320, "f1": 9415, "bg": {"plate": "ink60full/plates/tower_rust_closeup.png", "zoom": [1.0, 1.08]},
+   "els": [
+    {"t": "words", "text": "TOO EXPENSIVE", "x": 960, "y": 300, "size": 130, "color": "orange", "at": 9366},
+    {"t": "words", "text": "TO MAINTAIN", "x": 960, "y": 450, "size": 90, "at": 9389}
+   ]},
+  {"f0": 9415, "f1": 9520, "bg": {"card": true},
+   "els": [
+    {"t": "tower", "x": 1380, "y": 980, "h": 640, "cut": [9462, 9474]},
+    {"t": "words", "text": "THE GOVERNMENT", "x": 600, "y": 300, "size": 80, "at": 9431},
+    {"t": "words", "text": "HAS DECIDED", "x": 600, "y": 420, "size": 80, "at": 9451},
+    {"t": "words", "text": "DEMOLISH IT.", "x": 600, "y": 620, "size": 130, "color": "red", "at": 9470}
+   ]},
+  {"f0": 9520, "f1": 9630, "bg": {"plate": "ink60full/plates/paris_cafe_artists.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "IT CAN'T SAY SO", "x": 960, "y": 200, "size": 100, "at": 9533},
+    {"t": "sprite", "src": "ink60/cast/artist_signing_petition.png", "x": 1400, "y": 1000, "h": 620, "at": 9580},
+    {"t": "tag", "text": "THE PUBLIC WOULD REVOLT", "x": 640, "y": 560, "at": 9594}
+   ]},
+  {"f0": 9630, "f1": 9730, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_whisper.png", "x": 480, "y": 1000, "h": 680, "at": 9634},
+    {"t": "words", "text": "THE SALE", "x": 1280, "y": 320, "size": 120, "at": 9646},
+    {"t": "stamp", "text": "CONFIDENTIAL", "x": 1280, "y": 580, "rot": -8, "color": "red", "at": 9675}
+   ]}
+ ]
+}
