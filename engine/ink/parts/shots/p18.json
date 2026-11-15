@@ -1,0 +1,36 @@
+{
+ "_doc": "p18 shot list. Same schema as p01.json. Frames from words/p18.json. Story: meanwhile Poisson waited for the deal to move, believing he was part of a secret -> every time he looked at the tower he saw something he thought was his -> the tower did not move, weeks passed -> slowly a different feeling started to grow. f1 = p19 first word (14249) minus 15.",
+ "part": "p18",
+ "f0": 13754,
+ "f1": 14234,
+ "shots": [
+  {"f0": 13754, "f1": 13920, "bg": {"plate": "ink60full/plates/poisson_parlour_night.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_waiting_window.png", "x": 1420, "y": 1000, "h": 660, "at": 13769},
+    {"t": "words", "text": "MEANWHILE", "x": 620, "y": 220, "size": 90, "at": 13769},
+    {"t": "words", "text": "HE WAITED", "x": 620, "y": 440, "size": 100, "at": 13800},
+    {"t": "words", "text": "PART OF A SECRET", "x": 620, "y": 680, "size": 90, "color": "orange", "at": 13875}
+   ]},
+  {"f0": 13920, "f1": 14060, "bg": {"plate": "ink60full/plates/paris_skyline_extreme_wide.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_looking_up.png", "x": 480, "y": 1000, "h": 660, "at": 13930},
+    {"t": "words", "text": "EVERY TIME", "x": 1300, "y": 240, "size": 90, "at": 13930},
+    {"t": "words", "text": "HE SAW", "x": 1300, "y": 440, "size": 90, "at": 13983},
+    {"t": "words", "text": "HIS.", "x": 1300, "y": 700, "size": 160, "color": "orange", "at": 14020}
+   ]},
+  {"f0": 14060, "f1": 14140, "bg": {"plate": "ink60full/plates/tower_rust_closeup.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "words", "text": "THE TOWER", "x": 960, "y": 340, "size": 110, "at": 14064},
+    {"t": "words", "text": "DID NOT MOVE.", "x": 960, "y": 600, "size": 140, "color": "orange", "at": 14083},
+    {"t": "words", "text": "WEEKS PASSED", "x": 960, "y": 860, "size": 80, "at": 14104}
+   ]},
+  {"f0": 14140, "f1": 14234, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_doubtful.png", "x": 460, "y": 1000, "h": 640, "at": 14145},
+    {"t": "words", "text": "SLOWLY", "x": 1300, "y": 260, "size": 90, "at": 14149},
+    {"t": "words", "text": "A DIFFERENT FEELING", "x": 1300, "y": 500, "size": 80, "color": "orange", "at": 14174},
+    {"t": "underline", "x": 1300, "y": 570, "w": 820, "at": 14181},
+    {"t": "words", "text": "STARTED TO GROW.", "x": 1300, "y": 760, "size": 80, "at": 14193}
+   ]}
+ ]
+}
