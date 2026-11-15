@@ -35,3 +35,6 @@ videos/*/*/draft/
 videos/*/*/assets/ep*/
 videos/*/*/assets/flood*/
 videos/*/*/assets/wishes*/
+
+# Layout v2: old out/ leftovers with no episode (was ignored as out/)
+_archive/out-unmapped/
