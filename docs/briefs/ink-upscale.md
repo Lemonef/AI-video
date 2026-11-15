@@ -7,7 +7,7 @@ Write a CLI tool that upscales the Ink episode's line-art PNGs (stickman sprites
 # Files
 - NEW `tools/ink/upscale_assets.py` - the module and its CLI.
 - NEW `tools/ink/requirements-upscale.txt` - spandrel and torch (CPU) pins for the CLI only.
-- EDIT `.gitignore` - add one line ignoring the weights cache folder `tools/ink/models/`.
+- EDIT `.gitignore` - add one line ignoring the weights cache folder tools/ink/models/ (a gitignored cache: never created or committed by this task, the CLI makes it at run time).
 - Do not touch anything else. Work only inside the repo.
 
 # Contract (tests/test_upscale_assets.py is the source of truth; it is protected)
