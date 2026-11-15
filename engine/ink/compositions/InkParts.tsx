@@ -24,11 +24,12 @@ import p18 from '../parts/shots/p18.json';
 import p19 from '../parts/shots/p19.json';
 import p20 from '../parts/shots/p20.json';
 import p21 from '../parts/shots/p21.json';
+import p22 from '../parts/shots/p22.json';
 const part01 = p01 as unknown as Part;
 const part02 = p02 as unknown as Part;
 export const INK_FIRSTMIN_FRAMES = part02.f1;
 // Every part built so far, in story order; append new parts here as they land.
-const BUILT_PARTS = [p01, p02, p03, p04, p05, p06, p07, p08, p09, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21] as unknown as Part[];
+const BUILT_PARTS = [p01, p02, p03, p04, p05, p06, p07, p08, p09, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22] as unknown as Part[];
 export const INK_BUILT_FRAMES = BUILT_PARTS[BUILT_PARTS.length - 1].f1;
 // Paper halo behind hand-lettered words on photo/plate backgrounds: a tight ring keeps glyph edges crisp,
 // a wide soft glow lifts accent colours (orange on a warm sky or rust) off busy backgrounds. Cards need none.

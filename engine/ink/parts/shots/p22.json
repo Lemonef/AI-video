@@ -1,0 +1,49 @@
+{
+ "_doc": "p22 shot list. Same schema as p01.json. Frames from words/p22.json. Story: Lustig returned every dollar -> Capone was so impressed by his honesty he gave him $5,000 -> think what Capone saw: a man with money in his hands who gave it all back -> to Capone that was not weakness, it was proof -> in a world of liars, the one honest man -> that was the whole point: the money was never the con, the trust was. f1 = p23 first word (18054) minus 15.",
+ "part": "p22",
+ "f0": 17276,
+ "f1": 18039,
+ "shots": [
+  {"f0": 17276, "f1": 17340, "bg": {"plate": "ink60full/plates/capone_office.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_handing_money.png", "x": 480, "y": 1000, "h": 660, "at": 17291},
+    {"t": "words", "text": "HE RETURNED", "x": 1300, "y": 260, "size": 90, "at": 17293},
+    {"t": "words", "text": "EVERY DOLLAR.", "x": 1300, "y": 520, "size": 130, "color": "orange", "at": 17306}
+   ]},
+  {"f0": 17340, "f1": 17475, "bg": {"plate": "ink60full/plates/capone_office.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/capone_handing_money.png", "x": 1420, "y": 1000, "h": 660, "at": 17345},
+    {"t": "words", "text": "SO IMPRESSED", "x": 620, "y": 220, "size": 90, "at": 17362},
+    {"t": "words", "text": "BY HIS HONESTY", "x": 620, "y": 440, "size": 90, "at": 17389},
+    {"t": "words", "text": "+ $5,000", "x": 620, "y": 700, "size": 150, "color": "green", "at": 17428}
+   ]},
+  {"f0": 17475, "f1": 17645, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/capone_thinking.png", "x": 1460, "y": 1000, "h": 640, "at": 17483},
+    {"t": "words", "text": "WHAT CAPONE SAW:", "x": 620, "y": 200, "size": 85, "at": 17503},
+    {"t": "words", "text": "MONEY IN HIS HANDS", "x": 620, "y": 430, "size": 80, "at": 17559},
+    {"t": "words", "text": "GAVE IT ALL BACK.", "x": 620, "y": 680, "size": 90, "color": "orange", "at": 17606}
+   ]},
+  {"f0": 17645, "f1": 17755, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "TO CAPONE,", "x": 960, "y": 200, "size": 90, "at": 17656},
+    {"t": "words", "text": "WEAKNESS", "x": 960, "y": 440, "size": 100, "at": 17693},
+    {"t": "cross", "x": 960, "y": 440, "size": 300, "at": 17704},
+    {"t": "words", "text": "PROOF.", "x": 960, "y": 760, "size": 160, "color": "orange", "at": 17732}
+   ]},
+  {"f0": 17755, "f1": 17885, "bg": {"plate": "ink60full/plates/chicago_street_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_nodding_agree.png", "x": 1420, "y": 1000, "h": 660, "at": 17761},
+    {"t": "words", "text": "IN A WORLD OF LIARS", "x": 620, "y": 220, "size": 80, "at": 17768},
+    {"t": "words", "text": "THE ONE", "x": 620, "y": 460, "size": 100, "at": 17816},
+    {"t": "words", "text": "HONEST MAN.", "x": 620, "y": 700, "size": 130, "color": "orange", "at": 17829}
+   ]},
+  {"f0": 17885, "f1": 18039, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "THE WHOLE POINT:", "x": 960, "y": 180, "size": 80, "at": 17905},
+    {"t": "words", "text": "THE MONEY", "x": 960, "y": 380, "size": 100, "at": 17948},
+    {"t": "words", "text": "WAS NEVER THE CON.", "x": 960, "y": 570, "size": 85, "at": 17966},
+    {"t": "words", "text": "THE TRUST WAS.", "x": 960, "y": 820, "size": 140, "color": "orange", "at": 18005}
+   ]}
+ ]
+}
