@@ -76,16 +76,19 @@ def test_ignored_dirs_are_never_tracked():
 
 # Output layout on disk (gitignored, so tracked() cannot see it). Zen 2026-11-16: superseded cuts, previews,
 # stills and logs kept piling up in draft/ root and out/ was never emptied - a note did not stop it, this does.
-DRAFT_SUBDIRS = {"versions", "previews"}  # change together with ARCHITECTURE.md '## Practices' output line
+# Zen 2026-11-16 ("why is this still out alone"): a lone cut beside two folders reads as misplaced, so draft/
+# root holds folders only and the current cut gets its own folder.
+DRAFT_SUBDIRS = {"current", "versions", "previews"}  # change together with ARCHITECTURE.md '## Practices' output line
 
 
 def test_output_dirs_follow_the_layout():
     bad = [f"top-level out/ exists: {p}" for p in [ROOT / "out"] if p.exists()]
     for draft in ROOT.glob("videos/*/*/draft"):
-        cuts = [p for p in draft.iterdir() if p.is_file() and p.suffix == ".mp4"]
-        if len(cuts) > 1:
-            bad.append(f"{draft}: {len(cuts)} cuts in root, keep only the current one (old -> versions/, compressed -> previews/)")
-        bad += [f"{p}: not a cut, belongs in .build/" for p in draft.iterdir() if p.is_file() and p.suffix != ".mp4"]
+        bad += [f"{p}: draft/ root holds folders only (cut -> current/, old -> versions/, compressed -> previews/)"
+                for p in draft.iterdir() if p.is_file()]
+        current = draft / "current"
+        if current.is_dir() and len(cuts := list(current.glob("*.mp4"))) > 1:
+            bad.append(f"{current}: {len(cuts)} cuts, keep only the current one (old -> versions/)")
         bad += [f"{p}: draft/ subdir must be one of {sorted(DRAFT_SUBDIRS)}" for p in draft.iterdir()
                 if p.is_dir() and p.name not in DRAFT_SUBDIRS]
         for sub in DRAFT_SUBDIRS:
