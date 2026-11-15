@@ -60,8 +60,7 @@
    "els": []},
   {"f0": 599, "f1": 666, "bg": {"photo": "ink60full/pd/lustig_fbi_1931.jpg", "pos": "50% 25%", "push": [1.0, 1.45], "origin": "18% 37%"},
    "els": [
-    {"t": "tag", "text": "VICTOR LUSTIG", "x": 1240, "y": 900, "at": 622},
-    {"t": "underline", "x": 1240, "y": 975, "w": 520, "at": 640}
+    {"t": "tag", "text": "VICTOR LUSTIG", "x": 1240, "y": 900, "at": 622}
    ]},
   {"f0": 666, "f1": 788, "bg": {"card": true},
    "els": [
