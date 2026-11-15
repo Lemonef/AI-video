@@ -1,0 +1,9 @@
+{
+ "plates": {
+  "alcatraz_island": "alcatraz_island_fog"
+ },
+ "poses": {
+  "lustig_bedsheet_rope": "lustig_rope_escape",
+  "lustig_sad_prisoner": "lustig_prison_sad"
+ }
+}

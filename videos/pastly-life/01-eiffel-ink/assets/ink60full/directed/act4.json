@@ -1,0 +1,1416 @@
+{
+ "b35": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 980,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 360,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 760,
+      "at": 22,
+      "dur": 30
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1520,
+     "y": 900,
+     "k": 1,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "chip": "HOTEL DE CRILLON 1925",
+   "caption": null,
+   "why": "'He closed the door': Lustig steps away from the shut door, hands calmly behind his back, camera creeps in as the room seals"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "lustig_lean_whisper",
+     "x": 620,
+     "y": 900,
+     "h": 680,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0,
+     "fallback": "lustig_5"
+    },
+    {
+     "sprite": "scrap_dealer_seated",
+     "fallback": "parisian_3",
+     "x": 1300,
+     "y": 900,
+     "h": 600,
+     "flip": true,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 6,
+      "dur": 10
+     },
+     "bob": 1
+    }
+   ],
+   "why": "'spoke quietly... a state secret': leans in toward the seated dealers, one hand shielding his mouth (fallback: warning finger), push closes to whisper distance"
+  }
+ ],
+ "b36": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_seated",
+     "fallback": "parisian_3",
+     "x": 1350,
+     "y": 900,
+     "h": 600,
+     "flip": true,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 960,
+     "y": 820,
+     "k": 0.6,
+     "at": 10,
+     "anim": "drop"
+    },
+    {
+     "kind": "coin",
+     "x": 1050,
+     "y": 840,
+     "k": 0.6,
+     "at": 22,
+     "anim": "drop"
+    }
+   ],
+   "why": "'too expensive to maintain': rueful official shrug to the seated dealers as coins drop on the table one after another, the upkeep bill; drift circles the table"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_seated",
+     "fallback": "parisian_3",
+     "x": 640,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_seated",
+     "fallback": "parisian_3",
+     "x": 1320,
+     "y": 900,
+     "h": 600,
+     "flip": true,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 820,
+     "y": 840,
+     "k": 0.7,
+     "at": 6,
+     "anim": "drop"
+    },
+    {
+     "kind": "papers",
+     "x": 1140,
+     "y": 840,
+     "k": 0.7,
+     "at": 18,
+     "anim": "drop"
+    }
+   ],
+   "why": "'The government has decided': the official decree lands in front of each seated dealer in turn (the document is the point); pull widens to the whole table receiving it"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "hold",
+    "amt": 0
+   },
+   "actors": [],
+   "props": [],
+   "fx": [
+    "shake",
+    "dust"
+   ],
+   "why": "'to demolish it': the real tower alone in the grey, locked frame, a shake and dust as if the wrecking has already begun; the con's core claim made physical"
+  },
+  {
+   "k": "label",
+   "title": "The official story",
+   "a": "Too costly to maintain",
+   "b": "To be demolished",
+   "w": 1.0
+  }
+ ],
+ "b37": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "parisian_2",
+     "x": 760,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 10
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "parisian_3",
+     "x": 1180,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 8,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 420,
+     "y": 860,
+     "k": 0.7,
+     "at": 12,
+     "anim": "drop"
+    }
+   ],
+   "fx": [
+    "shake"
+   ],
+   "why": "'The public would revolt': imagined Paris reacts, angry reader plus arms-crossed scowl in the rain, small shake on the outrage"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 700,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1520,
+     "y": 900,
+     "k": 1,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "why": "'the sale must be kept confidential': back in the salon, hands behind his back beside the shut door; locked-off camera, nothing leaves this room"
+  }
+ ],
+ "b38": [
+  {
+   "k": "title",
+   "lines": [
+    "7,000 tons",
+    "of iron."
+   ],
+   "accent": "x",
+   "icon": "coin",
+   "w": 1.0
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 600,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1000,
+     "y": 760,
+     "k": 1,
+     "at": 10,
+     "anim": "pop"
+    },
+    {
+     "kind": "banknotes",
+     "x": 1120,
+     "y": 860,
+     "k": 1,
+     "at": 18,
+     "anim": "pop"
+    }
+   ],
+   "why": "'A fortune, for the right buyer': raised index finger singles out the one buyer, coin and cash pop in front of the tower as the push lands"
+  }
+ ],
+ "b39": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "limousine_street_day",
+   "fallback_plate": "paris_dusk",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 480,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -300,
+      "at": 0,
+      "dur": 18
+     },
+     "bob": 0
+    }
+   ],
+   "chip": "PARIS 1925",
+   "why": "'he took them in two limousines': welcoming palm ushers the dealers toward the waiting cars, pan rides along the kerb"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 160,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 640,
+      "at": 20,
+      "dur": 40
+     },
+     "bob": 2
+    },
+    {
+     "sprite": "scrap_dealer_proud",
+     "fallback": "parisian_3",
+     "x": -120,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 6,
+      "dur": 20
+     },
+     "move": {
+      "to": 300,
+      "at": 26,
+      "dur": 40
+     },
+     "bob": 2
+    }
+   ],
+   "chip": "CHAMP DE MARS",
+   "why": "'to see the tower in person': the group walks into frame and the camera pans with them until the real tower fills the right"
+  }
+ ],
+ "b40": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_looking_up",
+     "fallback": "clerk_1",
+     "x": 700,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_greedy",
+     "x": 1060,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'looking up at it differently... As inventory': one dealer squints up totting up the iron, another rubs his hands, the pull widens to show how much metal there is"
+  },
+  {
+   "k": "compare",
+   "head": "The tower",
+   "left": "A monument.",
+   "right": "Inventory.",
+   "w": 1.0
+  }
+ ],
+ "x13": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 360,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_greedy",
+     "fallback": "clerk_1",
+     "x": 900,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'He did not rush them': Lustig waits hands behind back at the edge while a dealer rubs his hands; slow drift, no hurry"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "hold",
+    "amt": 0
+   },
+   "actors": [
+    {
+     "sprite": "clerk_2",
+     "x": 760,
+     "y": 920,
+     "h": 760,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 1
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1080,
+     "y": 820,
+     "k": 1,
+     "at": 14,
+     "anim": "pop"
+    }
+   ],
+   "why": "'imagine the iron already theirs': greedy smirk fanning cash under the tower; locked frame lets the money sit there as if it were already his"
+  }
+ ],
+ "x14": [
+  {
+   "k": "title",
+   "lines": [
+    "Picture owning it,",
+    "and you've started paying."
+   ],
+   "accent": "x",
+   "icon": "coin",
+   "w": 1.0
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'he has already started to pay for it': the teaching finger states the rule, pull back to the tower he is really selling"
+  }
+ ],
+ "b41": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 380,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -120,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'Lustig watched them carefully': hands behind back, still and plotting at the edge of the group; slow drift, the watcher does not move"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "push",
+    "amt": 0.16
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 300,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_proud",
+     "fallback": "clerk_1",
+     "x": 900,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 4,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'he picked his target': hard push lands on one man, a flash marks him as the mark"
+  }
+ ],
+ "b42": [
+  {
+   "k": "label",
+   "title": "Andre Poisson",
+   "a": "Money: yes",
+   "b": "Elite: no",
+   "w": 1.0
+  },
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_hesitating",
+     "fallback": "clerk_3",
+     "x": 560,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "chip": "ANDRE POISSON",
+   "why": "'without a place in the Parisian elite': Poisson frozen outside the lit grand doors, hat to chest, the pull widens the gap between him and the door"
+  }
+ ],
+ "b43": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_lapels",
+     "fallback": "clerk_1",
+     "x": 900,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "why": "'Poisson wanted to be taken seriously': chest out, lapels gripped, standing tall in the grand salon; slow drift lets him pose"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -240,
+      "at": 0,
+      "dur": 16
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_lapels",
+     "fallback": "clerk_1",
+     "x": 1250,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "why": "'Lustig gave him exactly that feeling': open palm offered to Poisson like a peer, pan carries the gesture across to him"
+  }
+ ],
+ "b44": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_glance_over_shoulder",
+     "x": 720,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0,
+     "fallback": "lustig_3"
+    },
+    {
+     "sprite": "scrap_dealer_lapels",
+     "fallback": "clerk_1",
+     "x": 1220,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 980,
+     "y": 830,
+     "k": 0.9,
+     "at": 10,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'He hinted... the highest bidder': a glance over his shoulder to check the room before the contract slides between them; pull gives room to see the two men and the paper"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "crillon_salon_chandeliers",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_smart",
+     "fallback": "clerk_1",
+     "x": 960,
+     "y": 920,
+     "h": 720,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'He thought he was being smart': solo close-up, finger tapping temple with a sly grin, push makes it faintly ridiculous"
+  }
+ ],
+ "b45": [
+  {
+   "k": "title",
+   "lines": [
+    "The second",
+    "hook."
+   ],
+   "accent": "x",
+   "icon": "flame",
+   "w": 0.8
+  },
+  {
+   "k": "scene",
+   "w": 1.4,
+   "plate": "poisson_parlour_night",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "poisson_wife_suspicious",
+     "fallback": "parisian_3",
+     "x": 1150,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 4,
+      "dur": 10
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_hesitating",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "chip": "THE POISSON HOME",
+   "why": "'Poisson's wife grew suspicious': arms crossed, narrowed eyes on her husband, who freezes with hat clutched and a sweat drop; pan_l follows her stare across to him"
+  }
+ ],
+ "b46": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 640,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "chip": "A SECOND MEETING",
+   "why": "'Lustig did not argue': hands calmly behind his back, no fight offered; camera eases back to give him room"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 820,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "why": "'He shifted the story': aha finger up as he turns to face left, the pan swings the frame the other way with the new angle"
+  }
+ ],
+ "b47": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0
+   },
+   "actors": [
+    {
+     "sprite": "lustig_embarrassed",
+     "fallback": "lustig_4",
+     "x": 700,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "why": "'He admitted, with embarrassment': eyes down, rubbing his neck, hat in hand; locked frame lets the awkward confession sit"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 760,
+     "y": 920,
+     "h": 720,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1080,
+     "y": 780,
+     "k": 0.9,
+     "at": 10,
+     "anim": "pop"
+    }
+   ],
+   "why": "'needs a little extra to survive': helpless shrug of the underpaid official as one coin pops beside him; push on the bribe being asked for"
+  }
+ ],
+ "b48": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 480,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_handing_cash",
+     "fallback": "clerk_2",
+     "x": 1100,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 200,
+      "at": 0,
+      "dur": 16
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 800,
+     "y": 820,
+     "k": 1,
+     "at": 18,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'Poisson relaxed. A bribe made the whole thing feel real': relieved smile, the envelope of cash slides left to the calm, waiting Lustig; pan_l follows the money"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "clerk_2",
+     "x": 1180,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 1
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 900,
+     "y": 820,
+     "k": 0.8,
+     "at": 8,
+     "anim": "drop"
+    }
+   ],
+   "why": "'Corruption is something people already believe in': an ordinary doorway, an ordinary man pocketing a tip with a greedy smirk; small corruption as background normal"
+  }
+ ],
+ "b49": [
+  {
+   "k": "compare",
+   "head": "The genius",
+   "left": "Believe a lie.",
+   "right": "Believe a small sin.",
+   "w": 1.2
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 620,
+     "y": 900,
+     "h": 700,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 960,
+     "y": 760,
+     "k": 1,
+     "at": 12,
+     "anim": "pop"
+    }
+   ],
+   "why": "'believe in a small sin': the teaching finger raised over a single coin, the lesson of the con; push makes the viewer complicit"
+  }
+ ],
+ "x15": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "parisian_3",
+     "x": 420,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_hesitating",
+     "fallback": "clerk_3",
+     "x": 1200,
+     "y": 900,
+     "h": 600,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 240,
+      "at": 0,
+      "dur": 16
+     },
+     "bob": 1
+    }
+   ],
+   "why": "'Poisson was new to the city's business elite': the newcomer hovers, hat clutched, while an established man stands arms crossed; pan crosses the cold gap"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Everyone had a name.",
+    "He wanted one."
+   ],
+   "accent": "x",
+   "icon": null,
+   "w": 1.0
+  }
+ ],
+ "x16": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "tower",
+     "x": 1040,
+     "y": 900,
+     "k": 0.6,
+     "at": 10,
+     "anim": "drop"
+    }
+   ],
+   "why": "'did not sell him a tower': a shrug beside a toy tower, waving the iron away as beside the point"
+  },
+  {
+   "k": "scene",
+   "w": 1.4,
+   "plate": "elite_banquet_table_night",
+   "fallback_plate": "paris_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none"
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_proud",
+     "fallback": "clerk_1",
+     "x": -200,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 6,
+      "dur": 20
+     },
+     "move": {
+      "to": 1250,
+      "at": 26,
+      "dur": 44
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1500,
+     "y": 900,
+     "k": 1,
+     "at": 0,
+     "anim": "none"
+    },
+    {
+     "kind": "papers",
+     "x": 1300,
+     "y": 800,
+     "k": 0.8,
+     "at": 50,
+     "anim": "drop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'He sold him a seat at the table': Lustig's presenting palm ushers Poisson walking past him to the one empty chair at the elite table, contract lands on his place setting as the push closes the act"
+  }
+ ],
+ "needed_plates": [
+  {
+   "id": "crillon_salon_chandeliers",
+   "desc": "Palatial hotel salon interior: gilded panelled walls, two crystal chandeliers, tall mirrors, red velvet chairs pushed to the edges, polished parquet floor open y 66-100% full width, centre clear for 2-3 standing figures",
+   "beats": [
+    "b35",
+    "b37",
+    "b43",
+    "b44"
+   ]
+  },
+  {
+   "id": "elite_banquet_table_night",
+   "desc": "Grand Paris club dining room at night, 1925: long banquet table seen side-on across the right half (x 45-100%, tabletop y ~62%), candelabras and silverware, tall-backed chairs all occupied by silhouetted gentlemen except ONE empty chair with a glowing place setting at x ~68%; chandelier above, dark panelled walls; open floor on the left half y 66-100% for two standing actors; same ink-and-watercolour style, 1672x941",
+   "beats": [
+    "x16"
+   ]
+  },
+  {
+   "id": "limousine_street_day",
+   "desc": "Paris boulevard outside the Hotel de Crillon, 1925, grey-bright afternoon: two long black 1920s limousines with chauffeurs parked right-centre (x 50-95%, wheels at y ~70%), stone hotel facade with flags behind, plane trees; open cobbled pavement y 66-100% on the left half for actors; same ink-and-watercolour style and framing as paris_dusk, 1672x941",
+   "beats": [
+    "b39"
+   ]
+  },
+  {
+   "id": "poisson_parlour_night",
+   "desc": "Modest bourgeois Paris parlour at night, 1925: patterned wallpaper, small fireplace with a clock at centre-left, armchair at far left, oil lamp glowing on a side table at far right (x ~90%), heavy curtains; plain wooden floor y 66-100% open across the centre for a husband and wife standing; same ink-and-watercolour style, 1672x941",
+   "beats": [
+    "b45"
+   ]
+  }
+ ],
+ "needed_poses": [
+  {
+   "id": "lustig_embarrassed",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) sheepish: one hand rubbing the back of his neck, beret held low in the other hand, eyes looking down and away, faint blush, small apologetic smile; facing right",
+   "beats": [
+    "b47"
+   ]
+  },
+  {
+   "id": "poisson_wife_suspicious",
+   "desc": "Madame Poisson (stick figure, white round head, plum 1920s cloche hat, pearl necklace, dark green drop-waist dress) arms crossed tightly, narrowed suspicious eyes, one eyebrow raised, mouth pursed; front-facing, transparent background",
+   "beats": [
+    "b45"
+   ]
+  },
+  {
+   "id": "scrap_dealer_greedy",
+   "desc": "Scrap-metal dealer stick figure, stocky, grey work waistcoat over rolled sleeves, bowler hat, moustache, rubbing hands together with hungry wide eyes and grin, facing front",
+   "beats": [
+    "b40",
+    "x13"
+   ]
+  },
+  {
+   "id": "scrap_dealer_handing_cash",
+   "desc": "Andre Poisson, i.e. the same scrap-metal dealer as Act 3 (stocky stick figure, grey work waistcoat over rolled sleeves, bowler hat, moustache), Andre Poisson, scrap-metal dealer (stout stick figure, brown bowler hat, grey three-piece suit, gold watch chain, moustache), extending a fat envelope of banknotes forward to the right, eager hopeful smile.",
+   "beats": [
+    "b48"
+   ]
+  },
+  {
+   "id": "scrap_dealer_hesitating",
+   "desc": "Andre Poisson, i.e. the same scrap-metal dealer as Act 3 (stocky stick figure, grey work waistcoat over rolled sleeves, bowler hat, moustache), facing right, one foot forward then frozen, hat clutched to chest, sweat drop, worried brows: about to enter but stopping.",
+   "beats": [
+    "b42",
+    "b45",
+    "x15"
+   ]
+  },
+  {
+   "id": "scrap_dealer_lapels",
+   "desc": "Andre Poisson, i.e. the same scrap-metal dealer as Act 3 (stocky stick figure, grey work waistcoat over rolled sleeves, bowler hat, moustache): standing still, chest puffed out, chest puffed out, both hands gripping his lapels, proud eager smile, eyebrows up; facing right, transparent background",
+   "beats": [
+    "b43",
+    "b44"
+   ]
+  },
+  {
+   "id": "scrap_dealer_looking_up",
+   "desc": "A scrap-metal dealer as Act 3 (stocky stick figure, grey work waistcoat over rolled sleeves, bowler hat, moustache): standing three-quarter right, head tilted back looking up, one hand shading eyes, other hand counting on fingers, calculating squint; facing right",
+   "beats": [
+    "b40"
+   ]
+  },
+  {
+   "id": "scrap_dealer_proud",
+   "desc": "Same scrap dealer in his best suit, walking in profile facing right, chest out, chin up, proud and self-important",
+   "beats": [
+    "b39",
+    "b41",
+    "x16"
+   ]
+  },
+  {
+   "id": "scrap_dealer_seated",
+   "desc": "1920s Paris scrap-metal businessman stick figure (grey three-piece suit, flat cap, thick moustache), seated on a chair facing right, arms folded, sceptical squint",
+   "beats": [
+    "b35"
+   ]
+  },
+  {
+   "id": "scrap_dealer_smart",
+   "desc": "Andre Poisson, i.e. the same scrap-metal dealer as Act 3 (stocky stick figure, grey work waistcoat over rolled sleeves, bowler hat, moustache): tapping his temple with one finger, sly knowing grin, one eye half-closed in a wink, other hand in pocket; facing right",
+   "beats": [
+    "b44"
+   ]
+  },
+  {
+   "id": "lustig_lean_whisper",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) leaning forward at the waist, one hand cupped beside his mouth as if confiding, eyes sliding sideways; facing right",
+   "beats": [
+    "b35"
+   ]
+  },
+  {
+   "id": "lustig_glance_over_shoulder",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) body facing right, head turned back over his left shoulder checking the room, one hand resting flat on a document; facing right",
+   "beats": [
+    "b44"
+   ]
+  }
+ ]
+}

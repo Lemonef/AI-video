@@ -1,0 +1,1555 @@
+{
+ "b61": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "ocean_liner_deck",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 420,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -420,
+      "at": 0,
+      "dur": 24
+     },
+     "move": {
+      "to": 680,
+      "at": 30,
+      "dur": 50
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "ship",
+     "x": 1300,
+     "y": 560,
+     "k": 0.6,
+     "at": 10,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [],
+   "chip": "ATLANTIC 1925",
+   "caption": null,
+   "why": "'He crossed the Atlantic': suitcase pose = travelling, walk + pan right carry him across the deck toward the new continent"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "new_york_street_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": "AMERICA 1925",
+   "caption": "Prohibition",
+   "why": "'found a bigger stage': open-palm presenting pose sweeps at the city while the camera pulls out to reveal how big the stage is"
+  }
+ ],
+ "b62": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'He built a little wooden box': finger-up eureka pose = the inventor with a clever plan; slow drift lets the idea settle before the box appears"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_money_box",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "buyer_amazed",
+     "x": 1300,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 300,
+      "at": 6,
+      "dur": 16
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 820,
+     "y": 700,
+     "k": 0.7,
+     "at": 30,
+     "anim": "pop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'told buyers it printed perfect hundred dollar bills': Lustig offers the box, bills pop out between them, pan lands on the buyer's amazed face"
+  }
+ ],
+ "b63": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 480,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "buyer_paying",
+     "x": 1250,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 860,
+     "y": 720,
+     "k": 1.0,
+     "at": 12,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": "Tens of thousands",
+   "why": "'He sold it for tens of thousands of dollars': palm-up Lustig receives while the buyer hands over a cash stack that slides up between them; push sells the size of the deal"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "The box",
+    "printed nothing."
+   ],
+   "accent": "x",
+   "icon": null,
+   "w": 0.9
+  }
+ ],
+ "x23": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 1250,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 520,
+     "y": 640,
+     "k": 0.6,
+     "at": 10,
+     "anim": "drop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": "2 real bills in",
+   "why": "'Two real bills went in': teaching finger-up pose, flipped to the right side this time, while two bills drop toward the box on the left; gentle drift for the calm explainer"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_money_box",
+     "x": 760,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1150,
+     "y": 700,
+     "k": 0.7,
+     "at": 40,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "chip": null,
+   "caption": "6 hours later",
+   "why": "'Six hours later, two bills came out': locked-off hold on Lustig with the box, as if sitting out the six hours; flash and the 'copies' pop out on cue"
+  },
+  {
+   "k": "label",
+   "title": "The money box",
+   "a": "2 real bills in",
+   "b": "6 hours later: 2 'perfect copies'",
+   "w": 0.9
+  }
+ ],
+ "x24": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "drift",
+    "amt": 0.07
+   },
+   "actors": [
+    {
+     "sprite": "lustig_counting_cash",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -160,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1000,
+     "y": 820,
+     "k": 0.6,
+     "at": 18,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'the extra bills were also real. Hidden in the box': Lustig fans the real bills he hid with a satisfied smirk while more slide up from the hidden compartment; slow drift lets us in on the trick without a shush"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "buyer_amazed",
+     "x": 900,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 3
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1250,
+     "y": 700,
+     "k": 0.8,
+     "at": 6,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "chip": null,
+   "caption": null,
+   "why": "'The buyer saw a miracle': amazed buyer alone centre with the 'printed' bills, flash on the reveal"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "backroom_workshop_lamp",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "buyer_paying",
+     "x": 1250,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "lustig_1",
+     "x": 480,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "suitcase",
+     "x": 240,
+     "y": 760,
+     "k": 0.6,
+     "at": 14,
+     "anim": "pop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'and paid for a miracle': buyer hands over cash, pan left to Lustig's open palm receiving it while his packed case pops up behind him = the payout is already leaving"
+  }
+ ],
+ "x25": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "texas_main_street_day",
+   "cam": {
+    "move": "push",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_money_box",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 0,
+      "dur": 20
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "sheriff_paying",
+     "x": 1250,
+     "y": 900,
+     "h": 660,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 880,
+     "y": 720,
+     "k": 1.0,
+     "at": 28,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [
+    "dust"
+   ],
+   "chip": "TEXAS",
+   "caption": null,
+   "why": "'A sheriff in Texas paid thirty thousand dollars for one': Lustig walks in with the box, the badge-wearing sheriff pushes a fat stack across, dusty push"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "$30,000.",
+    "For a box."
+   ],
+   "accent": "x",
+   "icon": "coin",
+   "w": 0.8
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "texas_main_street_day",
+   "cam": {
+    "move": "pull",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "sheriff_angry",
+     "x": 800,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "lustig_2",
+     "x": 1550,
+     "y": 900,
+     "h": 480,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 2200,
+      "at": 6,
+      "dur": 36
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [
+    "dust"
+   ],
+   "chip": null,
+   "caption": null,
+   "why": "'By the time he understood, Lustig was long gone': sheriff fumes centre as a small suitcase Lustig walks out of frame right, pull widens the empty street"
+  }
+ ],
+ "b64": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "chicago_street_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "lustig_handshake",
+     "x": 480,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "capone_1",
+     "x": 1250,
+     "y": 900,
+     "h": 700,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 40,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [
+    "flash"
+   ],
+   "chip": "CHICAGO",
+   "caption": "Al Capone",
+   "why": "'Then came the boldest move. Al Capone.': Lustig steps forward with his hand out for a handshake, walking straight up to the most dangerous man in Chicago; Capone pops in larger on his name with a flash, push = stakes rising"
+  }
+ ],
+ "b65": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 500,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 0,
+      "dur": 20
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "capone_seated_desk",
+     "x": 1300,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'He told Capone he needed fifty thousand dollars for an investment': open-palm pitch pose walks up to the seated boss, pan follows the pitch to its target"
+  },
+  {
+   "k": "compare",
+   "head": "The offer",
+   "left": "$50,000 in",
+   "right": "$100,000 in 60 days",
+   "w": 0.9
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "capone_office",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 620,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1150,
+     "y": 720,
+     "k": 0.8,
+     "at": 10,
+     "anim": "pop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'promised to double it in sixty days': finger-up promise pose, bills pop beside him; an easy drift = the promise sounds effortless"
+  }
+ ],
+ "b66": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "capone_handing_money",
+     "x": 1250,
+     "y": 900,
+     "h": 680,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "lustig_nodding_agree",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 880,
+     "y": 720,
+     "k": 1.0,
+     "at": 10,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'Capone gave him the money': Capone pushes the stack across, pan left to Lustig accepting with a hand on his heart and a gracious nod, not grabbing"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "push",
+    "amt": 0.16
+   },
+   "actors": [
+    {
+     "sprite": "capone_warning_finger",
+     "x": 960,
+     "y": 960,
+     "h": 820,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1450,
+     "y": 760,
+     "k": 0.7,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "fx": [
+    "shake"
+   ],
+   "chip": null,
+   "caption": "\"Do not make me regret it.\"",
+   "why": "'and a warning. Do not make me regret it.': close, hard push (the strongest in the act) on Capone's wagging finger with a small shake, the money still on the desk as the stakes"
+  }
+ ],
+ "b67": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "bank_vault_safe_deposit",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -380,
+      "at": 0,
+      "dur": 24
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "keys",
+     "x": 1150,
+     "y": 640,
+     "k": 1.0,
+     "at": 26,
+     "anim": "drop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": "Safe deposit box",
+   "why": "'Lustig put it in a safe deposit box': locked-off hold on the vault as he walks in carrying the cash case and the deposit-box keys drop in = locked away, nothing moves"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "bank_vault_safe_deposit",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 1150,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": "60 days. Nothing.",
+   "why": "'and did nothing with it. For two months.': idle hands-behind-back waiting pose, a barely-moving drift = time passing with nothing happening"
+  }
+ ],
+ "b68": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "chicago_street_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_walking_profile_case",
+     "x": 300,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -400,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 1000,
+      "at": 22,
+      "dur": 50
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "suitcase",
+     "x": 1450,
+     "y": 780,
+     "k": 0.5,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'Then he walked back': walking-profile Lustig crosses the street, pan right tracks him back toward Capone's door"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_sad",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "capone_1",
+     "x": 1300,
+     "y": 900,
+     "h": 700,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": "\"The deal fell through.\"",
+   "why": "'with a sad face. The deal fell through, sorry.': hat-in-hands sad pose facing a looming Capone, push into the apology"
+  }
+ ],
+ "b69": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "capone_office",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_handing_money",
+     "x": 640,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -120,
+      "at": 0,
+      "dur": 12
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "capone_seated_desk",
+     "x": 1320,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 960,
+     "y": 720,
+     "k": 1.1,
+     "at": 14,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": "Every dollar",
+   "why": "'He returned every dollar': Lustig holds the whole stack out to Capone, the full pile slides back across the desk"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "capone_handing_money",
+     "x": 1250,
+     "y": 900,
+     "h": 680,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "lustig_1",
+     "x": 540,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 900,
+     "y": 640,
+     "k": 1.2,
+     "at": 16,
+     "anim": "pop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'so impressed by his honesty that he gave him five thousand': Capone now hands money the other way, Lustig's open palm receives, coin pops as the reward"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "$5,000.",
+    "For being honest."
+   ],
+   "accent": "x",
+   "icon": "coin",
+   "w": 0.8
+  }
+ ],
+ "x26": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "capone_office",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "capone_thinking",
+     "x": 1000,
+     "y": 900,
+     "h": 700,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'Think about what Capone saw': Capone alone, hand on chin, slow drift = his thoughts wandering back over the deal"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "capone_office",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_handing_money",
+     "x": 820,
+     "y": 900,
+     "h": 680,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1200,
+     "y": 700,
+     "k": 1.0,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'A man with money in his hands, and he gave it all back': Capone's POV of Lustig holding out the full stack, pull out frames the act as a memory"
+  }
+ ],
+ "x27": [
+  {
+   "k": "compare",
+   "head": "To Capone",
+   "left": "Not weakness.",
+   "right": "Proof.",
+   "w": 0.9
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "chicago_street_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "gangster_shifty",
+     "x": 280,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "lustig_3",
+     "x": 960,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "gangster_shifty",
+     "x": 1560,
+     "y": 900,
+     "h": 600,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'In a world of liars, here was the one honest man': calm Lustig centred between shifty gangsters, pull widens the world of liars around him"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "chicago_street_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_nodding_agree",
+     "x": 900,
+     "y": 940,
+     "h": 760,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'the one honest man': ironic tag, Lustig close with a hand on his heart and a sincere nod (the same gracious pose he took the money with); a still hold plays it straight and lets us see the act"
+  }
+ ],
+ "b70": [
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "capone_office",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'That was the whole point': finger-up key-point pose; a still hold lets the thesis land plainly before the reveal"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "capone_office",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 760,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 1250,
+     "y": 640,
+     "k": 1.0,
+     "at": 8,
+     "anim": "drop"
+    }
+   ],
+   "fx": [],
+   "chip": null,
+   "caption": null,
+   "why": "'The money was never the con': shrug while the cash drops on his right unnoticed; pan left moves away from the money"
+  },
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "chicago_street_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 300,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -400,
+      "at": 0,
+      "dur": 22
+     },
+     "move": {
+      "to": 760,
+      "at": 26,
+      "dur": 40
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "capone_1",
+     "x": 1400,
+     "y": 900,
+     "h": 560,
+     "flip": true,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 30,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1080,
+     "y": 600,
+     "k": 1.0,
+     "at": 50,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "chip": null,
+   "caption": "The trust was.",
+   "why": "'The trust was.': Lustig walks out with his case and Capone's trust, Capone appears nodding behind him, coin + flash on the last word; push closes the act on 'can he still win'"
+  }
+ ],
+ "needed_plates": [
+  {
+   "id": "ocean_liner_deck",
+   "desc": "First-class promenade deck of a 1920s transatlantic ocean liner by day: white railing at y ~58%, open sea and horizon behind, lifeboats and a funnel at top right, wooden deck chairs at far left; teak deck floor from y ~64% down fully open, centre x 20-80% clear for actors",
+   "beats": [
+    "b61"
+   ]
+  },
+  {
+   "id": "new_york_street_night",
+   "desc": "Hand-drawn ink-and-wash 1930s New York street at night, 16:9: brick tenements and a lit pawnshop/bank front on the right third, fire escapes, wet asphalt reflecting yellow streetlamps, a parked black 1930s sedan far right; open empty pavement foreground y 62-100% across x 15-80% for stick figures standing feet ~y 83%; no people, no text.",
+   "beats": [
+    "b61"
+   ]
+  },
+  {
+   "id": "backroom_workshop_lamp",
+   "desc": "Dim 1920s American back room / hotel suite workroom: single green-shaded hanging lamp, wooden workbench at right with tools and a small mahogany box with brass crank, venetian blinds, wallpaper; wooden floor y 66-100% open, actors left and centre",
+   "beats": [
+    "b62",
+    "b63",
+    "x23",
+    "x24"
+   ]
+  },
+  {
+   "id": "texas_main_street_day",
+   "desc": "Dusty 1920s small Texas town main street, bright day, false-front wooden storefronts, a sheriff's office sign right, water tower and a parked Model-T, tumbleweed; sandy ground y 64-100% open across full width",
+   "beats": [
+    "x25"
+   ]
+  },
+  {
+   "id": "chicago_street_night",
+   "desc": "1920s Chicago street at night, hand-drawn ink and watercolour style matching the Paris plates: brick buildings with fire escapes, neon-less painted speakeasy sign, a parked black 1920s sedan at far right (x 80-100%), lamp posts at x ~12% and ~88%, wet asphalt from y ~63% down fully open, centre x 20-80% clear for two actors",
+   "beats": [
+    "b64",
+    "b68",
+    "x27",
+    "b70"
+   ]
+  },
+  {
+   "id": "capone_office",
+   "desc": "Al Capone's 1920s Chicago hotel office (Lexington Hotel): dark wood panelling, big mahogany desk right of centre (x 60-85%) with ashtray and phone, leather chair, framed portrait, window with blinds and city lights; wooden floor y 66-100% open, actors left and centre",
+   "beats": [
+    "b65",
+    "b66",
+    "b68",
+    "b69",
+    "x26",
+    "b70"
+   ]
+  },
+  {
+   "id": "bank_vault_safe_deposit",
+   "desc": "1920s American bank vault: wall of brass safe-deposit boxes left-to-right, massive round steel vault door open at right (x 70-95%), marble floor y 66-100% open, actors left and centre",
+   "beats": [
+    "b67"
+   ]
+  }
+ ],
+ "needed_poses": [
+  {
+   "id": "lustig_money_box",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black flat cap), facing right, holding a small mahogany box with brass crank and slot out in front with both hands like a salesman, confident smirk",
+   "beats": [
+    "b62",
+    "x23",
+    "x25"
+   ]
+  },
+  {
+   "id": "lustig_sad",
+   "desc": "Victor Lustig, front-on, flat cap held in both hands at chest, shoulders slumped, sad droopy eyebrows, small frown, eyes looking down (performed sadness)",
+   "beats": [
+    "b68"
+   ]
+  },
+  {
+   "id": "lustig_walking_profile_case",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) walking in right-facing profile mid-stride, brown brass-cornered suitcase in the trailing hand, hurried focused look.",
+   "beats": [
+    "b68"
+   ]
+  },
+  {
+   "id": "lustig_handing_money",
+   "desc": "Victor Lustig facing right, both arms extended forward holding out a thick stack of green dollar bills, earnest open face, eyebrows raised (handing money over)",
+   "beats": [
+    "b69",
+    "x26"
+   ]
+  },
+  {
+   "id": "buyer_amazed",
+   "desc": "American 1920s mark (brown three-piece suit, bowler hat, moustache), front-on, both hands up open, eyes huge and starry, jaw dropped in wonder",
+   "beats": [
+    "b62",
+    "x24"
+   ]
+  },
+  {
+   "id": "buyer_paying",
+   "desc": "Same American mark (brown suit, bowler hat, moustache) facing right, one arm extended handing a fat wad of dollar bills, eager grin",
+   "beats": [
+    "b63",
+    "x24"
+   ]
+  },
+  {
+   "id": "sheriff_paying",
+   "desc": "1920s Texas sheriff (tan cowboy hat, star badge, vest, holster, boots, droopy moustache) facing right, holding out a thick wad of dollar bills, greedy grin",
+   "beats": [
+    "x25"
+   ]
+  },
+  {
+   "id": "sheriff_angry",
+   "desc": "Same Texas sheriff front-on, fists clenched, red face, steam puffs from ears, furious frown, hat askew",
+   "beats": [
+    "x25"
+   ]
+  },
+  {
+   "id": "capone_1",
+   "desc": "Al Capone stick figure in the same hand-drawn ink style (white round head, long black stick limbs): grey pinstripe double-breasted suit, white fedora with black band, cigar in mouth, arms crossed, heavy scowl with one eyebrow down; standing front-on, slight right turn; full body on flat magenta background",
+   "beats": [
+    "b64",
+    "b68",
+    "b70"
+   ]
+  },
+  {
+   "id": "capone_seated_desk",
+   "desc": "Al Capone (same as capone_1: white round head, long black stick limbs, grey pinstripe double-breasted suit, white fedora with black band, cigar) seated behind a mahogany desk facing right, fingers steepled, cigar smoke curling, appraising squint",
+   "beats": [
+    "b65",
+    "b69"
+   ]
+  },
+  {
+   "id": "capone_handing_money",
+   "desc": "Al Capone (same as capone_1: white round head, long black stick limbs, grey pinstripe double-breasted suit, white fedora with black band, cigar) standing facing right, one arm extended holding out a stack of dollar bills, small approving smile",
+   "beats": [
+    "b66",
+    "b69"
+   ]
+  },
+  {
+   "id": "capone_warning_finger",
+   "desc": "Al Capone (same as capone_1: white round head, long black stick limbs, grey pinstripe double-breasted suit, white fedora with black band, cigar) front-on close stance, leaning forward, index finger raised and wagging, cigar clenched, narrowed threatening eyes",
+   "beats": [
+    "b66"
+   ]
+  },
+  {
+   "id": "capone_thinking",
+   "desc": "Al Capone (same as capone_1: white round head, long black stick limbs, grey pinstripe double-breasted suit, white fedora with black band, cigar) front-on, one hand stroking chin, other hand holding cigar, eyebrows raised, impressed and thoughtful",
+   "beats": [
+    "x26"
+   ]
+  },
+  {
+   "id": "gangster_shifty",
+   "desc": "1920s Chicago gangster henchman (black fedora, dark pinstripe suit, loud tie), front-on, hands in pockets, eyes sliding sideways, sly crooked grin (a liar)",
+   "beats": [
+    "x27"
+   ]
+  }
+ ]
+}

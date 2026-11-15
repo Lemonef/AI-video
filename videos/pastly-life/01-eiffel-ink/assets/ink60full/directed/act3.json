@@ -1,0 +1,988 @@
+{
+ "b24": [
+  {
+   "k": "scene",
+   "w": 0.8,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -400,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "ACT 3: BUILDING THE LIE",
+   "caption": null,
+   "why": "'First, the costume.' - hands behind back, quietly working out step one of the plan (not the eureka finger of the beat before); pull back opens the room he plots in"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "forger_desk_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_forging_pen",
+     "x": 700,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 1150,
+     "y": 760,
+     "k": 1,
+     "at": 8,
+     "anim": "drop"
+    }
+   ],
+   "why": "'He forged letterhead from the French government' - pen on official paper under a lamp; slow push onto the fake crest"
+  }
+ ],
+ "b25": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "ministry_office_day",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -350,
+      "at": 0,
+      "dur": 20
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'he gave himself a title' - open palm presenting himself like an official introducing his rank as he walks in; pan right follows his walk toward the brass 'Postes et Telegraphes' sign, and the label card spells the title out"
+  },
+  {
+   "k": "label",
+   "title": "Deputy Director General",
+   "a": "Ministry of Posts",
+   "b": "and Telegraphs",
+   "w": 0.9
+  }
+ ],
+ "b26": [
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "hold",
+    "amt": 0.0
+   },
+   "actors": [
+    {
+     "sprite": "clerk_1",
+     "x": 760,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 1
+    }
+   ],
+   "props": [],
+   "why": "'Why that ministry?' - hand-on-chin doubter voices the viewer's question; still camera lets the question hang"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "telegram",
+     "x": 1000,
+     "y": 640,
+     "k": 0.8,
+     "at": 18,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'the tower already carried radio equipment. It sounded real.' - aha finger, pan right to the lit tower, telegram pops as the radio link"
+  }
+ ],
+ "b27": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "hotel_crillon_facade_day",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 460,
+     "y": 900,
+     "h": 560,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "HOTEL DE CRILLON",
+   "caption": null,
+   "why": "'Then the stage. The Hotel de Crillon' - pull back reveals the grand facade; Lustig small and calm before it, sizing up his theatre"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.07
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 1400,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "walk",
+      "from": 500,
+      "at": 0,
+      "dur": 22
+     },
+     "move": {
+      "to": 940,
+      "at": 30,
+      "dur": 40
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "doorman_bowing",
+     "x": 460,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 10,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'one of the most expensive hotels in Paris' - he strolls in from the right, case in hand, toward the lit doors where a doorman bows; pan left follows his walk, mirrored so it does not echo the dealers' arrival in b33"
+  }
+ ],
+ "b28": [
+  {
+   "k": "compare",
+   "head": "The stage",
+   "left": "Back room. Warehouse.",
+   "right": "A palace.",
+   "w": 1.0
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "crillon_salon_chandeliers",
+   "cam": {
+    "move": "push",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -300,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "doorman_bowing",
+     "x": 1350,
+     "y": 900,
+     "h": 660,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'A palace, with doormen, and chandeliers.' - open palm presents the room like a host; push under the chandeliers, doorman frames right"
+  }
+ ],
+ "b29": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "crillon_salon_chandeliers",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 1000,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "keys",
+     "x": 640,
+     "y": 760,
+     "k": 0.8,
+     "at": 14,
+     "anim": "drop"
+    }
+   ],
+   "why": "'He understood something simple.' - teaching finger, flipped to face the room; hotel keys drop as the room becomes his tool"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Trust the room.",
+    "Then the person."
+   ],
+   "accent": "x",
+   "icon": null,
+   "w": 1.0
+  }
+ ],
+ "b30": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 1240,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'Then the audience. He did not want rich men.' - hands behind back, choosing his marks; actor right of the window, quiet drift"
+  },
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "scrap_yard_day",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_greedy",
+     "x": 760,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 1
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1150,
+     "y": 700,
+     "k": 1,
+     "at": 16,
+     "anim": "drop"
+    }
+   ],
+   "chip": "THE MARKS",
+   "caption": null,
+   "why": "'He wanted men who wanted to be richer.' - ambitious scrap dealer eyeing a falling coin among his iron; push into his hunger"
+  }
+ ],
+ "b31": [
+  {
+   "k": "title",
+   "lines": [
+    "Six scrap",
+    "metal dealers."
+   ],
+   "accent": "x",
+   "icon": "coin",
+   "w": 0.9
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_reading_letter",
+     "x": 820,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "telegram",
+     "x": 1220,
+     "y": 640,
+     "k": 0.9,
+     "at": 6,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'Each one invited by a polite, official letter' - dealer opening the sealed envelope, flattered; a gentle pull back as it slides up keeps the moment polite, saving the tight push for what the letter says in b32"
+  }
+ ],
+ "b32": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_reading_letter",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 900,
+     "y": 700,
+     "k": 1.1,
+     "at": 4,
+     "anim": "pop"
+    }
+   ],
+   "why": "'The letter said only this.' - tight push onto the letter in his hands, night street so the reading feels private"
+  },
+  {
+   "k": "label",
+   "title": "Come to the Crillon.",
+   "a": "A matter of great importance.",
+   "b": "Tell no one.",
+   "w": 1.3
+  },
+  {
+   "k": "scene",
+   "w": 0.8,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0.0
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_pocketing_letter",
+     "fallback_sprite": "clerk_1",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -250,
+      "at": 0,
+      "dur": 12
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'Tell no one.' - the dealer tucks the sealed letter into his inner pocket with a glance over his shoulder: the secret obeyed, shown by the mark instead of a shush; locked camera under the dark tower keeps it hushed"
+  }
+ ],
+ "b33": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "scrap_dealer_proud",
+     "x": 300,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -400,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 1150,
+      "at": 24,
+      "dur": 50
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "doorman_bowing",
+     "x": 1460,
+     "y": 900,
+     "h": 660,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'The dealers arrived thinking they had been picked.' - chest-out dealer strides to the hotel door, doorman bows; pan follows the walk"
+  },
+  {
+   "k": "title",
+   "lines": [
+    "The first",
+    "hook."
+   ],
+   "accent": "x",
+   "icon": null,
+   "w": 0.8
+  }
+ ],
+ "b34": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1100,
+     "y": 780,
+     "k": 0.5,
+     "at": 20,
+     "anim": "pop"
+    }
+   ],
+   "why": "'the smallest detail could ruin him' - hands behind back, plotting, eyes on one small coin on the table; push narrows the frame down to the single tiny detail"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "crillon_salon_chandeliers",
+   "cam": {
+    "move": "hold",
+    "amt": 0.0
+   },
+   "actors": [
+    {
+     "sprite": "clerk_1",
+     "x": 640,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "scrap_dealer_hesitating",
+     "fallback_sprite": "parisian_3",
+     "x": 1100,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 1380,
+      "at": 34,
+      "dur": 24
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1600,
+     "y": 900,
+     "k": 1,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "why": "'One wrong word, and six men could walk out.' - a suspicious chin-hand guest and a scrap dealer who puts one foot toward the door, hat to chest, then freezes. Locked camera holds the threat: nobody has left yet"
+  }
+ ],
+ "x10": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.07
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 900,
+     "y": 700,
+     "k": 0.8,
+     "at": 30,
+     "anim": "pop"
+    },
+    {
+     "kind": "telegram",
+     "x": 1150,
+     "y": 640,
+     "k": 0.8,
+     "at": 55,
+     "anim": "pop"
+    },
+    {
+     "kind": "keys",
+     "x": 1400,
+     "y": 720,
+     "k": 0.8,
+     "at": 80,
+     "anim": "pop"
+    }
+   ],
+   "why": "'The papers, the title, the hotel' - explaining finger as each item pops on its word in turn; pan right walks the checklist"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_rehearsing_mirror",
+     "x": 1180,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 1
+    }
+   ],
+   "props": [],
+   "why": "'the order he would speak in' - rehearsing his speech mouth-open, hand gesturing, flipped toward the window; pull back = alone, practising"
+  }
+ ],
+ "x11": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_6",
+     "x": 700,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [
+    "shake"
+   ],
+   "why": "'One slip' - Lustig hunched in the 'about to be caught' pose outside the hotel, a small jolt as if he has misstepped; pull widens and leaves him exposed in the empty street"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "parisian_1",
+     "x": 1100,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "telegram",
+     "x": 720,
+     "y": 700,
+     "k": 0.8,
+     "at": 16,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'and call the police' - an imagined dealer, hands to cheeks as the truth lands, while a telegram rises beside him: the report he would send. Drift keeps it a threat, not an arrest (no police came for the first sale)"
+  }
+ ],
+ "x12": [
+  {
+   "k": "title",
+   "lines": [
+    "No second",
+    "take."
+   ],
+   "accent": "x",
+   "icon": "flame",
+   "w": 0.8
+  },
+  {
+   "k": "scene",
+   "w": 1.5,
+   "plate": "paris_dusk",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 420,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -500,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 860,
+      "at": 26,
+      "dur": 50
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 1180,
+     "y": 700,
+     "k": 0.9,
+     "at": 40,
+     "anim": "slide_up"
+    }
+   ],
+   "fx": [
+    "dust"
+   ],
+   "chip": "ONE AFTERNOON",
+   "caption": null,
+   "why": "'The whole plan lived or died in one afternoon.' - suitcase in hand he walks toward the tower at sunset, the forged papers rise beside him; push in = no turning back"
+  }
+ ],
+ "needed_plates": [
+  {
+   "id": "forger_desk_night",
+   "desc": "Cramped dim room at night, wooden desk under a green banker's lamp, inkwell, rubber stamps, stacks of blank letterhead with a French tricolour government crest, wastebasket of crumpled drafts; empty floor y 68-100% left-centre for a standing figure, desk right half",
+   "beats": [
+    "b24"
+   ]
+  },
+  {
+   "id": "ministry_office_day",
+   "desc": "1920s French government office interior, daylight through tall windows, filing cabinets, tricolour flag on pole at right, brass sign 'Postes et Telegraphes' on wall, wooden floor y 66-100% open across centre",
+   "beats": [
+    "b25"
+   ]
+  },
+  {
+   "id": "hotel_crillon_facade_day",
+   "desc": "Hotel de Crillon neoclassical colonnaded facade on Place de la Concorde, daytime warm light, obelisk at left edge, grand arched entrance right-centre with doorman post, wide open cobbled/paved foreground y 64-100%",
+   "beats": [
+    "b27"
+   ]
+  },
+  {
+   "id": "crillon_salon_chandeliers",
+   "desc": "Palatial hotel salon interior: gilded panelled walls, two crystal chandeliers, tall mirrors, red velvet chairs pushed to the edges, polished parquet floor open y 66-100% full width, centre clear for 2-3 standing figures",
+   "beats": [
+    "b28",
+    "b29",
+    "b34"
+   ]
+  },
+  {
+   "id": "scrap_yard_day",
+   "desc": "1920s Paris scrap-metal yard by day: heaps of rusty girders, wheels and pipes left and right, a small office shed with sign 'Ferraille', overcast sky, open dirt ground y 64-100% centre clear",
+   "beats": [
+    "b30"
+   ]
+  }
+ ],
+ "needed_poses": [
+  {
+   "id": "lustig_forging_pen",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) standing, leaning over, pen in right hand writing on a sheet held flat in left, sly concentrated smirk, facing right",
+   "beats": [
+    "b24"
+   ]
+  },
+  {
+   "id": "doorman_bowing",
+   "desc": "Hotel doorman stick figure in burgundy long coat with gold buttons and braid, peaked cap, white gloves, bowing politely with one hand on chest, facing right",
+   "beats": [
+    "b27",
+    "b28",
+    "b33"
+   ]
+  },
+  {
+   "id": "scrap_dealer_greedy",
+   "desc": "Scrap-metal dealer stick figure, stocky, grey work waistcoat over rolled sleeves, bowler hat, moustache, rubbing hands together with hungry wide eyes and grin, facing front",
+   "beats": [
+    "b30"
+   ]
+  },
+  {
+   "id": "scrap_dealer_reading_letter",
+   "desc": "Same scrap dealer holding open a cream letter with a red wax seal in both hands, flattered smile, eyebrows up, facing front",
+   "beats": [
+    "b31",
+    "b32"
+   ]
+  },
+  {
+   "id": "scrap_dealer_proud",
+   "desc": "Same scrap dealer in his best suit, walking in profile facing right, chest out, chin up, proud and self-important",
+   "beats": [
+    "b33"
+   ]
+  },
+  {
+   "id": "scrap_dealer_pocketing_letter",
+   "desc": "Same scrap dealer (stocky, grey work waistcoat, bowler hat, moustache) tucking a cream letter with a red wax seal into his inner coat pocket, glancing back over his shoulder, lips pressed tight, facing right",
+   "beats": [
+    "b32"
+   ]
+  },
+  {
+   "id": "lustig_rehearsing_mirror",
+   "desc": "Victor Lustig standing facing right, one hand raised mid-gesture, mouth open as if practising a speech, other hand holding a small card of notes, focused eyes",
+   "beats": [
+    "x10"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "kind": "plates",
+ "files": [
+  "public/ink60full/plates/chicago_street_night.png",
+  "public/ink60full/plates/federal_jail_exterior_night.png",
+  "public/ink60full/plates/alcatraz_island_fog.png",
+  "public/ink60full/plates/crillon_salon_chandeliers.png",
+  "public/ink60full/plates/paris_expo_1889.png",
+  "public/ink60full/plates/paris_cafe_artists.png"
+ ]
+}

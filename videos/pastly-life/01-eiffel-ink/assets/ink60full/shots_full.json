@@ -1,0 +1,1486 @@
+{
+ "b01": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "b02": [
+  {
+   "k": "title",
+   "lines": [
+    "He sold",
+    "it twice."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "And he got",
+    "away with it."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b03": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b04": [
+  {
+   "k": "title",
+   "lines": [
+    "His name was",
+    "Victor Lustig."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b05": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b06": [
+  {
+   "k": "title",
+   "lines": [
+    "Start with the",
+    "tower itself."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b07": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Then be",
+    "taken apart."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b08": [
+  {
+   "k": "title",
+   "lines": [
+    "Most Parisians",
+    "hated it."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b09": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "A giant",
+    "radio antenna."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b10": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b11": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "b12": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Is this thing",
+    "still worth keeping?"
+   ],
+   "accent": "x"
+  }
+ ],
+ "b13": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b14": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "x01": [
+  {
+   "k": "title",
+   "lines": [
+    "Think about what",
+    "he saw."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "x02": [
+  {
+   "k": "title",
+   "lines": [
+    "Every con needs",
+    "a believable story."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "x03": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b15": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b16": [
+  {
+   "k": "title",
+   "lines": [
+    "He spoke",
+    "five languages."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "He looked like",
+    "a diplomat."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "He never raised",
+    "his voice."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b17": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x04": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "x05": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "clerk_3",
+   "x": 520
+  }
+ ],
+ "x06": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b18": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b19": [
+  {
+   "k": "title",
+   "lines": [
+    "He even",
+    "had rules."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b20": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b21": [
+  {
+   "k": "title",
+   "lines": [
+    "Number two: never",
+    "look bored."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x07": [
+  {
+   "k": "title",
+   "lines": [
+    "Number four:",
+    "never boast."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Number five: never",
+    "be shabby."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "A rich person",
+    "trusts clean shoes."
+   ],
+   "accent": "x"
+  }
+ ],
+ "x08": [
+  {
+   "k": "title",
+   "lines": [
+    "Notice what",
+    "is missing."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Not one rule",
+    "says be clever."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x09": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b22": [
+  {
+   "k": "title",
+   "lines": [
+    "We will come",
+    "back to those."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b23": [
+  {
+   "k": "title",
+   "lines": [
+    "He had",
+    "the idea."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b24": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b25": [
+  {
+   "k": "title",
+   "lines": [
+    "Then he gave",
+    "himself a title."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "clerk_2",
+   "x": 1300
+  }
+ ],
+ "b26": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b27": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b28": [
+  {
+   "k": "title",
+   "lines": [
+    "Not a",
+    "back room."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b29": [
+  {
+   "k": "title",
+   "lines": [
+    "He understood",
+    "something simple."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "b30": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b31": [
+  {
+   "k": "title",
+   "lines": [
+    "Six scrap",
+    "metal dealers."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "parisian_3",
+   "x": 1300
+  }
+ ],
+ "b32": [
+  {
+   "k": "title",
+   "lines": [
+    "The letter said",
+    "only this."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Come to",
+    "the Crillon."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b33": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "That was the",
+    "first hook."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b34": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "x10": [
+  {
+   "k": "title",
+   "lines": [
+    "So he prepared",
+    "every detail."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "x11": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "x12": [
+  {
+   "k": "title",
+   "lines": [
+    "There was no",
+    "second take."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b35": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "b36": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b37": [
+  {
+   "k": "title",
+   "lines": [
+    "But it cannot",
+    "say so."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "The public",
+    "would revolt."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b38": [
+  {
+   "k": "title",
+   "lines": [
+    "Seven thousand tons",
+    "of iron."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "A fortune, for",
+    "the right buyer."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b39": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b40": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Not as a",
+    "monument. As inventory."
+   ],
+   "accent": "x"
+  }
+ ],
+ "x13": [
+  {
+   "k": "title",
+   "lines": [
+    "He did not",
+    "rush them."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "x14": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b41": [
+  {
+   "k": "title",
+   "lines": [
+    "Lustig watched",
+    "them carefully."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "And he picked",
+    "his target."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b42": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b43": [
+  {
+   "k": "title",
+   "lines": [
+    "Poisson wanted to",
+    "be taken seriously."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "parisian_2",
+   "x": 1300
+  }
+ ],
+ "b44": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "parisian_1",
+   "x": 1300
+  }
+ ],
+ "b45": [
+  {
+   "k": "title",
+   "lines": [
+    "Then the",
+    "second hook."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Poisson's wife",
+    "grew suspicious."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b46": [
+  {
+   "k": "title",
+   "lines": [
+    "Lustig did",
+    "not argue."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "He shifted",
+    "the story."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b47": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b48": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "parisian_3",
+   "x": 1300
+  }
+ ],
+ "b49": [
+  {
+   "k": "title",
+   "lines": [
+    "That is",
+    "the genius."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "x15": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "parisian_2",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "x16": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "b50": [
+  {
+   "k": "title",
+   "lines": [
+    "Poisson paid for",
+    "the tower."
+   ],
+   "accent": null
+  },
+  {
+   "k": "title",
+   "lines": [
+    "And paid the",
+    "bribe on top."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b51": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b52": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b53": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b54": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "parisian_3",
+   "x": 520
+  }
+ ],
+ "b55": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b56": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x17": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "x18": [
+  {
+   "k": "scene",
+   "plate": "paris_tower_grey",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "x19": [
+  {
+   "k": "title",
+   "lines": [
+    "The tower did",
+    "not move."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b57": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ],
+ "b58": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b59": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b60": [
+  {
+   "k": "title",
+   "lines": [
+    "Lustig left France",
+    "that night."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "x20": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "He had",
+    "already won."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x21": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "x22": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_2",
+   "x": 1300
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "clerk_3",
+   "x": 520
+  }
+ ],
+ "b61": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "America, in the",
+    "prohibition years."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b62": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b63": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "The box did",
+    "not print anything."
+   ],
+   "accent": "x"
+  }
+ ],
+ "x23": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Two real bills",
+    "went in."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "x24": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Hidden in",
+    "the box."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "x25": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_3",
+   "x": 520
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "clerk_1",
+   "x": 1300
+  }
+ ],
+ "b64": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b65": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b66": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_1",
+   "x": 520
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Do not make",
+    "me regret it."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b67": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b68": [
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "The deal fell",
+    "through, sorry."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b69": [
+  {
+   "k": "title",
+   "lines": [
+    "He returned",
+    "every dollar."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "x26": [
+  {
+   "k": "title",
+   "lines": [
+    "Think about what",
+    "Capone saw."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "hotel_room_night",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "x27": [
+  {
+   "k": "title",
+   "lines": [
+    "To Capone, that",
+    "was not weakness."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b70": [
+  {
+   "k": "title",
+   "lines": [
+    "That was the",
+    "whole point."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b71": [
+  {
+   "k": "title",
+   "lines": [
+    "In nineteen thirty-five,",
+    "his luck ended."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b72": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_4",
+   "x": 1300
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Then he was",
+    "caught again."
+   ],
+   "accent": "x"
+  }
+ ],
+ "b73": [
+  {
+   "k": "title",
+   "lines": [
+    "He was sent",
+    "to Alcatraz."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b74": [
+  {
+   "k": "scene",
+   "plate": "paris_night",
+   "sprite": "lustig_2",
+   "x": 1300
+  }
+ ],
+ "x28": [
+  {
+   "k": "scene",
+   "plate": "paris_grey",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "x29": [
+  {
+   "k": "title",
+   "lines": [
+    "No money.",
+    "No title."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_5",
+   "x": 520
+  }
+ ],
+ "b75": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_6",
+   "x": 1300
+  }
+ ],
+ "b76": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_1",
+   "x": 520
+  }
+ ],
+ "b77": [
+  {
+   "k": "title",
+   "lines": [
+    "The tower",
+    "never moved."
+   ],
+   "accent": null
+  },
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_3",
+   "x": 520
+  }
+ ],
+ "b78": [
+  {
+   "k": "scene",
+   "plate": "paris_dusk",
+   "sprite": "lustig_4",
+   "x": 1300
+  }
+ ]
+}

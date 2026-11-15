@@ -5,6 +5,8 @@
   "scripts": {
     "studio": "remotion studio engine/index.ts",
     "ep": "python tools/make.py",
+    "ink:studio": "remotion studio engine/ink/index.ts --public-dir videos/pastly-life/01-eiffel-ink/assets",
+    "ink:test": "node --test tests/ink/*.test.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

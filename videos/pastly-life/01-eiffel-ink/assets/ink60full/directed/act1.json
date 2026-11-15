@@ -1,0 +1,863 @@
+{
+ "b06": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.12
+   },
+   "actors": [],
+   "props": [],
+   "fx": [
+    "dust"
+   ],
+   "why": "'Start with the tower itself': no actor, just an empty esplanade and a slow pan right onto the iron legs, so the tower is the only subject."
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_expo_1889",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "parisian_awe_looking_up",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -320,
+      "at": 0,
+      "dur": 20
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "PARIS 1889",
+   "why": "'built in eighteen eighty-nine, for a world's fair': a fairgoer walks in and stares up at the brand-new tower; the pull reveals the fair crowd and flags, chip marks the jump back in time."
+  }
+ ],
+ "b07": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "hold",
+    "amt": 0.0
+   },
+   "actors": [
+    {
+     "sprite": "city_official_decree",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -260,
+      "at": 0,
+      "dur": 16
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'supposed to stand for twenty years': an official slides in under the scaffolding holding the sealed permit (the decree is in his hands, no extra prop); the locked frame does not move, the way the tower was only meant to 'stand' still for a fixed term."
+  },
+  {
+   "k": "compare",
+   "w": 1.0,
+   "head": "The 1889 permit",
+   "left": "1889: built",
+   "right": "1909: tear it down"
+  }
+ ],
+ "b08": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "parisian_3",
+     "x": 760,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 0,
+      "dur": 18
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'Most Parisians hated it': arms-crossed scowl in the rain; the pull widens from his face out to the tower small in the mist behind him, so we see both the hater and 'it'."
+  },
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_cafe_artists",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "artist_signing_petition",
+     "x": 1100,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 1
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 760,
+     "y": 720,
+     "k": 1.0,
+     "at": 8,
+     "anim": "drop"
+    }
+   ],
+   "why": "'Artists signed a petition': a painter in a beret signs the sheet on a cafe table; the pan left follows the pen along the list of signatures."
+  },
+  {
+   "k": "title",
+   "w": 1.0,
+   "lines": [
+    "\"A gigantic black",
+    "factory chimney.\""
+   ],
+   "accent": "x",
+   "icon": "flame"
+  }
+ ],
+ "b09": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "tower_radio_station",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "soldier_radio_operator",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 4,
+      "dur": 10
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "telegram",
+     "x": 1000,
+     "y": 620,
+     "k": 0.8,
+     "at": 18,
+     "anim": "pop"
+    }
+   ],
+   "why": "'the army found a use for it': a soldier with headphones at a radio set at the tower's foot; a telegram pops out of the machine, the use he found."
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [],
+   "props": [
+    {
+     "kind": "telegram",
+     "x": 1560,
+     "y": 180,
+     "k": 0.6,
+     "at": 6,
+     "anim": "pop"
+    },
+    {
+     "kind": "telegram",
+     "x": 1700,
+     "y": 260,
+     "k": 0.5,
+     "at": 16,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'A giant radio antenna': hard push up the lit tower, signals popping off the top with a flash, so the whole tower reads as one big aerial."
+  }
+ ],
+ "b10": [
+  {
+   "k": "scene",
+   "w": 1.4,
+   "plate": "paris_dusk",
+   "cam": {
+    "move": "drift",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "clerk_1",
+     "x": 640,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -300,
+      "at": 0,
+      "dur": 18
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "PARIS 1925",
+   "why": "'by nineteen twenty-five ... already in the air': a hand-on-chin ponderer gazes across at the distant tower at sunset; the slow drift is the idea floating, the chip jumps the clock to 1925."
+  },
+  {
+   "k": "title",
+   "w": 1.0,
+   "lines": [
+    "Temporary.",
+    "Everyone knew it."
+   ],
+   "accent": "x",
+   "icon": "tower"
+  }
+ ],
+ "b11": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "tower_rust_closeup",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.1
+   },
+   "actors": [],
+   "props": [],
+   "fx": [
+    "dust"
+   ],
+   "why": "'the tower was in bad shape. It needed paint': no bystander, the tower itself is the subject; the pan left runs back along the flaking girders, ladder and paint buckets while rust dust falls."
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "ministry_office_day",
+   "cam": {
+    "move": "push",
+    "amt": 0.09
+   },
+   "actors": [
+    {
+     "sprite": "clerk_3",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 1100,
+     "y": 720,
+     "k": 0.8,
+     "at": 6,
+     "anim": "drop"
+    },
+    {
+     "kind": "papers",
+     "x": 1060,
+     "y": 600,
+     "k": 0.8,
+     "at": 30,
+     "anim": "drop"
+    }
+   ],
+   "why": "'the bills kept growing': a sweating official waves nervously while repair invoices (the documents are the point: bills) keep dropping onto the pile beside him; push in on the growing stack, the peak of the money problem."
+  }
+ ],
+ "b12": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "parisian_2",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -260,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 980,
+     "y": 760,
+     "k": 0.7,
+     "at": 10,
+     "anim": "drop"
+    },
+    {
+     "kind": "newspaper",
+     "x": 1080,
+     "y": 790,
+     "k": 0.7,
+     "at": 20,
+     "anim": "drop"
+    }
+   ],
+   "why": "'Newspapers asked the same question every week': a reader scowls over the paper under the street lamps while more editions keep landing at his feet; the slow sideways drift is time passing, week after week."
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 760,
+     "y": 780,
+     "k": 1.0,
+     "at": 0,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'Is this thing still worth keeping?': the question in print, a newspaper sliding up big in the foreground; the pull widens off it to the scaffolded tower the headline is asking about."
+  }
+ ],
+ "b13": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "parisian_walk_profile",
+     "x": 1180,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 2300,
+      "at": 8,
+      "dur": 40
+     },
+     "bob": 2
+    },
+    {
+     "sprite": "parisian_2",
+     "x": 760,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 2300,
+      "at": 20,
+      "dur": 44
+     },
+     "bob": 2
+    },
+    {
+     "sprite": "parisian_walk_profile",
+     "x": 380,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 2300,
+      "at": 34,
+      "dur": 50
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 1120,
+     "y": 860,
+     "k": 0.6,
+     "at": 6,
+     "anim": "drop"
+    },
+    {
+     "kind": "newspaper",
+     "x": 760,
+     "y": 860,
+     "k": 0.6,
+     "at": 18,
+     "anim": "drop"
+    },
+    {
+     "kind": "newspaper",
+     "x": 380,
+     "y": 860,
+     "k": 0.6,
+     "at": 32,
+     "anim": "drop"
+    }
+   ],
+   "why": "'Most people just read that, and moved on': a small crowd of readers thins out one by one, each dropping the paper on the wet cobbles and walking off right; the slow drift watches the street empty until only the discarded papers are left."
+  }
+ ],
+ "b14": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0.0
+   },
+   "actors": [
+    {
+     "sprite": "lustig_reading_newspaper",
+     "x": 640,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "VICTOR LUSTIG",
+   "why": "'Victor Lustig read it': first look at our man, reading the same paper in a lamplit hotel room with the tower in the window; after the drifting street the camera holds dead still on him, the one reader who stayed put and did not move on."
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -320,
+      "at": 0,
+      "dur": 18
+     },
+     "move": {
+      "to": 900,
+      "at": 22,
+      "dur": 30
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1400,
+     "y": 580,
+     "k": 1.0,
+     "at": 26,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'and saw a door open': finger up in an aha, he strides toward the hotel doors as a door pops open with a flash of light; push in on the opening."
+  }
+ ],
+ "x01": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "push",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'Think about what he saw': hands behind his back, calm and calculating, staring at the misty tower; the push puts us inside his look."
+  },
+  {
+   "k": "compare",
+   "w": 1.0,
+   "head": "What he saw",
+   "left": "Not a monument.",
+   "right": "A pile of iron."
+  },
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "parisian_3",
+     "x": 520,
+     "y": 900,
+     "h": 620,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "parisian_2",
+     "x": 920,
+     "y": 900,
+     "h": 620,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 240,
+      "at": 4,
+      "dur": 14
+     },
+     "bob": 1
+    }
+   ],
+   "props": [],
+   "why": "'people openly argued about keeping': two locals face off in the street, the scowler and the angry reader; the pull widens from the argument out to the misty tower they are arguing over, out in the open for anyone to hear."
+  }
+ ],
+ "x02": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 1300,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 260,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "tower",
+     "x": 760,
+     "y": 700,
+     "k": 0.8,
+     "at": 16,
+     "anim": "pop"
+    }
+   ],
+   "why": "'Every con needs a believable story': finger raised like a teacher, on the right side of frame facing left as a small tower pops up beside him; the slow drift lets the point land, the tower was already telling the story he needs."
+  },
+  {
+   "k": "title",
+   "w": 1.0,
+   "lines": [
+    "The tower told the story.",
+    "He just listened."
+   ],
+   "accent": "x",
+   "icon": "tower"
+  }
+ ],
+ "x03": [
+  {
+   "k": "scene",
+   "w": 1.3,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 420,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -340,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 760,
+      "at": 24,
+      "dur": 36
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 1020,
+     "y": 720,
+     "k": 0.8,
+     "at": 10,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'All he had to do was finish the sentence': he walks across the esplanade with an open palm held out to the tower, like a salesman presenting stock; pan right toward the iron."
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "lustig_pen_newspaper",
+     "fallback_sprite": "lustig_3",
+     "x": 700,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -240,
+      "at": 0,
+      "dur": 12
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "newspaper",
+     "x": 1000,
+     "y": 760,
+     "k": 0.7,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "fx": [
+    "shake"
+   ],
+   "why": "'finish the sentence the newspapers had started': he slides in and leans over the open paper, fountain pen poised to write the last word himself; a hard push and a small shake end the act on him finishing it."
+  }
+ ],
+ "needed_poses": [
+  {
+   "id": "parisian_awe_looking_up",
+   "desc": "Parisian bystander (brown flat cap, brown herringbone tweed jacket, bright orange scarf, dark brown trousers), front-on, head tipped back looking up and to the right, mouth open in wonder, one hand holding the cap on his head. Same stick style: white round head, long black stick legs.",
+   "beats": [
+    "b06"
+   ]
+  },
+  {
+   "id": "city_official_decree",
+   "desc": "City official stickman in a black bowler hat, grey frock coat and waistcoat, facing right, holding a rolled document with a red wax seal at chest height, stern neutral face.",
+   "beats": [
+    "b07"
+   ]
+  },
+  {
+   "id": "artist_signing_petition",
+   "desc": "Painter stickman in a floppy black beret, paint-smeared smock and red neckerchief, facing right, bent slightly forward signing a long paper petition with a quill held in his right hand, indignant frown.",
+   "beats": [
+    "b08"
+   ]
+  },
+  {
+   "id": "soldier_radio_operator",
+   "desc": "French army stickman, early 1900s horizon-blue uniform and kepi, seated or standing at a wooden radio set, headphones on, one hand tapping a telegraph key, focused face, facing right.",
+   "beats": [
+    "b09"
+   ]
+  },
+  {
+   "id": "parisian_walk_profile",
+   "desc": "Parisian bystander (brown flat cap, tweed jacket, orange scarf) walking in side profile to the right, mid-stride, hands in pockets, bored neutral face.",
+   "beats": [
+    "b13"
+   ]
+  },
+  {
+   "id": "lustig_reading_newspaper",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret), front-on, holding an open newspaper low enough to show his face, eyes narrowed with a slow sly smile, one eyebrow raised.",
+   "beats": [
+    "b14"
+   ]
+  },
+  {
+   "id": "lustig_pen_newspaper",
+   "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black beret) leaning forward facing right, fountain pen in right hand reaching down as if writing the last word on something just in front of him at waist height (the newspaper is a separate prop), sly half-smile, full body, same stick style.",
+   "beats": [
+    "x03"
+   ]
+  }
+ ],
+ "needed_plates": [
+  {
+   "id": "paris_expo_1889",
+   "desc": "1889 Paris World's Fair (Exposition Universelle) on the Champ de Mars, sunny day: the brand-new Eiffel Tower, painted red-brown, at right (x 68-95%), flags and bunting, exhibition pavilions and small crowds in the distance; open sandy foreground from y ~65% down, centre-left clear for actors. Same hand-drawn ink and watercolour style as the existing plates, 16:9.",
+   "beats": [
+    "b06"
+   ]
+  },
+  {
+   "id": "paris_cafe_artists",
+   "desc": "Montmartre-style Paris cafe terrace by day: small round marble tables with chairs, striped awning, easels and canvases leaning on the wall at left, the Eiffel Tower small and dark on the far skyline at right; open paved floor from y ~65% down, a table at centre-left (x 35-45%) for a petition prop. Same ink and watercolour style, 16:9.",
+   "beats": [
+    "b08"
+   ]
+  },
+  {
+   "id": "tower_radio_station",
+   "desc": "Foot of the Eiffel Tower around 1910: a wooden military radio hut with antenna wires running up into the tower legs at right (x 65-100%), a tricolour flag, sandbags; overcast sky; open ground from y ~65% down, centre-left clear for a soldier actor. Same ink and watercolour style, 16:9.",
+   "beats": [
+    "b09"
+   ]
+  },
+  {
+   "id": "tower_rust_closeup",
+   "desc": "Close view of the Eiffel Tower's lower ironwork in grey weather: rusted, flaking red-brown girders and rivets filling the right half, paint peeling, a painter's ladder and paint buckets on scaffolding; open ground band from y ~66% down at left and centre for one actor. Same ink and watercolour style, 16:9.",
+   "beats": [
+    "b11"
+   ]
+  },
+  {
+   "id": "ministry_office_day",
+   "desc": "1920s French government office interior by day: dark wooden desk with stacks of papers and ledgers at right-centre, tall window with the Eiffel Tower faintly visible, filing cabinets, framed tricolour seal on the wall; open wooden floor from y ~68% down, centre-left clear for an actor. Same ink and watercolour style, 16:9.",
+   "beats": [
+    "b11"
+   ]
+  }
+ ]
+}

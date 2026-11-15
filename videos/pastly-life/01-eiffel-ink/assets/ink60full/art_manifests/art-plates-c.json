@@ -1,0 +1,11 @@
+{
+ "kind": "plates",
+ "files": [
+  "public/ink60full/plates/liner_cabin_night.png",
+  "public/ink60full/plates/tailor_shop_mirror.png",
+  "public/ink60full/plates/forger_desk_night.png",
+  "public/ink60full/plates/hotel_crillon_facade_day.png",
+  "public/ink60full/plates/scrap_yard_day.png",
+  "public/ink60full/plates/elite_banquet_table_night.png"
+ ]
+}

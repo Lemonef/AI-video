@@ -1,0 +1,177 @@
+{
+ "fps": 30,
+ "totalFrames": 1728,
+ "beats": [
+  {
+   "id": "b1",
+   "start": 0,
+   "dur": 170,
+   "shots": [
+    {
+     "start": 0,
+     "dur": 43
+    },
+    {
+     "start": 43,
+     "dur": 43
+    },
+    {
+     "start": 86,
+     "dur": 42
+    },
+    {
+     "start": 128,
+     "dur": 42
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "start": 170,
+   "dur": 211,
+   "shots": [
+    {
+     "start": 170,
+     "dur": 71
+    },
+    {
+     "start": 241,
+     "dur": 70
+    },
+    {
+     "start": 311,
+     "dur": 70
+    }
+   ]
+  },
+  {
+   "id": "b3",
+   "start": 381,
+   "dur": 195,
+   "shots": [
+    {
+     "start": 381,
+     "dur": 65
+    },
+    {
+     "start": 446,
+     "dur": 65
+    },
+    {
+     "start": 511,
+     "dur": 65
+    }
+   ]
+  },
+  {
+   "id": "b4",
+   "start": 576,
+   "dur": 188,
+   "shots": [
+    {
+     "start": 576,
+     "dur": 94
+    },
+    {
+     "start": 670,
+     "dur": 94
+    }
+   ]
+  },
+  {
+   "id": "b5",
+   "start": 764,
+   "dur": 192,
+   "shots": [
+    {
+     "start": 764,
+     "dur": 64
+    },
+    {
+     "start": 828,
+     "dur": 64
+    },
+    {
+     "start": 892,
+     "dur": 64
+    }
+   ]
+  },
+  {
+   "id": "b6",
+   "start": 956,
+   "dur": 157,
+   "shots": [
+    {
+     "start": 956,
+     "dur": 53
+    },
+    {
+     "start": 1009,
+     "dur": 52
+    },
+    {
+     "start": 1061,
+     "dur": 52
+    }
+   ]
+  },
+  {
+   "id": "b7",
+   "start": 1113,
+   "dur": 227,
+   "shots": [
+    {
+     "start": 1113,
+     "dur": 76
+    },
+    {
+     "start": 1189,
+     "dur": 76
+    },
+    {
+     "start": 1265,
+     "dur": 75
+    }
+   ]
+  },
+  {
+   "id": "b8",
+   "start": 1340,
+   "dur": 155,
+   "shots": [
+    {
+     "start": 1340,
+     "dur": 52
+    },
+    {
+     "start": 1392,
+     "dur": 52
+    },
+    {
+     "start": 1444,
+     "dur": 51
+    }
+   ]
+  },
+  {
+   "id": "b9",
+   "start": 1495,
+   "dur": 215,
+   "shots": [
+    {
+     "start": 1495,
+     "dur": 72
+    },
+    {
+     "start": 1567,
+     "dur": 72
+    },
+    {
+     "start": 1639,
+     "dur": 71
+    }
+   ]
+  }
+ ]
+}

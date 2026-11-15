@@ -1,0 +1,11 @@
+{
+ "kind": "plates",
+ "files": [
+  "public/ink60full/plates/new_york_street_night.png",
+  "public/ink60full/plates/backroom_workshop_lamp.png",
+  "public/ink60full/plates/texas_main_street_day.png",
+  "public/ink60full/plates/capone_office.png",
+  "public/ink60full/plates/bank_vault_safe_deposit.png",
+  "public/ink60full/plates/prison_cell.png"
+ ]
+}

@@ -6,7 +6,7 @@ One file that says where everything goes. `tests/test_architecture.py` fails if 
 
 | Dir | Owner / purpose | Rule |
 |---|---|---|
-| `engine/` | Remotion code: `compositions/`, `components/`, `lib/`, `registry/`, `characters/<name>/`, `legacy/` (old per-version engines); `jaab3d/` (separate 3D-shorts entry); `shared/` (assets every render gets: fonts, sfx, reference-study) | code is shared; no per-version or per-style folder at the top of `engine/` (a second Remotion entry is listed in `render_entries`); `shared/` is assets, so any file type |
+| `engine/` | Remotion code: `compositions/`, `components/`, `lib/`, `registry/`, `characters/<name>/`, `legacy/` (old per-version engines); `jaab3d/` (separate 3D-shorts entry); `ink/` (separate hand-drawn Ink history entry, assets in `videos/pastly-life/01-eiffel-ink/assets` via `--public-dir`); `shared/` (assets every render gets: fonts, sfx, reference-study) | code is shared; no per-version or per-style folder at the top of `engine/` (a second Remotion entry is listed in `render_entries`); `shared/` is assets, so any file type |
 | `tools/` | `make.py`, `pipeline/`, `episode/` (per-episode one-offs), `spikes/` | python only; max 4 levels (package dirs like pipeline/tts) |
 | `videos/` | `<channel>/<id>/`: `script/` (`<id>.json`, `docs/<id>/`), `assets/<id>/` (voices, images, `3d/`), `final/` and `draft/` (gitignored outputs); `<channel>/_shared/` for channel assets | one folder per video; `unsorted/` until a channel is chosen |
 | `docs/` | guides flat; `briefs/`, `agent-logs/`, `reference/`, `TODO.md` | max 3 levels |

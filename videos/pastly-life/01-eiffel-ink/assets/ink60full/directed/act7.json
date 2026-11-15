@@ -1,0 +1,865 @@
+{
+ "b71": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "new_york_street_night",
+   "fallback_plate": "paris_night",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_6",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -360,
+      "at": 0,
+      "dur": 22
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 860,
+     "y": 760,
+     "k": 0.9,
+     "at": 14,
+     "anim": "pop"
+    }
+   ],
+   "chip": "NEW YORK 1935",
+   "caption": null,
+   "why": "'his luck ended': Lustig creeps in hunched with finger to lips (the 'about to be caught' pose, its only use in the closing acts) clutching fake notes; a locked-off hold = the trap is already set and waiting"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "new_york_street_night",
+   "fallback_plate": "paris_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_arrested",
+     "fallback_sprite": "lustig_4",
+     "x": 620,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "secret_service_agent",
+     "fallback_sprite": "parisian_3",
+     "x": 1180,
+     "y": 900,
+     "h": 660,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 420,
+      "at": 4,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "handcuffs",
+     "x": 720,
+     "y": 640,
+     "k": 1,
+     "at": 16,
+     "anim": "drop"
+    },
+    {
+     "kind": "banknotes",
+     "x": 420,
+     "y": 860,
+     "k": 0.8,
+     "at": 18,
+     "anim": "drop"
+    }
+   ],
+   "fx": [
+    "flash"
+   ],
+   "why": "'The Secret Service caught him, with counterfeit money': agent slides in from the right, cuffs drop on Lustig, fake notes scatter at his feet; flash = the bust"
+  }
+ ],
+ "b72": [
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "prison_cell",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.07
+   },
+   "actors": [
+    {
+     "sprite": "lustig_bedsheet_rope",
+     "fallback_sprite": "lustig_6",
+     "x": 700,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 1000,
+      "at": 10,
+      "dur": 40
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "keys",
+     "x": 300,
+     "y": 820,
+     "k": 0.7,
+     "at": 0,
+     "anim": "none"
+    }
+   ],
+   "chip": "NEW YORK JAIL",
+   "caption": null,
+   "why": "'escaped from a New York jail, using a rope made from bedsheets': he edges toward the barred window with the knotted sheets; camera pans with him to the escape route"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "new_york_street_night",
+   "fallback_plate": "paris_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_walking_profile_case",
+     "x": 1540,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "walk",
+      "from": 400,
+      "at": 0,
+      "dur": 16
+     },
+     "move": {
+      "to": 770,
+      "at": 18,
+      "dur": 36
+     },
+     "bob": 2
+    }
+   ],
+   "props": [],
+   "why": "'He escaped': free again, mid-stride with his case, he hurries left across the street and the camera pans left with him - straight toward the agent who pops up on that side next"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "new_york_street_night",
+   "fallback_plate": "paris_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_arrested",
+     "fallback_sprite": "lustig_4",
+     "x": 1050,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "secret_service_agent",
+     "fallback_sprite": "parisian_3",
+     "x": 600,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 6,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "handcuffs",
+     "x": 1010,
+     "y": 640,
+     "k": 1,
+     "at": 10,
+     "anim": "drop"
+    }
+   ],
+   "fx": [
+    "shake"
+   ],
+   "why": "'Then he was caught again': the agent pops up from the LEFT this time, blocking the run he just made; cuffs drop again and a hard push + shake lands the reversal"
+  }
+ ],
+ "b73": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "alcatraz_island",
+   "fallback_plate": "paris_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_sad_prisoner",
+     "fallback_sprite": "lustig_3",
+     "x": 520,
+     "y": 900,
+     "h": 520,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": "ALCATRAZ",
+   "caption": null,
+   "why": "'sent to Alcatraz': small, slumped prisoner on the dock while the camera pulls back to reveal the rock and the cold bay - the stage shrinks around him"
+  },
+  {
+   "k": "scene",
+   "w": 2.0,
+   "plate": "prison_hospital_ward",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_sick_bed",
+     "fallback_sprite": "lustig_3",
+     "x": 760,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 1
+    }
+   ],
+   "props": [],
+   "chip": "1947",
+   "caption": null,
+   "why": "'a prison hospital in Missouri, where he died of pneumonia': gaunt Lustig propped in an iron bed, nothing else in frame; a barely-moving drift = the quiet end, no prop, no flourish"
+  }
+ ],
+ "b74": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "records_office_desk",
+   "fallback_plate": "hotel_room_night",
+   "cam": {
+    "move": "push",
+    "amt": 0.09
+   },
+   "actors": [
+    {
+     "sprite": "clerk_1",
+     "x": 1200,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "slide",
+      "from": 300,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 640,
+     "y": 720,
+     "k": 1.3,
+     "at": 8,
+     "anim": "drop"
+    }
+   ],
+   "why": "'His death certificate lists his occupation': a clerk slides in, chin-in-hand, peering doubtfully at the form that drops on the desk; push toward the paper"
+  },
+  {
+   "k": "label",
+   "title": "Death certificate",
+   "a": "Occupation:",
+   "b": "Apprentice salesman",
+   "w": 1.0
+  }
+ ],
+ "x28": [
+  {
+   "k": "scene",
+   "w": 2.3,
+   "plate": "paris_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_2",
+     "x": 760,
+     "y": 900,
+     "h": 520,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "move": {
+      "to": 560,
+      "at": 10,
+      "dur": 50
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "fx": [
+    "dust"
+   ],
+   "why": "'The man who had sold the most famous building in the world': lone suitcase-man walks away from the misty tower in the rain while the camera pulls back and he shrinks - a salesman with nothing left to sell"
+  }
+ ],
+ "x29": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_dusk",
+   "cam": {
+    "move": "drift",
+    "amt": 0.05
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 600,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 8
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 860,
+     "y": 620,
+     "k": 0.6,
+     "at": 10,
+     "anim": "drop"
+    }
+   ],
+   "why": "'No money. No title.': open-palmed shrug with empty white gloves, a last coin falls out of frame; gentle drift because the line is a sigh, not a slam"
+  },
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_dusk",
+   "cam": {
+    "move": "push",
+    "amt": 0.14
+   },
+   "actors": [
+    {
+     "sprite": "lustig_3",
+     "x": 380,
+     "y": 900,
+     "h": 560,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "papers",
+     "x": 1000,
+     "y": 700,
+     "k": 1.6,
+     "at": 4,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'Just a tidy number on a form': the form rises big and centre while Lustig stands small and composed at the edge; strong push makes the paper outweigh the man"
+  }
+ ],
+ "b75": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "hold",
+    "amt": 0.06
+   },
+   "actors": [
+    {
+     "sprite": "lustig_5",
+     "x": 640,
+     "y": 900,
+     "h": 660,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -320,
+      "at": 0,
+      "dur": 18
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "chip": null,
+   "caption": "So what was the sentence?",
+   "why": "'So what was the sentence?': back at the tower where it began, Lustig walks in and raises one finger - the key point is coming; a still hold leaves the question hanging"
+  }
+ ],
+ "b76": [
+  {
+   "k": "title",
+   "lines": [
+    "Make them",
+    "feel special."
+   ],
+   "accent": "x",
+   "icon": "flame",
+   "w": 0.9
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "hotel_room_night",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 520,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -260,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "clerk_2",
+     "x": 1150,
+     "y": 900,
+     "h": 640,
+     "flip": true,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 2
+    }
+   ],
+   "props": [
+    {
+     "kind": "banknotes",
+     "x": 860,
+     "y": 640,
+     "k": 1,
+     "at": 18,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'Give people a reason to feel special, and they will help you fool them': Lustig's open-palm offer, the mark grinning over his own cash; pan carries us from the flattery to the payment"
+  },
+  {
+   "k": "scene",
+   "w": 0.9,
+   "plate": "paris_tower_night",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_handshake",
+     "x": 720,
+     "y": 900,
+     "h": 680,
+     "flip": false,
+     "enter": {
+      "how": "pop",
+      "from": 0,
+      "at": 0,
+      "dur": 6
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'help you fool them': under the lit tower Lustig steps toward us with his hand out, inviting the handshake that makes the mark his helper; pull widens so the offer sits small against the tower he sold"
+  }
+ ],
+ "b77": [
+  {
+   "k": "scene",
+   "w": 1.0,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pan_r",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "parisian_2",
+     "x": 380,
+     "y": 900,
+     "h": 520,
+     "flip": false,
+     "enter": {
+      "how": "none",
+      "from": 0,
+      "at": 0,
+      "dur": 0
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "tower",
+     "x": 380,
+     "y": 640,
+     "k": 0.4,
+     "at": 12,
+     "anim": "pop"
+    }
+   ],
+   "why": "'The tower never moved': slow pan right onto the real tower standing exactly where it always was, a Parisian reads the old scandal in the paper at left"
+  },
+  {
+   "k": "scene",
+   "w": 1.2,
+   "plate": "paris_tower_grey",
+   "cam": {
+    "move": "pull",
+    "amt": 0.1
+   },
+   "actors": [
+    {
+     "sprite": "lustig_4",
+     "x": 560,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -200,
+      "at": 0,
+      "dur": 14
+     },
+     "bob": 0
+    }
+   ],
+   "props": [],
+   "why": "'The man who sold it only borrowed a little of our oldest weakness': Lustig stands at the foot of the tower with an innocent shrug - only borrowed; camera pulls wide so the tower outlasts him"
+  },
+  {
+   "k": "label",
+   "title": "Our oldest weakness",
+   "a": "Wanting to feel special",
+   "b": "Trusting who flatters us",
+   "w": 1.0
+  }
+ ],
+ "b78": [
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_dusk",
+   "cam": {
+    "move": "push",
+    "amt": 0.12
+   },
+   "actors": [
+    {
+     "sprite": "lustig_point_viewer",
+     "fallback_sprite": "lustig_5",
+     "x": 420,
+     "y": 900,
+     "h": 640,
+     "flip": false,
+     "enter": {
+      "how": "walk",
+      "from": -420,
+      "at": 0,
+      "dur": 20
+     },
+     "move": {
+      "to": 760,
+      "at": 22,
+      "dur": 30
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "coin",
+     "x": 1100,
+     "y": 560,
+     "k": 0.7,
+     "at": 30,
+     "anim": "pop"
+    }
+   ],
+   "fx": [
+    "dust"
+   ],
+   "chip": "PARIS 1925",
+   "caption": null,
+   "why": "'If this story surprised you': Lustig strides back into the sunset plaza where the hook began and turns his finger on the viewer; push in, coin flips up - we are the next mark"
+  },
+  {
+   "k": "scene",
+   "w": 1.1,
+   "plate": "paris_night",
+   "cam": {
+    "move": "pan_l",
+    "amt": 0.08
+   },
+   "actors": [
+    {
+     "sprite": "lustig_1",
+     "x": 1250,
+     "y": 900,
+     "h": 660,
+     "flip": true,
+     "enter": {
+      "how": "walk",
+      "from": 300,
+      "at": 0,
+      "dur": 16
+     },
+     "move": {
+      "to": 900,
+      "at": 18,
+      "dur": 30
+     },
+     "bob": 0
+    },
+    {
+     "sprite": "clerk_1",
+     "x": 480,
+     "y": 900,
+     "h": 600,
+     "flip": false,
+     "enter": {
+      "how": "slide",
+      "from": -260,
+      "at": 10,
+      "dur": 12
+     },
+     "bob": 0
+    }
+   ],
+   "props": [
+    {
+     "kind": "door",
+     "x": 1420,
+     "y": 760,
+     "k": 0.8,
+     "at": 0,
+     "anim": "none"
+    },
+    {
+     "kind": "tower",
+     "x": 700,
+     "y": 620,
+     "k": 0.5,
+     "at": 34,
+     "anim": "slide_up"
+    }
+   ],
+   "why": "'tell me which part of the con you would have fallen for': Lustig walks out of the hotel door heading left, open palm pitching again, and a tiny tower rises between him and a doubtful chin-in-hand mark; pan left follows his walk - the comments are his next pitch",
+   "fx": [
+    "flash"
+   ]
+  },
+  {
+   "k": "title",
+   "lines": [
+    "Which part",
+    "would you fall for?"
+   ],
+   "accent": "x",
+   "icon": "tower",
+   "w": 0.9
+  }
+ ],
+ "needed_plates": [
+  {
+   "id": "new_york_street_night",
+   "desc": "Hand-drawn ink-and-wash 1930s New York street at night, 16:9: brick tenements and a lit pawnshop/bank front on the right third, fire escapes, wet asphalt reflecting yellow streetlamps, a parked black 1930s sedan far right; open empty pavement foreground y 62-100% across x 15-80% for stick figures standing feet ~y 83%; no people, no text.",
+   "beats": [
+    "b71",
+    "b72"
+   ]
+  },
+  {
+   "id": "prison_cell",
+   "desc": "Hand-drawn ink-and-wash 1930s jail cell interior, 16:9: grey stone walls, iron-barred door on left (x 0-20%), high barred window at right (x 65-85%, y 15-40%) with moonlight shaft, narrow cot with white bedsheet at back wall, open stone floor y 65-100% centre clear for one actor; cold blue-grey palette; no people, no text.",
+   "beats": [
+    "b72"
+   ]
+  },
+  {
+   "id": "alcatraz_island",
+   "desc": "Hand-drawn ink-and-wash view of Alcatraz island prison in 1930s, 16:9: the rocky island with cellhouse and lighthouse on the right half under heavy grey fog, choppy grey-green bay, a wooden dock in the foreground spanning x 0-70% with open planks y 64-100% for actors; bleak, cold; no people, no text.",
+   "beats": [
+    "b73"
+   ]
+  },
+  {
+   "id": "prison_hospital_ward",
+   "desc": "Hand-drawn ink-and-wash 1940s prison hospital ward, 16:9: pale green tiled walls, row of white iron beds receding left, one bed in centre-left foreground (x 30-60%) sized for a stick figure propped up, small barred window with dim afternoon light at right, bedside cabinet right-centre; quiet, sad; no people, no text.",
+   "beats": [
+    "b73"
+   ]
+  },
+  {
+   "id": "records_office_desk",
+   "desc": "Hand-drawn ink-and-wash 1940s county records office, 16:9: dark wooden counter/desk across left-centre (x 15-65%, top at y ~70%) with an ink stamp and pen, tall filing cabinets and wall clock behind, green banker's lamp; open floor right (x 60-90%) for a clerk; muted brown palette; no people, no text.",
+   "beats": [
+    "b74"
+   ]
+  }
+ ],
+ "needed_poses": [
+  {
+   "id": "lustig_arrested",
+   "desc": "Victor Lustig (same stick figure: white round head, black beret, navy double-breasted coat, cream scarf, orange pocket square), standing front/three-quarter right, wrists together in front in steel handcuffs, shoulders sagging, eyes down, rueful tight-lipped half-smile; transparent/magenta background like the existing cast sheets.",
+   "beats": [
+    "b71",
+    "b72"
+   ]
+  },
+  {
+   "id": "secret_service_agent",
+   "desc": "1930s US Secret Service agent stick figure in the same cast style: white round head, grey fedora, long tan trench coat, dark tie, one arm holding up a gold badge toward the right, other hand on hip, stern frown; facing right.",
+   "beats": [
+    "b71",
+    "b72"
+   ]
+  },
+  {
+   "id": "lustig_bedsheet_rope",
+   "desc": "Victor Lustig (cast style, beret, navy coat, scarf) in profile facing right, both gloved hands gripping a long knotted rope of white bedsheets that trails down behind him, mid-step, sly determined grin.",
+   "beats": [
+    "b72"
+   ]
+  },
+  {
+   "id": "lustig_sad_prisoner",
+   "desc": "Victor Lustig without beret, in grey-and-white striped prison uniform, standing slumped front-on, arms hanging, head tilted down, sad droopy eyes, small frown; same white round head and stick limbs as the cast.",
+   "beats": [
+    "b73"
+   ]
+  },
+  {
+   "id": "lustig_sick_bed",
+   "desc": "Victor Lustig, gaunt and older (thin moustache, no beret), in white hospital gown propped against a pillow in an iron hospital bed, blanket to waist, weak half-smile, tired heavy-lidded eyes; bed included in the sprite, side view facing right.",
+   "beats": [
+    "b73"
+   ]
+  },
+  {
+   "id": "lustig_point_viewer",
+   "desc": "Victor Lustig (cast style, beret, navy coat, scarf, orange pocket square) standing front-on, one arm extended pointing straight at the camera/viewer, other hand on hip, knowing sly grin with one raised eyebrow.",
+   "beats": [
+    "b78"
+   ]
+  }
+ ]
+}

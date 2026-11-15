@@ -1,0 +1,19 @@
+import {Composition} from 'remotion';
+import {Test10} from './compositions/Test10';
+import {SlideProof, SLIDE_PROOF_FRAMES} from './compositions/SlideProof';
+import {InkProof, INK_PROOF_FRAMES, Ink10, INK10_FRAMES} from './compositions/InkProof';
+import {InkFull, INKFULL_FRAMES} from './ink/ep_full';
+import {InkDirected, INKDIRECTED_FRAMES, calcInkDirected, DIRECTED_DEFAULT} from './ink/ep_directed';
+import {Ink60, INK60_FRAMES, INK15_FRAMES} from './ink/ep1';
+export const Root = () => (
+  <>
+    <Composition id="Test10" component={Test10} width={1920} height={1080} fps={30} durationInFrames={330}/>
+    <Composition id="SlideProof" component={SlideProof} width={1920} height={1080} fps={30} durationInFrames={SLIDE_PROOF_FRAMES}/>
+    <Composition id="InkProof" component={InkProof} width={1920} height={1080} fps={30} durationInFrames={INK_PROOF_FRAMES}/>
+    <Composition id="Ink60" component={Ink60} width={1920} height={1080} fps={30} durationInFrames={INK60_FRAMES}/>
+    <Composition id="Ink15" component={Ink60} width={1920} height={1080} fps={30} durationInFrames={INK15_FRAMES}/>
+    <Composition id="Ink10"component={Ink10} width={1920} height={1080} fps={30} durationInFrames={INK10_FRAMES}/>
+    <Composition id="InkFull" component={InkFull} width={1920} height={1080} fps={30} durationInFrames={INKFULL_FRAMES}/>
+    <Composition id="InkDirected" component={InkDirected} width={1920} height={1080} fps={30} durationInFrames={INKDIRECTED_FRAMES} defaultProps={{directed: DIRECTED_DEFAULT, resolved: null}} calculateMetadata={calcInkDirected}/>
+  </>
+);

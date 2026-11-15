@@ -1,0 +1,24 @@
+{"beat": "b1", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b2", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b3", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b4", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b5", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b6", "attempt": 0, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b6", "attempt": 1, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b6", "attempt": 2, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b6", "attempt": 3, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b6", "attempt": 0, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b6", "attempt": 1, "ok": true, "error": ""}
+{"beat": "b7", "attempt": 0, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b7", "attempt": 1, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b7", "attempt": 2, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b7", "attempt": 3, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b7", "attempt": 0, "ok": true, "error": ""}
+{"beat": "b8", "attempt": 0, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 1, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 2, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 3, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 0, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 1, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 2, "ok": false, "error": "HTTP Error 429: Too Many Requests"}
+{"beat": "b8", "attempt": 3, "ok": false, "error": "HTTP Error 429: Too Many Requests"}

@@ -1,0 +1,541 @@
+{
+ "voice": "Charon",
+ "gapSeconds": 0.3,
+ "beats": [
+  {
+   "id": "b01",
+   "shots": 3,
+   "text": "In nineteen twenty-five, a man sold the Eiffel Tower. Not a model. Not a ticket. The actual tower."
+  },
+  {
+   "id": "b02",
+   "shots": 2,
+   "text": "He sold it twice. And he got away with it."
+  },
+  {
+   "id": "b03",
+   "shots": 3,
+   "text": "Then he conned Al Capone, escaped a federal jail, and was sent to Alcatraz."
+  },
+  {
+   "id": "b04",
+   "shots": 3,
+   "text": "His name was Victor Lustig. And his whole trick fit inside one sentence."
+  },
+  {
+   "id": "b05",
+   "shots": 3,
+   "text": "By the end of this video, you will know the sentence. And you will understand why it works on almost everyone."
+  },
+  {
+   "id": "b06",
+   "shots": 2,
+   "text": "Start with the tower itself. It was built in eighteen eighty-nine, for a world's fair."
+  },
+  {
+   "id": "b07",
+   "shots": 2,
+   "text": "It was supposed to stand for twenty years. Then be taken apart."
+  },
+  {
+   "id": "b08",
+   "shots": 3,
+   "text": "Most Parisians hated it. Artists signed a petition calling it a gigantic black factory chimney."
+  },
+  {
+   "id": "b09",
+   "shots": 2,
+   "text": "It only survived because the army found a use for it. A giant radio antenna."
+  },
+  {
+   "id": "b10",
+   "shots": 2,
+   "text": "So by nineteen twenty-five, the idea of the tower being temporary was already in the air."
+  },
+  {
+   "id": "b11",
+   "shots": 2,
+   "text": "And the tower was in bad shape. It needed paint, it needed repairs, and the bills kept growing."
+  },
+  {
+   "id": "b12",
+   "shots": 2,
+   "text": "Newspapers asked the same question every week. Is this thing still worth keeping?"
+  },
+  {
+   "id": "b13",
+   "shots": 1,
+   "text": "Most people just read that, and moved on."
+  },
+  {
+   "id": "b14",
+   "shots": 2,
+   "text": "Victor Lustig read it, and saw a door open."
+  },
+  {
+   "id": "x01",
+   "shots": 3,
+   "text": "Think about what he saw. Not a monument. A pile of iron, in the middle of a city, that people openly argued about keeping."
+  },
+  {
+   "id": "x02",
+   "shots": 2,
+   "text": "Every con needs a believable story. The tower was already telling one for him."
+  },
+  {
+   "id": "x03",
+   "shots": 2,
+   "text": "All he had to do was finish the sentence the newspapers had started."
+  },
+  {
+   "id": "b15",
+   "shots": 2,
+   "text": "He was born in eighteen ninety, in a small town in Bohemia."
+  },
+  {
+   "id": "b16",
+   "shots": 3,
+   "text": "He spoke five languages. He looked like a diplomat. He never raised his voice."
+  },
+  {
+   "id": "b17",
+   "shots": 2,
+   "text": "He had no gun and no gang. Just a suit, a smile, and a lot of patience."
+  },
+  {
+   "id": "x04",
+   "shots": 3,
+   "text": "His real name was not even Lustig. He used more than forty names, and carried passports to match."
+  },
+  {
+   "id": "x05",
+   "shots": 2,
+   "text": "Police in several countries had files on him. None of the files agreed on who he was."
+  },
+  {
+   "id": "x06",
+   "shots": 2,
+   "text": "That mattered. A man nobody can pin down is a man nobody can chase."
+  },
+  {
+   "id": "b18",
+   "shots": 3,
+   "text": "He worked the ocean liners between Europe and America, because rich people on a ship have time to talk."
+  },
+  {
+   "id": "b19",
+   "shots": 3,
+   "text": "He even had rules. Ten of them. He wrote them down, like a business manual for lying."
+  },
+  {
+   "id": "b20",
+   "shots": 2,
+   "text": "The first one: be a patient listener. Let the other person talk, and tell you what they want."
+  },
+  {
+   "id": "b21",
+   "shots": 3,
+   "text": "Number two: never look bored. Number three: wait for the other person to reveal their politics, then agree with them."
+  },
+  {
+   "id": "x07",
+   "shots": 2,
+   "text": "Number four: never boast. Number five: never be shabby. A rich person trusts clean shoes."
+  },
+  {
+   "id": "x08",
+   "shots": 2,
+   "text": "Notice what is missing. Not one rule says be clever. They all say be careful, be calm, be kind."
+  },
+  {
+   "id": "x09",
+   "shots": 2,
+   "text": "The best con men are not the loudest people in the room. They are the ones you are glad to meet."
+  },
+  {
+   "id": "b22",
+   "shots": 2,
+   "text": "We will come back to those. Because on one afternoon in Paris, he used almost all of them."
+  },
+  {
+   "id": "b23",
+   "shots": 4,
+   "text": "He had the idea. Now he needed a costume, a stage, and an audience."
+  },
+  {
+   "id": "b24",
+   "shots": 2,
+   "text": "First, the costume. He forged letterhead from the French government."
+  },
+  {
+   "id": "b25",
+   "shots": 2,
+   "text": "Then he gave himself a title. Deputy Director General of the Ministry of Posts and Telegraphs."
+  },
+  {
+   "id": "b26",
+   "shots": 2,
+   "text": "Why that ministry? Because the tower already carried radio equipment. It sounded real."
+  },
+  {
+   "id": "b27",
+   "shots": 2,
+   "text": "Then the stage. The Hotel de Crillon, one of the most expensive hotels in Paris."
+  },
+  {
+   "id": "b28",
+   "shots": 2,
+   "text": "Not a back room. Not a warehouse. A palace, with doormen, and chandeliers."
+  },
+  {
+   "id": "b29",
+   "shots": 2,
+   "text": "He understood something simple. People trust the room before they trust the person."
+  },
+  {
+   "id": "b30",
+   "shots": 2,
+   "text": "Then the audience. He did not want rich men. He wanted men who wanted to be richer."
+  },
+  {
+   "id": "b31",
+   "shots": 2,
+   "text": "Six scrap metal dealers. Each one invited by a polite, official letter."
+  },
+  {
+   "id": "b32",
+   "shots": 3,
+   "text": "The letter said only this. Come to the Crillon. Discuss a matter of great importance. Tell no one."
+  },
+  {
+   "id": "b33",
+   "shots": 2,
+   "text": "The dealers arrived thinking they had been picked. That was the first hook."
+  },
+  {
+   "id": "b34",
+   "shots": 2,
+   "text": "Lustig knew the smallest detail could ruin him. One wrong word, and six men could walk out."
+  },
+  {
+   "id": "x10",
+   "shots": 2,
+   "text": "So he prepared every detail. The papers, the title, the hotel, the order he would speak in."
+  },
+  {
+   "id": "x11",
+   "shots": 2,
+   "text": "One slip, and six men could walk out and call the police."
+  },
+  {
+   "id": "x12",
+   "shots": 2,
+   "text": "There was no second take. The whole plan lived or died in one afternoon."
+  },
+  {
+   "id": "b35",
+   "shots": 2,
+   "text": "He closed the door, and spoke quietly. Gentlemen, what I tell you is a state secret."
+  },
+  {
+   "id": "b36",
+   "shots": 4,
+   "text": "The Eiffel Tower is too expensive to maintain. The government has decided to demolish it."
+  },
+  {
+   "id": "b37",
+   "shots": 2,
+   "text": "But it cannot say so. The public would revolt. So the sale must be kept confidential."
+  },
+  {
+   "id": "b38",
+   "shots": 2,
+   "text": "Seven thousand tons of iron. A fortune, for the right buyer."
+  },
+  {
+   "id": "b39",
+   "shots": 2,
+   "text": "To prove it, he took them in two limousines, to see the tower in person."
+  },
+  {
+   "id": "b40",
+   "shots": 2,
+   "text": "They walked around it, looking up at it differently. Not as a monument. As inventory."
+  },
+  {
+   "id": "x13",
+   "shots": 2,
+   "text": "He did not rush them. He let them see the tower, up close, and imagine the iron already theirs."
+  },
+  {
+   "id": "x14",
+   "shots": 2,
+   "text": "Because the moment a buyer pictures owning the thing, he has already started to pay for it."
+  },
+  {
+   "id": "b41",
+   "shots": 2,
+   "text": "Lustig watched them carefully. And he picked his target."
+  },
+  {
+   "id": "b42",
+   "shots": 2,
+   "text": "Andre Poisson. A businessman with money, but without a place in the Parisian elite."
+  },
+  {
+   "id": "b43",
+   "shots": 2,
+   "text": "Poisson wanted to be taken seriously. And Lustig gave him exactly that feeling."
+  },
+  {
+   "id": "b44",
+   "shots": 2,
+   "text": "He hinted that the contract would go to the highest bidder. Poisson understood. He thought he was being smart."
+  },
+  {
+   "id": "b45",
+   "shots": 2,
+   "text": "Then the second hook. Poisson's wife grew suspicious. This all felt a little too fast."
+  },
+  {
+   "id": "b46",
+   "shots": 2,
+   "text": "Lustig did not argue. He shifted the story."
+  },
+  {
+   "id": "b47",
+   "shots": 2,
+   "text": "He admitted, with embarrassment, that a low paid civil servant needs a little extra to survive."
+  },
+  {
+   "id": "b48",
+   "shots": 2,
+   "text": "Poisson relaxed. A bribe made the whole thing feel real. Corruption is something people already believe in."
+  },
+  {
+   "id": "b49",
+   "shots": 2,
+   "text": "That is the genius. Lustig did not ask him to believe a lie. He asked him to believe in a small sin."
+  },
+  {
+   "id": "x15",
+   "shots": 2,
+   "text": "And there was a second reason it worked. Poisson was new to the city's business elite. Everyone else had a name. He wanted one."
+  },
+  {
+   "id": "x16",
+   "shots": 2,
+   "text": "Lustig did not sell him a tower. He sold him a seat at the table."
+  },
+  {
+   "id": "b50",
+   "shots": 2,
+   "text": "Poisson paid for the tower. And paid the bribe on top."
+  },
+  {
+   "id": "b51",
+   "shots": 3,
+   "text": "Lustig took the cash, took the train, and left the country, to Vienna."
+  },
+  {
+   "id": "b52",
+   "shots": 2,
+   "text": "He bought newspapers every morning, and waited. Nothing."
+  },
+  {
+   "id": "b53",
+   "shots": 2,
+   "text": "No headline. No arrests. No manhunt. Silence."
+  },
+  {
+   "id": "b54",
+   "shots": 2,
+   "text": "Because Poisson had done something he could not undo. He had paid a bribe, to buy a national monument."
+  },
+  {
+   "id": "b55",
+   "shots": 2,
+   "text": "If he went to the police, he would be the man who tried to bribe a minister, and lost."
+  },
+  {
+   "id": "b56",
+   "shots": 2,
+   "text": "Shame did the work that Lustig no longer had to do."
+  },
+  {
+   "id": "x17",
+   "shots": 2,
+   "text": "Meanwhile Poisson waited for the deal to move, believing he was part of a secret."
+  },
+  {
+   "id": "x18",
+   "shots": 2,
+   "text": "Every time he looked at the tower, he saw something he thought was his."
+  },
+  {
+   "id": "x19",
+   "shots": 2,
+   "text": "The tower did not move. Weeks passed. And slowly, a different feeling started to grow."
+  },
+  {
+   "id": "b57",
+   "shots": 2,
+   "text": "So, a few months later, Lustig came back to Paris, and did it again."
+  },
+  {
+   "id": "b58",
+   "shots": 2,
+   "text": "Another set of dealers, the same hotel, the same script."
+  },
+  {
+   "id": "b59",
+   "shots": 2,
+   "text": "This time, one of them went to the police."
+  },
+  {
+   "id": "b60",
+   "shots": 2,
+   "text": "Lustig left France that night. He did not even stay to count his luck."
+  },
+  {
+   "id": "x20",
+   "shots": 2,
+   "text": "Here is the part most retellings skip. He had already won. He had a fortune, and a clean exit."
+  },
+  {
+   "id": "x21",
+   "shots": 2,
+   "text": "But a con man who stops is just a thief with a hobby. Lustig needed the story to keep going."
+  },
+  {
+   "id": "x22",
+   "shots": 3,
+   "text": "That is what finally caught up with him. Not the police. The need to be believed again."
+  },
+  {
+   "id": "b61",
+   "shots": 2,
+   "text": "He crossed the Atlantic, and found a bigger stage. America, in the prohibition years."
+  },
+  {
+   "id": "b62",
+   "shots": 2,
+   "text": "He built a little wooden box, and told buyers it printed perfect hundred dollar bills."
+  },
+  {
+   "id": "b63",
+   "shots": 2,
+   "text": "He sold it for tens of thousands of dollars. The box did not print anything."
+  },
+  {
+   "id": "x23",
+   "shots": 3,
+   "text": "The trick of the box was simple. Two real bills went in. Six hours later, two bills came out. Perfect copies."
+  },
+  {
+   "id": "x24",
+   "shots": 3,
+   "text": "Of course, the extra bills were also real. Hidden in the box. The buyer saw a miracle, and paid for a miracle."
+  },
+  {
+   "id": "x25",
+   "shots": 3,
+   "text": "A sheriff in Texas paid thirty thousand dollars for one. By the time he understood, Lustig was long gone."
+  },
+  {
+   "id": "b64",
+   "shots": 1,
+   "text": "Then came the boldest move. Al Capone."
+  },
+  {
+   "id": "b65",
+   "shots": 3,
+   "text": "He told Capone he needed fifty thousand dollars for an investment, and promised to double it in sixty days."
+  },
+  {
+   "id": "b66",
+   "shots": 2,
+   "text": "Capone gave him the money, and a warning. Do not make me regret it."
+  },
+  {
+   "id": "b67",
+   "shots": 2,
+   "text": "Lustig put it in a safe deposit box, and did nothing with it. For two months."
+  },
+  {
+   "id": "b68",
+   "shots": 2,
+   "text": "Then he walked back, with a sad face. The deal fell through, sorry."
+  },
+  {
+   "id": "b69",
+   "shots": 3,
+   "text": "He returned every dollar. Capone was so impressed by his honesty that he gave him five thousand."
+  },
+  {
+   "id": "x26",
+   "shots": 2,
+   "text": "Think about what Capone saw. A man with money in his hands, and he gave it all back."
+  },
+  {
+   "id": "x27",
+   "shots": 3,
+   "text": "To Capone, that was not weakness. That was proof. In a world of liars, here was the one honest man."
+  },
+  {
+   "id": "b70",
+   "shots": 3,
+   "text": "That was the whole point. The money was never the con. The trust was."
+  },
+  {
+   "id": "b71",
+   "shots": 2,
+   "text": "In nineteen thirty-five, his luck ended. The Secret Service caught him, with counterfeit money."
+  },
+  {
+   "id": "b72",
+   "shots": 3,
+   "text": "He escaped from a New York jail, using a rope made from bedsheets. Then he was caught again."
+  },
+  {
+   "id": "b73",
+   "shots": 2,
+   "text": "He was sent to Alcatraz. Later he was moved to a prison hospital in Missouri, where he died of pneumonia in nineteen forty-seven."
+  },
+  {
+   "id": "b74",
+   "shots": 2,
+   "text": "His death certificate lists his occupation as apprentice salesman."
+  },
+  {
+   "id": "x28",
+   "shots": 1,
+   "text": "The man who had sold the most famous building in the world, died as an apprentice."
+  },
+  {
+   "id": "x29",
+   "shots": 2,
+   "text": "No money. No title. Just a tidy number on a form."
+  },
+  {
+   "id": "b75",
+   "shots": 1,
+   "text": "So what was the sentence?"
+  },
+  {
+   "id": "b76",
+   "shots": 3,
+   "text": "Give people a reason to feel special, and they will help you fool them."
+  },
+  {
+   "id": "b77",
+   "shots": 3,
+   "text": "The tower never moved. The man who sold it only borrowed a little of our oldest weakness."
+  },
+  {
+   "id": "b78",
+   "shots": 3,
+   "text": "If this story surprised you, tell me which part of the con you would have fallen for."
+  }
+ ]
+}

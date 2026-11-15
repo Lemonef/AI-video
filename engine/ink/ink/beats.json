@@ -1,0 +1,15 @@
+{
+  "voice": "Charon",
+  "gapSeconds": 0.3,
+  "beats": [
+    {"id": "b1", "shots": 4, "text": "Paris, nineteen twenty-five. One man sold the Eiffel Tower. Twice."},
+    {"id": "b2", "shots": 3, "text": "His name was Victor Lustig. A con man with a very good suit, and a very bad conscience."},
+    {"id": "b3", "shots": 3, "text": "The city was complaining. The tower needed repairs, and the repairs were costing a fortune."},
+    {"id": "b4", "shots": 2, "text": "Lustig read about it in a newspaper, and he saw something nobody else did. An opening."},
+    {"id": "b5", "shots": 3, "text": "He forged government papers, and invited six scrap dealers to a hotel. Secret meeting."},
+    {"id": "b6", "shots": 3, "text": "He told them the tower was too expensive to keep. It was going to be sold for scrap."},
+    {"id": "b7", "shots": 3, "text": "One dealer, Andre Poisson, wanted in. Lustig made him feel important. Then he made him pay."},
+    {"id": "b8", "shots": 3, "text": "Poisson handed over the money, and Lustig vanished. The tower never moved."},
+    {"id": "b9", "shots": 3, "text": "And Poisson was too embarrassed to go to the police. So Lustig came back, and tried again."}
+  ]
+}

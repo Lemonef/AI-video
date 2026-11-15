@@ -1,0 +1,190 @@
+{
+  "b01": [
+    {
+      "k": "scene", "w": 1.1, "plate": "paris_dusk",
+      "cam": {"move": "push", "amt": 0.07},
+      "actors": [{
+        "sprite": "lustig_1", "x": 640, "y": 900, "h": 640, "flip": false,
+        "enter": {"how": "walk", "from": -520, "at": 0, "dur": 22},
+        "bob": 0
+      }],
+      "props": [],
+      "chip": "PARIS 1925", "caption": null,
+      "why": "'a man sold the Eiffel Tower': Lustig strolls in and offers an open palm toward the distant tower on the right, like a salesman presenting stock; slow push builds the hook"
+    },
+    {
+      "k": "scene", "w": 1.0, "plate": "paris_dusk",
+      "cam": {"move": "pan_l", "amt": 0.05},
+      "actors": [{
+        "sprite": "lustig_4", "x": 760, "y": 900, "h": 600, "flip": false,
+        "enter": {"how": "pop", "from": 0, "at": 0, "dur": 8},
+        "bob": 0
+      }],
+      "props": [
+        {"kind": "tower", "x": 1060, "y": 760, "k": 0.3, "at": 4, "anim": "pop"},
+        {"kind": "papers", "x": 470, "y": 780, "k": 0.6, "at": 30, "anim": "pop"}
+      ],
+      "why": "'Not a model. Not a ticket.': front-on shrug dismisses a toy tower popping on his right, then a paper ticket on his left; the slow pan left carries the eye from the first denial to the second, on the voice"
+    },
+    {
+      "k": "scene", "w": 1.1, "plate": "paris_tower_grey",
+      "cam": {"move": "pull", "amt": 0.14},
+      "actors": [{
+        "sprite": "lustig_1", "x": 520, "y": 930, "h": 470, "flip": false,
+        "enter": {"how": "slide", "from": -200, "at": 0, "dur": 14},
+        "bob": 0
+      }],
+      "props": [],
+      "fx": ["dust"],
+      "why": "'The actual tower.': pull back from Lustig to reveal the real iron base filling the right third; the smaller presenting figure sells the scale of the lie"
+    }
+  ],
+  "b02": [
+    {"k": "title", "lines": ["He sold it", "twice."], "accent": "x", "icon": "coin", "w": 0.8},
+    {
+      "k": "scene", "w": 1.2, "plate": "paris_tower_grey",
+      "cam": {"move": "pan_r", "amt": 0.08},
+      "actors": [{
+        "sprite": "lustig_2", "x": 460, "y": 900, "h": 620, "flip": false,
+        "enter": {"how": "walk", "from": -300, "at": 0, "dur": 12},
+        "move": {"to": 1100, "at": 14, "dur": 48},
+        "bob": 2
+      }],
+      "props": [{"kind": "banknotes", "x": 380, "y": 640, "k": 0.7, "at": 6, "anim": "drop"}],
+      "why": "'he got away with it': smug Lustig strides right with the suitcase of cash past the tower he never delivered, a few notes fluttering behind him; camera pans to follow the getaway"
+    }
+  ],
+  "b03": [
+    {
+      "k": "scene", "w": 1.0, "plate": "chicago_street_night",
+      "fallback_plate": "paris_night",
+      "cam": {"move": "push", "amt": 0.06},
+      "actors": [
+        {
+          "sprite": "lustig_1", "x": 560, "y": 900, "h": 620, "flip": false,
+          "enter": {"how": "slide", "from": -260, "at": 0, "dur": 12},
+          "bob": 0
+        },
+        {
+          "sprite": "capone_1", "fallback_sprite": "parisian_3", "x": 1320, "y": 900, "h": 660, "flip": true,
+          "enter": {"how": "pop", "from": 0, "at": 6, "dur": 8},
+          "bob": 0
+        }
+      ],
+      "props": [{"kind": "banknotes", "x": 940, "y": 700, "k": 0.8, "at": 20, "anim": "pop"}],
+      "chip": "CHICAGO", "caption": null,
+      "why": "'he conned Al Capone': Lustig's offering palm faces a scowling, arms-crossed Capone across a wad of cash; push-in tightens the danger"
+    },
+    {
+      "k": "scene", "w": 1.0, "plate": "federal_jail_exterior_night",
+      "fallback_plate": "paris_tower_night",
+      "cam": {"move": "pan_r", "amt": 0.1},
+      "actors": [{
+        "sprite": "lustig_rope_escape", "fallback_sprite": "lustig_6", "x": 520, "y": 900, "h": 600, "flip": false,
+        "enter": {"how": "slide", "from": -240, "at": 0, "dur": 10},
+        "move": {"to": 1150, "at": 12, "dur": 40},
+        "bob": 1
+      }],
+      "props": [{"kind": "handcuffs", "x": 420, "y": 880, "k": 0.6, "at": 4, "anim": "drop"}],
+      "chip": "NEW YORK 1935", "caption": null,
+      "why": "'escaped a federal jail': hunched, shushing Lustig sneaks right past the wall, cuffs dropped behind him; camera pans with the escape"
+    },
+    {
+      "k": "scene", "w": 1.0, "plate": "alcatraz_island_fog",
+      "fallback_plate": "paris_grey",
+      "cam": {"move": "pull", "amt": 0.12},
+      "actors": [{
+        "sprite": "lustig_prison_sad", "fallback_sprite": "lustig_3", "x": 640, "y": 900, "h": 560, "flip": false,
+        "enter": {"how": "none", "from": 0, "at": 0, "dur": 0},
+        "bob": 0
+      }],
+      "props": [{"kind": "handcuffs", "x": 640, "y": 700, "k": 0.7, "at": 10, "anim": "drop"}],
+      "chip": "ALCATRAZ", "caption": null,
+      "why": "'was sent to Alcatraz': cuffs snap down onto a slumped, striped Lustig as the camera pulls back to isolate him on the fogged rock; the first downbeat in the hook"
+    }
+  ],
+  "b04": [
+    {
+      "k": "scene", "w": 1.1, "plate": "hotel_room_night",
+      "cam": {"move": "drift", "amt": 0.05},
+      "actors": [{
+        "sprite": "lustig_3", "x": 620, "y": 920, "h": 680, "flip": false,
+        "enter": {"how": "pop", "from": 0, "at": 0, "dur": 8},
+        "bob": 0
+      }],
+      "props": [],
+      "caption": "Victor Lustig",
+      "why": "'His name was Victor Lustig': calm, hands-behind-back portrait framed against the hotel window and the lit tower; a slow sideways drift lets the name caption sit like a formal introduction without spending a push"
+    },
+    {
+      "k": "scene", "w": 1.1, "plate": "hotel_room_night",
+      "cam": {"move": "hold", "amt": 0.0},
+      "actors": [{
+        "sprite": "lustig_5", "x": 1050, "y": 900, "h": 620, "flip": true,
+        "enter": {"how": "slide", "from": 220, "at": 0, "dur": 12},
+        "bob": 0
+      }],
+      "props": [],
+      "fx": ["flash"],
+      "why": "'his whole trick fit inside one sentence': Lustig slides in on the right, flipped, and raises a single index finger, one finger for one sentence; the locked camera keeps the count clean and hands the number to the 'One sentence.' card"
+    },
+    {"k": "title", "lines": ["One", "sentence."], "accent": "x", "icon": null, "w": 0.8}
+  ],
+  "b05": [
+    {
+      "k": "scene", "w": 1.1, "plate": "crillon_salon_chandeliers",
+      "fallback_plate": "hotel_room_night",
+      "cam": {"move": "pull", "amt": 0.1},
+      "actors": [
+        {"sprite": "lustig_official_tailcoat", "fallback_sprite": "lustig_1", "x": 620, "y": 900, "h": 660, "flip": false,
+         "enter": {"how": "none", "from": 0, "at": 0, "dur": 0}, "bob": 0},
+        {"sprite": "scrap_dealer_seated", "fallback_sprite": "parisian_3", "x": 1240, "y": 900, "h": 560, "flip": true,
+         "enter": {"how": "none", "from": 0, "at": 0, "dur": 0}, "bob": 0}
+      ],
+      "props": [],
+      "why": "'you will know the sentence': flash-forward to the salon, Lustig in his ministry tailcoat standing over a seated, arms-folded dealer as if about to speak; the pull drags us out of the room before a word is heard, so the sentence stays a promise (new information: the disguise and the mark, not another tower pitch)"
+    },
+    {
+      "k": "scene", "w": 1.2, "plate": "paris_tower_night",
+      "cam": {"move": "pan_r", "amt": 0.07},
+      "actors": [
+        {"sprite": "clerk_2", "x": 520, "y": 900, "h": 600, "flip": false,
+         "enter": {"how": "pop", "from": 0, "at": 0, "dur": 8}, "bob": 0},
+        {"sprite": "parisian_1", "x": 800, "y": 900, "h": 600, "flip": false,
+         "enter": {"how": "pop", "from": 0, "at": 10, "dur": 8}, "bob": 0},
+        {"sprite": "clerk_3", "x": 1060, "y": 900, "h": 600, "flip": false,
+         "enter": {"how": "pop", "from": 0, "at": 20, "dur": 8}, "bob": 1},
+        {"sprite": "parisian_3", "x": 1340, "y": 900, "h": 600, "flip": false,
+         "enter": {"how": "pop", "from": 0, "at": 36, "dur": 8}, "bob": 0}
+      ],
+      "props": [],
+      "why": "'why it works on ...everyone': a row of marks pops in one by one (greedy, shocked, sheepish) as the camera pans right along them, the pan landing on a last arms-crossed man who sets up the 'almost' in the next shot"
+    },
+    {
+      "k": "scene", "w": 0.9, "plate": "paris_tower_night",
+      "cam": {"move": "push", "amt": 0.12},
+      "actors": [
+        {"sprite": "lustig_4", "x": 380, "y": 900, "h": 640, "flip": false,
+         "enter": {"how": "walk", "from": -360, "at": 0, "dur": 16},
+         "move": {"to": 620, "at": 18, "dur": 22}, "bob": 0},
+        {"sprite": "parisian_3", "x": 1340, "y": 900, "h": 600, "flip": false,
+         "enter": {"how": "none", "from": 0, "at": 0, "dur": 0}, "bob": 0}
+      ],
+      "props": [],
+      "why": "'almost everyone': reverse angle on the holdout, Lustig strolls up to the one arms-crossed man and gives an open-palmed 'what can you do' shrug; the push onto his smirk ends the hook on the 'almost', a question the video promises to answer"
+    }
+  ],
+  "needed_poses": [
+    {"id": "capone_1", "desc": "Al Capone stick figure in the same hand-drawn ink style (white round head, long black stick limbs): grey pinstripe double-breasted suit, white fedora with black band, cigar in mouth, arms crossed, heavy scowl with one eyebrow down; standing front-on, slight right turn; full body on flat magenta background", "beats": ["b03"]},
+    {"id": "lustig_rope_escape", "desc": "Victor Lustig (navy double-breasted coat, cream scarf, orange pocket square, black flat cap) climbing down a knotted bedsheet rope, both hands gripping the rope, legs wrapped, sly grin looking back over shoulder; facing right; full body on flat magenta background", "beats": ["b03"]},
+    {"id": "lustig_prison_sad", "desc": "Victor Lustig in black-and-white striped prison uniform and no cap, shoulders slumped, head bowed, hands cuffed in front, sad downturned mouth and drooping eyebrows; standing front-on; full body on flat magenta background", "beats": ["b03"]},
+    {"id": "lustig_official_tailcoat", "desc": "Victor Lustig dressed as a French ministry official: black tailcoat, top hat, white gloves, tricolour sash, holding a leather briefcase, chin up, solemn official expression, facing right", "beats": ["b05"]},
+    {"id": "scrap_dealer_seated", "desc": "1920s Paris scrap-metal businessman stick figure (grey three-piece suit, flat cap, thick moustache), seated on a chair facing right, arms folded, sceptical squint", "beats": ["b05"]}
+  ],
+  "needed_plates": [
+    {"id": "chicago_street_night", "desc": "1920s Chicago street at night, hand-drawn ink and watercolour style matching the Paris plates: brick buildings with fire escapes, neon-less painted speakeasy sign, a parked black 1920s sedan at far right (x 80-100%), lamp posts at x ~12% and ~88%, wet asphalt from y ~63% down fully open, centre x 20-80% clear for two actors", "beats": ["b03"]},
+    {"id": "federal_jail_exterior_night", "desc": "Exterior of a 1930s New York federal detention building at night, same ink style: tall grey stone wall with barred windows, one window at upper-left open with a knotted white bedsheet rope hanging down to the street, searchlight beam across a navy sky, sidewalk from y ~63% down open, centre and right clear for a sneaking actor", "beats": ["b03"]},
+    {"id": "alcatraz_island_fog", "desc": "Alcatraz island prison seen from the shore/dock in heavy grey fog, same ink style: cellhouse and lighthouse on the rock at right (x 60-95%), choppy grey bay water mid-ground, wooden dock planks foreground from y ~65% down fully open, left/centre clear for one actor; mood bleak and lonely", "beats": ["b03"]},
+    {"id": "crillon_salon_chandeliers", "desc": "Palatial hotel salon interior: gilded panelled walls, two crystal chandeliers, tall mirrors, red velvet chairs pushed to the edges, polished parquet floor open y 66-100% full width, centre clear for 2-3 standing figures", "beats": ["b05"]}
+  ]
+}

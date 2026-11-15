@@ -1,0 +1,5 @@
+{"beat": "v1", "attempt": 0, "ok": false, "error": "'content'"}
+{"beat": "v1", "attempt": 1, "ok": true, "error": ""}
+{"beat": "v2", "attempt": 0, "ok": true, "error": ""}
+{"beat": "v3", "attempt": 0, "ok": true, "error": ""}
+{"beat": "v4", "attempt": 0, "ok": true, "error": ""}
