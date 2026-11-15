@@ -23,7 +23,7 @@ from pathlib import Path
 def plan(manifest: dict, root: Path) -> tuple[list[tuple[Path, Path, int]], list[str]]:
     moves, problems = [], []
     for r in manifest["rows"]:
-        if r["state"] == "tracked" or r["dst"] is None or r["dst"] == r["src"]:
+        if r["state"] == "tracked" or r["dst"] is None or r["dst"] == r["src"] or "/__pycache__/" in r["src"]:
             continue
         src, dst = root / r["src"], root / r["dst"]
         if not src.is_file():
