@@ -1,0 +1,56 @@
+{
+ "_doc": "p20 shot list. Same schema as p01.json. Frames from words/p20.json. Story: Lustig crossed the Atlantic to a bigger stage, America in the Prohibition years -> built a little wooden box he told buyers printed perfect hundred-dollar bills -> sold it for tens of thousands, the box printed nothing -> the trick: two real bills in, six hours later two bills out, perfect copies -> of course the extra bills were real, hidden in the box -> the buyer saw a miracle and paid for a miracle. f1 = p21 first word (16292) minus 15.",
+ "part": "p20",
+ "f0": 15229,
+ "f1": 16277,
+ "shots": [
+  {"f0": 15229, "f1": 15335, "bg": {"plate": "ink60full/plates/ocean_liner_deck.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_walking_profile_case.png", "x": 480, "y": 1000, "h": 660, "at": 15244},
+    {"t": "words", "text": "CROSSED THE ATLANTIC", "x": 1300, "y": 240, "size": 80, "at": 15247},
+    {"t": "words", "text": "A BIGGER STAGE", "x": 1300, "y": 500, "size": 110, "color": "orange", "at": 15309}
+   ]},
+  {"f0": 15335, "f1": 15435, "bg": {"plate": "ink60full/plates/new_york_street_night.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/gangster_shifty.png", "x": 1420, "y": 1000, "h": 660, "at": 15340},
+    {"t": "words", "text": "AMERICA", "x": 620, "y": 280, "size": 150, "color": "orange", "at": 15338},
+    {"t": "words", "text": "PROHIBITION YEARS", "x": 620, "y": 540, "size": 80, "at": 15380}
+   ]},
+  {"f0": 15435, "f1": 15600, "bg": {"plate": "ink60full/plates/backroom_workshop_lamp.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_money_box.png", "x": 480, "y": 1000, "h": 660, "at": 15443},
+    {"t": "words", "text": "A LITTLE WOODEN BOX", "x": 1300, "y": 220, "size": 80, "at": 15454},
+    {"t": "words", "text": "PRINTS PERFECT", "x": 1300, "y": 460, "size": 90, "at": 15527},
+    {"t": "words", "text": "$100 BILLS", "x": 1300, "y": 700, "size": 140, "color": "orange", "at": 15551}
+   ]},
+  {"f0": 15600, "f1": 15775, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/buyer_paying.png", "x": 1460, "y": 1000, "h": 640, "at": 15610},
+    {"t": "words", "text": "SOLD FOR", "x": 620, "y": 200, "size": 90, "at": 15620},
+    {"t": "words", "text": "TENS OF THOUSANDS", "x": 620, "y": 400, "size": 85, "color": "orange", "at": 15640},
+    {"t": "words", "text": "THE BOX PRINTED", "x": 620, "y": 620, "size": 85, "at": 15707},
+    {"t": "stamp", "text": "NOTHING", "x": 620, "y": 840, "rot": -8, "color": "red", "at": 15740}
+   ]},
+  {"f0": 15775, "f1": 16020, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "THE TRICK WAS SIMPLE", "x": 960, "y": 180, "size": 90, "at": 15795},
+    {"t": "words", "text": "2 REAL BILLS IN", "x": 960, "y": 400, "size": 90, "at": 15866},
+    {"t": "words", "text": "6 HOURS LATER", "x": 960, "y": 600, "size": 80, "at": 15903},
+    {"t": "words", "text": "2 PERFECT COPIES OUT", "x": 960, "y": 820, "size": 90, "color": "orange", "at": 15961}
+   ]},
+  {"f0": 16020, "f1": 16160, "bg": {"plate": "ink60full/plates/forger_desk_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_murmur.png", "x": 480, "y": 1000, "h": 660, "at": 16062},
+    {"t": "words", "text": "OF COURSE", "x": 1300, "y": 220, "size": 90, "at": 16062},
+    {"t": "words", "text": "THE EXTRA BILLS", "x": 1300, "y": 440, "size": 85, "at": 16080},
+    {"t": "words", "text": "WERE HIDDEN INSIDE.", "x": 1300, "y": 680, "size": 80, "color": "orange", "at": 16128}
+   ]},
+  {"f0": 16160, "f1": 16277, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/buyer_amazed.png", "x": 460, "y": 1000, "h": 640, "at": 16165},
+    {"t": "words", "text": "THE BUYER SAW", "x": 1300, "y": 240, "size": 90, "at": 16180},
+    {"t": "words", "text": "A MIRACLE", "x": 1300, "y": 460, "size": 130, "color": "orange", "at": 16202},
+    {"t": "words", "text": "AND PAID FOR ONE.", "x": 1300, "y": 720, "size": 85, "at": 16227}
+   ]}
+ ]
+}
