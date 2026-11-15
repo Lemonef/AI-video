@@ -9,5 +9,6 @@ assert len(sc) == 193, len(sc)
 assert 40 <= len(f) <= 110, len(f)
 for s in f:
     c = s['cam']
-    assert 0 <= c['focus']['x'] <= 1 and 0 <= c['focus']['y'] <= 1 and 1.3 <= c['zoom'] <= 2.6, c
+    # zoom ceiling mirrors MAX_ZOOM in tools/ink/fix_zoom_cap.py (Zen 2026-11-15: 2.1 was too hard); change together
+    assert 0 <= c['focus']['x'] <= 1 and 0 <= c['focus']['y'] <= 1 and 1.0 <= c['zoom'] <= 1.25, c
 print('OK', len(f))
