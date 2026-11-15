@@ -7,9 +7,9 @@ Build a generic, data-driven renderer that plays hand-designed per-part shot lis
 # Files
 - NEW `engine/ink/parts/schema.ts` - TypeScript types for the shot-list JSON (below).
 - NEW `engine/ink/parts/elements.tsx` - one component per element type.
-- NEW `engine/ink/compositions/InkParts.tsx` - background layer, shot player, `InkParts` component, `InkFirstMin` + `INK_FIRSTMIN_FRAMES`.
-- EDIT `engine/ink/compositions/InkProof.tsx` - ADDITIVE ONLY: add `Words, Underline, Card, useIn, GREEN, RED` to an export list. Change no existing code or behaviour.
-- EDIT `engine/ink/Root.tsx` - register `<Composition id="InkFirstMin" .../>` (1920x1080, 30 fps, durationInFrames={INK_FIRSTMIN_FRAMES}).
+- NEW `engine/ink/compositions/InkParts.tsx` - background layer, shot player, the InkParts component, InkFirstMin + INK_FIRSTMIN_FRAMES.
+- EDIT `engine/ink/compositions/InkProof.tsx` - ADDITIVE ONLY: add Words, Underline, Card, useIn, GREEN, RED to an export list. Change no existing code or behaviour.
+- EDIT `engine/ink/Root.tsx` - register a Composition with id InkFirstMin (1920x1080, 30 fps, durationInFrames = INK_FIRSTMIN_FRAMES).
 - Do not touch anything else. Work only inside the repo.
 
 # Data contract (read p01.json and p02.json - they are the source of truth)
