@@ -1,0 +1,43 @@
+{
+ "_doc": "p13 shot list. Same schema as p01.json. Frames from words/p13.json. Story: 7,000 tons of iron, a fortune for the right buyer -> to prove it he drove them in two limousines to see the tower in person -> they walked around it looking up differently: not a monument, inventory -> he did not rush them, let them see it up close -> and imagine the iron already theirs. f1 = p14 first word (10542) minus 15.",
+ "part": "p13",
+ "f0": 9730,
+ "f1": 10527,
+ "shots": [
+  {"f0": 9730, "f1": 9900, "bg": {"card": true},
+   "els": [
+    {"t": "tower", "x": 1400, "y": 980, "h": 640},
+    {"t": "words", "text": "7,000 TONS", "x": 620, "y": 300, "size": 160, "at": 9745},
+    {"t": "words", "text": "OF IRON", "x": 620, "y": 450, "size": 90, "at": 9789},
+    {"t": "words", "text": "A FORTUNE", "x": 620, "y": 640, "size": 120, "color": "orange", "at": 9819},
+    {"t": "words", "text": "FOR THE RIGHT BUYER", "x": 620, "y": 770, "size": 70, "at": 9846}
+   ]},
+  {"f0": 9900, "f1": 10075, "bg": {"plate": "ink60full/plates/limousine_street_day.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "TO PROVE IT", "x": 960, "y": 200, "size": 100, "at": 9910},
+    {"t": "tag", "text": "TWO LIMOUSINES", "x": 960, "y": 340, "at": 9957},
+    {"t": "words", "text": "SEE IT IN PERSON", "x": 960, "y": 900, "size": 90, "color": "orange", "at": 9995}
+   ]},
+  {"f0": 10075, "f1": 10290, "bg": {"plate": "ink60full/plates/tower_low_angle_up.png", "zoom": [1.0, 1.08], "origin": "50% 30%"},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_looking_up.png", "x": 1420, "y": 1000, "h": 640, "at": 10084},
+    {"t": "words", "text": "LOOKING UP", "x": 600, "y": 190, "size": 90, "at": 10130},
+    {"t": "words", "text": "MONUMENT", "x": 600, "y": 430, "size": 90, "at": 10193},
+    {"t": "cross", "x": 600, "y": 430, "size": 300, "at": 10200},
+    {"t": "words", "text": "INVENTORY.", "x": 600, "y": 700, "size": 140, "color": "orange", "at": 10233}
+   ]},
+  {"f0": 10290, "f1": 10425, "bg": {"plate": "ink60full/plates/paris_birdseye_champ_de_mars.png", "zoom": [1.08, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_nodding_agree.png", "x": 480, "y": 1000, "h": 660, "at": 10300},
+    {"t": "words", "text": "NO RUSH.", "x": 1300, "y": 300, "size": 130, "at": 10309},
+    {"t": "words", "text": "UP CLOSE", "x": 1300, "y": 480, "size": 100, "color": "orange", "at": 10394}
+   ]},
+  {"f0": 10425, "f1": 10527, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_secret_smile.png", "x": 520, "y": 1000, "h": 660, "at": 10430},
+    {"t": "words", "text": "THE IRON", "x": 1300, "y": 340, "size": 100, "at": 10450},
+    {"t": "words", "text": "ALREADY THEIRS", "x": 1300, "y": 520, "size": 120, "color": "orange", "at": 10466},
+    {"t": "underline", "x": 1300, "y": 600, "w": 820, "at": 10481}
+   ]}
+ ]
+}
