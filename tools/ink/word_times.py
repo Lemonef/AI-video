@@ -10,7 +10,7 @@ Key: ~/.secrets/groq_api_key (never committed).
 Usage: python -I tools/ink/word_times.py <ink60full dir> <part id>
 Writes <ink60full dir>/words/<part id>.json: {fps, part, words:[{beat, w, f0, f1}]}.
 """
-import json, os, subprocess, sys
+import json, os, re, subprocess, sys, time
 from pathlib import Path
 
 MODEL = 'whisper-large-v3-turbo'
@@ -26,16 +26,25 @@ ids = [b['id'] for b in t['beats']]
 beats = t['beats'][ids.index(part['first']):ids.index(part['last']) + 1]
 
 
+RETRIES = 6  # free tier is 20 requests/min; one request per beat, so long parts hit it
+
+
 def transcribe(wav):
-    r = subprocess.run(['curl', '-s', '-A', UA, URL, '-H', 'Authorization: Bearer ' + key,
-                        '-F', 'file=@' + wav, '--form-string', 'model=' + MODEL,
-                        '--form-string', 'language=en', '--form-string', 'response_format=verbose_json',
-                        '--form-string', 'timestamp_granularities[]=word'],
-                       capture_output=True, text=True, check=True)
-    j = json.loads(r.stdout)
-    if 'words' not in j:
-        raise SystemExit('no words for %s: %s' % (wav, r.stdout[:300]))
-    return j['words']
+    for _ in range(RETRIES):
+        r = subprocess.run(['curl', '-s', '-A', UA, URL, '-H', 'Authorization: Bearer ' + key,
+                            '-F', 'file=@' + wav, '--form-string', 'model=' + MODEL,
+                            '--form-string', 'language=en', '--form-string', 'response_format=verbose_json',
+                            '--form-string', 'timestamp_granularities[]=word'],
+                           capture_output=True, text=True, check=True)
+        j = json.loads(r.stdout)
+        if 'words' in j:
+            return j['words']
+        msg = j.get('error', {}).get('message', '')
+        m = re.search(r'try again in ([\d.]+)s', msg)
+        if 'Rate limit' not in msg:
+            break
+        time.sleep(float(m.group(1)) + 1 if m else 60)  # wait exactly what the server asks
+    raise SystemExit('no words for %s: %s' % (wav, r.stdout[:300]))
 
 
 out = []

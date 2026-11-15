@@ -1,1 +1,1711 @@
-{"fps": 30, "silent": true, "totalFrames": 20421, "beats": [{"id": "b01", "start": 0, "dur": 225, "shots": [{"start": 0, "dur": 77}, {"start": 77, "dur": 70}, {"start": 147, "dur": 78}]}, {"id": "b02", "start": 225, "dur": 129, "shots": [{"start": 225, "dur": 52}, {"start": 277, "dur": 77}]}, {"id": "b03", "start": 354, "dur": 177, "shots": [{"start": 354, "dur": 59}, {"start": 413, "dur": 59}, {"start": 472, "dur": 59}]}, {"id": "b04", "start": 531, "dur": 165, "shots": [{"start": 531, "dur": 61}, {"start": 592, "dur": 61}, {"start": 653, "dur": 43}]}, {"id": "b05", "start": 696, "dur": 261, "shots": [{"start": 696, "dur": 90}, {"start": 786, "dur": 98}, {"start": 884, "dur": 73}]}, {"id": "b06", "start": 957, "dur": 189, "shots": [{"start": 957, "dur": 86}, {"start": 1043, "dur": 103}]}, {"id": "b07", "start": 1146, "dur": 153, "shots": [{"start": 1146, "dur": 83}, {"start": 1229, "dur": 70}]}, {"id": "b08", "start": 1299, "dur": 189, "shots": [{"start": 1299, "dur": 57}, {"start": 1356, "dur": 74}, {"start": 1430, "dur": 58}]}, {"id": "b09", "start": 1488, "dur": 189, "shots": [{"start": 1488, "dur": 103}, {"start": 1591, "dur": 86}]}, {"id": "b10", "start": 1677, "dur": 201, "shots": [{"start": 1677, "dur": 117}, {"start": 1794, "dur": 84}]}, {"id": "b11", "start": 1878, "dur": 225, "shots": [{"start": 1878, "dur": 102}, {"start": 1980, "dur": 123}]}, {"id": "b12", "start": 2103, "dur": 165, "shots": [{"start": 2103, "dur": 90}, {"start": 2193, "dur": 75}]}, {"id": "b13", "start": 2268, "dur": 105, "shots": [{"start": 2268, "dur": 105}]}, {"id": "b14", "start": 2373, "dur": 117, "shots": [{"start": 2373, "dur": 53}, {"start": 2426, "dur": 64}]}, {"id": "x01", "start": 2490, "dur": 297, "shots": [{"start": 2490, "dur": 90}, {"start": 2580, "dur": 90}, {"start": 2670, "dur": 117}]}, {"id": "x02", "start": 2787, "dur": 177, "shots": [{"start": 2787, "dur": 97}, {"start": 2884, "dur": 80}]}, {"id": "x03", "start": 2964, "dur": 165, "shots": [{"start": 2964, "dur": 93}, {"start": 3057, "dur": 72}]}, {"id": "b15", "start": 3129, "dur": 153, "shots": [{"start": 3129, "dur": 97}, {"start": 3226, "dur": 56}]}, {"id": "b16", "start": 3282, "dur": 177, "shots": [{"start": 3282, "dur": 59}, {"start": 3341, "dur": 59}, {"start": 3400, "dur": 59}]}, {"id": "b17", "start": 3459, "dur": 213, "shots": [{"start": 3459, "dur": 97}, {"start": 3556, "dur": 116}]}, {"id": "x04", "start": 3672, "dur": 225, "shots": [{"start": 3672, "dur": 83}, {"start": 3755, "dur": 60}, {"start": 3815, "dur": 82}]}, {"id": "x05", "start": 3897, "dur": 213, "shots": [{"start": 3897, "dur": 106}, {"start": 4003, "dur": 107}]}, {"id": "x06", "start": 4110, "dur": 177, "shots": [{"start": 4110, "dur": 108}, {"start": 4218, "dur": 69}]}, {"id": "b18", "start": 4287, "dur": 237, "shots": [{"start": 4287, "dur": 79}, {"start": 4366, "dur": 95}, {"start": 4461, "dur": 63}]}, {"id": "b19", "start": 4524, "dur": 213, "shots": [{"start": 4524, "dur": 73}, {"start": 4597, "dur": 81}, {"start": 4678, "dur": 59}]}, {"id": "b20", "start": 4737, "dur": 225, "shots": [{"start": 4737, "dur": 82}, {"start": 4819, "dur": 143}]}, {"id": "b21", "start": 4962, "dur": 249, "shots": [{"start": 4962, "dur": 80}, {"start": 5042, "dur": 104}, {"start": 5146, "dur": 65}]}, {"id": "x07", "start": 5211, "dur": 189, "shots": [{"start": 5211, "dur": 82}, {"start": 5293, "dur": 107}]}, {"id": "x08", "start": 5400, "dur": 237, "shots": [{"start": 5400, "dur": 108}, {"start": 5508, "dur": 129}]}, {"id": "x09", "start": 5637, "dur": 261, "shots": [{"start": 5637, "dur": 113}, {"start": 5750, "dur": 148}]}, {"id": "b22", "start": 5898, "dur": 225, "shots": [{"start": 5898, "dur": 139}, {"start": 6037, "dur": 86}]}, {"id": "b23", "start": 6123, "dur": 177, "shots": [{"start": 6123, "dur": 39}, {"start": 6162, "dur": 43}, {"start": 6205, "dur": 43}, {"start": 6248, "dur": 52}]}, {"id": "b24", "start": 6300, "dur": 129, "shots": [{"start": 6300, "dur": 52}, {"start": 6352, "dur": 77}]}, {"id": "b25", "start": 6429, "dur": 201, "shots": [{"start": 6429, "dur": 115}, {"start": 6544, "dur": 86}]}, {"id": "b26", "start": 6630, "dur": 165, "shots": [{"start": 6630, "dur": 71}, {"start": 6701, "dur": 94}]}, {"id": "b27", "start": 6795, "dur": 189, "shots": [{"start": 6795, "dur": 90}, {"start": 6885, "dur": 99}]}, {"id": "b28", "start": 6984, "dur": 165, "shots": [{"start": 6984, "dur": 75}, {"start": 7059, "dur": 90}]}, {"id": "b29", "start": 7149, "dur": 165, "shots": [{"start": 7149, "dur": 90}, {"start": 7239, "dur": 75}]}, {"id": "b30", "start": 7314, "dur": 213, "shots": [{"start": 7314, "dur": 93}, {"start": 7407, "dur": 120}]}, {"id": "b31", "start": 7527, "dur": 153, "shots": [{"start": 7527, "dur": 69}, {"start": 7596, "dur": 84}]}, {"id": "b32", "start": 7680, "dur": 225, "shots": [{"start": 7680, "dur": 73}, {"start": 7753, "dur": 94}, {"start": 7847, "dur": 58}]}, {"id": "b33", "start": 7905, "dur": 165, "shots": [{"start": 7905, "dur": 102}, {"start": 8007, "dur": 63}]}, {"id": "b34", "start": 8070, "dur": 213, "shots": [{"start": 8070, "dur": 101}, {"start": 8171, "dur": 112}]}, {"id": "x10", "start": 8283, "dur": 213, "shots": [{"start": 8283, "dur": 126}, {"start": 8409, "dur": 87}]}, {"id": "x11", "start": 8496, "dur": 153, "shots": [{"start": 8496, "dur": 76}, {"start": 8572, "dur": 77}]}, {"id": "x12", "start": 8649, "dur": 177, "shots": [{"start": 8649, "dur": 62}, {"start": 8711, "dur": 115}]}, {"id": "b35", "start": 8826, "dur": 201, "shots": [{"start": 8826, "dur": 91}, {"start": 8917, "dur": 110}]}, {"id": "b36", "start": 9027, "dur": 189, "shots": [{"start": 9027, "dur": 52}, {"start": 9079, "dur": 47}, {"start": 9126, "dur": 43}, {"start": 9169, "dur": 47}]}, {"id": "b37", "start": 9216, "dur": 201, "shots": [{"start": 9216, "dur": 96}, {"start": 9312, "dur": 105}]}, {"id": "b38", "start": 9417, "dur": 141, "shots": [{"start": 9417, "dur": 64}, {"start": 9481, "dur": 77}]}, {"id": "b39", "start": 9558, "dur": 189, "shots": [{"start": 9558, "dur": 90}, {"start": 9648, "dur": 99}]}, {"id": "b40", "start": 9747, "dur": 189, "shots": [{"start": 9747, "dur": 107}, {"start": 9854, "dur": 82}]}, {"id": "x13", "start": 9936, "dur": 237, "shots": [{"start": 9936, "dur": 108}, {"start": 10044, "dur": 129}]}, {"id": "x14", "start": 10173, "dur": 213, "shots": [{"start": 10173, "dur": 101}, {"start": 10274, "dur": 112}]}, {"id": "b41", "start": 10386, "dur": 117, "shots": [{"start": 10386, "dur": 58}, {"start": 10444, "dur": 59}]}, {"id": "b42", "start": 10503, "dur": 177, "shots": [{"start": 10503, "dur": 77}, {"start": 10580, "dur": 100}]}, {"id": "b43", "start": 10680, "dur": 165, "shots": [{"start": 10680, "dur": 79}, {"start": 10759, "dur": 86}]}, {"id": "b44", "start": 10845, "dur": 237, "shots": [{"start": 10845, "dur": 129}, {"start": 10974, "dur": 108}]}, {"id": "b45", "start": 11082, "dur": 189, "shots": [{"start": 11082, "dur": 69}, {"start": 11151, "dur": 120}]}, {"id": "b46", "start": 11271, "dur": 105, "shots": [{"start": 11271, "dur": 52}, {"start": 11323, "dur": 53}]}, {"id": "b47", "start": 11376, "dur": 201, "shots": [{"start": 11376, "dur": 114}, {"start": 11490, "dur": 87}]}, {"id": "b48", "start": 11577, "dur": 213, "shots": [{"start": 11577, "dur": 111}, {"start": 11688, "dur": 102}]}, {"id": "b49", "start": 11790, "dur": 273, "shots": [{"start": 11790, "dur": 149}, {"start": 11939, "dur": 124}]}, {"id": "x15", "start": 12063, "dur": 297, "shots": [{"start": 12063, "dur": 168}, {"start": 12231, "dur": 129}]}, {"id": "x16", "start": 12360, "dur": 189, "shots": [{"start": 12360, "dur": 79}, {"start": 12439, "dur": 110}]}, {"id": "b50", "start": 12549, "dur": 141, "shots": [{"start": 12549, "dur": 80}, {"start": 12629, "dur": 61}]}, {"id": "b51", "start": 12690, "dur": 165, "shots": [{"start": 12690, "dur": 52}, {"start": 12742, "dur": 52}, {"start": 12794, "dur": 61}]}, {"id": "b52", "start": 12855, "dur": 105, "shots": [{"start": 12855, "dur": 65}, {"start": 12920, "dur": 40}]}, {"id": "b53", "start": 12960, "dur": 93, "shots": [{"start": 12960, "dur": 59}, {"start": 13019, "dur": 34}]}, {"id": "b54", "start": 13053, "dur": 237, "shots": [{"start": 13053, "dur": 134}, {"start": 13187, "dur": 103}]}, {"id": "b55", "start": 13290, "dur": 237, "shots": [{"start": 13290, "dur": 129}, {"start": 13419, "dur": 108}]}, {"id": "b56", "start": 13527, "dur": 141, "shots": [{"start": 13527, "dur": 80}, {"start": 13607, "dur": 61}]}, {"id": "x17", "start": 13668, "dur": 189, "shots": [{"start": 13668, "dur": 94}, {"start": 13762, "dur": 95}]}, {"id": "x18", "start": 13857, "dur": 177, "shots": [{"start": 13857, "dur": 88}, {"start": 13945, "dur": 89}]}, {"id": "x19", "start": 14034, "dur": 189, "shots": [{"start": 14034, "dur": 99}, {"start": 14133, "dur": 90}]}, {"id": "b57", "start": 14223, "dur": 177, "shots": [{"start": 14223, "dur": 108}, {"start": 14331, "dur": 69}]}, {"id": "b58", "start": 14400, "dur": 129, "shots": [{"start": 14400, "dur": 64}, {"start": 14464, "dur": 65}]}, {"id": "b59", "start": 14529, "dur": 117, "shots": [{"start": 14529, "dur": 74}, {"start": 14603, "dur": 43}]}, {"id": "b60", "start": 14646, "dur": 177, "shots": [{"start": 14646, "dur": 93}, {"start": 14739, "dur": 84}]}, {"id": "x20", "start": 14823, "dur": 237, "shots": [{"start": 14823, "dur": 108}, {"start": 14931, "dur": 129}]}, {"id": "x21", "start": 15060, "dur": 249, "shots": [{"start": 15060, "dur": 124}, {"start": 15184, "dur": 125}]}, {"id": "x22", "start": 15309, "dur": 213, "shots": [{"start": 15309, "dur": 65}, {"start": 15374, "dur": 90}, {"start": 15464, "dur": 58}]}, {"id": "b61", "start": 15522, "dur": 177, "shots": [{"start": 15522, "dur": 93}, {"start": 15615, "dur": 84}]}, {"id": "b62", "start": 15699, "dur": 189, "shots": [{"start": 15699, "dur": 86}, {"start": 15785, "dur": 103}]}, {"id": "b63", "start": 15888, "dur": 189, "shots": [{"start": 15888, "dur": 112}, {"start": 16000, "dur": 77}]}, {"id": "x23", "start": 16077, "dur": 261, "shots": [{"start": 16077, "dur": 90}, {"start": 16167, "dur": 90}, {"start": 16257, "dur": 81}]}, {"id": "x24", "start": 16338, "dur": 273, "shots": [{"start": 16338, "dur": 97}, {"start": 16435, "dur": 88}, {"start": 16523, "dur": 88}]}, {"id": "x25", "start": 16611, "dur": 237, "shots": [{"start": 16611, "dur": 92}, {"start": 16703, "dur": 61}, {"start": 16764, "dur": 84}]}, {"id": "b64", "start": 16848, "dur": 93, "shots": [{"start": 16848, "dur": 93}]}, {"id": "b65", "start": 16941, "dur": 237, "shots": [{"start": 16941, "dur": 87}, {"start": 17028, "dur": 71}, {"start": 17099, "dur": 79}]}, {"id": "b66", "start": 17178, "dur": 177, "shots": [{"start": 17178, "dur": 88}, {"start": 17266, "dur": 89}]}, {"id": "b67", "start": 17355, "dur": 201, "shots": [{"start": 17355, "dur": 96}, {"start": 17451, "dur": 105}]}, {"id": "b68", "start": 17556, "dur": 165, "shots": [{"start": 17556, "dur": 79}, {"start": 17635, "dur": 86}]}, {"id": "b69", "start": 17721, "dur": 213, "shots": [{"start": 17721, "dur": 73}, {"start": 17794, "dur": 81}, {"start": 17875, "dur": 59}]}, {"id": "x26", "start": 17934, "dur": 225, "shots": [{"start": 17934, "dur": 107}, {"start": 18041, "dur": 118}]}, {"id": "x27", "start": 18159, "dur": 249, "shots": [{"start": 18159, "dur": 75}, {"start": 18234, "dur": 100}, {"start": 18334, "dur": 74}]}, {"id": "b70", "start": 18408, "dur": 177, "shots": [{"start": 18408, "dur": 50}, {"start": 18458, "dur": 55}, {"start": 18513, "dur": 72}]}, {"id": "b71", "start": 18585, "dur": 177, "shots": [{"start": 18585, "dur": 84}, {"start": 18669, "dur": 93}]}, {"id": "b72", "start": 18762, "dur": 225, "shots": [{"start": 18762, "dur": 90}, {"start": 18852, "dur": 68}, {"start": 18920, "dur": 67}]}, {"id": "b73", "start": 18987, "dur": 285, "shots": [{"start": 18987, "dur": 101}, {"start": 19088, "dur": 184}]}, {"id": "b74", "start": 19272, "dur": 117, "shots": [{"start": 19272, "dur": 58}, {"start": 19330, "dur": 59}]}, {"id": "x28", "start": 19389, "dur": 201, "shots": [{"start": 19389, "dur": 201}]}, {"id": "x29", "start": 19590, "dur": 141, "shots": [{"start": 19590, "dur": 70}, {"start": 19660, "dur": 71}]}, {"id": "b75", "start": 19731, "dur": 69, "shots": [{"start": 19731, "dur": 69}]}, {"id": "b76", "start": 19800, "dur": 177, "shots": [{"start": 19800, "dur": 53}, {"start": 19853, "dur": 71}, {"start": 19924, "dur": 53}]}, {"id": "b77", "start": 19977, "dur": 213, "shots": [{"start": 19977, "dur": 67}, {"start": 20044, "dur": 80}, {"start": 20124, "dur": 66}]}, {"id": "b78", "start": 20190, "dur": 231, "shots": [{"start": 20190, "dur": 82}, {"start": 20272, "dur": 82}, {"start": 20354, "dur": 67}]}]}
+{
+ "fps": 30,
+ "totalFrames": 19636,
+ "beats": [
+  {
+   "id": "b01",
+   "start": 0,
+   "dur": 266,
+   "shots": [
+    {
+     "start": 0,
+     "dur": 89
+    },
+    {
+     "start": 89,
+     "dur": 89
+    },
+    {
+     "start": 178,
+     "dur": 88
+    }
+   ]
+  },
+  {
+   "id": "b02",
+   "start": 266,
+   "dur": 126,
+   "shots": [
+    {
+     "start": 266,
+     "dur": 63
+    },
+    {
+     "start": 329,
+     "dur": 63
+    }
+   ]
+  },
+  {
+   "id": "b03",
+   "start": 392,
+   "dur": 197,
+   "shots": [
+    {
+     "start": 392,
+     "dur": 66
+    },
+    {
+     "start": 458,
+     "dur": 66
+    },
+    {
+     "start": 524,
+     "dur": 65
+    }
+   ]
+  },
+  {
+   "id": "b04",
+   "start": 589,
+   "dur": 184,
+   "shots": [
+    {
+     "start": 589,
+     "dur": 62
+    },
+    {
+     "start": 651,
+     "dur": 61
+    },
+    {
+     "start": 712,
+     "dur": 61
+    }
+   ]
+  },
+  {
+   "id": "b05",
+   "start": 773,
+   "dur": 228,
+   "shots": [
+    {
+     "start": 773,
+     "dur": 76
+    },
+    {
+     "start": 849,
+     "dur": 76
+    },
+    {
+     "start": 925,
+     "dur": 76
+    }
+   ]
+  },
+  {
+   "id": "b06",
+   "start": 1001,
+   "dur": 71,
+   "shots": [
+    {
+     "start": 1001,
+     "dur": 36
+    },
+    {
+     "start": 1037,
+     "dur": 35
+    }
+   ]
+  },
+  {
+   "id": "b07",
+   "start": 1072,
+   "dur": 119,
+   "shots": [
+    {
+     "start": 1072,
+     "dur": 60
+    },
+    {
+     "start": 1132,
+     "dur": 59
+    }
+   ]
+  },
+  {
+   "id": "b08",
+   "start": 1191,
+   "dur": 136,
+   "shots": [
+    {
+     "start": 1191,
+     "dur": 46
+    },
+    {
+     "start": 1237,
+     "dur": 45
+    },
+    {
+     "start": 1282,
+     "dur": 45
+    }
+   ]
+  },
+  {
+   "id": "b09",
+   "start": 1327,
+   "dur": 219,
+   "shots": [
+    {
+     "start": 1327,
+     "dur": 110
+    },
+    {
+     "start": 1437,
+     "dur": 109
+    }
+   ]
+  },
+  {
+   "id": "b10",
+   "start": 1546,
+   "dur": 170,
+   "shots": [
+    {
+     "start": 1546,
+     "dur": 85
+    },
+    {
+     "start": 1631,
+     "dur": 85
+    }
+   ]
+  },
+  {
+   "id": "b11",
+   "start": 1716,
+   "dur": 198,
+   "shots": [
+    {
+     "start": 1716,
+     "dur": 99
+    },
+    {
+     "start": 1815,
+     "dur": 99
+    }
+   ]
+  },
+  {
+   "id": "b12",
+   "start": 1914,
+   "dur": 202,
+   "shots": [
+    {
+     "start": 1914,
+     "dur": 101
+    },
+    {
+     "start": 2015,
+     "dur": 101
+    }
+   ]
+  },
+  {
+   "id": "b13",
+   "start": 2116,
+   "dur": 266,
+   "shots": [
+    {
+     "start": 2116,
+     "dur": 266
+    }
+   ]
+  },
+  {
+   "id": "b14",
+   "start": 2382,
+   "dur": 118,
+   "shots": [
+    {
+     "start": 2382,
+     "dur": 59
+    },
+    {
+     "start": 2441,
+     "dur": 59
+    }
+   ]
+  },
+  {
+   "id": "x01",
+   "start": 2500,
+   "dur": 268,
+   "shots": [
+    {
+     "start": 2500,
+     "dur": 90
+    },
+    {
+     "start": 2590,
+     "dur": 89
+    },
+    {
+     "start": 2679,
+     "dur": 89
+    }
+   ]
+  },
+  {
+   "id": "x02",
+   "start": 2768,
+   "dur": 181,
+   "shots": [
+    {
+     "start": 2768,
+     "dur": 91
+    },
+    {
+     "start": 2859,
+     "dur": 90
+    }
+   ]
+  },
+  {
+   "id": "x03",
+   "start": 2949,
+   "dur": 129,
+   "shots": [
+    {
+     "start": 2949,
+     "dur": 65
+    },
+    {
+     "start": 3014,
+     "dur": 64
+    }
+   ]
+  },
+  {
+   "id": "b15",
+   "start": 3078,
+   "dur": 147,
+   "shots": [
+    {
+     "start": 3078,
+     "dur": 74
+    },
+    {
+     "start": 3152,
+     "dur": 73
+    }
+   ]
+  },
+  {
+   "id": "b16",
+   "start": 3225,
+   "dur": 208,
+   "shots": [
+    {
+     "start": 3225,
+     "dur": 70
+    },
+    {
+     "start": 3295,
+     "dur": 69
+    },
+    {
+     "start": 3364,
+     "dur": 69
+    }
+   ]
+  },
+  {
+   "id": "b17",
+   "start": 3433,
+   "dur": 216,
+   "shots": [
+    {
+     "start": 3433,
+     "dur": 108
+    },
+    {
+     "start": 3541,
+     "dur": 108
+    }
+   ]
+  },
+  {
+   "id": "x04",
+   "start": 3649,
+   "dur": 404,
+   "shots": [
+    {
+     "start": 3649,
+     "dur": 135
+    },
+    {
+     "start": 3784,
+     "dur": 135
+    },
+    {
+     "start": 3919,
+     "dur": 134
+    }
+   ]
+  },
+  {
+   "id": "x05",
+   "start": 4053,
+   "dur": 190,
+   "shots": [
+    {
+     "start": 4053,
+     "dur": 95
+    },
+    {
+     "start": 4148,
+     "dur": 95
+    }
+   ]
+  },
+  {
+   "id": "x06",
+   "start": 4243,
+   "dur": 218,
+   "shots": [
+    {
+     "start": 4243,
+     "dur": 109
+    },
+    {
+     "start": 4352,
+     "dur": 109
+    }
+   ]
+  },
+  {
+   "id": "b18",
+   "start": 4461,
+   "dur": 215,
+   "shots": [
+    {
+     "start": 4461,
+     "dur": 72
+    },
+    {
+     "start": 4533,
+     "dur": 72
+    },
+    {
+     "start": 4605,
+     "dur": 71
+    }
+   ]
+  },
+  {
+   "id": "b19",
+   "start": 4676,
+   "dur": 208,
+   "shots": [
+    {
+     "start": 4676,
+     "dur": 70
+    },
+    {
+     "start": 4746,
+     "dur": 69
+    },
+    {
+     "start": 4815,
+     "dur": 69
+    }
+   ]
+  },
+  {
+   "id": "b20",
+   "start": 4884,
+   "dur": 108,
+   "shots": [
+    {
+     "start": 4884,
+     "dur": 54
+    },
+    {
+     "start": 4938,
+     "dur": 54
+    }
+   ]
+  },
+  {
+   "id": "b21",
+   "start": 4992,
+   "dur": 199,
+   "shots": [
+    {
+     "start": 4992,
+     "dur": 67
+    },
+    {
+     "start": 5059,
+     "dur": 66
+    },
+    {
+     "start": 5125,
+     "dur": 66
+    }
+   ]
+  },
+  {
+   "id": "x07",
+   "start": 5191,
+   "dur": 269,
+   "shots": [
+    {
+     "start": 5191,
+     "dur": 135
+    },
+    {
+     "start": 5326,
+     "dur": 134
+    }
+   ]
+  },
+  {
+   "id": "x08",
+   "start": 5460,
+   "dur": 265,
+   "shots": [
+    {
+     "start": 5460,
+     "dur": 133
+    },
+    {
+     "start": 5593,
+     "dur": 132
+    }
+   ]
+  },
+  {
+   "id": "x09",
+   "start": 5725,
+   "dur": 193,
+   "shots": [
+    {
+     "start": 5725,
+     "dur": 97
+    },
+    {
+     "start": 5822,
+     "dur": 96
+    }
+   ]
+  },
+  {
+   "id": "b22",
+   "start": 5918,
+   "dur": 197,
+   "shots": [
+    {
+     "start": 5918,
+     "dur": 99
+    },
+    {
+     "start": 6017,
+     "dur": 98
+    }
+   ]
+  },
+  {
+   "id": "b23",
+   "start": 6115,
+   "dur": 182,
+   "shots": [
+    {
+     "start": 6115,
+     "dur": 46
+    },
+    {
+     "start": 6161,
+     "dur": 46
+    },
+    {
+     "start": 6207,
+     "dur": 45
+    },
+    {
+     "start": 6252,
+     "dur": 45
+    }
+   ]
+  },
+  {
+   "id": "b24",
+   "start": 6297,
+   "dur": 158,
+   "shots": [
+    {
+     "start": 6297,
+     "dur": 79
+    },
+    {
+     "start": 6376,
+     "dur": 79
+    }
+   ]
+  },
+  {
+   "id": "b25",
+   "start": 6455,
+   "dur": 214,
+   "shots": [
+    {
+     "start": 6455,
+     "dur": 107
+    },
+    {
+     "start": 6562,
+     "dur": 107
+    }
+   ]
+  },
+  {
+   "id": "b26",
+   "start": 6669,
+   "dur": 203,
+   "shots": [
+    {
+     "start": 6669,
+     "dur": 102
+    },
+    {
+     "start": 6771,
+     "dur": 101
+    }
+   ]
+  },
+  {
+   "id": "b27",
+   "start": 6872,
+   "dur": 202,
+   "shots": [
+    {
+     "start": 6872,
+     "dur": 101
+    },
+    {
+     "start": 6973,
+     "dur": 101
+    }
+   ]
+  },
+  {
+   "id": "b28",
+   "start": 7074,
+   "dur": 209,
+   "shots": [
+    {
+     "start": 7074,
+     "dur": 105
+    },
+    {
+     "start": 7179,
+     "dur": 104
+    }
+   ]
+  },
+  {
+   "id": "b29",
+   "start": 7283,
+   "dur": 82,
+   "shots": [
+    {
+     "start": 7283,
+     "dur": 41
+    },
+    {
+     "start": 7324,
+     "dur": 41
+    }
+   ]
+  },
+  {
+   "id": "b30",
+   "start": 7365,
+   "dur": 130,
+   "shots": [
+    {
+     "start": 7365,
+     "dur": 65
+    },
+    {
+     "start": 7430,
+     "dur": 65
+    }
+   ]
+  },
+  {
+   "id": "b31",
+   "start": 7495,
+   "dur": 205,
+   "shots": [
+    {
+     "start": 7495,
+     "dur": 103
+    },
+    {
+     "start": 7598,
+     "dur": 102
+    }
+   ]
+  },
+  {
+   "id": "b32",
+   "start": 7700,
+   "dur": 181,
+   "shots": [
+    {
+     "start": 7700,
+     "dur": 61
+    },
+    {
+     "start": 7761,
+     "dur": 60
+    },
+    {
+     "start": 7821,
+     "dur": 60
+    }
+   ]
+  },
+  {
+   "id": "b33",
+   "start": 7881,
+   "dur": 210,
+   "shots": [
+    {
+     "start": 7881,
+     "dur": 105
+    },
+    {
+     "start": 7986,
+     "dur": 105
+    }
+   ]
+  },
+  {
+   "id": "b34",
+   "start": 8091,
+   "dur": 60,
+   "shots": [
+    {
+     "start": 8091,
+     "dur": 30
+    },
+    {
+     "start": 8121,
+     "dur": 30
+    }
+   ]
+  },
+  {
+   "id": "x10",
+   "start": 8151,
+   "dur": 164,
+   "shots": [
+    {
+     "start": 8151,
+     "dur": 82
+    },
+    {
+     "start": 8233,
+     "dur": 82
+    }
+   ]
+  },
+  {
+   "id": "x11",
+   "start": 8315,
+   "dur": 580,
+   "shots": [
+    {
+     "start": 8315,
+     "dur": 290
+    },
+    {
+     "start": 8605,
+     "dur": 290
+    }
+   ]
+  },
+  {
+   "id": "x12",
+   "start": 8895,
+   "dur": 170,
+   "shots": [
+    {
+     "start": 8895,
+     "dur": 85
+    },
+    {
+     "start": 8980,
+     "dur": 85
+    }
+   ]
+  },
+  {
+   "id": "b35",
+   "start": 9065,
+   "dur": 110,
+   "shots": [
+    {
+     "start": 9065,
+     "dur": 55
+    },
+    {
+     "start": 9120,
+     "dur": 55
+    }
+   ]
+  },
+  {
+   "id": "b36",
+   "start": 9175,
+   "dur": 138,
+   "shots": [
+    {
+     "start": 9175,
+     "dur": 35
+    },
+    {
+     "start": 9210,
+     "dur": 35
+    },
+    {
+     "start": 9245,
+     "dur": 34
+    },
+    {
+     "start": 9279,
+     "dur": 34
+    }
+   ]
+  },
+  {
+   "id": "b37",
+   "start": 9313,
+   "dur": 201,
+   "shots": [
+    {
+     "start": 9313,
+     "dur": 101
+    },
+    {
+     "start": 9414,
+     "dur": 100
+    }
+   ]
+  },
+  {
+   "id": "b38",
+   "start": 9514,
+   "dur": 214,
+   "shots": [
+    {
+     "start": 9514,
+     "dur": 107
+    },
+    {
+     "start": 9621,
+     "dur": 107
+    }
+   ]
+  },
+  {
+   "id": "b39",
+   "start": 9728,
+   "dur": 165,
+   "shots": [
+    {
+     "start": 9728,
+     "dur": 83
+    },
+    {
+     "start": 9811,
+     "dur": 82
+    }
+   ]
+  },
+  {
+   "id": "b40",
+   "start": 9893,
+   "dur": 172,
+   "shots": [
+    {
+     "start": 9893,
+     "dur": 86
+    },
+    {
+     "start": 9979,
+     "dur": 86
+    }
+   ]
+  },
+  {
+   "id": "x13",
+   "start": 10065,
+   "dur": 219,
+   "shots": [
+    {
+     "start": 10065,
+     "dur": 110
+    },
+    {
+     "start": 10175,
+     "dur": 109
+    }
+   ]
+  },
+  {
+   "id": "x14",
+   "start": 10284,
+   "dur": 242,
+   "shots": [
+    {
+     "start": 10284,
+     "dur": 121
+    },
+    {
+     "start": 10405,
+     "dur": 121
+    }
+   ]
+  },
+  {
+   "id": "b41",
+   "start": 10526,
+   "dur": 194,
+   "shots": [
+    {
+     "start": 10526,
+     "dur": 97
+    },
+    {
+     "start": 10623,
+     "dur": 97
+    }
+   ]
+  },
+  {
+   "id": "b42",
+   "start": 10720,
+   "dur": 138,
+   "shots": [
+    {
+     "start": 10720,
+     "dur": 69
+    },
+    {
+     "start": 10789,
+     "dur": 69
+    }
+   ]
+  },
+  {
+   "id": "b43",
+   "start": 10858,
+   "dur": 205,
+   "shots": [
+    {
+     "start": 10858,
+     "dur": 103
+    },
+    {
+     "start": 10961,
+     "dur": 102
+    }
+   ]
+  },
+  {
+   "id": "b44",
+   "start": 11063,
+   "dur": 182,
+   "shots": [
+    {
+     "start": 11063,
+     "dur": 91
+    },
+    {
+     "start": 11154,
+     "dur": 91
+    }
+   ]
+  },
+  {
+   "id": "b45",
+   "start": 11245,
+   "dur": 219,
+   "shots": [
+    {
+     "start": 11245,
+     "dur": 110
+    },
+    {
+     "start": 11355,
+     "dur": 109
+    }
+   ]
+  },
+  {
+   "id": "b46",
+   "start": 11464,
+   "dur": 195,
+   "shots": [
+    {
+     "start": 11464,
+     "dur": 98
+    },
+    {
+     "start": 11562,
+     "dur": 97
+    }
+   ]
+  },
+  {
+   "id": "b47",
+   "start": 11659,
+   "dur": 292,
+   "shots": [
+    {
+     "start": 11659,
+     "dur": 146
+    },
+    {
+     "start": 11805,
+     "dur": 146
+    }
+   ]
+  },
+  {
+   "id": "b48",
+   "start": 11951,
+   "dur": 212,
+   "shots": [
+    {
+     "start": 11951,
+     "dur": 106
+    },
+    {
+     "start": 12057,
+     "dur": 106
+    }
+   ]
+  },
+  {
+   "id": "b49",
+   "start": 12163,
+   "dur": 217,
+   "shots": [
+    {
+     "start": 12163,
+     "dur": 109
+    },
+    {
+     "start": 12272,
+     "dur": 108
+    }
+   ]
+  },
+  {
+   "id": "x15",
+   "start": 12380,
+   "dur": 230,
+   "shots": [
+    {
+     "start": 12380,
+     "dur": 115
+    },
+    {
+     "start": 12495,
+     "dur": 115
+    }
+   ]
+  },
+  {
+   "id": "x16",
+   "start": 12610,
+   "dur": 126,
+   "shots": [
+    {
+     "start": 12610,
+     "dur": 63
+    },
+    {
+     "start": 12673,
+     "dur": 63
+    }
+   ]
+  },
+  {
+   "id": "b50",
+   "start": 12736,
+   "dur": 130,
+   "shots": [
+    {
+     "start": 12736,
+     "dur": 65
+    },
+    {
+     "start": 12801,
+     "dur": 65
+    }
+   ]
+  },
+  {
+   "id": "b51",
+   "start": 12866,
+   "dur": 137,
+   "shots": [
+    {
+     "start": 12866,
+     "dur": 46
+    },
+    {
+     "start": 12912,
+     "dur": 46
+    },
+    {
+     "start": 12958,
+     "dur": 45
+    }
+   ]
+  },
+  {
+   "id": "b52",
+   "start": 13003,
+   "dur": 247,
+   "shots": [
+    {
+     "start": 13003,
+     "dur": 124
+    },
+    {
+     "start": 13127,
+     "dur": 123
+    }
+   ]
+  },
+  {
+   "id": "b53",
+   "start": 13250,
+   "dur": 119,
+   "shots": [
+    {
+     "start": 13250,
+     "dur": 60
+    },
+    {
+     "start": 13310,
+     "dur": 59
+    }
+   ]
+  },
+  {
+   "id": "b54",
+   "start": 13369,
+   "dur": 115,
+   "shots": [
+    {
+     "start": 13369,
+     "dur": 58
+    },
+    {
+     "start": 13427,
+     "dur": 57
+    }
+   ]
+  },
+  {
+   "id": "b55",
+   "start": 13484,
+   "dur": 155,
+   "shots": [
+    {
+     "start": 13484,
+     "dur": 78
+    },
+    {
+     "start": 13562,
+     "dur": 77
+    }
+   ]
+  },
+  {
+   "id": "b56",
+   "start": 13639,
+   "dur": 117,
+   "shots": [
+    {
+     "start": 13639,
+     "dur": 59
+    },
+    {
+     "start": 13698,
+     "dur": 58
+    }
+   ]
+  },
+  {
+   "id": "x17",
+   "start": 13756,
+   "dur": 163,
+   "shots": [
+    {
+     "start": 13756,
+     "dur": 82
+    },
+    {
+     "start": 13838,
+     "dur": 81
+    }
+   ]
+  },
+  {
+   "id": "x18",
+   "start": 13919,
+   "dur": 135,
+   "shots": [
+    {
+     "start": 13919,
+     "dur": 68
+    },
+    {
+     "start": 13987,
+     "dur": 67
+    }
+   ]
+  },
+  {
+   "id": "x19",
+   "start": 14054,
+   "dur": 184,
+   "shots": [
+    {
+     "start": 14054,
+     "dur": 92
+    },
+    {
+     "start": 14146,
+     "dur": 92
+    }
+   ]
+  },
+  {
+   "id": "b57",
+   "start": 14238,
+   "dur": 247,
+   "shots": [
+    {
+     "start": 14238,
+     "dur": 124
+    },
+    {
+     "start": 14362,
+     "dur": 123
+    }
+   ]
+  },
+  {
+   "id": "b58",
+   "start": 14485,
+   "dur": 87,
+   "shots": [
+    {
+     "start": 14485,
+     "dur": 44
+    },
+    {
+     "start": 14529,
+     "dur": 43
+    }
+   ]
+  },
+  {
+   "id": "b59",
+   "start": 14572,
+   "dur": 130,
+   "shots": [
+    {
+     "start": 14572,
+     "dur": 65
+    },
+    {
+     "start": 14637,
+     "dur": 65
+    }
+   ]
+  },
+  {
+   "id": "b60",
+   "start": 14702,
+   "dur": 187,
+   "shots": [
+    {
+     "start": 14702,
+     "dur": 94
+    },
+    {
+     "start": 14796,
+     "dur": 93
+    }
+   ]
+  },
+  {
+   "id": "x20",
+   "start": 14889,
+   "dur": 109,
+   "shots": [
+    {
+     "start": 14889,
+     "dur": 55
+    },
+    {
+     "start": 14944,
+     "dur": 54
+    }
+   ]
+  },
+  {
+   "id": "x21",
+   "start": 14998,
+   "dur": 88,
+   "shots": [
+    {
+     "start": 14998,
+     "dur": 44
+    },
+    {
+     "start": 15042,
+     "dur": 44
+    }
+   ]
+  },
+  {
+   "id": "x22",
+   "start": 15086,
+   "dur": 151,
+   "shots": [
+    {
+     "start": 15086,
+     "dur": 51
+    },
+    {
+     "start": 15137,
+     "dur": 50
+    },
+    {
+     "start": 15187,
+     "dur": 50
+    }
+   ]
+  },
+  {
+   "id": "b61",
+   "start": 15237,
+   "dur": 196,
+   "shots": [
+    {
+     "start": 15237,
+     "dur": 98
+    },
+    {
+     "start": 15335,
+     "dur": 98
+    }
+   ]
+  },
+  {
+   "id": "b62",
+   "start": 15433,
+   "dur": 176,
+   "shots": [
+    {
+     "start": 15433,
+     "dur": 88
+    },
+    {
+     "start": 15521,
+     "dur": 88
+    }
+   ]
+  },
+  {
+   "id": "b63",
+   "start": 15609,
+   "dur": 170,
+   "shots": [
+    {
+     "start": 15609,
+     "dur": 85
+    },
+    {
+     "start": 15694,
+     "dur": 85
+    }
+   ]
+  },
+  {
+   "id": "x23",
+   "start": 15779,
+   "dur": 79,
+   "shots": [
+    {
+     "start": 15779,
+     "dur": 27
+    },
+    {
+     "start": 15806,
+     "dur": 26
+    },
+    {
+     "start": 15832,
+     "dur": 26
+    }
+   ]
+  },
+  {
+   "id": "x24",
+   "start": 15858,
+   "dur": 191,
+   "shots": [
+    {
+     "start": 15858,
+     "dur": 64
+    },
+    {
+     "start": 15922,
+     "dur": 64
+    },
+    {
+     "start": 15986,
+     "dur": 63
+    }
+   ]
+  },
+  {
+   "id": "x25",
+   "start": 16049,
+   "dur": 233,
+   "shots": [
+    {
+     "start": 16049,
+     "dur": 78
+    },
+    {
+     "start": 16127,
+     "dur": 78
+    },
+    {
+     "start": 16205,
+     "dur": 77
+    }
+   ]
+  },
+  {
+   "id": "b64",
+   "start": 16282,
+   "dur": 220,
+   "shots": [
+    {
+     "start": 16282,
+     "dur": 220
+    }
+   ]
+  },
+  {
+   "id": "b65",
+   "start": 16502,
+   "dur": 115,
+   "shots": [
+    {
+     "start": 16502,
+     "dur": 39
+    },
+    {
+     "start": 16541,
+     "dur": 38
+    },
+    {
+     "start": 16579,
+     "dur": 38
+    }
+   ]
+  },
+  {
+   "id": "b66",
+   "start": 16617,
+   "dur": 202,
+   "shots": [
+    {
+     "start": 16617,
+     "dur": 101
+    },
+    {
+     "start": 16718,
+     "dur": 101
+    }
+   ]
+  },
+  {
+   "id": "b67",
+   "start": 16819,
+   "dur": 146,
+   "shots": [
+    {
+     "start": 16819,
+     "dur": 73
+    },
+    {
+     "start": 16892,
+     "dur": 73
+    }
+   ]
+  },
+  {
+   "id": "b68",
+   "start": 16965,
+   "dur": 160,
+   "shots": [
+    {
+     "start": 16965,
+     "dur": 80
+    },
+    {
+     "start": 17045,
+     "dur": 80
+    }
+   ]
+  },
+  {
+   "id": "b69",
+   "start": 17125,
+   "dur": 155,
+   "shots": [
+    {
+     "start": 17125,
+     "dur": 52
+    },
+    {
+     "start": 17177,
+     "dur": 52
+    },
+    {
+     "start": 17229,
+     "dur": 51
+    }
+   ]
+  },
+  {
+   "id": "x26",
+   "start": 17280,
+   "dur": 192,
+   "shots": [
+    {
+     "start": 17280,
+     "dur": 96
+    },
+    {
+     "start": 17376,
+     "dur": 96
+    }
+   ]
+  },
+  {
+   "id": "x27",
+   "start": 17472,
+   "dur": 405,
+   "shots": [
+    {
+     "start": 17472,
+     "dur": 135
+    },
+    {
+     "start": 17607,
+     "dur": 135
+    },
+    {
+     "start": 17742,
+     "dur": 135
+    }
+   ]
+  },
+  {
+   "id": "b70",
+   "start": 17877,
+   "dur": 170,
+   "shots": [
+    {
+     "start": 17877,
+     "dur": 57
+    },
+    {
+     "start": 17934,
+     "dur": 57
+    },
+    {
+     "start": 17991,
+     "dur": 56
+    }
+   ]
+  },
+  {
+   "id": "b71",
+   "start": 18047,
+   "dur": 179,
+   "shots": [
+    {
+     "start": 18047,
+     "dur": 90
+    },
+    {
+     "start": 18137,
+     "dur": 89
+    }
+   ]
+  },
+  {
+   "id": "b72",
+   "start": 18226,
+   "dur": 187,
+   "shots": [
+    {
+     "start": 18226,
+     "dur": 63
+    },
+    {
+     "start": 18289,
+     "dur": 62
+    },
+    {
+     "start": 18351,
+     "dur": 62
+    }
+   ]
+  },
+  {
+   "id": "b73",
+   "start": 18413,
+   "dur": 67,
+   "shots": [
+    {
+     "start": 18413,
+     "dur": 34
+    },
+    {
+     "start": 18447,
+     "dur": 33
+    }
+   ]
+  },
+  {
+   "id": "b74",
+   "start": 18480,
+   "dur": 186,
+   "shots": [
+    {
+     "start": 18480,
+     "dur": 93
+    },
+    {
+     "start": 18573,
+     "dur": 93
+    }
+   ]
+  },
+  {
+   "id": "x28",
+   "start": 18666,
+   "dur": 137,
+   "shots": [
+    {
+     "start": 18666,
+     "dur": 137
+    }
+   ]
+  },
+  {
+   "id": "x29",
+   "start": 18803,
+   "dur": 287,
+   "shots": [
+    {
+     "start": 18803,
+     "dur": 144
+    },
+    {
+     "start": 18947,
+     "dur": 143
+    }
+   ]
+  },
+  {
+   "id": "b75",
+   "start": 19090,
+   "dur": 66,
+   "shots": [
+    {
+     "start": 19090,
+     "dur": 66
+    }
+   ]
+  },
+  {
+   "id": "b76",
+   "start": 19156,
+   "dur": 133,
+   "shots": [
+    {
+     "start": 19156,
+     "dur": 45
+    },
+    {
+     "start": 19201,
+     "dur": 44
+    },
+    {
+     "start": 19245,
+     "dur": 44
+    }
+   ]
+  },
+  {
+   "id": "b77",
+   "start": 19289,
+   "dur": 183,
+   "shots": [
+    {
+     "start": 19289,
+     "dur": 61
+    },
+    {
+     "start": 19350,
+     "dur": 61
+    },
+    {
+     "start": 19411,
+     "dur": 61
+    }
+   ]
+  },
+  {
+   "id": "b78",
+   "start": 19472,
+   "dur": 146,
+   "shots": [
+    {
+     "start": 19472,
+     "dur": 49
+    },
+    {
+     "start": 19521,
+     "dur": 49
+    },
+    {
+     "start": 19570,
+     "dur": 48
+    }
+   ]
+  }
+ ]
+}
