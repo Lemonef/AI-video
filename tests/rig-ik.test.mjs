@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {solveTwoBone,boneLengths,bendSide} from '../src/lib/rig/ik.ts';
+import {solveTwoBone,boneLengths,bendSide} from '../engine/lib/rig/ik.ts';
 
 const d=(a,b)=>Math.hypot(b[0]-a[0],b[1]-a[1]);
 const close=(a,b,eps=1e-9)=>assert.ok(Math.abs(a-b)<eps,`${a} != ${b}`);

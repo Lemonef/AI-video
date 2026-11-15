@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from pipeline import postkit  # noqa: E402
 
 VOTE_EP = {"id": "t1", "scenes": [{"id": "hook", "say": "hook"}, {"id": "end", "say": "", "type": "endcard", "a": "บอกความจริง", "b": "โกหก"}],

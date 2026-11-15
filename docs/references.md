@@ -15,7 +15,7 @@ Dark, cinematic flat 2D. Silent hero Pip (yellow knitted scarf, glowing dot eyes
 
 ### Chandler (Claude Code + Remotion edit) — instagram.com/p/De8SPjEAuV0
 Talking-head edit built by Claude Code. Workflow, as he states it:
-- **Storyboard table first**: every line, what's on screen, which tool makes it. Fix the plan, then build. Our `episodes/*.json` plays this role; worth adding a human-readable table export for review.
+- **Storyboard table first**: every line, what's on screen, which tool makes it. Fix the plan, then build. Our `videos/*/*/script/*.json` plays this role; worth adding a human-readable table export for review.
 - **Whisper word timing** drives captions and card pop-ins. Ours comes from TTS word boundaries; Whisper is the verification pass (TODO).
 - Text-behind-head (segmentation), Remotion motion graphics, FFmpeg colour grades (warm with a slider reveal; moody with curves, lower saturation and a vignette), **whip-pan** transitions instead of recursive zoom. Adopt whip-pan + vignette.
 
@@ -28,7 +28,7 @@ Blocky low-poly **3D** characters (cube heads, rectangle eyes, ties) in warm-lit
 
 ## story-series-skill-pack (Instagram, local copy D:\Documents\Downloads\story-series-skill-pack-yoolaibeef)
 Thai-language Remotion + three.js pack for 9:16 "survival rule" series. **Licence is an unfilled DRAFT with "no redistribution"**, so no code is copied; ideas only.
-- Pipeline shape: edge-tts → faster-whisper transcribe/align (`overlaps: 0` gate) → splice pauses → render → mix (sidechain duck, −14 LUFS). **Adopted the idea** of −14 LUFS mastering (`scripts/pipeline/master.py`, own implementation).
+- Pipeline shape: edge-tts → faster-whisper transcribe/align (`overlaps: 0` gate) → splice pauses → render → mix (sidechain duck, −14 LUFS). **Adopted the idea** of −14 LUFS mastering (`tools/pipeline/master.py`, own implementation).
 - "Write for the ear": numbers as words, Thai ไม้ไต่คู้ for short vowels, listen to doubtful words because Whisper can't prove pronunciation. Folded into the README's episode-writing rules.
 - Re-voice one line without re-cutting the picture (keep slot lengths). Ours already caches per line; the picture re-times automatically.
 - Pause rules: +0.4–0.6 s after a punch line, +0.8–1.0 s before the twist. Applied via `padAfter`.

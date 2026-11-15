@@ -12,7 +12,7 @@ def test_unity_speed_edit_preserves_audio_tail(tmp_path):
                     "sine=frequency=440:sample_rate=48000:duration=1.2",
                     "-c:v", "libx264", "-c:a", "aac", str(src)], check=True)
     measurement.write_text(json.dumps({"safe_gaps": []}))
-    script = Path(__file__).resolve().parents[1] / "scripts" / "repair_delivery_pauses.py"
+    script = Path(__file__).resolve().parents[1] / "tools" / "episode" / "repair_delivery_pauses.py"
     subprocess.run([sys.executable, str(script), "--source", str(src), "--measurement",
                     str(measurement), "--out", str(out), "--speed", "1"], check=True, capture_output=True)
     streams = json.loads(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries",

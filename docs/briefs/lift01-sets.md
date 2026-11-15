@@ -1,15 +1,15 @@
 ---json
-{"id": "lift01-sets", "type": "creative", "risk": "low", "repo": "D:/AI-video", "gates": ["python scripts/tsc_in_worktree.py"], "protected": ["scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "src/compositions/**", "src/v2/**", "src/types.ts", "tsconfig.json"], "context_files": ["episodes/lift01.json", "src/v7/FloodEscape.tsx", "src/v7/FloodFinale.tsx", "src/v7/Store.tsx", "src/v7/light.tsx", "src/v2/cast.ts", "src/v5/Forest.tsx"]}
+{"id": "lift01-sets", "type": "creative", "risk": "low", "repo": "D:/AI-video", "gates": ["python tools/tsc_in_worktree.py"], "protected": ["tools/**", "out/**", "public/**", "package.json", "package-lock.json", "episodes/**", "docs/**", "engine/compositions/**", "engine/legacy/v2/**", "engine/types.ts", "tsconfig.json"], "context_files": ["videos/unsorted/lift01/script/lift01.json", "engine/legacy/v7/FloodEscape.tsx", "engine/legacy/v7/FloodFinale.tsx", "engine/legacy/v7/Store.tsx", "engine/legacy/v7/light.tsx", "engine/legacy/v2/cast.ts", "engine/legacy/v5/Forest.tsx"]}
 ---
 # Goal
-Build the ten background sets for episode `episodes/lift01.json`. This is an original Thai rom-com, "Stuck in a lift with my ex", in the same flat-vector v7 look as the flood sets. Each scene's `bg` id is one `React.FC<EnvProps>` that draws the set AND its actors, with acting driven by `progress` (0..1 across the narration line). The scene JSON has `cast: []` because the actors live inside the set, exactly like `FloodStall` in `src/v7/FloodFinale.tsx`.
+Build the ten background sets for episode `videos/unsorted/lift01/script/lift01.json`. This is an original Thai rom-com, "Stuck in a lift with my ex", in the same flat-vector v7 look as the flood sets. Each scene's `bg` id is one `React.FC<EnvProps>` that draws the set AND its actors, with acting driven by `progress` (0..1 across the narration line). The scene JSON has `cast: []` because the actors live inside the set, exactly like `FloodStall` in `engine/legacy/v7/FloodFinale.tsx`.
 
 The frame is 1080x1920 portrait. Captions occupy roughly y 1350–1700, so keep faces and key props above y 1300.
 
 # Files
-- NEW `src/v7/Lift.tsx`: all ten sets plus shared pieces.
-- `src/v5/Forest.tsx`: import them and register in the `ENV5` map (one new line, same style as the flood line).
-- `src/v7/light.tsx`: add a `CAST_LIGHT` entry for each new bg id, the same shape as the flood entries. Interior lift is a cool white top light (rim `rgba(220,235,255,.5)`). Lift with lights out is red-tinted (low brightness, rim `rgba(255,70,60,.45)`). Lobby is warm (rim `rgba(255,205,140,.45)`).
+- NEW `engine/legacy/v7/Lift.tsx`: all ten sets plus shared pieces.
+- `engine/legacy/v5/Forest.tsx`: import them and register in the `ENV5` map (one new line, same style as the flood line).
+- `engine/legacy/v7/light.tsx`: add a `CAST_LIGHT` entry for each new bg id, the same shape as the flood entries. Interior lift is a cool white top light (rim `rgba(220,235,255,.5)`). Lift with lights out is red-tinted (low brightness, rim `rgba(255,70,60,.45)`). Lobby is warm (rim `rgba(255,205,140,.45)`).
 - Change nothing else.
 
 Reuse `Actor`, `phase`, `mix` and `label` from `./FloodEscape` (they are exported). Use `Darkness`/`Glow`/`Shaft`/`ContactShadow` from `./light`.
@@ -93,4 +93,4 @@ Poses: idle, wave, shock, yawn, armsCrossed, point, think, hold. Expressions: sm
 - Every gradient/filter/mask id must be unique per set; prefix with `lift-<bg>-`.
 
 # Done when
-The gate `python scripts/tsc_in_worktree.py` exits 0. Do NOT try to render; the sandbox cannot run a browser. Visual review happens outside. If an API you need does not exist (e.g. a prop on `Actor`), STOP and report rather than editing protected files.
+The gate `python tools/tsc_in_worktree.py` exits 0. Do NOT try to render; the sandbox cannot run a browser. Visual review happens outside. If an API you need does not exist (e.g. a prop on `Actor`), STOP and report rather than editing protected files.

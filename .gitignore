@@ -25,3 +25,13 @@ docs/agent-logs/*.log
 
 # jaab3d: mirror of public/sfx (itself ignored); rebuilt locally
 public3d/sfx/
+
+# Layout v2 mirrors of the ignored public/ rules above (keep both until the local public/ is migrated)
+engine/shared/sfx/
+engine/shared/sfx3d/
+engine/shared/reference-study/
+videos/*/*/final/
+videos/*/*/draft/
+videos/*/*/assets/ep*/
+videos/*/*/assets/flood*/
+videos/*/*/assets/wishes*/

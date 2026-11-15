@@ -1,0 +1,357 @@
+"""Voice an episode and write <public_dir>/<ep>/timing.json: {scene_id: {audio, duration, words, cues}}.
+
+Two modes, chosen by the engine:
+- per line (edge): each scene voiced separately, cached by text, word timings from the engine.
+- whole take (gemini): the episode is read in ONE request so tone and pacing flow like a real
+  narrator; Whisper finds the word timings and the take is cut at the silence before each line.
+"""
+import hashlib
+import json
+from dataclasses import asdict
+from pathlib import Path
+
+from . import gemini_align, media, whisper
+from .align import _norm, scene_cuts, spoken_len, words_in
+from .captions import build_cues
+from .tts import TtsEngine, Word
+
+
+MIN_COVERAGE = 0.7  # below this share of the script's letters, the transcript is not trusted for cutting
+PAUSE_TOLERANCE_SEC = 0.3  # Gemini's line starts are ~0.1-0.3 s loose; a pause ending this soon after still counts as "before"
+MAX_PAUSE_GAP_SEC = 0.8  # if the nearest pause before a line start is further back than this, cut at the start itself
+MIN_LINE_SEC = 0.5  # a line start this close to the end of the take cannot be real
+BREATH_BEFORE_SEC = 0.5  # how far before a letter-position estimate a breath may end and still be "its" breath
+BREATH_AFTER_SEC = 0.35  # ...and how far after (estimates run early as often as late)
+
+
+def _key(*parts: str) -> str:
+    return hashlib.sha1("|".join(parts).encode("utf-8")).hexdigest()[:16]
+
+
+def _line(scene: dict) -> str:
+    """Spoken line with its optional delivery tag, e.g. "[whispers] ..."."""
+    tone = scene.get("tone")
+    return f"[{tone}] {scene['say']}" if tone else scene["say"]
+
+
+def _entry(episode: dict, scene: dict, key: str, words: list[Word], duration: float, speech: list[float] | None = None) -> dict:
+    cues = build_cues(scene.get("caption", scene["say"]), words, duration, (speech[0], speech[1]) if speech else None)
+    return {
+        "key": key,
+        "letters": spoken_len(scene["say"]),  # with duration + tempo: the measured speaking rate
+        "audio": f"{episode['id']}/{scene['id']}.mp3",
+        "duration": duration,
+        "words": [asdict(w) for w in words],
+        "cues": [asdict(c) for c in cues],
+    }
+
+
+def _save(path: Path, data: dict) -> None:
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def narrate(episode: dict, engine: TtsEngine, public_dir: Path, force: bool = False) -> dict:
+    ep_dir = public_dir / episode["id"]
+    ep_dir.mkdir(parents=True, exist_ok=True)
+    timing_path = ep_dir / "timing.json"
+    if episode.get("voiceClips"):
+        return _narrate_approved_clips(episode, public_dir, timing_path)
+    cache = {} if force or not timing_path.exists() else json.loads(timing_path.read_text(encoding="utf-8"))
+    if engine.whole_take:
+        return _narrate_take(episode, engine, ep_dir, timing_path, cache)
+    return _narrate_lines(episode, engine, ep_dir, timing_path, cache)
+
+
+def _narrate_approved_clips(episode: dict, public_dir: Path, timing_path: Path) -> dict:
+    """Rebuild captions from approved, already processed clips after a targeted speech repair.
+
+    Fail on stale text, voice or effects rather than silently reusing a mismatched recording.
+    These sources stay separate from the generated per-build files.
+    """
+    public_root = public_dir.resolve()
+    manifest_path = (public_root / episode["voiceClips"]).resolve()
+    if not manifest_path.is_relative_to(public_root):
+        raise ValueError("voiceClips must be inside public/")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if any(manifest.get(k) != episode.get(k) for k in ("engine", "voice", "voiceModel", "tempo")):
+        raise ValueError("approved clips use a different voice, model or tempo")
+    timing = {}
+    for scene in episode["scenes"]:
+        clip = manifest["clips"][scene["id"]]
+        if _norm(clip["say"]) != _norm(scene["say"]):
+            raise ValueError(f"approved clip text no longer matches scene {scene['id']}")
+        for effect in ("monster", "monsterPreserveTiming"):
+            if clip.get(effect) != scene.get(effect):
+                raise ValueError(f"approved clip effect no longer matches scene {scene['id']}")
+        path = (public_root / clip["audio"]).resolve()
+        if not path.is_relative_to(public_root):
+            raise ValueError("approved audio must be inside public/")
+        length = media.duration(path)
+        words = [Word(**word) for word in clip["words"]]
+        if not words or any(w.start < 0 or w.end < w.start or w.end > length + .05 for w in words):
+            raise ValueError(f"invalid approved word timings in scene {scene['id']}")
+        key = _key("approved", hashlib.sha256(path.read_bytes()).hexdigest())
+        entry = _entry(episode, scene, key, words, length)
+        entry["audio"] = path.relative_to(public_root).as_posix()
+        timing[scene["id"]] = entry
+        print(f"  = {scene['id']}: approved clip ({length:.2f}s)")
+    _save(timing_path, timing)
+    return timing
+
+
+def _narrate_lines(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
+    voice, rate = episode["voice"], episode.get("rate", "+0%")
+    timing = {k: v for k, v in cache.items() if k != "_take"}
+    for scene in episode["scenes"]:
+        sid = scene["id"]
+        key = _key(engine.name, voice, rate, scene["say"])
+        mp3 = ep_dir / f"{sid}.mp3"
+        old = cache.get(sid)
+        if old and old.get("key") == key and mp3.exists():
+            words = [Word(**w) for w in old["words"]]
+            print(f"  = {sid} (cached)")
+        else:
+            print(f"  > {sid}: voicing…", flush=True)
+            tmp = ep_dir / f"{sid}.tmp.mp3"
+            words = engine.synthesize(scene["say"], voice, rate, tmp)
+            tmp.replace(mp3)
+        timing[sid] = _entry(episode, scene, key, words, media.duration(mp3))
+        _save(timing_path, timing)  # persist per line so audio and cache key never disagree
+    return {s["id"]: timing[s["id"]] for s in episode["scenes"]}
+
+
+def _take_keys(episode: dict, engine: TtsEngine) -> tuple[list[str], str, str]:
+    lines = [_line(s) for s in episode["scenes"]]
+    script = episode.get("narrationJoin", "\n").join(lines)
+    direction = episode.get("narrationDirection")
+    if direction and engine.name == "elevenlabs":
+        raise ValueError("ElevenLabs direction must use supported inline audio tags, not a spoken instruction preamble")
+    if direction:
+        script = f"{direction}\n\nRead only this Thai story, exactly as written:\n{script}"
+    voice_key = _key(engine.name, episode["voice"], script)
+    if engine.name == "elevenlabs":
+        voice_key = _key(voice_key, episode.get("voiceModel", ""),
+                         json.dumps(episode.get("voiceSettings", {}), sort_keys=True))
+    return lines, script, voice_key
+
+
+def needs_voicing(episode: dict, engine: TtsEngine, public_dir: Path) -> bool:
+    """True when building this episode would spend a TTS request (whole-take engines only)."""
+    if episode.get("voiceClips"):
+        return False
+    if not engine.whole_take:
+        return False
+    ep_dir = public_dir / episode["id"]
+    timing_path = ep_dir / "timing.json"
+    if not (timing_path.exists() and (ep_dir / "take.raw.mp3").exists()):
+        return True
+    cached = json.loads(timing_path.read_text(encoding="utf-8")).get("_take", {})
+    return cached.get("voice_key") != _take_keys(episode, engine)[2]
+
+
+def measured_rate(*public_dirs: Path) -> float | None:
+    """Spoken letters per second at tempo 1.0, measured across every voiced take on disk."""
+    letters = seconds = 0.0
+    for path in (p for d in public_dirs for p in d.glob("*/timing.json")):
+        timing = json.loads(path.read_text(encoding="utf-8"))
+        tempo = timing.get("_take", {}).get("tempo")
+        if not tempo:
+            continue
+        for sid, entry in timing.items():
+            if sid != "_take" and entry.get("letters"):
+                letters += entry["letters"]
+                seconds += entry["duration"] * tempo
+    return letters / seconds if seconds else None
+
+
+def cue_words(scene: dict) -> set[str]:
+    """Every word a scene times something on: bubbles, hits, sfx, shots, tint, hush, beds, monster."""
+    found = {c["word"] for k in ("bubbles", "hits", "sfx", "shots") for c in scene.get(k, []) if c.get("word")}
+    found |= {scene[k]["word"] for k in ("tint", "hush", "bedsAt") if isinstance(scene.get(k), dict) and scene[k].get("word")}
+    if scene.get("monster"):
+        found.add(scene["monster"])
+    return found
+
+
+def monster_end(say: str, word: str, at: float, spoken_end: float, words: list[Word], speech: list[float] | None, pauses: list[tuple[float, float]]) -> float:
+    """Where the creature's words stop: the start of the narration that follows them (snapped
+    back to the breath before it), or the end of the speech when they close the line."""
+    rest = say.split(word, 1)[1].strip() if word in say else ""
+    if not rest:
+        return spoken_end
+    nxt = word_start(say, rest.split()[0], words, speech)
+    if nxt is None or nxt <= at:
+        return spoken_end
+    # the narrator breathes before carrying on: end inside that pause, not mid-syllable
+    gaps = [a for a, _ in pauses if at < a <= nxt + BREATH_AFTER_SEC]
+    return min(gaps, key=lambda a: abs(a - nxt)) if gaps else nxt
+
+
+def snap_to_breath(t: float, pauses: list[tuple[float, float]]) -> float:
+    """A letter-position estimate lands within ~0.3 s of the word; if a pause ends near it, the
+    word starts exactly there (Thai narration takes a breath before a punch word)."""
+    ends = [b for _, b in pauses if t - BREATH_BEFORE_SEC <= b <= t + BREATH_AFTER_SEC]
+    return min(ends, key=lambda b: abs(b - t)) if ends else t
+
+
+def word_start(say: str, word: str, words: list[Word], speech: list[float] | None) -> float | None:
+    """Seconds into the clip where `word` begins: from Whisper's words when present (matched on
+    joined letters, as engine/lib/cueAt.ts does), else by its letter position across the spoken span."""
+    target = _norm(word)
+    if words:
+        joined, starts = "", []
+        for w in words:
+            starts.append(len(joined))
+            joined += _norm(w.text)
+        idx = joined.find(target)
+        if idx >= 0:
+            k = max(i for i, s in enumerate(starts) if s <= idx)
+            return words[k].start
+    line = _norm(say)
+    idx = line.find(target)
+    if idx < 0 or not speech:
+        return None
+    return speech[0] + (speech[1] - speech[0]) * idx / len(line)
+
+
+def _repair_starts(starts: list[float], letters: list[int], take_sec: float, pauses: list[tuple[float, float]]) -> tuple[list[float], int]:
+    """Keep plausible starts (inside the take, after the previous one); re-estimate the rest
+    between their nearest good neighbours, in proportion to letters, then take the nearest pause
+    (a line starts just after one). Good anchors beat a whole-take guess."""
+    good, last = [True], 0.0
+    for s in starts[1:]:  # compare with the last GOOD start, so one invented time spoils only itself
+        ok = last < s < take_sec - MIN_LINE_SEC
+        good.append(ok)
+        last = s if ok else last
+    fixed = [0.0 if i == 0 else s for i, s in enumerate(starts)]
+    for i, ok in enumerate(good):
+        if ok:
+            continue
+        lo = max(j for j in range(i) if good[j])
+        hi = next((j for j in range(i + 1, len(starts)) if good[j]), None)
+        t_lo, t_hi = fixed[lo], (starts[hi] if hi is not None else take_sec)
+        span = letters[lo : hi if hi is not None else len(letters)]
+        est = t_lo + (t_hi - t_lo) * sum(letters[lo:i]) / max(1, sum(span))
+        ends = [b for a, b in pauses if t_lo < b < t_hi] or [est]
+        fixed[i] = min(ends, key=lambda b: abs(b - est))
+    return fixed, good.count(False)
+
+
+def _cuts_from_starts(starts: list[float], take_sec: float, pauses: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    """Scene (start, end) from each line's start: a cut sits in the pause just BEFORE a line starts
+    (searching back from the start, since a line begins right after its pause)."""
+    breaks = []
+    for s in starts[1:]:
+        before = [(a, b) for a, b in pauses if b <= s + PAUSE_TOLERANCE_SEC]
+        a, b = before[-1] if before else (s, s)
+        breaks.append((a + b) / 2 if s - b <= MAX_PAUSE_GAP_SEC else s)
+    begins = [0.0, *breaks]
+    return list(zip(begins, [*breaks, take_sec]))
+
+
+def speech_span(start: float, end: float, pauses: list[tuple[float, float]]) -> list[float]:
+    """[first, last] second of speech inside the clip [start, end): the cut pauses at its edges trimmed."""
+    lead = next((b - start for a, b in pauses if a <= start < b), 0.0)
+    tail = next((a - start for a, b in pauses if a < end <= b), end - start)
+    return [round(max(0.0, lead), 3), round(max(lead, tail), 3)]
+
+
+def _narrate_take(episode: dict, engine: TtsEngine, ep_dir: Path, timing_path: Path, cache: dict) -> dict:
+    voice = episode["voice"]
+    lines, script, voice_key = _take_keys(episode, engine)
+    speed = float(episode.get("tempo", 1.0))
+    key = _key(voice_key, str(speed))
+    raw = ep_dir / "take.raw.mp3"
+    take = ep_dir / "take.mp3"
+    take_meta = cache.get("_take", {})
+    if take_meta.get("voice_key") == voice_key and raw.exists():
+        print("  = take voice (cached)")
+    else:
+        print(f"  > take: voicing {len(lines)} lines in one request…", flush=True)
+        tmp = ep_dir / "take.tmp.mp3"
+        if hasattr(engine, "model"):
+            engine.model = episode.get("voiceModel")  # no silent fallback to a different-sounding model
+        if hasattr(engine, "settings"):
+            engine.settings = episode.get("voiceSettings")
+        engine.synthesize(script, voice, "", tmp)
+        tmp.replace(raw)
+        alignment = tmp.with_suffix(".alignment.json")
+        if alignment.exists():
+            alignment.replace(raw.with_suffix(".alignment.json"))
+    if take_meta.get("key") == key and take.exists() and take_meta.get("tempo"):
+        words = [Word(**w) for w in take_meta["words"]]
+        print("  = take alignment (cached)")
+    else:
+        media.tempo(raw, speed, take)
+        print(f"  > take: tempo x{speed}, aligning speech…", flush=True)
+        try:
+            provider_words = engine.cached_words(raw, speed) if hasattr(engine, "cached_words") else []
+            words = provider_words or whisper.words(str(take))
+            if provider_words:
+                print("    using provider character timings (independent speech check remains separate)")
+        except (ImportError, OSError) as e:
+            # e.g. Windows Smart App Control blocking faster-whisper's native DLLs. Fall back to cuts
+            # placed by script length and snapped to the take's real pauses; captions spread per line.
+            print(f"  ! Whisper unavailable ({type(e).__name__}): aligning by pauses only, word cues placed by letter position")
+            words = []
+    heard = sum(spoken_len(w.text) for w in words)
+    expected = sum(spoken_len(line) for line in lines)
+    if words and heard < MIN_COVERAGE * expected:
+        raise RuntimeError(f"Whisper heard {heard}/{expected} letters of the script: transcript unusable, cuts would be wrong")
+    take_sec = media.duration(take)
+    timing: dict = {"_take": {"key": key, "voice_key": voice_key, "tempo": speed, "words": [asdict(w) for w in words], "duration": take_sec}}
+    pauses = media.silences(take)
+    # A reviewed alignment belongs to this exact voice/tempo cache key only.
+    line_starts = take_meta.get("reviewed_line_starts") if take_meta.get("key") == key else None
+    if line_starts:
+        if len(line_starts) != len(lines) or any(b <= a for a, b in zip(line_starts, line_starts[1:])):
+            raise ValueError("reviewed line starts must cover every scene in increasing order")
+        timing["_take"]["reviewed_line_starts"] = line_starts
+    if not words:  # no transcript: ask Gemini when each line starts (cached with the alignment)
+        line_starts = take_meta.get("line_starts") if take_meta.get("key") == key else None
+        line_starts = line_starts or gemini_align.line_starts(take, lines)
+        timing["_take"]["line_starts"] = line_starts
+    cuts = scene_cuts(lines, words, take_sec, pauses)
+    if line_starts:
+        # Gemini can invent a time (ep02: 104 s in a 71 s take): keep only starts that fall inside
+        # the take, after the previous line; any other line keeps its pause-based cut.
+        fixed, bad = _repair_starts(line_starts, [spoken_len(line) for line in lines], take_sec, pauses)
+        cuts = _cuts_from_starts(fixed, take_sec, pauses)
+        print(f"  = cuts from Gemini line starts, snapped to pauses ({bad} implausible start(s) replaced by the pause guess)")
+    for scene, (start, end) in zip(episode["scenes"], cuts):
+        mp3 = ep_dir / f"{scene['id']}.mp3"
+        media.cut(take, start, end, mp3)
+        clip_words = words_in(words, start, end)
+        speech = None if words else speech_span(start, end, pauses)
+        cue_times: dict[str, float] = {}
+        if speech:  # word cues are placed by letter position across the spoken part (see engine/lib/cueAt.ts)...
+            # ...refined: a word that follows a breath starts where that breath ends
+            clip_pauses = [(a - start, b - start) for a, b in pauses if start < b and a < end]
+            cue_times = {w: snap_to_breath(t, clip_pauses) for w in cue_words(scene) if (t := word_start(scene["say"], w, [], speech)) is not None}
+        length = end - start
+        if scene.get("monster"):  # the creature's own words only; the narrator goes on in his own voice
+            word = scene["monster"]
+            at = cue_times.get(word)
+            at = at if at is not None else word_start(scene["say"], word, clip_words, speech)
+            if word == scene["say"]:  # a complete dialogue line, even if Whisper spells a word differently
+                at = clip_words[0].start if clip_words else (speech[0] if speech else 0.0)
+            if at is not None:
+                spoken_end = speech[1] if speech else (clip_words[-1].end if clip_words else end - start)
+                pauses_in = [(a - start, b - start) for a, b in pauses if start < b and a < end]
+                word_end = monster_end(scene["say"], word, at, spoken_end, clip_words, speech, pauses_in)
+                preserve = bool(scene.get("monsterPreserveTiming"))
+                length = media.monster(mp3, at, word_end, preserve_timing=preserve)
+                grown = 0.0 if preserve else (word_end - at) * (1 / media.MONSTER_PITCH - 1)
+                # everything after the creature's words moves later by what the slowing added
+                cue_times = {w: t + grown if t >= word_end else t for w, t in cue_times.items()}
+                cue_times[f"{word}:end"] = word_end + grown  # cue a hit AFTER the word, not over it
+                if speech:
+                    speech = [speech[0], round(spoken_end + grown, 3)]
+        timing[scene["id"]] = _entry(episode, scene, key, clip_words, length, speech)
+        if speech:
+            timing[scene["id"]].update(say=scene["say"], speech=speech)
+        if cue_times:
+            timing[scene["id"]]["cueTimes"] = cue_times
+        print(f"  ✓ {scene['id']}: {start:5.2f}–{end:5.2f}s")
+    _save(timing_path, timing)
+    return {s["id"]: timing[s["id"]] for s in episode["scenes"]}

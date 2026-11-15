@@ -4,8 +4,8 @@
 Write the script for ONE standalone Thai short titled **ตะกรุดสามคำขอ** (promised by the end card of the
 posted `lift03` episode). Output two files only:
 
-1. `docs/takrut01-beat-sheet.md` - same structure as `docs/lift03-beat-sheet.md`.
-2. `episodes/takrut01.json` - same schema as `episodes/lift03.json` (read it fully first; mirror every
+1. `videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md` - same structure as `videos/unsorted/lift03/script/docs/lift03/lift03-beat-sheet.md`.
+2. `videos/unsorted/takrut01/script/takrut01.json` - same schema as `videos/unsorted/lift03/script/lift03.json` (read it fully first; mirror every
    top-level key: style, engine, voice, voiceModel, tempo, mix, post, narrationJoin, narrationDirection, scenes).
 
 Do not edit any other file. Do not run git. Do not run the renderer or TTS.
@@ -22,7 +22,7 @@ One sentence: **ถ้าตะกรุดให้รวยจริง... แ
 ## Rules
 - Genre: weird-funny. 60-80 s total narration. 8-12 scenes.
 - **No จ๊าบ.** The lead is a NEW character (name him, e.g. a Thai nickname). He needs a new look; describe it
-  in the beat sheet (hair, top colour, one recognisable trait) so a later task can add it to `src/v2/cast.ts`.
+  in the beat sheet (hair, top colour, one recognisable trait) so a later task can add it to `engine/legacy/v2/cast.ts`.
   In the JSON use look id `"takrutLead"` for him.
 - Thai must be natural spoken Bangkok Thai, the way a friend tells a funny story - not translated, varied
   sentence rhythm (read `D:/second-brain/skills/script-voice/references/voice-flow.md` if reachable;
@@ -31,15 +31,15 @@ One sentence: **ถ้าตะกรุดให้รวยจริง... แ
   undecided next story.
 - No real brands (generic convenience store, no 7-Eleven logo/name). No real people. No religion mocked
   (the ตะกรุด is treated with a little respect; the joke is on the guy's wording).
-- Reuse existing sets where they fit: read `src/v5/Forest.tsx` ENV5 map and `src/v7/Store.tsx`
-  (`StoreInside` is a convenience store), `src/v7/House.tsx`. For every scene that needs a NEW set, give it a
+- Reuse existing sets where they fit: read `engine/legacy/v5/Forest.tsx` ENV5 map and `engine/legacy/v7/Store.tsx`
+  (`StoreInside` is a convenience store), `engine/legacy/v7/House.tsx`. For every scene that needs a NEW set, give it a
   bg id and a one-paragraph set description in the beat sheet section "New sets needed" (props, layout,
   lighting, what animates over p 0..1), in the same detail level as `docs/briefs/lift03-sets.md`.
 - `post`: title `ตะกรุดสามคำขอ`, `seriesSlug` `"takrut"`, standalone (part 1, total 1), coverHook <= 30 Thai chars,
   question = a comment prompt, hashtags like lift03 (Thai, 6-8).
 
 ## Done criteria
-- Both files exist; `python -c "import json;json.load(open('episodes/takrut01.json',encoding='utf-8'))"` passes.
+- Both files exist; `python -c "import json;json.load(open('videos/unsorted/takrut01/script/takrut01.json',encoding='utf-8'))"` passes.
 - Sum of narration reads at ~60-80 s at the lift03 tempo (state your estimate in the beat sheet).
 - Beat sheet ends with: scene table (scene, bg id, new/existing, cast, line, seconds) and "New sets needed".
 - Final report: list files written, scene count, estimated seconds, new set ids, and anything you were unsure of.

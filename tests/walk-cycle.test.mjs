@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {walkCycle} from '../src/lib/walkCycle.ts';
+import {walkCycle} from '../engine/lib/walkCycle.ts';
 
 test('depth walk keeps hips attached and a stance foot planted through the cycle', () => {
   for (let frame = 0; frame < 72; frame++) {

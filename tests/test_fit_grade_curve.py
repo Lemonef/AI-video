@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tools"))
 
 from fit_grade_curve import MAX_SLOPE, MIN_LUMA, MIN_SLOPE, fit_curve, merge_curve  # noqa: E402
 

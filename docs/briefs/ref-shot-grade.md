@@ -1,11 +1,11 @@
 ---json
-{"id": "ref-shot-grade", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python scripts/gate_in_worktree.py --shots 3 19 23 28 32 34"], "protected": ["scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "src/compositions/ReferenceStudy/shots.ts", "src/compositions/ReferenceStudy/*.json", "docs/**"], "context_files": ["src/compositions/ReferenceStudy/index.tsx"]}
+{"id": "ref-shot-grade", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python tools/gate_in_worktree.py --shots 3 19 23 28 32 34"], "protected": ["tools/**", "out/**", "public/**", "package.json", "package-lock.json", "engine/compositions/ReferenceStudy/shots.ts", "engine/compositions/ReferenceStudy/*.json", "docs/**"], "context_files": ["engine/compositions/ReferenceStudy/index.tsx"]}
 ---
 # Goal
 Match each listed shot's overall brightness to the source in the `ReferenceAssisted` render with one per-shot linear grade. Slopes are measured (source mean luma / render mean luma over the shot, first 6 frames skipped); do not re-measure.
 
 # Files
-Only `src/compositions/ReferenceStudy/index.tsx`. Keep CRLF line endings and the compact one-line JSX style.
+Only `engine/compositions/ReferenceStudy/index.tsx`. Keep CRLF line endings and the compact one-line JSX style.
 
 # Steps
 1. Above `export const ReferenceStudy`, add, with a one-line comment stating the derivation above:

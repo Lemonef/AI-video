@@ -1,11 +1,11 @@
 ---json
-{"id": "ref-cut-transitions", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python scripts/gate_in_worktree.py --shots 8 9 23 28 31 32 --guard 20"], "protected": ["scripts/**", "out/**", "public/**", "package.json", "package-lock.json", "src/compositions/ReferenceStudy/shots.ts", "src/compositions/ReferenceStudy/*.json", "docs/**"], "context_files": ["src/compositions/ReferenceStudy/index.tsx"]}
+{"id": "ref-cut-transitions", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python tools/gate_in_worktree.py --shots 8 9 23 28 31 32 --guard 20"], "protected": ["tools/**", "out/**", "public/**", "package.json", "package-lock.json", "engine/compositions/ReferenceStudy/shots.ts", "engine/compositions/ReferenceStudy/*.json", "docs/**"], "context_files": ["engine/compositions/ReferenceStudy/index.tsx"]}
 ---
 # Goal
 Match the source's cut transitions (flash-to-white and fade-from-black at shot starts) in the `ReferenceAssisted` render. All numbers below were measured from the private source (per-frame mean luma); do not re-measure, just implement.
 
 # Files
-Only `src/compositions/ReferenceStudy/index.tsx`. Keep its CRLF line endings and its compact one-line JSX style. Change nothing outside the transition overlay.
+Only `engine/compositions/ReferenceStudy/index.tsx`. Keep its CRLF line endings and its compact one-line JSX style. Change nothing outside the transition overlay.
 
 # Steps
 1. Above `export const ReferenceStudy`, add one table, with a one-line comment saying the values are per-local-frame overlay opacities measured from the source cut (luma), local frame = `frame - shot.start`:
@@ -25,4 +25,4 @@ Only `src/compositions/ReferenceStudy/index.tsx`. Keep its CRLF line endings and
 3. Do not touch the existing shot-28 dark grade rect, the clock, the vignette, the camera, or anything else.
 
 # Done when
-The gate command passes (exit 0, prints KEEP): every target shot 8/9/23/28/31/32 lowers frame or actor MAE without lowering SSIM, and guards (20 plus same-stage shots) do not regress. Do NOT edit scripts/, baselines under out/, shots.ts or any JSON. If a target cannot pass with these exact numbers, STOP and report which shot and the gate output; do not invent other changes.
+The gate command passes (exit 0, prints KEEP): every target shot 8/9/23/28/31/32 lowers frame or actor MAE without lowering SSIM, and guards (20 plus same-stage shots) do not regress. Do NOT edit tools/, baselines under out/, shots.ts or any JSON. If a target cannot pass with these exact numbers, STOP and report which shot and the gate output; do not invent other changes.

@@ -1,13 +1,13 @@
 # TODO — the only place live status lives
 
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
-- [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `src/jaab3d/`
+- [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `engine/jaab3d/`
 - [x] mood01 built: no main character, simple end question, no A/B; 84.7 s 1080x1920
 - [x] Render path while Smart App Control blocks Remotion ffprobe: `--props='{"audio":false}' --muted`,
       cue sheet `MOOD01_AUDIO` dumped via esbuild -> ffmpeg mix -> master.py (-14.0 LUFS, TP -1.3)
 - [x] Final: `out/final/mood/ep01/video.mp4`; QA contact sheet + end card read
 - [ ] Zen posts (IG + TikTok @jaabjaab); collect views / retention
-- [ ] Cue-sheet mixer lives in scratchpad; promote to `scripts/pipeline/mixcues.py` next episode
+- [ ] Cue-sheet mixer lives in scratchpad; promote to `tools/pipeline/mixcues.py` next episode
 
 ## QUEUE (owner order, 2026-11-01)
 -1. NOW (owner order 2026-11-04, lift03 ep3 posted TikTok + IG): finish 1:1 -> skill work -> next video (story 04) built with both
@@ -46,11 +46,11 @@
 5. [x] AgentsRoom via own MCP: brain tools/agentsroom_mcp.py proxy (13 of 175 tools), spawn + live status verified with app open; results come back via docs/agent-logs files (wait/get refuse non-AgentsRoom callers)
 6. [x] Brain cleanup: research/ 124->53 items (c1c3f17), paper-trades price log archived 595->473 KB (85c6273); v2 shadow skill kept; memory/ + AGENT.md renames skipped (cross-repo churn, cosmetic)
 7. [ ] 1:1 reference (DegJCmXtbGj) from v10, ElevenLabs voice; stash@{0} = Codex shot-7 lighting WIP (unverified)
-   - [x] Measured gate scripts/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
+   - [x] Measured gate tools/episode/reference_gate.py: same-settings control clips, stage guards, fingerprinted baselines, self-test pass+fail (501d758, f77eb1e); render-noise allowance from repeat run (cf2c123)
    - [x] Baselines from f77eb1e for shots 10,13,14,15,22,27,28,24,26 (gate-baseline/)
    - [x] Playable previews: CRF 16 High/yuv420p (-crf 0 = 4:4:4 = black screen); v12 playable copy
-   - [x] IK lib src/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
-   - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); scripts/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
+   - [x] IK lib engine/lib/rig/ik.ts + 5 tests (8e2cff4); retrofit on lead rig DISCARDED by gate (<=0.006 MAE), branch ik/lead-rig kept unmerged
+   - [x] Character score: actor-box crop MAE/SSIM in review + gate (eb4007b); tools/actor_boxes.py derives boxes from LeadPerformance.tsx, shots 2/3 hand-measured; self-test 8 px shift = actor +2.14 MAE vs frame +0.30
    - [ ] Tool trials (local, zero tokens while running)
      - [x] Free vision (Gemini 2.5 flash) for joint coords: FAILS (generic skeleton); pose description OK -> hand-marking stays
      - [x] Blender 5.2.3 headless Grease Pencil v3 smoke render works (stroke + plane visible; materials need show_stroke=True)
@@ -83,7 +83,7 @@
          - [x] Densify other moving shots: 26-shot motion-aware gate, KEEP 17 (1 2 3 4 5 6 7 10 15 16 17 18 20 22 24 26 27; e.g. 6 15.93->12.56, 16 10.33->8.24, 27 18.69->16.94), reverted 9 (wobble) + 11/12/28/29/31/32/33/34 (MAE flat) (402e23d); baselines re-made, deterministic
          - [x] Motion score in gate + side-by-side for failed targets (pipeline zen deepseek, groq review; 9254672)
          - [ ] MAE-flat review lane: Gemini vision opinion on shotNN-side.mp4, Zen decides (candidates 28, 11, 31; 29 solved by grade curve)
-         - [x] Shot 29 per-frame grade curve (pipeline: nim nemotron-3-ultra built, cohere reviewed; scripts/fit_grade_curve.py -> grade-curves.json): MAE 21.72 -> 12.34, SSIM .768 -> .862, motion 3.26 -> 2.38 KEEP (dd5f54d); guards 3/19/28/30 held; baseline 29 rebuilt
+         - [x] Shot 29 per-frame grade curve (pipeline: nim nemotron-3-ultra built, cohere reviewed; tools/fit_grade_curve.py -> grade-curves.json): MAE 21.72 -> 12.34, SSIM .768 -> .862, motion 3.26 -> 2.38 KEEP (dd5f54d); guards 3/19/28/30 held; baseline 29 rebuilt
          - [ ] Check gate motion on shot 3: guard motion 4.93 -> 1.61 with frame MAE identical (baseline vs candidate should be bit-identical)
          - [ ] Try grade curve on other brightness-ratio shots (35/4/25/6), one gate each
          - [ ] Worst now: 7 (24.24 head/hands/arms), 9 (21.70), 22 (18.15), 4 (17.99), 33 (17.22)
@@ -94,10 +94,10 @@
        - [ ] Optional: slat groove phase fit at left and right edges
    - [ ] J1-J4 cut transitions + grades (full v13 luma scan vs source, per-frame)
      - [x] Shot 20: 3-frame flash + clock exits at 1537 (781a7b0; gate MAE 17.637->13.241, SSIM .7934->.8065). Shot 6 already near source.
-     - [x] scripts/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
+     - [x] tools/gate_in_worktree.py so pipeline attempts can render (smoke: unchanged shot 35 measures identical)
      - [x] Pipeline job ref-cut-transitions: all 3 rungs built it right (nemotron + terra identical gate numbers); brief numbers partly wrong. Kept 31/32 (c348cc3: 16.60->15.02, 17.70->16.42), dropped 8/9/23 (< 0.05 bar) and 28 (doubled its own dark grade, worse). Baselines 31/32 rebuilt at c348cc3
      - [x] Pipeline job ref-shot-grade: kept 23/28/32/34 (b754ced: 25.97->17.52, 24.46->18.16, 16.42->5.16, 25.19->7.99), dropped 3/19 (local mismatch, global slope worse). Baselines rebuilt at b754ced
-     - [x] Shots 3/19 local brightness (region, not global): root cause was framing, not light. Fitted camera pulls back past the one-frame aisle plate (scale .87 / tilt +105) and the nested stage svg clipped at 270x480, leaving black bars. scripts/extend_clean_plate.py builds aisle-clean-v2 from source frames; assisted aisle/dark shots render unclipped (f43e95e: shot 3 22.46->14.67, 19 29.36->26.13, guard 29 22.90->22.26). Baselines 3/19/29/30/31/33 rebuilt at f43e95e
+     - [x] Shots 3/19 local brightness (region, not global): root cause was framing, not light. Fitted camera pulls back past the one-frame aisle plate (scale .87 / tilt +105) and the nested stage svg clipped at 270x480, leaving black bars. tools/extend_clean_plate.py builds aisle-clean-v2 from source frames; assisted aisle/dark shots render unclipped (f43e95e: shot 3 22.46->14.67, 19 29.36->26.13, guard 29 22.90->22.26). Baselines 3/19/29/30/31/33 rebuilt at f43e95e
        - [ ] Optional: shot 19 residual +10-34 at edges/ceiling during the tilt (source-median margins); same overshoot measured on other plates (units past the frame, calibration.json): door shot 22 right +47, map-parking shot 15 right +52 / top +64, parking shot 11 right +25, door 15 right +17, map 17 bottom +47, dark-prop 32 ~9. Next: add spans/overlays per plate to extend_clean_plate.py and gate each
      - [x] Full v14 render: out/drafts/reference-study/DegJCmXtbGj/practice-v14-gated-preview.mp4 (sha 6d158f6b9c18, +playable). vs v13: MAE 17.81->14.96, SSIM .783->.796, 13 shots better, 0 shots worse; one frame worse (27@2005). Worst left: 7 (30.7), 22 (26.0), 9 (23.9), 27 (23.2), 15 (21.4) -> 1:1 loop
      - [x] Skill family (owner-agreed 2026-11-03; DONE brain 9cbd8cc, installed to ~/.codex/skills), right after v14: video-maker (top, idea -> posted video) calls craft skills story / script-voice / character / camera / lighting / sound / captions / qa / release
@@ -112,12 +112,12 @@
    - [ ] LAST in queue (owner 2026-11-02: "add the repo clean up at last, rn its so messy"): AI-video repo cleanup - re-check the plan against the repo as it stands then, show it, then execute
 9. [ ] Upload quality (owner 2026-11-02: "ppl say video quality is bad")
    - [x] Posted copies measured (lift ep1, 2026-11-03): TikTok 576x1024 h264 ~301 kbps + aac 128k; IG 1080x1920 ~398 kbps + audio ~49 kbps. Copies in D:/Documents/Downloads/ (Download.mp4, ig/lift-ep1-ig.mp4)
-   - [x] Static film grain overlay (src/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
+   - [x] Static film grain overlay (engine/components/Grain, GRAIN token) + yuv420p/bt709 tags in render.py (3c035d0); test render probes yuv420p/tv/bt709 1440x2560
    - [ ] Re-render lift ep1 (or next episode) with grain, then compare against the TikTok copy after upload (owner downloads it; auto-mode blocks the API)
 8. [x] Flood ep 3 (Part 3) - branch B: final out/final/02-bangkok-flood/ep03 (74s, -14.0 LUFS), src 42812b1; posting = owner
-10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet docs/lift02-beat-sheet.md v2
+10. [x] Lift-ex ep 2 (Part 2, vote A = truth) - beat sheet videos/unsorted/lift02/script/docs/lift02/lift02-beat-sheet.md v2
    - [x] Beat sheet v2 after free-leg story review (f33ee79, 0b7f749)
-   - [x] Script episodes/lift02.json, pre-voice retention lint pass (6a5c920)
+   - [x] Script videos/unsorted/lift02/script/lift02.json, pre-voice retention lint pass (6a5c920)
    - [x] Contract test + brief for 4 new sets: tests/test_lift02_sets.py, docs/briefs/lift02-sets.md (322763f)
    - [x] Pipeline build lift02-sets (deepseek-flash-free, cohere review PASS), merged e1aedf9
    - [x] Draft 1 rendered (out/drafts/lift02/video.mp4); stills read: 7/9 scenes OK
@@ -133,16 +133,16 @@
 
 ## CURRENT — 2026-11-01 agent pipeline + paused 1:1 (read first; full context: brain session-log 2026-11-01)
 - [ ] 1:1 reference rebuild (private, never posted): paused at v10 (MAE 18.79 / SSIM .777, not 1:1); WIP committed 5fab1ff.
-  - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
-  - [x] Guided-loop handoff written: docs/handoff-gemini-reference-loop.md (reusable by any builder).
-- [ ] Reel mining (both batches, 29 + 7): handoff docs/handoff-gemini-reel-mining.md; sent to Antigravity agent 2026-11-01 (result unverified).
+  - [ ] Codex resumes when quota resets: open boxes of the ledger "Master continuation checklist" (docs/reference/reference-study-milestones-DegJCmXtbGj.md), picture first, then ElevenLabs voice (key ~/.secrets/elevenlabs_api_key - owner to ROTATE), measured gate (keep a change only if MAE down + SSIM not down).
+  - [x] Guided-loop handoff written: docs/reference/handoff-gemini-reference-loop.md (reusable by any builder).
+- [ ] Reel mining (both batches, 29 + 7): handoff docs/reference/handoff-gemini-reel-mining.md; sent to Antigravity agent 2026-11-01 (result unverified).
 - [ ] Agent pipeline (owner talks only to Claude; Claude launches builders via `bash D:/second-brain/tools/run_agent.sh <codex|gemini|antigravity> <repo> <handoff> <log> [model]`)
   - [x] AgentsRoom installed (free): projects D:\ + D:\AI-video
   - [ ] Add agents in AgentsRoom; check if it can start agents from the command line
   - [ ] Retest OpenCode free builders (config ~/.config/opencode/opencode.json: NVIDIA GLM 5.3 / DeepSeek / Kimi K3, Mistral Devstral/Codestral, OpenRouter Nemotron) - first test gave empty output
   - [ ] Design tiered pipeline (plan Opus -> build Codex sol/terra/luna | OpenCode free | Antigravity -> verify other company + free legs -> escalate on gate failure) and get owner approval before building
 - [ ] Flood Part 3 finale: waits for the real Part 2 A/B count
-- [ ] Untracked draft episodes/wishes01.json + src/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
+- [ ] Untracked draft videos/unsorted/wishes01/script/wishes01.json + engine/legacy/v7/Wishes.tsx ("ตะกรุดสามคำขอ"): owner to decide keep/drop
 
 
 ## CURRENT — 2026-10-31 Bangkok flood Part2
@@ -155,16 +155,16 @@
 - [x] Build one cached Iapetus performance, align all15scenes, integrate CC0 hard-floor/furniture recordings and continuous bed dynamics.
 - [x] Review every scene and16contact phases; replace flat floor masks and hovering red-thug hands with targeted frame renders.
 - [x] Remove5measured quiet centers only, preserve reveal/end holds, fix unity-speed audio-tail handling and check the actual exported clock.
-- [x] Verify final export/cover and write `docs/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
+- [x] Verify final export/cover and write `videos/unsorted/flood02/script/docs/flood02/flood02-release-review.md`; delivered exact `out/final/02-bangkok-flood/ep02/video.mp4` path. Owner heard slight rushing; current57.166667s/1715frames after4percent pitch-preserving sharedAVretime. Actualmix-14.21LUFS/-1.83dBTP. Priorfinalarchived;39pytest+2gaitchecks/TypeScriptpass.
 - [ ] Owner listens/reviews and posts; record actual vote/retention before Part3. No automatic social post.
 - [ ] Later: improve ElevenLabs Thai casting/performance; review seven queued posts and investigate sourcecreator stack (still unverified).
 
 ## NOW (2026-10-30) — read this first
-- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. docs/flood01-release-review.md.
+- [x] New survival story Part1 built/reviewed: out/final/02-bangkok-flood/ep01/video.mp4,45s,1440x2560; flood + looter antagonists, cover/post/script. videos/unsorted/flood01/script/docs/flood01/flood01-release-review.md.
 - [ ] Zen watches/posts flood Part1; collect actual A/B votes and retention before Part2.
 - [x] Group existing final arc as out/final/01-ghost/ep01–ep03; approved ep03 bytes/hash preserved.
 - [ ] Reference-copy study PAUSED at owner request; incomplete, keep checkpoints.
-- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `docs/ep03-rewrite-review.md`.
+- [x] Part 3 approved and promoted: `out/final/ep03/video.mp4` (78.6 s) with revised cover/post/script. Previous final archived as draft: `out/drafts/ep03/previous-final/video.mp4`. Review: `videos/unsorted/ep03/script/docs/ep03/ep03-rewrite-review.md`.
 - [ ] กฎเข้าป่า series
   - [x] Part 1 posted
   - [x] Part 2 posted (IG ~1.1K views first night, 2 real followers; TikTok stuck at ~3 views - check "not eligible" warning)
@@ -173,7 +173,7 @@
   - [ ] Collect numbers: views, avg watch time, retention graphs (IG + TikTok), comments
 - [ ] Upgrade phase (start in a NEW chat; Codex does the heavy work, Claude writes the contract + checks frames)
   - [ ] Read Part 2/3 retention graphs → where viewers drop
-  - [ ] Private visual reconstruction of reference reel IG DegJCmXtbGj (never posted; `docs/reference-study-DegJCmXtbGj.md`)
+  - [ ] Private visual reconstruction of reference reel IG DegJCmXtbGj (never posted; `docs/reference/reference-study-DegJCmXtbGj.md`)
     - [x] Download and inspect reference; measure 35 shot groups
     - [x] Rebuild isolated sets, poses, camera and lighting on the measured timeline
     - [x] Render and inspect every shot plus action sequences (93.3 s, 1080x1920, silent practice.mp4)
@@ -185,10 +185,10 @@
     - [x] Short crowd v8 tests, measured head paths and source-frame proportion correction (not full-film acceptance)
     - [x] Reusable reference-animation-rebuild skill created/installed; keep enriching actual techniques
   - [ ] Future-film natural Thai/prosody/edit review: vary talk/pause/action rhythm; inspect actual whole-take flow and continuous beds; use docs/episode-release-checklist.md before final
-  - [ ] Character7 (new simple Jaab, `src/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
+  - [ ] Character7 (new simple Jaab, `engine/legacy/v7/Character7.tsx`) wired into SceneV2 (style v7 / view prop / FACE_BOX7)
   - [ ] Camera vocabulary: over-the-shoulder, from behind, POV, low/high angle, mood shot first
   - [ ] Test a ChatGPT-generated background plate (Zen saves it to `assets/`) behind the animated cast
-  - [ ] Next story (zombie store story assets exist: `src/v7/Store*.tsx`; ideas in `docs/story-ideas.md`)
+  - [ ] Next story (zombie store story assets exist: `engine/legacy/v7/Store*.tsx`; ideas in `docs/story-ideas.md`)
 - [ ] TikTok reach: appeal if flagged; else keep posting on schedule
 
 ## Working rules
@@ -219,9 +219,9 @@
 - [ ] Cover still (`remotion still`) for the TikTok thumbnail
 - [ ] Whisper re-check of the final MP4 (catch mispronounced words)
 - [ ] Evaluate official Remotion agent skills (github.com/remotion-dev/skills)
-- [ ] vitest for `src/lib/castState.ts`
+- [ ] vitest for `engine/lib/castState.ts`
 
-- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (docs/takrut01-beat-sheet.md, episodes/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
+- 2026-11-05 PARKED (quota): A4-A6 1:1 study + B2 3D test until weekly quotas reset. NOW: takrut01 - script done (videos/unsorted/takrut01/script/docs/takrut01/takrut01-beat-sheet.md, videos/unsorted/takrut01/script/takrut01.json); next = 4 new sets free-only, then key frames, then draft.
 
 ## NOW 2026-11-06 (owner asks 11-05 + 11-06, full tree rebuilt from chat log)
 - [ ] 1. Sukuna shrine ep01 "ถ้า Sukuna มาไทย แล้วเดินเข้าวัด" (ONE ep, NO A/B, others build, Claude reviews only)
