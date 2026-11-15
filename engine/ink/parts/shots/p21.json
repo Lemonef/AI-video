@@ -1,0 +1,58 @@
+{
+ "_doc": "p21 shot list. Same schema as p01.json. Frames from words/p21.json. Story: a Texas sheriff paid $30,000 for one box -> by the time he understood, Lustig was long gone -> then the boldest move, Al Capone -> told Capone he needed $50,000 for an investment, doubled in 60 days -> Capone gave the money and a warning: do not make me regret it -> Lustig put it in a safe deposit box and did nothing for two months -> walked back with a sad face: the deal fell through, sorry. f1 = p22 first word (17291) minus 15.",
+ "part": "p21",
+ "f0": 16277,
+ "f1": 17276,
+ "shots": [
+  {"f0": 16277, "f1": 16420, "bg": {"plate": "ink60full/plates/texas_main_street_day.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/sheriff_paying.png", "x": 1420, "y": 1000, "h": 660, "at": 16295},
+    {"t": "words", "text": "A TEXAS SHERIFF", "x": 620, "y": 240, "size": 90, "at": 16295},
+    {"t": "words", "text": "PAID $30,000", "x": 620, "y": 480, "size": 120, "color": "orange", "at": 16323},
+    {"t": "words", "text": "FOR ONE.", "x": 620, "y": 720, "size": 90, "at": 16376}
+   ]},
+  {"f0": 16420, "f1": 16510, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/sheriff_angry.png", "x": 460, "y": 1000, "h": 640, "at": 16420},
+    {"t": "words", "text": "BY THE TIME HE KNEW", "x": 1300, "y": 260, "size": 80, "at": 16420},
+    {"t": "words", "text": "LUSTIG WAS", "x": 1300, "y": 480, "size": 90, "at": 16436},
+    {"t": "words", "text": "LONG GONE.", "x": 1300, "y": 720, "size": 140, "color": "orange", "at": 16460}
+   ]},
+  {"f0": 16510, "f1": 16625, "bg": {"plate": "ink60full/plates/chicago_street_night.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/capone_1.png", "x": 1420, "y": 1000, "h": 660, "at": 16564},
+    {"t": "words", "text": "THE BOLDEST MOVE", "x": 620, "y": 260, "size": 90, "at": 16537},
+    {"t": "words", "text": "AL CAPONE.", "x": 620, "y": 540, "size": 150, "color": "orange", "at": 16564}
+   ]},
+  {"f0": 16625, "f1": 16820, "bg": {"plate": "ink60full/plates/capone_office.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_whisper.png", "x": 480, "y": 1000, "h": 660, "at": 16630},
+    {"t": "words", "text": "$50,000", "x": 1300, "y": 220, "size": 140, "color": "orange", "at": 16660},
+    {"t": "words", "text": "AN INVESTMENT", "x": 1300, "y": 460, "size": 90, "at": 16711},
+    {"t": "words", "text": "DOUBLED IN 60 DAYS", "x": 1300, "y": 700, "size": 80, "at": 16756}
+   ]},
+  {"f0": 16820, "f1": 16965, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/capone_warning_finger.png", "x": 1460, "y": 1000, "h": 640, "at": 16829},
+    {"t": "words", "text": "CAPONE GAVE HIM", "x": 620, "y": 200, "size": 85, "at": 16829},
+    {"t": "words", "text": "THE MONEY", "x": 620, "y": 400, "size": 90, "at": 16857},
+    {"t": "words", "text": "+ A WARNING", "x": 620, "y": 600, "size": 90, "color": "orange", "at": 16877},
+    {"t": "words", "text": "DO NOT MAKE ME REGRET IT.", "x": 620, "y": 830, "size": 70, "color": "red", "at": 16901}
+   ]},
+  {"f0": 16965, "f1": 17130, "bg": {"plate": "ink60full/plates/bank_vault_safe_deposit.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_glance_over_shoulder.png", "x": 480, "y": 1000, "h": 660, "at": 16978},
+    {"t": "words", "text": "A SAFE DEPOSIT BOX", "x": 1300, "y": 240, "size": 80, "at": 17005},
+    {"t": "words", "text": "DID NOTHING", "x": 1300, "y": 480, "size": 120, "color": "orange", "at": 17045},
+    {"t": "words", "text": "FOR TWO MONTHS.", "x": 1300, "y": 720, "size": 85, "at": 17083}
+   ]},
+  {"f0": 17130, "f1": 17276, "bg": {"plate": "ink60full/plates/capone_office.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_sad.png", "x": 480, "y": 1000, "h": 660, "at": 17148},
+    {"t": "words", "text": "A SAD FACE", "x": 1300, "y": 220, "size": 90, "at": 17178},
+    {"t": "words", "text": "THE DEAL", "x": 1300, "y": 440, "size": 90, "at": 17209},
+    {"t": "words", "text": "FELL THROUGH.", "x": 1300, "y": 660, "size": 110, "color": "orange", "at": 17221},
+    {"t": "words", "text": "SORRY.", "x": 1300, "y": 880, "size": 90, "at": 17247}
+   ]}
+ ]
+}
