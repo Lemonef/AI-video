@@ -1,0 +1,60 @@
+{
+ "_doc": "p11 shot list. Same schema as p01.json. Frames from words/p11.json. Story: the letter says tell no one -> the dealers arrive believing they were picked = the first hook -> Lustig knew one small detail could ruin him: one wrong word and six men walk out -> so he prepared everything: papers, title, hotel, the order he would speak in -> one slip and they call the police -> no second take, the whole plan lived or died in one afternoon. f1 = p12 first word (9071) minus 15.",
+ "part": "p11",
+ "f0": 8087,
+ "f1": 9056,
+ "shots": [
+  {"f0": 8087, "f1": 8155, "bg": {"plate": "ink60full/plates/desk_topdown_papers.png", "zoom": [1.08, 1.12]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_pocketing_letter.png", "x": 1380, "y": 1000, "h": 660, "at": 8090},
+    {"t": "stamp", "text": "TELL NO ONE", "x": 640, "y": 460, "rot": -8, "color": "red", "at": 8108}
+   ]},
+  {"f0": 8155, "f1": 8320, "bg": {"plate": "ink60full/plates/hotel_doorway_framed_view.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_lapels.png", "x": 1380, "y": 1000, "h": 680, "at": 8165},
+    {"t": "words", "text": "THEY THOUGHT", "x": 620, "y": 260, "size": 80, "at": 8191},
+    {"t": "words", "text": "THEY'D BEEN PICKED", "x": 620, "y": 390, "size": 100, "color": "orange", "at": 8216},
+    {"t": "tag", "text": "HOOK #1", "x": 620, "y": 760, "at": 8270}
+   ]},
+  {"f0": 8320, "f1": 8410, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_glance_over_shoulder.png", "x": 520, "y": 1000, "h": 680, "at": 8327},
+    {"t": "words", "text": "THE SMALLEST", "x": 1300, "y": 320, "size": 90, "at": 8350},
+    {"t": "words", "text": "DETAIL", "x": 1300, "y": 460, "size": 140, "at": 8362},
+    {"t": "words", "text": "COULD RUIN HIM", "x": 1300, "y": 640, "size": 100, "color": "red", "at": 8387}
+   ]},
+  {"f0": 8410, "f1": 8520, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.04, 1.1], "origin": "50% 40%"},
+   "els": [
+    {"t": "tag", "text": "ONE WRONG WORD", "x": 960, "y": 220, "at": 8429},
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_doubtful.png", "x": 560, "y": 1000, "h": 580, "at": 8453},
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_hesitating.png", "x": 1360, "y": 1000, "h": 580, "at": 8467},
+    {"t": "words", "text": "SIX MEN WALK OUT", "x": 960, "y": 360, "size": 100, "color": "orange", "at": 8490}
+   ]},
+  {"f0": 8520, "f1": 8750, "bg": {"plate": "ink60full/plates/hotel_suite_corner_34.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_writing_desk.png", "x": 1440, "y": 1000, "h": 660, "at": 8532},
+    {"t": "words", "text": "EVERY DETAIL", "x": 640, "y": 190, "size": 100, "color": "orange", "at": 8550},
+    {"t": "tag", "text": "THE PAPERS", "x": 760, "y": 350, "at": 8599},
+    {"t": "tick", "x": 300, "y": 350, "at": 8609},
+    {"t": "tag", "text": "THE TITLE", "x": 760, "y": 510, "at": 8631},
+    {"t": "tick", "x": 300, "y": 510, "at": 8641},
+    {"t": "tag", "text": "THE HOTEL", "x": 760, "y": 670, "at": 8663},
+    {"t": "tick", "x": 300, "y": 670, "at": 8673},
+    {"t": "tag", "text": "THE ORDER HE SPEAKS", "x": 760, "y": 830, "at": 8701},
+    {"t": "tick", "x": 300, "y": 830, "at": 8720}
+   ]},
+  {"f0": 8750, "f1": 8895, "bg": {"plate": "ink60full/plates/paris_police_station.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "ONE SLIP", "x": 620, "y": 280, "size": 140, "color": "orange", "at": 8767},
+    {"t": "sprite", "src": "ink60/cast/police_officer_whistle.png", "x": 1400, "y": 1000, "h": 680, "at": 8838},
+    {"t": "stamp", "text": "POLICE", "x": 620, "y": 620, "rot": -8, "color": "red", "at": 8849}
+   ]},
+  {"f0": 8895, "f1": 9056, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "NO SECOND TAKE.", "x": 960, "y": 300, "size": 130, "at": 8916},
+    {"t": "words", "text": "LIVED OR DIED", "x": 960, "y": 560, "size": 90, "at": 8982},
+    {"t": "words", "text": "IN ONE AFTERNOON", "x": 960, "y": 700, "size": 120, "color": "orange", "at": 9021},
+    {"t": "underline", "x": 960, "y": 780, "w": 1180, "at": 9030}
+   ]}
+ ]
+}
