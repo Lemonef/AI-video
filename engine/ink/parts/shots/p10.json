@@ -1,0 +1,54 @@
+{
+ "_doc": "p10 shot list. Same schema as p01.json. Frames from words/p10.json. Story: 2. the stage: Hotel de Crillon, one of the most expensive hotels in Paris -> not a back room, not a warehouse, a palace with doormen and chandeliers -> people trust the room before they trust the person -> 3. the audience: not rich men, men who wanted to be richer -> six scrap metal dealers, each invited by a polite official letter -> the letter: come to the Crillon, a matter of great importance. f1 = p11 first word (8102) minus 15.",
+ "part": "p10",
+ "f0": 6873,
+ "f1": 8087,
+ "shots": [
+  {"f0": 6873, "f1": 7075, "bg": {"plate": "ink60full/plates/hotel_crillon_facade_day.png", "zoom": [1.0, 1.08]},
+   "chip": "2. THE STAGE", "chipAt": 6888,
+   "els": [
+    {"t": "words", "text": "HOTEL DE CRILLON", "x": 960, "y": 220, "size": 110, "at": 6939},
+    {"t": "tag", "text": "MOST EXPENSIVE IN PARIS", "x": 960, "y": 900, "at": 6999}
+   ]},
+  {"f0": 7075, "f1": 7290, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "tag", "text": "A BACK ROOM", "x": 520, "y": 230, "at": 7095},
+    {"t": "cross", "x": 520, "y": 230, "size": 150, "at": 7110},
+    {"t": "tag", "text": "A WAREHOUSE", "x": 520, "y": 450, "at": 7137},
+    {"t": "cross", "x": 520, "y": 450, "size": 150, "at": 7150},
+    {"t": "words", "text": "A PALACE", "x": 520, "y": 620, "size": 130, "color": "orange", "at": 7173},
+    {"t": "sprite", "src": "ink60/cast/doorman_bowing.png", "x": 1420, "y": 1000, "h": 660, "at": 7209}
+   ]},
+  {"f0": 7290, "f1": 7505, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_point_viewer.png", "x": 480, "y": 1000, "h": 680, "at": 7300},
+    {"t": "words", "text": "PEOPLE TRUST", "x": 1260, "y": 280, "size": 90, "at": 7383},
+    {"t": "words", "text": "THE ROOM", "x": 1260, "y": 430, "size": 140, "color": "orange", "at": 7400},
+    {"t": "words", "text": "BEFORE", "x": 1260, "y": 590, "size": 80, "at": 7417},
+    {"t": "words", "text": "THE PERSON", "x": 1260, "y": 730, "size": 110, "at": 7452}
+   ]},
+  {"f0": 7505, "f1": 7700, "bg": {"card": true},
+   "chip": "3. THE AUDIENCE", "chipAt": 7515,
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_proud.png", "x": 520, "y": 1000, "h": 620, "at": 7582},
+    {"t": "words", "text": "RICH MEN", "x": 520, "y": 240, "size": 90, "at": 7582},
+    {"t": "cross", "x": 520, "y": 240, "size": 180, "at": 7592},
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_greedy.png", "x": 1400, "y": 1000, "h": 620, "at": 7628},
+    {"t": "words", "text": "WANTED RICHER", "x": 1400, "y": 240, "size": 90, "color": "orange", "at": 7666}
+   ]},
+  {"f0": 7700, "f1": 7880, "bg": {"plate": "ink60full/plates/scrap_yard_day.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "SIX", "x": 560, "y": 300, "size": 220, "color": "orange", "at": 7713},
+    {"t": "words", "text": "SCRAP METAL DEALERS", "x": 560, "y": 480, "size": 80, "at": 7734},
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_reading_letter.png", "x": 1420, "y": 1000, "h": 660, "at": 7791},
+    {"t": "tag", "text": "POLITE. OFFICIAL.", "x": 560, "y": 820, "at": 7829}
+   ]},
+  {"f0": 7880, "f1": 8087, "bg": {"plate": "ink60full/plates/desk_topdown_papers.png", "zoom": [1.0, 1.08]},
+   "els": [
+    {"t": "words", "text": "\"COME TO THE CRILLON.\"", "x": 960, "y": 400, "size": 110, "at": 7958},
+    {"t": "words", "text": "A MATTER OF", "x": 960, "y": 580, "size": 80, "at": 8019},
+    {"t": "words", "text": "GREAT IMPORTANCE", "x": 960, "y": 700, "size": 110, "color": "orange", "at": 8039},
+    {"t": "underline", "x": 960, "y": 770, "w": 820, "at": 8050}
+   ]}
+ ]
+}
