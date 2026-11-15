@@ -32,7 +32,7 @@ const TITLE_ICONS = new Set(['tower', 'flame', 'coin']);
 type Travel = {how?: 'walk' | 'slide' | 'pop' | 'none'; from?: number; at?: number; dur?: number};
 type Actor = {sprite: string; fallback_sprite?: string; x: number; y?: number; h?: number; flip?: boolean; enter?: Travel; move?: {to: number; at?: number; dur?: number}; bob?: number};
 type PropSpec = {kind: PropKind; x: number; y: number; k?: number; at?: number; anim?: 'pop' | 'slide_up' | 'drop' | 'none'};
-type SceneShot = {k: 'scene'; w?: number; plate: string; fallback_plate?: string; cam?: {move?: string; amt?: number}; actors?: Actor[]; props?: PropSpec[]; fx?: string[]; chip?: string | null; caption?: string | null; why?: string};
+type SceneShot = {k: 'scene'; w?: number; plate: string; fallback_plate?: string; cam?: {move?: string; amt?: number; focus?: {x: number; y: number}; zoom?: number}; actors?: Actor[]; props?: PropSpec[]; fx?: string[]; chip?: string | null; caption?: string | null; why?: string};
 type Shot =
   | SceneShot
   | {k: 'title'; lines: string[]; accent?: string | null; icon?: string | null; w?: number}
@@ -197,7 +197,7 @@ const DirectedScene: React.FC<{shot: SceneShot; len: number; plates: Record<stri
   const stand = [...(pl.usedFallback ? [shot.plate] : []), ...cast.filter((c) => c.usedFallback).map((c) => c.a.sprite)];
   const {width, height} = useVideoConfig();
   const fx = new Set(shot.fx ?? []);
-  const cam = camAt(shot.cam, f, len, width);
+  const cam = camAt(shot.cam, f, len, width, height);
   const sh = fx.has('shake') ? shakeAt(f) : {x: 0, y: 0};
   const flash = fx.has('flash') ? interpolate(f, [0, FLASH_FRAMES], [FLASH_PEAK, 0], {extrapolateRight: 'clamp'}) : 0;
   return (

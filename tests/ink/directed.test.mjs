@@ -45,3 +45,17 @@ test('directed: walk travels from offset to rest with a bounded bob; pop hidden 
   assert.equal(actorAt({x: 1, enter: {how: 'pop', at: 5}}, 4).visible, false);
   assert.equal(actorAt({x: 1, enter: {how: 'pop', at: 5}}, 5).visible, true);
 });
+
+test('directed: focus cam centres the focus point, zooms to target, never exposes an edge', () => {
+  const W = 1920, H = 1080;
+  const end = camAt({move: 'push', focus: {x: 0.5, y: 0.5}, zoom: 2.2}, 60, 60, W, H);
+  assert.ok(Math.abs(end.s - 2.2) < 1e-9);
+  for (const focus of [{x: 0, y: 0}, {x: 1, y: 1}, {x: 0.3, y: 0.7}, {x: 0.5, y: 0.5}]) {
+    for (let f = 0; f <= 60; f += 6) {
+      const c = camAt({move: 'push', focus, zoom: 2.4}, f, 60, W, H);
+      assert.ok(c.tx <= (c.s - 1) * W * 0.5 + 1e-9 && c.tx >= -(c.s - 1) * W * 0.5 - 1e-9, `tx ${f}`);
+      assert.ok(c.ty <= (c.s - 1) * H * 0.6 + 1e-9 && c.ty >= -(c.s - 1) * H * 0.4 - 1e-9, `ty ${f}`);
+    }
+  }
+  assert.equal(camAt({move: 'pull', focus: {x: 0.5, y: 0.5}, zoom: 2}, 60, 60, W, H).s, 1);
+});

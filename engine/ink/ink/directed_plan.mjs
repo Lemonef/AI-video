@@ -72,7 +72,23 @@ export const CAM = {
 
 // Camera state at frame f of a shot of length len: {s: scale, tx, ty: px translate}. Pans over-scale by amt so the
 // translate range +-amt*W/2 never exposes the plate edge (scale 1+amt adds exactly amt*W/2 margin per side).
-export const camAt = (cam, f, len, W) => {
+// Focal-point camera (close-up / low-angle feel): cam.focus {x,y} are plate fractions 0..1, cam.zoom the end scale.
+// Origin matches the camera layer's transform-origin (50% 60%); the translate centres the focus point and is clamped so
+// the scaled plate always covers the frame (no exposed edge). push = 1->zoom, pull = zoom->1, anything else holds zoom.
+export const CAM_ORIGIN = {x: 0.5, y: 0.6};
+export const focusCam = (cam, f, len, W, H) => {
+  const z = Math.max(1, Number.isFinite(cam.zoom) ? cam.zoom : 2);
+  const t = easeInOut(f / Math.max(1, len));
+  const s = cam.move === 'push' ? 1 + (z - 1) * t : cam.move === 'pull' ? z - (z - 1) * t : z;
+  const ox = CAM_ORIGIN.x * W, oy = CAM_ORIGIN.y * H;
+  const fx = Math.min(1, Math.max(0, cam.focus.x ?? 0.5)) * W, fy = Math.min(1, Math.max(0, cam.focus.y ?? 0.5)) * H;
+  const want = (c, o, p) => c - o - s * (p - o);
+  const clamp = (v, o, size) => Math.min((s - 1) * o, Math.max(-(s - 1) * (size - o), v));
+  return {s, tx: clamp(want(W / 2, ox, fx), ox, W), ty: clamp(want(H / 2, oy, fy), oy, H)};
+};
+
+export const camAt = (cam, f, len, W, H = (W * 9) / 16) => {
+  if (cam?.focus) return focusCam(cam, f, len, W, H);
   const move = cam?.move ?? 'hold';
   const amt = Number.isFinite(cam?.amt) ? cam.amt : CAM.defaultAmt;
   const t = easeInOut(f / Math.max(1, len));
