@@ -1,0 +1,37 @@
+{
+  "_doc": "p03 shot list. Same schema as p01.json. Frames from words/p03.json. Story: 1925, tower temporary in the air -> rust -> paint/repairs/bills -> newspapers ask 'worth keeping?' -> most move on -> Lustig sees a door.",
+  "part": "p03",
+  "f0": 1716,
+  "f1": 2498,
+  "shots": [
+    {"f0": 1716, "f1": 1923, "bg": {"plate": "ink60/plates/paris_tower_grey.png", "zoom": [1.0, 1.1], "origin": "75% 40%"}, "chip": "PARIS, 1925", "chipAt": 1743, "els": [
+      {"t": "words", "text": "TEMPORARY?", "x": 620, "y": 300, "size": 120, "color": "orange", "at": 1831},
+      {"t": "underline", "x": 620, "y": 380, "w": 520, "at": 1858}
+    ]},
+    {"f0": 1923, "f1": 1985, "bg": {"plate": "ink60full/plates/tower_rust_closeup.png", "zoom": [1.0, 1.15], "origin": "50% 50%"}, "els": [
+      {"t": "stamp", "text": "BAD SHAPE", "x": 960, "y": 540, "rot": -8, "color": "red", "at": 1952}
+    ]},
+    {"f0": 1985, "f1": 2110, "bg": {"card": true}, "els": [
+      {"t": "sprite", "src": "ink60/cast/city_official_decree.png", "x": 1460, "y": 1000, "h": 640, "at": 1988},
+      {"t": "words", "text": "PAINT", "x": 560, "y": 300, "size": 100, "at": 1997},
+      {"t": "words", "text": "REPAIRS", "x": 560, "y": 470, "size": 100, "at": 2026},
+      {"t": "words", "text": "BILLS", "x": 560, "y": 640, "size": 100, "color": "orange", "at": 2061},
+      {"t": "stamp", "text": "OVERDUE", "x": 640, "y": 840, "rot": -10, "color": "red", "at": 2080}
+    ]},
+    {"f0": 2110, "f1": 2280, "bg": {"plate": "ink60/plates/paris_grey.png", "zoom": [1.0, 1.08]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/parisian_2.png", "x": 1420, "y": 1000, "h": 640, "at": 2128},
+      {"t": "stamp", "text": "EVERY WEEK", "x": 1380, "y": 170, "rot": 8, "color": "red", "at": 2197},
+      {"t": "words", "text": "STILL WORTH", "x": 620, "y": 330, "size": 100, "at": 2234},
+      {"t": "words", "text": "KEEPING?", "x": 620, "y": 460, "size": 120, "color": "orange", "at": 2252}
+    ]},
+    {"f0": 2280, "f1": 2380, "bg": {"plate": "ink60/plates/paris_grey.png", "zoom": [1.08, 1.12]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/parisian_walk_profile.png", "x": 700, "x2": 1500, "y": 1000, "h": 600, "at": 2287},
+      {"t": "words", "text": "MOVED ON.", "x": 960, "y": 260, "size": 110, "at": 2344}
+    ]},
+    {"f0": 2380, "f1": 2498, "bg": {"plate": "ink60/plates/paris_dusk.png", "zoom": [1.0, 1.1], "origin": "30% 60%"}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_reading_newspaper.png", "x": 620, "y": 1000, "h": 660, "at": 2394},
+      {"t": "tag", "text": "VICTOR LUSTIG", "x": 620, "y": 260, "at": 2400},
+      {"t": "words", "text": "A DOOR OPEN.", "x": 1340, "y": 420, "size": 110, "color": "orange", "at": 2458}
+    ]}
+  ]
+}

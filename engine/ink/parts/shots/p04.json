@@ -1,0 +1,36 @@
+{
+  "_doc": "p04 shot list. Same schema as p01.json. Frames from words/p04.json. Story: not a monument -> a pile of iron -> a city arguing keep/scrap -> every con needs a believable story -> the tower already told one -> he only had to finish the sentence.",
+  "part": "p04",
+  "f0": 2498,
+  "f1": 3071,
+  "shots": [
+    {"f0": 2498, "f1": 2590, "bg": {"card": true}, "els": [
+      {"t": "words", "text": "THINK ABOUT WHAT HE SAW", "x": 960, "y": 160, "size": 80, "at": 2511},
+      {"t": "tower", "x": 960, "y": 980, "h": 640},
+      {"t": "words", "text": "A MONUMENT", "x": 1460, "y": 620, "size": 80, "at": 2568},
+      {"t": "cross", "x": 1460, "y": 620, "size": 460, "at": 2575}
+    ]},
+    {"f0": 2590, "f1": 2660, "bg": {"plate": "ink60full/plates/tower_rust_closeup.png", "zoom": [1.15, 1.0], "origin": "50% 50%"}, "els": [
+      {"t": "words", "text": "A PILE OF IRON", "x": 960, "y": 220, "size": 120, "color": "orange", "at": 2601}
+    ]},
+    {"f0": 2660, "f1": 2770, "bg": {"plate": "ink60full/plates/paris_skyline_extreme_wide.png", "zoom": [1.0, 1.08]}, "els": [
+      {"t": "words", "text": "OPENLY ARGUED", "x": 960, "y": 200, "size": 100, "at": 2689},
+      {"t": "stamp", "text": "KEEP", "x": 560, "y": 560, "rot": -10, "color": "green", "at": 2703},
+      {"t": "stamp", "text": "SCRAP", "x": 1360, "y": 560, "rot": 9, "color": "red", "at": 2720}
+    ]},
+    {"f0": 2770, "f1": 2845, "bg": {"card": true}, "els": [
+      {"t": "words", "text": "EVERY CON NEEDS", "x": 960, "y": 380, "size": 90, "at": 2781},
+      {"t": "words", "text": "A BELIEVABLE STORY", "x": 960, "y": 540, "size": 110, "color": "orange", "at": 2817},
+      {"t": "underline", "x": 960, "y": 620, "w": 760, "at": 2831}
+    ]},
+    {"f0": 2845, "f1": 2950, "bg": {"plate": "ink60/plates/paris_tower_grey.png", "zoom": [1.0, 1.12], "origin": "75% 40%"}, "els": [
+      {"t": "words", "text": "ALREADY TELLING ONE", "x": 820, "y": 300, "size": 90, "at": 2883},
+      {"t": "underline", "x": 820, "y": 370, "w": 640, "at": 2906}
+    ]},
+    {"f0": 2950, "f1": 3071, "bg": {"plate": "ink60full/plates/forger_desk_night.png", "zoom": [1.0, 1.08]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_pen_newspaper.png", "x": 620, "y": 1000, "h": 680, "at": 2962},
+      {"t": "words", "text": "FINISH", "x": 1340, "y": 340, "size": 100, "at": 2991},
+      {"t": "words", "text": "THE SENTENCE", "x": 1340, "y": 470, "size": 100, "color": "orange", "at": 3008}
+    ]}
+  ]
+}

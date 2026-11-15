@@ -1,0 +1,42 @@
+{
+  "_doc": "p05 shot list. Same schema as p01.json. Frames from words/p05.json. Story: born 1890, small town in Bohemia -> five languages -> looked like a diplomat -> never raised his voice -> no gun, no gang -> just a suit, a smile, patience.",
+  "part": "p05",
+  "f0": 3071,
+  "f1": 3654,
+  "shots": [
+    {"f0": 3071, "f1": 3240, "bg": {"plate": "ink60full/plates/bohemia_village_1890.png", "zoom": [1.0, 1.12]}, "chip": "BOHEMIA, 1890", "chipAt": 3106, "els": [
+      {"t": "words", "text": "A SMALL TOWN", "x": 960, "y": 240, "size": 100, "at": 3149}
+    ]},
+    {"f0": 3240, "f1": 3295, "bg": {"plate": "ink60full/plates/vienna_cafe_morning.png", "zoom": [1.0, 1.06]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_polyglot_greeting.png", "x": 960, "y": 1000, "h": 660, "at": 3245},
+      {"t": "words", "text": "5 LANGUAGES", "x": 960, "y": 170, "size": 100, "color": "orange", "at": 3255},
+      {"t": "tag", "text": "BONJOUR", "x": 420, "y": 420, "at": 3257},
+      {"t": "tag", "text": "GUTEN TAG", "x": 1500, "y": 380, "at": 3261},
+      {"t": "tag", "text": "DOBRÝ DEN", "x": 380, "y": 640, "at": 3265},
+      {"t": "tag", "text": "BUONGIORNO", "x": 1540, "y": 600, "at": 3269},
+      {"t": "tag", "text": "HELLO", "x": 1460, "y": 820, "at": 3273}
+    ]},
+    {"f0": 3295, "f1": 3345, "bg": {"plate": "ink60full/plates/tailor_shop_mirror.png", "zoom": [1.0, 1.06]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_official_tailcoat.png", "x": 760, "y": 1000, "h": 680, "at": 3298},
+      {"t": "stamp", "text": "DIPLOMAT", "x": 1400, "y": 380, "rot": -8, "color": "teal", "at": 3317}
+    ]},
+    {"f0": 3345, "f1": 3440, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.08]}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_lean_murmur.png", "x": 760, "y": 1000, "h": 660, "at": 3350},
+      {"t": "words", "text": "NEVER RAISED", "x": 1360, "y": 340, "size": 90, "at": 3361},
+      {"t": "words", "text": "HIS VOICE", "x": 1360, "y": 460, "size": 90, "color": "orange", "at": 3381}
+    ]},
+    {"f0": 3440, "f1": 3510, "bg": {"card": true}, "els": [
+      {"t": "words", "text": "NO GUN", "x": 560, "y": 540, "size": 120, "at": 3462},
+      {"t": "cross", "x": 560, "y": 540, "size": 360, "at": 3469},
+      {"t": "words", "text": "NO GANG", "x": 1360, "y": 540, "size": 120, "at": 3488},
+      {"t": "cross", "x": 1360, "y": 540, "size": 360, "at": 3494}
+    ]},
+    {"f0": 3510, "f1": 3654, "bg": {"plate": "ink60/plates/paris_dusk.png", "zoom": [1.0, 1.08], "origin": "30% 60%"}, "els": [
+      {"t": "sprite", "src": "ink60/cast/lustig_4.png", "x": 620, "y": 1000, "h": 660, "at": 3511},
+      {"t": "tag", "text": "A SUIT", "x": 1340, "y": 300, "at": 3534},
+      {"t": "tag", "text": "A SMILE", "x": 1340, "y": 440, "at": 3558},
+      {"t": "words", "text": "PATIENCE", "x": 1340, "y": 640, "size": 120, "color": "orange", "at": 3593},
+      {"t": "underline", "x": 1340, "y": 720, "w": 480, "at": 3603}
+    ]}
+  ]
+}

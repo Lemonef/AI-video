@@ -1,5 +1,5 @@
 import {Composition} from 'remotion';
-import {InkFirstMin, INK_FIRSTMIN_FRAMES} from './compositions/InkParts';
+import {InkFirstMin, INK_FIRSTMIN_FRAMES, InkBuilt, INK_BUILT_FRAMES} from './compositions/InkParts';
 import {Test10} from './compositions/Test10';
 import {SlideProof, SLIDE_PROOF_FRAMES} from './compositions/SlideProof';
 import {InkProof, INK_PROOF_FRAMES, Ink10, INK10_FRAMES} from './compositions/InkProof';
@@ -9,6 +9,7 @@ import {Ink60, INK60_FRAMES, INK15_FRAMES} from './ink/ep1';
 export const Root = () => (
   <>
     <Composition id="InkFirstMin" component={InkFirstMin} width={1920} height={1080} fps={30} durationInFrames={INK_FIRSTMIN_FRAMES}/>
+    <Composition id="InkBuilt" component={InkBuilt} width={1920} height={1080} fps={30} durationInFrames={INK_BUILT_FRAMES}/>
     <Composition id="Test10" component={Test10} width={1920} height={1080} fps={30} durationInFrames={330}/>
     <Composition id="SlideProof" component={SlideProof} width={1920} height={1080} fps={30} durationInFrames={SLIDE_PROOF_FRAMES}/>
     <Composition id="InkProof" component={InkProof} width={1920} height={1080} fps={30} durationInFrames={INK_PROOF_FRAMES}/>

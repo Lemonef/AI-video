@@ -5,12 +5,21 @@ import {Element} from '../parts/elements';
 import type {Part, Shot} from '../parts/schema';
 import p01 from '../parts/shots/p01.json';
 import p02 from '../parts/shots/p02.json';
+import p03 from '../parts/shots/p03.json';
+import p04 from '../parts/shots/p04.json';
+import p05 from '../parts/shots/p05.json';
 const part01 = p01 as unknown as Part;
 const part02 = p02 as unknown as Part;
 export const INK_FIRSTMIN_FRAMES = part02.f1;
+// Every part built so far, in story order; append new parts here as they land.
+const BUILT_PARTS = [p01, p02, p03, p04, p05] as unknown as Part[];
+export const INK_BUILT_FRAMES = BUILT_PARTS[BUILT_PARTS.length - 1].f1;
+// Paper halo behind hand-lettered words on photo/plate backgrounds: a tight ring keeps glyph edges crisp,
+// a wide soft glow lifts accent colours (orange on a warm sky or rust) off busy backgrounds. Cards need none.
+const HALO = [...Array(3).fill(`0 0 4px ${PAPER}`), ...Array(3).fill(`0 0 16px ${PAPER}`)].join(',');
 const Elements: React.FC<{shot: Shot}> = ({shot}) => <>{shot.els.map((el, i) => {
   const content = <Element el={el} shotF0={shot.f0} shotF1={shot.f1}/>;
-  if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={{textShadow: !('card' in shot.bg) && (el.t === 'words' || el.t === 'underline') ? Array(4).fill(`0 0 6px ${PAPER}`).join(',') : undefined}}>{content}</AbsoluteFill>;
+  if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={{textShadow: !('card' in shot.bg) && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
   return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}>{content}</svg>;
 })}</>;
 const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
@@ -30,3 +39,4 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 export const InkFirstMin: React.FC = () => <><InkParts parts={[part01, part02]}/><Audio src={staticFile('ink60full/master.wav')}/></>;
+export const InkBuilt: React.FC = () => <><InkParts parts={BUILT_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
