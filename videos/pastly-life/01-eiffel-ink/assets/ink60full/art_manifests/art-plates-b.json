@@ -1,11 +1,11 @@
 {
  "kind": "plates",
  "files": [
-  "public/ink60full/plates/tower_radio_station.png",
-  "public/ink60full/plates/tower_rust_closeup.png",
-  "public/ink60full/plates/ministry_office_day.png",
-  "public/ink60full/plates/bohemia_village_1890.png",
-  "public/ink60full/plates/police_records_office.png",
-  "public/ink60full/plates/ocean_liner_deck.png"
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/tower_radio_station.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/tower_rust_closeup.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/ministry_office_day.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/bohemia_village_1890.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/police_records_office.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/ocean_liner_deck.png"
  ]
 }

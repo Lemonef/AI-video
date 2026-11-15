@@ -1,11 +1,11 @@
 {
  "kind": "plates",
  "files": [
-  "public/ink60full/plates/new_york_street_night.png",
-  "public/ink60full/plates/backroom_workshop_lamp.png",
-  "public/ink60full/plates/texas_main_street_day.png",
-  "public/ink60full/plates/capone_office.png",
-  "public/ink60full/plates/bank_vault_safe_deposit.png",
-  "public/ink60full/plates/prison_cell.png"
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/new_york_street_night.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/backroom_workshop_lamp.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/texas_main_street_day.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/capone_office.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/bank_vault_safe_deposit.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/prison_cell.png"
  ]
 }

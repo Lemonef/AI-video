@@ -1,11 +1,11 @@
 {
  "kind": "plates",
  "files": [
-  "public/ink60full/plates/limousine_street_day.png",
-  "public/ink60full/plates/poisson_parlour_night.png",
-  "public/ink60full/plates/paris_train_station_night.png",
-  "public/ink60full/plates/vienna_street_dusk.png",
-  "public/ink60full/plates/vienna_cafe_morning.png",
-  "public/ink60full/plates/paris_police_station.png"
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/limousine_street_day.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/poisson_parlour_night.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/paris_train_station_night.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/vienna_street_dusk.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/vienna_cafe_morning.png",
+  "videos/pastly-life/01-eiffel-ink/assets/ink60full/plates/paris_police_station.png"
  ]
 }
