@@ -1,0 +1,9 @@
+{
+  "_note": "Real archive images from Wikimedia Commons, each checked Public domain via the Commons API (LicenseShortName) 2026-11-15. Used as 'real photo' inserts inside ink shots. Credit line goes in the video description.",
+  "files": {
+    "lustig_fbi_1931.jpg": {"commons": "File:Victor Lustig DOJ BOI (FBI) identification, 1931.jpg", "license": "Public domain", "author": "United States Department of Justice", "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Victor_Lustig_DOJ_BOI_%28FBI%29_identification%2C_1931.jpg"},
+    "capone_mugshot.jpg": {"commons": "File:AlCaponemugshotCPD.jpg", "license": "Public domain", "author": "United States Bureau of Prisons", "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/AlCaponemugshotCPD.jpg"},
+    "alcatraz_1930s.jpg": {"commons": "File:USS Oklahoma (BB-37) passing Alcatraz in the 1930s.jpg", "license": "Public domain", "author": "USN", "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/USS_Oklahoma_%28BB-37%29_passing_Alcatraz_in_the_1930s.jpg"},
+    "eiffel_construction_1888.jpg": {"commons": "File:Louis-Emile Durandelle, The Eiffel Tower - State of the Construction, 1888.jpg", "license": "Public domain", "author": "Louis-Emile Durandelle", "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Louis-Emile_Durandelle%2C_The_Eiffel_Tower_-_State_of_the_Construction%2C_1888.jpg"}
+  }
+}
