@@ -1,5 +1,5 @@
 ---json
-{"id": "ink-upscale", "type": "normal", "risk": "medium", "repo": "D:/AI-video", "gates": ["python -m pytest tests/test_upscale_assets.py -q"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "docs/**", "videos/**", "engine/**", "package.json", "package-lock.json"], "context_files": ["tests/test_upscale_assets.py"]}
+{"id": "ink-upscale", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python -m pytest tests/test_upscale_assets.py -q"], "protected": ["tests/**", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "docs/**", "videos/**", "engine/**", "package.json", "package-lock.json"], "context_files": ["tests/test_upscale_assets.py"]}
 ---
 # Goal
 Write a CLI tool that upscales the Ink episode's line-art PNGs (stickman sprites with alpha, painted background plates) to exactly 2x their pixel size, in place, using the Real-ESRGAN anime x4 model on CPU. The 1080p render shows the sprites and plates soft/pixelated because they are drawn larger than their native size. Layout code sizes sprites by height with the aspect kept, so a uniform 2x change is layout-neutral.
