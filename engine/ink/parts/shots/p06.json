@@ -1,0 +1,250 @@
+{
+ "_doc": "p06 shot list. Same schema as p01.json. Frames from words/p06.json. Story: not even his real name -> 40+ names, passports to match -> police files in several countries disagree -> that mattered: can't pin down = can't chase -> worked the Europe-America liners -> rich people on a ship have time to talk.",
+ "part": "p06",
+ "f0": 3654,
+ "f1": 4466,
+ "shots": [
+  {
+   "f0": 3654,
+   "f1": 3724,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "photo",
+     "src": "ink60full/pd/lustig_fbi_1931.jpg",
+     "x": 960,
+     "y": 470,
+     "w": 420,
+     "rot": -4,
+     "frame": "polaroid",
+     "label": "VICTOR LUSTIG",
+     "at": 3667
+    },
+    {
+     "t": "cross",
+     "x": 960,
+     "y": 470,
+     "size": 520,
+     "at": 3708
+    }
+   ]
+  },
+  {
+   "f0": 3724,
+   "f1": 3855,
+   "bg": {
+    "plate": "ink60/plates/hotel_room_night.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_passports_fan.png",
+     "x": 1340,
+     "y": 1000,
+     "h": 680,
+     "at": 3726
+    },
+    {
+     "t": "words",
+     "text": "40+",
+     "x": 560,
+     "y": 380,
+     "size": 220,
+     "at": 3762,
+     "color": "orange"
+    },
+    {
+     "t": "words",
+     "text": "NAMES",
+     "x": 560,
+     "y": 560,
+     "size": 100,
+     "at": 3773
+    },
+    {
+     "t": "tag",
+     "text": "PASSPORTS TO MATCH",
+     "x": 560,
+     "y": 780,
+     "at": 3807
+    }
+   ]
+  },
+  {
+   "f0": 3855,
+   "f1": 4040,
+   "bg": {
+    "plate": "ink60full/plates/police_records_office.png",
+    "zoom": [
+     1.0,
+     1.08
+    ]
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/police_officer_two_files.png",
+     "x": 1380,
+     "y": 1000,
+     "h": 680,
+     "at": 3870
+    },
+    {
+     "t": "tag",
+     "text": "FILE 1",
+     "x": 520,
+     "y": 260,
+     "at": 3914
+    },
+    {
+     "t": "tag",
+     "text": "FILE 2",
+     "x": 520,
+     "y": 400,
+     "at": 3920
+    },
+    {
+     "t": "tag",
+     "text": "FILE 3",
+     "x": 520,
+     "y": 540,
+     "at": 3926
+    },
+    {
+     "t": "stamp",
+     "text": "NO MATCH",
+     "x": 560,
+     "y": 760,
+     "rot": -8,
+     "color": "red",
+     "at": 3990
+    }
+   ]
+  },
+  {
+   "f0": 4040,
+   "f1": 4100,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "words",
+     "text": "THAT MATTERED.",
+     "x": 960,
+     "y": 540,
+     "size": 140,
+     "at": 4074
+    }
+   ]
+  },
+  {
+   "f0": 4100,
+   "f1": 4240,
+   "bg": {
+    "plate": "ink60full/plates/paris_train_station_night.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_walking_profile_case.png",
+     "x": 500,
+     "y": 1000,
+     "h": 620,
+     "at": 4107,
+     "x2": 1450
+    },
+    {
+     "t": "words",
+     "text": "CAN'T PIN DOWN",
+     "x": 960,
+     "y": 200,
+     "size": 90,
+     "at": 4141
+    },
+    {
+     "t": "words",
+     "text": "CAN'T CHASE",
+     "x": 960,
+     "y": 330,
+     "size": 110,
+     "at": 4200,
+     "color": "orange"
+    }
+   ]
+  },
+  {
+   "f0": 4240,
+   "f1": 4355,
+   "bg": {
+    "plate": "ink60full/plates/ocean_liner_deck.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "timeline",
+     "x1": 500,
+     "x2": 1560,
+     "y": 780,
+     "left": "EUROPE",
+     "right": "AMERICA",
+     "at": 4299,
+     "bracket": "THE LINERS",
+     "bracketAt": 4327
+    }
+   ]
+  },
+  {
+   "f0": 4355,
+   "f1": 4466,
+   "bg": {
+    "plate": "ink60full/plates/ocean_liner_deck.png",
+    "zoom": [
+     1.06,
+     1.12
+    ],
+    "origin": "40% 60%"
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/rich_passenger_deckchair.png",
+     "x": 640,
+     "y": 1000,
+     "h": 600,
+     "at": 4369
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_lean_murmur.png",
+     "x": 1300,
+     "y": 1000,
+     "h": 660,
+     "at": 4384
+    },
+    {
+     "t": "words",
+     "text": "TIME TO TALK",
+     "x": 960,
+     "y": 200,
+     "size": 110,
+     "at": 4409,
+     "color": "orange"
+    }
+   ]
+  }
+ ]
+}

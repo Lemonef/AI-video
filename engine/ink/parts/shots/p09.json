@@ -1,0 +1,44 @@
+{
+ "_doc": "p09 shot list. Same schema as p01.json. Frames from words/p09.json. Story: he had the idea; now he needs costume, stage, audience (three-item checklist) -> 1. costume: forged French government letterhead -> self-given title, Deputy Director General, Ministry of Posts and Telegraphs -> why that ministry? the tower already carried radio -> it sounded real. f1 = p10 first word (6888) minus the 15-frame lead used by earlier parts.",
+ "part": "p09",
+ "f0": 6120,
+ "f1": 6873,
+ "shots": [
+  {"f0": 6120, "f1": 6300, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_writing_desk.png", "x": 420, "y": 1000, "h": 640, "at": 6135},
+    {"t": "words", "text": "HE NEEDED", "x": 1180, "y": 220, "size": 90, "at": 6187},
+    {"t": "tag", "text": "A COSTUME", "x": 1180, "y": 430, "at": 6201},
+    {"t": "tag", "text": "A STAGE", "x": 1180, "y": 600, "at": 6228},
+    {"t": "tag", "text": "AN AUDIENCE", "x": 1180, "y": 770, "at": 6261}
+   ]},
+  {"f0": 6300, "f1": 6460, "bg": {"plate": "ink60full/plates/forger_desk_night.png", "zoom": [1.0, 1.06]},
+   "chip": "1. THE COSTUME", "chipAt": 6307,
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_forging_pen.png", "x": 1300, "y": 1000, "h": 680, "at": 6362},
+    {"t": "words", "text": "FRENCH GOVERNMENT", "x": 620, "y": 300, "size": 80, "at": 6409},
+    {"t": "words", "text": "LETTERHEAD", "x": 620, "y": 420, "size": 100, "color": "orange", "at": 6382},
+    {"t": "stamp", "text": "FORGED", "x": 620, "y": 640, "rot": -10, "color": "red", "at": 6369}
+   ]},
+  {"f0": 6460, "f1": 6675, "bg": {"plate": "ink60full/plates/ministry_office_day.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_official_tailcoat.png", "x": 1460, "y": 1000, "h": 720, "at": 6472},
+    {"t": "tag", "text": "DEPUTY DIRECTOR GENERAL", "x": 700, "y": 330, "at": 6516},
+    {"t": "words", "text": "MINISTRY OF", "x": 700, "y": 520, "size": 70, "at": 6582},
+    {"t": "words", "text": "POSTS & TELEGRAPHS", "x": 700, "y": 630, "size": 80, "color": "orange", "at": 6602},
+    {"t": "underline", "x": 700, "y": 700, "w": 760, "at": 6624}
+   ]},
+  {"f0": 6675, "f1": 6800, "bg": {"plate": "ink60full/plates/tower_radio_station.png", "zoom": [1.0, 1.08]},
+   "els": [
+    {"t": "words", "text": "WHY THAT MINISTRY?", "x": 960, "y": 160, "size": 90, "at": 6682},
+    {"t": "sprite", "src": "ink60/cast/soldier_radio_operator.png", "x": 1450, "y": 1000, "h": 620, "at": 6725},
+    {"t": "tag", "text": "RADIO ON THE TOWER", "x": 620, "y": 900, "at": 6775}
+   ]},
+  {"f0": 6800, "f1": 6873, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_official_tailcoat.png", "x": 560, "y": 1000, "h": 720, "at": 6802},
+    {"t": "words", "text": "IT SOUNDED", "x": 1280, "y": 420, "size": 100, "at": 6822},
+    {"t": "words", "text": "REAL.", "x": 1280, "y": 580, "size": 160, "color": "orange", "at": 6833}
+   ]}
+ ]
+}

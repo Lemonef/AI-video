@@ -1,0 +1,199 @@
+{
+ "_doc": "p07 shot list. Same schema as p01.json. Frames from words/p07.json. Story: he had rules, ten -> wrote them like a business manual for lying -> 1 patient listener, let them talk -> 2 never look bored -> 3 wait for their politics, then agree.",
+ "part": "p07",
+ "f0": 4466,
+ "f1": 5200,
+ "shots": [
+  {
+   "f0": 4466,
+   "f1": 4555,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_writing_desk.png",
+     "x": 600,
+     "y": 1000,
+     "h": 660,
+     "at": 4479
+    },
+    {
+     "t": "words",
+     "text": "10 RULES",
+     "x": 1300,
+     "y": 420,
+     "size": 160,
+     "at": 4516,
+     "color": "orange"
+    }
+   ]
+  },
+  {
+   "f0": 4555,
+   "f1": 4690,
+   "bg": {
+    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "zoom": [
+     1.0,
+     1.08
+    ]
+   },
+   "els": [
+    {
+     "t": "words",
+     "text": "A BUSINESS MANUAL",
+     "x": 960,
+     "y": 380,
+     "size": 100,
+     "at": 4603
+    },
+    {
+     "t": "words",
+     "text": "FOR LYING.",
+     "x": 960,
+     "y": 540,
+     "size": 120,
+     "at": 4633,
+     "color": "orange"
+    },
+    {
+     "t": "underline",
+     "x": 960,
+     "y": 620,
+     "w": 520,
+     "at": 4645
+    }
+   ]
+  },
+  {
+   "f0": 4690,
+   "f1": 4895,
+   "bg": {
+    "plate": "ink60full/plates/liner_cabin_night.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "tag",
+     "text": "RULE 1",
+     "x": 960,
+     "y": 150,
+     "at": 4699
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_rapt_listening.png",
+     "x": 560,
+     "y": 1000,
+     "h": 640,
+     "at": 4735
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/mark_talking_gesturing.png",
+     "x": 1360,
+     "y": 1000,
+     "h": 640,
+     "at": 4782
+    },
+    {
+     "t": "words",
+     "text": "BE A PATIENT LISTENER",
+     "x": 960,
+     "y": 280,
+     "size": 80,
+     "at": 4735
+    }
+   ]
+  },
+  {
+   "f0": 4895,
+   "f1": 5005,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "tag",
+     "text": "RULE 2",
+     "x": 960,
+     "y": 150,
+     "at": 4907
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_5.png",
+     "x": 600,
+     "y": 1000,
+     "h": 660,
+     "at": 4924
+    },
+    {
+     "t": "words",
+     "text": "BORED",
+     "x": 1360,
+     "y": 500,
+     "size": 120,
+     "at": 4948
+    },
+    {
+     "t": "cross",
+     "x": 1360,
+     "y": 500,
+     "size": 360,
+     "at": 4956
+    }
+   ]
+  },
+  {
+   "f0": 5005,
+   "f1": 5200,
+   "bg": {
+    "plate": "ink60full/plates/elite_banquet_table_night.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "tag",
+     "text": "RULE 3",
+     "x": 960,
+     "y": 150,
+     "at": 5031
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/loud_braggart_shouting.png",
+     "x": 1360,
+     "y": 1000,
+     "h": 640,
+     "at": 5085
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_nodding_agree.png",
+     "x": 560,
+     "y": 1000,
+     "h": 640,
+     "at": 5140
+    },
+    {
+     "t": "words",
+     "text": "THEN AGREE.",
+     "x": 960,
+     "y": 300,
+     "size": 100,
+     "at": 5140,
+     "color": "orange"
+    }
+   ]
+  }
+ ]
+}

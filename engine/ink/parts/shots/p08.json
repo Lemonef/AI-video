@@ -1,0 +1,233 @@
+{
+ "_doc": "p08 shot list. Same schema as p01.json. Frames from words/p08.json. Story: 4 never boast -> 5 never be shabby, rich trust clean shoes -> notice what is missing: no rule says be clever; careful, calm, kind -> best con men are not the loudest, they are the ones you are glad to meet -> one afternoon in Paris he used almost all of them.",
+ "part": "p08",
+ "f0": 5200,
+ "f1": 6120,
+ "shots": [
+  {
+   "f0": 5200,
+   "f1": 5285,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "tag",
+     "text": "RULE 4",
+     "x": 960,
+     "y": 150,
+     "at": 5216
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/loud_braggart_shouting.png",
+     "x": 640,
+     "y": 1000,
+     "h": 660,
+     "at": 5240
+    },
+    {
+     "t": "words",
+     "text": "NEVER BOAST",
+     "x": 1360,
+     "y": 420,
+     "size": 100,
+     "at": 5249
+    },
+    {
+     "t": "cross",
+     "x": 640,
+     "y": 660,
+     "size": 520,
+     "at": 5258
+    }
+   ]
+  },
+  {
+   "f0": 5285,
+   "f1": 5470,
+   "bg": {
+    "plate": "ink60full/plates/tailor_shop_mirror.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "tag",
+     "text": "RULE 5",
+     "x": 960,
+     "y": 150,
+     "at": 5301
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_rehearsing_mirror.png",
+     "x": 640,
+     "y": 1000,
+     "h": 680,
+     "at": 5301
+    },
+    {
+     "t": "words",
+     "text": "NEVER BE SHABBY",
+     "x": 1340,
+     "y": 320,
+     "size": 90,
+     "at": 5337
+    },
+    {
+     "t": "tag",
+     "text": "CLEAN SHOES",
+     "x": 1340,
+     "y": 760,
+     "at": 5402
+    }
+   ]
+  },
+  {
+   "f0": 5470,
+   "f1": 5740,
+   "bg": {
+    "card": true
+   },
+   "els": [
+    {
+     "t": "words",
+     "text": "NOT ONE RULE SAYS",
+     "x": 960,
+     "y": 220,
+     "size": 80,
+     "at": 5517
+    },
+    {
+     "t": "words",
+     "text": "BE CLEVER",
+     "x": 960,
+     "y": 480,
+     "size": 120,
+     "at": 5566
+    },
+    {
+     "t": "cross",
+     "x": 960,
+     "y": 480,
+     "size": 260,
+     "at": 5576
+    },
+    {
+     "t": "tag",
+     "text": "CAREFUL",
+     "x": 480,
+     "y": 720,
+     "at": 5623
+    },
+    {
+     "t": "tag",
+     "text": "CALM",
+     "x": 960,
+     "y": 720,
+     "at": 5654
+    },
+    {
+     "t": "tag",
+     "text": "KIND",
+     "x": 1440,
+     "y": 720,
+     "at": 5682
+    }
+   ]
+  },
+  {
+   "f0": 5740,
+   "f1": 5930,
+   "bg": {
+    "plate": "ink60full/plates/crillon_salon_chandeliers.png",
+    "zoom": [
+     1.0,
+     1.06
+    ]
+   },
+   "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/loud_braggart_shouting.png",
+     "x": 520,
+     "y": 1000,
+     "h": 640,
+     "at": 5787
+    },
+    {
+     "t": "words",
+     "text": "LOUDEST",
+     "x": 520,
+     "y": 260,
+     "size": 90,
+     "at": 5787
+    },
+    {
+     "t": "cross",
+     "x": 520,
+     "y": 260,
+     "size": 300,
+     "at": 5800
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_polyglot_greeting.png",
+     "x": 1360,
+     "y": 1000,
+     "h": 660,
+     "at": 5848
+    },
+    {
+     "t": "words",
+     "text": "GLAD TO MEET",
+     "x": 1360,
+     "y": 260,
+     "size": 90,
+     "at": 5865,
+     "color": "orange"
+    }
+   ]
+  },
+  {
+   "f0": 5930,
+   "f1": 6120,
+   "bg": {
+    "plate": "ink60full/plates/paris_skyline_extreme_wide.png",
+    "zoom": [
+     1.0,
+     1.08
+    ]
+   },
+   "els": [
+    {
+     "t": "words",
+     "text": "ONE AFTERNOON",
+     "x": 960,
+     "y": 220,
+     "size": 100,
+     "at": 6000
+    },
+    {
+     "t": "words",
+     "text": "IN PARIS",
+     "x": 960,
+     "y": 360,
+     "size": 120,
+     "at": 6019,
+     "color": "orange"
+    },
+    {
+     "t": "tag",
+     "text": "ALMOST ALL OF THEM",
+     "x": 960,
+     "y": 900,
+     "at": 6052
+    }
+   ]
+  }
+ ]
+}
