@@ -1,0 +1,39 @@
+{
+ "_doc": "p24 shot list (final part). Same schema as p01.json. Frames from words/p24.json. Story: so what was the sentence -> give people a reason to feel special and they will help you fool them -> the tower never moved -> the man who sold it only borrowed a little of our oldest weakness -> if this story surprised you, tell me which part of the con you would have fallen for. f1 = master.wav end (654.533 s x 30 fps = 19636).",
+ "part": "p24",
+ "f0": 19090,
+ "f1": 19636,
+ "shots": [
+  {"f0": 19090, "f1": 19295, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_whisper.png", "x": 1460, "y": 1000, "h": 640, "at": 19105},
+    {"t": "words", "text": "THE SENTENCE:", "x": 620, "y": 180, "size": 85, "at": 19113},
+    {"t": "words", "text": "GIVE PEOPLE A REASON", "x": 620, "y": 380, "size": 75, "at": 19165},
+    {"t": "words", "text": "TO FEEL SPECIAL,", "x": 620, "y": 580, "size": 90, "color": "orange", "at": 19194},
+    {"t": "words", "text": "THEY WILL HELP YOU", "x": 620, "y": 770, "size": 75, "at": 19229},
+    {"t": "words", "text": "FOOL THEM.", "x": 620, "y": 940, "size": 110, "color": "red", "at": 19251}
+   ]},
+  {"f0": 19295, "f1": 19385, "bg": {"plate": "ink60full/plates/tower_low_angle_up.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "words", "text": "THE TOWER", "x": 960, "y": 220, "size": 95, "at": 19302},
+    {"t": "words", "text": "NEVER MOVED.", "x": 960, "y": 460, "size": 140, "color": "orange", "at": 19314},
+    {"t": "words", "text": "THE MAN WHO SOLD IT", "x": 960, "y": 760, "size": 85, "at": 19354}
+   ]},
+  {"f0": 19385, "f1": 19475, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_walking_profile_case.png", "x": 460, "y": 1000, "h": 640, "at": 19385},
+    {"t": "words", "text": "ONLY BORROWED", "x": 1300, "y": 220, "size": 90, "at": 19390},
+    {"t": "words", "text": "A LITTLE OF", "x": 1300, "y": 420, "size": 85, "at": 19407},
+    {"t": "words", "text": "OUR OLDEST", "x": 1300, "y": 620, "size": 90, "at": 19417},
+    {"t": "words", "text": "WEAKNESS.", "x": 1300, "y": 850, "size": 130, "color": "orange", "at": 19432}
+   ]},
+  {"f0": 19475, "f1": 19636, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_point_viewer.png", "x": 1460, "y": 1000, "h": 640, "at": 19483},
+    {"t": "words", "text": "SURPRISED?", "x": 620, "y": 220, "size": 110, "at": 19500},
+    {"t": "words", "text": "WHICH PART OF THE CON", "x": 620, "y": 450, "size": 75, "at": 19542},
+    {"t": "words", "text": "WOULD YOU HAVE", "x": 620, "y": 660, "size": 85, "at": 19569},
+    {"t": "words", "text": "FALLEN FOR?", "x": 620, "y": 880, "size": 130, "color": "orange", "at": 19584}
+   ]}
+ ]
+}
