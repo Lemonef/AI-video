@@ -1,0 +1,29 @@
+{
+  "_note": "Story parts for the per-part rebuild (Zen 2026-11-15: build each part like the 10 s proof). Cut on story-scene boundaries of the LOCKED VO (timeline_full.json); first/last beat inclusive. Times are derived from timeline_full.json, never stored here.",
+  "parts": [
+    {"id": "p01", "name": "Hook: sold the tower twice", "first": "b01", "last": "b05"},
+    {"id": "p02", "name": "The tower: built to be torn down", "first": "b06", "last": "b10"},
+    {"id": "p03", "name": "Rust, bills, the newspaper question", "first": "b11", "last": "b14"},
+    {"id": "p04", "name": "What Lustig saw: a story already told", "first": "x01", "last": "x03"},
+    {"id": "p05", "name": "Who he was: diplomat look, no gun", "first": "b15", "last": "b17"},
+    {"id": "p06", "name": "Forty names, files that disagree", "first": "x04", "last": "x06"},
+    {"id": "p07", "name": "Ocean liners and the ten rules", "first": "b18", "last": "b21"},
+    {"id": "p08", "name": "Rules four, five: calm beats clever", "first": "x07", "last": "b22"},
+    {"id": "p09", "name": "The costume: forged ministry", "first": "b23", "last": "b26"},
+    {"id": "p10", "name": "The stage and the audience", "first": "b27", "last": "b33"},
+    {"id": "p11", "name": "One afternoon, no second take", "first": "b34", "last": "x12"},
+    {"id": "p12", "name": "The pitch: a state secret", "first": "b35", "last": "b38"},
+    {"id": "p13", "name": "Limousines: the tower as inventory", "first": "b39", "last": "x14"},
+    {"id": "p14", "name": "Picking Andre Poisson", "first": "b41", "last": "b44"},
+    {"id": "p15", "name": "The wife, the bribe, the small sin", "first": "b45", "last": "b49"},
+    {"id": "p16", "name": "A seat at the table, cash, Vienna", "first": "x15", "last": "b51"},
+    {"id": "p17", "name": "Silence: shame does the work", "first": "b52", "last": "b56"},
+    {"id": "p18", "name": "Poisson waits", "first": "x17", "last": "x19"},
+    {"id": "p19", "name": "He did it again, and why he could not stop", "first": "b57", "last": "x22"},
+    {"id": "p20", "name": "America: the money box", "first": "b61", "last": "x25"},
+    {"id": "p21", "name": "Al Capone's fifty thousand", "first": "b64", "last": "b69"},
+    {"id": "p22", "name": "The trust was the con", "first": "x26", "last": "b70"},
+    {"id": "p23", "name": "Bedsheet rope, Alcatraz, apprentice salesman", "first": "b71", "last": "x29"},
+    {"id": "p24", "name": "The sentence", "first": "b75", "last": "b78"}
+  ]
+}
