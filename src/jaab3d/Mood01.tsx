@@ -458,13 +458,11 @@ const EndQuestion: React.FC<{ t: number }> = ({ t }) => {
 // ---------- sound: one voice take + cue'd foley ----------
 type Sfx = { at: number; sound: string; vol: number; len?: number };
 const SFX: Sfx[] = [
-  { at: 0.02, sound: "boom", vol: 0.55 },
   { at: SC.morning.start, sound: "whoosh", vol: 0.25 },
   { at: EV.setB, sound: "whoosh", vol: 0.3 },
   { at: EV.horn1, sound: "horn", vol: 0.5 },
   { at: EV.horn2, sound: "horn", vol: 0.45 },
   { at: EV.horn3, sound: "horn", vol: 0.45 },
-  { at: EV.flowA - 1.0, sound: "riser", vol: 0.35 },
   { at: EV.flowB - 0.6, sound: "wind", vol: 0.35, len: 6 },
   { at: EV.flowB, sound: "rain", vol: 0.32, len: EV.clearDone - EV.flowB },
   { at: EV.strike, sound: "boom", vol: 0.8 },

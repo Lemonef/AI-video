@@ -2,6 +2,7 @@ import {LiftJolt,LiftDoors,LiftRecognize,LiftAwkward,LiftPanel,LobbyGuard,LiftBi
 import {FloodRing,FloodRewind,FloodStall,FloodDecoy,FloodUpload,FloodCount,FloodChairSwing,FloodDoorLatch,FloodWindowSignal,FloodSearchlight,FloodArrest,FloodBatteryDie,FloodDawnChair,FloodFinale} from '../v7/FloodFinale';
 import {FloodWide,FloodHall,FloodCarry,FloodBoat,FloodPhone,FloodLock,FloodWindow} from '../v7/Flood';
 import {FloodEvidence,FloodRoute,FloodPassage,FloodGroup,FloodChair,FloodBarricade,FloodRecord,FloodRearDoor,FloodSurrounded,FloodExtort,FloodRescue,FloodBattery,FloodPressure} from '../v7/FloodEscape';
+import {ShrineHook,ShrineBell,ShrineDog,ShrineMonk,ShrineOffer,ShrineChant,ShrineClash,ShrineDomain,ShrineLotus,ShrineExit} from '../v7/SukunaShrine';
 import React from 'react';
 import {H, W} from '../lib/tokens';
 import type {EnvProps} from '../v2/Forest';
@@ -238,6 +239,7 @@ export const ENV5: Record<string, React.FC<EnvProps>> = {
  liftJolt:LiftJolt,liftDoors:LiftDoors,liftRecognize:LiftRecognize,liftAwkward:LiftAwkward,liftPanel:LiftPanel,lobbyGuard:LobbyGuard,liftBicker:LiftBicker,lobbyCrowd:LobbyCrowd,liftQuestion:LiftQuestion,liftPressure:LiftPressure,liftEmpty:LiftEmpty,lobbyHold:LobbyHold,lobbyGesture:LobbyGesture,liftCafe:LiftCafe,liftRing:LiftRing,lobbyPeak:LobbyPeak,liftCatCall:LiftCatCall,liftCafeKitten:LiftCafeKitten,lobbyDoorsOpen:LobbyDoorsOpen,liftDoorsStop:LiftDoorsStop,lobbyExit:LobbyExit,
  floodRing:FloodRing,floodRewind:FloodRewind,floodStall:FloodStall,floodDecoy:FloodDecoy,floodUpload:FloodUpload,floodCount:FloodCount,floodChairSwing:FloodChairSwing,floodDoorLatch:FloodDoorLatch,floodWindowSignal:FloodWindowSignal,floodSearchlight:FloodSearchlight,floodArrest:FloodArrest,floodBatteryDie:FloodBatteryDie,floodDawnChair:FloodDawnChair,floodFinale:FloodFinale,
  floodEvidence:FloodEvidence,floodRoute:FloodRoute,floodPassage:FloodPassage,floodGroup:FloodGroup,floodChair:FloodChair,floodBarricade:FloodBarricade,floodRecord:FloodRecord,floodRearDoor:FloodRearDoor,floodSurrounded:FloodSurrounded,floodExtort:FloodExtort,floodRescue:FloodRescue,floodBattery:FloodBattery,floodPressure:FloodPressure,
+ shrineHook:ShrineHook,shrineBell:ShrineBell,shrineDog:ShrineDog,shrineMonk:ShrineMonk,shrineOffer:ShrineOffer,shrineChant:ShrineChant,shrineClash:ShrineClash,shrineDomain:ShrineDomain,shrineLotus:ShrineLotus,shrineExit:ShrineExit,
  floodWide:FloodWide,floodHall:FloodHall,floodCarry:FloodCarry,floodBoat:FloodBoat,floodPhone:FloodPhone,floodLock:FloodLock,floodWindow:FloodWindow,
 	forestDepth: ForestDepth,
 	forestSide: ForestSide,
