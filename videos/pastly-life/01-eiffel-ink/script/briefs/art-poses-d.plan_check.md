@@ -1,7 +1,3 @@
-# Plan check art-poses-d
-
-Reviewed by multi_ai_check fan-out 2026-11-15 (Groq Qwen, OpenRouter Nemotron, Gemini FIX; omniroute, Cohere PASS); valid fixes folded in (context refs, layout, no-crowd, prop rule, cross-contaminated steps). Template shared by all art briefs; pilots plates-a and poses-a checked visually by main session.
-
-brief-sha256: af290f311dea9c8155ce506ff9e97621ea169626b06415426961d6e0f5d232d0
-
+Review 2026-11-15: Codex gpt-6.1-sol (read-only) reviewed this exact brief text and returned VERDICT: PASS, no concrete defects, after earlier FIX rounds were applied.
+brief-sha256: 6fee13bc219db63b509ef440cdb9af901eb0326b3ac85d1abfa4d050265d9a3e
 VERDICT: PASS
