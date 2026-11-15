@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Chip, Dust, PAPER, Vignette, Watermark, useIn} from './InkProof';
+import {Chip, Dust, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkProof';
 import {Element} from '../parts/elements';
 import type {Part, Shot} from '../parts/schema';
 import p01 from '../parts/shots/p01.json';
@@ -16,10 +16,22 @@ const BUILT_PARTS = [p01, p02, p03, p04, p05] as unknown as Part[];
 export const INK_BUILT_FRAMES = BUILT_PARTS[BUILT_PARTS.length - 1].f1;
 // Paper halo behind hand-lettered words on photo/plate backgrounds: a tight ring keeps glyph edges crisp,
 // a wide soft glow lifts accent colours (orange on a warm sky or rust) off busy backgrounds. Cards need none.
-const HALO = [...Array(3).fill(`0 0 4px ${PAPER}`), ...Array(3).fill(`0 0 16px ${PAPER}`)].join(',');
+const HALO_RING = 4, HALO_GLOW = 16; // px blur radii: tight ring, wide glow
+const HALO = [...Array(3).fill(`0 0 ${HALO_RING}px ${PAPER}`), ...Array(3).fill(`0 0 ${HALO_GLOW}px ${PAPER}`)].join(',');
+// Chromium paints text-shadow once per text paint pass, so with paint-order stroke-fill the fill pass's paper
+// shadow lands ON the ink stroke and greys it out. Keylined words take the halo as a filter instead: it shadows
+// the composited stroke+fill, so it stays behind both. Chained drop-shadows compound, so one ring + one glow.
+const HALO_FILTER = `drop-shadow(0 0 ${HALO_RING}px ${PAPER}) drop-shadow(0 0 ${HALO_GLOW}px ${PAPER})`;
+// Accent-coloured words (orange/red/green/teal) are mid-tones: a paper glow alone cannot separate them from a
+// warm plate (orange on a sunset sky or rust). They get an ink keyline, the same INK outline the art gives every
+// coloured fill (bag, flame). paint-order draws the stroke under the fill, so half the width shows: LINE*2/3 = 6px
+// stroke ~ 3px rim, thinner than sprite lines (LINE) so letters stay hand-lettered, not bubble text.
+const KEYLINE = {WebkitTextStroke: `${Math.round(LINE * 2 / 3)}px ${INK}`, paintOrder: 'stroke fill'} as const;
 const Elements: React.FC<{shot: Shot}> = ({shot}) => <>{shot.els.map((el, i) => {
   const content = <Element el={el} shotF0={shot.f0} shotF1={shot.f1}/>;
-  if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={{textShadow: !('card' in shot.bg) && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
+  const onScene = !('card' in shot.bg);
+  const accentWords = onScene && el.t === 'words' && 'color' in el && el.color !== undefined;
+  if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={accentWords ? {...KEYLINE, filter: HALO_FILTER} : {textShadow: onScene && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
   return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}>{content}</svg>;
 })}</>;
 const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
