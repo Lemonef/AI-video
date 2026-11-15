@@ -393,3 +393,4 @@ export const InkProof: React.FC = () => (
     ))}
   </AbsoluteFill>
 );
+export {Words, Underline, Card, useIn, GREEN, RED};
