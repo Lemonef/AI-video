@@ -1,0 +1,67 @@
+{
+ "_doc": "p19 shot list. Same schema as p01.json. Frames from words/p19.json. Story: a few months later Lustig came back to Paris and did it again -> new dealers, same hotel, same script -> this time one went to the police -> Lustig left France that night, did not stay to count his luck -> the part most retellings skip: he had already won, a fortune and a clean exit -> but a con man who stops is just a thief with a hobby -> he needed the story to keep going -> what caught him was not the police but the need to be believed again. f1 = p20 first word (15244) minus 15.",
+ "part": "p19",
+ "f0": 14234,
+ "f1": 15229,
+ "shots": [
+  {"f0": 14234, "f1": 14370, "bg": {"plate": "ink60full/plates/hotel_crillon_facade_day.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_official_tailcoat.png", "x": 480, "y": 1000, "h": 660, "at": 14249},
+    {"t": "words", "text": "MONTHS LATER", "x": 1300, "y": 220, "size": 90, "at": 14249},
+    {"t": "words", "text": "BACK IN PARIS", "x": 1300, "y": 440, "size": 90, "at": 14320},
+    {"t": "words", "text": "AGAIN.", "x": 1300, "y": 700, "size": 160, "color": "orange", "at": 14348}
+   ]},
+  {"f0": 14370, "f1": 14490, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_whisper.png", "x": 1420, "y": 1000, "h": 660, "at": 14374},
+    {"t": "words", "text": "NEW DEALERS", "x": 620, "y": 220, "size": 90, "at": 14374},
+    {"t": "words", "text": "SAME HOTEL", "x": 620, "y": 440, "size": 90, "at": 14422},
+    {"t": "words", "text": "SAME SCRIPT.", "x": 620, "y": 680, "size": 110, "color": "orange", "at": 14451}
+   ]},
+  {"f0": 14490, "f1": 14575, "bg": {"plate": "ink60full/plates/paris_police_station.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/dealer_reporting.png", "x": 1420, "y": 1000, "h": 660, "at": 14495},
+    {"t": "words", "text": "THIS TIME", "x": 620, "y": 220, "size": 90, "at": 14495},
+    {"t": "words", "text": "ONE WENT", "x": 620, "y": 440, "size": 100, "at": 14519},
+    {"t": "words", "text": "TO THE POLICE.", "x": 620, "y": 680, "size": 100, "color": "orange", "at": 14537}
+   ]},
+  {"f0": 14575, "f1": 14705, "bg": {"plate": "ink60full/plates/paris_train_station_night.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_glance_over_shoulder.png", "x": 480, "y": 1000, "h": 660, "at": 14581},
+    {"t": "words", "text": "LEFT FRANCE", "x": 1300, "y": 220, "size": 90, "at": 14591},
+    {"t": "words", "text": "THAT NIGHT.", "x": 1300, "y": 460, "size": 130, "color": "orange", "at": 14609},
+    {"t": "words", "text": "NO TIME TO COUNT", "x": 1300, "y": 720, "size": 80, "at": 14641}
+   ]},
+  {"f0": 14705, "f1": 14890, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_counting_cash.png", "x": 460, "y": 1000, "h": 640, "at": 14713},
+    {"t": "words", "text": "THE PART MOST SKIP", "x": 1300, "y": 200, "size": 80, "at": 14721},
+    {"t": "words", "text": "HE HAD ALREADY WON.", "x": 1300, "y": 420, "size": 85, "color": "orange", "at": 14788},
+    {"t": "underline", "x": 1300, "y": 490, "w": 860, "at": 14799},
+    {"t": "words", "text": "+ A FORTUNE", "x": 1300, "y": 660, "size": 85, "at": 14830},
+    {"t": "words", "text": "+ A CLEAN EXIT", "x": 1300, "y": 860, "size": 85, "at": 14853}
+   ]},
+  {"f0": 14890, "f1": 15000, "bg": {"plate": "ink60full/plates/tailor_shop_mirror.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_rehearsing_mirror.png", "x": 480, "y": 1000, "h": 660, "at": 14897},
+    {"t": "words", "text": "A CON MAN", "x": 1300, "y": 200, "size": 90, "at": 14903},
+    {"t": "words", "text": "WHO STOPS", "x": 1300, "y": 380, "size": 90, "at": 14923},
+    {"t": "words", "text": "= A THIEF", "x": 1300, "y": 620, "size": 130, "color": "orange", "at": 14955},
+    {"t": "words", "text": "WITH A HOBBY", "x": 1300, "y": 840, "size": 80, "at": 14966}
+   ]},
+  {"f0": 15000, "f1": 15090, "bg": {"plate": "ink60full/plates/desk_topdown_papers.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "words", "text": "LUSTIG NEEDED", "x": 960, "y": 320, "size": 100, "at": 15006},
+    {"t": "words", "text": "THE STORY", "x": 960, "y": 570, "size": 150, "color": "orange", "at": 15032},
+    {"t": "words", "text": "TO KEEP GOING.", "x": 960, "y": 820, "size": 90, "at": 15048}
+   ]},
+  {"f0": 15090, "f1": 15229, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "WHAT CAUGHT HIM?", "x": 960, "y": 200, "size": 90, "at": 15106},
+    {"t": "words", "text": "THE POLICE", "x": 960, "y": 440, "size": 100, "at": 15156},
+    {"t": "cross", "x": 960, "y": 440, "size": 280, "at": 15165},
+    {"t": "words", "text": "THE NEED TO BE BELIEVED", "x": 960, "y": 720, "size": 90, "color": "orange", "at": 15183},
+    {"t": "underline", "x": 960, "y": 800, "w": 1100, "at": 15201}
+   ]}
+ ]
+}
