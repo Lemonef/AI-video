@@ -1,0 +1,64 @@
+{
+ "_doc": "p23 shot list. Same schema as p01.json. Frames from words/p23.json. Story: in 1935 his luck ended -> the Secret Service caught him with counterfeit money -> escaped a New York jail on a rope of bedsheets -> caught again, sent to Alcatraz -> moved to a prison hospital in Missouri, died of pneumonia in 1947 -> death certificate lists his occupation as apprentice salesman -> the man who sold the most famous building in the world died an apprentice -> no money, no title, just a tidy number on a form. f1 = p24 first word (19105) minus 15.",
+ "part": "p23",
+ "f0": 18039,
+ "f1": 19090,
+ "shots": [
+  {"f0": 18039, "f1": 18130, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "1935", "x": 960, "y": 380, "size": 200, "at": 18058},
+    {"t": "words", "text": "HIS LUCK ENDED.", "x": 960, "y": 700, "size": 110, "color": "red", "at": 18102}
+   ]},
+  {"f0": 18130, "f1": 18230, "bg": {"plate": "ink60full/plates/police_records_office.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/secret_service_agent.png", "x": 1420, "y": 1000, "h": 660, "at": 18138},
+    {"t": "words", "text": "THE SECRET SERVICE", "x": 620, "y": 240, "size": 85, "at": 18138},
+    {"t": "words", "text": "CAUGHT HIM WITH", "x": 620, "y": 480, "size": 85, "at": 18155},
+    {"t": "words", "text": "COUNTERFEIT MONEY.", "x": 620, "y": 720, "size": 95, "color": "orange", "at": 18179}
+   ]},
+  {"f0": 18230, "f1": 18345, "bg": {"plate": "ink60full/plates/federal_jail_exterior_night.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_rope_escape.png", "x": 480, "y": 1000, "h": 660, "at": 18237},
+    {"t": "words", "text": "ESCAPED", "x": 1300, "y": 220, "size": 120, "color": "orange", "at": 18239},
+    {"t": "words", "text": "A NEW YORK JAIL", "x": 1300, "y": 460, "size": 85, "at": 18262},
+    {"t": "words", "text": "ON A BEDSHEET ROPE", "x": 1300, "y": 700, "size": 80, "at": 18299}
+   ]},
+  {"f0": 18345, "f1": 18480, "bg": {"plate": "ink60full/plates/alcatraz_island_fog.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_arrested.png", "x": 480, "y": 1000, "h": 660, "at": 18350},
+    {"t": "words", "text": "CAUGHT AGAIN.", "x": 1300, "y": 260, "size": 100, "at": 18373},
+    {"t": "words", "text": "SENT TO", "x": 1300, "y": 480, "size": 85, "at": 18431},
+    {"t": "words", "text": "ALCATRAZ.", "x": 1300, "y": 720, "size": 150, "color": "orange", "at": 18441}
+   ]},
+  {"f0": 18480, "f1": 18665, "bg": {"plate": "ink60full/plates/prison_hospital_ward.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_sick_bed.png", "x": 480, "y": 1000, "h": 660, "at": 18507},
+    {"t": "words", "text": "A PRISON HOSPITAL", "x": 1300, "y": 220, "size": 85, "at": 18523},
+    {"t": "words", "text": "MISSOURI", "x": 1300, "y": 440, "size": 100, "at": 18548},
+    {"t": "words", "text": "PNEUMONIA", "x": 1300, "y": 660, "size": 95, "at": 18592},
+    {"t": "words", "text": "1947", "x": 1300, "y": 880, "size": 130, "color": "red", "at": 18614}
+   ]},
+  {"f0": 18665, "f1": 18805, "bg": {"plate": "ink60full/plates/desk_topdown_papers.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "words", "text": "DEATH CERTIFICATE", "x": 960, "y": 220, "size": 100, "at": 18682},
+    {"t": "words", "text": "OCCUPATION:", "x": 960, "y": 460, "size": 90, "at": 18723},
+    {"t": "stamp", "text": "APPRENTICE SALESMAN", "x": 960, "y": 720, "rot": -6, "color": "red", "at": 18752}
+   ]},
+  {"f0": 18805, "f1": 18950, "bg": {"card": true},
+   "els": [
+    {"t": "tower", "x": 460, "y": 960, "h": 640},
+    {"t": "words", "text": "THE MAN WHO SOLD", "x": 1300, "y": 220, "size": 85, "at": 18818},
+    {"t": "words", "text": "THE MOST FAMOUS", "x": 1300, "y": 420, "size": 85, "at": 18847},
+    {"t": "words", "text": "BUILDING IN THE WORLD", "x": 1300, "y": 620, "size": 75, "at": 18864},
+    {"t": "words", "text": "DIED AN APPRENTICE.", "x": 1300, "y": 860, "size": 90, "color": "orange", "at": 18915}
+   ]},
+  {"f0": 18950, "f1": 19090, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_prison_sad.png", "x": 1460, "y": 1000, "h": 640, "at": 18961},
+    {"t": "words", "text": "NO MONEY.", "x": 620, "y": 220, "size": 100, "at": 18961},
+    {"t": "words", "text": "NO TITLE.", "x": 620, "y": 460, "size": 100, "at": 18990},
+    {"t": "words", "text": "JUST A TIDY NUMBER", "x": 620, "y": 700, "size": 85, "color": "orange", "at": 19020},
+    {"t": "words", "text": "ON A FORM.", "x": 620, "y": 900, "size": 85, "color": "orange", "at": 19047}
+   ]}
+ ]
+}
