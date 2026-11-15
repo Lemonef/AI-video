@@ -1,0 +1,43 @@
+{
+ "_doc": "p16 shot list. Same schema as p01.json. Frames from words/p16.json. Story: there was a second reason it worked -> Poisson was new to the city's business elite; everyone else had a name, he wanted one -> Lustig did not sell him a tower, he sold him a seat at the table -> Poisson paid for the tower and paid the bribe on top -> Lustig took the cash, took the train and left for Vienna. f1 = p17 first word (13012) minus 15.",
+ "part": "p16",
+ "f0": 12379,
+ "f1": 12997,
+ "shots": [
+  {"f0": 12379, "f1": 12445, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "A SECOND REASON", "x": 960, "y": 360, "size": 110, "at": 12400},
+    {"t": "words", "text": "IT WORKED.", "x": 960, "y": 620, "size": 140, "color": "orange", "at": 12427},
+    {"t": "underline", "x": 960, "y": 710, "w": 760, "at": 12434}
+   ]},
+  {"f0": 12445, "f1": 12620, "bg": {"plate": "ink60full/plates/elite_banquet_table_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_looking_up.png", "x": 1420, "y": 1000, "h": 660, "at": 12450},
+    {"t": "words", "text": "NEW TO THE ELITE", "x": 620, "y": 220, "size": 90, "at": 12466},
+    {"t": "words", "text": "THEY HAD A NAME", "x": 620, "y": 440, "size": 90, "at": 12523},
+    {"t": "words", "text": "HE WANTED ONE.", "x": 620, "y": 680, "size": 120, "color": "orange", "at": 12568}
+   ]},
+  {"f0": 12620, "f1": 12735, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_lean_murmur.png", "x": 460, "y": 1000, "h": 660, "at": 12624},
+    {"t": "words", "text": "A TOWER", "x": 1280, "y": 280, "size": 100, "at": 12659},
+    {"t": "cross", "x": 1280, "y": 280, "size": 260, "at": 12672},
+    {"t": "words", "text": "A SEAT AT THE TABLE", "x": 1260, "y": 600, "size": 90, "color": "orange", "at": 12699},
+    {"t": "underline", "x": 1260, "y": 680, "w": 900, "at": 12714}
+   ]},
+  {"f0": 12735, "f1": 12870, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_handing_cash.png", "x": 460, "y": 1000, "h": 640, "at": 12741},
+    {"t": "words", "text": "PAID FOR THE TOWER", "x": 1300, "y": 300, "size": 80, "at": 12757},
+    {"t": "words", "text": "+ THE BRIBE", "x": 1300, "y": 520, "size": 120, "color": "orange", "at": 12818},
+    {"t": "underline", "x": 1300, "y": 600, "w": 640, "at": 12835}
+   ]},
+  {"f0": 12870, "f1": 12997, "bg": {"plate": "ink60full/plates/paris_train_station_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_walking_profile_case.png", "x": 480, "y": 1000, "h": 660, "at": 12878},
+    {"t": "words", "text": "TOOK THE CASH", "x": 1300, "y": 240, "size": 90, "at": 12889},
+    {"t": "words", "text": "TOOK THE TRAIN", "x": 1300, "y": 440, "size": 90, "at": 12920},
+    {"t": "words", "text": "VIENNA.", "x": 1300, "y": 700, "size": 150, "color": "orange", "at": 12965}
+   ]}
+ ]
+}
