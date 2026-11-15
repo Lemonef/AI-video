@@ -8,7 +8,7 @@
     "tests": {"depth": 2, "ext": null},
     "_archive": {"depth": null, "ext": null}
   },
-  "ignored_dirs": ["out"],
+  "ignored_dirs": [],
   "top_level_files": ["ARCHITECTURE.md", "README.md", "CLAUDE.md", ".mcp.json", "package.json", "package-lock.json", "tsconfig.json", "remotion.config.ts", ".gitignore"],
   "asset_subdirs": {"engine": ["shared"]},
   "docs_loose_ext": [".md", ".txt"],
@@ -18,6 +18,6 @@
   "_note_legacy": "Frozen list: pre-existing per-version folders moved under engine/legacy/ (restructure phase 3), so nothing is exempt at the engine/ top any more. Never add to it.",
   "_note_render_entries": "Engine top folders that are a separate Remotion entry point (own index.tsx, own public dir), not a per-version/style copy of the main engine. jaab3d = the 3D shorts entry (engine/jaab3d/index.tsx). Add only for a real second entry point.",
   "_note_asset_subdirs": "engine/shared/ holds the shared public-dir assets (fonts, sfx, reference-study) staged into every render, so the engine code-extension rule does not apply there.",
-  "_note_ignored_dirs": "Gitignored top-level dirs that still exist on disk: listed in ARCHITECTURE.md, never tracked. out/ goes away when the restructure's phase 8 migrates the old renders.",
+  "_note_ignored_dirs": "Gitignored top-level dirs that still exist on disk: listed in ARCHITECTURE.md, never tracked. Empty since 2026-11-16: out/ was emptied and removed (outputs live in the video's draft/ or final/, intermediates in .build/).",
   "_note_depth": "depth = path parts of a tracked file incl. top dir; null = no limit (_archive is frozen data). videos/<channel>/<id>/assets/approved/<id>/x.mp3 = 7; tools/pipeline/tts/x.py = 4; docs/briefs/x.md = 3."
 }

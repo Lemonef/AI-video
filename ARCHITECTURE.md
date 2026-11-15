@@ -12,11 +12,10 @@ One file that says where everything goes. `tests/test_architecture.py` fails if 
 | `docs/` | guides flat; `briefs/`, `agent-logs/`, `reference/`, `TODO.md` | max 3 levels |
 | `tests/` | pytest + node tests, flat | one place |
 | `_archive/` | retired data kept for the record (e.g. `episodes/` drafts) | frozen; nothing reads it |
-| `out/` | old renders and logs, gitignored | legacy: new outputs go to the video's `final/` or `draft/`; emptied by the restructure's migration (phase 8) |
 
 ## Practices
 - One place per thing. A new top-level dir needs a row above AND an entry in `tests/architecture.json`.
-- Outputs only in the video's `final/` (what gets posted) or `draft/` (drafts, `draft/versions/`); intermediates in the hidden `.build/`. Never commit renders.
+- Outputs only in the video's `final/` (what gets posted) or `draft/`; intermediates in the hidden `.build/`. Never commit renders. `draft/` root holds only the current full-res cut; `draft/versions/` = superseded cuts; `draft/previews/` = compressed copies made to send/watch (a preview is not a version). Stills, render logs and scratch audio go to `.build/<channel>-<video>/` (`stills/`, `logs/`). No top-level `out/`: it was emptied 2026-11-16 (old previews -> `draft/previews/`, the one kept wav -> `.build/pastly-life-01-eiffel-ink/legacy-out/`).
 - Data, assets and outputs for an episode live in `videos/<channel>/<video>/script/<id>.json`, `videos/<channel>/<video>/assets/<id>/`, `videos/<channel>/<video>/final/`; docs in `videos/<channel>/<video>/script/docs/<id>/`; one-off scripts in `tools/episode/`.
 - Remotion reads one public dir per render: `tools/pipeline/stage.py` hardlinks `engine/shared/`, the channel `_shared/` and the video's `assets/` into `.build/<channel>-<video>/public/` and checks every `staticFile()` path first. Never edit a staged file (it is a hardlink to the original).
 - Delete rejected experiments after logging why in `docs/`.
