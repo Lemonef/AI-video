@@ -72,3 +72,23 @@ def test_legacy_src_entries_still_exist():
 def test_ignored_dirs_are_never_tracked():
     bad = [str(p) for p in tracked() if p.parts[0] in SPEC["ignored_dirs"]]
     assert not bad, f"renders/logs must stay gitignored: {bad[:5]}"
+
+
+# Output layout on disk (gitignored, so tracked() cannot see it). Zen 2026-11-16: superseded cuts, previews,
+# stills and logs kept piling up in draft/ root and out/ was never emptied - a note did not stop it, this does.
+DRAFT_SUBDIRS = {"versions", "previews"}  # change together with ARCHITECTURE.md '## Practices' output line
+
+
+def test_output_dirs_follow_the_layout():
+    bad = [f"top-level out/ exists: {p}" for p in [ROOT / "out"] if p.exists()]
+    for draft in ROOT.glob("videos/*/*/draft"):
+        cuts = [p for p in draft.iterdir() if p.is_file() and p.suffix == ".mp4"]
+        if len(cuts) > 1:
+            bad.append(f"{draft}: {len(cuts)} cuts in root, keep only the current one (old -> versions/, compressed -> previews/)")
+        bad += [f"{p}: not a cut, belongs in .build/" for p in draft.iterdir() if p.is_file() and p.suffix != ".mp4"]
+        bad += [f"{p}: draft/ subdir must be one of {sorted(DRAFT_SUBDIRS)}" for p in draft.iterdir()
+                if p.is_dir() and p.name not in DRAFT_SUBDIRS]
+        for sub in DRAFT_SUBDIRS:
+            if (draft / sub).is_dir():
+                bad += [f"{p}: only .mp4 in {sub}/" for p in (draft / sub).iterdir() if p.suffix != ".mp4"]
+    assert not bad, "\n".join(bad)
