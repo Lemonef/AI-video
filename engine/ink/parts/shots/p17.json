@@ -1,0 +1,42 @@
+{
+ "_doc": "p17 shot list. Same schema as p01.json. Frames from words/p17.json. Story: in Vienna Lustig bought newspapers every morning and waited -> nothing: no headline, no arrests, no manhunt, silence -> because Poisson had done something he could not undo: paid a bribe to buy a national monument -> going to the police would make him the man who tried to bribe a minister and lost -> shame did the work Lustig no longer had to do. f1 = p18 first word (13769) minus 15.",
+ "part": "p17",
+ "f0": 12997,
+ "f1": 13754,
+ "shots": [
+  {"f0": 12997, "f1": 13100, "bg": {"plate": "ink60full/plates/vienna_cafe_morning.png", "zoom": [1.0, 1.05]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_reading_newspaper.png", "x": 480, "y": 1000, "h": 660, "at": 13012},
+    {"t": "words", "text": "EVERY MORNING", "x": 1300, "y": 260, "size": 90, "at": 13038},
+    {"t": "words", "text": "WAITED.", "x": 1300, "y": 500, "size": 120, "color": "orange", "at": 13067}
+   ]},
+  {"f0": 13100, "f1": 13250, "bg": {"card": true},
+   "els": [
+    {"t": "words", "text": "NO HEADLINE", "x": 960, "y": 200, "size": 100, "at": 13125},
+    {"t": "words", "text": "NO ARRESTS", "x": 960, "y": 400, "size": 100, "at": 13154},
+    {"t": "words", "text": "NO MANHUNT", "x": 960, "y": 600, "size": 100, "at": 13182},
+    {"t": "words", "text": "SILENCE.", "x": 960, "y": 850, "size": 150, "color": "orange", "at": 13205}
+   ]},
+  {"f0": 13250, "f1": 13480, "bg": {"plate": "ink60full/plates/poisson_parlour_night.png", "zoom": [1.0, 1.06]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_head_in_hands.png", "x": 1420, "y": 1000, "h": 660, "at": 13266},
+    {"t": "words", "text": "COULD NOT UNDO", "x": 620, "y": 240, "size": 90, "at": 13323},
+    {"t": "words", "text": "A BRIBE", "x": 620, "y": 460, "size": 100, "at": 13398},
+    {"t": "words", "text": "FOR A MONUMENT", "x": 620, "y": 680, "size": 100, "color": "orange", "at": 13433}
+   ]},
+  {"f0": 13480, "f1": 13640, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_humiliated.png", "x": 460, "y": 1000, "h": 640, "at": 13494},
+    {"t": "words", "text": "GO TO THE POLICE?", "x": 1300, "y": 220, "size": 90, "at": 13504},
+    {"t": "words", "text": "THE MAN WHO", "x": 1300, "y": 420, "size": 80, "at": 13549},
+    {"t": "words", "text": "BRIBED A MINISTER", "x": 1300, "y": 560, "size": 80, "at": 13572},
+    {"t": "stamp", "text": "AND LOST", "x": 1300, "y": 780, "rot": -8, "color": "red", "at": 13604}
+   ]},
+  {"f0": 13640, "f1": 13754, "bg": {"plate": "ink60full/plates/vienna_street_dusk.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_walking_profile_case.png", "x": 480, "y": 1000, "h": 660, "at": 13645},
+    {"t": "words", "text": "SHAME", "x": 1300, "y": 320, "size": 160, "color": "orange", "at": 13651},
+    {"t": "words", "text": "DID THE WORK.", "x": 1300, "y": 580, "size": 100, "at": 13673}
+   ]}
+ ]
+}
