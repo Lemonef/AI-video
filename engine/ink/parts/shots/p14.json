@@ -1,0 +1,37 @@
+{
+ "_doc": "p14 shot list. Same schema as p01.json. Frames from words/p14.json. Story: the moment a buyer pictures owning the thing he has already started to pay -> Lustig watched them carefully and picked his target -> Andre Poisson, a businessman with money but no place in the Parisian elite -> Poisson wanted to be taken seriously -> Lustig gave him exactly that feeling. f1 = p15 first word (11260) minus 15.",
+ "part": "p14",
+ "f0": 10527,
+ "f1": 11245,
+ "shots": [
+  {"f0": 10527, "f1": 10730, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/buyer_amazed.png", "x": 480, "y": 1000, "h": 660, "at": 10560},
+    {"t": "words", "text": "PICTURES OWNING IT", "x": 1300, "y": 320, "size": 90, "at": 10577},
+    {"t": "words", "text": "ALREADY PAYING.", "x": 1300, "y": 520, "size": 120, "color": "orange", "at": 10642},
+    {"t": "underline", "x": 1300, "y": 600, "w": 820, "at": 10672}
+   ]},
+  {"f0": 10730, "f1": 10865, "bg": {"plate": "ink60full/plates/crillon_salon_chandeliers.png", "zoom": [1.0, 1.06], "origin": "50% 40%"},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/lustig_rapt_listening.png", "x": 1400, "y": 1000, "h": 680, "at": 10739},
+    {"t": "words", "text": "WATCHED CAREFULLY", "x": 620, "y": 300, "size": 90, "at": 10750},
+    {"t": "stamp", "text": "TARGET", "x": 620, "y": 560, "rot": -8, "color": "red", "at": 10820}
+   ]},
+  {"f0": 10865, "f1": 11070, "bg": {"plate": "ink60full/plates/elite_banquet_table_night.png", "zoom": [1.06, 1.0]},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_proud.png", "x": 1420, "y": 1000, "h": 660, "at": 10871},
+    {"t": "tag", "text": "ANDRÉ POISSON", "x": 560, "y": 200, "at": 10882},
+    {"t": "words", "text": "MONEY", "x": 500, "y": 430, "size": 100, "at": 10951},
+    {"t": "tick", "x": 820, "y": 430, "at": 10958},
+    {"t": "words", "text": "ELITE", "x": 500, "y": 660, "size": 100, "at": 11024},
+    {"t": "cross", "x": 500, "y": 660, "size": 200, "at": 11030}
+   ]},
+  {"f0": 11070, "f1": 11245, "bg": {"card": true},
+   "els": [
+    {"t": "sprite", "src": "ink60/cast/scrap_dealer_lapels.png", "x": 460, "y": 1000, "h": 640, "at": 11077},
+    {"t": "words", "text": "TAKEN SERIOUSLY", "x": 1300, "y": 190, "size": 100, "at": 11106},
+    {"t": "sprite", "src": "ink60/cast/lustig_handshake.png", "x": 1380, "y": 1000, "h": 560, "flip": true, "at": 11157},
+    {"t": "words", "text": "THAT FEELING.", "x": 1300, "y": 330, "size": 90, "color": "orange", "at": 11205}
+   ]}
+ ]
+}
