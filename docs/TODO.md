@@ -14,7 +14,8 @@
   - [x] SFX dropped (ink_audio --no-sfx) + music louder (bed ~8-10 dB under speech) -> .build/.../remix-nosfx/master_music.wav; muxed on v3 video -> draft/versions/ink_ep01_v4sound_first1min_send.mp4, sent
   - [x] Zen: "this music is bad, find something better + better sound effects" (2026-11-16). Root cause old bed 475737 = 95% energy <200 Hz, phone speakers cannot play it. CC0 music + SFX shortlist in listening folder -> Zen picks -> remix with picked track + real SFX placed from render shot JSONs -> picked 3 (621294) 2026-11-17
   - [x] Audio stems written separately (voice.wav / music.wav / sfx.wav / final_mix.wav); Zen confused master_music.wav = full mix -> .build/pastly-life-01-eiffel-ink/remix-v4sound
-  - [ ] Zen picks a first minute, v4sound or v4nomusic (refs mostly have no music, 2026-11-17) -> v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
+  - [x] Zen picked v4nomusic first minute 2026-11-17 ("ok no sound", "this one good") = no music track, voice+pad+sparse SFX; v3 card merge OK
+  - [ ] v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
   - [ ] Zen OK on draft/ cleanup (~2.4 GB old builds) — asked, not yet answered
@@ -36,7 +37,7 @@
     - [x] generator tools/ink/make_v3_shots.py -> engine/ink/parts/shots_v3/ (merges at f0 143, 1001, 1263)
     - [x] InkFirstMinV3 composition, tsc clean; stills f200/f1120/f1370 checked, no overlap/cut-off
     - [x] render + send (57.2 s) draft/versions/ink_ep01_v3_first1min.mp4: 21 shots (was 24), shortest 1.8 s (was 1.0 s)
-    - [ ] Zen verdict; if OK apply same merge pass to p03-p24 (only after he confirms)
+    - [x] Zen OK (v4nomusic first minute uses v3 video, 2026-11-17) -> merge pass p03-p24 goes into v4 full
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
