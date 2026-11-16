@@ -1,5 +1,13 @@
 # TODO — the only place live status lives
 
+## NOW 2026-11-16 — Pastly Life ink ep01 polish (read first)
+- [x] FINAL render `draft/current/ink_ep01_full.mp4` (p01-p24)
+- [x] Scene-switch "weird sound" diagnosed: no SFX/clicks (151 cuts measured); music bed swells ~+10 dB in VO gaps
+      that sit on cuts (e.g. 147.9->149.3 s across p07 cut 148.87 s) = duck release/pump
+- [ ] Zen OK -> remix master with flat bed level between lines + VO edge fades, re-render (master LOCKED until OK)
+- [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
+- [ ] Zen picks logo -> replace placeholder `Watermark` (engine/ink/compositions/InkProof.tsx:195), re-render
+
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
 - [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `engine/jaab3d/`
 - [x] mood01 built: no main character, simple end question, no A/B; 84.7 s 1080x1920
