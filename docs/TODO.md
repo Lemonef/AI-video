@@ -316,5 +316,5 @@
 - [x] v7 = v6 minus split 402 (Zen: full-frame Capone mugshot "bad", v4 polaroid-on-office better); shots_v7 via make_v5_shots.py v7, full comp on v7, tsc OK
 - [x] v7 render stopped: Zen 2026-11-17 "it was good at v4 but then you try to do more than everything broke"
 - [x] v8 = v4 shots + only the 1888 photo split (make_v5_shots.py v8, 21 cuts), full comp on v8, tsc OK
-- [ ] full render InkEp01Full -> versions/01-v8.mp4 + 01-v8-share.mp4 (running), send + open
+- [x] full render 01-v8.mp4 (654.5 s) + 01-v8-share.mp4 (2-pass 960p 280k, 27.6 MiB) sent proactive 03:10 (Zen asleep, open on return)
 - [ ] p03-p24 rebuild to v4 effort: every scene made for its line, real images + white explainer cards + diagrams + charts where the line needs them; same effect level every scene (no quarter drop)
