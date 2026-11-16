@@ -317,8 +317,8 @@
 - [x] v7 render stopped: Zen 2026-11-17 "it was good at v4 but then you try to do more than everything broke"
 - [x] v8 = v4 shots + only the 1888 photo split (make_v5_shots.py v8, 21 cuts), full comp on v8, tsc OK
 - [x] full render 01-v8.mp4 (654.5 s) + 01-v8-share.mp4 (2-pass 960p 280k, 27.6 MiB) sent proactive 03:10 (Zen asleep, open on return)
-- [ ] p03-p24 rebuild to v4 effort: every scene made for its line, real images + white explainer cards + diagrams + charts where the line needs them; same effect level every scene (no quarter drop)
+- [x] p03-p24 rebuild to v4 effort: every scene made for its line, real images + white explainer cards + diagrams + charts where the line needs them; same effect level every scene (no quarter drop)
   - [x] generator tools/ink/make_v9_shots.py: 151 shots p03-p24, per-sentence scenes (plates+sprites w/ camera, white cards, bars, flow, real photos, stamps, crosses)
   - [x] BarsEl + FlowEl elements (schema.ts, elements.tsx); InkParts full comp = v8 p01-p02 + v9 p03-p24, tsc clean
   - [x] frame-safe fit pass (stage->frame affine incl. cam + plate zoom): 45 words shifted/shrunk; 151 stills (tools/ink/v9_stills.mjs) read on 13 sheets, no clipping
-  - [ ] full render 01-v9.mp4 + share copy, send
+  - [x] full render 01-v9.mp4 (654.5 s, EXIT 0) + 01-v9-share.mp4 (2-pass 960p 280k, 27.7 MiB), spot frames 120/300/302/450 s OK, sent proactive 03:44 (Zen asleep, open on return)
