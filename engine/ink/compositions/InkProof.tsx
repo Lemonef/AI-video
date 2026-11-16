@@ -192,11 +192,16 @@ const CaptionPill: React.FC<{text: string}> = ({text}) => (
   </div>
 );
 
+// Channel mark (Zen 2026-11-16 picked GPT logo #10). PNG built by
+// videos/pastly-life/brand/logo/watermark/make_wm_rewind.py into the public dir.
+// Size/opacity match the approved corner mockup (WM_HEIGHT=72, opacity 0.8 there); change together.
+const WM_SIZE = 72;
+const WM_OPACITY = 0.8;
 const Watermark: React.FC = () => (
-  <svg width={64} height={64} style={{position: 'absolute', right: 36, bottom: 30, opacity: 0.55}} viewBox="0 0 64 64">
-    <circle cx={32} cy={32} r={28} fill="none" stroke={INK} strokeWidth={5} />
-    <path d="M20 40 L32 14 L44 40 M24 32 L40 32" fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />
-  </svg>
+  <Img
+    src={staticFile('brand/wm_rewind.png')}
+    style={{position: 'absolute', right: 36, bottom: 30, width: WM_SIZE, height: WM_SIZE, opacity: WM_OPACITY}}
+  />
 );
 
 // ---------- white cards ----------

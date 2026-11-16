@@ -4,14 +4,17 @@
 - [x] FINAL render `draft/current/ink_ep01_full.mp4` (p01-p24)
 - [x] Scene-switch "weird sound" diagnosed: no SFX/clicks (151 cuts measured); music bed swells ~+10 dB in VO gaps
       that sit on cuts (e.g. 147.9->149.3 s across p07 cut 148.87 s) = duck release/pump
-- [ ] Zen OK -> remix master with flat bed level between lines + VO edge fades, re-render (master LOCKED until OK)
+- [ ] Music fix (Zen 2026-11-16 "where is the background music"): bed was -23 dB vs mix
+  - [x] music_bed.py: loudnorm bed to TARGET-10 LU, duck threshold derived for 6 dB dip, release 1200 ms -> -13.6 dB vs mix, -19 under speech
+  - [ ] re-render + Zen listens (VO edge fades still open)
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
 - [ ] Zen picks logo -> replace placeholder `Watermark` (engine/ink/compositions/InkProof.tsx:195), re-render
       - [ ] Zen floated the 2-line Ink Free wordmark "PASTLY / LIFE" with an orange underline: advised wordmark for watermark/banner + icon (GPT #10 or PL) for avatar; awaiting "go"
       - [x] Zen: "watermark should be simple, want more designs" -> 12 simple Ink Free watermarks `videos/pastly-life/brand/logo/watermark/` wm_01..12 + wm_sheet + wm_corners_1to1 (true size in frame), viewed, sent
-      - [ ] Zen picks wm number -> wire into Watermark, re-render
+      - [x] Zen picked GPT #10 -> make_wm_rewind.py -> assets/brand/wm_rewind.png, Watermark = Img 72px @0.8 (still checked frame 1200)
+      - [ ] full re-render verified
 
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
 - [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `engine/jaab3d/`
