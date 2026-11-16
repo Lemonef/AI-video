@@ -18,7 +18,7 @@
     - [x] generator videos/pastly-life/01-eiffel-ink/v2/make_v2_shots.py -> engine/ink/parts/shots_v2/
     - [x] InkFirstMinV2 composition
     - [x] stills checked; fixed 6 cut-offs (SOLD, GOT AWAY, ESCAPED, ticks, chimney quote, redact bars)
-    - [ ] render + send to Zen (draft/versions/ink_ep01_v2_first1min.mp4)
+    - [x] render + send to Zen (57.2 s, sent 2026-11-16) (draft/versions/ink_ep01_v2_first1min.mp4)
     - [ ] Zen verdict -> roll out to p03-p24
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
