@@ -17,5 +17,9 @@ export type ChimneyEl = Position & {t: 'chimney'; h: number; at: number; done: n
 export type RadioEl = Position & Entry & {t: 'radio'};
 export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | TimelineEl | ChimneyEl | RadioEl;
 export type Background = {plate: string; zoom: [number, number]; origin?: string} | {photo: string; push: [number, number]; origin?: string; pos?: string} | {card: true};
-export type Shot = {f0: number; f1: number; bg: Background; chip?: string; chipAt?: number; els: El[]};
+// Virtual camera over the whole shot (background + elements): [scale, focusX, focusY] in 1920x1080 stage px.
+// The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to
+// across `span` (fraction of the shot, default 1). Shots without `cam` render exactly as before.
+export type Cam = {from: [number, number, number]; to: [number, number, number]; span?: number};
+export type Shot = {f0: number; f1: number; bg: Background; cam?: Cam; chip?: string; chipAt?: number; els: El[]};
 export type Part = {_doc?: string; part: string; f0: number; f1: number; shots: Shot[]};

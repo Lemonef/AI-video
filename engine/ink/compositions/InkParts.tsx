@@ -1,8 +1,10 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Chip, Dust, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkProof';
 import {Element} from '../parts/elements';
-import type {Part, Shot} from '../parts/schema';
+import type {Cam, Part, Shot} from '../parts/schema';
+import v2p01 from '../parts/shots_v2/p01.json';
+import v2p02 from '../parts/shots_v2/p02.json';
 import p01 from '../parts/shots/p01.json';
 import p02 from '../parts/shots/p02.json';
 import p03 from '../parts/shots/p03.json';
@@ -53,6 +55,17 @@ const Elements: React.FC<{shot: Shot}> = ({shot}) => <>{shot.els.map((el, i) => 
   if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={accentWords ? {...KEYLINE, filter: HALO_FILTER} : {textShadow: onScene && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
   return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}>{content}</svg>;
 })}</>;
+const STAGE_W = 1920, STAGE_H = 1080; // composition size (Root.tsx); the camera frames this stage
+// Holds the eased focus point at frame centre at the eased scale; translate is clamped to [stage*(1-s), 0]
+// so a zoomed stage never exposes its edge.
+const Camera: React.FC<{cam: Cam; len: number; children: React.ReactNode}> = ({cam, len, children}) => {
+  const f = useCurrentFrame();
+  const t = interpolate(f, [0, Math.max(1, (len - 1) * (cam.span ?? 1))], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic)});
+  const [s, fx, fy] = cam.from.map((a, i) => a + (cam.to[i] - a) * t);
+  const tx = Math.min(0, Math.max(STAGE_W * (1 - s), STAGE_W / 2 - s * fx));
+  const ty = Math.min(0, Math.max(STAGE_H * (1 - s), STAGE_H / 2 - s * fy));
+  return <AbsoluteFill style={{transform: `translate(${tx}px, ${ty}px) scale(${s})`, transformOrigin: '0 0'}}>{children}</AbsoluteFill>;
+};
 const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
   const f = useCurrentFrame(); const bg = shot.bg; const len = shot.f1 - shot.f0;
   const chip = useIn((shot.chipAt ?? shot.f0) - shot.f0);
@@ -66,8 +79,13 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
   } else if ('card' in bg && bg.card === true) {
     layer = <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
   } else throw new Error(`Unknown background kind: ${Object.keys(bg).join(', ')}`);
+  if (shot.cam) layer = <Camera cam={shot.cam} len={len}>{layer}</Camera>;
   return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><Chip text={shot.chip}/></AbsoluteFill>}</AbsoluteFill>;
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 export const InkFirstMin: React.FC = () => <><InkParts parts={[part01, part02]}/><Audio src={staticFile('ink60full/master.wav')}/></>;
+// v2 (Zen 2026-11-16): same parts + voice, plus a camera plan and fewer bare paper cards. v1 stays untouched.
+const V2_PARTS = [v2p01, v2p02] as unknown as Part[];
+export const INK_FIRSTMIN_V2_FRAMES = V2_PARTS[V2_PARTS.length - 1].f1;
+export const InkFirstMinV2: React.FC = () => <><InkParts parts={V2_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
 export const InkBuilt: React.FC = () => <><InkParts parts={BUILT_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
