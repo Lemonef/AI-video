@@ -7,6 +7,12 @@
 - [ ] Music fix (Zen 2026-11-16 "where is the background music"): bed was -23 dB vs mix
   - [x] music_bed.py: loudnorm bed to TARGET-10 LU, duck threshold derived for 6 dB dip, release 1200 ms -> -13.6 dB vs mix, -19 under speech
   - [ ] re-render + Zen listens (VO edge fades still open)
+- [ ] Background/camera audit (Zen 2026-11-16 "enough background... various camera angle?")
+  - [x] Audit: 152 shots = 92 plate (45 distinct images, 409 s) + 56 paper cards (236 s, 36%) + 4 PD photos;
+        plates vary angle (extreme wide, birdseye, low-angle up, top-down desk, close-up rust, framed doorway);
+        weak: stickman always full-body eye-level same size, 85% of moves = same slow centre push-in 1.00->1.06,
+        ~half of 20 s samples are paper cards, some near-empty (lone stickman on blank paper)
+  - [ ] Zen "go" on fix: camera grammar (wide/medium/close via zoom+origin, pans, pull-outs) + turn near-empty cards into plates
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
