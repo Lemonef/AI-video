@@ -122,7 +122,8 @@ SPLITS = {
 # drawn-in build (chimney), go back to the v3 shot.
 # v7 drops 402 (Zen 2026-11-17: pulling the Capone polaroid out of the office into its own full-frame shot
 # broke a scene that already worked; v3's polaroid-on-office comes back).
-VERSIONS = {'v5': set(SPLITS), 'v6': {402, 666, 1001, 1263}, 'v7': {666, 1001, 1263}}
+# v8 (Zen 2026-11-17: "it was good at v4 ... you try to do more than everything broke") = v4 shots, only the 1888 photo split he liked.
+VERSIONS = {'v5': set(SPLITS), 'v6': {402, 666, 1001, 1263}, 'v7': {666, 1001, 1263}, 'v8': {1001}}
 
 
 def bg_key(s):

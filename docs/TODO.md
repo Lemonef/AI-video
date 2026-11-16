@@ -314,4 +314,7 @@
 - [x] draft/current deleted on Zen ask (old v1 full, 935 MB, old audio) - the FINAL-render line above points to a file that no longer exists
 - [x] drafts renamed: versions/ = full only (01-v1, 01-v1-lowres, 01-v1-share), previews/ = partial (01-v0..v6 first1min/parts)
 - [x] v7 = v6 minus split 402 (Zen: full-frame Capone mugshot "bad", v4 polaroid-on-office better); shots_v7 via make_v5_shots.py v7, full comp on v7, tsc OK
-- [ ] full render InkEp01Full -> versions/01-v7.mp4 + 01-v7-share.mp4 (running), send + open, quality per quarter
+- [x] v7 render stopped: Zen 2026-11-17 "it was good at v4 but then you try to do more than everything broke"
+- [x] v8 = v4 shots + only the 1888 photo split (make_v5_shots.py v8, 21 cuts), full comp on v8, tsc OK
+- [ ] full render InkEp01Full -> versions/01-v8.mp4 + 01-v8-share.mp4 (running), send + open
+- [ ] p03-p24 rebuild to v4 effort: every scene made for its line, real images + white explainer cards + diagrams + charts where the line needs them; same effect level every scene (no quarter drop)
