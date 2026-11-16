@@ -8,6 +8,9 @@
   - [x] music_bed.py: loudnorm bed to TARGET-10 LU, duck threshold derived for 6 dB dip, release 1200 ms -> -13.6 dB vs mix, -19 under speech
   - [x] re-render (v1 full 654.5 s, -14.8 LUFS); logo OK per Zen 2026-11-16
   - [ ] Zen listens to music bed (VO edge fades still open)
+  - [x] "Cut sound" re-check (Zen 2026-11-16 v3): 78 VO clips padded 220-495 ms both ends (not chopped); v3 mp4 audio == master.wav (0 diffs >6 dB)
+  - [ ] Suspect: single-pass loudnorm in music_bed.py = dynamic gain riding (bed swells in gaps / start ramp) -> two-pass linear loudnorm, rebuild, measure gap levels, re-render
+- [ ] Real photos only early (Zen 2026-11-16): 8 PD photos all in p01/p02/p06 (<=2:29 of 10:54); p03-p24 zero -> source more PD photos for later story beats (needs Zen OK on list)
 - [x] Background/camera audit (Zen 2026-11-16 "enough background... various camera angle?") -> v2 REJECTED, v1 stays
   - [x] Audit: 152 shots = 92 plate (45 distinct images, 409 s) + 56 paper cards (236 s, 36%) + 4 PD photos;
         plates vary angle (extreme wide, birdseye, low-angle up, top-down desk, close-up rust, framed doorway);
