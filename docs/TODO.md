@@ -12,6 +12,8 @@
   - [x] loudnorm gain-riding suspect RULED OUT: mix-vs-voice offset steady -3.3 dB (p5 -4.1 / p95 -1.8) over 10.9 min
   - [x] ROOT CAUSE: ink_audio.py adds synthetic whoosh (beat start, incl. t=0) + pop (every shot) at -16 dB, timed to the OLD timeline_full shot splits; first 57 s = 25 SFX, only 4 within 3 frames of a real cut -> clicks mid-shot. Earlier "no SFX" diagnosis was wrong (checked only at real cuts)
   - [x] SFX dropped (ink_audio --no-sfx) + music louder (bed ~8-10 dB under speech) -> .build/.../remix-nosfx/master_music.wav; muxed on v3 video -> draft/versions/ink_ep01_v4sound_first1min_send.mp4, sent
+  - [ ] Zen: "this music is bad, find something better + better sound effects" (2026-11-16). Root cause old bed 475737 = 95% energy <200 Hz, phone speakers cannot play it. CC0 music + SFX shortlist in listening folder -> Zen picks -> remix with picked track + real SFX placed from render shot JSONs
+  - [ ] Audio stems written separately (voice.wav / music.wav / sfx.wav / final_mix.wav); Zen confused master_music.wav = full mix
   - [ ] Zen OK on v4sound first minute -> v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
