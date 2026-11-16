@@ -14,7 +14,7 @@
   - [x] SFX dropped (ink_audio --no-sfx) + music louder (bed ~8-10 dB under speech) -> .build/.../remix-nosfx/master_music.wav; muxed on v3 video -> draft/versions/ink_ep01_v4sound_first1min_send.mp4, sent
   - [x] Zen: "this music is bad, find something better + better sound effects" (2026-11-16). Root cause old bed 475737 = 95% energy <200 Hz, phone speakers cannot play it. CC0 music + SFX shortlist in listening folder -> Zen picks -> remix with picked track + real SFX placed from render shot JSONs -> picked 3 (621294) 2026-11-17
   - [x] Audio stems written separately (voice.wav / music.wav / sfx.wav / final_mix.wav); Zen confused master_music.wav = full mix -> .build/pastly-life-01-eiffel-ink/remix-v4sound
-  - [ ] Zen OK on v4sound first minute -> v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
+  - [ ] Zen picks a first minute, v4sound or v4nomusic (refs mostly have no music, 2026-11-17) -> v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
   - [ ] Zen OK on draft/ cleanup (~2.4 GB old builds) — asked, not yet answered
