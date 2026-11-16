@@ -16,7 +16,9 @@
   - [x] Audio stems written separately (voice.wav / music.wav / sfx.wav / final_mix.wav); Zen confused master_music.wav = full mix -> .build/pastly-life-01-eiffel-ink/remix-v4sound
   - [x] Zen picked v4nomusic first minute 2026-11-17 ("ok no sound", "this one good") = no music track, voice+pad+sparse SFX; v3 card merge OK
   - [ ] v4 full: new master + merge pass + even-quality pass p03-p24, full re-render; first min >=26 cuts, rest 20-24/min (new pictures, hard cuts); payoff-first hook kept (b01); Ink lessons, not a copy (D:/second-brain/docs/ink-episode-quality-bar.md)
-    - [ ] v5 first minute for Zen (2026-11-17 "show me anyway as a new v"): same VO, >=26 cuts from new/extra pictures
+    - [x] v5 first minute sent 2026-11-17: 26 cuts at scene>0.3 in 57.2 s (v4 16); 9 long v3 shots split into new pictures on word starts; tools/ink/make_v5_shots.py -> engine/ink/parts/shots_v5; InkFirstMinV5; draft/versions/ink_ep01_v5_first1min(_share).mp4
+    - [ ] Zen verdict on v5 first minute
+    - [ ] NO DROP (Zen 2026-11-17 "most important"): same split method p03-p24 to 20-24 cuts/min every quarter; quality_by_quarter.py reports cuts/min per quarter, fails if a quarter >10% under Q1
     - [ ] publish pack: Zen picks title/thumb/desc (videos/pastly-life/01-eiffel-ink/script/publish.md)
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
