@@ -15,7 +15,7 @@
   - [x] Zen: "this music is bad, find something better + better sound effects" (2026-11-16). Root cause old bed 475737 = 95% energy <200 Hz, phone speakers cannot play it. CC0 music + SFX shortlist in listening folder -> Zen picks -> remix with picked track + real SFX placed from render shot JSONs -> picked 3 (621294) 2026-11-17
   - [x] Audio stems written separately (voice.wav / music.wav / sfx.wav / final_mix.wav); Zen confused master_music.wav = full mix -> .build/pastly-life-01-eiffel-ink/remix-v4sound
   - [x] Zen picked v4nomusic first minute 2026-11-17 ("ok no sound", "this one good") = no music track, voice+pad+sparse SFX; v3 card merge OK
-  - [ ] v4 full: new master + merge pass + even-quality pass p03-p24, full re-render
+  - [ ] v4 full: new master + merge pass + even-quality pass p03-p24, full re-render; pace floor 24-30 cuts/min + Ink hook formula (D:/second-brain/research/channels/2026-11-17-ink-explainer-channel-study.md)
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
   - [ ] Zen OK on draft/ cleanup (~2.4 GB old builds) — asked, not yet answered
