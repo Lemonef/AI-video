@@ -15,14 +15,14 @@
         ~half of 20 s samples are paper cards, some near-empty (lone stickman on blank paper)
   - [x] v2 first minute (camera grammar + fewer bare cards; v1 untouched)
     - [x] `cam` field in schema + Camera in InkParts
-    - [x] generator videos/pastly-life/01-eiffel-ink/v2/make_v2_shots.py -> engine/ink/parts/shots_v2/
+    - [x] generator tools/ink/make_v2_shots.py -> engine/ink/parts/shots_v2/
     - [x] InkFirstMinV2 composition
     - [x] stills checked; fixed 6 cut-offs (SOLD, GOT AWAY, ESCAPED, ticks, chimney quote, redact bars)
     - [x] render + send to Zen (57.2 s, sent 2026-11-16) (draft/versions/ink_ep01_v2_first1min.mp4)
     - [x] Zen verdict 2026-11-16: "too dissy", "wrose than v1" -> REJECTED, no rollout; v2 code kept (unused) for reference
           lesson: camera move on every ~2.4 s cut = dizzy; first minute pacing 24 shots/57 s (2.4 s avg) vs 4.3 s rest of ep
 - [ ] v3 first minute = v1 + short cards merged (Zen 2026-11-16 picked option A: "ok sho me v3 the a")
-    - [x] generator videos/pastly-life/01-eiffel-ink/v3/make_v3_shots.py -> engine/ink/parts/shots_v3/ (merges at f0 143, 1001, 1263)
+    - [x] generator tools/ink/make_v3_shots.py -> engine/ink/parts/shots_v3/ (merges at f0 143, 1001, 1263)
     - [x] InkFirstMinV3 composition, tsc clean; stills f200/f1120/f1370 checked, no overlap/cut-off
     - [x] render + send (57.2 s) draft/versions/ink_ep01_v3_first1min.mp4: 21 shots (was 24), shortest 1.8 s (was 1.0 s)
     - [ ] Zen verdict; if OK apply same merge pass to p03-p24 (only after he confirms)
