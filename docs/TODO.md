@@ -9,6 +9,7 @@
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
 - [ ] Zen picks logo -> replace placeholder `Watermark` (engine/ink/compositions/InkProof.tsx:195), re-render
+      - [ ] Zen floated the 2-line Ink Free wordmark "PASTLY / LIFE" with an orange underline: advised wordmark for watermark/banner + icon (GPT #10 or PL) for avatar; awaiting "go"
 
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
 - [x] jaab3d engine (three.js world via @remotion/three; 2D card cast; weather kit) `engine/jaab3d/`
