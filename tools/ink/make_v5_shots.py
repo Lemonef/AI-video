@@ -120,7 +120,9 @@ SPLITS = {
 # v6 (Zen 2026-11-17 review of v5: 0:03-0:04, 0:29, 0:32, ~0:50 rush + 0:50, 0:53-0:54 worse; liked 0:36): keep only the
 # splits whose new picture was made FOR its line; library plates picked to pad the cut count, and splits that halve a
 # drawn-in build (chimney), go back to the v3 shot.
-VERSIONS = {'v5': set(SPLITS), 'v6': {402, 666, 1001, 1263}}
+# v7 drops 402 (Zen 2026-11-17: pulling the Capone polaroid out of the office into its own full-frame shot
+# broke a scene that already worked; v3's polaroid-on-office comes back).
+VERSIONS = {'v5': set(SPLITS), 'v6': {402, 666, 1001, 1263}, 'v7': {666, 1001, 1263}}
 
 
 def bg_key(s):

@@ -313,4 +313,5 @@
 ## 2026-11-17 drafts housekeeping
 - [x] draft/current deleted on Zen ask (old v1 full, 935 MB, old audio) - the FINAL-render line above points to a file that no longer exists
 - [x] drafts renamed: versions/ = full only (01-v1, 01-v1-lowres, 01-v1-share), previews/ = partial (01-v0..v6 first1min/parts)
-- [ ] full render InkEp01Full -> rename to versions/01-v6.mp4 + 01-v6-share.mp4, send + open, quality per quarter
+- [x] v7 = v6 minus split 402 (Zen: full-frame Capone mugshot "bad", v4 polaroid-on-office better); shots_v7 via make_v5_shots.py v7, full comp on v7, tsc OK
+- [ ] full render InkEp01Full -> versions/01-v7.mp4 + 01-v7-share.mp4 (running), send + open, quality per quarter
