@@ -109,3 +109,7 @@ const V6_PARTS = [v6p01, v6p02] as unknown as Part[];
 export const INK_FIRSTMIN_V6_FRAMES = V6_PARTS[V6_PARTS.length - 1].f1;
 export const InkFirstMinV6: React.FC = () => <><InkParts parts={V6_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
 export const InkBuilt: React.FC = () => <><InkParts parts={BUILT_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
+// Full episode: v6 opening (Zen OK 2026-11-17) + p03-p24 as built, on the approved mix.
+const EP01_FULL_PARTS = [v6p01, v6p02, ...BUILT_PARTS.slice(2)] as unknown as Part[];
+export const INK_EP01_FULL_FRAMES = EP01_FULL_PARTS[EP01_FULL_PARTS.length - 1].f1;
+export const InkEp01Full: React.FC = () => <><InkParts parts={EP01_FULL_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;

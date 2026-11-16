@@ -20,7 +20,7 @@
     - [x] Zen verdict on v5 (2026-11-17): 0:03-04, 0:29, 0:32, ~0:50 rush, 0:53-54 worse (padding plates, chimney halved); liked 0:36
     - [x] v6 first minute 2026-11-17: v3 + splits 402/666/1001/1263 only (make_v5_shots.py v6 -> shots_v6, InkFirstMinV6), 24 shots; draft/versions/ink_ep01_v6_first1min(_share).mp4 sent + opened
     - [x] v6 audio fix 2026-11-17 (Zen: "how is that weird sound effect back"): v5/v6 comps played old ink60full/master.wav (music + old SFX); now EPISODE_AUDIO = ink60full/master_v4nomusic.wav (copy of remix-v4sound/final_nomusic.wav), v6 remuxed, RMS matches v4nomusic send (-17.79 vs -17.77 dB)
-    - [ ] Zen verdict on v6
+    - [x] Zen verdict on v6: OK 2026-11-17 ("ready for full video")
     - [ ] full-episode render must use EPISODE_AUDIO too (InkBuilt + older comps still on master.wav)
     - [ ] NO DROP (Zen 2026-11-17 "most important"; revised after v5): measure QUALITY per quarter, not cut count. Any new shot p03-p24 = picture designed one by one for its line (no library plate to pad cuts, never halve a drawn build). quality_by_quarter.py reports cuts/min as info only (Beanie: 36 in min 1 then ~9/min)
     - [ ] publish pack: Zen picks title/thumb/desc (videos/pastly-life/01-eiffel-ink/script/publish.md)
@@ -309,3 +309,8 @@
   - [ ] Dahl MiniMax-M2.7 as free leg; call weekly so 100M grant does not burn (7 idle days)
   - [ ] Flint (OpenRouter recursive/flint-v1.0:free) into multi_ai_check
 - [ ] 6. Older queue still open: 1:1 v10 (paused, see item 3), takrut01, DeepSeek/Mistral top-up (owner), groq 403, reel mining both batches, browser eyes, story-mode social mining, repo cleanup LAST
+
+## 2026-11-17 drafts housekeeping
+- [x] draft/current deleted on Zen ask (old v1 full, 935 MB, old audio) - the FINAL-render line above points to a file that no longer exists
+- [x] drafts renamed: versions/ = full only (01-v1, 01-v1-lowres, 01-v1-share), previews/ = partial (01-v0..v6 first1min/parts)
+- [ ] full render InkEp01Full -> rename to versions/01-v6.mp4 + 01-v6-share.mp4, send + open, quality per quarter
