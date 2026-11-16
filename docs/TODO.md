@@ -8,18 +8,19 @@
   - [x] music_bed.py: loudnorm bed to TARGET-10 LU, duck threshold derived for 6 dB dip, release 1200 ms -> -13.6 dB vs mix, -19 under speech
   - [x] re-render (v1 full 654.5 s, -14.8 LUFS); logo OK per Zen 2026-11-16
   - [ ] Zen listens to music bed (VO edge fades still open)
-- [ ] Background/camera audit (Zen 2026-11-16 "enough background... various camera angle?")
+- [x] Background/camera audit (Zen 2026-11-16 "enough background... various camera angle?") -> v2 REJECTED, v1 stays
   - [x] Audit: 152 shots = 92 plate (45 distinct images, 409 s) + 56 paper cards (236 s, 36%) + 4 PD photos;
         plates vary angle (extreme wide, birdseye, low-angle up, top-down desk, close-up rust, framed doorway);
         weak: stickman always full-body eye-level same size, 85% of moves = same slow centre push-in 1.00->1.06,
         ~half of 20 s samples are paper cards, some near-empty (lone stickman on blank paper)
-  - [ ] v2 first minute (camera grammar + fewer bare cards; v1 untouched)
+  - [x] v2 first minute (camera grammar + fewer bare cards; v1 untouched)
     - [x] `cam` field in schema + Camera in InkParts
     - [x] generator videos/pastly-life/01-eiffel-ink/v2/make_v2_shots.py -> engine/ink/parts/shots_v2/
     - [x] InkFirstMinV2 composition
     - [x] stills checked; fixed 6 cut-offs (SOLD, GOT AWAY, ESCAPED, ticks, chimney quote, redact bars)
     - [x] render + send to Zen (57.2 s, sent 2026-11-16) (draft/versions/ink_ep01_v2_first1min.mp4)
-    - [ ] Zen verdict -> roll out to p03-p24
+    - [x] Zen verdict 2026-11-16: "too dissy", "wrose than v1" -> REJECTED, no rollout; v2 code kept (unused) for reference
+          lesson: camera move on every ~2.4 s cut = dizzy; first minute pacing 24 shots/57 s (2.4 s avg) vs 4.3 s rest of ep
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
