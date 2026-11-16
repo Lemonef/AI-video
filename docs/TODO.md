@@ -9,7 +9,9 @@
   - [x] re-render (v1 full 654.5 s, -14.8 LUFS); logo OK per Zen 2026-11-16
   - [ ] Zen listens to music bed (VO edge fades still open)
   - [x] "Cut sound" re-check (Zen 2026-11-16 v3): 78 VO clips padded 220-495 ms both ends (not chopped); v3 mp4 audio == master.wav (0 diffs >6 dB)
-  - [ ] Suspect: single-pass loudnorm in music_bed.py = dynamic gain riding (bed swells in gaps / start ramp) -> two-pass linear loudnorm, rebuild, measure gap levels, re-render
+  - [x] loudnorm gain-riding suspect RULED OUT: mix-vs-voice offset steady -3.3 dB (p5 -4.1 / p95 -1.8) over 10.9 min
+  - [x] ROOT CAUSE: ink_audio.py adds synthetic whoosh (beat start, incl. t=0) + pop (every shot) at -16 dB, timed to the OLD timeline_full shot splits; first 57 s = 25 SFX, only 4 within 3 frames of a real cut -> clicks mid-shot. Earlier "no SFX" diagnosis was wrong (checked only at real cuts)
+  - [ ] Zen pick: drop all SFX vs soft whoosh on real cuts only -> remix (cached VO) -> music_bed -> verify -> re-render v3 + v1
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
   - [ ] Zen OK on draft/ cleanup (~2.4 GB old builds) — asked, not yet answered
