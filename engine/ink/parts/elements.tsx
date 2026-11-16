@@ -1,7 +1,7 @@
 import React, {useId} from 'react';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
-import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, TimelineEl, ChimneyEl, RadioEl} from './schema';
+import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl} from './schema';
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 const color = (c?: Color) => c ? ({orange: ORANGE, red: RED, green: GREEN, teal: TEAL}[c]) : INK;
 type Props<T> = {el: T; shotF0: number; shotF1: number};
@@ -58,6 +58,26 @@ export const RadioElement: React.FC<Props<RadioEl>> = ({el, shotF0}) => {
   const span = Math.max(0, Math.min(GROW, (el.y - STROKE) / RISE - R0));
   const f = useCurrentFrame() - delay(el, shotF0); return <g fill="none" stroke={ORANGE} strokeWidth={STROKE} strokeLinecap="round">{f >= 0 && [0, 1, 2].flatMap(i => {const p = ((f + PERIOD - i * 10) % PERIOD) / PERIOD; const r = R0 + p * span; return [-1, 1].map(s => <path key={`${i}-${s}`} d={`M${el.x + s * r * 0.65} ${el.y - r * 0.75} Q${el.x + s * r * 1.3} ${el.y} ${el.x + s * r * 0.65} ${el.y + r * 0.75}`} opacity={1 - p}/>);})}</g>;
 };
+// Label text sizes derive from the stage's 70px timeline labels so every diagram reads at the same scale.
+const LABEL = 70, SMALL = LABEL * 0.7;
+const halo = {stroke: PAPER, strokeWidth: LINE * 2, strokeLinejoin: 'round' as const, paintOrder: 'stroke' as const};
+export const BarsElement: React.FC<Props<BarsEl>> = ({el, shotF0}) => {
+  const f = useCurrentFrame(); const max = Math.max(...el.items.map(i => i.value)); const slot = el.w / el.items.length; const bw = slot * 0.55;
+  return <g fontFamily={FONT} textAnchor="middle"><line x1={el.x - el.w / 2} x2={el.x + el.w / 2} y1={el.y} y2={el.y} stroke={INK} strokeWidth={LINE}/>{el.items.map((it, i) => {
+    const a = el.at - shotF0 + i * el.step; const p = progress(f, a, a + 18); const e = p * p * (3 - 2 * p); const bh = el.h * it.value / max * e; const cx = el.x - el.w / 2 + slot * (i + 0.5);
+    return <g key={i}><rect x={cx - bw / 2} y={el.y - bh} width={bw} height={bh} fill={color(it.color ?? 'orange')} stroke={INK} strokeWidth={LINE}/><text x={cx} y={el.y + SMALL + 20} fontSize={SMALL} fill={INK} opacity={progress(f, a, a + 6)} {...halo}>{it.label}</text><text x={cx} y={el.y - bh - 24} fontSize={LABEL} fill={INK} opacity={progress(f, a + 12, a + 20)} {...halo}>{it.text}</text></g>;
+  })}</g>;
+};
+export const FlowElement: React.FC<Props<FlowEl>> = ({el, shotF0}) => {
+  const f = useCurrentFrame(); const n = el.items.length; const total = n * el.w + (n - 1) * el.gap; const h = el.w * 0.42;
+  return <g fontFamily={FONT} textAnchor="middle">{el.items.map((txt, i) => {
+    const a = el.at - shotF0 + i * el.step; const p = useInLike(f, a); const x0 = el.x - total / 2 + i * (el.w + el.gap);
+    const arrow = i > 0 ? progress(f, a - 8, a) : 0;
+    return <g key={i}>{i > 0 && <path d={`M${x0 - el.gap + 12} ${el.y} L${x0 - 18} ${el.y} m-22 -18 l22 18 l-22 18`} fill="none" stroke={INK} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - arrow} opacity={arrow > 0 ? 1 : 0}/>}<g opacity={p} transform={`translate(${x0 + el.w / 2} ${el.y}) scale(${0.85 + 0.15 * p})`}><rect x={-el.w / 2} y={-h / 2} width={el.w} height={h} rx={20} fill={i === n - 1 && el.color ? color(el.color) : PAPER} stroke={INK} strokeWidth={LINE}/><text y={SMALL * 0.35} fontSize={SMALL} fill={INK}>{txt}</text></g></g>;
+  })}</g>;
+};
+// Same 0..1 entrance as useIn, computed inline so it can run inside a map (hooks cannot).
+const useInLike = (f: number, a: number) => {const p = progress(f, a, a + 10); return p * p * (3 - 2 * p);};
 export const Element: React.FC<Props<El>> = props => {
   const el = props.el; const common = {shotF0: props.shotF0, shotF1: props.shotF1};
   switch (el.t) {
@@ -75,6 +95,8 @@ export const Element: React.FC<Props<El>> = props => {
     case 'timeline': return <TimelineElement {...common} el={el}/>;
     case 'chimney': return <ChimneyElement {...common} el={el}/>;
     case 'radio': return <RadioElement {...common} el={el}/>;
+    case 'bars': return <BarsElement {...common} el={el}/>;
+    case 'flow': return <FlowElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
