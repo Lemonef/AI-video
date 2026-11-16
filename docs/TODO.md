@@ -10,6 +10,9 @@
   - [ ] Zen listens to music bed (VO edge fades still open)
   - [x] "Cut sound" re-check (Zen 2026-11-16 v3): 78 VO clips padded 220-495 ms both ends (not chopped); v3 mp4 audio == master.wav (0 diffs >6 dB)
   - [ ] Suspect: single-pass loudnorm in music_bed.py = dynamic gain riding (bed swells in gaps / start ramp) -> two-pass linear loudnorm, rebuild, measure gap levels, re-render
+- [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
+  - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
+  - [ ] Zen OK on draft/ cleanup (~2.4 GB old builds) — asked, not yet answered
 - [ ] Real photos only early (Zen 2026-11-16): 8 PD photos all in p01/p02/p06 (<=2:29 of 10:54); p03-p24 zero -> source more PD photos for later story beats (needs Zen OK on list)
 - [x] Background/camera audit (Zen 2026-11-16 "enough background... various camera angle?") -> v2 REJECTED, v1 stays
   - [x] Audit: 152 shots = 92 plate (45 distinct images, 409 s) + 56 paper cards (236 s, 36%) + 4 PD photos;
