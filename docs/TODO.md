@@ -6,9 +6,8 @@
       that sit on cuts (e.g. 147.9->149.3 s across p07 cut 148.87 s) = duck release/pump
 - [ ] Zen OK -> remix master with flat bed level between lines + VO edge fades, re-render (master LOCKED until OK)
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
-- [ ] GPT-image logos (Codex gpt-6.1-sol, prompt `videos/pastly-life/brand/logo/gpt/prompt.md`) PAUSED by Zen
-      after 3/10 generated (in ~/.codex/generated_images/01a1e305-2589-7bf3-96f2-0ceccb4c6c53/, not yet copied).
-      Resume: `codex exec resume 01a1e305-2589-7bf3-96f2-0ceccb4c6c53 -m gpt-6.1-sol "continue"` (stdin closed)
+- [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
+      gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen
 - [ ] Zen picks logo -> replace placeholder `Watermark` (engine/ink/compositions/InkProof.tsx:195), re-render
 
 ## NOW 2026-11-09 — jaab3d engine + mood01 "ฟ้าตามอารมณ์" (read first)
