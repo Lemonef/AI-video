@@ -21,6 +21,11 @@
     - [x] render + send to Zen (57.2 s, sent 2026-11-16) (draft/versions/ink_ep01_v2_first1min.mp4)
     - [x] Zen verdict 2026-11-16: "too dissy", "wrose than v1" -> REJECTED, no rollout; v2 code kept (unused) for reference
           lesson: camera move on every ~2.4 s cut = dizzy; first minute pacing 24 shots/57 s (2.4 s avg) vs 4.3 s rest of ep
+- [ ] v3 first minute = v1 + short cards merged (Zen 2026-11-16 picked option A: "ok sho me v3 the a")
+    - [x] generator videos/pastly-life/01-eiffel-ink/v3/make_v3_shots.py -> engine/ink/parts/shots_v3/ (merges at f0 143, 1001, 1263)
+    - [x] InkFirstMinV3 composition, tsc clean; stills f200/f1120/f1370 checked, no overlap/cut-off
+    - [x] render + send (57.2 s) draft/versions/ink_ep01_v3_first1min.mp4: 21 shots (was 24), shortest 1.8 s (was 1.0 s)
+    - [ ] Zen verdict; if OK apply same merge pass to p03-p24 (only after he confirms)
 - [x] Logo: 12 concepts `videos/pastly-life/brand/logo/` (html source + png/ + contact_sheet.png), sent to Zen
 - [x] GPT-image logos: 10 via Codex gpt-6.1-sol (paused at 3, resumed) -> `videos/pastly-life/brand/logo/gpt/`
       gpt_logo_01..10.png + gpt_contact_sheet.png, all 1024px, spelling checked by eye, sent to Zen

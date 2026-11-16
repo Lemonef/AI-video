@@ -5,6 +5,8 @@ import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
 import v2p01 from '../parts/shots_v2/p01.json';
 import v2p02 from '../parts/shots_v2/p02.json';
+import v3p01 from '../parts/shots_v3/p01.json';
+import v3p02 from '../parts/shots_v3/p02.json';
 import p01 from '../parts/shots/p01.json';
 import p02 from '../parts/shots/p02.json';
 import p03 from '../parts/shots/p03.json';
@@ -88,4 +90,8 @@ export const InkFirstMin: React.FC = () => <><InkParts parts={[part01, part02]}/
 const V2_PARTS = [v2p01, v2p02] as unknown as Part[];
 export const INK_FIRSTMIN_V2_FRAMES = V2_PARTS[V2_PARTS.length - 1].f1;
 export const InkFirstMinV2: React.FC = () => <><InkParts parts={V2_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
+// v3 (Zen 2026-11-16, option A): v1 + short cards merged so the first minute breathes; no camera plan.
+const V3_PARTS = [v3p01, v3p02] as unknown as Part[];
+export const INK_FIRSTMIN_V3_FRAMES = V3_PARTS[V3_PARTS.length - 1].f1;
+export const InkFirstMinV3: React.FC = () => <><InkParts parts={V3_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
 export const InkBuilt: React.FC = () => <><InkParts parts={BUILT_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
