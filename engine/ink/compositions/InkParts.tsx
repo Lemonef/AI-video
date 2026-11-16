@@ -9,6 +9,8 @@ import v3p01 from '../parts/shots_v3/p01.json';
 import v3p02 from '../parts/shots_v3/p02.json';
 import v5p01 from '../parts/shots_v5/p01.json';
 import v5p02 from '../parts/shots_v5/p02.json';
+import v6p01 from '../parts/shots_v6/p01.json';
+import v6p02 from '../parts/shots_v6/p02.json';
 import p01 from '../parts/shots/p01.json';
 import p02 from '../parts/shots/p02.json';
 import p03 from '../parts/shots/p03.json';
@@ -87,6 +89,8 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
   return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><Chip text={shot.chip}/></AbsoluteFill>}</AbsoluteFill>;
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
+// Episode mix Zen picked 2026-11-17 ("ok no sound"): voice + pad + sparse SFX, no music. Copy of .build/.../remix-v4sound/final_nomusic.wav.
+const EPISODE_AUDIO = 'ink60full/master_v4nomusic.wav';
 export const InkFirstMin: React.FC = () => <><InkParts parts={[part01, part02]}/><Audio src={staticFile('ink60full/master.wav')}/></>;
 // v2 (Zen 2026-11-16): same parts + voice, plus a camera plan and fewer bare paper cards. v1 stays untouched.
 const V2_PARTS = [v2p01, v2p02] as unknown as Part[];
@@ -100,5 +104,8 @@ export const InkFirstMinV3: React.FC = () => <><InkParts parts={V3_PARTS}/><Audi
 // v5 (Zen 2026-11-17): v3 look + long shots split into new pictures (hard cuts, no camera) for >=26 cuts in minute one; made by tools/ink/make_v5_shots.py.
 const V5_PARTS = [v5p01, v5p02] as unknown as Part[];
 export const INK_FIRSTMIN_V5_FRAMES = V5_PARTS[V5_PARTS.length - 1].f1;
-export const InkFirstMinV5: React.FC = () => <><InkParts parts={V5_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;
+export const InkFirstMinV5: React.FC = () => <><InkParts parts={V5_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
+const V6_PARTS = [v6p01, v6p02] as unknown as Part[];
+export const INK_FIRSTMIN_V6_FRAMES = V6_PARTS[V6_PARTS.length - 1].f1;
+export const InkFirstMinV6: React.FC = () => <><InkParts parts={V6_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
 export const InkBuilt: React.FC = () => <><InkParts parts={BUILT_PARTS}/><Audio src={staticFile('ink60full/master.wav')}/></>;

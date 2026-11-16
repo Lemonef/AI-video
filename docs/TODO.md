@@ -17,8 +17,12 @@
   - [x] Zen picked v4nomusic first minute 2026-11-17 ("ok no sound", "this one good") = no music track, voice+pad+sparse SFX; v3 card merge OK
   - [ ] v4 full: new master + merge pass + even-quality pass p03-p24, full re-render; first min >=26 cuts, rest 20-24/min (new pictures, hard cuts); payoff-first hook kept (b01); Ink lessons, not a copy (D:/second-brain/docs/ink-episode-quality-bar.md)
     - [x] v5 first minute sent 2026-11-17: 26 cuts at scene>0.3 in 57.2 s (v4 16); 9 long v3 shots split into new pictures on word starts; tools/ink/make_v5_shots.py -> engine/ink/parts/shots_v5; InkFirstMinV5; draft/versions/ink_ep01_v5_first1min(_share).mp4
-    - [ ] Zen verdict on v5 first minute
-    - [ ] NO DROP (Zen 2026-11-17 "most important"): same split method p03-p24 to 20-24 cuts/min every quarter; quality_by_quarter.py reports cuts/min per quarter, fails if a quarter >10% under Q1
+    - [x] Zen verdict on v5 (2026-11-17): 0:03-04, 0:29, 0:32, ~0:50 rush, 0:53-54 worse (padding plates, chimney halved); liked 0:36
+    - [x] v6 first minute 2026-11-17: v3 + splits 402/666/1001/1263 only (make_v5_shots.py v6 -> shots_v6, InkFirstMinV6), 24 shots; draft/versions/ink_ep01_v6_first1min(_share).mp4 sent + opened
+    - [x] v6 audio fix 2026-11-17 (Zen: "how is that weird sound effect back"): v5/v6 comps played old ink60full/master.wav (music + old SFX); now EPISODE_AUDIO = ink60full/master_v4nomusic.wav (copy of remix-v4sound/final_nomusic.wav), v6 remuxed, RMS matches v4nomusic send (-17.79 vs -17.77 dB)
+    - [ ] Zen verdict on v6
+    - [ ] full-episode render must use EPISODE_AUDIO too (InkBuilt + older comps still on master.wav)
+    - [ ] NO DROP (Zen 2026-11-17 "most important"; revised after v5): measure QUALITY per quarter, not cut count. Any new shot p03-p24 = picture designed one by one for its line (no library plate to pad cuts, never halve a drawn build). quality_by_quarter.py reports cuts/min as info only (Beanie: 36 in min 1 then ~9/min)
     - [ ] publish pack: Zen picks title/thumb/desc (videos/pastly-life/01-eiffel-ink/script/publish.md)
 - [ ] Even-quality pass p03-p24 (Zen 2026-11-16 rule, brain docs/ink-episode-quality-bar.md): photos every quarter, no repeated / side-view-only plates, no bare white cards
   - [ ] build tools/ink/quality_by_quarter.py (per-quarter photos, distinct plates, angle mix, card share; fail if below Q1)
