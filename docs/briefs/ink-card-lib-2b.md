@@ -11,26 +11,26 @@ flat colour fills, one RED accent, slightly wobbly lines (never ruler-perfect), 
 
 # Files
 - NEW `engine/ink/parts/layouts/tokens.ts` - the type tokens, moved out of cards.tsx so every layout
-  shares one source: `export const LABEL = 70;` (card label px), `export const SMALL = LABEL * 0.7;`,
-  `export const CHAR_WIDTH = 0.55;` (hand lettering width estimate, per px of font size). Pure TS, no imports.
+  shares one source: export const LABEL = 70; (card label px), export const SMALL = LABEL * 0.7;,
+  export const CHAR_WIDTH = 0.55; (hand lettering width estimate, per px of font size). Pure TS, no imports.
 - EDIT `engine/ink/parts/cards.tsx` - delete its own LABEL / SMALL / CHAR_WIDTH declarations and import
-  them from `./layouts/tokens`. Add `export` to the existing helpers `progress`, `delay`, `smooth`, `pop`,
-  `Text`, `Draw` (no other change to them). Nothing doc-related goes in cards.tsx.
-- NEW `engine/ink/parts/layouts/docLayout.ts` - PURE geometry, timing and validation for `doc`. Imports
-  only `./tokens` and `import type` from `../schema`. No React, no remotion (the test bundles and calls it).
-- NEW `engine/ink/parts/layouts/doc.tsx` - `export const DocElement` renderer. Imports `docLayout`, the
-  cards.tsx helpers, `scribbleEllipse` from `../doodle`, colours from `../../compositions/InkProof`,
-  `DOODLE` from `../icons`.
-- EDIT `engine/ink/parts/schema.ts` - ADDITIVE: `export type DocEl` (shape below) and `DocEl` in the
-  `El` union.
-- EDIT `engine/ink/parts/elements.tsx` - ADDITIVE: `import {DocElement} from './layouts/doc';` and one
-  line in the Element switch: `case 'doc': return <DocElement {...common} el={el}/>;` (same pattern as the
+  them from `./layouts/tokens`. Add export to the existing helpers progress, delay, smooth, pop,
+  Text, Draw (no other change to them). Nothing doc-related goes in cards.tsx.
+- NEW `engine/ink/parts/layouts/docLayout.ts` - PURE geometry, timing and validation for doc. Imports
+  only `./tokens` and import type from `../schema`. No React, no remotion (the test bundles and calls it).
+- NEW `engine/ink/parts/layouts/doc.tsx` - export const DocElement renderer. Imports docLayout, the
+  cards.tsx helpers, scribbleEllipse from `../doodle`, colours from `../../compositions/InkProof`,
+  DOODLE from `../icons`.
+- EDIT `engine/ink/parts/schema.ts` - ADDITIVE: export type DocEl (shape below) and DocEl in the
+  El union.
+- EDIT `engine/ink/parts/elements.tsx` - ADDITIVE: import {DocElement} from './layouts/doc'; and one
+  line in the Element switch: case 'doc': return <DocElement {...common} el={el}/>; (same pattern as the
   existing card cases).
-- NEW `engine/ink/parts/cardlib/demo2.json` - one Part, `part: "cardlib2"` (shots below).
+- NEW `engine/ink/parts/cardlib/demo2.json` - one Part, part: "cardlib2" (shots below).
 - NEW `engine/ink/compositions/CardLibrary2.tsx` - copy of CardLibrary.tsx's pattern playing demo2.json;
-  exports `CardLibrary2` and `CARD_LIBRARY2_FRAMES = part.f1`.
-- EDIT `engine/ink/Root.tsx` - register `<Composition id="CardLibrary2" component={CardLibrary2}
-  width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY2_FRAMES}/>` next to CardLibrary.
+  exports CardLibrary2 and CARD_LIBRARY2_FRAMES = part.f1.
+- EDIT `engine/ink/Root.tsx` - register <Composition id="CardLibrary2" component={CardLibrary2}
+  width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY2_FRAMES}/> next to CardLibrary.
 - `tests/ink/cardlib2b.test.mjs` is the PROTECTED contract (with cardlib, cardlib2a, v11b). Make it pass;
   never edit any test.
 
