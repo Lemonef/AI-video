@@ -3,6 +3,7 @@ import {IconElement, CountElement, SplitElement, HeroElement, CrossoutElement, C
 import {DocElement} from './layouts/doc';
 import {MapElement} from './layouts/map';
 import {TransformElement} from './layouts/transform';
+import {ScaleElement} from './layouts/scale';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
@@ -119,6 +120,7 @@ export const Element: React.FC<Props<El>> = props => {
     case 'doc': return <DocElement {...common} el={el}/>;
     case 'map': return <MapElement {...common} el={el}/>;
     case 'transform': return <TransformElement {...common} el={el}/>;
+    case 'scale': return <ScaleElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
