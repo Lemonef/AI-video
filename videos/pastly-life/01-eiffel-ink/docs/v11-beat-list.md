@@ -4,7 +4,7 @@ _One-line purpose: every VO beat (107, locked voice + script) mapped to ONE visu
 
 Rules carried (brain `skills/pastly-explainer/SKILL.md` rows 10-11, `docs/ink-card-patterns.md`):
 - Remake, not patch: nothing copied from shots_v10.
-- Art (pivot Zen 2026-11-17, brain `docs/ink-card-patterns.md` line 79): Video A may add new art — 4 corner-room plates + ~5 inserts via pipeline, cost quoted before spending; Video B uses existing art only (63 plates, 94 cast sprites, 13 PD photos). Card drawings are code-drawn SVG doodles (boiled).
+- Art (pivot Zen 2026-11-17, brain `docs/ink-card-patterns.md` item 11): BOTH videos may add new art via pipeline, cost quoted before spending. A (this list) = 4 corner-room plates + ~5 inserts on top of the 63 plates, 94 cast sprites, 13 PD photos. B (v10.2 continued) may also replace weak v10.2 art with new art. Card drawings are code-drawn SVG doodles (boiled).
 - TYPE_CAP: any card layout <= 4 per episode; BAR <= 1; FLOW <= 2. Charts only where the VO compares numbers (b69 only).
 - Each PD photo used once, with paper border + tilt + red mark.
 - Scenes: 4-6 framings per plate max reuse; facts written ON objects (tags, papers, stamps), not floating.
