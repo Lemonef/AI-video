@@ -336,6 +336,8 @@
   - [x] plate cap lint PLATE_MAX=2 (15 plates over cap, 26 slots); remap plan written
   - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
   - [ ] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
+    - [x] batches h + i: 12 plates, Codex gpt-6.1-sol, eye-checked, committed bf38ae8
+    - [ ] batches j + k: pipeline running (jobs art-plates-j/k-20261117060823)
   - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [ ] pick title from publish.md options (cross-check free legs)
