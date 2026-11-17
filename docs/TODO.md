@@ -354,6 +354,7 @@
 - [ ] v10.2 sprite fit (Zen 2026-11-17 @01:10: "thisi sbroken" - top-down Lustig oversized, cut bottom-right)
   - [x] root cause: v10.1 swap kept old tall sprite x/h for wide top-down PNG
   - [x] fit_sprites() in make_v10_shots.py: ink-box vs camera states, x pulled in, h shrunk, top-down 4-edge + cap 0.36 x stage H; 8 top-down stills READ, all in frame (f735444)
+  - [x] Zen "idk why he write on empty thing": pen-on-empty-palm sprite rejected, 2 shots swapped, 77 sprites scanned (4573484)
   - [ ] full render 01-v10.2.mp4 + share copy, send + open
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [x] pick title: pick 1 'How One Sentence Let a Con Man Sell the Eiffel Tower' + thumb A (publish.md, b376236)
