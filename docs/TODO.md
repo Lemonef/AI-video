@@ -351,6 +351,10 @@
     - [x] opened 01-v10.1.mp4 + thumbs preview on Zen's PC 2026-11-17
   - [x] thumbs v2 (Zen 2026-11-17: "thumbnail should be straightforward ... say he sold eiffel twice"): tools/ink/make_thumbs.py -> thumbD + thumbE + phone_size_preview_v2, READ at full + phone size, sent + opened
   - [x] Zen picked thumbE ("this one"): publish.md pick 1 = "How One Sentence Let a Con Man Sell the Eiffel Tower" + E, D = A/B variant
+- [ ] v10.2 sprite fit (Zen 2026-11-17 @01:10: "thisi sbroken" - top-down Lustig oversized, cut bottom-right)
+  - [x] root cause: v10.1 swap kept old tall sprite x/h for wide top-down PNG
+  - [x] fit_sprites() in make_v10_shots.py: ink-box vs camera states, x pulled in, h shrunk, top-down 4-edge + cap 0.36 x stage H; 8 top-down stills READ, all in frame (f735444)
+  - [ ] full render 01-v10.2.mp4 + share copy, send + open
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [x] pick title: pick 1 'How One Sentence Let a Con Man Sell the Eiffel Tower' + thumb A (publish.md, b376236)
   - [x] 3 thumbnail mock-ups A/B/C + phone_size_preview.jpg in D:/AI-video/videos/pastly-life/01-eiffel-ink/final/thumbs/ (local, gitignored)
