@@ -337,3 +337,7 @@
   - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
   - [ ] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
   - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send
+- [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
+  - [ ] pick title from publish.md options (cross-check free legs)
+  - [ ] 2-3 thumbnail mock-ups (Codex image via pipeline; paid KIE waits for Zen), phone-size readability check
+  - [ ] Shorts/IG cover frame, YT A/B test plan
