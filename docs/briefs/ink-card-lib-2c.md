@@ -46,7 +46,7 @@ Named constants, one per meaning, each with a comment; no bare numbers except 0,
   each region's points together span at least 60% of the width and 60% of the map height.
   - europe: one mainland polygon with the Iberian peninsula, the Brittany bump, the Italian boot and the
     Denmark/Scandinavia hint top-right; Great Britain as its own island polygon (Ireland optional).
-    Paris and Vienna must sit inside the mainland.
+    The mainland is the FIRST polygon (`COAST.europe[0]`); Paris and Vienna must sit inside it (tested).
   - atlantic: North America's east coast as a polygon touching the left edge (min x <= 480), Europe's west
     coast (Iberia, France, Britain hint) as a polygon touching the right edge (max x >= 1440), open sea between.
 - `mapLayout(el)` - throws a descriptive Error when `dur` is not a positive integer, `from` equals `to`
@@ -83,7 +83,8 @@ Named constants, one per meaning, each with a comment; no bare numbers except 0,
    icons.
 7. `map` atlantic: from a point on Europe's west coast (right, e.g. label "LE HAVRE") to a point on the
    American coast (left, label "NEW YORK"), `label: "AMERICA"`, `at = f0 + 6`.
-Both map points must lie inside their region's land polygons (the test checks point-in-polygon).
+Both map points must lie inside their region's land polygons (the test checks point-in-polygon), at
+least ~20 px inland from the coastline, never on it (a boundary point is ambiguous for the check).
 Timing budget: entry 6 + COAST_DRAW 12 + ROUTE_LAG 4 + dur + pin pop + label fade must end by local
 frame 84; `dur: 30` with pops/fades of about 6-8 frames fits.
 

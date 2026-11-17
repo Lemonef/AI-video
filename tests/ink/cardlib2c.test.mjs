@@ -86,7 +86,7 @@ test('2c: timing: coast, from-pin, route after ROUTE_LAG, to-pin on arrival, lab
 test('2c: pin TIP sits on the point; route bows upward by ROUTE_BOW x distance', async () => {
   const {mapLayout, PIN_SIZE, PIN_TIP, ROUTE_BOW} = await load();
   assert.equal(PIN_SIZE, 120);
-  assert.equal(PIN_TIP, PIN_TIP_LOCAL * PIN_SIZE / PIN_BOX, 'PIN_TIP derives from the pin art tip and PIN_SIZE');
+  assert.ok(Math.abs(PIN_TIP - PIN_TIP_LOCAL * PIN_SIZE / PIN_BOX) < 1e-9, 'PIN_TIP derives from the pin art tip and PIN_SIZE');
   assert.ok(ROUTE_BOW > 0 && ROUTE_BOW < 1);
   const el = base();
   const L = mapLayout(el);
@@ -150,7 +150,7 @@ test('2c: demo2 appends europe map, a batch-1 card, atlantic map; points on land
   const [eu, mid, atl] = p.shots.slice(PREV_SHOTS).map(mainLayout);
   assert.equal(eu.t, 'map');
   assert.equal(atl.t, 'map');
-  assert.ok(!['map', 'doc', 'words'].includes(mid.t), 'middle shot is an existing batch-1 layout');
+  assert.ok(!['map', 'doc', 'split', 'words'].includes(mid.t), 'middle shot is another existing batch-1 layout');
   assert.equal(eu.region, 'europe');
   assert.equal(eu.label, 'VIENNA');
   assert.equal(atl.region, 'atlantic');
@@ -163,6 +163,7 @@ test('2c: demo2 appends europe map, a batch-1 card, atlantic map; points on land
     assert.ok(onLand(el.from, el.region, COAST), `shot ${i} from-point is in the sea`);
     assert.ok(onLand(el.to, el.region, COAST), `shot ${i} to-point is in the sea`);
   }
+  for (const k of ['from', 'to']) assert.ok(inside([eu[k].x, eu[k].y], COAST.europe[0]), `europe ${k} must sit in the mainland (COAST.europe[0])`);
 });
 
 test('2c: touched sources are ASCII-only', () => {
