@@ -8,7 +8,8 @@ import {INK, RED} from '../../compositions/InkProof';
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 
 export const TransformElement: React.FC<Props<TransformEl>> = ({el, shotF0, shotF1}) => {
-  const f = useCurrentFrame();
+  // useCurrentFrame() is shot-local (each shot is a Sequence); layout times are absolute card frames.
+  const f = useCurrentFrame() + shotF0;
   const L = transformLayout(el);
 
   const arrowP = progress(f, L.arrowAt, L.arrowEnd);
@@ -29,7 +30,7 @@ export const TransformElement: React.FC<Props<TransformEl>> = ({el, shotF0, shot
           y: L.a.y,
           size: L.a.size,
           icon: el.a.icon,
-          label: el.a.label,
+          label: undefined, // slot label drawn below with the shared slotLabelY
           at: L.aAt,
           crossAt: L.crossAt,
         }}
