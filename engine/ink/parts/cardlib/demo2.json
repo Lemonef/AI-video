@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 450,
+  "f1": 720,
   "shots": [
     {
       "f0": 0,
@@ -133,6 +133,56 @@
           "y": 1000,
           "size": 49,
           "at": 366
+        }
+      ]
+    },
+    {
+      "f0": 450,
+      "f1": 540,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "map",
+          "region": "europe",
+          "from": {"x": 770, "y": 640, "label": "PARIS"},
+          "to": {"x": 1250, "y": 620, "label": "VIENNA"},
+          "at": 456,
+          "dur": 30,
+          "label": "VIENNA"
+        }
+      ]
+    },
+    {
+      "f0": 540,
+      "f1": 630,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "count",
+          "x": 960,
+          "y": 440,
+          "w": 1450,
+          "icon": "bill",
+          "n": 5,
+          "step": 8,
+          "label": "5 BUYERS",
+          "at": 546
+        }
+      ]
+    },
+    {
+      "f0": 630,
+      "f1": 720,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "map",
+          "region": "atlantic",
+          "from": {"x": 1610, "y": 590, "label": "LE HAVRE"},
+          "to": {"x": 250, "y": 600, "label": "NEW YORK"},
+          "at": 636,
+          "dur": 30,
+          "label": "AMERICA"
         }
       ]
     }
