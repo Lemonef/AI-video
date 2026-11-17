@@ -1,10 +1,12 @@
 import React, {useId} from 'react';
+import {IconElement, CountElement, SplitElement, HeroElement, CrossoutElement, ChecklistElement, QuoteElement, BignumElement} from './cards';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
 import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, CircleEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl} from './schema';
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 const color = (c?: Color) => c ? ({orange: ORANGE, red: RED, green: GREEN, teal: TEAL}[c]) : INK;
+export {color};
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 const delay = (el: {at?: number}, f0: number) => (el.at ?? f0) - f0;
 const Center: React.FC<{x: number; y: number; children: React.ReactNode}> = ({x, y, children}) => <div style={{position: 'absolute', left: x, top: y, transform: 'translate(-50%,-50%)', whiteSpace: 'nowrap'}}>{children}</div>;
@@ -86,6 +88,14 @@ const useInLike = (f: number, a: number) => {const p = progress(f, a, a + 10); r
 export const Element: React.FC<Props<El>> = props => {
   const el = props.el; const common = {shotF0: props.shotF0, shotF1: props.shotF1};
   switch (el.t) {
+    case 'icon': return <IconElement {...common} el={el}/>;
+    case 'count': return <CountElement {...common} el={el}/>;
+    case 'split': return <SplitElement {...common} el={el}/>;
+    case 'hero': return <HeroElement {...common} el={el}/>;
+    case 'crossout': return <CrossoutElement {...common} el={el}/>;
+    case 'checklist': return <ChecklistElement {...common} el={el}/>;
+    case 'quote': return <QuoteElement {...common} el={el}/>;
+    case 'bignum': return <BignumElement {...common} el={el}/>;
     case 'sprite': return <SpriteElement {...common} el={el}/>;
     case 'words': return <WordsElement {...common} el={el}/>;
     case 'underline': return <UnderlineElement {...common} el={el}/>;

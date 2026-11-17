@@ -1,0 +1,1201 @@
+{
+  "part": "cardlib",
+  "f0": 0,
+  "f1": 2700,
+  "shots": [
+    {
+      "f0": 0,
+      "f1": 90,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "tower",
+          "x": 320,
+          "y": 145,
+          "size": 150,
+          "at": 6
+        },
+        {
+          "t": "words",
+          "text": "tower",
+          "x": 320,
+          "y": 250,
+          "size": 49,
+          "at": 6
+        },
+        {
+          "t": "icon",
+          "name": "hat",
+          "x": 640,
+          "y": 145,
+          "size": 150,
+          "at": 8
+        },
+        {
+          "t": "words",
+          "text": "hat",
+          "x": 640,
+          "y": 250,
+          "size": 49,
+          "at": 8
+        },
+        {
+          "t": "icon",
+          "name": "bill",
+          "x": 960,
+          "y": 145,
+          "size": 150,
+          "at": 10
+        },
+        {
+          "t": "words",
+          "text": "bill",
+          "x": 960,
+          "y": 250,
+          "size": 49,
+          "at": 10
+        },
+        {
+          "t": "icon",
+          "name": "coin",
+          "x": 1280,
+          "y": 145,
+          "size": 150,
+          "at": 12
+        },
+        {
+          "t": "words",
+          "text": "coin",
+          "x": 1280,
+          "y": 250,
+          "size": 49,
+          "at": 12
+        },
+        {
+          "t": "icon",
+          "name": "padlock",
+          "x": 1600,
+          "y": 145,
+          "size": 150,
+          "at": 14
+        },
+        {
+          "t": "words",
+          "text": "padlock",
+          "x": 1600,
+          "y": 250,
+          "size": 49,
+          "at": 14
+        },
+        {
+          "t": "icon",
+          "name": "letter",
+          "x": 320,
+          "y": 380,
+          "size": 150,
+          "at": 16
+        },
+        {
+          "t": "words",
+          "text": "letter",
+          "x": 320,
+          "y": 485,
+          "size": 49,
+          "at": 16
+        },
+        {
+          "t": "icon",
+          "name": "mask",
+          "x": 640,
+          "y": 380,
+          "size": 150,
+          "at": 18
+        },
+        {
+          "t": "words",
+          "text": "mask",
+          "x": 640,
+          "y": 485,
+          "size": 49,
+          "at": 18
+        },
+        {
+          "t": "icon",
+          "name": "pin",
+          "x": 960,
+          "y": 380,
+          "size": 150,
+          "at": 20
+        },
+        {
+          "t": "words",
+          "text": "pin",
+          "x": 960,
+          "y": 485,
+          "size": 49,
+          "at": 20
+        },
+        {
+          "t": "icon",
+          "name": "ship",
+          "x": 1280,
+          "y": 380,
+          "size": 150,
+          "at": 22
+        },
+        {
+          "t": "words",
+          "text": "ship",
+          "x": 1280,
+          "y": 485,
+          "size": 49,
+          "at": 22
+        },
+        {
+          "t": "icon",
+          "name": "newspaper",
+          "x": 1600,
+          "y": 380,
+          "size": 150,
+          "at": 24
+        },
+        {
+          "t": "words",
+          "text": "newspaper",
+          "x": 1600,
+          "y": 485,
+          "size": 49,
+          "at": 24
+        },
+        {
+          "t": "icon",
+          "name": "factory",
+          "x": 320,
+          "y": 615,
+          "size": 150,
+          "at": 26
+        },
+        {
+          "t": "words",
+          "text": "factory",
+          "x": 320,
+          "y": 720,
+          "size": 49,
+          "at": 26
+        },
+        {
+          "t": "icon",
+          "name": "badge",
+          "x": 640,
+          "y": 615,
+          "size": 150,
+          "at": 28
+        },
+        {
+          "t": "words",
+          "text": "badge",
+          "x": 640,
+          "y": 720,
+          "size": 49,
+          "at": 28
+        },
+        {
+          "t": "icon",
+          "name": "clock",
+          "x": 960,
+          "y": 615,
+          "size": 150,
+          "at": 30
+        },
+        {
+          "t": "words",
+          "text": "clock",
+          "x": 960,
+          "y": 720,
+          "size": 49,
+          "at": 30
+        },
+        {
+          "t": "icon",
+          "name": "scrap",
+          "x": 1280,
+          "y": 615,
+          "size": 150,
+          "at": 32
+        },
+        {
+          "t": "words",
+          "text": "scrap",
+          "x": 1280,
+          "y": 720,
+          "size": 49,
+          "at": 32
+        },
+        {
+          "t": "icon",
+          "name": "key",
+          "x": 1600,
+          "y": 615,
+          "size": 150,
+          "at": 34
+        },
+        {
+          "t": "words",
+          "text": "key",
+          "x": 1600,
+          "y": 720,
+          "size": 49,
+          "at": 34
+        },
+        {
+          "t": "icon",
+          "name": "suitcase",
+          "x": 320,
+          "y": 850,
+          "size": 150,
+          "at": 36
+        },
+        {
+          "t": "words",
+          "text": "suitcase",
+          "x": 320,
+          "y": 955,
+          "size": 49,
+          "at": 36
+        },
+        {
+          "t": "icon",
+          "name": "handcuffs",
+          "x": 640,
+          "y": 850,
+          "size": 150,
+          "at": 38
+        },
+        {
+          "t": "words",
+          "text": "handcuffs",
+          "x": 640,
+          "y": 955,
+          "size": 49,
+          "at": 38
+        },
+        {
+          "t": "icon",
+          "name": "pen",
+          "x": 960,
+          "y": 850,
+          "size": 150,
+          "at": 40
+        },
+        {
+          "t": "words",
+          "text": "pen",
+          "x": 960,
+          "y": 955,
+          "size": 49,
+          "at": 40
+        },
+        {
+          "t": "icon",
+          "name": "hotel",
+          "x": 1280,
+          "y": 850,
+          "size": 150,
+          "at": 42
+        },
+        {
+          "t": "words",
+          "text": "hotel",
+          "x": 1280,
+          "y": 955,
+          "size": 49,
+          "at": 42
+        },
+        {
+          "t": "icon",
+          "name": "crown",
+          "x": 1600,
+          "y": 850,
+          "size": 150,
+          "at": 44
+        },
+        {
+          "t": "words",
+          "text": "crown",
+          "x": 1600,
+          "y": 955,
+          "size": 49,
+          "at": 44
+        }
+      ]
+    },
+    {
+      "f0": 90,
+      "f1": 180,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "count",
+          "x": 960,
+          "y": 440,
+          "w": 1450,
+          "icon": "bill",
+          "n": 5,
+          "step": 8,
+          "label": "5 BUYERS",
+          "at": 96
+        }
+      ]
+    },
+    {
+      "f0": 180,
+      "f1": 270,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "split",
+          "step": 12,
+          "left": {
+            "icon": "hat",
+            "label": "COUNT"
+          },
+          "right": {
+            "icon": "mask",
+            "label": "CON MAN"
+          },
+          "vs": "VS",
+          "at": 186
+        }
+      ]
+    },
+    {
+      "f0": 270,
+      "f1": 360,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "hero",
+          "x": 960,
+          "y": 440,
+          "icon": "tower",
+          "size": 420,
+          "label": "FOR SALE",
+          "burst": true,
+          "at": 276
+        }
+      ]
+    },
+    {
+      "f0": 360,
+      "f1": 450,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "hero",
+          "x": 560,
+          "y": 440,
+          "icon": "tower",
+          "size": 300,
+          "label": "SAME TOWER",
+          "from": [
+            960,
+            440,
+            420
+          ],
+          "at": 366
+        },
+        {
+          "t": "icon",
+          "name": "padlock",
+          "x": 1360,
+          "y": 440,
+          "size": 240,
+          "at": 386
+        }
+      ]
+    },
+    {
+      "f0": 450,
+      "f1": 540,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "crossout",
+          "x": 960,
+          "y": 440,
+          "icon": "tower",
+          "size": 420,
+          "label": "SCRAP",
+          "crossAt": 486,
+          "at": 456
+        }
+      ]
+    },
+    {
+      "f0": 540,
+      "f1": 630,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "checklist",
+          "x": 960,
+          "y": 480,
+          "w": 900,
+          "step": 14,
+          "rows": [
+            {
+              "text": "BIG",
+              "mark": "tick"
+            },
+            {
+              "text": "FAMOUS",
+              "mark": "tick"
+            },
+            {
+              "text": "FOR SALE?",
+              "mark": "cross"
+            }
+          ],
+          "at": 546
+        }
+      ]
+    },
+    {
+      "f0": 630,
+      "f1": 720,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "quote",
+          "x": 960,
+          "y": 450,
+          "w": 660,
+          "text": "THE TOWER IS FOR SALE",
+          "who": "VICTOR LUSTIG",
+          "at": 636
+        }
+      ]
+    },
+    {
+      "f0": 720,
+      "f1": 810,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "bignum",
+          "x": 960,
+          "y": 530,
+          "value": 70000,
+          "suffix": " FRANCS",
+          "label": "THE PRICE",
+          "dur": 36,
+          "at": 726
+        }
+      ]
+    },
+    {
+      "f0": 810,
+      "f1": 900,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "sprite",
+          "src": "ink60/cast/lustig_handing_money.png",
+          "x": 550,
+          "y": 880,
+          "h": 640,
+          "at": 816
+        },
+        {
+          "t": "icon",
+          "name": "letter",
+          "x": 1270,
+          "y": 470,
+          "size": 300,
+          "at": 816
+        }
+      ]
+    },
+    {
+      "f0": 900,
+      "f1": 990,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "tower",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 906
+        },
+        {
+          "t": "icon",
+          "name": "tower",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 906
+        },
+        {
+          "t": "words",
+          "text": "tower",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 906
+        }
+      ]
+    },
+    {
+      "f0": 990,
+      "f1": 1080,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "hat",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 996
+        },
+        {
+          "t": "icon",
+          "name": "hat",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 996
+        },
+        {
+          "t": "words",
+          "text": "hat",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 996
+        }
+      ]
+    },
+    {
+      "f0": 1080,
+      "f1": 1170,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "bill",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1086
+        },
+        {
+          "t": "icon",
+          "name": "bill",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1086
+        },
+        {
+          "t": "words",
+          "text": "bill",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1086
+        }
+      ]
+    },
+    {
+      "f0": 1170,
+      "f1": 1260,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "coin",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1176
+        },
+        {
+          "t": "icon",
+          "name": "coin",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1176
+        },
+        {
+          "t": "words",
+          "text": "coin",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1176
+        }
+      ]
+    },
+    {
+      "f0": 1260,
+      "f1": 1350,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "padlock",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1266
+        },
+        {
+          "t": "icon",
+          "name": "padlock",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1266
+        },
+        {
+          "t": "words",
+          "text": "padlock",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1266
+        }
+      ]
+    },
+    {
+      "f0": 1350,
+      "f1": 1440,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "letter",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1356
+        },
+        {
+          "t": "icon",
+          "name": "letter",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1356
+        },
+        {
+          "t": "words",
+          "text": "letter",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1356
+        }
+      ]
+    },
+    {
+      "f0": 1440,
+      "f1": 1530,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "mask",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1446
+        },
+        {
+          "t": "icon",
+          "name": "mask",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1446
+        },
+        {
+          "t": "words",
+          "text": "mask",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1446
+        }
+      ]
+    },
+    {
+      "f0": 1530,
+      "f1": 1620,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "pin",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1536
+        },
+        {
+          "t": "icon",
+          "name": "pin",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1536
+        },
+        {
+          "t": "words",
+          "text": "pin",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1536
+        }
+      ]
+    },
+    {
+      "f0": 1620,
+      "f1": 1710,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "ship",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1626
+        },
+        {
+          "t": "icon",
+          "name": "ship",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1626
+        },
+        {
+          "t": "words",
+          "text": "ship",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1626
+        }
+      ]
+    },
+    {
+      "f0": 1710,
+      "f1": 1800,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "newspaper",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1716
+        },
+        {
+          "t": "icon",
+          "name": "newspaper",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1716
+        },
+        {
+          "t": "words",
+          "text": "newspaper",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1716
+        }
+      ]
+    },
+    {
+      "f0": 1800,
+      "f1": 1890,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "factory",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1806
+        },
+        {
+          "t": "icon",
+          "name": "factory",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1806
+        },
+        {
+          "t": "words",
+          "text": "factory",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1806
+        }
+      ]
+    },
+    {
+      "f0": 1890,
+      "f1": 1980,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "badge",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1896
+        },
+        {
+          "t": "icon",
+          "name": "badge",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1896
+        },
+        {
+          "t": "words",
+          "text": "badge",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1896
+        }
+      ]
+    },
+    {
+      "f0": 1980,
+      "f1": 2070,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "clock",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 1986
+        },
+        {
+          "t": "icon",
+          "name": "clock",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 1986
+        },
+        {
+          "t": "words",
+          "text": "clock",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 1986
+        }
+      ]
+    },
+    {
+      "f0": 2070,
+      "f1": 2160,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "scrap",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2076
+        },
+        {
+          "t": "icon",
+          "name": "scrap",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2076
+        },
+        {
+          "t": "words",
+          "text": "scrap",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2076
+        }
+      ]
+    },
+    {
+      "f0": 2160,
+      "f1": 2250,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "key",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2166
+        },
+        {
+          "t": "icon",
+          "name": "key",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2166
+        },
+        {
+          "t": "words",
+          "text": "key",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2166
+        }
+      ]
+    },
+    {
+      "f0": 2250,
+      "f1": 2340,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "suitcase",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2256
+        },
+        {
+          "t": "icon",
+          "name": "suitcase",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2256
+        },
+        {
+          "t": "words",
+          "text": "suitcase",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2256
+        }
+      ]
+    },
+    {
+      "f0": 2340,
+      "f1": 2430,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "handcuffs",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2346
+        },
+        {
+          "t": "icon",
+          "name": "handcuffs",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2346
+        },
+        {
+          "t": "words",
+          "text": "handcuffs",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2346
+        }
+      ]
+    },
+    {
+      "f0": 2430,
+      "f1": 2520,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "pen",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2436
+        },
+        {
+          "t": "icon",
+          "name": "pen",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2436
+        },
+        {
+          "t": "words",
+          "text": "pen",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2436
+        }
+      ]
+    },
+    {
+      "f0": 2520,
+      "f1": 2610,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "hotel",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2526
+        },
+        {
+          "t": "icon",
+          "name": "hotel",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2526
+        },
+        {
+          "t": "words",
+          "text": "hotel",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2526
+        }
+      ]
+    },
+    {
+      "f0": 2610,
+      "f1": 2700,
+      "bg": {
+        "card": true
+      },
+      "els": [
+        {
+          "t": "icon",
+          "name": "crown",
+          "x": 560,
+          "y": 470,
+          "size": 160,
+          "at": 2616
+        },
+        {
+          "t": "icon",
+          "name": "crown",
+          "x": 1250,
+          "y": 470,
+          "size": 360,
+          "at": 2616
+        },
+        {
+          "t": "words",
+          "text": "crown",
+          "x": 960,
+          "y": 790,
+          "size": 70,
+          "at": 2616
+        }
+      ]
+    }
+  ]
+}

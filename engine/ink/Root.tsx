@@ -1,4 +1,5 @@
 import {Composition} from 'remotion';
+import {CardLibrary, CARD_LIBRARY_FRAMES} from './compositions/CardLibrary';
 import {InkFirstMin, INK_FIRSTMIN_FRAMES, InkFirstMinV2, INK_FIRSTMIN_V2_FRAMES, InkFirstMinV3, INK_FIRSTMIN_V3_FRAMES, InkFirstMinV5, INK_FIRSTMIN_V5_FRAMES, InkFirstMinV6, INK_FIRSTMIN_V6_FRAMES, InkBuilt, INK_BUILT_FRAMES, InkEp01Full, INK_EP01_FULL_FRAMES} from './compositions/InkParts';
 import {Test10} from './compositions/Test10';
 import {SlideProof, SLIDE_PROOF_FRAMES} from './compositions/SlideProof';
@@ -8,6 +9,7 @@ import {InkDirected, INKDIRECTED_FRAMES, calcInkDirected, DIRECTED_DEFAULT} from
 import {Ink60, INK60_FRAMES, INK15_FRAMES} from './ink/ep1';
 export const Root = () => (
   <>
+    <Composition id="CardLibrary" component={CardLibrary} width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY_FRAMES}/>
     <Composition id="InkFirstMin" component={InkFirstMin} width={1920} height={1080} fps={30} durationInFrames={INK_FIRSTMIN_FRAMES}/>
     <Composition id="InkFirstMinV2" component={InkFirstMinV2} width={1920} height={1080} fps={30} durationInFrames={INK_FIRSTMIN_V2_FRAMES}/>
     <Composition id="InkFirstMinV3" component={InkFirstMinV3} width={1920} height={1080} fps={30} durationInFrames={INK_FIRSTMIN_V3_FRAMES}/>

@@ -1,3 +1,4 @@
+import type {IconName} from './icons';
 export type Color = 'orange' | 'red' | 'green' | 'teal';
 type Position = {x: number; y: number};
 type Entry = {at?: number};
@@ -22,7 +23,16 @@ export type RadioEl = Position & Entry & {t: 'radio'};
 export type BarsEl = Position & {t: 'bars'; w: number; h: number; at: number; step: number; items: {label: string; value: number; text: string; color?: Color}[]};
 // Diagram: boxes left-to-right centred on x, joined by arrows; box i appears at `at + i*step`. Box width = w, gap between boxes = gap.
 export type FlowEl = Position & {t: 'flow'; w: number; gap: number; at: number; step: number; items: string[]; color?: Color};
-export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl;
+export type IconEl = Position & Entry & {t: 'icon'; name: IconName; size: number; color?: Color; rot?: number; from?: [number, number, number]};
+export type CountEl = Position & {t: 'count'; w: number; icon: IconName; n: number; at: number; step: number; label?: string; color?: Color};
+export type Side = {icon: IconName; label: string; color?: Color};
+export type SplitEl = {t: 'split'; at: number; step: number; left: Side; right: Side; vs?: string};
+export type HeroEl = Position & {t: 'hero'; icon: IconName; size: number; label: string; at: number; color?: Color; burst?: boolean; from?: [number, number, number]};
+export type CrossoutEl = Position & {t: 'crossout'; icon: IconName; size: number; label?: string; at: number; crossAt: number};
+export type ChecklistEl = Position & {t: 'checklist'; w: number; at: number; step: number; rows: {text: string; mark: 'tick' | 'cross' | 'none'}[]};
+export type QuoteEl = Position & {t: 'quote'; w: number; text: string; who?: string; at: number};
+export type BignumEl = Position & {t: 'bignum'; value: number; prefix?: string; suffix?: string; label: string; at: number; dur: number; color?: Color};
+export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl | IconEl | CountEl | SplitEl | HeroEl | CrossoutEl | ChecklistEl | QuoteEl | BignumEl;
 export type Background = {plate: string; zoom: [number, number]; origin?: string} | {photo: string; push: [number, number]; origin?: string; pos?: string} | {card: true};
 // Virtual camera over the whole shot (background + elements): [scale, focusX, focusY] in 1920x1080 stage px.
 // The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to
