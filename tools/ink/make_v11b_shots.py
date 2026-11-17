@@ -439,18 +439,18 @@ for s in PARTS['p16']:
         s['els'] = new_els
         break
 
-# 13106: keep sprite and words SILENCE.; drop words NO and flow; add XO('newspaper', 'HEADLINES', 13110, 13150, 760, 440, 300)
+# 13106: keep sprite and words SILENCE.; drop words NO and flow; add XO('newspaper', 'HEADLINES', 13110, 13150, 960, 330, 260)
 for s in PARTS['p17']:
     if s['start'] == 13106:
         new_els = []
         for e in s['els']:
             if e['t'] == 'sprite' or (e['t'] == 'words' and e['text'] == 'SILENCE.'):
                 new_els.append(e)
-        new_els.extend(XO('newspaper', 'HEADLINES', 13110, 13150, 760, 440, 300))
+        new_els.extend(XO('newspaper', 'HEADLINES', 13110, 13150, 960, 330, 260))
         s['els'] = new_els
         break
 
-# 15140: keep sprite and words NEED TO BE BELIEVED (with its underline); drop words NOT THE POLICE and its cross; add XO('handcuffs', 'THE POLICE', 15144, 15159, 760, 260, 200)
+# 15140: keep sprite and words NEED TO BE BELIEVED (with its underline); drop words NOT THE POLICE and its cross; add XO('handcuffs', 'THE POLICE', 15144, 15159, 960, 210, 180)
 for s in PARTS['p19']:
     if s['start'] == 15140:
         new_els = []
@@ -463,7 +463,7 @@ for s in PARTS['p19']:
                 # Check if it matches the kept words
                 if e['x'] == 960 and e['y'] == 549:
                     new_els.append(e)
-        new_els.extend(XO('handcuffs', 'THE POLICE', 15144, 15159, 760, 260, 200))
+        new_els.extend(XO('handcuffs', 'THE POLICE', 15144, 15159, 960, 210, 180))
         s['els'] = new_els
         break
 
