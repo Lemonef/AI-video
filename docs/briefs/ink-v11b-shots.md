@@ -1,5 +1,5 @@
 ---json
-{"id": "ink-v11b-shots", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python tools/ink/make_v11b_shots.py", "python tools/tsc_in_worktree.py", "npm run ink:test"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v10/**", "tools/ink/make_v10_shots.py", "engine/ink/parts/cards.tsx", "engine/ink/parts/icons.tsx", "engine/ink/parts/elements.tsx", "engine/ink/parts/schema.ts", "engine/ink/ink/**", "engine/ink/rig/**"], "context_files": ["tools/ink/make_v10_shots.py", "engine/ink/parts/schema.ts", "engine/ink/parts/cards.tsx", "engine/ink/compositions/InkParts.tsx", "engine/ink/Root.tsx", "tests/ink/v11b.test.mjs"]}
+{"id": "ink-v11b-shots", "type": "normal", "risk": "low", "repo": "D:/AI-video", "gates": ["python tools/tsc_in_worktree.py", "npm run ink:test"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v10/**", "tools/ink/make_v10_shots.py", "engine/ink/parts/cards.tsx", "engine/ink/parts/icons.tsx", "engine/ink/parts/elements.tsx", "engine/ink/parts/schema.ts", "engine/ink/ink/**", "engine/ink/rig/**"], "context_files": ["tools/ink/make_v10_shots.py", "engine/ink/parts/schema.ts", "engine/ink/parts/cards.tsx", "engine/ink/compositions/InkParts.tsx", "engine/ink/Root.tsx", "tests/ink/v11b.test.mjs"]}
 ---
 # Goal
 Video B (v11B) of episode 01 = the v10.2 cut with the same timing frame-for-frame, upgraded with the
@@ -64,6 +64,6 @@ is `tests/ink/v11b.test.mjs` - read it first; it must pass unchanged.
    and register `<Composition id="InkEp01V11B" ... 1920x1080, 30 fps, durationInFrames={INK_EP01_V11B_FRAMES}/>`.
 
 # Done when
-- All three gates pass; `tests/ink/v11b.test.mjs` and every old test unchanged and green.
+- Both gates pass, and `python tools/ink/make_v11b_shots.py` exits 0 and rewrites the committed JSON with no diff; `tests/ink/v11b.test.mjs` and every old test unchanged and green.
 - `InkEp01Full` and the v10 data are untouched.
 - Work only inside the repo; touch only the files listed above.
