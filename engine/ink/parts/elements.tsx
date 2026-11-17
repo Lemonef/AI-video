@@ -1,6 +1,7 @@
 import React, {useId} from 'react';
 import {IconElement, CountElement, SplitElement, HeroElement, CrossoutElement, ChecklistElement, QuoteElement, BignumElement} from './cards';
 import {DocElement} from './layouts/doc';
+import {MapElement} from './layouts/map';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
@@ -115,6 +116,7 @@ export const Element: React.FC<Props<El>> = props => {
     case 'bars': return <BarsElement {...common} el={el}/>;
     case 'flow': return <FlowElement {...common} el={el}/>;
     case 'doc': return <DocElement {...common} el={el}/>;
+    case 'map': return <MapElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
