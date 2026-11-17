@@ -59,6 +59,9 @@ Throws a descriptive Error when: `dur` is not a positive integer, `heavy` is nei
 (`label.length * LABEL * CHAR_WIDTH > CARD_W`).
 
 # scale.tsx
+- Frames: `useCurrentFrame()` is SHOT-LOCAL (every shot is a Sequence) but every layout time is an
+  absolute card frame, so take `const f = useCurrentFrame() + shotF0;` once and compare `f` to layout
+  times (job 2d shipped with an invisible arrow and labels from mixing the two).
 - `export const ScaleElement: React.FC<Props<ScaleEl>>`; read EVERY number from `scaleLayout(el)`; no
   layout arithmetic of its own; no bare numbers except 0, 1, 2.
 - Frame structure drawn on with cards.tsx `Draw` (progress drawAt..drawEnd), the same LINE stroke and

@@ -49,6 +49,9 @@ not a positive integer, `odd.angle` is not finite, any icon box (ring or odd) le
 caption is wider than the card (`label.length * LABEL * CHAR_WIDTH > CARD_W`).
 
 # ring.tsx
+- Frames: `useCurrentFrame()` is SHOT-LOCAL (every shot is a Sequence) but every layout time is an
+  absolute card frame, so take `const f = useCurrentFrame() + shotF0;` once and compare `f` to layout
+  times (job 2d shipped with an invisible arrow and labels from mixing the two).
 - `export const RingElement: React.FC<Props<RingEl>>`; read EVERY number from `ringLayout(el)`; no
   layout arithmetic of its own; no bare numbers except 0, 1, 2.
 - Ring: doodle.tsx `scribbleEllipse(r, r)` translated to (x, y), drawn on with cards.tsx `Draw`
