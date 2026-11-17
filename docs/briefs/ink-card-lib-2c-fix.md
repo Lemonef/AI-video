@@ -20,7 +20,7 @@ Rendered stills of demo2 (CardLibrary2 frames 530, 710) show:
 
 # Files
 - EDIT `engine/ink/parts/layouts/mapLayout.ts` - the europe coast, the projection, the label placement.
-- EDIT `engine/ink/parts/cardlib/demo2.json` - only the europe map shot's `from`/`to` x/y (labels,
+- EDIT `engine/ink/parts/cardlib/demo2.json` - only the europe map shot's from/to x/y (labels,
   timing and every other shot unchanged).
 - EDIT `engine/ink/parts/layouts/map.tsx` - ONLY if the new label fields need it; otherwise leave it.
 
