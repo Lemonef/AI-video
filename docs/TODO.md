@@ -347,7 +347,8 @@
   - [ ] pipeline flaw: blind reviewer FAILs image briefs it cannot see -> good build discarded (j att 1); route image briefs to owner-check
   - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send
     - [x] remap + lint clean, 32 QA stills READ, full render 01-v10.1.mp4 (997,649,053 B, 1920x1080, 654.549 s)
-    - [ ] share copy 01-v10.1-share.mp4 <30 MiB, SendUserFile, open when Zen back
+    - [x] share copy 01-v10.1-share.mp4 29,483,769 B, 654.549 s, sent 2026-11-17
+    - [ ] open both on Zen's PC when he is back (away now)
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [x] pick title: pick 1 'How One Sentence Let a Con Man Sell the Eiffel Tower' + thumb A (publish.md, b376236)
   - [x] 3 thumbnail mock-ups A/B/C + phone_size_preview.jpg in D:/AI-video/videos/pastly-life/01-eiffel-ink/final/thumbs/ (local, gitignored)
