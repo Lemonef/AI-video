@@ -100,6 +100,16 @@ before its shot ends; doc `at` = shot f0 + 6.
    `mark: {line: <index of that line>, style: "circle"}`.
 Copy the hero/split field shapes from `engine/ink/parts/cardlib/demo.json` (read-only reference).
 
+Timing budget (checked by the test, plan for it): shot 1's 47-char title types until local frame
+6 + DOC_OUTLINE + 47 = 63, and `end` must be <= 84, so `step + LINE_FADE <= 21` for that doc. Use
+`step: 6` on all three demo docs and keep LINE_FADE, MARK_DRAW, BAR_DRAW, STAMP_DELAY + the pop short
+(about 6-8 frames each) so the memo (redact + stamp) and certificate (mark) also end by local 84.
+
+Import cycle note: cards.tsx and elements.tsx already import each other; doc.tsx joins that loop
+(elements -> doc -> cards -> elements). It works only because no module USES an import at load time:
+keep every use of imported values inside functions/components, no top-level calls or constants
+computed from another module's exports (tokens.ts is the exception: it imports nothing).
+
 # Done when
 - All gates pass; every test file unchanged; `tsc` clean.
 - Touched files ASCII-only; doc.tsx has no `<rect>` and no bare layout numbers.
