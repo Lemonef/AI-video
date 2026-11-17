@@ -334,7 +334,7 @@
 - [ ] v10.1 (Zen 2026-11-17: "for the real images you didn't just use same one every where right" / "I don't see you make more unique back ground ... mostly sides")
   - [x] photo de-dup: 9 repeat photo slots swapped (sprites/other PD); lint reuse_errors() PHOTO_MAX=1 in body
   - [x] plate cap lint PLATE_MAX=2 (15 plates over cap, 26 slots); remap plan written
-  - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
+  - [x] Q3 photo 2<3: Commons gave up (429), fixed with PD Crillon/Concorde 1890s photo -> Q1-Q4 photo 3/3/3/3 (0499a7c)
   - [x] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
     - [x] batches h + i: 12 plates, Codex gpt-6.1-sol, eye-checked, committed bf38ae8
     - [x] batches j + k
@@ -342,11 +342,13 @@
       - [x] j: 6 plates harvested from attempt 4 (Codex gpt-6-astra), eye-checked, gate OK 6 files
   - [ ] viewpoint sprites (Zen 2026-11-17: "2d so ... made the background and character pose THAT angle"): all 79 sprites eye-level -> 15 new poses drawn from above/below/behind
     - [x] briefs art-poses-v1/v2/v3 + manifests + sheet_v*.order.json (cite master drawing # for top_down/from_below/turn_back)
-    - [ ] Codex gpt-6.1-sol plan_check -> pipeline -> harvest -> integrate_art cut -> eye-check -> commit
-    - [ ] generator: pair viewpoint sprites with angled plates + lint sprite-view must match plate angle
+    - [x] Codex gpt-6.1-sol plan_check -> pipeline -> harvest -> integrate_art cut -> eye-check -> commit (20ecaae)
+    - [x] generator: 39 plate/sprite swaps + angle_errors() lint, 0 errors, angle 5/10/15/10 (0499a7c)
   - [ ] pipeline flaw: blind reviewer FAILs image briefs it cannot see -> good build discarded (j att 1); route image briefs to owner-check
   - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send
+    - [x] remap + lint clean, 32 QA stills READ, full render 01-v10.1.mp4 (997,649,053 B, 1920x1080, 654.549 s)
+    - [ ] share copy 01-v10.1-share.mp4 <30 MiB, SendUserFile, open when Zen back
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
-  - [ ] pick title from publish.md options (cross-check free legs)
-  - [ ] 2-3 thumbnail mock-ups (Codex image via pipeline; paid KIE waits for Zen), phone-size readability check
+  - [x] pick title: pick 1 'How One Sentence Let a Con Man Sell the Eiffel Tower' + thumb A (publish.md, b376236)
+  - [x] 3 thumbnail mock-ups A/B/C + phone_size_preview.jpg in D:/AI-video/videos/pastly-life/01-eiffel-ink/final/thumbs/ (local, gitignored)
   - [ ] Shorts/IG cover frame, YT A/B test plan
