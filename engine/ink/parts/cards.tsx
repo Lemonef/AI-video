@@ -24,13 +24,16 @@ const COUNT_MAX = 16, COUNT_ROW_MAX = 8; // count limits
 const COUNT_SIZE = 220, COUNT_FILL = 0.8; // count icon cap and slot occupancy
 const COUNT_LABEL_DELAY = 12; // label delay after last entry
 const SPLIT_SIZE = 360, SPLIT_LEFT = 480, SPLIT_RIGHT = 1440, SPLIT_Y = 460; // split layout
-const DIVIDER_FRAMES = 10; // divider draw time
-const DIVIDER_TOP = 160, DIVIDER_BOTTOM = 880, DIVIDER_CONTROL_Y = 320; // divider geometry
-const DIVIDER_BOW = 7; // divider drift
 const VS_RADIUS = 68, VS_BASELINE = 0.35; // versus circle and baseline
+const DIVIDER_FRAMES = 10; // divider draw time
+const DIVIDER_TOP = SPLIT_Y - SPLIT_SIZE / 2;
+const DIVIDER_BOTTOM = 2 * CY - DIVIDER_TOP;
+const DIVIDER_CONTROL_Y = (DIVIDER_TOP + CY - VS_RADIUS) / 2;
+const DIVIDER_BOW = 7; // divider drift
 const VS_DRAW = 8, VS_FADE = 4; // versus draw and opacity durations
 const BURST_COUNT = 8, BURST_DRAW = 8; // ray count and draw time
-const BURST_INNER = 0.64, BURST_OUTER = 0.75, BURST_START = 0.7, BURST_SWEEP = 1.6; // ray geometry, leaving the label sector clear
+const BURST_DROP = 0.1;
+const BURST_INNER = 0.64, BURST_OUTER = 0.75, BURST_START = 1 - BURST_DROP, BURST_SWEEP = 1 + 2 * BURST_DROP; // ray geometry, leaving the label sector clear
 const CROSS_FRAMES = 10, CROSS_DIM = 0.45; // crossout duration and final opacity
 const CROSS_NATIVE_END = 11; // existing CrossElement completes at frame eleven
 const ROW_PITCH = LABEL * 1.6, BOX = LABEL * 0.8, TEXT_OFFSET = LABEL * 1.2; // checklist layout
@@ -46,7 +49,7 @@ const QUOTE_DRAW = 8, QUOTE_STEP = 8, QUOTE_DELAY = 6; // quote timing
 const LINE_HEIGHT = LABEL * 1.2; // quote line spacing
 const BIG_FONT = 260, BIG_FIT = 1680; // number font and maximum width
 const BIG_FADE = 4, UNDERLINE_DRAW = 10; // number entrance and underline time
-const UNDERLINE_Y = 0.18, UNDERLINE_BOW = 0.04, BIG_LABEL_GAP = 1.5; // number layout
+const UNDERLINE_Y = 0.18, UNDERLINE_BOW = 0.04, BIG_LABEL_GAP = 1.5; // number layout (gap below underline in label heights)
 
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
@@ -134,5 +137,5 @@ export const BignumElement: React.FC<Props<BignumEl>> = ({el, shotF0}) => {
   const format = (v: number) => `${el.prefix ?? ''}${Math.round(v).toLocaleString('en-US')}${el.suffix ?? ''}`;
   const size = Math.min(BIG_FONT, BIG_FIT / (format(el.value).length * CHAR_WIDTH));
   const p = progress(f, a, a + el.dur), width = format(el.value).length * size * CHAR_WIDTH;
-  return <g><Text x={el.x} y={el.y} text={format(el.value * (1 - Math.pow(1 - p, EASE_POWER)))} size={size} fill={color(el.color)} opacity={progress(f, a, a + BIG_FADE)}/><Draw ink={ORANGE} p={progress(f, a + el.dur, a + el.dur + UNDERLINE_DRAW)} d={`M${el.x - width / 2} ${el.y + size * UNDERLINE_Y} Q${el.x} ${el.y + size * (UNDERLINE_Y + UNDERLINE_BOW)} ${el.x + width / 2} ${el.y + size * UNDERLINE_Y}`}/><Text x={el.x} y={el.y + LABEL * BIG_LABEL_GAP} text={el.label} opacity={progress(f, a + el.dur, a + el.dur + LABEL_FADE)}/></g>;
+  return <g><Text x={el.x} y={el.y} text={format(el.value * (1 - Math.pow(1 - p, EASE_POWER)))} size={size} fill={color(el.color)} opacity={progress(f, a, a + BIG_FADE)}/><Draw ink={ORANGE} p={progress(f, a + el.dur, a + el.dur + UNDERLINE_DRAW)} d={`M${el.x - width / 2} ${el.y + size * UNDERLINE_Y} Q${el.x} ${el.y + size * (UNDERLINE_Y + UNDERLINE_BOW)} ${el.x + width / 2} ${el.y + size * UNDERLINE_Y}`}/><Text x={el.x} y={el.y + size * UNDERLINE_Y + LABEL * BIG_LABEL_GAP} text={el.label} opacity={progress(f, a + el.dur, a + el.dur + LABEL_FADE)}/></g>;
 };
