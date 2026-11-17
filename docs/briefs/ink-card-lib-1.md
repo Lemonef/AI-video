@@ -7,14 +7,14 @@ Add a shared library of hand-drawn explain-card pieces to the Ink shot engine: 2
 Look target (the reference channel's explain cards): white paper, ONE idea per card, 1-4 words of hand lettering, the icon IS the idea, flat colour fills inside a thick ink outline, one red/orange accent, everything slightly wobbly (never ruler-perfect), lots of empty paper.
 
 # Files
-- NEW `engine/ink/parts/icons.tsx` - the icon set, `IconName`, `DOODLE`, `DoodleIcon`.
+- NEW `engine/ink/parts/icons.tsx` - the icon set, IconName, DOODLE, DoodleIcon.
 - NEW `engine/ink/parts/cards.tsx` - one component per new element.
 - NEW `engine/ink/parts/cardlib/demo.json` - the demo shot list (one Part).
-- NEW `engine/ink/compositions/CardLibrary.tsx` - plays demo.json with the existing `InkParts` player, exports `CardLibrary` + `CARD_LIBRARY_FRAMES`.
-- EDIT `engine/ink/parts/schema.ts` - ADDITIVE: the 8 new element types, added to the `El` union.
-- EDIT `engine/ink/parts/elements.tsx` - ADDITIVE: import the new components, one `case` per new type in `Element`. Existing components unchanged.
-- EDIT `engine/ink/Root.tsx` - register Composition id `CardLibrary`, 1920x1080, 30 fps, `durationInFrames={CARD_LIBRARY_FRAMES}` (keep the one-line JSX style).
-- `tests/ink/cardlib.test.mjs` already exists and is PROTECTED: it is the contract for this brief. Make it pass; never edit it.
+- NEW `engine/ink/compositions/CardLibrary.tsx` - plays demo.json with the existing InkParts player, exports CardLibrary + CARD_LIBRARY_FRAMES.
+- EDIT `engine/ink/parts/schema.ts` - ADDITIVE: the 8 new element types, added to the El union.
+- EDIT `engine/ink/parts/elements.tsx` - ADDITIVE: import the new components, one case per new type in Element. Existing components unchanged.
+- EDIT `engine/ink/Root.tsx` - register Composition id CardLibrary, 1920x1080, 30 fps, durationInFrames={CARD_LIBRARY_FRAMES} (keep the one-line JSX style).
+- tests/ink/cardlib.test.mjs already exists and is PROTECTED: it is the contract for this brief. Make it pass; never edit it.
 - Do not touch anything else. Work only inside the repo.
 
 # Shared rules
