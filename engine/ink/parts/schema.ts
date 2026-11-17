@@ -13,6 +13,8 @@ export type TagEl = Position & Entry & {t: 'tag'; text: string};
 export type PhotoEl = Position & Entry & {t: 'photo'; src: string; w: number; rot: number; frame: 'polaroid'; label: string};
 export type RedactEl = Position & Entry & {t: 'redact'; w: number; h: number};
 export type TickEl = Position & Entry & {t: 'tick'};
+// Red hand circle round a detail (a photo, a word): ellipse w x h centred on x,y, drawn on in one overshooting stroke.
+export type CircleEl = Position & Entry & {t: 'circle'; w: number; h: number};
 export type TimelineEl = {t: 'timeline'; x1: number; x2: number; y: number; left: string; right: string; at: number; bracket: string; bracketAt: number};
 export type ChimneyEl = Position & {t: 'chimney'; h: number; at: number; done: number};
 export type RadioEl = Position & Entry & {t: 'radio'};
@@ -20,7 +22,7 @@ export type RadioEl = Position & Entry & {t: 'radio'};
 export type BarsEl = Position & {t: 'bars'; w: number; h: number; at: number; step: number; items: {label: string; value: number; text: string; color?: Color}[]};
 // Diagram: boxes left-to-right centred on x, joined by arrows; box i appears at `at + i*step`. Box width = w, gap between boxes = gap.
 export type FlowEl = Position & {t: 'flow'; w: number; gap: number; at: number; step: number; items: string[]; color?: Color};
-export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl;
+export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl;
 export type Background = {plate: string; zoom: [number, number]; origin?: string} | {photo: string; push: [number, number]; origin?: string; pos?: string} | {card: true};
 // Virtual camera over the whole shot (background + elements): [scale, focusX, focusY] in 1920x1080 stage px.
 // The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to

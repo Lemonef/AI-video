@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Chip, Dust, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkProof';
+import {Dust, FONT, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkProof';
+import {BoilDefs, DoodleChip, useBoil} from '../parts/doodle';
 import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
 import v2p01 from '../parts/shots_v2/p01.json';
@@ -78,13 +79,20 @@ const HALO_FILTER = `drop-shadow(0 0 ${HALO_RING}px ${PAPER}) drop-shadow(0 0 ${
 // coloured fill (bag, flame). paint-order draws the stroke under the fill, so half the width shows: LINE*2/3 = 6px
 // stroke ~ 3px rim, thinner than sprite lines (LINE) so letters stay hand-lettered, not bubble text.
 const KEYLINE = {WebkitTextStroke: `${Math.round(LINE * 2 / 3)}px ${INK}`, paintOrder: 'stroke fill'} as const;
-const Elements: React.FC<{shot: Shot}> = ({shot}) => <>{shot.els.map((el, i) => {
-  const content = <Element el={el} shotF0={shot.f0} shotF1={shot.f1}/>;
-  const onScene = !('card' in shot.bg);
-  const accentWords = onScene && el.t === 'words' && 'color' in el && el.color !== undefined;
-  if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={accentWords ? {...KEYLINE, filter: HALO_FILTER} : {textShadow: onScene && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
-  return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}>{content}</svg>;
-})}</>;
+// Never boiled: real photos must stay sharp, painted sprites/towers already carry their own hand line.
+const NO_BOIL = ['photo', 'sprite', 'tower', 'chimney'];
+const Elements: React.FC<{shot: Shot}> = ({shot}) => {
+  const boil = useBoil();
+  return <>{shot.els.map((el, i) => {
+    const content = <Element el={el} shotF0={shot.f0} shotF1={shot.f1}/>;
+    const onScene = !('card' in shot.bg);
+    const accentWords = onScene && el.t === 'words' && 'color' in el && el.color !== undefined;
+    const b = NO_BOIL.includes(el.t) ? undefined : boil;
+    if (['words', 'underline', 'stamp', 'tag', 'photo'].includes(el.t)) return <AbsoluteFill key={i} style={accentWords ? {...KEYLINE, filter: [b, HALO_FILTER].filter(Boolean).join(' ')} : {filter: b, textShadow: onScene && (el.t === 'words' || el.t === 'underline') ? HALO : undefined}}>{content}</AbsoluteFill>;
+    return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}><g filter={b}>{content}</g></svg>;
+  })}</>;
+};
+const BoiledChip: React.FC<{text: string}> = ({text}) => <AbsoluteFill style={{filter: useBoil()}}><DoodleChip text={text} font={FONT} ink={INK} paper={PAPER}/></AbsoluteFill>;
 const STAGE_W = 1920, STAGE_H = 1080; // composition size (Root.tsx); the camera frames this stage
 // Holds the eased focus point at frame centre at the eased scale; translate is clamped to [stage*(1-s), 0]
 // so a zoomed stage never exposes its edge.
@@ -110,9 +118,9 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
     layer = <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
   } else throw new Error(`Unknown background kind: ${Object.keys(bg).join(', ')}`);
   if (shot.cam) layer = <Camera cam={shot.cam} len={len}>{layer}</Camera>;
-  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><Chip text={shot.chip}/></AbsoluteFill>}</AbsoluteFill>;
+  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip}/></AbsoluteFill>}</AbsoluteFill>;
 };
-export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
+export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}><BoilDefs/>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 // Episode mix Zen picked 2026-11-17 ("ok no sound"): voice + pad + sparse SFX, no music. Copy of .build/.../remix-v4sound/final_nomusic.wav.
 const EPISODE_AUDIO = 'ink60full/master_v4nomusic.wav';
 export const InkFirstMin: React.FC = () => <><InkParts parts={[part01, part02]}/><Audio src={staticFile('ink60full/master.wav')}/></>;
