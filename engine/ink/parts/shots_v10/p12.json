@@ -98,7 +98,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/city_official_decree.png",
-     "x": 1700,
+     "x": 1609,
      "y": 1000,
      "h": 540,
      "at": 9340
@@ -174,7 +174,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/poisson_from_below_greedy.png",
-     "x": 520,
+     "x": 609,
      "y": 1000,
      "h": 600,
      "at": 9528
@@ -182,7 +182,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_from_below_smug.png",
-     "x": 1400,
+     "x": 1378,
      "y": 1000,
      "h": 620,
      "at": 9585,

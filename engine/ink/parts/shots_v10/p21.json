@@ -42,7 +42,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/buyer_paying.png",
-     "x": 1720,
+     "x": 1673,
      "y": 1000,
      "h": 520,
      "at": 16330
@@ -302,7 +302,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_money_box.png",
-     "x": 1560,
+     "x": 1508,
      "y": 1000,
      "h": 600,
      "at": 16985

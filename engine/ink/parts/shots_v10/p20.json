@@ -53,7 +53,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_high_angle_sly.png",
-     "x": 1520,
+     "x": 1482,
      "y": 1000,
      "h": 500,
      "at": 15240
@@ -233,9 +233,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1700,
-     "y": 1000,
-     "h": 520,
+     "x": 1588,
+     "y": 998,
+     "h": 389,
      "at": 15798
     },
     {

@@ -52,7 +52,7 @@
      "src": "ink60/cast/capone_topdown_desk.png",
      "x": 1320,
      "y": 1000,
-     "h": 700,
+     "h": 389,
      "at": 17345
     },
     {
@@ -130,7 +130,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/capone_back_34.png",
-     "x": 1720,
+     "x": 1636,
      "y": 1000,
      "h": 540,
      "at": 17655

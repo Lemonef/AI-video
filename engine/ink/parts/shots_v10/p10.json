@@ -102,7 +102,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_lean_murmur.png",
-     "x": 1700,
+     "x": 1667,
      "y": 1000,
      "h": 520,
      "at": 7090
@@ -353,7 +353,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/scrap_dealer_proud.png",
-     "x": 380,
+     "x": 448,
      "y": 1000,
      "h": 520,
      "at": 7713

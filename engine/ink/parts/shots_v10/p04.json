@@ -36,7 +36,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/poisson_from_below_greedy.png",
-     "x": 1520,
+     "x": 1517,
      "y": 1000,
      "h": 560,
      "at": 2510
@@ -142,7 +142,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_passports_fan.png",
-     "x": 1720,
+     "x": 1713,
      "y": 1000,
      "h": 480,
      "at": 2786

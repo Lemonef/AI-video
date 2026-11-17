@@ -144,9 +144,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1720,
+     "x": 1603,
      "y": 1000,
-     "h": 500,
+     "h": 389,
      "at": 5490
     },
     {
@@ -187,7 +187,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_polyglot_greeting.png",
-     "x": 1720,
+     "x": 1685,
      "y": 1000,
      "h": 560,
      "at": 5590

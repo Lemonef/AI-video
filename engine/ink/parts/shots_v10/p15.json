@@ -19,8 +19,8 @@
      "t": "sprite",
      "src": "ink60/cast/lustig_topdown_walk.png",
      "x": 600,
-     "y": 1000,
-     "h": 680,
+     "y": 969,
+     "h": 389,
      "at": 11260
     },
     {
@@ -188,7 +188,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_nodding_agree.png",
-     "x": 1720,
+     "x": 1689,
      "y": 1000,
      "h": 520,
      "at": 11676

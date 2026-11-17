@@ -671,6 +671,70 @@ def fit_words(shot):
     return log
 
 
+# ---------- sprites fitted to the frame ----------
+# Mirrors InkProof.tsx Sprite: image box = SPRITE_BOX_W x h, preserveAspectRatio "xMidYMax meet", so the drawn
+# width is min(SPRITE_BOX_W, h * png aspect), bottom-centred on (x, FLOOR). The visible ink is the PNG's alpha
+# bbox inside that box. v10.1 bug (Zen 2026-11-17 "thisi sbroken" @01:10): a tall sprite swapped for a wide
+# top-down one kept its old x/h and hung off the right edge. Change SPRITE_BOX_W together with InkProof.tsx.
+SPRITE_BOX_W = 900
+# Top-down sprites have no floor: the body is seen from above, so all four edges are checked and the anchor may
+# rise off FLOOR. Their height is capped so the figure reads at desk/plate scale, not as a giant over the plate
+# (Zen 2026-11-17 @01:10 "oversized"; 520px hat-to-shoes covered half a desk). 0.36 x STAGE_H ~= 390px.
+TOPDOWN_MAX_H = round(0.36 * STAGE_H)
+_ink_cache = {}
+
+
+def _sprite_ink(src):
+    """(png aspect w/h, alpha bbox as fractions l, t, r, b) of a cast PNG, cached."""
+    if src not in _ink_cache:
+        from PIL import Image
+        im = Image.open(ASSETS / src)
+        l, t, r, b = im.getchannel('A').getbbox() if 'A' in im.getbands() else (0, 0, *im.size)
+        W, H = im.size
+        _ink_cache[src] = (W / H, (l / W, t / H, r / W, b / H))
+    return _ink_cache[src]
+
+
+def _sprite_box(e):
+    """Stage-space box (left, top, right, bottom) of the visible ink, relative to x (left/right are offsets)."""
+    ar, (fl, ft, fr, fb) = _sprite_ink(e['src'])
+    w = min(SPRITE_BOX_W, e['h'] * ar)
+    h = w / ar
+    if e.get('flip'):
+        fl, fr = 1 - fr, 1 - fl
+    return -w / 2 + fl * w, e['y'] - h + ft * h, -w / 2 + fr * w, e['y'] - h + fb * h
+
+
+def fit_sprites(shot):
+    """Move (then if needed shrink) every sprite so its visible ink stays inside the safe frame for the whole
+    shot (start and end of plate zoom / camera). Bottom is not checked: feet sit on FLOOR whatever h is, and a
+    push that crops below the knees is normal framing, not an overflow."""
+    log, states = [], _states(shot)
+    for e in [e for e in shot['els'] if e['t'] == 'sprite']:
+        x0, h0, y0 = e['x'], e['h'], e['y']
+        topdown = '_topdown_' in e['src']
+        if topdown:
+            e['h'] = min(e['h'], TOPDOWN_MAX_H)
+        for _ in range(12):
+            l, t, r, b = _sprite_box(e)
+            lo_x = max((SAFE - bx) / ax - l for ax, bx, _, _ in states)
+            hi_x = min((STAGE_W - SAFE - bx) / ax - r for ax, bx, _, _ in states)
+            hi_dy = min((STAGE_H - SAFE - by) / ay - b for _, _, ay, by in states) if topdown else 0
+            fits_y = all(ay * (t + min(0, hi_dy)) + by >= SAFE for _, _, ay, by in states)
+            if lo_x <= hi_x and fits_y:
+                break
+            e['h'] = int(e['h'] * 0.94)                       # too big for any position: shrink
+        else:
+            raise SystemExit(f"{shot['start']}: sprite {e['src']} cannot fit the frame")
+        for k in ('x', 'x2'):
+            if k in e:
+                e[k] = round(min(max(e[k], lo_x), hi_x))
+        e['y'] = round(e['y'] + min(0, hi_dy))
+        if (e['x'], e['h'], e['y']) != (x0, h0, y0):
+            log.append(f"{e['src'].rsplit('/', 1)[-1]}: x {x0}->{e['x']} y {y0}->{e['y']} h {h0}->{e['h']}")
+    return log
+
+
 # ---------- crosses fitted to their word ----------
 # A cross drawn on a word's own (x, y) strikes that word: its box is the word's glyph box plus STRIKE_PAD
 # each side, height STRIKE_H x size. Stacked "NO X / NO Y / NO Z" rows then never overlap (v9 p17 had
@@ -725,6 +789,7 @@ def build():
                 errors.append(f'{pid}@{s["start"]}: text-only shot, needs a living picture')
             pairs = pair_crosses(s)
             fits += [f'{pid}@{s["start"]} {m}' for m in fit_words(s)]
+            fits += [f'{pid}@{s["start"]} {m}' for m in fit_sprites(s)]
             fit_crosses(pairs)
             if cross_overlaps(s):
                 errors.append(f'{pid}@{s["start"]}: crosses overlap')

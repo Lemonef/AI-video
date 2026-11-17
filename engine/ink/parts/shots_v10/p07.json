@@ -51,9 +51,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1700,
-     "y": 1000,
-     "h": 520,
+     "x": 1573,
+     "y": 992,
+     "h": 389,
      "at": 4570
     },
     {
