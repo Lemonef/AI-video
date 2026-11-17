@@ -322,3 +322,7 @@
   - [x] BarsEl + FlowEl elements (schema.ts, elements.tsx); InkParts full comp = v8 p01-p02 + v9 p03-p24, tsc clean
   - [x] frame-safe fit pass (stage->frame affine incl. cam + plate zoom): 45 words shifted/shrunk; 151 stills (tools/ink/v9_stills.mjs) read on 13 sheets, no clipping
   - [x] full render 01-v9.mp4 (654.5 s, EXIT 0) + 01-v9-share.mp4 (2-pass 960p 280k, 27.7 MiB), spot frames 120/300/302/450 s OK, sent proactive 03:44 (Zen asleep, open on return)
+- [ ] v10: restage Q1/Q2/Q4 to Q3 level (Zen 2026-11-17: "why i only see the background and character in the side way after middle"). Measured char-in-scene Q1 36 / Q2 40 / Q3 62 / Q4 41 %. Awaiting Zen go.
+  - [ ] backstory lines: angled room + side/3-4 pose beside the card
+  - [ ] pre-render check: each quarter within ~10 pts on char-in-scene + non-frontal pose share
+  - [ ] full render 01-v10 + share copy, send
