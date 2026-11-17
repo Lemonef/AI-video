@@ -114,7 +114,7 @@ const Elements: React.FC<{shot: Shot}> = ({shot}) => {
     return <svg key={i} width={1920} height={1080} style={{position: 'absolute', inset: 0}}><g filter={b}>{content}</g></svg>;
   })}</>;
 };
-const BoiledChip: React.FC<{text: string}> = ({text}) => <AbsoluteFill style={{filter: useBoil()}}><DoodleChip text={text} font={FONT} ink={INK} paper={PAPER}/></AbsoluteFill>;
+const BoiledChip: React.FC<{text: string; pos?: 'tl' | 'bl'}> = ({text, pos}) => <AbsoluteFill style={{filter: useBoil()}}><DoodleChip text={text} font={FONT} ink={INK} paper={PAPER} pos={pos}/></AbsoluteFill>;
 const STAGE_W = 1920, STAGE_H = 1080; // composition size (Root.tsx); the camera frames this stage
 // Holds the eased focus point at frame centre at the eased scale; translate is clamped to [stage*(1-s), 0]
 // so a zoomed stage never exposes its edge.
@@ -140,7 +140,7 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
     layer = <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
   } else throw new Error(`Unknown background kind: ${Object.keys(bg).join(', ')}`);
   if (shot.cam) layer = <Camera cam={shot.cam} len={len}>{layer}</Camera>;
-  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip}/></AbsoluteFill>}</AbsoluteFill>;
+  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip} pos={shot.chipPos}/></AbsoluteFill>}</AbsoluteFill>;
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}><BoilDefs/>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 // Episode mix Zen picked 2026-11-17 ("ok no sound"): voice + pad + sparse SFX, no music. Copy of .build/.../remix-v4sound/final_nomusic.wav.

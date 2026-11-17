@@ -502,18 +502,20 @@ for s in PARTS['p24']:
 
 
 # ---- Add TOWERS SOLD HUD chips ----
-# shot 12874 gets chip='TOWERS SOLD: 1', chipAt=12880
+# shot 12874 gets chip='TOWERS SOLD: 1', chipAt=12880, chipPos='bl'
 for s in PARTS['p16']:
     if s['start'] == 12874:
         s['chip'] = 'TOWERS SOLD: 1'
         s['chipAt'] = 12880
+        s['chipPos'] = 'bl'
         break
 
-# shot 14370 gets chip='TOWERS SOLD: 2', chipAt=14376
+# shot 14370 gets chip='TOWERS SOLD: 2', chipAt=14376, chipPos='bl'
 for s in PARTS['p19']:
     if s['start'] == 14370:
         s['chip'] = 'TOWERS SOLD: 2'
         s['chipAt'] = 14376
+        s['chipPos'] = 'bl'
         break
 
 
@@ -831,6 +833,8 @@ def build():
                 shot['cam'] = s['cam']
             if s['chip']:
                 shot['chip'], shot['chipAt'] = s['chip'], s['chipAt']
+            if s.get('chipPos'):
+                shot['chipPos'] = s['chipPos']
             shot['els'] = s['els']
             out.append(shot)
         kinds_seen = {framing(s) for s in shots}
