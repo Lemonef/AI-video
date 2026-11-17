@@ -11,16 +11,16 @@
     "plate": "ink60full/plates/parlour_tea_table_high_angle.png",
     "zoom": [
      1.0,
-     1.1
+     1.15
     ]
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/poisson_high_angle_eager.png",
-     "x": 1320,
-     "y": 1000,
-     "h": 680,
+     "t": "circle",
+     "x": 1140,
+     "y": 480,
+     "w": 380,
+     "h": 300,
      "at": 13769
     },
     {
@@ -33,7 +33,7 @@
     {
      "t": "words",
      "text": "PART OF A SECRET",
-     "x": 600,
+     "x": 613,
      "y": 240,
      "size": 90,
      "at": 13875,
@@ -67,7 +67,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_looking_up.png",
+     "src": "ink60/cast/scrap_dealer_proud.png",
      "x": 600,
      "y": 1000,
      "h": 660,
@@ -104,11 +104,11 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/poisson_topdown_reach.png",
-     "x": 1560,
-     "y": 1000,
-     "h": 389,
+     "t": "circle",
+     "x": 960,
+     "y": 460,
+     "w": 260,
+     "h": 300,
      "at": 14075
     },
     {

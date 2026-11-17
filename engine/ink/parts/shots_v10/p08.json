@@ -91,14 +91,6 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/lustig_official_tailcoat.png",
-     "x": 240,
-     "y": 1000,
-     "h": 560,
-     "at": 5376
-    },
-    {
      "t": "words",
      "text": "A RICH PERSON TRUSTS",
      "x": 960,
@@ -123,9 +115,11 @@
      "at": 5410
     },
     {
-     "t": "tick",
-     "x": 1560,
+     "t": "circle",
+     "x": 960,
      "y": 440,
+     "w": 700,
+     "h": 200,
      "at": 5412
     }
    ]
@@ -134,7 +128,7 @@
    "f0": 5478,
    "f1": 5580,
    "bg": {
-    "plate": "ink60full/plates/archive_shelves_birdseye.png",
+    "plate": "ink60full/plates/records_office_desk.png",
     "zoom": [
      1.0,
      1.08
@@ -143,10 +137,10 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1603,
+     "src": "ink60/cast/lustig_glance_over_shoulder.png",
+     "x": 1683,
      "y": 1000,
-     "h": 389,
+     "h": 680,
      "at": 5490
     },
     {
@@ -187,53 +181,33 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_polyglot_greeting.png",
-     "x": 1685,
+     "x": 960,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 5590
     },
     {
      "t": "words",
-     "text": "BE CAREFUL",
-     "x": 860,
-     "y": 300,
+     "text": "BE",
+     "x": 960,
+     "y": 200,
      "size": 110,
      "at": 5617
     },
     {
-     "t": "tick",
-     "x": 1380,
-     "y": 300,
-     "at": 5623
-    },
-    {
-     "t": "words",
-     "text": "BE CALM",
-     "x": 860,
-     "y": 460,
-     "size": 110,
-     "at": 5648
-    },
-    {
-     "t": "tick",
-     "x": 1380,
-     "y": 460,
-     "at": 5654
-    },
-    {
-     "t": "words",
-     "text": "BE KIND",
-     "x": 860,
-     "y": 620,
-     "size": 110,
-     "at": 5678,
+     "t": "flow",
+     "x": 960,
+     "y": 560,
+     "w": 420,
+     "gap": 120,
+     "at": 5617,
+     "step": 31,
+     "items": [
+      "CAREFUL",
+      "CALM",
+      "KIND"
+     ],
      "color": "orange"
-    },
-    {
-     "t": "tick",
-     "x": 1380,
-     "y": 620,
-     "at": 5682
     }
    ]
   },

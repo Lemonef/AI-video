@@ -60,21 +60,12 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/poisson_high_angle_eager.png",
-     "x": 760,
-     "y": 1000,
-     "h": 600,
-     "at": 10745
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/lustig_high_angle_sly.png",
-     "x": 1400,
-     "y": 1000,
-     "h": 620,
-     "at": 10758,
-     "flip": true
+     "t": "circle",
+     "x": 300,
+     "y": 620,
+     "w": 260,
+     "h": 300,
+     "at": 10820
     },
     {
      "t": "words",
@@ -148,7 +139,7 @@
      "src": "ink60/cast/scrap_dealer_lapels.png",
      "x": 1420,
      "y": 1000,
-     "h": 620,
+     "h": 324,
      "at": 11077,
      "flip": true
     },

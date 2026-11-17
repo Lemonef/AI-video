@@ -49,7 +49,7 @@
    "els": [
     {
      "t": "words",
-     "text": "EVERYONE ELSE HAD A NAME",
+     "text": "THEY ALL HAD NAMES",
      "x": 960,
      "y": 240,
      "size": 80,
@@ -73,10 +73,10 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_looking_up.png",
+     "src": "ink60/cast/scrap_dealer_greedy.png",
      "x": 960,
      "y": 1000,
-     "h": 360,
+     "h": 324,
      "at": 12568
     }
    ]
@@ -94,12 +94,12 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/poisson_high_angle_eager.png",
-     "x": 1180,
-     "y": 1000,
-     "h": 600,
-     "at": 12624
+     "t": "circle",
+     "x": 400,
+     "y": 800,
+     "w": 300,
+     "h": 260,
+     "at": 12700
     },
     {
      "t": "words",

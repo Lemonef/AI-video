@@ -97,14 +97,6 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_proud.png",
-     "x": 1700,
-     "y": 1000,
-     "h": 560,
-     "at": 8258
-    },
-    {
      "t": "words",
      "text": "THE FIRST HOOK",
      "x": 960,
@@ -126,6 +118,14 @@
      "x": 960,
      "y": 620,
      "at": 8277
+    },
+    {
+     "t": "circle",
+     "x": 960,
+     "y": 620,
+     "w": 500,
+     "h": 160,
+     "at": 8285
     }
    ]
   },
@@ -135,8 +135,8 @@
    "bg": {
     "plate": "ink60full/plates/hotel_suite_corner_34.png",
     "zoom": [
-     1.08,
-     1.0
+     1.0,
+     1.08
     ]
    },
    "cam": {
@@ -163,7 +163,7 @@
     {
      "t": "words",
      "text": "THE SMALLEST DETAIL",
-     "x": 1200,
+     "x": 1148,
      "y": 220,
      "size": 80,
      "at": 8350
@@ -171,7 +171,7 @@
     {
      "t": "words",
      "text": "COULD RUIN HIM",
-     "x": 1237,
+     "x": 1185,
      "y": 340,
      "size": 100,
      "at": 8387,
@@ -255,8 +255,8 @@
    "bg": {
     "plate": "ink60full/plates/paris_police_station.png",
     "zoom": [
-     1.0,
-     1.1
+     1.12,
+     1.0
     ]
    },
    "els": [
@@ -278,7 +278,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/police_officer_whistle.png",
+     "src": "ink60/cast/police_officer_reading_file.png",
      "x": 1340,
      "y": 1000,
      "h": 660,
@@ -296,9 +296,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_handshake.png",
-     "x": 1682,
+     "x": 1720,
      "y": 1000,
-     "h": 520,
+     "h": 324,
      "at": 8910
     },
     {

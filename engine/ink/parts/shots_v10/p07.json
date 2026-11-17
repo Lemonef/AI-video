@@ -16,7 +16,7 @@
      "src": "ink60/cast/lustig_writing_desk.png",
      "x": 1440,
      "y": 1000,
-     "h": 600,
+     "h": 324,
      "at": 4479
     },
     {
@@ -41,7 +41,7 @@
    "f0": 4560,
    "f1": 4692,
    "bg": {
-    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "plate": "ink60full/plates/liner_cabin_night.png",
     "zoom": [
      1.12,
      1.0
@@ -50,10 +50,10 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1573,
-     "y": 992,
-     "h": 389,
+     "src": "ink60/cast/lustig_forging_pen.png",
+     "x": 1599,
+     "y": 1000,
+     "h": 680,
      "at": 4570
     },
     {
@@ -111,7 +111,7 @@
      "src": "ink60/cast/lustig_rapt_listening.png",
      "x": 680,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 4735
     },
     {
@@ -119,7 +119,7 @@
      "src": "ink60/cast/mark_talking_gesturing.png",
      "x": 1260,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 4751,
      "flip": true
     }

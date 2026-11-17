@@ -54,7 +54,7 @@
      "src": "ink60/cast/lustig_point_viewer.png",
      "x": 1760,
      "y": 1000,
-     "h": 440,
+     "h": 324,
      "at": 19170
     },
     {
@@ -80,14 +80,6 @@
      "y": 492,
      "w": 975,
      "at": 19196
-    },
-    {
-     "t": "words",
-     "text": "AND THEY WILL HELP YOU FOOL THEM",
-     "x": 960,
-     "y": 640,
-     "size": 60,
-     "at": 19229
     }
    ]
   },
@@ -111,12 +103,12 @@
      "at": 19305
     },
     {
-     "t": "sprite",
-     "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1500,
-     "y": 983,
-     "h": 389,
-     "at": 19300
+     "t": "circle",
+     "x": 960,
+     "y": 620,
+     "w": 300,
+     "h": 240,
+     "at": 19320
     }
    ]
   },
@@ -163,7 +155,7 @@
      "src": "ink60/cast/lustig_point_viewer.png",
      "x": 1420,
      "y": 1000,
-     "h": 660,
+     "h": 324,
      "at": 19483
     },
     {

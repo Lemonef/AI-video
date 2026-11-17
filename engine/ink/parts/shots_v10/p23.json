@@ -16,7 +16,7 @@
      "src": "ink60/cast/lustig_arrested.png",
      "x": 1660,
      "y": 1000,
-     "h": 520,
+     "h": 324,
      "at": 18060
     },
     {
@@ -147,7 +147,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/police_officer_whistle.png",
+     "src": "ink60/cast/police_officer_reading_file.png",
      "x": 1360,
      "y": 1000,
      "h": 660,
@@ -248,15 +248,14 @@
      "src": "ink60/cast/clerk_3.png",
      "x": 1760,
      "y": 1000,
-     "h": 480,
+     "h": 324,
      "at": 18690
     },
     {
-     "t": "words",
+     "t": "tag",
      "text": "DEATH CERTIFICATE",
      "x": 960,
      "y": 160,
-     "size": 60,
      "at": 18682
     },
     {
@@ -347,12 +346,12 @@
      "src": "ink60/cast/lustig_sad_prisoner.png",
      "x": 1760,
      "y": 1000,
-     "h": 480,
+     "h": 324,
      "at": 18966
     },
     {
      "t": "words",
-     "text": "NO MONEY",
+     "text": "NO MONEY. NO TITLE.",
      "x": 960,
      "y": 240,
      "size": 100,
@@ -360,26 +359,18 @@
     },
     {
      "t": "words",
-     "text": "NO TITLE",
+     "text": "JUST A NUMBER",
      "x": 960,
-     "y": 380,
-     "size": 100,
-     "at": 18990
-    },
-    {
-     "t": "words",
-     "text": "JUST A TIDY NUMBER ON A FORM",
-     "x": 960,
-     "y": 560,
-     "size": 70,
+     "y": 480,
+     "size": 120,
      "at": 19020,
      "color": "orange"
     },
     {
      "t": "underline",
      "x": 960,
-     "y": 598,
-     "w": 980,
+     "y": 546,
+     "w": 780,
      "at": 19028
     }
    ]

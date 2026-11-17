@@ -91,11 +91,12 @@
    "els": [
     {
      "t": "words",
-     "text": "THE BILLS KEPT GROWING",
+     "text": "BILLS KEEP GROWING",
      "x": 960,
      "y": 180,
-     "size": 80,
-     "at": 2061
+     "size": 100,
+     "at": 2061,
+     "color": "orange"
     },
     {
      "t": "bars",
@@ -109,17 +110,17 @@
       {
        "label": "PAINT",
        "value": 3,
-       "text": "PAINT"
+       "text": ""
       },
       {
        "label": "REPAIRS",
        "value": 5,
-       "text": "REPAIRS"
+       "text": ""
       },
       {
        "label": "BILLS",
        "value": 9,
-       "text": "BILLS"
+       "text": ""
       }
      ]
     }
@@ -129,19 +130,19 @@
    "f0": 2120,
    "f1": 2198,
    "bg": {
-    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "plate": "ink60full/plates/vienna_cafe_morning.png",
     "zoom": [
      1.0,
-     1.12
+     1.08
     ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_topdown_walk.png",
-     "x": 1573,
-     "y": 992,
-     "h": 389,
+     "src": "ink60/cast/lustig_reading_newspaper.png",
+     "x": 1560,
+     "y": 1000,
+     "h": 680,
      "at": 2130
     },
     {
@@ -154,8 +155,8 @@
     {
      "t": "words",
      "text": "EVERY WEEK",
-     "x": 1300,
-     "y": 300,
+     "x": 800,
+     "y": 260,
      "size": 110,
      "at": 2186,
      "color": "orange"
@@ -177,26 +178,26 @@
     },
     {
      "t": "words",
-     "text": "IS THIS THING STILL",
+     "text": "STILL WORTH",
      "x": 700,
      "y": 300,
-     "size": 80,
+     "size": 110,
      "at": 2200
     },
     {
      "t": "words",
-     "text": "WORTH KEEPING?",
+     "text": "KEEPING?",
      "x": 700,
-     "y": 430,
-     "size": 110,
+     "y": 440,
+     "size": 130,
      "at": 2243,
      "color": "orange"
     },
     {
      "t": "underline",
      "x": 700,
-     "y": 491,
-     "w": 770,
+     "y": 512,
+     "w": 520,
      "at": 2251
     }
    ]

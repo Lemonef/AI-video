@@ -42,9 +42,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/buyer_paying.png",
-     "x": 1673,
+     "x": 1720,
      "y": 1000,
-     "h": 520,
+     "h": 324,
      "at": 16330
     },
     {
@@ -185,7 +185,7 @@
    "els": [
     {
      "t": "words",
-     "text": "DOUBLE IT IN 60 DAYS",
+     "text": "DOUBLE IN 60 DAYS",
      "x": 960,
      "y": 170,
      "size": 70,

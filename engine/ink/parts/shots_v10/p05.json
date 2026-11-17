@@ -62,7 +62,7 @@
      "src": "ink60/cast/lustig_polyglot_greeting.png",
      "x": 620,
      "y": 1000,
-     "h": 640,
+     "h": 324,
      "at": 3245
     },
     {
@@ -151,7 +151,7 @@
      "src": "ink60/cast/lustig_lean_murmur.png",
      "x": 1460,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 3334,
      "flip": true
     },

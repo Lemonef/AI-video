@@ -16,7 +16,7 @@
      "src": "ink60/cast/lustig_handing_money.png",
      "x": 640,
      "y": 1000,
-     "h": 640,
+     "h": 324,
      "at": 17291
     },
     {
@@ -48,11 +48,11 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/capone_topdown_desk.png",
-     "x": 1320,
-     "y": 1000,
-     "h": 389,
+     "t": "circle",
+     "x": 300,
+     "y": 750,
+     "w": 300,
+     "h": 500,
      "at": 17345
     },
     {
@@ -101,13 +101,13 @@
      "src": "ink60/cast/capone_seated_desk.png",
      "x": 1520,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 17503,
      "flip": true
     },
     {
      "t": "words",
-     "text": "HE GAVE IT ALL BACK",
+     "text": "HE GAVE IT BACK",
      "x": 700,
      "y": 480,
      "size": 80,
@@ -122,7 +122,7 @@
    "bg": {
     "plate": "ink60full/plates/limousine_backseat_view.png",
     "zoom": [
-     1.08,
+     1.15,
      1.0
     ]
    },
@@ -130,7 +130,7 @@
     {
      "t": "sprite",
      "src": "ink60/cast/capone_back_34.png",
-     "x": 1636,
+     "x": 1584,
      "y": 1000,
      "h": 540,
      "at": 17655
@@ -179,7 +179,7 @@
    "els": [
     {
      "t": "words",
-     "text": "IN A WORLD OF LIARS",
+     "text": "A WORLD OF LIARS",
      "x": 960,
      "y": 240,
      "size": 80,
@@ -206,7 +206,7 @@
      "src": "ink60/cast/lustig_nodding_agree.png",
      "x": 960,
      "y": 1000,
-     "h": 380,
+     "h": 324,
      "at": 17821
     }
    ]

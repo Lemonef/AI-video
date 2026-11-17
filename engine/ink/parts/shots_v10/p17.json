@@ -14,18 +14,6 @@
      1.08
     ]
    },
-   "cam": {
-    "from": [
-     1.0,
-     960.0,
-     540.0
-    ],
-    "to": [
-     1.12,
-     1240,
-     540
-    ]
-   },
    "els": [
     {
      "t": "sprite",
@@ -45,7 +33,7 @@
     {
      "t": "words",
      "text": "NOTHING.",
-     "x": 624,
+     "x": 600,
      "y": 260,
      "size": 130,
      "at": 13072,
@@ -65,59 +53,31 @@
      "src": "ink60/cast/scrap_dealer_head_in_hands.png",
      "x": 1720,
      "y": 1000,
-     "h": 480,
+     "h": 324,
      "at": 13116
     },
     {
      "t": "words",
-     "text": "NO HEADLINE",
+     "text": "NO",
      "x": 960,
      "y": 220,
-     "size": 90,
+     "size": 120,
      "at": 13110
     },
     {
-     "t": "cross",
+     "t": "flow",
      "x": 960,
-     "y": 220,
-     "size": 260,
-     "at": 13125,
-     "w": 674,
-     "h": 99
-    },
-    {
-     "t": "words",
-     "text": "NO ARRESTS",
-     "x": 960,
-     "y": 360,
-     "size": 90,
-     "at": 13145
-    },
-    {
-     "t": "cross",
-     "x": 960,
-     "y": 360,
-     "size": 260,
-     "at": 13154,
-     "w": 618,
-     "h": 99
-    },
-    {
-     "t": "words",
-     "text": "NO MANHUNT",
-     "x": 960,
-     "y": 500,
-     "size": 90,
-     "at": 13178
-    },
-    {
-     "t": "cross",
-     "x": 960,
-     "y": 500,
-     "size": 260,
-     "at": 13182,
-     "w": 618,
-     "h": 99
+     "y": 420,
+     "w": 420,
+     "gap": 120,
+     "at": 13110,
+     "step": 34,
+     "items": [
+      "HEADLINES",
+      "ARRESTS",
+      "MANHUNT"
+     ],
+     "color": "orange"
     },
     {
      "t": "words",
@@ -176,7 +136,7 @@
     },
     {
      "t": "words",
-     "text": "TO BUY A NATIONAL MONUMENT",
+     "text": "FOR A MONUMENT",
      "x": 960,
      "y": 330,
      "size": 70,
@@ -253,7 +213,7 @@
      "src": "ink60/cast/scrap_dealer_humiliated.png",
      "x": 1700,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 13656
     },
     {

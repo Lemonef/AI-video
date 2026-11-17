@@ -47,7 +47,7 @@
      "src": "ink60/cast/lustig_passports_fan.png",
      "x": 600,
      "y": 1000,
-     "h": 660,
+     "h": 324,
      "at": 3724
     },
     {
@@ -141,12 +141,12 @@
      "src": "ink60/cast/police_officer_two_files.png",
      "x": 1720,
      "y": 1000,
-     "h": 480,
+     "h": 324,
      "at": 3965
     },
     {
      "t": "words",
-     "text": "NONE OF THE FILES AGREED",
+     "text": "NO FILE AGREED",
      "x": 960,
      "y": 200,
      "size": 80,

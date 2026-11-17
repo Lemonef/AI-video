@@ -48,8 +48,8 @@
    "bg": {
     "plate": "ink60full/plates/forger_desk_night.png",
     "zoom": [
-     1.08,
-     1.0
+     1.0,
+     1.08
     ]
    },
    "cam": {
@@ -189,7 +189,7 @@
      "src": "ink60/cast/scrap_dealer_reading_letter.png",
      "x": 260,
      "y": 1000,
-     "h": 540,
+     "h": 324,
      "at": 6810
     },
     {

@@ -55,26 +55,18 @@
    },
    "els": [
     {
-     "t": "sprite",
-     "src": "ink60/cast/doorman_bowing.png",
-     "x": 1660,
-     "y": 1000,
-     "h": 560,
-     "at": 6990
-    },
-    {
      "t": "words",
-     "text": "ONE OF THE MOST EXPENSIVE",
+     "text": "THE PRICIEST",
      "x": 960,
-     "y": 360,
-     "size": 80,
+     "y": 300,
+     "size": 110,
      "at": 6988
     },
     {
      "t": "words",
      "text": "HOTELS IN PARIS",
      "x": 960,
-     "y": 500,
+     "y": 440,
      "size": 120,
      "at": 7015,
      "color": "orange"
@@ -82,9 +74,17 @@
     {
      "t": "underline",
      "x": 960,
-     "y": 566,
+     "y": 506,
      "w": 900,
      "at": 7023
+    },
+    {
+     "t": "circle",
+     "x": 960,
+     "y": 440,
+     "w": 1200,
+     "h": 220,
+     "at": 7030
     }
    ]
   },
@@ -166,7 +166,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/doorman_bowing.png",
+     "src": "ink60/cast/parisian_awe_looking_up.png",
      "x": 1440,
      "y": 1000,
      "h": 660,
@@ -399,7 +399,7 @@
    "f0": 7764,
    "f1": 7890,
    "bg": {
-    "plate": "ink60full/plates/records_office_desk.png",
+    "plate": "ink60full/plates/ministry_office_day.png",
     "zoom": [
      1.0,
      1.08
@@ -454,47 +454,31 @@
      "src": "ink60/cast/scrap_dealer_pocketing_letter.png",
      "x": 1720,
      "y": 1000,
-     "h": 440,
+     "h": 324,
      "at": 7900
-    },
-    {
-     "t": "words",
-     "text": "THE LETTER SAID ONLY THIS",
-     "x": 960,
-     "y": 150,
-     "size": 60,
-     "at": 7893
     },
     {
      "t": "words",
      "text": "COME TO THE CRILLON",
      "x": 960,
-     "y": 320,
-     "size": 90,
+     "y": 280,
+     "size": 100,
      "at": 7958
-    },
-    {
-     "t": "words",
-     "text": "DISCUSS A MATTER OF",
-     "x": 960,
-     "y": 460,
-     "size": 70,
-     "at": 8008
     },
     {
      "t": "words",
      "text": "GREAT IMPORTANCE",
      "x": 960,
-     "y": 580,
-     "size": 100,
+     "y": 440,
+     "size": 110,
      "at": 8039,
      "color": "orange"
     },
     {
      "t": "underline",
      "x": 960,
-     "y": 635,
-     "w": 800,
+     "y": 501,
+     "w": 880,
      "at": 8047
     }
    ]

@@ -8,7 +8,7 @@
    "f0": 11245,
    "f1": 11352,
    "bg": {
-    "plate": "ink60full/plates/crillon_salon_birdseye.png",
+    "plate": "ink60full/plates/hotel_crillon_facade_day.png",
     "zoom": [
      1.1,
      1.2
@@ -17,10 +17,10 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_topdown_walk.png",
+     "src": "ink60/cast/lustig_official_tailcoat.png",
      "x": 600,
-     "y": 969,
-     "h": 389,
+     "y": 1000,
+     "h": 680,
      "at": 11260
     },
     {
@@ -106,7 +106,7 @@
      "src": "ink60/cast/scrap_dealer_hesitating.png",
      "x": 1700,
      "y": 1000,
-     "h": 560,
+     "h": 324,
      "at": 11482
     },
     {
@@ -188,9 +188,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_nodding_agree.png",
-     "x": 1689,
+     "x": 1720,
      "y": 1000,
-     "h": 520,
+     "h": 324,
      "at": 11676
     },
     {
@@ -325,7 +325,7 @@
      "src": "ink60/cast/scrap_dealer_secret_smile.png",
      "x": 1720,
      "y": 1000,
-     "h": 520,
+     "h": 324,
      "at": 12076
     },
     {
@@ -401,7 +401,7 @@
      "src": "ink60/cast/lustig_handing_money.png",
      "x": 960,
      "y": 1000,
-     "h": 440,
+     "h": 324,
      "at": 12230
     },
     {

@@ -74,7 +74,7 @@
     },
     {
      "t": "tag",
-     "text": "IN THE MIDDLE OF A CITY",
+     "text": "MID-CITY",
      "x": 1320,
      "y": 560,
      "at": 2641
@@ -142,9 +142,9 @@
     {
      "t": "sprite",
      "src": "ink60/cast/lustig_passports_fan.png",
-     "x": 1713,
+     "x": 1720,
      "y": 1000,
-     "h": 480,
+     "h": 324,
      "at": 2786
     },
     {
@@ -179,7 +179,7 @@
    "bg": {
     "plate": "ink60/plates/paris_tower_grey.png",
     "zoom": [
-     1.08,
+     1.15,
      1.0
     ]
    },
@@ -187,7 +187,7 @@
     {
      "t": "words",
      "text": "THE TOWER WAS ALREADY",
-     "x": 600,
+     "x": 623,
      "y": 220,
      "size": 70,
      "at": 2852

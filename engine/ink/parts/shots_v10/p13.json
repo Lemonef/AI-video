@@ -189,8 +189,8 @@
    "bg": {
     "plate": "ink60full/plates/tower_lattice_framing_paris.png",
     "zoom": [
-     1.12,
-     1.0
+     1.0,
+     1.08
     ]
    },
    "cam": {
@@ -217,15 +217,15 @@
     {
      "t": "words",
      "text": "HE DID NOT RUSH THEM",
-     "x": 621,
-     "y": 160,
+     "x": 673,
+     "y": 177,
      "size": 60,
      "at": 10303
     },
     {
      "t": "words",
      "text": "ALREADY THEIRS",
-     "x": 726,
+     "x": 779,
      "y": 280,
      "size": 110,
      "at": 10466,
