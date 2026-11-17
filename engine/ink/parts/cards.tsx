@@ -18,7 +18,8 @@ const POP_START = 0.6, POP_PEAK = 1.08; // entrance scales
 const ICON_FADE = 4; // icon opacity frames
 const GLIDE = 14; // carry duration
 const SMOOTHSTEP_A = 3, SMOOTHSTEP_B = 2; // smoothstep coefficients
-const EASE_POWER = 3; // ease-out exponent
+const POP_EASE = 3; // pop rise exponent
+const COUNT_EASE = 3; // bignum ease-out exponent
 const LABEL_FADE = 6; // label opacity duration
 const COUNT_MAX = 16, COUNT_ROW_MAX = 8; // count limits
 const COUNT_SIZE = 220, COUNT_FILL = 0.8; // count icon cap and slot occupancy
@@ -28,21 +29,22 @@ const VS_RADIUS = 68, VS_BASELINE = 0.35; // versus circle and baseline
 const DIVIDER_FRAMES = 10; // divider draw time
 const DIVIDER_TOP = SPLIT_Y - SPLIT_SIZE / 2;
 const DIVIDER_BOTTOM = 2 * CY - DIVIDER_TOP;
-const DIVIDER_CONTROL_Y = (DIVIDER_TOP + CY - VS_RADIUS) / 2;
+const DIVIDER_CTRL_Y = (DIVIDER_TOP + CY - VS_RADIUS) / 2; // Bezier control point y of the upper divider stroke
+const DIVIDER_LOWER_CTRL_Y = 2 * CY - DIVIDER_CTRL_Y; // mirror of the upper control point about the card centre
 const DIVIDER_BOW = 7; // divider drift
 const VS_DRAW = 8, VS_FADE = 4; // versus draw and opacity durations
 const BURST_COUNT = 8, BURST_DRAW = 8; // ray count and draw time
 const BURST_DROP = 0.1;
 const BURST_INNER = 0.64, BURST_OUTER = 0.75, BURST_START = 1 - BURST_DROP, BURST_SWEEP = 1 + 2 * BURST_DROP; // ray geometry, leaving the label sector clear
 const CROSS_FRAMES = 10, CROSS_DIM = 0.45; // crossout duration and final opacity
-const CROSS_NATIVE_END = 11; // existing CrossElement completes at frame eleven
+const CROSS_NATIVE_END = 11; // mirrors the native draw length of CrossElement in elements.tsx; the two change together
 const ROW_PITCH = LABEL * 1.6, BOX = LABEL * 0.8, TEXT_OFFSET = LABEL * 1.2; // checklist layout
 const BOX_DRAW = 8, MARK_DELAY = 8, MARK_DRAW = 8; // checklist timing
 const BOX_DRIFT = 2; // checklist corner wobble
 const TEXT_BASELINE = 0.35; // checklist vertical alignment
 const CHAR_WIDTH = 0.55; // hand lettering width estimate
 const MARK_LEFT = 0.15, TICK_RUN = 0.25, TICK_DROP = 0.25, TICK_RISE = 0.55, TICK_REACH = 0.45; // tick geometry
-const CROSS_INSET_X = 0.2, CROSS_INSET_Y = 0.25, CROSS_SPAN = 0.6; // checkbox X geometry
+const CROSS_MARK_INSET_X = 0.2, CROSS_MARK_INSET_Y = 0.25, CROSS_MARK_SPAN_X = 0.6, CROSS_MARK_SPAN_Y = 0.5; // checkbox X geometry
 const QUOTE_HEIGHT = LABEL * 2, QUOTE_GAP = LABEL * 0.4; // quote mark dimensions
 const QUOTE_HOOK_X = 0.3, QUOTE_HOOK_Y = 0.6, QUOTE_WIDTH = 0.45, QUOTE_PAIR = 0.55; // quote curves
 const QUOTE_DRAW = 8, QUOTE_STEP = 8, QUOTE_DELAY = 6; // quote timing
@@ -50,13 +52,15 @@ const LINE_HEIGHT = LABEL * 1.2; // quote line spacing
 const BIG_FONT = 260, BIG_FIT = 1680; // number font and maximum width
 const BIG_FADE = 4, UNDERLINE_DRAW = 10; // number entrance and underline time
 const UNDERLINE_Y = 0.18, UNDERLINE_BOW = 0.04, BIG_LABEL_GAP = 1.5; // number layout (gap below underline in label heights)
+const HERO_LABEL_GAP = LABEL * 0.3; // clear space between icon base and label cap top
+const HERO_CAP = LABEL * 0.7; // label cap height
 
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 const delay = (el: {at?: number}, f0: number) => (el.at ?? f0) - f0;
 const smooth = (p: number) => p * p * (SMOOTHSTEP_A - SMOOTHSTEP_B * p);
 const pop = (f: number, at: number) => f < at + POP_UP
-  ? POP_START + (POP_PEAK - POP_START) * (1 - Math.pow(1 - progress(f, at, at + POP_UP), EASE_POWER))
+  ? POP_START + (POP_PEAK - POP_START) * (1 - Math.pow(1 - progress(f, at, at + POP_UP), POP_EASE))
   : POP_PEAK + (1 - POP_PEAK) * smooth(progress(f, at + POP_UP, at + POP_UP + POP_SETTLE));
 const Text: React.FC<{x: number; y: number; text: string; opacity?: number; size?: number; anchor?: 'start' | 'middle'; fill?: string}> = ({x, y, text, opacity = 1, size = LABEL, anchor = 'middle', fill = INK}) => <text x={x} y={y} opacity={opacity} fontFamily={FONT} fontWeight={WEIGHT} fontSize={size} textAnchor={anchor} fill={fill}>{text.toUpperCase()}</text>;
 const Draw: React.FC<{d: string; p: number; ink?: string}> = ({d, p, ink = INK}) => <path d={d} fill="none" stroke={ink} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} opacity={p > 0 ? 1 : 0}/>;
@@ -85,7 +89,7 @@ export const CountElement: React.FC<Props<CountEl>> = ({el, shotF0, shotF1}) => 
 export const SplitElement: React.FC<Props<SplitEl>> = ({el, shotF0, shotF1}) => {
   const f = useCurrentFrame(), a = delay(el, shotF0), vsAt = a + el.step + POP_FRAMES;
   const circle = scribbleEllipse(VS_RADIUS, VS_RADIUS);
-  const divider = el.vs ? `M${CX} ${DIVIDER_TOP} Q${CX + DIVIDER_BOW} ${DIVIDER_CONTROL_Y} ${CX} ${CY - VS_RADIUS} M${CX} ${CY + VS_RADIUS} Q${CX - DIVIDER_BOW} ${DIVIDER_BOTTOM} ${CX} ${DIVIDER_BOTTOM}` : `M${CX} ${DIVIDER_TOP} Q${CX + DIVIDER_BOW} ${CY} ${CX} ${DIVIDER_BOTTOM}`;
+  const divider = el.vs ? `M${CX} ${DIVIDER_TOP} Q${CX + DIVIDER_BOW} ${DIVIDER_CTRL_Y} ${CX} ${CY - VS_RADIUS} M${CX} ${CY + VS_RADIUS} Q${CX - DIVIDER_BOW} ${DIVIDER_LOWER_CTRL_Y} ${CX} ${DIVIDER_BOTTOM}` : `M${CX} ${DIVIDER_TOP} Q${CX + DIVIDER_BOW} ${CY} ${CX} ${DIVIDER_BOTTOM}`;
   return <g><Draw d={divider} p={progress(f, a, a + DIVIDER_FRAMES)}/>{[el.left, el.right].map((side, i) => {
     const x = i === 0 ? SPLIT_LEFT : SPLIT_RIGHT, labelAt = a + i * el.step + POP_FRAMES;
     return <g key={i}><IconElement shotF0={shotF0} shotF1={shotF1} el={{t: 'icon', name: side.icon, x, y: SPLIT_Y, size: SPLIT_SIZE, color: side.color, at: el.at + i * el.step}}/><Text x={x} y={SPLIT_Y + SPLIT_SIZE / 2 + LABEL} text={side.label} opacity={progress(f, labelAt, labelAt + LABEL_FADE)}/></g>;
@@ -93,7 +97,7 @@ export const SplitElement: React.FC<Props<SplitEl>> = ({el, shotF0, shotF1}) => 
 };
 export const HeroElement: React.FC<Props<HeroEl>> = ({el, shotF0, shotF1}) => {
   const f = useCurrentFrame(), end = delay(el, shotF0) + (el.from ? GLIDE : POP_FRAMES);
-  return <g><IconElement shotF0={shotF0} shotF1={shotF1} el={{...el, t: 'icon', name: el.icon}}/><Text x={el.x} y={el.y + el.size / 2 + LABEL} text={el.label} opacity={progress(f, end, end + LABEL_FADE)}/>{el.burst && Array.from({length: BURST_COUNT}, (_, i) => {
+  return <g><IconElement shotF0={shotF0} shotF1={shotF1} el={{...el, t: 'icon', name: el.icon}}/><Text x={el.x} y={el.y + el.size / 2 + HERO_LABEL_GAP + HERO_CAP} text={el.label} opacity={progress(f, end, end + LABEL_FADE)}/>{el.burst && Array.from({length: BURST_COUNT}, (_, i) => {
     const a = (BURST_START + i * BURST_SWEEP / (BURST_COUNT - 1)) * Math.PI;
     return <Draw key={i} ink={ORANGE} p={progress(f, end, end + BURST_DRAW)} d={`M${el.x + Math.cos(a) * el.size * BURST_INNER} ${el.y + Math.sin(a) * el.size * BURST_INNER} l${Math.cos(a) * el.size * (BURST_OUTER - BURST_INNER)} ${Math.sin(a) * el.size * (BURST_OUTER - BURST_INNER)}`}/>;
   })}</g>;
@@ -110,8 +114,8 @@ export const ChecklistElement: React.FC<Props<ChecklistEl>> = ({el, shotF0}) => 
     if (row.text.toUpperCase().length * LABEL * CHAR_WIDTH > el.w - TEXT_OFFSET) throw new Error(`checklist row too wide: ${row.text}`);
     const y = el.y + (i - (el.rows.length - 1) / 2) * ROW_PITCH, a = delay(el, shotF0) + i * el.step;
     const box = `M${left} ${y - BOX / 2} l${BOX} ${BOX_DRIFT} l${-BOX_DRIFT} ${BOX} l${-BOX + BOX_DRIFT} ${-BOX_DRIFT}Z`;
-    const mark = row.mark === 'tick' ? `M${left + BOX * MARK_LEFT} ${y} l${BOX * TICK_RUN} ${BOX * TICK_DROP} l${BOX * TICK_REACH} ${-BOX * TICK_RISE}` : `M${left + BOX * CROSS_INSET_X} ${y - BOX * CROSS_INSET_Y} l${BOX * CROSS_SPAN} ${BOX / 2} M${left + BOX * (1 - CROSS_INSET_X)} ${y - BOX * CROSS_INSET_Y} l${-BOX * CROSS_SPAN} ${BOX / 2}`;
-    return <g key={i}><Draw d={box} p={progress(f, a, a + BOX_DRAW)}/><Text x={left + TEXT_OFFSET} y={y + LABEL * TEXT_BASELINE} text={row.text} anchor="start" opacity={progress(f, a, a + LABEL_FADE)}/>{row.mark !== 'none' && <Draw d={mark} ink={row.mark === 'tick' ? GREEN : RED} p={progress(f, a + MARK_DELAY, a + MARK_DELAY + MARK_DRAW)}/>}</g>;
+    const mark = row.mark === 'tick' ? <Draw d={`M${left + BOX * MARK_LEFT} ${y} l${BOX * TICK_RUN} ${BOX * TICK_DROP} l${BOX * TICK_REACH} ${-BOX * TICK_RISE}`} ink={GREEN} p={progress(f, a + MARK_DELAY, a + MARK_DELAY + MARK_DRAW)}/> : <Draw d={`M${left + BOX * CROSS_MARK_INSET_X} ${y - BOX * CROSS_MARK_INSET_Y} l${BOX * CROSS_MARK_SPAN_X} ${BOX * CROSS_MARK_SPAN_Y} M${left + BOX * (1 - CROSS_MARK_INSET_X)} ${y - BOX * CROSS_MARK_INSET_Y} l${-BOX * CROSS_MARK_SPAN_X} ${BOX * CROSS_MARK_SPAN_Y}`} ink={RED} p={progress(f, a + MARK_DELAY, a + MARK_DELAY + MARK_DRAW)}/>;
+    return <g key={i}><Draw d={box} p={progress(f, a, a + BOX_DRAW)}/><Text x={left + TEXT_OFFSET} y={y + LABEL * TEXT_BASELINE} text={row.text} anchor="start" opacity={progress(f, a, a + LABEL_FADE)}/>{row.mark !== 'none' && mark}</g>;
   })}</g>;
 };
 export const QuoteElement: React.FC<Props<QuoteEl>> = ({el, shotF0}) => {
@@ -137,5 +141,5 @@ export const BignumElement: React.FC<Props<BignumEl>> = ({el, shotF0}) => {
   const format = (v: number) => `${el.prefix ?? ''}${Math.round(v).toLocaleString('en-US')}${el.suffix ?? ''}`;
   const size = Math.min(BIG_FONT, BIG_FIT / (format(el.value).length * CHAR_WIDTH));
   const p = progress(f, a, a + el.dur), width = format(el.value).length * size * CHAR_WIDTH;
-  return <g><Text x={el.x} y={el.y} text={format(el.value * (1 - Math.pow(1 - p, EASE_POWER)))} size={size} fill={color(el.color)} opacity={progress(f, a, a + BIG_FADE)}/><Draw ink={ORANGE} p={progress(f, a + el.dur, a + el.dur + UNDERLINE_DRAW)} d={`M${el.x - width / 2} ${el.y + size * UNDERLINE_Y} Q${el.x} ${el.y + size * (UNDERLINE_Y + UNDERLINE_BOW)} ${el.x + width / 2} ${el.y + size * UNDERLINE_Y}`}/><Text x={el.x} y={el.y + size * UNDERLINE_Y + LABEL * BIG_LABEL_GAP} text={el.label} opacity={progress(f, a + el.dur, a + el.dur + LABEL_FADE)}/></g>;
+  return <g><Text x={el.x} y={el.y} text={format(el.value * (1 - Math.pow(1 - p, COUNT_EASE)))} size={size} fill={color(el.color)} opacity={progress(f, a, a + BIG_FADE)}/><Draw ink={ORANGE} p={progress(f, a + el.dur, a + el.dur + UNDERLINE_DRAW)} d={`M${el.x - width / 2} ${el.y + size * UNDERLINE_Y} Q${el.x} ${el.y + size * (UNDERLINE_Y + UNDERLINE_BOW)} ${el.x + width / 2} ${el.y + size * UNDERLINE_Y}`}/><Text x={el.x} y={el.y + size * UNDERLINE_Y + LABEL * BIG_LABEL_GAP} text={el.label} opacity={progress(f, a + el.dur, a + el.dur + LABEL_FADE)}/></g>;
 };

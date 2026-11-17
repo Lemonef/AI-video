@@ -11,6 +11,10 @@ export const DOODLE = {
   cream: '#F1E6CC', // warm paper marker
 };
 
+// Hand-drawn window quads: a small corner drift keeps the panes off-square.
+const WIN_W = 25, WIN_H = 28, WIN_TOP = 24, WIN_WOBBLE = 2, WIN_DRIFT = 1;
+const HOTEL_WIN_W = 17, HOTEL_WIN_H = 18;
+
 // All artwork shares the same outline and one upper-left paper glint.
 export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}> = ({name, size, fill}) => {
   let art: React.ReactNode;
@@ -18,7 +22,7 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
   const base = (c: string) => fill ?? c;
   switch (name) {
     case 'tower':
-      art = <><path fill={base(DOODLE.brown)} d="M-77 86 Q-40 30 -25 -20 L-9 -69 L0 -92 L8 -68 L24 -20 Q39 35 77 86 L42 86 Q29 32 0 34 Q-29 33 -43 87Z"/><path fill={DOODLE.brown} d="M-38 9 L37 7 L40 19 L-41 21Z M-23 -31 L22 -33 L25 -23 L-26 -21Z"/><path fill="none" d="M-57 65 l22 7 m-17 -18 l22 6 m-13 -19 l20 6 M56 65 l-22 7 m17 -18 l-22 6 m13 -19 l-20 6 M-51 72 l19 -18 m-10 -1 l18 -16 M51 72 L32 54 m10 -1 L24 37 M-25 7 L15 -20 M25 7 L-15 -20 M-13 -35 L8 -56 M13 -35 L-8 -56"/></>;
+      art = <><path fill={base(DOODLE.brown)} d="M-77 86 Q-40 30 -25 -20 L-9 -69 L0 -92 L8 -68 L24 -20 Q39 35 77 86 L42 86 Q29 32 0 34 Q-29 33 -43 87Z"/><path fill={base(DOODLE.brown)} d="M-38 9 L37 7 L40 19 L-41 21Z M-23 -31 L22 -33 L25 -23 L-26 -21Z"/><path fill="none" d="M-57 65 l22 7 m-17 -18 l22 6 m-13 -19 l20 6 M56 65 l-22 7 m17 -18 l-22 6 m13 -19 l-20 6 M-51 72 l19 -18 m-10 -1 l18 -16 M51 72 L32 54 m10 -1 L24 37 M-25 7 L15 -20 M25 7 L-15 -20 M-13 -35 L8 -56 M13 -35 L-8 -56"/></>;
       highlight = 'M-15 -43 L-11 -55'; break;
     case 'hat':
       art = <><path fill={base(INK)} d="M-57 28 Q-64 -66 -3 -68 Q59 -72 57 28 Q77 37 88 23 Q97 51 65 59 Q-1 74 -71 55 Q-96 47 -87 25 Q-74 38 -57 28Z"/><path fill={DOODLE.grey} d="M-58 9 Q0 24 58 8 L58 28 Q0 44 -58 28Z"/></>;
@@ -48,7 +52,7 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
       art = <><path fill={base(DOODLE.cream)} d="M-70 -81 L70 -76 L65 61 Q82 79 61 82 L-69 78 Q-79 77 -75 55Z"/><path fill={INK} d="M-56 -63 L53 -59 L52 -43 L-57 -46Z"/><path fill="none" d="M-55 -28 L48 -25 M-56 -13 L49 -10 M-2 9 L48 11 M-2 25 L47 27 M-55 49 L47 51 M-55 63 L45 65 M65 61 L48 61 Q47 78 61 82"/><path fill={DOODLE.blue} d="M-56 4 L-19 6 L-21 35 L-55 33Z"/></>;
       highlight = 'M-65 -69 L-65 -49'; break;
     case 'factory':
-      art = <><path fill={DOODLE.grey} d="M39 -69 Q16 -73 28 -88 Q37 -99 51 -89 Q71 -98 78 -82 Q93 -68 74 -60 Q56 -53 39 -69Z"/><path fill={base(DOODLE.brown)} d="M-82 76 L-82 -12 L-35 -40 L-34 -11 L12 -39 L14 -9 L36 -9 L36 -57 L59 -58 L63 1 L80 1 L81 77Z"/>{[-61,-12,38].map((x,i)=><path key={x} fill={DOODLE.cream} d={`M${x} 24 l25 ${i-1} l-1 28 l-24 -2Z`}/>)}</>;
+      art = <><path fill={DOODLE.grey} d="M39 -69 Q16 -73 28 -88 Q37 -99 51 -89 Q71 -98 78 -82 Q93 -68 74 -60 Q56 -53 39 -69Z"/><path fill={base(DOODLE.brown)} d="M-82 76 L-82 -12 L-35 -40 L-34 -11 L12 -39 L14 -9 L36 -9 L36 -57 L59 -58 L63 1 L80 1 L81 77Z"/>{[-61,-12,38].map((x,i)=><path key={x} fill={DOODLE.cream} d={`M${x} ${WIN_TOP} l${WIN_W} ${i - WIN_DRIFT} l${-WIN_DRIFT} ${WIN_H} l${-WIN_W + WIN_DRIFT} ${-WIN_WOBBLE}Z`}/>)}</>;
       highlight = 'M-68 9 L-52 0'; break;
     case 'badge':
       art = <><path fill={base(DOODLE.yellow)} d="M0 -87 L23 -46 L69 -51 L53 -7 L87 24 L42 39 L33 84 L-2 57 L-39 83 L-43 37 L-87 20 L-52 -9 L-67 -53 L-23 -46Z"/><circle r={32} fill={DOODLE.cream}/><path fill="none" d="M-17 -8 L17 -9 M-15 10 L15 9"/></>;
@@ -72,10 +76,10 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
       art = <g transform="rotate(30)"><path fill={base(INK)} d="M-15 -84 Q0 -91 15 -83 L14 36 L-14 35Z"/><path fill={DOODLE.yellow} d="M-14 35 L14 36 L20 55 L0 88 L-20 55Z"/><path fill="none" d="M0 86 L0 54"/><circle cy={52} r={3} fill={INK}/><path stroke={DOODLE.grey} fill="none" d="M9 -73 L23 -69 L22 -24"/></g>;
       highlight = 'M24 -65 L14 -47'; break;
     case 'hotel':
-      art = <><path fill={base(DOODLE.cream)} d="M-61 81 L-63 -69 L59 -72 L63 82Z"/><path fill="none" d="M7 -72 L7 -96"/><path fill={RED} d="M8 -95 L43 -88 L9 -79Z"/>{[-40,-9,22].flatMap((x,i)=>[-51,-22,7].map((y,j)=><path key={`${x},${y}`} fill={DOODLE.blue} d={`M${x} ${y} l17 ${i%2+1} l-1 18 l-16 ${-1-j%2}Z`}/>))}<path fill={INK} d="M-16 80 L-16 49 Q0 44 17 49 L18 81Z"/><path fill={RED} d="M-60 33 L60 32 L73 49 Q61 57 48 50 Q34 57 23 50 Q9 57 -4 50 Q-17 57 -30 50 Q-44 57 -57 50 Q-69 57 -74 49Z"/></>;
+      art = <><path fill={base(DOODLE.cream)} d="M-61 81 L-63 -69 L59 -72 L63 82Z"/><path fill="none" d="M7 -72 L7 -96"/><path fill={RED} d="M8 -95 L43 -88 L9 -79Z"/>{[-40,-9,22].flatMap((x,i)=>[-51,-22,7].map((y,j)=><path key={`${x},${y}`} fill={DOODLE.blue} d={`M${x} ${y} l${HOTEL_WIN_W} ${i % 2 + WIN_DRIFT} l${-WIN_DRIFT} ${HOTEL_WIN_H} l${-HOTEL_WIN_W + WIN_DRIFT} ${-WIN_DRIFT - j % 2}Z`}/>))}<path fill={INK} d="M-16 80 L-16 49 Q0 44 17 49 L18 81Z"/><path fill={RED} d="M-60 33 L60 32 L73 49 Q61 57 48 50 Q34 57 23 50 Q9 57 -4 50 Q-17 57 -30 50 Q-44 57 -57 50 Q-69 57 -74 49Z"/></>;
       highlight = 'M-53 -57 L-52 -38'; break;
     case 'crown':
-      art = <><path fill={base(DOODLE.yellow)} d="M-77 -45 L-42 -8 L-35 -63 L-8 -24 L4 -81 L24 -24 L53 -61 L51 -6 L84 -41 L65 64 Q0 79 -63 64Z"/><path fill={base(DOODLE.yellow)} d="M-66 41 Q0 53 68 39 L65 64 Q0 79 -63 64Z"/>{[[-77,-47],[-35,-65],[4,-83],[53,-63],[84,-43]].map(([x,y])=><circle key={x} cx={x} cy={y} r={6} fill={DOODLE.yellow}/>)}{[-38,0,38].map(x=><circle key={x} cx={x} cy={57} r={6} fill={RED}/>)}</>;
+      art = <><path fill={base(DOODLE.yellow)} d="M-77 -45 L-42 -8 L-35 -63 L-8 -24 L4 -81 L24 -24 L53 -61 L51 -6 L84 -41 L65 64 Q0 79 -63 64Z"/><path fill={base(DOODLE.yellow)} d="M-66 41 Q0 53 68 39 L65 64 Q0 79 -63 64Z"/>{[[-77,-47],[-35,-65],[4,-83],[53,-63],[84,-43]].map(([x,y])=><circle key={x} cx={x} cy={y} r={6} fill={base(DOODLE.yellow)}/>)}{[-38,0,38].map(x=><circle key={x} cx={x} cy={57} r={6} fill={RED}/>)}</>;
       highlight = 'M-55 14 L-49 28'; break;
     default: throw new Error(`Unknown icon name: ${name}`);
   }
