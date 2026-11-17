@@ -139,7 +139,7 @@ test('2c: map wired as its own layout file', () => {
 test('2c: demo2 appends europe map, a batch-1 card, atlantic map; points on land; no back-to-back', async () => {
   const {mapLayout, COAST} = await load();
   const p = JSON.parse(read('engine/ink/parts/cardlib/demo2.json'));
-  assert.equal(p.shots.length, PREV_SHOTS + 3);
+  assert.ok(p.shots.length >= PREV_SHOTS + 3, '2c appends three shots (later jobs append after them)');
   assert.equal(p.f1, p.shots.length * SHOT);
   p.shots.forEach((s, i) => {
     assert.equal(s.f0, i * SHOT, `shot ${i} f0`);
@@ -147,7 +147,7 @@ test('2c: demo2 appends europe map, a batch-1 card, atlantic map; points on land
     assert.deepEqual(s.bg, {card: true}, `shot ${i} bg`);
     if (i > 0) assert.notEqual(mainLayout(s).t, mainLayout(p.shots[i - 1]).t, `shots ${i - 1} and ${i} repeat a layout`);
   });
-  const [eu, mid, atl] = p.shots.slice(PREV_SHOTS).map(mainLayout);
+  const [eu, mid, atl] = p.shots.slice(PREV_SHOTS, PREV_SHOTS + 3).map(mainLayout);
   assert.equal(eu.t, 'map');
   assert.equal(atl.t, 'map');
   assert.ok(!['map', 'doc', 'split', 'words'].includes(mid.t), 'middle shot is another existing batch-1 layout');
