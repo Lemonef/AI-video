@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 720,
+  "f1": 810,
   "shots": [
     {
       "f0": 0,
@@ -183,6 +183,21 @@
           "at": 636,
           "dur": 30,
           "label": "AMERICA"
+        }
+      ]
+    },
+    {
+      "f0": 720,
+      "f1": 810,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "transform",
+          "a": {"icon": "tower", "label": "TOWER"},
+          "b": {"icon": "scrap", "label": "SCRAP"},
+          "label": "SOLD FOR SCRAP",
+          "at": 726,
+          "step": 18
         }
       ]
     }
