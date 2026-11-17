@@ -6,7 +6,8 @@ export type WordsEl = Position & Entry & {t: 'words'; text: string; size: number
 export type UnderlineEl = Position & Entry & {t: 'underline'; w: number};
 export type StampEl = Position & Entry & {t: 'stamp'; text: string; rot: number; color: Color};
 export type TowerEl = Position & {t: 'tower'; h: number; build?: [number, number]; cut?: [number, number]};
-export type CrossEl = Position & Entry & {t: 'cross'; size: number};
+// Cross: square `size` box by default; w/h (when set) fit it to the word it strikes so stacked rows never overlap.
+export type CrossEl = Position & Entry & {t: 'cross'; size: number; w?: number; h?: number};
 export type TicketEl = Position & Entry & {t: 'ticket'; w: number; text: string};
 export type TagEl = Position & Entry & {t: 'tag'; text: string};
 export type PhotoEl = Position & Entry & {t: 'photo'; src: string; w: number; rot: number; frame: 'polaroid'; label: string};

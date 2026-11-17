@@ -27,8 +27,8 @@ export const TowerElement: React.FC<Props<TowerEl>> = ({el, shotF0}) => {
   return <g><defs><clipPath id={`${id}build`}><rect x={el.x - el.h} y={el.y - el.h * build - (build === 1 ? 20 : 0)} width={el.h * 2} height={el.h * build + (build === 1 ? 40 : 0)}/></clipPath>{[0, 1, 2].map(i => <clipPath key={i} id={`${id}s${i}`}><rect x={el.x - el.h} y={el.y - el.h * (i + 1) / 3 - (i === 2 ? 20 : 0)} width={el.h * 2} height={el.h / 3 + (i === 2 ? 20 : i === 0 ? 20 : 0)}/></clipPath>)}</defs><g clipPath={`url(#${id}build)`}>{[0, 1, 2].map(i => <g key={i} transform={i === 1 ? `translate(${30 * cut} 0)` : i === 2 ? `translate(0 ${-60 * cut}) rotate(${8 * cut} ${el.x} ${el.y - el.h * 2 / 3})` : undefined}><g clipPath={`url(#${id}s${i})`}><Tower x={el.x} y={el.y} k={el.h / 430}/></g></g>)}</g>{el.cut && [1, 2].map(i => <line key={i} x1={el.x - el.h * 0.35} x2={el.x + el.h * 0.35 * (2 * line - 1)} y1={el.y - el.h * i / 3} y2={el.y - el.h * i / 3} stroke={RED} strokeWidth={6} strokeDasharray="18 12" opacity={line > 0 ? 1 : 0}/>)}</g>;
 };
 export const CrossElement: React.FC<Props<CrossEl>> = ({el, shotF0}) => {
-  const f = useCurrentFrame() - delay(el, shotF0); const r = el.size / 2;
-  return <g transform={`translate(${el.x} ${el.y})`} stroke={RED} strokeWidth={22} strokeLinecap="round">{[0, 1].map(i => <path key={i} d={i ? `M${r} ${-r} L${-r} ${r}` : `M${-r} ${-r} L${r} ${r}`} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - progress(f, i * 4, i * 4 + 7)} opacity={f > i * 4 ? 1 : 0}/>)}</g>;
+  const f = useCurrentFrame() - delay(el, shotF0); const rx = (el.w ?? el.size) / 2; const ry = (el.h ?? el.size) / 2;
+  return <g transform={`translate(${el.x} ${el.y})`} stroke={RED} strokeWidth={22} strokeLinecap="round">{[0, 1].map(i => <path key={i} d={i ? `M${rx} ${-ry} L${-rx} ${ry}` : `M${-rx} ${-ry} L${rx} ${ry}`} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - progress(f, i * 4, i * 4 + 7)} opacity={f > i * 4 ? 1 : 0}/>)}</g>;
 };
 export const TicketElement: React.FC<Props<TicketEl>> = ({el, shotF0}) => {
   const p = useIn(delay(el, shotF0)); const h = el.w * 0.38; const perf = el.w * 0.26;
