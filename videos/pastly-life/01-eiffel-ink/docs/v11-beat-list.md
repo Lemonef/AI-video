@@ -4,7 +4,7 @@ _One-line purpose: every VO beat (107, locked voice + script) mapped to ONE visu
 
 Rules carried (brain `skills/pastly-explainer/SKILL.md` rows 10-11, `docs/ink-card-patterns.md`):
 - Remake, not patch: nothing copied from shots_v10.
-- Budget (Zen 2026-11-17 "we spent too much on this video"): only existing art — 63 plates, 94 cast sprites, 13 PD photos. Card drawings are code-drawn SVG doodles (boiled). No paid art.
+- Art (pivot Zen 2026-11-17, brain `docs/ink-card-patterns.md` line 79): Video A may add new art — 4 corner-room plates + ~5 inserts via pipeline, cost quoted before spending; Video B uses existing art only (63 plates, 94 cast sprites, 13 PD photos). Card drawings are code-drawn SVG doodles (boiled).
 - TYPE_CAP: any card layout <= 4 per episode; BAR <= 1; FLOW <= 2. Charts only where the VO compares numbers (b69 only).
 - Each PD photo used once, with paper border + tilt + red mark.
 - Scenes: 4-6 framings per plate max reuse; facts written ON objects (tags, papers, stamps), not floating.
@@ -16,7 +16,7 @@ Framing codes: WIDE · MED · CLOSE · INSERT (object fills frame) · OTS (over 
 
 | Layout | What it draws | Uses |
 |---|---|---|
-| COUNT | a row of N identical doodles drawing on one by one, number above | b02, b16, b23, b31 |
+| COUNT | a row of N identical doodles drawing on one by one, number above | b02, b16, b23 |
 | SPLIT | page split by a hand line, left idea vs right idea, red X or tick on one side | x01, b30, b49, x21 |
 | HERO | one big doodle centered + 1-3 words under it | b10, x02, x12, x19 |
 | CROSSOUT | 2-3 hand-written words, each struck by a red line, final word circled | b17, x08, b53 |
@@ -89,7 +89,7 @@ Framing codes: WIDE · MED · CLOSE · INSERT (object fills frame) · OTS (over 
 | b28 | SCENE | crillon_salon_chandeliers LOW, doorman_bowing |
 | b29 | CARD SCALE | big room vs tiny man; room side drops: "ROOM FIRST" |
 | b30 | CARD SPLIT | RICH (one coin stack) vs WANTS RICHER (stack + arrow up), red tick right |
-| b31 | CARD COUNT | 6 top hats each with an envelope: "6 DEALERS" |
+| b31 | SCENE | telegraph_desk_topdown INSERT (2nd framing), 6 sealed envelopes fan out, each addressed; top one tagged "6 DEALERS" |
 | b32 | SCENE | wax_seal_extreme_closeup INSERT, letter line "TELL NO ONE" |
 | b33 | SCENE | hotel_crillon_facade_day WIDE, scrap_dealer_proud; hook doodle tag "HOOK 1" |
 | **p11** | | |
@@ -173,6 +173,6 @@ Framing codes: WIDE · MED · CLOSE · INSERT (object fills frame) · OTS (over 
 | b78 | SCENE | hotel_suite_corner_34 MED, lustig_point_viewer (CTA) |
 
 ## Tallies (lint targets)
-- 107 beats: cards 40 · scenes 57 · photos 10 (b73 = photo then scene; unused: expo_1889, concorde_1922).
-- Card layouts all <= 4 (COUNT 4, SPLIT 4, HERO 4, QUOTE 4, CROSSOUT 3, DOC 3, MAP 3, CHECKLIST 2, TRANSFORM 2, FLOW 2, BAR 1, rest 1).
-- Longest same-kind run: 3 cards (b29-b31) — lint max 3.
+- 107 beats: cards 39 · scenes 58 · photos 10 (b73 = photo then scene; unused: expo_1889, concorde_1922).
+- Card layouts all <= 4 (SPLIT 4, COUNT 3, HERO 4, QUOTE 4, CROSSOUT 3, DOC 3, MAP 3, CHECKLIST 2, TRANSFORM 2, FLOW 2, BAR 1, rest 1).
+- Longest same-kind run: 2 cards (SKILL.md row 8 + ink-card-patterns lint: max 2 cards in a row).
