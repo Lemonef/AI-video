@@ -5,9 +5,9 @@ import {color, CrossElement} from './elements';
 import {DoodleIcon} from './icons';
 import {scribbleEllipse} from './doodle';
 import type {IconEl, CountEl, SplitEl, HeroEl, CrossoutEl, ChecklistEl, QuoteEl, BignumEl} from './schema';
+import {LABEL, SMALL, CHAR_WIDTH} from './layouts/tokens';
+export {LABEL, SMALL, CHAR_WIDTH} from './layouts/tokens';
 
-const LABEL = 70; // card label px (brief spec)
-const SMALL = LABEL * 0.7;
 const W = 1920, H = 1080; // stage dimensions
 const CX = W / 2, CY = H / 2; // card centre
 const WEIGHT = 700; // hand lettering weight
@@ -42,7 +42,6 @@ const ROW_PITCH = LABEL * 1.6, BOX = LABEL * 0.8, TEXT_OFFSET = LABEL * 1.2; // 
 const BOX_DRAW = 8, MARK_DELAY = 8, MARK_DRAW = 8; // checklist timing
 const BOX_DRIFT = 2; // checklist corner wobble
 const TEXT_BASELINE = 0.35; // checklist vertical alignment
-const CHAR_WIDTH = 0.55; // hand lettering width estimate
 const MARK_LEFT = 0.15, TICK_RUN = 0.25, TICK_DROP = 0.25, TICK_RISE = 0.55, TICK_REACH = 0.45; // tick geometry
 const CROSS_MARK_INSET_X = 0.2, CROSS_MARK_INSET_Y = 0.25, CROSS_MARK_SPAN_X = 0.6, CROSS_MARK_SPAN_Y = 0.5; // checkbox X geometry
 const QUOTE_HEIGHT = LABEL * 2, QUOTE_GAP = LABEL * 0.4; // quote mark dimensions
@@ -56,14 +55,14 @@ const HERO_LABEL_GAP = LABEL * 0.3; // clear space between icon base and label c
 const HERO_CAP = LABEL * 0.7; // label cap height
 
 type Props<T> = {el: T; shotF0: number; shotF1: number};
-const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-const delay = (el: {at?: number}, f0: number) => (el.at ?? f0) - f0;
-const smooth = (p: number) => p * p * (SMOOTHSTEP_A - SMOOTHSTEP_B * p);
-const pop = (f: number, at: number) => f < at + POP_UP
+export const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+export const delay = (el: {at?: number}, f0: number) => (el.at ?? f0) - f0;
+export const smooth = (p: number) => p * p * (SMOOTHSTEP_A - SMOOTHSTEP_B * p);
+export const pop = (f: number, at: number) => f < at + POP_UP
   ? POP_START + (POP_PEAK - POP_START) * (1 - Math.pow(1 - progress(f, at, at + POP_UP), POP_EASE))
   : POP_PEAK + (1 - POP_PEAK) * smooth(progress(f, at + POP_UP, at + POP_UP + POP_SETTLE));
-const Text: React.FC<{x: number; y: number; text: string; opacity?: number; size?: number; anchor?: 'start' | 'middle'; fill?: string}> = ({x, y, text, opacity = 1, size = LABEL, anchor = 'middle', fill = INK}) => <text x={x} y={y} opacity={opacity} fontFamily={FONT} fontWeight={WEIGHT} fontSize={size} textAnchor={anchor} fill={fill}>{text.toUpperCase()}</text>;
-const Draw: React.FC<{d: string; p: number; ink?: string}> = ({d, p, ink = INK}) => <path d={d} fill="none" stroke={ink} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} opacity={p > 0 ? 1 : 0}/>;
+export const Text: React.FC<{x: number; y: number; text: string; opacity?: number; size?: number; anchor?: 'start' | 'middle'; fill?: string}> = ({x, y, text, opacity = 1, size = LABEL, anchor = 'middle', fill = INK}) => <text x={x} y={y} opacity={opacity} fontFamily={FONT} fontWeight={WEIGHT} fontSize={size} textAnchor={anchor} fill={fill}>{text.toUpperCase()}</text>;
+export const Draw: React.FC<{d: string; p: number; ink?: string}> = ({d, p, ink = INK}) => <path d={d} fill="none" stroke={ink} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p} opacity={p > 0 ? 1 : 0}/>;
 
 export const IconElement: React.FC<Props<IconEl>> = ({el, shotF0}) => {
   const f = useCurrentFrame(), a = delay(el, shotF0);
