@@ -11,9 +11,9 @@ as batch 1's best cards (crossout, split, hero).
 - NEW `engine/ink/parts/layouts/transformLayout.ts` - pure layout: validation, timing chain, positions,
   arrow paths. Imports only from ./tokens and types from ../schema. No React, no remotion.
 - NEW `engine/ink/parts/layouts/transform.tsx` - the renderer.
-- EDIT `engine/ink/parts/schema.ts` - add `SlotIcon` and `TransformEl`, add `TransformEl` to the `El` union.
-- EDIT `engine/ink/parts/elements.tsx` - one `case 'transform'` line and its import.
-- EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND one shot (index 8) and raise `f1` by 90. The
+- EDIT `engine/ink/parts/schema.ts` - add SlotIcon and TransformEl, add TransformEl to the El union.
+- EDIT `engine/ink/parts/elements.tsx` - one transform case line and its import.
+- EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND one shot (index 8) and raise f1 by 90. The
   existing 8 shots stay byte-identical.
 
 Nothing else changes.
