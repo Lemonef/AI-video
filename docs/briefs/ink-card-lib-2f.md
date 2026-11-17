@@ -34,7 +34,7 @@ Named constants, one per meaning, each with a one-line comment; no bare numbers 
 - `CIRCLE_PAD` (red circle radius beyond the odd icon half-size), `LABEL_GAP`.
 
 `export const ringLayout = (el: RingEl)` returns:
-- `drawAt = at`, `drawEnd = at + DRAW_FRAMES`, `size = min(2 * PI * r / n * RING_FILL, MAX_ICON)`.
+- `ringX = el.x`, `ringY = el.y`, `ringR = el.r` (the renderer reads the ring from these), `drawAt = at`, `drawEnd = at + DRAW_FRAMES`, `size = min(2 * PI * r / n * RING_FILL, MAX_ICON)`.
 - `icons[i] = {x, y, size, at}` for i in 0..n-1: angle `-PI / 2 + 2 * PI * i / n` (12 o'clock start,
   clockwise in SVG y-down), `x = el.x + r cos`, `y = el.y + r sin`, `at = drawEnd + i * step`.
 - `odd = {icon: el.odd.icon ?? el.icon, x, y, size, at}`: angle `el.odd.angle` degrees (0 = right,
@@ -54,7 +54,8 @@ caption is wider than the card (`label.length * LABEL * CHAR_WIDTH > CARD_W`).
   times (job 2d shipped with an invisible arrow and labels from mixing the two).
 - `export const RingElement: React.FC<Props<RingEl>>`; read EVERY number from `ringLayout(el)`; no
   layout arithmetic of its own; no bare numbers except 0, 1, 2.
-- Ring: doodle.tsx `scribbleEllipse(r, r)` translated to (x, y), drawn on with cards.tsx `Draw`
+- Font sizes: import `LABEL` / `SMALL` from ./tokens (never redefine them).
+- Ring: doodle.tsx `scribbleEllipse(ringR, ringR)` translated to (ringX, ringY), drawn on with cards.tsx `Draw`
   (progress drawAt..drawEnd), INK, the same LINE stroke as every card.
 - Icons: one `<IconElement el={{t: 'icon', x, y, size, name: el.icon, at}} .../>` per ring slot, and
   the odd one the same way with `odd.icon` (batch-1 pop).
