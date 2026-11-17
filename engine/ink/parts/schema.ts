@@ -29,6 +29,7 @@ export type Side = {icon: IconName; label: string; color?: Color};
 export type SlotIcon = {icon: IconName; label?: string; color?: Color};
 export type SplitEl = {t: 'split'; at: number; step: number; left: Side; right: Side; vs?: string};
 export type TransformEl = {t: 'transform'; a: SlotIcon; b: SlotIcon; label?: string; at: number; step: number};
+export type ScaleEl = {t: 'scale'; left: SlotIcon; right: SlotIcon; heavy: 'left' | 'right'; label?: string; at: number; dur: number};
 export type HeroEl = Position & {t: 'hero'; icon: IconName; size: number; label: string; at: number; color?: Color; burst?: boolean; from?: [number, number, number]};
 export type CrossoutEl = Position & {t: 'crossout'; icon: IconName; size: number; label?: string; at: number; crossAt: number};
 export type ChecklistEl = Position & {t: 'checklist'; w: number; at: number; step: number; rows: {text: string; mark: 'tick' | 'cross' | 'none'}[]};
@@ -36,7 +37,7 @@ export type QuoteEl = Position & {t: 'quote'; w: number; text: string; who?: str
 export type BignumEl = Position & {t: 'bignum'; value: number; prefix?: string; suffix?: string; label: string; at: number; dur: number; color?: Color};
 export type DocEl = {t: 'doc'; x: number; y: number; w: number; h: number; kind: 'card' | 'memo' | 'certificate'; title: string; lines: string[]; at: number; step: number; rot?: number; mark?: {line: number; style: 'circle' | 'underline'}; redact?: number[]; stamp?: string};
 export type MapEl = {t: 'map'; region: 'europe' | 'atlantic'; from: {x: number; y: number; label: string}; to: {x: number; y: number; label: string}; at: number; dur: number; label?: string};
-export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl | IconEl | CountEl | SplitEl | HeroEl | CrossoutEl | ChecklistEl | QuoteEl | BignumEl | DocEl | MapEl | TransformEl;
+export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl | IconEl | CountEl | SplitEl | HeroEl | CrossoutEl | ChecklistEl | QuoteEl | BignumEl | DocEl | MapEl | TransformEl | ScaleEl;
 export type Background = {plate: string; zoom: [number, number]; origin?: string} | {photo: string; push: [number, number]; origin?: string; pos?: string} | {card: true};
 // Virtual camera over the whole shot (background + elements): [scale, focusX, focusY] in 1920x1080 stage px.
 // The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to

@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 810,
+  "f1": 900,
   "shots": [
     {
       "f0": 0,
@@ -198,6 +198,22 @@
           "label": "SOLD FOR SCRAP",
           "at": 726,
           "step": 18
+        }
+      ]
+    },
+    {
+      "f0": 810,
+      "f1": 900,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "scale",
+          "left": {"icon": "bill", "label": "BRIBE"},
+          "right": {"icon": "badge", "label": "DUTY"},
+          "heavy": "left",
+          "label": "MONEY WINS",
+          "at": 816,
+          "dur": 20
         }
       ]
     }
