@@ -105,14 +105,11 @@
    },
    "els": [
     {
-     "t": "photo",
-     "src": "ink60full/pd/citroen_tower_1925.jpg",
+     "t": "sprite",
+     "src": "ink60/cast/parisian_awe_looking_up.png",
      "x": 1560,
-     "y": 700,
-     "w": 420,
-     "rot": 4,
-     "frame": "polaroid",
-     "label": "STILL STANDING, 1925",
+     "y": 1000,
+     "h": 600,
      "at": 14075
     },
     {

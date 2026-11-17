@@ -216,14 +216,11 @@
    },
    "els": [
     {
-     "t": "photo",
-     "src": "ink60full/pd/lustig_fbi_1931.jpg",
-     "x": 1600,
-     "y": 760,
-     "w": 360,
-     "rot": -4,
-     "frame": "polaroid",
-     "label": "LUSTIG, 1931",
+     "t": "sprite",
+     "src": "ink60/cast/lustig_pen_newspaper.png",
+     "x": 1640,
+     "y": 1000,
+     "h": 520,
      "at": 14720
     },
     {

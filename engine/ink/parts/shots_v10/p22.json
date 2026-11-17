@@ -98,15 +98,13 @@
      "at": 17494
     },
     {
-     "t": "photo",
-     "src": "ink60full/pd/capone_mugshot.jpg",
-     "x": 1420,
-     "y": 460,
-     "w": 380,
-     "rot": 4,
-     "frame": "polaroid",
-     "label": "AL CAPONE",
-     "at": 17503
+     "t": "sprite",
+     "src": "ink60/cast/capone_seated_desk.png",
+     "x": 1520,
+     "y": 1000,
+     "h": 560,
+     "at": 17503,
+     "flip": true
     },
     {
      "t": "words",
@@ -226,14 +224,11 @@
    },
    "els": [
     {
-     "t": "photo",
-     "src": "ink60full/pd/lustig_fbi_1931.jpg",
+     "t": "sprite",
+     "src": "ink60/cast/police_officer_two_files.png",
      "x": 560,
-     "y": 560,
-     "w": 640,
-     "rot": -3,
-     "frame": "polaroid",
-     "label": "FBI FILE, 1931",
+     "y": 1000,
+     "h": 640,
      "at": 17890
     },
     {

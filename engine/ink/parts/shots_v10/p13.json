@@ -126,13 +126,13 @@
     },
     {
      "t": "photo",
-     "src": "ink60full/pd/citroen_tower_1925.jpg",
+     "src": "ink60full/pd/eiffel_caricature_1887.png",
      "x": 960,
      "y": 580,
      "w": 320,
      "rot": 3,
      "frame": "polaroid",
-     "label": "THE TOWER, 1925",
+     "label": "MOCKED, 1887",
      "at": 10140
     },
     {

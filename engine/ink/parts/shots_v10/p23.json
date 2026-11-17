@@ -12,14 +12,11 @@
    },
    "els": [
     {
-     "t": "photo",
-     "src": "ink60full/pd/lustig_1935.jpg",
-     "x": 1620,
-     "y": 640,
-     "w": 420,
-     "rot": 5,
-     "frame": "polaroid",
-     "label": "LUSTIG, 1935",
+     "t": "sprite",
+     "src": "ink60/cast/lustig_arrested.png",
+     "x": 1660,
+     "y": 1000,
+     "h": 520,
      "at": 18060
     },
     {

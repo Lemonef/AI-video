@@ -8,6 +8,7 @@ reused pictures only as deliberate callbacks, real photos + white cards + diagra
 
 Run: python tools/ink/make_v10_shots.py  -> engine/ink/parts/shots_v10/pXX.json (+ checks).
 """
+import collections
 import json
 import pathlib
 
@@ -263,7 +264,7 @@ PARTS['p09'] = [
 
 PARTS['p10'] = [
     S(6873, PL('hotel_crillon_facade_day', origin='50% 30%'), O('HOTEL DE CRILLON', 6939, y=200, size=100, ul=True),
-      PO('concorde_1922.jpg', 6955, 1480, 640, 420, 4, 'PLACE DE LA CONCORDE'),
+      PO('expo_1925_concorde.jpg', 6955, 1480, 640, 420, 4, 'PLACE DE LA CONCORDE'),
       chip='2. THE STAGE', chipAt=6895),
     S(6972, CARD, SP('doorman_bowing', 6990, 1660, 560), W('ONE OF THE MOST EXPENSIVE', 6988, y=360, size=80),
       O('HOTELS IN PARIS', 7015, y=500, size=120, ul=True)),
@@ -272,8 +273,7 @@ PARTS['p10'] = [
     S(7156, PL('crillon_salon_chandeliers', origin='50% 20%'), O('A PALACE', 7173, x=L, y=220, size=160),
       SP('doorman_bowing', 7191, 1440, 660, flip=True), TG('CHANDELIERS', 7234, L, 520)),
     S(7292, PL('hotel_doorway_framed_view'), SP('lustig_3', 7297, 1320, 680),
-      W('SOMETHING SIMPLE', 7314, x=L, y=240, size=90),
-      PO('expo_1925_concorde.jpg', 7330, L, 600, 440, -4, 'CONCORDE, 1925'), cam=PUSH(1220)),
+      W('SOMETHING SIMPLE', 7314, x=L, y=240, size=90), cam=PUSH(1220)),
     S(7372, CARD, W('PEOPLE TRUST', 7377, y=220, size=90),
       FL(['THE ROOM', 'THE PERSON'], 7395, 47, w=520, gap=220), O('FIRST', 7417, x=600, y=800, size=90)),
     S(7505, PL('paris_dusk', zoom=(1.0, 1.08)), W('NOT RICH MEN', 7574, y=260, size=100), X(7590, 960, 260, 420),
@@ -330,7 +330,7 @@ PARTS['p13'] = [
       cam=PAN(800, 1120)),
     S(10076, PL('tower_low_angle_up', zoom=(1.0, 1.1), origin='50% 20%'),
       SP('scrap_dealer_looking_up', 10084, 540, 640), SP('buyer_amazed', 10113, 1400, 600, flip=True),
-      PO('citroen_tower_1925.jpg', 10140, 960, 580, 320, 3, 'THE TOWER, 1925'),
+      PO('eiffel_caricature_1887.png', 10140, 960, 580, 320, 3, 'MOCKED, 1887'),
       W('NOT A MONUMENT', 10181, y=160, size=80)),
     S(10216, CARD, TW(640, 620), O('INVENTORY', 10219, x=R, y=280, size=160, ul=True),
       TG('7,000 TONS', 10240, R, 520), ST('FOR SALE', 10250, x=R, y=720)),
@@ -416,7 +416,7 @@ PARTS['p18'] = [
       O('PART OF A SECRET', 13875, x=L, y=240, size=90)),
     S(13926, PL('paris_tower_night', zoom=(1.0, 1.08), origin='50% 20%'), SP('scrap_dealer_looking_up', 13930, 600, 660),
       W('HE THOUGHT', 14006, x=R, y=200, size=80), O('WAS HIS', 14013, x=R, y=330, size=140), cam=PAN(860, 1060)),
-    S(14060, PL('paris_birdseye_champ_de_mars', zoom=(1.0, 1.06)), PO('citroen_tower_1925.jpg', 14075, 1560, 700, 420, 4, 'STILL STANDING, 1925'), W('THE TOWER DID NOT MOVE', 14068, x=L, y=220, size=70)),
+    S(14060, PL('paris_birdseye_champ_de_mars', zoom=(1.0, 1.06)), SP('parisian_awe_looking_up', 14075, 1560, 600), W('THE TOWER DID NOT MOVE', 14068, x=L, y=220, size=70)),
     S(14100, CARD, TL('THE DEAL', '?', 14104, 'WEEKS PASSED', 14121),
       O('A DIFFERENT FEELING', 14174, y=220, size=90)),
 ]
@@ -433,7 +433,7 @@ PARTS['p19'] = [
       ST('POLICE', 14539, x=960, y=380)),
     S(14576, PL('paris_train_station_night', zoom=(1.1, 1.0)), SP('lustig_glance_over_shoulder', 14581, 1320, 700),
       O('LEFT FRANCE', 14591, x=L, y=220, size=100), TG('THAT NIGHT', 14609, L, 480), cam=PUSH(1240)),
-    S(14708, CARD, PO('lustig_fbi_1931.jpg', 14720, 1600, 760, 360, -4, 'LUSTIG, 1931'), W('THE PART MOST', 14713, y=300, size=80), O('RETELLINGS SKIP', 14739, y=430, size=110, ul=True)),
+    S(14708, CARD, SP('lustig_pen_newspaper', 14720, 1640, 520), W('THE PART MOST', 14713, y=300, size=80), O('RETELLINGS SKIP', 14739, y=430, size=110, ul=True)),
     S(14764, PL('vienna_street_dusk'), SP('lustig_counting_cash', 14768, 1320, 680),
       O('HE HAD ALREADY WON', 14788, x=L, y=220, size=80), TG('A FORTUNE', 14830, L, 480),
       TG('A CLEAN EXIT', 14853, L, 620)),
@@ -493,18 +493,18 @@ PARTS['p22'] = [
     S(17340, PL('capone_office', zoom=(1.08, 1.0), origin='70% 50%'), SP('capone_handing_money', 17345, 1320, 700),
       W('IMPRESSED', 17367, x=L, y=220, size=110), O('+ $5,000', 17428, x=L, y=380, size=130, ul=True)),
     S(17478, CARD, W('WHAT CAPONE SAW', 17494, x=700, y=200, size=80),
-      PO('capone_mugshot.jpg', 17503, 1420, 460, 380, 4, 'AL CAPONE'),
+      SP('capone_seated_desk', 17503, 1520, 560, flip=True),
       O('HE GAVE IT ALL BACK', 17603, x=700, y=480, size=80)),
     S(17645, PL('desk_topdown_papers', zoom=(1.08, 1.0)), SP('capone_thinking', 17655, 1720, 540), W('NOT WEAKNESS', 17686, y=220, size=100),
       X(17693, 960, 220, 380), O('PROOF', 17725, y=420, size=170, ul=True)),
     S(17756, CARD, W('IN A WORLD OF LIARS', 17765, y=240, size=80),
       O('ONE HONEST MAN', 17816, y=400, size=120, ul=True), SP('lustig_nodding_agree', 17821, 960, 380)),
-    S(17884, PL('police_records_office'), PO('lustig_fbi_1931.jpg', 17890, 560, 560, 640, -3, 'FBI FILE, 1931'),
+    S(17884, PL('police_records_office'), SP('police_officer_two_files', 17890, 560, 640),
       W('THE MONEY WAS NEVER THE CON', 17943, x=1420, y=440, size=50), O('THE TRUST WAS.', 18001, x=1420, y=600, size=110, ul=True)),
 ]
 
 PARTS['p23'] = [
-    S(18039, CARD, PO('lustig_1935.jpg', 18060, 1620, 640, 420, 5, 'LUSTIG, 1935'), O('1935', 18058, y=300, size=200, ul=True), W('HIS LUCK ENDED', 18097, y=520, size=100)),
+    S(18039, CARD, SP('lustig_arrested', 18060, 1660, 520), O('1935', 18058, y=300, size=200, ul=True), W('HIS LUCK ENDED', 18097, y=520, size=100)),
     S(18110, PL('new_york_street_night', zoom=(1.08, 1.0)), SP('lustig_arrested', 18114, 600, 660),
       SP('secret_service_agent', 18138, 1360, 700, flip=True), O('COUNTERFEIT MONEY', 18168, y=160, size=80),
       cam=PAN(1060, 860)),
@@ -531,7 +531,7 @@ PARTS['p24'] = [
     S(19160, CARD, SP('lustig_point_viewer', 19170, 1760, 440), W('GIVE PEOPLE A REASON', 19165, y=280, size=90), O('TO FEEL SPECIAL', 19188, y=420, size=130, ul=True),
       W('AND THEY WILL HELP YOU FOOL THEM', 19229, y=640, size=60)),
     S(19296, PL('tower_low_angle_up', zoom=(1.0, 1.15), origin='50% 15%'), W('THE TOWER NEVER MOVED', 19305, y=200, size=90), SP('lustig_official_tailcoat', 19300, 1500, 620)),
-    S(19336, PH('eiffel_construction_1888.jpg', push=(1.0, 1.08)), W('ONLY BORROWED', 19390, x=1300, y=200, size=80),
+    S(19336, PH('expo_1889.jpg', push=(1.0, 1.08)), W('ONLY BORROWED', 19390, x=1300, y=200, size=80),
       O('OUR OLDEST WEAKNESS', 19417, x=1300, y=320, size=90)),
     S(19478, CARD, SP('lustig_point_viewer', 19483, 1420, 660), O('WHICH PART', 19542, x=650, y=300, size=110),
       W('WOULD YOU FALL FOR?', 19576, x=650, y=440, size=80)),
@@ -546,7 +546,12 @@ def bg_key(bg):
 # v9 front-loaded its real photos and 2D camera-angle plates, so the back half felt flat (Zen 2026-11-17).
 # Every quarter of the runtime must carry at least this many of each. Floors = the thinnest quarter
 # after the v10 rebalance (photos 3/3/3/5, angle plates 5/8/6/5), so a later edit cannot quietly drain one.
-ANGLE_PLATES = ('birdseye', 'low_angle', 'corner_34', 'topdown', 'doorway_framed', 'extreme_wide', 'closeup')
+ANGLE_PLATES = ('birdseye', 'low_angle', 'corner_34', 'topdown', 'doorway_framed', 'extreme_wide', 'closeup',
+                'high_angle', 'over_', 'through_', 'dutch', 'looking_down', 'framing', 'backseat')
+# Reuse caps (Zen 2026-11-17: "you didn't just use same one every where right" / "mostly sides").
+# The hook (p01-p02) is outside PARTS, so a hook photo may come back here once as a callback.
+PHOTO_MAX = 1   # each real photo once in the body
+PLATE_MAX = 2   # each background plate at most twice in the body
 QUARTER_MIN = {'photo': 3, 'angle': 5}
 # Per-SHOT bar (Zen 2026-11-17, "the whole thing should get same effort"): quarter averages hid
 # 37 text-only slides. Every shot needs >=1 living picture: a non-text element or a photo bg.
@@ -555,6 +560,19 @@ TEXT_ELS = {'words', 'cross', 'tag', 'stamp', 'underline', 'tick', 'redact'}
 
 def text_only(shot):
     return 'photo' not in shot['bg'] and all(e['t'] in TEXT_ELS for e in shot['els'])
+
+
+def reuse_errors(parts):
+    photos, plates = collections.defaultdict(list), collections.defaultdict(list)
+    for shots in parts.values():
+        for s in shots:
+            for src in [s['bg'].get('photo')] + [e['src'] for e in s['els'] if e['t'] == 'photo']:
+                if src:
+                    photos[src].append(s['start'])
+            if 'plate' in s['bg']:
+                plates[s['bg']['plate']].append(s['start'])
+    return ([f'photo {k} used {len(v)}x > {PHOTO_MAX}: {v}' for k, v in photos.items() if len(v) > PHOTO_MAX] +
+            [f'plate {k} used {len(v)}x > {PLATE_MAX}: {v}' for k, v in plates.items() if len(v) > PLATE_MAX])
 
 
 def quarter_balance(parts, end):
@@ -716,7 +734,7 @@ def build():
     print('\n'.join(rows))
     counts, qerrs = quarter_balance(PARTS, f1)
     print('per quarter: ' + ' | '.join(f'Q{i + 1} {c}' for i, c in enumerate(counts)))
-    errors += qerrs
+    errors += qerrs + reuse_errors(PARTS)
     total = sum(len(v) for v in PARTS.values())
     print(f'total shots {total}')
     print(f'frame-safe fits ({len(fits)}):\n  ' + '\n  '.join(fits))

@@ -330,4 +330,10 @@
   - [x] per-SHOT bar (Zen 2026-11-17: "Didn't I say that the whole thing. Should get same effeort"): 37/151 shots were text-only, hidden by quarter averages. +1 living visual each (31 posed sprites, 6 PD polaroids) + build lint `text_only()` errors on any text-only shot -> bare 0/0/0/0, scene 19/22/23/24, non-front 94/97/100/97 %, photo 3/5/5/6
   - [x] backstory lines: angled room + side/3-4 pose beside the card (p05-p06: every plate has sprite, every card sprite+tag/flow; 4 per-shot fixes 6972/9186/14370/17884 after reading 13 QA sheets)
   - [x] pre-render check: each quarter within ~10 pts on char-in-scene + non-frontal pose share + photo/angle counts -> scene 59/58/61/56 %, nonfront 94/97/100/97 %, photo 3/4/4/6, angle 5/8/6/5
-  - [ ] full render 01-v10 + share copy, send
+  - [x] full render 01-v10 + share copy, send (01-v10-share.mp4 sent 2026-11-17)
+- [ ] v10.1 (Zen 2026-11-17: "for the real images you didn't just use same one every where right" / "I don't see you make more unique back ground ... mostly sides")
+  - [x] photo de-dup: 9 repeat photo slots swapped (sprites/other PD); lint reuse_errors() PHOTO_MAX=1 in body
+  - [x] plate cap lint PLATE_MAX=2 (15 plates over cap, 26 slots); remap plan written
+  - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
+  - [ ] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
+  - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send

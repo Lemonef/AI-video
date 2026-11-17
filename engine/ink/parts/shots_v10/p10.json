@@ -36,7 +36,7 @@
     },
     {
      "t": "photo",
-     "src": "ink60full/pd/concorde_1922.jpg",
+     "src": "ink60full/pd/expo_1925_concorde.jpg",
      "x": 1480,
      "y": 640,
      "w": 420,
@@ -220,17 +220,6 @@
      "y": 240,
      "size": 90,
      "at": 7314
-    },
-    {
-     "t": "photo",
-     "src": "ink60full/pd/expo_1925_concorde.jpg",
-     "x": 600,
-     "y": 600,
-     "w": 440,
-     "rot": -4,
-     "frame": "polaroid",
-     "label": "CONCORDE, 1925",
-     "at": 7330
     }
    ]
   },
