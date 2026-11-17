@@ -1,0 +1,140 @@
+{
+  "part": "cardlib2",
+  "f0": 0,
+  "f1": 450,
+  "shots": [
+    {
+      "f0": 0,
+      "f1": 90,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "doc",
+          "x": 960,
+          "y": 540,
+          "w": 900,
+          "h": 420,
+          "kind": "card",
+          "title": "DEPUTY DIRECTOR GENERAL OF POSTS AND TELEGRAPHS",
+          "lines": ["MINISTRY OF POSTS", "PARIS 1925"],
+          "at": 6,
+          "step": 6,
+          "rot": -3
+        },
+        {
+          "t": "words",
+          "text": "card overflow title",
+          "x": 960,
+          "y": 1000,
+          "size": 49,
+          "at": 6
+        }
+      ]
+    },
+    {
+      "f0": 90,
+      "f1": 180,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "hero",
+          "x": 960,
+          "y": 440,
+          "icon": "tower",
+          "size": 360,
+          "label": "LANDMARK",
+          "at": 96,
+          "burst": true
+        },
+        {
+          "t": "words",
+          "text": "hero tower",
+          "x": 960,
+          "y": 1000,
+          "size": 49,
+          "at": 96
+        }
+      ]
+    },
+    {
+      "f0": 180,
+      "f1": 270,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "doc",
+          "x": 960,
+          "y": 540,
+          "w": 800,
+          "h": 500,
+          "kind": "memo",
+          "title": "TOWER SCRAP SALE",
+          "lines": ["MINISTER APPROVES", "SECRET AUCTION", "WIRE FUNDS TODAY", "BURN AFTER READING"],
+          "at": 186,
+          "step": 6,
+          "redact": [1, 2],
+          "stamp": "CONFIDENTIAL"
+        },
+        {
+          "t": "words",
+          "text": "memo redacted",
+          "x": 960,
+          "y": 1000,
+          "size": 49,
+          "at": 186
+        }
+      ]
+    },
+    {
+      "f0": 270,
+      "f1": 360,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "split",
+          "step": 12,
+          "left": {"icon": "hat", "label": "COUNT"},
+          "right": {"icon": "mask", "label": "CON MAN"},
+          "vs": "VS",
+          "at": 276
+        },
+        {
+          "t": "words",
+          "text": "split vs",
+          "x": 960,
+          "y": 1000,
+          "size": 49,
+          "at": 276
+        }
+      ]
+    },
+    {
+      "f0": 360,
+      "f1": 450,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "doc",
+          "x": 960,
+          "y": 540,
+          "w": 850,
+          "h": 520,
+          "kind": "certificate",
+          "title": "DEATH CERTIFICATE",
+          "lines": ["VICTOR LUSTIG", "APPRENTICE SALESMAN", "PARIS 1935"],
+          "at": 366,
+          "step": 6,
+          "mark": {"line": 1, "style": "circle"}
+        },
+        {
+          "t": "words",
+          "text": "certificate mark",
+          "x": 960,
+          "y": 1000,
+          "size": 49,
+          "at": 366
+        }
+      ]
+    }
+  ]
+}

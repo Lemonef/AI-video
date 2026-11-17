@@ -1,9 +1,10 @@
 import React, {useId} from 'react';
 import {IconElement, CountElement, SplitElement, HeroElement, CrossoutElement, ChecklistElement, QuoteElement, BignumElement} from './cards';
+import {DocElement} from './layouts/doc';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
-import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, CircleEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl} from './schema';
+import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, CircleEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl, DocEl} from './schema';
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 const color = (c?: Color) => c ? ({orange: ORANGE, red: RED, green: GREEN, teal: TEAL}[c]) : INK;
 export {color};
@@ -113,6 +114,7 @@ export const Element: React.FC<Props<El>> = props => {
     case 'radio': return <RadioElement {...common} el={el}/>;
     case 'bars': return <BarsElement {...common} el={el}/>;
     case 'flow': return <FlowElement {...common} el={el}/>;
+    case 'doc': return <DocElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
