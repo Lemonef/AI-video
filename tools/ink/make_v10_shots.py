@@ -168,7 +168,7 @@ PARTS['p04'] = [
       O('A BELIEVABLE STORY', 2817, y=440, size=120, ul=True)),
     S(2848, PL('paris_tower_grey', zoom=(1.08, 1.0)), W('THE TOWER WAS ALREADY', 2852, x=L, y=220, size=70),
       O('TELLING ONE', 2896, x=L, y=330, size=110), TG('FOR HIM', 2920, L, 520), SP('lustig_glance_over_shoulder', 2860, 1400, 640)),
-    S(2952, PL('forger_desk_night'), SP('lustig_pen_newspaper', 2959, 1340, 700, flip=True),
+    S(2952, PL('forger_desk_night'), SP('lustig_writing_desk', 2959, 1340, 700, flip=True),
       O('FINISH THE SENTENCE', 2991, x=L, y=260, size=90, ul=True), cam=PUSH(1200)),
 ]
 
@@ -432,7 +432,7 @@ PARTS['p19'] = [
       ST('POLICE', 14539, x=960, y=380)),
     S(14576, PL('paris_train_station_night', zoom=(1.1, 1.0)), SP('lustig_glance_over_shoulder', 14581, 1320, 700),
       O('LEFT FRANCE', 14591, x=L, y=220, size=100), TG('THAT NIGHT', 14609, L, 480), cam=PUSH(1240)),
-    S(14708, CARD, SP('lustig_pen_newspaper', 14720, 1640, 520), W('THE PART MOST', 14713, y=300, size=80), O('RETELLINGS SKIP', 14739, y=430, size=110, ul=True)),
+    S(14708, CARD, SP('lustig_forging_pen', 14720, 1640, 520), W('THE PART MOST', 14713, y=300, size=80), O('RETELLINGS SKIP', 14739, y=430, size=110, ul=True)),
     S(14764, PL('vienna_street_dusk'), SP('lustig_counting_cash', 14768, 1320, 680),
       O('HE HAD ALREADY WON', 14788, x=L, y=220, size=80), TG('A FORTUNE', 14830, L, 480),
       TG('A CLEAN EXIT', 14853, L, 620)),
