@@ -337,7 +337,14 @@
   - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
   - [ ] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
     - [x] batches h + i: 12 plates, Codex gpt-6.1-sol, eye-checked, committed bf38ae8
-    - [ ] batches j + k: pipeline running (jobs art-plates-j/k-20261117060823)
+    - [ ] batches j + k
+      - [x] k: 6 plates committed 3b27553
+      - [x] j: 6 plates harvested from attempt 4 (Codex gpt-6-astra), eye-checked, gate OK 6 files
+  - [ ] viewpoint sprites (Zen 2026-11-17: "2d so ... made the background and character pose THAT angle"): all 79 sprites eye-level -> 15 new poses drawn from above/below/behind
+    - [x] briefs art-poses-v1/v2/v3 + manifests + sheet_v*.order.json (cite master drawing # for top_down/from_below/turn_back)
+    - [ ] Codex gpt-6.1-sol plan_check -> pipeline -> harvest -> integrate_art cut -> eye-check -> commit
+    - [ ] generator: pair viewpoint sprites with angled plates + lint sprite-view must match plate angle
+  - [ ] pipeline flaw: blind reviewer FAILs image briefs it cannot see -> good build discarded (j att 1); route image briefs to owner-check
   - [ ] apply remap, generator clean, stills READ, render 01-v10.1 + share, send
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [ ] pick title from publish.md options (cross-check free legs)
