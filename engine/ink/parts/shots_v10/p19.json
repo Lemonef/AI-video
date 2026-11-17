@@ -38,6 +38,17 @@
      "size": 100,
      "at": 14340,
      "color": "orange"
+    },
+    {
+     "t": "photo",
+     "src": "ink60full/pd/lustig_1935.jpg",
+     "x": 1700,
+     "y": 420,
+     "w": 300,
+     "rot": 5,
+     "frame": "polaroid",
+     "label": "VICTOR LUSTIG",
+     "at": 14300
     }
    ]
   },
@@ -205,6 +216,17 @@
    },
    "els": [
     {
+     "t": "photo",
+     "src": "ink60full/pd/lustig_fbi_1931.jpg",
+     "x": 1600,
+     "y": 760,
+     "w": 360,
+     "rot": -4,
+     "frame": "polaroid",
+     "label": "LUSTIG, 1931",
+     "at": 14720
+    },
+    {
      "t": "words",
      "text": "THE PART MOST",
      "x": 960,
@@ -281,6 +303,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_counting_cash.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 480,
+     "at": 14902
+    },
     {
      "t": "words",
      "text": "A CON MAN WHO STOPS",
@@ -368,6 +398,14 @@
      "y": 180,
      "size": 70,
      "at": 15109
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/police_officer_reading_file.png",
+     "x": 1500,
+     "y": 1000,
+     "h": 600,
+     "at": 15100
     }
    ]
   },
@@ -378,6 +416,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_rehearsing_mirror.png",
+     "x": 1760,
+     "y": 1000,
+     "h": 440,
+     "at": 15150
+    },
     {
      "t": "words",
      "text": "NOT THE POLICE",

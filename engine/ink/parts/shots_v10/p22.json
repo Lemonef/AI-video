@@ -123,13 +123,21 @@
    "f0": 17645,
    "f1": 17756,
    "bg": {
-    "plate": "ink60full/plates/chicago_street_night.png",
+    "plate": "ink60full/plates/desk_topdown_papers.png",
     "zoom": [
      1.08,
      1.0
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/capone_thinking.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 540,
+     "at": 17655
+    },
     {
      "t": "words",
      "text": "NOT WEAKNESS",
@@ -210,30 +218,47 @@
    "f0": 17884,
    "f1": 18039,
    "bg": {
-    "photo": "ink60full/pd/lustig_fbi_1931.jpg",
-    "push": [
-     1.06,
-     1.0
-    ],
-    "pos": "50% 30%"
+    "plate": "ink60full/plates/police_records_office.png",
+    "zoom": [
+     1.0,
+     1.08
+    ]
    },
    "els": [
     {
+     "t": "photo",
+     "src": "ink60full/pd/lustig_fbi_1931.jpg",
+     "x": 560,
+     "y": 560,
+     "w": 640,
+     "rot": -3,
+     "frame": "polaroid",
+     "label": "FBI FILE, 1931",
+     "at": 17890
+    },
+    {
      "t": "words",
      "text": "THE MONEY WAS NEVER THE CON",
-     "x": 1300,
-     "y": 180,
-     "size": 60,
+     "x": 1386,
+     "y": 440,
+     "size": 50,
      "at": 17943
     },
     {
      "t": "words",
      "text": "THE TRUST WAS.",
-     "x": 1300,
-     "y": 320,
+     "x": 1327,
+     "y": 600,
      "size": 110,
      "at": 18001,
      "color": "orange"
+    },
+    {
+     "t": "underline",
+     "x": 1327,
+     "y": 661,
+     "w": 770,
+     "at": 18009
     }
    ]
   }

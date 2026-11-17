@@ -91,6 +91,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_official_tailcoat.png",
+     "x": 240,
+     "y": 1000,
+     "h": 560,
+     "at": 5376
+    },
+    {
      "t": "words",
      "text": "A RICH PERSON TRUSTS",
      "x": 960,
@@ -135,6 +143,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_rapt_listening.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 500,
+     "at": 5490
+    },
+    {
      "t": "words",
      "text": "NOTICE WHAT IS MISSING",
      "x": 960,
@@ -169,6 +185,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_polyglot_greeting.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 560,
+     "at": 5590
+    },
     {
      "t": "words",
      "text": "BE CAREFUL",
@@ -339,6 +363,14 @@
      "y": 462,
      "w": 520,
      "at": 6021
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_walking_profile_case.png",
+     "x": 1540,
+     "y": 1000,
+     "h": 560,
+     "at": 5945
     }
    ]
   }

@@ -12,6 +12,17 @@
    },
    "els": [
     {
+     "t": "photo",
+     "src": "ink60full/pd/eiffel_construction_1888.jpg",
+     "x": 1600,
+     "y": 760,
+     "w": 400,
+     "rot": 5,
+     "frame": "polaroid",
+     "label": "IRON, 1888",
+     "at": 9750
+    },
+    {
      "t": "words",
      "text": "7,000 TONS",
      "x": 960,
@@ -114,6 +125,17 @@
      "flip": true
     },
     {
+     "t": "photo",
+     "src": "ink60full/pd/citroen_tower_1925.jpg",
+     "x": 960,
+     "y": 580,
+     "w": 320,
+     "rot": 3,
+     "frame": "polaroid",
+     "label": "THE TOWER, 1925",
+     "at": 10140
+    },
+    {
      "t": "words",
      "text": "NOT A MONUMENT",
      "x": 960,
@@ -174,7 +196,7 @@
    "f0": 10296,
    "f1": 10527,
    "bg": {
-    "plate": "ink60/plates/paris_tower_grey.png",
+    "plate": "ink60full/plates/tower_rust_closeup.png",
     "zoom": [
      1.12,
      1.0

@@ -61,6 +61,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_head_in_hands.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 480,
+     "at": 13116
+    },
+    {
      "t": "words",
      "text": "NO HEADLINE",
      "x": 960,
@@ -240,6 +248,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_humiliated.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 560,
+     "at": 13656
+    },
     {
      "t": "words",
      "text": "SHAME",

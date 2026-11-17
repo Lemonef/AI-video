@@ -12,6 +12,17 @@
    },
    "els": [
     {
+     "t": "photo",
+     "src": "ink60full/pd/lustig_1935.jpg",
+     "x": 1620,
+     "y": 640,
+     "w": 420,
+     "rot": 5,
+     "frame": "polaroid",
+     "label": "LUSTIG, 1935",
+     "at": 18060
+    },
+    {
      "t": "words",
      "text": "1935",
      "x": 960,
@@ -236,6 +247,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/clerk_3.png",
+     "x": 1760,
+     "y": 1000,
+     "h": 480,
+     "at": 18690
+    },
+    {
      "t": "words",
      "text": "DEATH CERTIFICATE",
      "x": 960,
@@ -326,6 +345,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_sad_prisoner.png",
+     "x": 1760,
+     "y": 1000,
+     "h": 480,
+     "at": 18966
+    },
     {
      "t": "words",
      "text": "NO MONEY",

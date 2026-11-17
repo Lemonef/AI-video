@@ -40,6 +40,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/buyer_paying.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 520,
+     "at": 16330
+    },
+    {
      "t": "words",
      "text": "$30,000",
      "x": 960,
@@ -291,6 +299,14 @@
      "x": 960,
      "y": 640,
      "at": 17083
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_money_box.png",
+     "x": 1560,
+     "y": 1000,
+     "h": 600,
+     "at": 16985
     }
    ]
   },

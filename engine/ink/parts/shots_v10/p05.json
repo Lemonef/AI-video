@@ -17,6 +17,15 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_walking_profile_case.png",
+     "x": 980,
+     "y": 1000,
+     "h": 440,
+     "at": 3085,
+     "flip": true
+    },
+    {
      "t": "words",
      "text": "1890",
      "x": 520,

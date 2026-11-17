@@ -97,6 +97,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_proud.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 560,
+     "at": 8258
+    },
+    {
      "t": "words",
      "text": "THE FIRST HOOK",
      "x": 960,
@@ -285,6 +293,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_handshake.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 520,
+     "at": 8910
+    },
     {
      "t": "words",
      "text": "NO SECOND TAKE",

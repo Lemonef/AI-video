@@ -92,6 +92,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_hesitating.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 560,
+     "at": 11482
+    },
+    {
      "t": "words",
      "text": "THE SECOND HOOK",
      "x": 960,
@@ -167,6 +175,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_nodding_agree.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 520,
+     "at": 11676
+    },
     {
      "t": "words",
      "text": "LUSTIG DID NOT ARGUE",
@@ -295,6 +311,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_secret_smile.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 520,
+     "at": 12076
+    },
+    {
      "t": "words",
      "text": "CORRUPTION",
      "x": 960,
@@ -362,6 +386,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_handing_money.png",
+     "x": 960,
+     "y": 1000,
+     "h": 440,
+     "at": 12230
+    },
     {
      "t": "words",
      "text": "NOT A LIE",

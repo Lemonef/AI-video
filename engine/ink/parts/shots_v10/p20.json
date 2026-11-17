@@ -49,6 +49,14 @@
      "y": 334,
      "w": 560,
      "at": 15346
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/rich_passenger_deckchair.png",
+     "x": 1520,
+     "y": 1000,
+     "h": 500,
+     "at": 15240
     }
    ]
   },
@@ -176,6 +184,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/buyer_amazed.png",
+     "x": 260,
+     "y": 1000,
+     "h": 540,
+     "at": 15690
+    },
+    {
      "t": "words",
      "text": "THE BOX DID NOT",
      "x": 960,
@@ -215,6 +231,14 @@
     "origin": "60% 40%"
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_forging_pen.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 520,
+     "at": 15798
+    },
     {
      "t": "words",
      "text": "THE TRICK",

@@ -32,6 +32,14 @@
      "at": 2568,
      "w": 1015,
      "h": 121
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_looking_up.png",
+     "x": 1520,
+     "y": 1000,
+     "h": 560,
+     "at": 2510
     }
    ]
   },
@@ -132,6 +140,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_passports_fan.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 480,
+     "at": 2786
+    },
+    {
      "t": "words",
      "text": "EVERY CON NEEDS",
      "x": 960,
@@ -191,6 +207,14 @@
      "x": 600,
      "y": 520,
      "at": 2920
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_glance_over_shoulder.png",
+     "x": 1400,
+     "y": 1000,
+     "h": 640,
+     "at": 2860
     }
    ]
   },

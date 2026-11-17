@@ -322,7 +322,12 @@
   - [x] BarsEl + FlowEl elements (schema.ts, elements.tsx); InkParts full comp = v8 p01-p02 + v9 p03-p24, tsc clean
   - [x] frame-safe fit pass (stage->frame affine incl. cam + plate zoom): 45 words shifted/shrunk; 151 stills (tools/ink/v9_stills.mjs) read on 13 sheets, no clipping
   - [x] full render 01-v9.mp4 (654.5 s, EXIT 0) + 01-v9-share.mp4 (2-pass 960p 280k, 27.7 MiB), spot frames 120/300/302/450 s OK, sent proactive 03:44 (Zen asleep, open on return)
-- [ ] v10: restage Q1/Q2/Q4 to Q3 level (Zen 2026-11-17: "why i only see the background and character in the side way after middle"). Measured char-in-scene Q1 36 / Q2 40 / Q3 62 / Q4 41 %. Awaiting Zen go.
-  - [ ] backstory lines: angled room + side/3-4 pose beside the card
-  - [ ] pre-render check: each quarter within ~10 pts on char-in-scene + non-frontal pose share
+- [ ] v10: restage Q1/Q2/Q4 to Q3 level (Zen 2026-11-17: "why i only see the background and character in the side way after middle"). Measured char-in-scene Q1 36 / Q2 40 / Q3 62 / Q4 41 %. Go via away mode (Zen 2026-11-17 again: "did you fix about the real image and the angle bird eye ... this image here a bit too squish").
+  - [x] cross sized from its text + row pitch (p17 NO HEADLINE/ARRESTS/MANHUNT: 260px X on 140px rows = lattice; NOT A LIE X narrower than word): CrossEl w/h, generator helper, overlap lint (99f92af)
+  - [x] real photos every quarter (v9: Q1 1 / Q2 1 / Q3 0 / Q4 5, pool 7): +4 PD (citroen 1925, concorde 1922, expo 1925, lustig 1935) as polaroids -> v10 photo 3/3/3/5; 3 more Commons files 429'd, skipped
+  - [x] angle plates every quarter (v9 angled: Q1 5 / Q2 11 / Q3 10 / Q4 3): 5 plate swaps (rust closeup, doorway, birdseye, topdown, extreme wide) -> v10 angle 5/8/6/5; generator lint quarter_balance() fails build if photo<3 or angle<5 in any quarter
+  - [x] char-in-scene: +9 sprites on bare plates (2848, 2498, 5932, 7505, 15090, 15229, 16975, 19090, 19296) -> scene share 47/50/58/51 %, non-front 92/96/100/100 %
+  - [x] per-SHOT bar (Zen 2026-11-17: "Didn't I say that the whole thing. Should get same effeort"): 37/151 shots were text-only, hidden by quarter averages. +1 living visual each (31 posed sprites, 6 PD polaroids) + build lint `text_only()` errors on any text-only shot -> bare 0/0/0/0, scene 19/22/23/24, non-front 94/97/100/97 %, photo 3/5/5/6
+  - [x] backstory lines: angled room + side/3-4 pose beside the card (p05-p06: every plate has sprite, every card sprite+tag/flow; 4 per-shot fixes 6972/9186/14370/17884 after reading 13 QA sheets)
+  - [x] pre-render check: each quarter within ~10 pts on char-in-scene + non-frontal pose share + photo/angle counts -> scene 59/58/61/56 %, nonfront 94/97/100/97 %, photo 3/4/4/6, angle 5/8/6/5
   - [ ] full render 01-v10 + share copy, send

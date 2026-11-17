@@ -185,6 +185,14 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_reading_letter.png",
+     "x": 260,
+     "y": 1000,
+     "h": 540,
+     "at": 6810
+    },
+    {
      "t": "words",
      "text": "IT SOUNDED",
      "x": 960,

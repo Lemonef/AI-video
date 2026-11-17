@@ -1,12 +1,71 @@
 {
   "_note": "Real archive images from Wikimedia Commons, each checked Public domain via the Commons API (LicenseShortName) 2026-11-15. Used as 'real photo' inserts inside ink shots. Credit line goes in the video description.",
   "files": {
-    "lustig_fbi_1931.jpg": {"commons": "File:Victor Lustig DOJ BOI (FBI) identification, 1931.jpg", "license": "Public domain", "author": "United States Department of Justice", "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Victor_Lustig_DOJ_BOI_%28FBI%29_identification%2C_1931.jpg"},
-    "capone_mugshot.jpg": {"commons": "File:AlCaponemugshotCPD.jpg", "license": "Public domain", "author": "United States Bureau of Prisons", "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/AlCaponemugshotCPD.jpg"},
-    "alcatraz_1930s.jpg": {"commons": "File:USS Oklahoma (BB-37) passing Alcatraz in the 1930s.jpg", "license": "Public domain", "author": "USN", "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/USS_Oklahoma_%28BB-37%29_passing_Alcatraz_in_the_1930s.jpg"},
-    "eiffel_construction_1888.jpg": {"commons": "File:Louis-Emile Durandelle, The Eiffel Tower - State of the Construction, 1888.jpg", "license": "Public domain", "author": "Louis-Emile Durandelle", "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Louis-Emile_Durandelle%2C_The_Eiffel_Tower_-_State_of_the_Construction%2C_1888.jpg"},
-    "expo_1889.jpg": {"commons": "File:Eiffel tower at Exposition Universelle, Paris, 1889.jpg", "license": "Public domain", "author": "Neurdein", "url": "https://commons.wikimedia.org/wiki/File:Eiffel_tower_at_Exposition_Universelle,_Paris,_1889.jpg"},
-    "eiffel_caricature_1887.png": {"commons": "File:Caricature Gustave Eiffel.png", "license": "Public domain", "author": "Unknown (Le Temps, 14 Feb 1887)", "url": "https://commons.wikimedia.org/wiki/File:Caricature_Gustave_Eiffel.png"},
-    "antenna_1914.jpg": {"commons": "File:Antenne tour Eiffel 1914.jpg", "license": "Public domain", "author": "Unknown", "url": "https://commons.wikimedia.org/wiki/File:Antenne_tour_Eiffel_1914.jpg"}
+    "lustig_fbi_1931.jpg": {
+      "commons": "File:Victor Lustig DOJ BOI (FBI) identification, 1931.jpg",
+      "license": "Public domain",
+      "author": "United States Department of Justice",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Victor_Lustig_DOJ_BOI_%28FBI%29_identification%2C_1931.jpg"
+    },
+    "capone_mugshot.jpg": {
+      "commons": "File:AlCaponemugshotCPD.jpg",
+      "license": "Public domain",
+      "author": "United States Bureau of Prisons",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/AlCaponemugshotCPD.jpg"
+    },
+    "alcatraz_1930s.jpg": {
+      "commons": "File:USS Oklahoma (BB-37) passing Alcatraz in the 1930s.jpg",
+      "license": "Public domain",
+      "author": "USN",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/USS_Oklahoma_%28BB-37%29_passing_Alcatraz_in_the_1930s.jpg"
+    },
+    "eiffel_construction_1888.jpg": {
+      "commons": "File:Louis-Emile Durandelle, The Eiffel Tower - State of the Construction, 1888.jpg",
+      "license": "Public domain",
+      "author": "Louis-Emile Durandelle",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Louis-Emile_Durandelle%2C_The_Eiffel_Tower_-_State_of_the_Construction%2C_1888.jpg"
+    },
+    "expo_1889.jpg": {
+      "commons": "File:Eiffel tower at Exposition Universelle, Paris, 1889.jpg",
+      "license": "Public domain",
+      "author": "Neurdein",
+      "url": "https://commons.wikimedia.org/wiki/File:Eiffel_tower_at_Exposition_Universelle,_Paris,_1889.jpg"
+    },
+    "eiffel_caricature_1887.png": {
+      "commons": "File:Caricature Gustave Eiffel.png",
+      "license": "Public domain",
+      "author": "Unknown (Le Temps, 14 Feb 1887)",
+      "url": "https://commons.wikimedia.org/wiki/File:Caricature_Gustave_Eiffel.png"
+    },
+    "antenna_1914.jpg": {
+      "commons": "File:Antenne tour Eiffel 1914.jpg",
+      "license": "Public domain",
+      "author": "Unknown",
+      "url": "https://commons.wikimedia.org/wiki/File:Antenne_tour_Eiffel_1914.jpg"
+    },
+    "citroen_tower_1925.jpg": {
+      "commons": "File:Tour Eiffel Citroen.jpg",
+      "license": "Public domain",
+      "author": "Unknown authorUnknown author",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Tour_Eiffel_Citroen.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+    },
+    "concorde_1922.jpg": {
+      "commons": "File:Pierre Thévenet - Paris - Place de la Concorde (1922).jpg",
+      "license": "Public domain",
+      "author": "Pierre Thévenet",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Pierre_Th%C3%A9venet_-_Paris_-_Place_de_la_Concorde_%281922%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+    },
+    "expo_1925_concorde.jpg": {
+      "commons": "File:Paris-FR-75-Expo 1925 Arts décoratifs-entrée Place de la Concorde (cropped).jpg",
+      "license": "Public domain",
+      "author": "Unknown authorUnknown author",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Paris-FR-75-Expo_1925_Arts_d%C3%A9coratifs-entr%C3%A9e_Place_de_la_Concorde_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+    },
+    "lustig_1935.jpg": {
+      "commons": "File:Victor Lustig.jpg",
+      "license": "Public domain",
+      "author": "Page from a 1935 Philadelphia newspaper",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Victor_Lustig.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+    }
   }
 }

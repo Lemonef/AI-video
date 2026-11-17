@@ -33,6 +33,17 @@
      "y": 255,
      "w": 800,
      "at": 6947
+    },
+    {
+     "t": "photo",
+     "src": "ink60full/pd/concorde_1922.jpg",
+     "x": 1480,
+     "y": 640,
+     "w": 420,
+     "rot": 4,
+     "frame": "polaroid",
+     "label": "PLACE DE LA CONCORDE",
+     "at": 6955
     }
    ]
   },
@@ -43,6 +54,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/doorman_bowing.png",
+     "x": 1660,
+     "y": 1000,
+     "h": 560,
+     "at": 6990
+    },
     {
      "t": "words",
      "text": "ONE OF THE MOST EXPENSIVE",
@@ -80,6 +99,14 @@
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_lean_murmur.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 520,
+     "at": 7090
+    },
     {
      "t": "words",
      "text": "NOT A BACK ROOM",
@@ -193,6 +220,17 @@
      "y": 240,
      "size": 90,
      "at": 7314
+    },
+    {
+     "t": "photo",
+     "src": "ink60full/pd/expo_1925_concorde.jpg",
+     "x": 600,
+     "y": 600,
+     "w": 440,
+     "rot": -4,
+     "frame": "polaroid",
+     "label": "CONCORDE, 1925",
+     "at": 7330
     }
    ]
   },
@@ -289,6 +327,14 @@
      "y": 666,
      "w": 720,
      "at": 7663
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_greedy.png",
+     "x": 1600,
+     "y": 1000,
+     "h": 520,
+     "at": 7520
     }
    ]
   },
@@ -414,6 +460,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_pocketing_letter.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 440,
+     "at": 7900
+    },
     {
      "t": "words",
      "text": "THE LETTER SAID ONLY THIS",

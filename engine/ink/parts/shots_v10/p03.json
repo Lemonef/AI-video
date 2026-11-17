@@ -24,6 +24,17 @@
      "at": 1742
     },
     {
+     "t": "photo",
+     "src": "ink60full/pd/citroen_tower_1925.jpg",
+     "x": 1500,
+     "y": 620,
+     "w": 340,
+     "rot": 5,
+     "frame": "polaroid",
+     "label": "THE TOWER, 1925",
+     "at": 1770
+    },
+    {
      "t": "words",
      "text": "TEMPORARY",
      "x": 960,
@@ -52,6 +63,14 @@
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/parisian_awe_looking_up.png",
+     "x": 420,
+     "y": 1000,
+     "h": 560,
+     "at": 1930
+    },
     {
      "t": "stamp",
      "text": "BAD SHAPE",
@@ -117,6 +136,14 @@
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_reading_newspaper.png",
+     "x": 1720,
+     "y": 1000,
+     "h": 520,
+     "at": 2130
+    },
     {
      "t": "tag",
      "text": "NEWSPAPERS",
@@ -221,6 +248,17 @@
      "y": 220,
      "size": 110,
      "at": 2344
+    },
+    {
+     "t": "photo",
+     "src": "ink60full/pd/concorde_1922.jpg",
+     "x": 960,
+     "y": 600,
+     "w": 420,
+     "rot": -3,
+     "frame": "polaroid",
+     "label": "PARIS, 1922",
+     "at": 2316
     }
    ]
   },

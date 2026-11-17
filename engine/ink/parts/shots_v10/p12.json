@@ -50,6 +50,15 @@
    },
    "els": [
     {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_lean_whisper.png",
+     "x": 260,
+     "y": 1000,
+     "h": 520,
+     "at": 9196,
+     "flip": true
+    },
+    {
      "t": "words",
      "text": "GENTLEMEN,",
      "x": 960,
@@ -87,6 +96,14 @@
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/city_official_decree.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 540,
+     "at": 9340
+    },
     {
      "t": "words",
      "text": "TOO EXPENSIVE",

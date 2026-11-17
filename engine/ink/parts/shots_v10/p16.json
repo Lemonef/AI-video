@@ -8,13 +8,21 @@
    "f0": 12379,
    "f1": 12518,
    "bg": {
-    "plate": "ink60full/plates/elite_banquet_table_night.png",
+    "plate": "ink60full/plates/hotel_doorway_framed_view.png",
     "zoom": [
      1.0,
      1.1
     ]
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/scrap_dealer_lapels.png",
+     "x": 1700,
+     "y": 1000,
+     "h": 520,
+     "at": 12390
+    },
     {
      "t": "words",
      "text": "A SECOND REASON",

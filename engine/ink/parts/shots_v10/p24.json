@@ -8,7 +8,7 @@
    "f0": 19090,
    "f1": 19160,
    "bg": {
-    "plate": "ink60/plates/paris_dusk.png",
+    "plate": "ink60full/plates/paris_skyline_extreme_wide.png",
     "zoom": [
      1.0,
      1.1
@@ -31,6 +31,14 @@
      "size": 140,
      "at": 19118,
      "color": "orange"
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_glance_over_shoulder.png",
+     "x": 1620,
+     "y": 1000,
+     "h": 540,
+     "at": 19098
     }
    ]
   },
@@ -41,6 +49,14 @@
     "card": true
    },
    "els": [
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_point_viewer.png",
+     "x": 1760,
+     "y": 1000,
+     "h": 440,
+     "at": 19170
+    },
     {
      "t": "words",
      "text": "GIVE PEOPLE A REASON",
@@ -94,6 +110,14 @@
      "y": 200,
      "size": 90,
      "at": 19305
+    },
+    {
+     "t": "sprite",
+     "src": "ink60/cast/lustig_official_tailcoat.png",
+     "x": 1500,
+     "y": 1000,
+     "h": 620,
+     "at": 19300
     }
    ]
   },
