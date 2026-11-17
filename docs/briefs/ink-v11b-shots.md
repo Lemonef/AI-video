@@ -8,8 +8,8 @@ card layouts from card library 1. Only the 17 card shots listed below change; tw
 is `tests/ink/v11b.test.mjs` - read it first; it must pass unchanged.
 
 # Files
-- NEW `tools/ink/make_v11b_shots.py` (copy of `tools/ink/make_v10_shots.py`, then edited)
-- NEW `engine/ink/parts/shots_v11b/p03.json` .. `p24.json` (written by running the new generator)
+- NEW `tools/ink/make_v11b_shots.py` (copy of the protected v10 generator tools/ink/make_v10_shots.py, then edited; the v10 file itself stays unchanged)
+- NEW `engine/ink/parts/shots_v11b/p03.json` through `engine/ink/parts/shots_v11b/p24.json` (all 22, written by running the new generator)
 - `engine/ink/compositions/InkParts.tsx`
 - `engine/ink/Root.tsx`
 
