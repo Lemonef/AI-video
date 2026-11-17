@@ -349,6 +349,8 @@
     - [x] remap + lint clean, 32 QA stills READ, full render 01-v10.1.mp4 (997,649,053 B, 1920x1080, 654.549 s)
     - [x] share copy 01-v10.1-share.mp4 29,483,769 B, 654.549 s, sent 2026-11-17
     - [x] opened 01-v10.1.mp4 + thumbs preview on Zen's PC 2026-11-17
+  - [x] thumbs v2 (Zen 2026-11-17: "thumbnail should be straightforward ... say he sold eiffel twice"): tools/ink/make_thumbs.py -> thumbD + thumbE + phone_size_preview_v2, READ at full + phone size, sent + opened
+  - [x] Zen picked thumbE ("this one"): publish.md pick 1 = "How One Sentence Let a Con Man Sell the Eiffel Tower" + E, D = A/B variant
 - [ ] Ep01 packaging pass (Zen 2026-11-17: "the cover and the title ... 50 % of its work")
   - [x] pick title: pick 1 'How One Sentence Let a Con Man Sell the Eiffel Tower' + thumb A (publish.md, b376236)
   - [x] 3 thumbnail mock-ups A/B/C + phone_size_preview.jpg in D:/AI-video/videos/pastly-life/01-eiffel-ink/final/thumbs/ (local, gitignored)

@@ -31,3 +31,16 @@ Pairing rule: thumbnail text adds to the title, never repeats it.
 | 3 | He Sold the Eiffel Tower. Twice. Then Conned Al Capone. | C: "FAKE DEAL. REAL MONEY." |
 
 A/B test: upload with pick 1, swap thumbnail to B after 48 h if CTR < channel median.
+
+## v10.1 thumbs v2 (2026-11-17, Zen: "straightforward ... say he sold eiffel twice, already gives context")
+Built by D:/AI-video/tools/ink/make_thumbs.py (text auto-fits its box). Files in final/thumbs/:
+thumbD_he_sold_tower_twice.jpg (smug Lustig under tower), thumbE_he_sold_tower_twice_cash.jpg (counting cash on the tower), phone_size_preview_v2.jpg.
+Text: "HE SOLD THE EIFFEL TOWER / TWICE." - whole story in one glance, no stamp clutter.
+
+| Pick | Title | Thumbnail |
+|---|---|---|
+| **1 (Zen picked 2026-11-17: "this one")** | How One Sentence Let a Con Man Sell the Eiffel Tower | E |
+| A/B variant | same title | D |
+
+Thumb states the WHAT (sold it twice), title adds the HOW (one sentence) - no repeat. Supersedes the A/B/C table above.
+YouTube Test & Compare: E vs D (vs old A), pick by watch time.
