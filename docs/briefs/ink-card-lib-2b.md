@@ -31,8 +31,10 @@ flat colour fills, one RED accent, slightly wobbly lines (never ruler-perfect), 
   exports CardLibrary2 and CARD_LIBRARY2_FRAMES = part.f1.
 - EDIT `engine/ink/Root.tsx` - register <Composition id="CardLibrary2" component={CardLibrary2}
   width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY2_FRAMES}/> next to CardLibrary.
-- `tests/ink/cardlib2b.test.mjs` is the PROTECTED contract (with cardlib, cardlib2a, v11b). Make it pass;
-  never edit any test.
+
+# Contract
+`tests/ink/cardlib2b.test.mjs` is the PROTECTED contract (with cardlib, cardlib2a, v11b). Make it pass;
+never edit any test.
 
 # The `doc` element
 `DocEl = {t: 'doc'; x: number; y: number; w: number; h: number; kind: 'card' | 'memo' | 'certificate';

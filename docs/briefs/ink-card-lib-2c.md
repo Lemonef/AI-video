@@ -21,9 +21,11 @@ empty paper. The coast must read as the real place at a glance (a viewer should 
   line in the Element switch: case 'map': return <MapElement {...common} el={el}/>; (same as the doc case).
 - EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND three shots after the existing five (keep the five
   exactly as they are) and set f1 to the new length.
-- `tests/ink/cardlib2c.test.mjs` is the PROTECTED contract (with cardlib, cardlib2a, cardlib2b, v11b).
-  Make it pass; never edit any test. CardLibrary2.tsx and Root.tsx already read demo2.json and its f1;
-  do not touch them.
+
+# Contract
+`tests/ink/cardlib2c.test.mjs` is the PROTECTED contract (with cardlib, cardlib2a, cardlib2b, v11b).
+Make it pass; never edit any test. CardLibrary2.tsx and Root.tsx already read demo2.json and its f1;
+do not touch them.
 
 # The `map` element
 `MapEl = {t: 'map'; region: 'europe' | 'atlantic'; from: {x: number; y: number; label: string};
