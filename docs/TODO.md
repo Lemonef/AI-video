@@ -335,9 +335,9 @@
   - [x] photo de-dup: 9 repeat photo slots swapped (sprites/other PD); lint reuse_errors() PHOTO_MAX=1 in body
   - [x] plate cap lint PLATE_MAX=2 (15 plates over cap, 26 slots); remap plan written
   - [ ] Q3 photo 2<3: Commons opera/counterfeit/death_cert downloading (429 backoff)
-  - [ ] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
+  - [x] 24 new camera-angle plates (briefs art-plates-h..k): cross-check -> plan_check -> pipeline -> eye-check
     - [x] batches h + i: 12 plates, Codex gpt-6.1-sol, eye-checked, committed bf38ae8
-    - [ ] batches j + k
+    - [x] batches j + k
       - [x] k: 6 plates committed 3b27553
       - [x] j: 6 plates harvested from attempt 4 (Codex gpt-6-astra), eye-checked, gate OK 6 files
   - [ ] viewpoint sprites (Zen 2026-11-17: "2d so ... made the background and character pose THAT angle"): all 79 sprites eye-level -> 15 new poses drawn from above/below/behind
