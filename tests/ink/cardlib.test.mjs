@@ -25,12 +25,13 @@ const iconNamesUsed = (el) => {
   return out;
 };
 
-test('cardlib: IconName union is exactly the 20 required names', () => {
+// Batch 2 (ink-card-lib-2) grows the union; the exact count lives in cardlib2.test.mjs.
+test('cardlib: IconName union contains the 20 batch-1 names', () => {
   const src = read('engine/ink/parts/icons.tsx');
   const m = src.match(/export type IconName\s*=([^;]+);/);
   assert.ok(m, 'export type IconName missing');
-  const names = [...m[1].matchAll(/'([a-z]+)'/g)].map((x) => x[1]).sort();
-  assert.deepEqual(names, [...ICONS].sort());
+  const names = new Set([...m[1].matchAll(/'([a-z]+)'/g)].map((x) => x[1]));
+  for (const n of ICONS) assert.ok(names.has(n), `IconName lost ${n}`);
 });
 
 test('cardlib: schema adds all 8 element types to El and elements.tsx routes each', () => {
