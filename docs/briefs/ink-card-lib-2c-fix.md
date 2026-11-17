@@ -93,7 +93,9 @@ Ireland is optional (a fourth polygon) - add it only if it stays clean.
   SMALL tall above the baseline.
 - Candidates, tried in this order for each pin (point = the pin TIP = the map point):
   1. below the point, centred (anchor middle), baseline = point.y + PIN_LABEL_GAP + SMALL;
-  2. below, aligned to the side AWAY from the other pin (anchor start/end);
+  2. below, on the side AWAY from the other pin, always anchor 'start': x = point.x when away is
+     right, x = point.x - box width when away is left (cards.tsx `Text` is protected and accepts only
+     'start' | 'middle', so never emit 'end' anywhere);
   3. beside the pin icon on the side away from the other pin, baseline at the icon centre;
   4. above the pin icon, centred.
   Keep the first candidate whose box (grown by PIN_LABEL_GAP on every side) is: inside the card with
@@ -101,7 +103,7 @@ Ireland is optional (a fourth polygon) - add it only if it stays clean.
   quadratic from->ctrl->to; none inside the grown box); clear of the OTHER pin's icon box; and with all
   four corners on land (`insidePoly` against any polygon of the region). If none passes all tests, take
   the first that passes everything except the land test; if none passes that, the first inside the card.
-- `fromLabel` / `toLabel` keep the shape {x, y, anchor} map.tsx already reads.
+- `fromLabel` / `toLabel` keep the shape {x, y, anchor: 'start' | 'middle'} map.tsx already reads.
 
 # demo2.json
 Europe map shot only: `from` = project(2.35, 48.85) (Paris, ~[754, 526]), `to` = project(16.37, 48.21)
