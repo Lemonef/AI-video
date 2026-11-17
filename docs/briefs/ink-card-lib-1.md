@@ -89,4 +89,5 @@ Look target (the reference channel's explain cards): white paper, ONE idea per c
 - All 20 icons drawn to the per-icon spec and all 8 element types implemented, no stub or placeholder; demo.json uses every one of them.
 - Diffs to schema.ts, elements.tsx and Root.tsx are additive only; InkParts.tsx, InkProof.tsx, doodle.tsx and tests are untouched; no `any`.
 - Work only inside the repo.
+- Known traps from an earlier attempt's audit (each one failed it): (a) source files are ASCII-only text; write the quote dash as the escape —, never a pasted character that can turn into U+FFFD; (b) no bare layout numbers in cards.tsx: every offset, factor and path coordinate is a named constant derived from LABEL / LINE / the size prop, with its derivation in a comment; (c) SMALL = LABEL * 0.7 as an expression, and LABEL itself derives from LINE, never a typed literal; (d) the newspaper icon has a filled masthead band across its top, in its fill colour.
 - (Planner checks after merge, not the builder: stills of every card at settled frame 80, carry frames 360/373/380, start/mid/end of each animation, reviewed for stroke weight, wobble, lettering, spacing, clipping.)
