@@ -43,8 +43,31 @@ export const scribbleEllipse = (rx: number, ry: number) => {
   return {d: `M${pts.join(' L')}`, tilt: TILT};
 };
 
-// HUD chip top-left (replaces InkProof.Chip on parts): hand font, uneven border, slight tilt; boiled by the caller.
+// HUD chip: top-left (default) or bottom-left; hand font, uneven border, slight tilt; boiled by the caller.
 const CHIP_TILT = -1.5;
-export const DoodleChip: React.FC<{text: string; font: string; ink: string; paper: string}> = ({text, font, ink, paper}) => (
-  <div style={{position: 'absolute', left: 48, top: 40, padding: '6px 26px', background: paper, border: `${LINE * 0.8}px solid ${ink}`, borderRadius: HAND_RADIUS, color: ink, fontFamily: font, fontWeight: 700, fontSize: 48, letterSpacing: 2, textTransform: 'uppercase', transform: `rotate(${CHIP_TILT}deg)`}}>{text}</div>
-);
+const CHIP_INSET = 40; // shared inset for top/bottom and left
+export const DoodleChip: React.FC<{text: string; font: string; ink: string; paper: string; pos?: 'tl' | 'bl'}> = ({text, font, ink, paper, pos = 'tl'}) => {
+  const style: React.CSSProperties = {
+    position: 'absolute',
+    left: CHIP_INSET + 8, // 48 = 40 + 8
+    padding: '6px 26px',
+    background: paper,
+    border: `${LINE * 0.8}px solid ${ink}`,
+    borderRadius: HAND_RADIUS,
+    color: ink,
+    fontFamily: font,
+    fontWeight: 700,
+    fontSize: 48,
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    transform: `rotate(${CHIP_TILT}deg)`,
+  };
+  if (pos === 'bl') {
+    style.top = undefined;
+    style.bottom = CHIP_INSET;
+  } else {
+    style.top = CHIP_INSET;
+    style.bottom = undefined;
+  }
+  return <div style={style}>{text}</div>;
+};

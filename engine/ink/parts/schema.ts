@@ -38,5 +38,5 @@ export type Background = {plate: string; zoom: [number, number]; origin?: string
 // The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to
 // across `span` (fraction of the shot, default 1). Shots without `cam` render exactly as before.
 export type Cam = {from: [number, number, number]; to: [number, number, number]; span?: number};
-export type Shot = {f0: number; f1: number; bg: Background; cam?: Cam; chip?: string; chipAt?: number; els: El[]};
+export type Shot = {f0: number; f1: number; bg: Background; cam?: Cam; chip?: string; chipAt?: number; chipPos?: 'tl' | 'bl'; els: El[]};
 export type Part = {_doc?: string; part: string; f0: number; f1: number; shots: Shot[]};
