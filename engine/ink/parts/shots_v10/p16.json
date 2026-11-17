@@ -8,7 +8,7 @@
    "f0": 12379,
    "f1": 12518,
    "bg": {
-    "plate": "ink60full/plates/hotel_doorway_framed_view.png",
+    "plate": "ink60full/plates/parlour_through_doorway.png",
     "zoom": [
      1.0,
      1.1
@@ -17,7 +17,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_lapels.png",
+     "src": "ink60/cast/poisson_back_34_peek.png",
      "x": 1700,
      "y": 1000,
      "h": 520,
@@ -85,7 +85,7 @@
    "f0": 12620,
    "f1": 12736,
    "bg": {
-    "plate": "ink60full/plates/elite_banquet_table_night.png",
+    "plate": "ink60full/plates/banquet_table_high_angle.png",
     "zoom": [
      1.12,
      1.2
@@ -95,7 +95,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_seated.png",
+     "src": "ink60/cast/poisson_high_angle_eager.png",
      "x": 1180,
      "y": 1000,
      "h": 600,

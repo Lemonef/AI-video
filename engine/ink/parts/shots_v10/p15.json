@@ -8,17 +8,16 @@
    "f0": 11245,
    "f1": 11352,
    "bg": {
-    "plate": "ink60full/plates/crillon_salon_chandeliers.png",
+    "plate": "ink60full/plates/crillon_salon_birdseye.png",
     "zoom": [
      1.1,
      1.2
-    ],
-    "origin": "40% 60%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_lean_murmur.png",
+     "src": "ink60/cast/lustig_topdown_walk.png",
      "x": 600,
      "y": 1000,
      "h": 680,
@@ -27,7 +26,7 @@
     {
      "t": "words",
      "text": "HIGHEST BIDDER",
-     "x": 1254,
+     "x": 1286,
      "y": 220,
      "size": 100,
      "at": 11316,
@@ -35,10 +34,21 @@
     },
     {
      "t": "underline",
-     "x": 1254,
+     "x": 1286,
      "y": 275,
      "w": 700,
      "at": 11324
+    },
+    {
+     "t": "photo",
+     "src": "ink60full/pd/crillon_concorde_1890s.jpg",
+     "x": 1340,
+     "y": 640,
+     "w": 400,
+     "rot": -4,
+     "frame": "polaroid",
+     "label": "HOTEL DE CRILLON",
+     "at": 11290
     }
    ]
   },
@@ -46,7 +56,7 @@
    "f0": 11352,
    "f1": 11472,
    "bg": {
-    "plate": "ink60full/plates/hotel_suite_corner_34.png",
+    "plate": "ink60full/plates/hotel_suite_window_dutch.png",
     "zoom": [
      1.0,
      1.08
@@ -257,7 +267,7 @@
    "f0": 11958,
    "f1": 12066,
    "bg": {
-    "plate": "ink60full/plates/crillon_salon_chandeliers.png",
+    "plate": "ink60full/plates/crillon_salon_over_armchair.png",
     "zoom": [
      1.0,
      1.08
@@ -278,7 +288,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_secret_smile.png",
+     "src": "ink60/cast/poisson_back_34_peek.png",
      "x": 1340,
      "y": 1000,
      "h": 680,

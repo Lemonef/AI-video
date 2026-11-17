@@ -134,17 +134,16 @@
    "f0": 5478,
    "f1": 5580,
    "bg": {
-    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "plate": "ink60full/plates/archive_shelves_birdseye.png",
     "zoom": [
      1.0,
      1.08
-    ],
-    "origin": "30% 50%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_rapt_listening.png",
+     "src": "ink60/cast/lustig_topdown_walk.png",
      "x": 1720,
      "y": 1000,
      "h": 500,

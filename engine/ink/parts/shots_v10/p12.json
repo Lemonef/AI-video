@@ -8,17 +8,16 @@
    "f0": 9056,
    "f1": 9186,
    "bg": {
-    "plate": "ink60full/plates/hotel_suite_corner_34.png",
+    "plate": "ink60full/plates/crillon_salon_over_armchair.png",
     "zoom": [
-     1.1,
-     1.22
-    ],
-    "origin": "70% 50%"
+     1.0,
+     1.08
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_lean_whisper.png",
+     "src": "ink60/cast/poisson_back_34_peek.png",
      "x": 1340,
      "y": 1000,
      "h": 700,
@@ -153,7 +152,7 @@
    "f0": 9520,
    "f1": 9730,
    "bg": {
-    "plate": "ink60full/plates/crillon_salon_chandeliers.png",
+    "plate": "ink60full/plates/crillon_ceiling_low_angle.png",
     "zoom": [
      1.08,
      1.0
@@ -174,7 +173,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_looking_up.png",
+     "src": "ink60/cast/poisson_from_below_greedy.png",
      "x": 520,
      "y": 1000,
      "h": 600,
@@ -182,7 +181,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_secret_smile.png",
+     "src": "ink60/cast/lustig_from_below_smug.png",
      "x": 1400,
      "y": 1000,
      "h": 620,

@@ -218,17 +218,16 @@
    "f0": 16825,
    "f1": 16975,
    "bg": {
-    "plate": "ink60full/plates/capone_office.png",
+    "plate": "ink60full/plates/capone_desk_low_angle.png",
     "zoom": [
      1.12,
      1.24
-    ],
-    "origin": "50% 40%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/capone_warning_finger.png",
+     "src": "ink60/cast/capone_from_below_menace.png",
      "x": 1320,
      "y": 1000,
      "h": 720,

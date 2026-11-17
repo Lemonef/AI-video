@@ -8,7 +8,7 @@
    "f0": 19090,
    "f1": 19160,
    "bg": {
-    "plate": "ink60full/plates/paris_skyline_extreme_wide.png",
+    "plate": "ink60full/plates/tower_lattice_framing_paris.png",
     "zoom": [
      1.0,
      1.1
@@ -34,7 +34,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_glance_over_shoulder.png",
+     "src": "ink60/cast/lustig_back_walk_case.png",
      "x": 1620,
      "y": 1000,
      "h": 540,
@@ -95,12 +95,11 @@
    "f0": 19296,
    "f1": 19336,
    "bg": {
-    "plate": "ink60full/plates/tower_low_angle_up.png",
+    "plate": "ink60full/plates/tower_top_looking_down.png",
     "zoom": [
      1.0,
      1.15
-    ],
-    "origin": "50% 15%"
+    ]
    },
    "els": [
     {
@@ -113,7 +112,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_official_tailcoat.png",
+     "src": "ink60/cast/lustig_topdown_walk.png",
      "x": 1500,
      "y": 1000,
      "h": 620,

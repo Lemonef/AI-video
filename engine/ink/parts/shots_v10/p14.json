@@ -40,7 +40,7 @@
    "f0": 10734,
    "f1": 10866,
    "bg": {
-    "plate": "ink60full/plates/elite_banquet_table_night.png",
+    "plate": "ink60full/plates/banquet_table_high_angle.png",
     "zoom": [
      1.0,
      1.08
@@ -61,32 +61,16 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_proud.png",
-     "x": 360,
+     "src": "ink60/cast/poisson_high_angle_eager.png",
+     "x": 760,
      "y": 1000,
-     "h": 560,
-     "at": 10739
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_lapels.png",
-     "x": 720,
-     "y": 1000,
-     "h": 560,
+     "h": 600,
      "at": 10745
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_seated.png",
-     "x": 1080,
-     "y": 1000,
-     "h": 540,
-     "at": 10750
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/lustig_rapt_listening.png",
-     "x": 1560,
+     "src": "ink60/cast/lustig_high_angle_sly.png",
+     "x": 1400,
      "y": 1000,
      "h": 620,
      "at": 10758,

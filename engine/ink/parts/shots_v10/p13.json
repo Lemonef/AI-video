@@ -109,20 +109,11 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_looking_up.png",
+     "src": "ink60/cast/poisson_from_below_greedy.png",
      "x": 540,
      "y": 1000,
      "h": 640,
      "at": 10084
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/buyer_amazed.png",
-     "x": 1400,
-     "y": 1000,
-     "h": 600,
-     "at": 10113,
-     "flip": true
     },
     {
      "t": "photo",
@@ -196,7 +187,7 @@
    "f0": 10296,
    "f1": 10527,
    "bg": {
-    "plate": "ink60full/plates/tower_rust_closeup.png",
+    "plate": "ink60full/plates/tower_lattice_framing_paris.png",
     "zoom": [
      1.12,
      1.0
@@ -217,7 +208,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_secret_smile.png",
+     "src": "ink60/cast/poisson_back_stand.png",
      "x": 1340,
      "y": 1000,
      "h": 680,

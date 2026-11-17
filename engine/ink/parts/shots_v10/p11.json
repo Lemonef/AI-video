@@ -8,7 +8,7 @@
    "f0": 8087,
    "f1": 8156,
    "bg": {
-    "plate": "ink60/plates/paris_dusk.png",
+    "plate": "ink60full/plates/train_hall_extreme_wide.png",
     "zoom": [
      1.08,
      1.0
@@ -192,7 +192,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_doubtful.png",
+     "src": "ink60/cast/poisson_back_34_peek.png",
      "x": 1320,
      "y": 1000,
      "h": 640,

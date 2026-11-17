@@ -56,12 +56,11 @@
    "f0": 14370,
    "f1": 14490,
    "bg": {
-    "plate": "ink60full/plates/crillon_salon_chandeliers.png",
+    "plate": "ink60full/plates/crillon_salon_through_doors.png",
     "zoom": [
      1.0,
      1.08
-    ],
-    "origin": "50% 50%"
+    ]
    },
    "cam": {
     "from": [
@@ -78,34 +77,17 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_greedy.png",
-     "x": 480,
+     "src": "ink60/cast/poisson_back_stand.png",
+     "x": 960,
      "y": 1000,
-     "h": 560,
+     "h": 620,
      "at": 14374
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_proud.png",
-     "x": 900,
-     "y": 1000,
-     "h": 580,
-     "at": 14389
-    },
-    {
-     "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_smart.png",
-     "x": 1420,
-     "y": 1000,
-     "h": 560,
-     "at": 14393,
-     "flip": true
     },
     {
      "t": "words",
      "text": "SAME HOTEL. SAME SCRIPT.",
      "x": 960,
-     "y": 181,
+     "y": 189,
      "size": 80,
      "at": 14415
     }
@@ -115,7 +97,7 @@
    "f0": 14490,
    "f1": 14576,
    "bg": {
-    "plate": "ink60full/plates/paris_police_station.png",
+    "plate": "ink60full/plates/police_station_high_angle.png",
     "zoom": [
      1.0,
      1.08
@@ -124,7 +106,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/police_officer_reading_file.png",
+     "src": "ink60/cast/officer_high_angle_notebook.png",
      "x": 600,
      "y": 1000,
      "h": 620,
@@ -132,7 +114,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/dealer_reporting.png",
+     "src": "ink60/cast/poisson_high_angle_eager.png",
      "x": 1340,
      "y": 1000,
      "h": 680,
@@ -331,7 +313,7 @@
    "f0": 15000,
    "f1": 15090,
    "bg": {
-    "plate": "ink60/plates/hotel_room_night.png",
+    "plate": "ink60full/plates/hotel_suite_window_dutch.png",
     "zoom": [
      1.0,
      1.08
@@ -352,7 +334,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_sad.png",
+     "src": "ink60/cast/lustig_back_window.png",
      "x": 1320,
      "y": 1000,
      "h": 680,
@@ -381,7 +363,7 @@
    "f0": 15090,
    "f1": 15140,
    "bg": {
-    "plate": "ink60full/plates/tower_low_angle_up.png",
+    "plate": "ink60full/plates/prison_corridor_low_angle.png",
     "zoom": [
      1.08,
      1.0
@@ -398,7 +380,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/police_officer_reading_file.png",
+     "src": "ink60/cast/lustig_from_below_smug.png",
      "x": 1500,
      "y": 1000,
      "h": 600,

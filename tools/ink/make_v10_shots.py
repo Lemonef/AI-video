@@ -143,7 +143,7 @@ PARTS['p03'] = [
     S(1918, PL('tower_rust_closeup', zoom=(1.05, 1.18)), SP('parisian_awe_looking_up', 1930, 420, 560), ST('BAD SHAPE', 1952, x=1380, y=400)),
     S(1986, CARD, W('THE BILLS KEPT GROWING', 2061, y=180, size=80),
       BR([('PAINT', 3, 'PAINT'), ('REPAIRS', 5, 'REPAIRS'), ('BILLS', 9, 'BILLS')], 1997, 32)),
-    S(2120, PL('desk_topdown_papers', zoom=(1.0, 1.12)), SP('lustig_reading_newspaper', 2130, 1720, 520), TG('NEWSPAPERS', 2128, 560, 520),
+    S(2120, PL('desk_topdown_papers', zoom=(1.0, 1.12)), SP('lustig_topdown_walk', 2130, 1720, 520), TG('NEWSPAPERS', 2128, 560, 520),
       O('EVERY WEEK', 2186, x=1300, y=300, size=110)),
     S(2198, CARD, TW(1500, 560), W('IS THIS THING STILL', 2200, x=700, y=300, size=80),
       O('WORTH KEEPING?', 2243, x=700, y=430, size=110, ul=True)),
@@ -158,7 +158,7 @@ PARTS['p03'] = [
 
 PARTS['p04'] = [
     S(2498, PL('tower_low_angle_up', origin='50% 15%'), W('NOT A MONUMENT', 2549, y=220, size=110),
-      X(2568, 960, 220, 420), SP('scrap_dealer_looking_up', 2510, 1520, 560)),
+      X(2568, 960, 220, 420), SP('poisson_from_below_greedy', 2510, 1520, 560)),
     S(2586, CARD, TW(700, 600), O('A PILE OF IRON', 2590, x=R, y=280, size=120, ul=True),
       TG('IN THE MIDDLE OF A CITY', 2641, R, 560)),
     S(2662, PL('paris_dusk'), SP('parisian_1', 2681, 560, 600),
@@ -213,7 +213,7 @@ PARTS['p06'] = [
 
 PARTS['p07'] = [
     S(4466, CARD, SP('lustig_writing_desk', 4479, 1440, 600), O('10 RULES', 4516, x=700, y=320, size=200, ul=True)),
-    S(4560, PL('desk_topdown_papers', zoom=(1.12, 1.0)), SP('lustig_writing_desk', 4570, 1700, 520), W('A BUSINESS MANUAL', 4603, y=240, size=90),
+    S(4560, PL('desk_topdown_papers', zoom=(1.12, 1.0)), SP('lustig_topdown_walk', 4570, 1700, 520), W('A BUSINESS MANUAL', 4603, y=240, size=90),
       O('FOR LYING', 4624, y=380, size=140, ul=True)),
     S(4692, CARD, O('RULE 1', 4699, y=150, size=90), W('BE A PATIENT LISTENER', 4727, y=270, size=80),
       SP('lustig_rapt_listening', 4735, 680, 560), SP('mark_talking_gesturing', 4751, 1260, 560, flip=True)),
@@ -234,7 +234,7 @@ PARTS['p08'] = [
       O('RULE 5: NEVER BE SHABBY', 5319, x=R, y=220, size=70), cam=PAN(1080, 840)),
     S(5366, CARD, SP('lustig_official_tailcoat', 5376, 240, 560), W('A RICH PERSON TRUSTS', 5370, y=280, size=80),
       O('CLEAN SHOES', 5402, y=440, size=160, ul=True), TK(5412, 1560, 440)),
-    S(5478, PL('desk_topdown_papers', origin='30% 50%'), SP('lustig_rapt_listening', 5490, 1720, 500), W('NOTICE WHAT IS MISSING', 5483, y=200, size=80),
+    S(5478, PL('archive_shelves_birdseye'), SP('lustig_topdown_walk', 5490, 1720, 500), W('NOTICE WHAT IS MISSING', 5483, y=200, size=80),
       O('BE CLEVER', 5551, y=460, size=140), X(5566, 960, 460, 440)),
     S(5580, CARD, SP('lustig_polyglot_greeting', 5590, 1720, 560), W('BE CAREFUL', 5617, x=860, y=300, size=110), TK(5623, 1380, 300),
       W('BE CALM', 5648, x=860, y=460, size=110), TK(5654, 1380, 460),
@@ -272,7 +272,7 @@ PARTS['p10'] = [
       W('NOT A WAREHOUSE', 7117, y=400, size=90), X(7137, 960, 400, 380)),
     S(7156, PL('crillon_salon_chandeliers', origin='50% 20%'), O('A PALACE', 7173, x=L, y=220, size=160),
       SP('doorman_bowing', 7191, 1440, 660, flip=True), TG('CHANDELIERS', 7234, L, 520)),
-    S(7292, PL('hotel_doorway_framed_view'), SP('lustig_3', 7297, 1320, 680),
+    S(7292, PL('hotel_doorway_framed_view'), SP('lustig_back_walk_case', 7297, 1320, 680),
       W('SOMETHING SIMPLE', 7314, x=L, y=240, size=90), cam=PUSH(1220)),
     S(7372, CARD, W('PEOPLE TRUST', 7377, y=220, size=90),
       FL(['THE ROOM', 'THE PERSON'], 7395, 47, w=520, gap=220), O('FIRST', 7417, x=600, y=800, size=90)),
@@ -291,7 +291,7 @@ PARTS['p10'] = [
 ]
 
 PARTS['p11'] = [
-    S(8087, PL('paris_dusk', zoom=(1.08, 1.0)), SP('scrap_dealer_pocketing_letter', 8090, 1320, 680),
+    S(8087, PL('train_hall_extreme_wide', zoom=(1.08, 1.0)), SP('scrap_dealer_pocketing_letter', 8090, 1320, 680),
       ST('TELL NO ONE', 8102, x=600, y=380, rot=-9)),
     S(8156, PL('crillon_salon_chandeliers', zoom=(1.0, 1.1), origin='50% 70%'),
       SP('scrap_dealer_proud', 8165, 480, 560), SP('scrap_dealer_smart', 8174, 900, 580),
@@ -300,7 +300,7 @@ PARTS['p11'] = [
     S(8320, PL('hotel_suite_corner_34', zoom=(1.08, 1.0)), SP('lustig_6', 8327, 600, 680),
       W('THE SMALLEST DETAIL', 8350, x=R, y=220, size=80), O('COULD RUIN HIM', 8387, x=R, y=340, size=100),
       cam=PUSH(700)),
-    S(8410, PL('hotel_doorway_framed_view', zoom=(1.1, 1.0)), SP('scrap_dealer_doubtful', 8415, 1320, 640),
+    S(8410, PL('hotel_doorway_framed_view', zoom=(1.1, 1.0)), SP('poisson_back_34_peek', 8415, 1320, 640),
       O('ONE WRONG WORD', 8415, x=L, y=220, size=90), TG('SIX MEN WALK OUT', 8467, L, 520)),
     S(8500, CARD, W('HE PREPARED EVERY DETAIL', 8532, y=220, size=80),
       FL(['PAPERS', 'TITLE', 'HOTEL', 'ORDER'], 8599, 33, w=330, gap=80)),
@@ -310,15 +310,15 @@ PARTS['p11'] = [
 ]
 
 PARTS['p12'] = [
-    S(9056, PL('hotel_suite_corner_34', zoom=(1.1, 1.22), origin='70% 50%'), SP('lustig_lean_whisper', 9071, 1340, 700),
+    S(9056, PL('crillon_salon_over_armchair'), SP('poisson_back_34_peek', 9071, 1340, 700),
       O('QUIETLY', 9127, x=L, y=260, size=120, ul=True)),
     S(9186, CARD, SP('lustig_lean_whisper', 9196, 260, 520, flip=True), W('GENTLEMEN,', 9190, y=200, size=80), O('A STATE SECRET', 9257, y=380, size=140),
       RD(9268, 960, 560, 700)),
     S(9326, PL('tower_rust_closeup', zoom=(1.18, 1.05)), SP('city_official_decree', 9340, 1700, 540), W('TOO EXPENSIVE', 9361, y=200, size=110),
       TG('TO MAINTAIN', 9389, 960, 520)),
     S(9400, CARD, TW(960, 620, cut=(9470, 9485)), O('DEMOLISH IT', 9470, y=150, size=120)),
-    S(9520, PL('crillon_salon_chandeliers', zoom=(1.08, 1.0)), SP('scrap_dealer_looking_up', 9528, 520, 600),
-      SP('scrap_dealer_secret_smile', 9585, 1400, 620, flip=True),
+    S(9520, PL('crillon_ceiling_low_angle', zoom=(1.08, 1.0)), SP('poisson_from_below_greedy', 9528, 520, 600),
+      SP('lustig_from_below_smug', 9585, 1400, 620, flip=True),
       W('THE PUBLIC WOULD REVOLT', 9585, y=160, size=70), ST('CONFIDENTIAL', 9675, x=960, y=380),
       cam=PAN(1100, 860)),
 ]
@@ -329,12 +329,12 @@ PARTS['p13'] = [
     S(9906, PL('limousine_street_day'), SP('lustig_5', 9910, 1380, 660), TG('TWO LIMOUSINES', 9957, 600, 500),
       cam=PAN(800, 1120)),
     S(10076, PL('tower_low_angle_up', zoom=(1.0, 1.1), origin='50% 20%'),
-      SP('scrap_dealer_looking_up', 10084, 540, 640), SP('buyer_amazed', 10113, 1400, 600, flip=True),
+      SP('poisson_from_below_greedy', 10084, 540, 640),
       PO('eiffel_caricature_1887.png', 10140, 960, 580, 320, 3, 'MOCKED, 1887'),
       W('NOT A MONUMENT', 10181, y=160, size=80)),
     S(10216, CARD, TW(640, 620), O('INVENTORY', 10219, x=R, y=280, size=160, ul=True),
       TG('7,000 TONS', 10240, R, 520), ST('FOR SALE', 10250, x=R, y=720)),
-    S(10296, PL('tower_rust_closeup', zoom=(1.12, 1.0)), SP('scrap_dealer_secret_smile', 10300, 1340, 680),
+    S(10296, PL('tower_lattice_framing_paris', zoom=(1.12, 1.0)), SP('poisson_back_stand', 10300, 1340, 680),
       W('HE DID NOT RUSH THEM', 10303, x=L, y=160, size=60), O('ALREADY THEIRS', 10466, x=L, y=280, size=110),
       cam=PUSH(1240)),
 ]
@@ -342,9 +342,8 @@ PARTS['p13'] = [
 PARTS['p14'] = [
     S(10527, CARD, W('THE MOMENT A BUYER', 10546, y=220, size=80),
       FL(['PICTURES IT', 'OWNS IT', 'PAYS FOR IT'], 10577, 47, w=440, gap=130)),
-    S(10734, PL('elite_banquet_table_night'), SP('scrap_dealer_proud', 10739, 360, 560),
-      SP('scrap_dealer_lapels', 10745, 720, 560), SP('scrap_dealer_seated', 10750, 1080, 540),
-      SP('lustig_rapt_listening', 10758, 1560, 620, flip=True), O('HE PICKED HIS TARGET', 10806, y=160, size=80),
+    S(10734, PL('banquet_table_high_angle'), SP('poisson_high_angle_eager', 10745, 760, 600),
+      SP('lustig_high_angle_sly', 10758, 1400, 620, flip=True), O('HE PICKED HIS TARGET', 10806, y=160, size=80),
       cam=PAN(900, 1100)),
     S(10866, PL('poisson_parlour_night'), SP('scrap_dealer_proud', 10871, 1320, 700),
       TG('MONEY', 10951, 600, 480), TG('NO PLACE IN THE ELITE', 10999, 600, 640),
@@ -355,9 +354,10 @@ PARTS['p14'] = [
 ]
 
 PARTS['p15'] = [
-    S(11245, PL('crillon_salon_chandeliers', zoom=(1.1, 1.2), origin='40% 60%'),
-      SP('lustig_lean_murmur', 11260, 600, 680), O('HIGHEST BIDDER', 11316, x=R, y=220, size=100, ul=True)),
-    S(11352, PL('hotel_suite_corner_34'), SP('scrap_dealer_smart', 11357, 1340, 680),
+    S(11245, PL('crillon_salon_birdseye', zoom=(1.1, 1.2)),
+      SP('lustig_topdown_walk', 11260, 600, 680), O('HIGHEST BIDDER', 11316, x=R, y=220, size=100, ul=True),
+      PO('crillon_concorde_1890s.jpg', 11290, 1340, 640, 400, -4, 'HOTEL DE CRILLON')),
+    S(11352, PL('hotel_suite_window_dutch'), SP('scrap_dealer_smart', 11357, 1340, 680),
       O('BEING SMART', 11418, x=L, y=260, size=110), cam=PUSH(1240)),
     S(11472, CARD, SP('scrap_dealer_hesitating', 11482, 1700, 560), O('THE SECOND HOOK', 11483, y=360, size=130, ul=True)),
     S(11514, PL('poisson_parlour_night', zoom=(1.08, 1.0)), SP('poisson_wife_suspicious', 11520, 600, 680),
@@ -368,7 +368,7 @@ PARTS['p15'] = [
     S(11740, PL('records_office_desk', zoom=(1.08, 1.0)), SP('lustig_embarrassed', 11745, 640, 700),
       TG('LOW-PAID', 11832, 1360, 480), TG('CIVIL SERVANT', 11844, 1360, 620),
       O('NEEDS A LITTLE EXTRA', 11888, x=R, y=220, size=70)),
-    S(11958, PL('crillon_salon_chandeliers', zoom=(1.0, 1.08)), SP('scrap_dealer_secret_smile', 11964, 1340, 680),
+    S(11958, PL('crillon_salon_over_armchair', zoom=(1.0, 1.08)), SP('poisson_back_34_peek', 11964, 1340, 680),
       O('A BRIBE', 12007, x=L, y=220, size=140), W('FEELS REAL', 12037, x=L, y=380, size=100),
       cam=PUSH(1260)),
     S(12066, CARD, SP('scrap_dealer_secret_smile', 12076, 1720, 520), O('CORRUPTION', 12071, y=300, size=140, ul=True),
@@ -380,12 +380,12 @@ PARTS['p15'] = [
 ]
 
 PARTS['p16'] = [
-    S(12379, PL('hotel_doorway_framed_view', zoom=(1.0, 1.1)), SP('scrap_dealer_lapels', 12390, 1700, 520), W('A SECOND REASON', 12406, y=180, size=90),
+    S(12379, PL('parlour_through_doorway', zoom=(1.0, 1.1)), SP('poisson_back_34_peek', 12390, 1700, 520), W('A SECOND REASON', 12406, y=180, size=90),
       TG('NEW TO THE ELITE', 12466, 960, 480)),
     S(12518, CARD, W('EVERYONE ELSE HAD A NAME', 12523, y=240, size=80),
       O('HE WANTED ONE', 12564, y=400, size=110, ul=True), SP('scrap_dealer_looking_up', 12568, 960, 360)),
-    S(12620, PL('elite_banquet_table_night', zoom=(1.12, 1.2), origin='50% 70%'),
-      SP('scrap_dealer_seated', 12624, 1180, 600), W('NOT A TOWER', 12644, x=560, y=170, size=80),
+    S(12620, PL('banquet_table_high_angle', zoom=(1.12, 1.2), origin='50% 70%'),
+      SP('poisson_high_angle_eager', 12624, 1180, 600), W('NOT A TOWER', 12644, x=560, y=170, size=80),
       X(12659, 560, 170, 320), O('A SEAT AT THE TABLE', 12696, x=R, y=300, size=90)),
     S(12736, CARD, W('POISSON PAID', 12741, y=160, size=80),
       BR([('THE TOWER', 5, 'PAID'), ('THE BRIBE', 2, 'PAID AGAIN')], 12781, 37)),
@@ -400,23 +400,23 @@ PARTS['p17'] = [
     S(13106, CARD, SP('scrap_dealer_head_in_hands', 13116, 1720, 480), W('NO HEADLINE', 13110, y=220, size=90), X(13125, 960, 220, 260),
       W('NO ARRESTS', 13145, y=360, size=90), X(13154, 960, 360, 260),
       W('NO MANHUNT', 13178, y=500, size=90), X(13182, 960, 500, 260), O('SILENCE.', 13205, y=720, size=150)),
-    S(13256, PL('poisson_parlour_night', zoom=(1.12, 1.0)), SP('scrap_dealer_head_in_hands', 13266, 1320, 640),
+    S(13256, PL('parlour_through_doorway', zoom=(1.12, 1.0)), SP('poisson_back_stand', 13266, 1320, 640),
       W('COULD NOT UNDO', 13308, x=L, y=240, size=100)),
     S(13372, CARD, W('HE PAID A BRIBE', 13385, y=200, size=90), O('TO BUY A NATIONAL MONUMENT', 13419, y=330, size=70),
       TW(960, 420)),
-    S(13488, PL('paris_police_station', zoom=(1.0, 1.1)), SP('scrap_dealer_humiliated', 13494, 1320, 680),
+    S(13488, PL('police_office_through_bars', zoom=(1.0, 1.1)), SP('poisson_back_stand', 13494, 1320, 680),
       W('IF HE WENT TO THE POLICE', 13500, x=L, y=200, size=60), ST('LOST', 13604, x=L, y=420),
       cam=PUSH(1240)),
     S(13646, CARD, SP('scrap_dealer_humiliated', 13656, 1700, 560), O('SHAME', 13651, y=320, size=200, ul=True), W('DID THE WORK', 13668, y=540, size=100)),
 ]
 
 PARTS['p18'] = [
-    S(13754, PL('poisson_parlour_night', zoom=(1.0, 1.1), origin='70% 50%'),
-      SP('scrap_dealer_waiting_window', 13769, 1320, 680), TG('WAITING', 13800, 600, 480),
+    S(13754, PL('parlour_tea_table_high_angle', zoom=(1.0, 1.1)),
+      SP('poisson_high_angle_eager', 13769, 1320, 680), TG('WAITING', 13800, 600, 480),
       O('PART OF A SECRET', 13875, x=L, y=240, size=90)),
     S(13926, PL('paris_tower_night', zoom=(1.0, 1.08), origin='50% 20%'), SP('scrap_dealer_looking_up', 13930, 600, 660),
       W('HE THOUGHT', 14006, x=R, y=200, size=80), O('WAS HIS', 14013, x=R, y=330, size=140), cam=PAN(860, 1060)),
-    S(14060, PL('paris_birdseye_champ_de_mars', zoom=(1.0, 1.06)), SP('parisian_awe_looking_up', 14075, 1560, 600), W('THE TOWER DID NOT MOVE', 14068, x=L, y=220, size=70)),
+    S(14060, PL('paris_birdseye_champ_de_mars', zoom=(1.0, 1.06)), SP('poisson_topdown_reach', 14075, 1560, 600), W('THE TOWER DID NOT MOVE', 14068, x=L, y=220, size=70)),
     S(14100, CARD, TL('THE DEAL', '?', 14104, 'WEEKS PASSED', 14121),
       O('A DIFFERENT FEELING', 14174, y=220, size=90)),
 ]
@@ -425,11 +425,10 @@ PARTS['p19'] = [
     S(14234, PL('paris_skyline_extreme_wide', zoom=(1.12, 1.0)), SP('lustig_2', 14292, 1340, 660),
       TG('MONTHS LATER', 14265, 600, 480), O('HE DID IT AGAIN', 14340, x=L, y=240, size=100),
       PO('lustig_1935.jpg', 14300, 1700, 420, 300, 5, 'VICTOR LUSTIG')),
-    S(14370, PL('crillon_salon_chandeliers', origin='50% 50%'), SP('scrap_dealer_greedy', 14374, 480, 560),
-      SP('scrap_dealer_proud', 14389, 900, 580), SP('scrap_dealer_smart', 14393, 1420, 560, flip=True),
+    S(14370, PL('crillon_salon_through_doors'), SP('poisson_back_stand', 14374, 960, 620),
       W('SAME HOTEL. SAME SCRIPT.', 14415, y=160, size=80), cam=PAN(1060, 860)),
-    S(14490, PL('paris_police_station'), SP('police_officer_reading_file', 14495, 600, 620),
-      SP('dealer_reporting', 14519, 1340, 680, flip=True), O('THIS TIME', 14495, y=170, size=90),
+    S(14490, PL('police_station_high_angle'), SP('officer_high_angle_notebook', 14495, 600, 620),
+      SP('poisson_high_angle_eager', 14519, 1340, 680, flip=True), O('THIS TIME', 14495, y=170, size=90),
       ST('POLICE', 14539, x=960, y=380)),
     S(14576, PL('paris_train_station_night', zoom=(1.1, 1.0)), SP('lustig_glance_over_shoulder', 14581, 1320, 700),
       O('LEFT FRANCE', 14591, x=L, y=220, size=100), TG('THAT NIGHT', 14609, L, 480), cam=PUSH(1240)),
@@ -438,17 +437,17 @@ PARTS['p19'] = [
       O('HE HAD ALREADY WON', 14788, x=L, y=220, size=80), TG('A FORTUNE', 14830, L, 480),
       TG('A CLEAN EXIT', 14853, L, 620)),
     S(14892, CARD, SP('lustig_counting_cash', 14902, 1720, 480), W('A CON MAN WHO STOPS', 14899, y=280, size=80), O('= A THIEF WITH A HOBBY', 14942, y=440, size=90)),
-    S(15000, PL('hotel_room_night'), SP('lustig_sad', 15006, 1320, 680),
+    S(15000, PL('hotel_suite_window_dutch'), SP('lustig_back_window', 15006, 1320, 680),
       W('THE STORY HAD TO', 15032, x=L, y=220, size=70), O('KEEP GOING', 15048, x=L, y=330, size=110),
       cam=PUSH(1240)),
-    S(15090, PL('tower_low_angle_up', zoom=(1.08, 1.0)), W('WHAT CAUGHT UP WITH HIM', 15109, y=180, size=70), SP('police_officer_reading_file', 15100, 1500, 600)),
+    S(15090, PL('prison_corridor_low_angle', zoom=(1.08, 1.0)), W('WHAT CAUGHT UP WITH HIM', 15109, y=180, size=70), SP('lustig_from_below_smug', 15100, 1500, 600)),
     S(15140, CARD, SP('lustig_rehearsing_mirror', 15150, 1760, 440), W('NOT THE POLICE', 15144, y=300, size=100), X(15159, 960, 300, 420),
       O('THE NEED TO BE BELIEVED', 15183, y=500, size=90, ul=True)),
 ]
 
 PARTS['p20'] = [
-    S(15229, PL('ocean_liner_deck', zoom=(1.0, 1.1)), TG('ACROSS THE ATLANTIC', 15264, 960, 480),
-      O('AMERICA', 15338, y=220, size=160, ul=True), SP('rich_passenger_deckchair', 15240, 1520, 500), cam=PAN(800, 1120)),
+    S(15229, PL('liner_deck_high_angle', zoom=(1.0, 1.1)), TG('ACROSS THE ATLANTIC', 15264, 960, 480),
+      O('AMERICA', 15338, y=220, size=160, ul=True), SP('lustig_high_angle_sly', 15240, 1520, 500), cam=PAN(800, 1120)),
     S(15372, CARD, W('THE PROHIBITION YEARS', 15380, y=260, size=90),
       TL('1920', '1933', 15384, 'PROHIBITION', 15397)),
     S(15438, PL('backroom_workshop_lamp', zoom=(1.0, 1.1)), SP('lustig_money_box', 15443, 1320, 680),
@@ -458,10 +457,10 @@ PARTS['p20'] = [
       cam=PAN(1060, 860)),
     S(15678, CARD, SP('buyer_amazed', 15690, 260, 540), W('THE BOX DID NOT', 15707, y=300, size=90), O('PRINT ANYTHING', 15729, y=440, size=110),
       ST('FAKE', 15740, x=1500, y=700)),
-    S(15788, PL('desk_topdown_papers', zoom=(1.0, 1.1), origin='60% 40%'), SP('lustig_forging_pen', 15798, 1700, 520), O('THE TRICK', 15795, y=300, size=150, ul=True)),
+    S(15788, PL('telegraph_desk_topdown', zoom=(1.0, 1.1)), SP('lustig_topdown_walk', 15798, 1700, 520), O('THE TRICK', 15795, y=300, size=150, ul=True)),
     S(15860, CARD, O('PERFECT COPIES?', 15978, y=220, size=90),
       FL(['2 REAL BILLS IN', '6 HOURS', '2 BILLS OUT'], 15866, 52, w=460, gap=120)),
-    S(16056, PL('backroom_workshop_lamp', zoom=(1.12, 1.2), origin='30% 60%'), SP('lustig_money_box', 16062, 600, 700),
+    S(16056, PL('wax_seal_extreme_closeup', zoom=(1.12, 1.2)), SP('lustig_money_box', 16062, 600, 700),
       O('ALSO REAL', 16104, x=R, y=260, size=120), TG('HIDDEN IN THE BOX', 16128, R, 520)),
     S(16154, PL('chicago_street_night'), SP('buyer_amazed', 16180, 1340, 680),
       O('A MIRACLE', 16202, x=L, y=240, size=130, ul=True), cam=PUSH(1240)),
@@ -479,7 +478,7 @@ PARTS['p21'] = [
       SP('lustig_lean_murmur', 16641, 560, 660), TG('$50,000', 16660, 960, 480), cam=PAN(860, 1060)),
     S(16705, CARD, W('DOUBLE IT IN 60 DAYS', 16739, y=170, size=70),
       BR([('BORROW', 50, '$50,000'), ('IN 60 DAYS', 100, '$100,000')], 16711, 45)),
-    S(16825, PL('capone_office', zoom=(1.12, 1.24), origin='50% 40%'), SP('capone_warning_finger', 16829, 1320, 720),
+    S(16825, PL('capone_desk_low_angle', zoom=(1.12, 1.24)), SP('capone_from_below_menace', 16829, 1320, 720),
       O('DO NOT MAKE ME', 16905, x=L, y=220, size=90), O('REGRET IT', 16927, x=L, y=340, size=120)),
     S(16975, PL('bank_vault_safe_deposit'), TG('SAFE DEPOSIT BOX', 17003, 960, 480),
       O('DID NOTHING', 17045, y=220, size=110), TG('2 MONTHS', 17083, 960, 640), SP('lustig_money_box', 16985, 1560, 600), cam=PUSH(960)),
@@ -490,12 +489,12 @@ PARTS['p21'] = [
 PARTS['p22'] = [
     S(17276, CARD, SP('lustig_handing_money', 17291, 640, 640), O('EVERY DOLLAR', 17306, x=R, y=300, size=110),
       TK(17320, R, 460)),
-    S(17340, PL('capone_office', zoom=(1.08, 1.0), origin='70% 50%'), SP('capone_handing_money', 17345, 1320, 700),
+    S(17340, PL('capone_desk_topdown_cash', zoom=(1.08, 1.0)), SP('capone_topdown_desk', 17345, 1320, 700),
       W('IMPRESSED', 17367, x=L, y=220, size=110), O('+ $5,000', 17428, x=L, y=380, size=130, ul=True)),
     S(17478, CARD, W('WHAT CAPONE SAW', 17494, x=700, y=200, size=80),
       SP('capone_seated_desk', 17503, 1520, 560, flip=True),
       O('HE GAVE IT ALL BACK', 17603, x=700, y=480, size=80)),
-    S(17645, PL('desk_topdown_papers', zoom=(1.08, 1.0)), SP('capone_thinking', 17655, 1720, 540), W('NOT WEAKNESS', 17686, y=220, size=100),
+    S(17645, PL('limousine_backseat_view', zoom=(1.08, 1.0)), SP('capone_back_34', 17655, 1720, 540), W('NOT WEAKNESS', 17686, y=220, size=100),
       X(17693, 960, 220, 380), O('PROOF', 17725, y=420, size=170, ul=True)),
     S(17756, CARD, W('IN A WORLD OF LIARS', 17765, y=240, size=80),
       O('ONE HONEST MAN', 17816, y=400, size=120, ul=True), SP('lustig_nodding_agree', 17821, 960, 380)),
@@ -526,11 +525,11 @@ PARTS['p23'] = [
 ]
 
 PARTS['p24'] = [
-    S(19090, PL('paris_skyline_extreme_wide', zoom=(1.0, 1.1)), W('SO WHAT WAS', 19105, y=300, size=90),
-      O('THE SENTENCE?', 19118, y=440, size=140), SP('lustig_glance_over_shoulder', 19098, 1620, 540)),
+    S(19090, PL('tower_lattice_framing_paris', zoom=(1.0, 1.1)), W('SO WHAT WAS', 19105, y=300, size=90),
+      O('THE SENTENCE?', 19118, y=440, size=140), SP('lustig_back_walk_case', 19098, 1620, 540)),
     S(19160, CARD, SP('lustig_point_viewer', 19170, 1760, 440), W('GIVE PEOPLE A REASON', 19165, y=280, size=90), O('TO FEEL SPECIAL', 19188, y=420, size=130, ul=True),
       W('AND THEY WILL HELP YOU FOOL THEM', 19229, y=640, size=60)),
-    S(19296, PL('tower_low_angle_up', zoom=(1.0, 1.15), origin='50% 15%'), W('THE TOWER NEVER MOVED', 19305, y=200, size=90), SP('lustig_official_tailcoat', 19300, 1500, 620)),
+    S(19296, PL('tower_top_looking_down', zoom=(1.0, 1.15)), W('THE TOWER NEVER MOVED', 19305, y=200, size=90), SP('lustig_topdown_walk', 19300, 1500, 620)),
     S(19336, PH('expo_1889.jpg', push=(1.0, 1.08)), W('ONLY BORROWED', 19390, x=1300, y=200, size=80),
       O('OUR OLDEST WEAKNESS', 19417, x=1300, y=320, size=90)),
     S(19478, CARD, SP('lustig_point_viewer', 19483, 1420, 660), O('WHICH PART', 19542, x=650, y=300, size=110),
@@ -573,6 +572,32 @@ def reuse_errors(parts):
                 plates[s['bg']['plate']].append(s['start'])
     return ([f'photo {k} used {len(v)}x > {PHOTO_MAX}: {v}' for k, v in photos.items() if len(v) > PHOTO_MAX] +
             [f'plate {k} used {len(v)}x > {PLATE_MAX}: {v}' for k, v in plates.items() if len(v) > PLATE_MAX])
+
+
+# 2D viewpoint rule (Zen 2026-11-17): no camera exists, so an angled plate needs a sprite DRAWN from that
+# angle. Plate keyword -> sprite-name tags that qualify. Neutral plates (closeup, extreme_wide, corner_34,
+# dutch) take any pose. Change together with ANGLE_PLATES.
+ANGLE_SPRITE = {
+    'topdown': ('_topdown_',), 'birdseye': ('_topdown_',), 'looking_down': ('_topdown_',),
+    'low_angle': ('_from_below_',), 'high_angle': ('_high_angle_',),
+    'over_': ('_back_',), 'through_': ('_back_',), 'doorway': ('_back_',),
+    'backseat': ('_back_',), 'framing': ('_back_',),
+}
+
+
+def angle_errors(parts):
+    errs = []
+    for shots in parts.values():
+        for s in shots:
+            plate = s['bg'].get('plate', '').rsplit('/', 1)[-1]
+            need = next((v for k, v in ANGLE_SPRITE.items() if k in plate), None)
+            if not need:
+                continue
+            for e in s['els']:
+                name = '_' + e.get('src', '').rsplit('/', 1)[-1].removesuffix('.png') + '_'
+                if e['t'] == 'sprite' and not any(tag in name for tag in need):
+                    errs.append(f'{s["start"]}: eye-level sprite {name.strip("_")} on angled plate {plate}')
+    return errs
 
 
 def quarter_balance(parts, end):
@@ -734,7 +759,7 @@ def build():
     print('\n'.join(rows))
     counts, qerrs = quarter_balance(PARTS, f1)
     print('per quarter: ' + ' | '.join(f'Q{i + 1} {c}' for i, c in enumerate(counts)))
-    errors += qerrs + reuse_errors(PARTS)
+    errors += qerrs + reuse_errors(PARTS) + angle_errors(PARTS)
     total = sum(len(v) for v in PARTS.values())
     print(f'total shots {total}')
     print(f'frame-safe fits ({len(fits)}):\n  ' + '\n  '.join(fits))

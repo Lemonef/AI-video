@@ -8,17 +8,16 @@
    "f0": 13754,
    "f1": 13926,
    "bg": {
-    "plate": "ink60full/plates/poisson_parlour_night.png",
+    "plate": "ink60full/plates/parlour_tea_table_high_angle.png",
     "zoom": [
      1.0,
      1.1
-    ],
-    "origin": "70% 50%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/scrap_dealer_waiting_window.png",
+     "src": "ink60/cast/poisson_high_angle_eager.png",
      "x": 1320,
      "y": 1000,
      "h": 680,
@@ -34,7 +33,7 @@
     {
      "t": "words",
      "text": "PART OF A SECRET",
-     "x": 612,
+     "x": 600,
      "y": 240,
      "size": 90,
      "at": 13875,
@@ -106,7 +105,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/parisian_awe_looking_up.png",
+     "src": "ink60/cast/poisson_topdown_reach.png",
      "x": 1560,
      "y": 1000,
      "h": 600,

@@ -8,7 +8,7 @@
    "f0": 15229,
    "f1": 15372,
    "bg": {
-    "plate": "ink60full/plates/ocean_liner_deck.png",
+    "plate": "ink60full/plates/liner_deck_high_angle.png",
     "zoom": [
      1.0,
      1.1
@@ -52,7 +52,7 @@
     },
     {
      "t": "sprite",
-     "src": "ink60/cast/rich_passenger_deckchair.png",
+     "src": "ink60/cast/lustig_high_angle_sly.png",
      "x": 1520,
      "y": 1000,
      "h": 500,
@@ -223,17 +223,16 @@
    "f0": 15788,
    "f1": 15860,
    "bg": {
-    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "plate": "ink60full/plates/telegraph_desk_topdown.png",
     "zoom": [
      1.0,
      1.1
-    ],
-    "origin": "60% 40%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/lustig_forging_pen.png",
+     "src": "ink60/cast/lustig_topdown_walk.png",
      "x": 1700,
      "y": 1000,
      "h": 520,
@@ -294,12 +293,11 @@
    "f0": 16056,
    "f1": 16154,
    "bg": {
-    "plate": "ink60full/plates/backroom_workshop_lamp.png",
+    "plate": "ink60full/plates/wax_seal_extreme_closeup.png",
     "zoom": [
      1.12,
      1.2
-    ],
-    "origin": "30% 60%"
+    ]
    },
    "els": [
     {

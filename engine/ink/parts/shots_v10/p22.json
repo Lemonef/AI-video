@@ -40,17 +40,16 @@
    "f0": 17340,
    "f1": 17478,
    "bg": {
-    "plate": "ink60full/plates/capone_office.png",
+    "plate": "ink60full/plates/capone_desk_topdown_cash.png",
     "zoom": [
      1.08,
      1.0
-    ],
-    "origin": "70% 50%"
+    ]
    },
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/capone_handing_money.png",
+     "src": "ink60/cast/capone_topdown_desk.png",
      "x": 1320,
      "y": 1000,
      "h": 700,
@@ -121,7 +120,7 @@
    "f0": 17645,
    "f1": 17756,
    "bg": {
-    "plate": "ink60full/plates/desk_topdown_papers.png",
+    "plate": "ink60full/plates/limousine_backseat_view.png",
     "zoom": [
      1.08,
      1.0
@@ -130,7 +129,7 @@
    "els": [
     {
      "t": "sprite",
-     "src": "ink60/cast/capone_thinking.png",
+     "src": "ink60/cast/capone_back_34.png",
      "x": 1720,
      "y": 1000,
      "h": 540,
