@@ -30,7 +30,7 @@ const REVIEW_BOUNDS = {
   p05: {'3298,3330': [[3298, 3361]], '3330,3448': [[3361, 3448]]},  // diplomat hold 32 -> 63 frames
   p20: {'15229,15372': [[15229, 15290], [15290, 15372]]},          // liner plate, then ink map card
 };
-const REVIEW_ELS = new Set([3240, 3298, 3361, 5006, 6120, 10866, 12736, 15229, 15290, 15372]);
+const REVIEW_ELS = new Set([3240, 3298, 3361, 5006, 6120, 9186, 9520, 10866, 12736, 15229, 15290, 15372]);
 const REVIEW_LAYOUT = {3240: null, 12736: null};  // swap layout replaced by a drawn picture
 
 const v10 = (p) => json(`engine/ink/parts/shots_v10/${p}.json`);

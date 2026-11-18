@@ -563,6 +563,22 @@ PARTS['p20'].insert(i + 1, {'start': 15290, 'bg': CARD, 'chip': None, 'chipAt': 
      'to': {'x': 250, 'y': 600, 'label': 'AMERICA'}, 'at': 15293, 'dur': 45, 'label': 'AMERICA'}]})
 # the prohibition timeline moves onto a once-used Chicago desk plate so two cards never touch
 _shot('p20', 15372)['bg'] = PL('capone_desk_low_angle')
+# b33 "a state secret": the lone redact bar (x is its LEFT edge, so it hung right of centre, covering nothing)
+# becomes a memo whose spoiler lines are blacked out, so the bar reads as redaction
+s = _shot('p12', 9186)
+s['els'] = [e for e in s['els'] if e['t'] == 'sprite' or e.get('text') == 'GENTLEMEN,'] + [
+    {'t': 'doc', 'x': 1080, 'y': 640, 'w': 780, 'h': 560, 'kind': 'memo', 'title': 'A STATE SECRET',
+     'lines': ['THE EIFFEL TOWER', 'IS TO BE SOLD', 'FOR SCRAP', 'TELL NO ONE'], 'at': 9257, 'step': 6, 'redact': [1, 2]}]
+# b35 "the public would revolt": eye-level doorway plate (low-angle chandelier + from-below sprites hid the text),
+# text on a paper tag, stamp on the clear floor left of Lustig
+s = _shot('p12', 9520)
+s['bg'] = PL('crillon_salon_through_doors')
+s['cam'] = {'from': [1.08, 1010, 540], 'to': [1.08, 910, 540]}  # keeps p12's pan framing
+# doorway plate = seen from behind (ANGLE_SPRITE): Lustig at the window over Paris, the public outside
+# (Poisson's only back sprite is already at its 4-use cap)
+s['els'] = [{'t': 'sprite', 'src': 'ink60/cast/lustig_back_window.png', 'x': 1380, 'y': 1000, 'h': 640, 'at': 9528},
+            _t('THE PUBLIC WOULD REVOLT', 960, 150, 9585),
+            {'t': 'stamp', 'text': 'CONFIDENTIAL', 'x': 820, 'y': 760, 'rot': -8, 'color': 'red', 'at': 9675}]
 
 # ---- Add TOWERS SOLD HUD chips ----
 # shot 12874 gets chip='TOWERS SOLD: 1', chipAt=12880, chipPos='bl'
