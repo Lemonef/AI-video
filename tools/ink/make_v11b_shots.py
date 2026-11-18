@@ -501,6 +501,69 @@ for s in PARTS['p24']:
         break
 
 
+
+# ---- Zen v11B review fixes (2026-11-18): only the beats he flagged; picture = the spoken word, timed ----
+def _shot(pid, start):
+    return next(s for s in PARTS[pid] if s['start'] == start)
+
+def _w(text, x, y, size, at, color=None):
+    e = {'t': 'words', 'text': text, 'x': x, 'y': y, 'size': size, 'at': at}
+    if color:
+        e['color'] = color
+    return e
+
+def _t(text, x, y, at):
+    return {'t': 'tag', 'text': text, 'x': x, 'y': y, 'at': at}
+
+def _icon(name, x, y, size, at, frm=None):
+    e = {'t': 'icon', 'name': name, 'x': x, 'y': y, 'size': size, 'at': at}
+    if frm:
+        e['from'] = frm
+    return e
+
+# b16 "spoke five languages": greetings pop per language instead of a mail-letter count
+s = _shot('p05', 3240)
+s['els'] = [{'t': 'sprite', 'src': 'ink60/cast/lustig_polyglot_greeting.png', 'x': 520, 'y': 1000, 'h': 620, 'at': 3245},
+            _t('BONJOUR', 1180, 250, 3249), _t('HELLO', 1620, 360, 3255), _t('GUTEN TAG', 1220, 480, 3261),
+            _t('CIAO', 1640, 600, 3267), _t('AHOJ', 1260, 720, 3273), _w('5 LANGUAGES', 1420, 900, 120, 3279, 'orange')]
+# diplomat shot held 63 frames (was 32): next card starts on its first word
+s = _shot('p05', 3330)
+s['start'] = 3361
+for e in s['els']:
+    if e['t'] == 'sprite':
+        e['at'] = 3361
+# b21 "rule 3: wait": clock plus the spoken caption, no lone icon
+_shot('p07', 5006)['els'] = HERO('clock', 'RULE 3: WAIT', 5012, 560, 460, 320) + [
+    _w('LET THEM REVEAL', 1340, 380, 84, 5085), _w('THEIR POLITICS', 1340, 490, 84, 5102, 'orange'),
+    {'t': 'stamp', 'text': 'THEN AGREE', 'x': 1340, 'y': 690, 'rot': -6, 'color': 'green', 'at': 5140}]
+# b23 idea, then each need pops as it is said
+_shot('p09', 6120)['els'] = HERO('tower', 'THE IDEA', 6140, 420, 460, 300, burst=True) + [
+    _w('NOW HE NEEDED', 1300, 200, 80, 6187),
+    _icon('mask', 1000, 500, 190, 6201), _t('COSTUME', 1000, 690, 6203),
+    _icon('hotel', 1300, 500, 190, 6228), _t('STAGE', 1300, 690, 6230),
+    _icon('man', 1600, 500, 190, 6261), _t('AUDIENCE', 1600, 690, 6263)]
+# b42 money but no place in the elite: coin, then a crossed-out crown
+s = _shot('p14', 10866)
+s['els'] = [e for e in s['els'] if e['t'] == 'sprite'] + [
+    _icon('coin', 640, 400, 170, 10951), _t('MONEY', 640, 560, 10953),
+    _icon('crown', 940, 400, 170, 10999), _t('NO PLACE IN THE ELITE', 790, 720, 11001),
+    {'t': 'cross', 'x': 940, 'y': 400, 'size': 200, 'at': 11024}]
+# b50 "a bribe on top": the coin drops onto the bill
+s = _shot('p16', 12736)
+s['els'] = [e for e in s['els'] if e['t'] == 'words' and e['text'] == 'POISSON PAID'] + [
+    _icon('bill', 960, 760, 260, 12781), _t('TOWER PRICE', 500, 760, 12783),
+    _icon('coin', 960, 560, 200, 12818, frm=[960, -150, 200]), _t('+ BRIBE', 1400, 560, 12822),
+    {'t': 'stamp', 'text': 'ON TOP', 'x': 1400, 'y': 380, 'rot': -8, 'color': 'red', 'at': 12835}]
+# b61 "America": liner plate, then an ink map card France -> America
+s = _shot('p20', 15229)
+s['els'] = [e for e in s['els'] if e['t'] == 'tag'] + [{'t': 'circle', 'x': 1400, 'y': 320, 'w': 500, 'h': 240, 'at': 15270}]
+i = PARTS['p20'].index(s)
+PARTS['p20'].insert(i + 1, {'start': 15290, 'bg': CARD, 'chip': None, 'chipAt': None, 'cam': None, 'els': [
+    {'t': 'map', 'region': 'atlantic', 'from': {'x': 1610, 'y': 590, 'label': 'FRANCE'},
+     'to': {'x': 250, 'y': 600, 'label': 'AMERICA'}, 'at': 15293, 'dur': 45, 'label': 'AMERICA'}]})
+# the prohibition timeline moves onto a once-used Chicago desk plate so two cards never touch
+_shot('p20', 15372)['bg'] = PL('capone_desk_low_angle')
+
 # ---- Add TOWERS SOLD HUD chips ----
 # shot 12874 gets chip='TOWERS SOLD: 1', chipAt=12880, chipPos='bl'
 for s in PARTS['p16']:

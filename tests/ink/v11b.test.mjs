@@ -24,6 +24,14 @@ const SWAPS = {
   13106: 'crossout', 15140: 'crossout', 18674: 'quote', 18956: 'checklist', 19160: 'hero',
 };
 const CHIPS = {12874: 'TOWERS SOLD: 1', 14370: 'TOWERS SOLD: 2'};
+// Zen review 2026-11-18 (docs/TODO.md): targeted fixes after watching v11B. Boundary moves per part
+// (old [f0,f1] -> new list) and the shot f0s whose elements/bg may now differ from v10.
+const REVIEW_BOUNDS = {
+  p05: {'3298,3330': [[3298, 3361]], '3330,3448': [[3361, 3448]]},  // diplomat hold 32 -> 63 frames
+  p20: {'15229,15372': [[15229, 15290], [15290, 15372]]},          // liner plate, then ink map card
+};
+const REVIEW_ELS = new Set([3240, 3298, 3361, 5006, 6120, 10866, 12736, 15229, 15290, 15372]);
+const REVIEW_LAYOUT = {3240: null, 12736: null};  // swap layout replaced by a drawn picture
 
 const v10 = (p) => json(`engine/ink/parts/shots_v10/${p}.json`);
 const v11 = (p) => json(`engine/ink/parts/shots_v11b/${p}.json`);
@@ -37,7 +45,8 @@ test('v11b: every part exists with the v10 part and shot boundaries, contiguous'
     const a = v10(p), b = v11(p);
     assert.equal(b.f0, a.f0, `${p} f0`);
     assert.equal(b.f1, a.f1, `${p} f1`);
-    assert.deepEqual(b.shots.map((s) => [s.f0, s.f1]), a.shots.map((s) => [s.f0, s.f1]), `${p} shot boundaries`);
+    const want = a.shots.flatMap((s) => REVIEW_BOUNDS[p]?.[`${s.f0},${s.f1}`] ?? [[s.f0, s.f1]]);
+    assert.deepEqual(b.shots.map((s) => [s.f0, s.f1]), want, `${p} shot boundaries`);
     b.shots.forEach((s, i) => assert.equal(s.f0, i ? b.shots[i - 1].f1 : b.f0, `${p} shot ${i} not contiguous`));
   }
 });
@@ -45,6 +54,7 @@ test('v11b: every part exists with the v10 part and shot boundaries, contiguous'
 test('v11b: each swapped shot carries its new layout and drops flow/bars', () => {
   const byF0 = new Map(allShots().map((s) => [s.f0, s]));
   for (const [f0, t] of Object.entries(SWAPS)) {
+    if (REVIEW_LAYOUT[f0] === null) continue;
     const s = byF0.get(Number(f0));
     assert.ok(s, `no shot at ${f0}`);
     const lay = layoutOf(s);
@@ -55,11 +65,12 @@ test('v11b: each swapped shot carries its new layout and drops flow/bars', () =>
 
 test('v11b: shots outside the swap list keep their v10 elements', () => {
   for (const p of PARTS) {
-    const a = v10(p).shots, b = v11(p).shots;
-    b.forEach((s, i) => {
-      if (SWAPS[s.f0]) return;
-      assert.deepEqual(s.els, a[i].els, `${p} shot ${s.f0} els changed`);
-      assert.deepEqual(s.bg, a[i].bg, `${p} shot ${s.f0} bg changed`);
+    const a = new Map(v10(p).shots.map((s) => [s.f0, s])), b = v11(p).shots;
+    b.forEach((s) => {
+      if (SWAPS[s.f0] || REVIEW_ELS.has(s.f0)) return;
+      assert.ok(a.has(s.f0), `${p} shot ${s.f0} not in v10 and not a review fix`);
+      assert.deepEqual(s.els, a.get(s.f0).els, `${p} shot ${s.f0} els changed`);
+      assert.deepEqual(s.bg, a.get(s.f0).bg, `${p} shot ${s.f0} bg changed`);
     });
   }
 });
