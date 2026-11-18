@@ -1,7 +1,7 @@
 import React from 'react';
 import {INK, PAPER, GREEN, RED, ORANGE, LINE} from '../compositions/InkProof';
 
-export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown';
+export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man';
 export const DOODLE = {
   yellow: '#E8C15A', // muted gold marker
   blue: '#7FA6C9', // muted blue marker
@@ -81,6 +81,12 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
     case 'crown':
       art = <><path fill={base(DOODLE.yellow)} d="M-77 -45 L-42 -8 L-35 -63 L-8 -24 L4 -81 L24 -24 L53 -61 L51 -6 L84 -41 L65 64 Q0 79 -63 64Z"/><path fill={base(DOODLE.yellow)} d="M-66 41 Q0 53 68 39 L65 64 Q0 79 -63 64Z"/>{[[-77,-47],[-35,-65],[4,-83],[53,-63],[84,-43]].map(([x,y])=><circle key={x} cx={x} cy={y} r={6} fill={base(DOODLE.yellow)}/>)}{[-38,0,38].map(x=><circle key={x} cx={x} cy={57} r={6} fill={RED}/>)}</>;
       highlight = 'M-55 14 L-49 28'; break;
+    case 'face':
+      art = <><path fill={base(DOODLE.skin)} d="M-35 12 Q-38 -12 -35 -38 Q-30 -52 -5 -50 Q15 -51 30 -46 Q38 -36 35 -12 Q38 6 35 12 Q30 18 -5 20 Q-30 18 -35 12Z"/><path fill={base(DOODLE.skin)} d="M-38 -18 Q-46 -28 -43 -12 Q-47 -2 -38 -8 Q-40 -4 -35 -14Z"/><path fill={base(DOODLE.skin)} d="M38 -18 Q46 -28 43 -12 Q47 -2 38 -8 Q40 -4 35 -14Z"/><path fill={INK} d="M-32 -48 Q-22 -62 2 -62 Q25 -62 32 -48 Q28 -52 2 -52 Q-20 -52 -25 -48Z"/><path fill={INK} d="M-18 -30 Q-16 -33 -14 -31 Q-17 -28 -18 -30Z"/><path fill={INK} d="M14 -30 Q16 -33 18 -31 Q17 -28 14 -30Z"/><path fill={INK} d="M-4 -16 Q-1 -20 3 -16 Q2 -13 -1 -14 Q-5 -14 -4 -16Z"/><path fill={INK} d="M-14 6 Q-6 9 0 7 Q6 9 14 6"/></>;
+      highlight = 'M-42 -50 L-32 -60'; break;
+    case 'man':
+      art = <><path fill={base(DOODLE.skin)} d="M-20 -42 Q-22 -58 -5 -60 Q15 -61 22 -56 Q26 -48 20 -38 Q24 -30 5 -28 Q-14 -30 -20 -42Z"/><path fill={INK} d="M-28 -62 Q-18 -78 3 -78 Q22 -78 30 -64 Q24 -68 3 -68 Q-16 -68 -22 -64Z"/><path fill={INK} d="M-32 -60 Q-5 -55 30 -58 L30 -52 Q5 -50 -32 -54Z"/><path fill={base(DOODLE.grey)} d="M-28 -36 Q-32 -10 -28 14 Q-20 28 -8 30 L8 30 Q20 28 28 14 Q32 -10 28 -36 Q22 -20 5 -22 Q-12 -20 -28 -36Z"/><path fill={base(DOODLE.grey)} d="M-28 -30 Q-38 -20 -38 6 Q-38 18 -28 22"/><path fill={base(DOODLE.grey)} d="M28 -30 Q38 -20 38 6 Q38 18 28 22"/><path fill={base(DOODLE.grey)} d="M-14 22 Q-16 55 -8 78"/><path fill={base(DOODLE.grey)} d="M14 22 Q16 55 8 78"/><path fill={INK} d="M-12 76 Q-16 84 -4 86 Q8 86 10 80 Q6 78 -8 78Z"/><path fill={INK} d="M12 76 Q16 84 4 86 Q-8 86 -10 80 Q-6 78 8 78Z"/><path fill={RED} d="M-2 -34 Q-6 -18 -2 2 Q2 -18 6 -34 Q2 -26 -2 -34Z"/><path fill={INK} d="M-6 -22 Q-4 -26 -2 -24 Q0 -22 -6 -22Z"/><path fill={INK} d="M-6 -6 Q-4 -10 -2 -8 Q0 -6 -6 -6Z"/></>;
+      highlight = 'M-36 -64 L-26 -74'; break;
     default: throw new Error(`Unknown icon name: ${name}`);
   }
   if (!Number.isFinite(size) || size <= 0) throw new Error(`Icon ${name}: size must be positive and finite`);

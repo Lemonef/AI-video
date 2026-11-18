@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 1080,
+  "f1": 1170,
   "shots": [
     {
       "f0": 0,
@@ -236,7 +236,7 @@
         }
       ]
     },
-    {
+{
       "f0": 990,
       "f1": 1080,
       "bg": {"card": true},
@@ -249,10 +249,26 @@
           "icon": "mask",
           "cols": 4,
           "rows": 3,
-          "odd": {"index": 6, "icon": "badge"},
+          "odd": {"index": 6, "icon": "face"},
           "at": 996,
           "step": 4,
           "label": "ONE HONEST MAN"
+        }
+      ]
+    },
+    {
+      "f0": 1080,
+      "f1": 1170,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "scale",
+          "left": {"icon": "hotel", "label": "HOTEL"},
+          "right": {"icon": "man", "label": "ONE MAN"},
+          "heavy": "right",
+          "label": "HE ACTED ALONE",
+          "at": 1086,
+          "dur": 20
         }
       ]
     }
