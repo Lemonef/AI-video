@@ -1,7 +1,7 @@
 import React from 'react';
 import {INK, PAPER, GREEN, RED, ORANGE, LINE} from '../compositions/InkProof';
 
-export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man';
+export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair';
 export const DOODLE = {
   yellow: '#E8C15A', // muted gold marker
   blue: '#7FA6C9', // muted blue marker
@@ -87,6 +87,9 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
     case 'man':
       art = <><path fill={base(DOODLE.grey)} d="M-29 35 L-4 37 L-7 82 L-27 83 Q-30 62 -29 35Z"/><path fill={base(DOODLE.grey)} d="M5 37 L29 36 Q31 60 27 83 L8 82Z"/><path fill={INK} d="M-28 78 L-8 79 L-7 92 Q-25 95 -37 91 Q-41 84 -28 78Z"/><path fill={INK} d="M8 79 L27 78 Q42 84 38 92 L8 93Z"/><path fill={base(DOODLE.grey)} d="M-30 -22 Q-46 -20 -49 5 L-49 29 L-35 31 L-32 7 L-23 -8Z"/><path fill={base(DOODLE.grey)} d="M29 -22 Q45 -20 48 5 L49 30 L35 31 L32 7 L23 -8Z"/><path fill={base(DOODLE.skin)} d="M-49 28 L-35 29 Q-31 45 -42 45 Q-53 44 -49 28Z"/><path fill={base(DOODLE.skin)} d="M35 29 L49 28 Q53 43 43 45 Q32 46 35 29Z"/><path fill={base(DOODLE.grey)} d="M-29 -24 Q0 -30 29 -23 L34 39 Q1 45 -34 40Z"/><path fill={PAPER} d="M-15 -25 L0 -18 L15 -25 L9 -5 L-8 -5Z"/><path fill={RED} d="M-4 -18 L4 -18 L6 -11 L2 -7 L7 15 L0 22 L-7 15 L-3 -7 L-6 -11Z"/><path fill="none" d="M-18 -22 L-23 -6 L-12 -1 L-19 6 L-3 25 M18 -22 L23 -6 L13 -1 L20 6 L7 25 M1 28 L1 39"/><path fill={INK} d="M-3 26 Q0 23 3 26 Q5 30 1 31 Q-3 31 -3 26Z M-3 35 Q0 32 3 35 Q5 39 1 40 Q-3 40 -3 35Z"/><path fill={base(DOODLE.skin)} d="M-23 -66 Q0 -74 24 -65 L25 -46 Q23 -22 1 -21 Q-23 -22 -25 -45Z"/><path fill={base(INK)} d="M-29 -63 Q-31 -92 -3 -93 Q28 -95 30 -63Z"/><path fill={DOODLE.grey} d="M-29 -70 Q0 -66 29 -71 L30 -62 L-29 -61Z"/><path fill={INK} d="M-37 -64 Q0 -59 37 -65 L39 -58 Q0 -51 -39 -57Z"/><path fill={INK} d="M-13 -44 Q-13 -47 -10 -47 Q-7 -47 -7 -44 Q-7 -41 -10 -41 Q-13 -41 -13 -44Z M8 -44 Q8 -47 11 -47 Q14 -47 14 -44 Q14 -41 11 -41 Q8 -41 8 -44Z"/><path fill="none" d="M1 -42 L-1 -35 L3 -35 M-7 -29 Q0 -25 8 -30"/></>;
       highlight = 'M-18 -51 L-18 -47'; break;
+    case 'chair':
+      art = <><path fill={base(DOODLE.brown)} d="M-43 1 L-31 0 L-33 69 L-43 70Z M39 -2 L50 -1 L56 68 L46 70Z"/><path fill={base(DOODLE.brown)} d="M-45 5 L-49 -87 Q-45 -93 -36 -91 L-31 5Z M32 2 L28 -89 Q34 -94 41 -90 L45 3Z"/><path fill={base(DOODLE.brown)} d="M-48 -88 Q-7 -97 40 -90 L41 -75 Q-3 -82 -47 -73Z M-46 -61 Q-6 -67 42 -61 L42 -50 Q-3 -55 -45 -49Z M-44 -35 Q-4 -40 43 -35 L44 -24 Q-1 -29 -43 -23Z"/><path fill={base(DOODLE.brown)} d="M-58 17 L-46 19 L-49 92 L-59 91Z M44 19 L57 16 L62 90 L51 92Z"/><path fill={base(DOODLE.brown)} d="M-53 59 Q-3 63 55 58 L56 66 Q1 71 -54 67Z"/><path fill={base(DOODLE.brown)} d="M-41 -5 Q0 -9 43 -5 L64 15 Q8 24 -64 18Z"/><path fill={INK} fillOpacity={0.25} d="M-64 18 Q5 24 64 15 L63 24 Q6 33 -63 27Z"/><path fill="none" d="M-32 4 Q-8 1 16 4 M-16 12 Q12 15 35 9"/></>;
+      highlight = 'M-32 -85 Q-20 -88 -9 -87'; break;
     default: throw new Error(`Unknown icon name: ${name}`);
   }
   if (!Number.isFinite(size) || size <= 0) throw new Error(`Icon ${name}: size must be positive and finite`);

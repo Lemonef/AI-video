@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 1170,
+  "f1": 1260,
   "shots": [
     {
       "f0": 0,
@@ -269,6 +269,21 @@
           "label": "HE ACTED ALONE",
           "at": 1086,
           "dur": 20
+        }
+      ]
+    },
+    {
+      "f0": 1170,
+      "f1": 1260,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "transform",
+          "a": {"icon": "tower", "label": "TOWER"},
+          "b": {"icon": "chair", "label": "CHAIR"},
+          "label": "A SEAT",
+          "at": 1176,
+          "step": 18
         }
       ]
     }
