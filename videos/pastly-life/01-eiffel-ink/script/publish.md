@@ -21,7 +21,7 @@ Chapters: 0:00 The sale · (fill from final render)
 Sources: (fill) · Photos: public domain (list) · Sound: CC0 (from master.credits.json)
 
 ## v10.1 packaging (2026-11-17, mock-ups built)
-Files: D:/AI-video/videos/pastly-life/01-eiffel-ink/final/thumbs/ (thumbA_sold_twice, thumbB_conned_capone, thumbC_fake_deal, phone_size_preview).
+Files: D:/AI-video/videos/pastly-life/01-eiffel-ink/thumbs/ (thumbA_sold_twice, thumbB_conned_capone, thumbC_fake_deal, phone_size_preview).
 Pairing rule: thumbnail text adds to the title, never repeats it.
 
 | Pick | Title | Thumbnail |
