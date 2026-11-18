@@ -8,6 +8,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,18 +21,18 @@ def main() -> int:
     CAST.mkdir(parents=True, exist_ok=True)
     for sheet in sorted((PUB / "sheets").glob("sheet_*.png")):
         order = json.loads(sheet.with_suffix(".order.json").read_text(encoding="utf-8"))
-        tmp = ROOT / "out" / "integrate_cut" / sheet.stem
-        shutil.rmtree(tmp, ignore_errors=True)
-        tmp.mkdir(parents=True)
-        run = subprocess.run([sys.executable, "-I", str(ROOT / "tools/ink/cut_sprites.py"), str(sheet), str(tmp), "g", str(len(order))],
-                             capture_output=True, text=True)
-        cuts = sorted(tmp.glob("g*.png"), key=lambda p: int(p.stem[1:]))
-        if run.returncode != 0 or len(cuts) != len(order) or "WARN" in run.stdout:
-            print(f"FAIL {sheet.name}: {len(cuts)}/{len(order)} {run.stdout[-120:]}{run.stderr[-120:]}")
-            return 1
-        for pose, cut in zip(order, cuts):
-            shutil.copy(cut, CAST / f"{pose}.png")
-            print(f"cast {pose}")
+        # Raw cuts are scratch; only the renamed copies in CAST are kept (Zen 2026-11-16: nothing goes in out/).
+        with tempfile.TemporaryDirectory(prefix="integrate_cut_") as td:
+            tmp = Path(td)
+            run = subprocess.run([sys.executable, "-I", str(ROOT / "tools/ink/cut_sprites.py"), str(sheet), str(tmp), "g", str(len(order))],
+                                 capture_output=True, text=True)
+            cuts = sorted(tmp.glob("g*.png"), key=lambda p: int(p.stem[1:]))
+            if run.returncode != 0 or len(cuts) != len(order) or "WARN" in run.stdout:
+                print(f"FAIL {sheet.name}: {len(cuts)}/{len(order)} {run.stdout[-120:]}{run.stderr[-120:]}")
+                return 1
+            for pose, cut in zip(order, cuts):
+                shutil.copy(cut, CAST / f"{pose}.png")
+                print(f"cast {pose}")
     aliases = json.loads((PUB / "art_aliases.json").read_text(encoding="utf-8"))
     for plate, real in aliases["plates"].items():
         src = PUB / "plates" / f"{real}.png"

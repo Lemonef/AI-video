@@ -6,6 +6,7 @@ sheet:  PNG exists, magenta key fraction 0.35-0.92, cut_sprites finds exactly N 
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -33,11 +34,11 @@ for f in m["files"]:
         fr = key.mean()
         if not 0.35 <= fr <= 0.92:
             bad.append(f"{f}: magenta fraction {fr:.2f}")
-        out = ROOT / "out" / "art_gate_cut" / p.stem
-        out.mkdir(parents=True, exist_ok=True)
-        r = subprocess.run([sys.executable, "-I", str(ROOT / "tools/ink/cut_sprites.py"), str(p), str(out), "g", str(m["poses"])],
-                           capture_output=True, text=True)
-        n = len(list(out.glob("g*.png")))
+        # Cuts are only counted, never kept: a self-deleting temp dir (Zen 2026-11-16: nothing goes in out/).
+        with tempfile.TemporaryDirectory(prefix="art_gate_") as td:
+            r = subprocess.run([sys.executable, "-I", str(ROOT / "tools/ink/cut_sprites.py"), str(p), td, "g", str(m["poses"])],
+                               capture_output=True, text=True)
+            n = len(list(Path(td).glob("g*.png")))
         if r.returncode != 0 or n != m["poses"]:
             bad.append(f"{f}: cut gave {n}/{m['poses']} ({r.stdout[-120:]}{r.stderr[-120:]})")
 print("\n".join(bad) if bad else f"OK {len(m['files'])} files")
