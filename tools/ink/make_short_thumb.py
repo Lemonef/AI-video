@@ -10,6 +10,8 @@ PAD = 60                      # edge margin
 TEXT_TOP = int(H * 0.08)      # text block starts below the shelf/feed top chrome
 TEXT_H = int(H * 0.36)        # top ~third carries the story; tower + Lustig below
 SPRITE_H = 0.42               # Lustig height as share of H (bottom band, under the text)
+SINK = 0.14                   # share of sprite height pushed below the frame edge: crops the shoes off,
+                              # so he is framed from the shins up instead of floating on the plate (Zen 2026-11-19)
 
 
 def cover(img, w, h):
@@ -34,7 +36,7 @@ sp = Image.open(CAST + 'lustig_from_below_smug.png').convert('RGBA')
 sp = sp.crop(sp.getbbox())
 sh = int(H * SPRITE_H)
 sp = sp.resize((int(sp.width * sh / sp.height), sh), Image.LANCZOS)
-bg.paste(sp, ((W - sp.width) // 2, H - sp.height), sp)
+bg.paste(sp, ((W - sp.width) // 2, H - sp.height + int(sp.height * SINK)), sp)
 
 d = ImageDraw.Draw(bg)
 lines = [('HE SOLD THE', WHITE, 0.24), ('EIFFEL TOWER', WHITE, 0.24), ('TWICE.', YELLOW, 0.42)]
