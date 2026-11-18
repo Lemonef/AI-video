@@ -1,3 +1,4 @@
+import {InkShortEp01S01, INK_SHORT_EP01_S01_FRAMES} from './compositions/InkShort';
 import {Composition} from 'remotion';
 import {CardLibrary, CARD_LIBRARY_FRAMES} from './compositions/CardLibrary';
 import {CardLibrary2, CARD_LIBRARY2_FRAMES} from './compositions/CardLibrary2';
@@ -10,6 +11,7 @@ import {InkDirected, INKDIRECTED_FRAMES, calcInkDirected, DIRECTED_DEFAULT} from
 import {Ink60, INK60_FRAMES, INK15_FRAMES} from './ink/ep1';
 export const Root = () => (
   <>
+    <Composition id="InkShortEp01S01" component={InkShortEp01S01} width={1080} height={1920} fps={30} durationInFrames={INK_SHORT_EP01_S01_FRAMES}/>
     <Composition id="CardLibrary" component={CardLibrary} width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY_FRAMES}/>
     <Composition id="CardLibrary2" component={CardLibrary2} width={1920} height={1080} fps={30} durationInFrames={CARD_LIBRARY2_FRAMES}/>
     <Composition id="InkFirstMin" component={InkFirstMin} width={1920} height={1080} fps={30} durationInFrames={INK_FIRSTMIN_FRAMES}/>

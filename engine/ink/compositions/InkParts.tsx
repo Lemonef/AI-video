@@ -169,6 +169,6 @@ const EP01_FULL_PARTS = [v8p01, v8p02, v10p03, v10p04, v10p05, v10p06, v10p07, v
 export const INK_EP01_FULL_FRAMES = EP01_FULL_PARTS[EP01_FULL_PARTS.length - 1].f1;
 export const InkEp01Full: React.FC = () => <><InkParts parts={EP01_FULL_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
 // v11B: v10.2 timing kept frame-for-frame; card layouts from card library 1 (tools/ink/make_v11b_shots.py).
-const EP01_V11B_PARTS = [v8p01, v8p02, v11bp03, v11bp04, v11bp05, v11bp06, v11bp07, v11bp08, v11bp09, v11bp10, v11bp11, v11bp12, v11bp13, v11bp14, v11bp15, v11bp16, v11bp17, v11bp18, v11bp19, v11bp20, v11bp21, v11bp22, v11bp23, v11bp24] as unknown as Part[];
+export const EP01_V11B_PARTS = [v8p01, v8p02, v11bp03, v11bp04, v11bp05, v11bp06, v11bp07, v11bp08, v11bp09, v11bp10, v11bp11, v11bp12, v11bp13, v11bp14, v11bp15, v11bp16, v11bp17, v11bp18, v11bp19, v11bp20, v11bp21, v11bp22, v11bp23, v11bp24] as unknown as Part[];
 export const INK_EP01_V11B_FRAMES = EP01_V11B_PARTS[EP01_V11B_PARTS.length - 1].f1;
 export const InkEp01V11B: React.FC = () => <><InkParts parts={EP01_V11B_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
