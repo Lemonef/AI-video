@@ -144,8 +144,8 @@
         {
           "t": "map",
           "region": "europe",
-          "from": {"x": 770, "y": 640, "label": "PARIS"},
-          "to": {"x": 1250, "y": 620, "label": "VIENNA"},
+          "from": {"x": 753, "y": 526, "label": "PARIS"},
+          "to": {"x": 1132, "y": 552, "label": "VIENNA"},
           "at": 456,
           "dur": 30,
           "label": "VIENNA"
