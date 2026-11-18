@@ -56,12 +56,13 @@ def make(plate, sprite, out, sprite_h=0.92):
     return bg
 
 
-a = make('tower_low_angle_up.png', 'lustig_from_below_smug.png', 'thumbD_he_sold_tower_twice.jpg')
-b = make('tower_lattice_framing_paris.png', 'lustig_counting_cash.png', 'thumbE_he_sold_tower_twice_cash.jpg', 0.8)
-# phone-size check: ~ 246x138 is a YouTube mobile feed thumb
-pw, ph = 320, 180
-prev = Image.new('RGB', (pw * 2 + 30, ph + 20), (24, 24, 24))
-prev.paste(a.resize((pw, ph), Image.LANCZOS), (10, 10))
-prev.paste(b.resize((pw, ph), Image.LANCZOS), (pw + 20, 10))
-prev.save(OUT + 'phone_size_preview_v2.jpg', quality=92)
-print('ok')
+if __name__ == '__main__':
+    a = make('tower_low_angle_up.png', 'lustig_from_below_smug.png', 'thumbD_he_sold_tower_twice.jpg')
+    b = make('tower_lattice_framing_paris.png', 'lustig_counting_cash.png', 'thumbE_he_sold_tower_twice_cash.jpg', 0.8)
+    # phone-size check: ~ 246x138 is a YouTube mobile feed thumb
+    pw, ph = 320, 180
+    prev = Image.new('RGB', (pw * 2 + 30, ph + 20), (24, 24, 24))
+    prev.paste(a.resize((pw, ph), Image.LANCZOS), (10, 10))
+    prev.paste(b.resize((pw, ph), Image.LANCZOS), (pw + 20, 10))
+    prev.save(OUT + 'phone_size_preview_v2.jpg', quality=92)
+    print('ok')
