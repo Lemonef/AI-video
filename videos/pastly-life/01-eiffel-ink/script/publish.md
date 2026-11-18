@@ -44,3 +44,10 @@ Text: "HE SOLD THE EIFFEL TOWER / TWICE." - whole story in one glance, no stamp 
 
 Thumb states the WHAT (sold it twice), title adds the HOW (one sentence) - no repeat. Supersedes the A/B/C table above.
 YouTube Test & Compare: E vs D (vs old A), pick by watch time.
+
+## FINAL upload pack (2026-11-18, v11B3, 10:54) - Zen posts, Claude never posts
+Channel: Pastly Life (@pastlylife). File: D:/AI-video/videos/pastly-life/01-eiffel-ink/draft/versions/01-v11B3.mp4 (full-quality master, not the share copy).
+Title: How One Sentence Let a Con Man Sell the Eiffel Tower. Thumb: final/thumbs/thumbE_he_sold_tower_twice_cash.jpg (Test & Compare vs thumbD).
+Chapters (from words/pXX.json f0 at 30 fps, merged parts):
+0:00 He sold the Eiffel Tower twice · 0:33 A tower built to be torn down · 1:23 What Lustig saw · 1:42 Who Victor Lustig was · 2:29 His 10 rules of the con · 3:24 The costume and the stage · 5:02 The pitch: a state secret · 5:51 Picking the buyer · 7:13 Why nobody called the police · 7:54 He did it again · 8:28 America and Al Capone · 10:01 Alcatraz · 10:36 The sentence
+Pinned comment: yes - one question to start replies (text in chat reply 2026-11-18).
