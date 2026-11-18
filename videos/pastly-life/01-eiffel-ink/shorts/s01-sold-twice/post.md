@@ -15,7 +15,7 @@ Why Nobody Called the Police on This Con Man #shorts
 
 ## Description
 ```
-In 1925, Victor Lustig sold the Eiffel Tower to a scrap dealer. The victim never went to the police. So Lustig came back and sold it again.
+A con man sold the Eiffel Tower. Then he sold it again. In 1925, Victor Lustig sold it to a scrap dealer, who was too embarrassed to go to the police, so Lustig came back for a second buyer.
 Full story (and what happened next) in the related video.
 #history #conman #eiffeltower #shorts
 ```
