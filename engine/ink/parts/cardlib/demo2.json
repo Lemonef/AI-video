@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 990,
+  "f1": 1080,
   "shots": [
     {
       "f0": 0,
@@ -233,6 +233,26 @@
           "step": 4,
           "odd": {"angle": 30, "label": "OUTSIDER"},
           "label": "ONE DOES NOT FIT"
+        }
+      ]
+    },
+    {
+      "f0": 990,
+      "f1": 1080,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "grid",
+          "x": 960,
+          "y": 440,
+          "w": 880,
+          "icon": "mask",
+          "cols": 4,
+          "rows": 3,
+          "odd": {"index": 6, "icon": "badge"},
+          "at": 996,
+          "step": 4,
+          "label": "ONE HONEST MAN"
         }
       ]
     }

@@ -38,7 +38,8 @@ export type QuoteEl = Position & {t: 'quote'; w: number; text: string; who?: str
 export type BignumEl = Position & {t: 'bignum'; value: number; prefix?: string; suffix?: string; label: string; at: number; dur: number; color?: Color};
 export type DocEl = {t: 'doc'; x: number; y: number; w: number; h: number; kind: 'card' | 'memo' | 'certificate'; title: string; lines: string[]; at: number; step: number; rot?: number; mark?: {line: number; style: 'circle' | 'underline'}; redact?: number[]; stamp?: string};
 export type MapEl = {t: 'map'; region: 'europe' | 'atlantic'; from: {x: number; y: number; label: string}; to: {x: number; y: number; label: string}; at: number; dur: number; label?: string};
-export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl | IconEl | CountEl | SplitEl | HeroEl | CrossoutEl | ChecklistEl | QuoteEl | BignumEl | DocEl | MapEl | TransformEl | ScaleEl | RingEl;
+export type GridEl = {t: 'grid'; x: number; y: number; w: number; icon: IconName; cols: number; rows: number; odd: {index: number; icon: IconName}; at: number; step: number; label?: string};
+export type El = SpriteEl | WordsEl | UnderlineEl | StampEl | TowerEl | CrossEl | TicketEl | TagEl | PhotoEl | RedactEl | TickEl | CircleEl | TimelineEl | ChimneyEl | RadioEl | BarsEl | FlowEl | IconEl | CountEl | SplitEl | HeroEl | CrossoutEl | ChecklistEl | QuoteEl | BignumEl | DocEl | MapEl | TransformEl | ScaleEl | RingEl | GridEl;
 export type Background = {plate: string; zoom: [number, number]; origin?: string} | {photo: string; push: [number, number]; origin?: string; pos?: string} | {card: true};
 // Virtual camera over the whole shot (background + elements): [scale, focusX, focusY] in 1920x1080 stage px.
 // The focus point is held at frame centre (clamped so the stage always covers the frame), eased from -> to

@@ -5,10 +5,11 @@ import {MapElement} from './layouts/map';
 import {TransformElement} from './layouts/transform';
 import {ScaleElement} from './layouts/scale';
 import {RingElement} from './layouts/ring';
+import {GridElement} from './layouts/grid';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
-import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, CircleEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl, DocEl, TransformEl} from './schema';
+import type {Color, El, SpriteEl, WordsEl, UnderlineEl, StampEl, TowerEl, CrossEl, TicketEl, TagEl, PhotoEl, RedactEl, TickEl, CircleEl, TimelineEl, ChimneyEl, RadioEl, BarsEl, FlowEl, DocEl, TransformEl, GridEl} from './schema';
 const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 const color = (c?: Color) => c ? ({orange: ORANGE, red: RED, green: GREEN, teal: TEAL}[c]) : INK;
 export {color};
@@ -123,6 +124,7 @@ export const Element: React.FC<Props<El>> = props => {
     case 'transform': return <TransformElement {...common} el={el}/>;
     case 'scale': return <ScaleElement {...common} el={el}/>;
     case 'ring': return <RingElement {...common} el={el}/>;
+    case 'grid': return <GridElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
