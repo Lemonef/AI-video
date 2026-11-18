@@ -1,10 +1,53 @@
 {
-  "_doc": "Short s01 of ep01. Read by tools/ink/make_short.py -> engine/ink/parts/shorts/ep01-s01.json. Beats are ep01 timeline ids (assets/ink60full/timeline_full.json); each plays its full timeline window, in this order, back to back.",
+  "_doc": "Short s01 of ep01. Read by tools/ink/make_short.py -> engine/ink/parts/shorts/ep01-s01.json. Beats are ep01 timeline ids (assets/ink60full/timeline_full.json); each plays its timeline window (stretched to the end of its last spoken word), in this order, back to back. captions: group size cap and the hold gap (frames) under which a group stays up until the next one.",
   "id": "ep01-s01",
   "episode_assets": "videos/pastly-life/01-eiffel-ink/assets/ink60full",
-  "beats": ["b01", "b02", "b35", "b36", "b50", "b53", "b54", "b56", "b57", "b59"],
-  "hook": [{"text": "HE SOLD THE"}, {"text": "EIFFEL TOWER."}, {"text": "TWICE.", "color": "orange"}],
-  "end_card": {"seconds": 2.5, "lines": [{"text": "WHAT HAPPENED NEXT?"}, {"text": "FULL STORY BELOW", "color": "orange"}]},
+  "beats": [
+    "b01",
+    "b02",
+    "b35",
+    "b36",
+    "b50",
+    "b51",
+    "b52",
+    "b53",
+    "b54",
+    "b56",
+    "b57",
+    "b58",
+    "b59"
+  ],
+  "hook": [
+    {
+      "text": "HE SOLD THE"
+    },
+    {
+      "text": "EIFFEL TOWER."
+    },
+    {
+      "text": "TWICE.",
+      "color": "orange"
+    }
+  ],
+  "end_card": {
+    "seconds": 2.5,
+    "lines": [
+      {
+        "text": "WHAT HAPPENED NEXT?"
+      },
+      {
+        "text": "FULL STORY BELOW",
+        "color": "orange"
+      }
+    ]
+  },
   "vo": "ink60full/master_v4nomusic.wav",
-  "music": {"src": "ink60full/music_475737.mp3", "volume": 0.12}
+  "music": {
+    "src": "ink60full/music_475737.mp3",
+    "volume": 0.12
+  },
+  "captions": {
+    "max_words": 3,
+    "hold_gap_frames": 10
+  }
 }

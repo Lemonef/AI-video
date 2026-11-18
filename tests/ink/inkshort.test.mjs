@@ -1,6 +1,6 @@
 // 9:16 Short composition contract (brief docs/briefs/ink-short-s01.md). Written by the planner BEFORE the
 // build and protected. The Short re-plays ep01 V11B shots inside a 9:16 frame: hook header on top from frame 0,
-// the 16:9 scene scaled to full width in the middle, word captions below, end card last.
+// the 16:9 scene scaled to full width in the middle, caption groups below, end card last.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -23,13 +23,19 @@ test('InkShort reuses the V11B parts and plays audio per clip', () => {
   assert.match(src, /InkParts/, 'renders the episode shots through InkParts');
   assert.match(src, /EP01_V11B_PARTS/, 'uses the v11B shot data');
   assert.match(src, /shorts\/ep01-s01\.json/, 'reads the generated short data');
-  assert.match(src, /trimBefore|startFrom/, 'VO is cut per clip from the episode track');
+  assert.match(src, /trimBefore/, 'VO is cut per clip from the episode track (Remotion 4: trimBefore)');
+  assert.doesNotMatch(src, /startFrom|endAt=/, 'startFrom/endAt are the deprecated names');
+  assert.match(src, /transformOrigin:\s*['"]0 0['"]/, 'stage wrapper scales from its top-left corner');
+  assert.match(src, /width:\s*STAGE_W/, 'stage wrapper is an explicit STAGE_W x STAGE_H box');
+  assert.match(src, /height:\s*STAGE_H/, 'stage wrapper is an explicit STAGE_W x STAGE_H box');
+  assert.match(src, /UI_TOP|UI_BOTTOM|UI_RIGHT/, 'text placement derives from the Shorts safe zone');
   assert.match(src, /1920\s*\/\s*1080|STAGE_W|1080\s*\/\s*1920/, 'scene scale derived from stage size, not a literal');
 });
 
-test('generated data has hook, clips, words and end card', () => {
+test('generated data has hook, clips, captions and end card', () => {
   const d = JSON.parse(read('engine/ink/parts/shorts/ep01-s01.json'));
+  const spec = JSON.parse(read('videos/pastly-life/01-eiffel-ink/shorts/s01-sold-twice/spec.json'));
   assert.equal(d.fps, 30);
-  assert.ok(d.hook.length >= 2 && d.clips.length === 10 && d.words.length > 100);
+  assert.ok(d.hook.length >= 2 && d.clips.length === spec.beats.length && d.captions.length > 30);
   assert.equal(d.totalFrames, d.endCard.f1);
 });

@@ -1,16 +1,16 @@
 ---json
-{"id": "ink-short-s01", "type": "creative", "risk": "medium", "repo": "D:/AI-video", "plan_check": "docs/briefs/ink-short-s01.plan_check.md", "gates": ["python tools/tsc_in_worktree.py", "python -m pytest -q tests/test_ink_short.py", "node --test tests/ink/inkshort.test.mjs tests/ink/v11b.test.mjs tests/ink/v11b-chip.test.mjs"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v10/**", "engine/ink/parts/shots_v11b/**", "engine/ink/parts/cards.tsx", "engine/ink/parts/elements.tsx", "engine/ink/parts/schema.ts", "engine/ink/parts/layouts/**", "engine/ink/ink/**", "engine/ink/rig/**"], "context_files": ["engine/ink/compositions/InkParts.tsx", "engine/ink/compositions/InkProof.tsx", "engine/ink/Root.tsx", "videos/pastly-life/01-eiffel-ink/shorts/s01-sold-twice/spec.json", "videos/pastly-life/01-eiffel-ink/assets/ink60full/words/p01.json", "tests/test_ink_short.py", "tests/ink/inkshort.test.mjs"]}
+{"id": "ink-short-s01", "type": "creative", "risk": "medium", "repo": "D:/AI-video", "plan_check": "docs/briefs/ink-short-s01.plan_check.md", "gates": ["python tools/tsc_in_worktree.py", "python -m pytest -q tests/test_ink_short.py", "node --test tests/ink/inkshort.test.mjs tests/ink/v11b.test.mjs tests/ink/v11b-chip.test.mjs"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v10/**", "engine/ink/parts/shots_v11b/**", "engine/ink/parts/cards.tsx", "engine/ink/parts/elements.tsx", "engine/ink/parts/schema.ts", "engine/ink/parts/layouts/**", "engine/ink/ink/**", "engine/ink/rig/**", "engine/ink/compositions/InkProof.tsx"], "context_files": ["engine/ink/compositions/InkParts.tsx", "engine/ink/compositions/InkProof.tsx", "engine/ink/Root.tsx", "videos/pastly-life/01-eiffel-ink/shorts/s01-sold-twice/spec.json", "videos/pastly-life/01-eiffel-ink/assets/ink60full/words/p01.json", "tests/test_ink_short.py", "tests/ink/inkshort.test.mjs"]}
 ---
 # Goal
 Make the first YouTube Short for Pastly Life ep01 ("he sold the Eiffel Tower twice") as a 1080x1920, 30 fps
 Remotion composition `InkShortEp01S01`. It re-plays the finished ep01 cut (composition `InkEp01V11B`) beat by
-beat: the planner picked 10 voice-over beats (`spec.json` `beats`); each beat plays its full ep01 timeline window
+beat: the planner picked 13 voice-over beats (`spec.json` `beats`); each beat plays its full ep01 timeline window
 (pictures AND voice), back to back, then a short end card. No new art, no new voice-over.
 
 Why this shape (lessons from our earlier short-form work, brain `research/channels/2026-11-09-money-plan.md`):
 a Short is a funnel to the long video, so the hook must land in the first 2-3 s (big header from frame 0),
-the Short must pay something off on its own (the "why nobody called the police" shame reason, beats b53-b56),
-and it ends on an open question that points to the full video (b59 cliffhanger + end card).
+the Short must pay something off on its own (the "why nobody called the police" shame reason, beats b51-b56: he fled, waited for headlines, none came, because the victim had paid a bribe),
+and it ends on an open question that points to the full video (b57-b59: he did it again, this time a dealer went to the police, he fled that night; end card "WHAT HAPPENED NEXT?", which the full video answers).
 
 # Files
 - `tools/ink/make_short.py` (new): `build(spec_path) -> dict` + CLI `python tools/ink/make_short.py <spec.json>`
@@ -20,39 +20,50 @@ and it ends on an open question that points to the full video (b59 cliffhanger +
   `videos/pastly-life/01-eiffel-ink/shorts/s01-sold-twice/spec.json`; commit the generated file).
 - `engine/ink/compositions/InkShort.tsx` (new): the 9:16 composition.
 - `engine/ink/compositions/InkParts.tsx`: export `EP01_V11B_PARTS` (add `export`; change nothing else).
-- `engine/ink/compositions/InkProof.tsx`: add `export` to `ORANGE` (it is module-private today; change nothing else).
 - `engine/ink/Root.tsx`: register `InkShortEp01S01`.
 
 # Steps
 1. **Data tool** (`make_short.py`, contract = `tests/test_ink_short.py`, read it first). Output keys:
    `id`, `fps` (from timeline_full.json), `hook` and `vo` and `music` (copied from spec),
-   `clips: [{beat, src0, len, dst0}]` where `src0`/`len` = the beat's `start`/`dur` in
-   `<episode_assets>/timeline_full.json` and `dst0` = running sum,
-   `words: [{w, f0, f1}]` = every word in `<episode_assets>/words/*.json` (files in sorted name order, words in file
-   order) whose `beat` is in the spec, each shifted by its clip's `dst0 - src0`,
+   `clips: [{beat, src0, len, dst0}]` where `src0` = the beat's `start` in `<episode_assets>/timeline_full.json`,
+   `len = max(dur, last word f1 of that beat - start)` (a few beats' last word runs 1-3 frames past the beat
+   window; stretching keeps the word, cutting it would clip speech) and `dst0` = running sum,
+   `captions: [{beat, f0, f1, words: [{w, f0, f1}]}]`: take every word in `<episode_assets>/words/*.json` (files in
+   sorted name order, words in file order) whose `beat` is in the spec, shift each by its clip's `dst0 - src0`,
+   then group greedily: a group takes up to `spec.captions.max_words` words and closes early after a word ending
+   in `.`, `?` or `!` or when the next word is in a different beat (groups never cross a cut or a sentence).
+   Group `f0` = first word's `f0`; group `f1` = next group's `f0` when that group is in the same beat and starts
+   less than `spec.captions.hold_gap_frames` after this group's last word `f1`, else this group's last word `f1`.
+   (The aligner sometimes overlaps words by a few frames, so a held group can end before its last word's `f1`;
+   that is intended: the next group wins.) The contract test reads both values from the spec; do not retype them.
    `endCard: {f0, f1, lines}` with `f0` = end of the last clip and `f1 = f0 + round(seconds * fps)`,
    `totalFrames = endCard.f1`.
 2. **Composition** `InkShort.tsx`: a generic `InkShort: React.FC<{data: ShortData; parts: Part[]}>` plus
    `export const InkShortEp01S01` (binds `EP01_V11B_PARTS` + the imported `../parts/shorts/ep01-s01.json`) and
    `export const INK_SHORT_EP01_S01_FRAMES = data.totalFrames`. Layers, top to bottom of the frame:
    - **Background**: `PAPER` full frame (InkParts brings its own boil filter defs).
-   - **Scene** (middle): for each clip, `<Sequence from={dst0} durationInFrames={len}>` containing a
+   - **Scene** (middle): a viewport `SHORT_W x SCENE_H` at top `SCENE_TOP`, `overflow: hidden`, holding a stage
+     wrapper `div` with `width: STAGE_W, height: STAGE_H, transform: scale(SCALE), transformOrigin: '0 0'` and
+     `position: relative` (InkParts mixes percentage `AbsoluteFill` layers with fixed 1920x1080 SVGs, so it needs a
+     real 1920x1080 box to lay out in). Inside the wrapper, for each clip, `<Sequence from={dst0} durationInFrames={len}>` containing a
      `<Sequence from={-src0}>` that renders `<InkParts parts={parts}/>` (so episode frame `src0 + t` shows at
-     short frame `dst0 + t`; InkParts' own Sequences use absolute episode frames). The 1920x1080 stage is
-     scaled by `SCALE = SHORT_W / STAGE_W` (1080/1920 = 0.5625, full width, nothing cropped: cards keep their
-     edge text) and its top sits at `SCENE_TOP`. Clip the scene box with `overflow: hidden`.
-   - **Hook header** (above the scene, visible from frame 0 to the end card, no fade-in: the hook must be readable
-     on frame 0): `data.hook` lines stacked, centred, `FONT`, `INK`, the line with `color: 'orange'` in the
-     same orange the ink parts use (import `ORANGE` from InkProof, do not retype the hex), with the same keyline style
+     short frame `dst0 + t`; InkParts' own Sequences use absolute episode frames). `SCALE = SHORT_W / STAGE_W`
+     (full width, nothing cropped: cards keep their edge text). Planner decision: the scene stays full width even
+     though its right edge passes under the Shorts button column (standard for a 16:9 reframe; shrinking to
+     `SAFE_W` would make the art 26% smaller); the planner checks it on stills.
+   - **Hook header** (above the scene, visible for `0 <= frame < endCard.f0`, no fade-in: the hook must be readable
+     on frame 0; it is gone from `endCard.f0` on, the end card replaces it): `data.hook` lines stacked, centred, `FONT`, `INK`, the line with `color: 'orange'` in the
+     same orange the ink parts use (import `ORANGE` from InkProof, already exported there; do not retype the hex), with the same keyline style
      InkParts gives accent words (`WebkitTextStroke` + `paintOrder`).
-   - **Captions** (below the scene): the current word group from `data.words`: groups of at most
-     `CAPTION_WORDS = 3` consecutive words; the group shows from its first word's `f0` to its last word's `f1`
-     (hold until the next group starts if the gap is under 10 frames, else hide); the word being spoken
+   - **Captions** (below the scene): the group from `data.captions` with `f0 <= frame < f1` (grouping and
+     timing are already decided in the data; do not regroup); the word being spoken
      (`f0 <= frame < f1`) is orange, the rest `INK`. Uppercase, `FONT`, one line, shrink the font size to fit
      `SAFE_W` if the group is too wide (measure, do not guess: estimate width as chars * size * a named
      glyph-width ratio, or use a fit loop).
    - **End card** (`endCard.f0`..`f1`): the scene and captions stop; `data.endCard.lines` centred in the
-     middle of the frame in the hook style; fade in over 8 frames.
+     safe rectangle (x `UI_RIGHT`..`SHORT_W - UI_RIGHT`, y `UI_TOP`..`SHORT_H - UI_BOTTOM`) in the hook style,
+     each line font-fitted on its own to `SAFE_W` (width estimate includes stroke), the stack's height
+     (sizes x line height) checked against the safe rectangle height; fade in over a named `END_FADE` frames.
    - **Audio**: per clip `<Sequence from={dst0} durationInFrames={len}><Audio src={staticFile(data.vo)}
      trimBefore={src0} .../></Sequence>` (Remotion 4.0.539: use `trimBefore`/`trimAfter`; `startFrom`/`endAt`
      are the deprecated names). Music: one `<Audio src={staticFile(data.music.src)} volume={data.music.volume}/>`
@@ -65,7 +76,9 @@ and it ends on an open question that points to the full video (b59 cliffhanger +
    video link) and the right `UI_RIGHT = 140` px (like/comment/share column); `SAFE_W = SHORT_W - 2 * UI_RIGHT`
    so text stays centred. Place the scene so its centre is at `(UI_TOP + (SHORT_H - UI_BOTTOM)) / 2`; the header
    fills `UI_TOP`..scene top, captions sit in the band between scene bottom and `SHORT_H - UI_BOTTOM`.
-   Hook font size: as large as fits `SAFE_W` and the header band (fit loop or the same width estimate).
+   Hook font size: one size for all hook lines (the widest line decides), as large as fits `SAFE_W` and the
+   header band height (lines x size x line height + stroke). Use one `fitSize(text, maxW)` helper for hook,
+   captions and end card.
 4. **Root.tsx**: `<Composition id="InkShortEp01S01" component={InkShortEp01S01} width={1080} height={1920}
    fps={30} durationInFrames={INK_SHORT_EP01_S01_FRAMES}/>`.
 5. Run the CLI to generate `engine/ink/parts/shorts/ep01-s01.json`, then the gates.
@@ -73,7 +86,8 @@ and it ends on an open question that points to the full video (b59 cliffhanger +
 # Done when
 - All gates pass: `python tools/tsc_in_worktree.py`, `python -m pytest -q tests/test_ink_short.py`,
   `node --test tests/ink/inkshort.test.mjs tests/ink/v11b.test.mjs tests/ink/v11b-chip.test.mjs`.
-- `InkEp01V11B` is unchanged apart from the added `export` keyword (diff of InkParts.tsx is that one word).
+- `InkEp01V11B` is unchanged apart from the added `export` keyword (diff of InkParts.tsx is that one word);
+  InkProof.tsx is not touched.
 - No hex colours, font names or pixel sizes are retyped in InkShort.tsx where InkProof/InkParts/elements already
   export one; every new number sits in the constants block with its derivation.
 - Work only inside the repo. Do not render video (assets like the wav/mp3 are not in the worktree); the planner
