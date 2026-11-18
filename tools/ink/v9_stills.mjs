@@ -15,9 +15,14 @@ for (let i = 3; i <= 24; i++) {
   p.shots.forEach((s, k) => { if (k % nth === 0) frames.push([`p${String(i).padStart(2, '0')}_${k}`, s.f1 - TAIL]); });
 }
 const serveUrl = await bundle({entryPoint: path.resolve('engine/ink/index.ts'), publicDir: path.resolve('videos/pastly-life/01-eiffel-ink/assets')});
-const composition = await selectComposition({serveUrl, id: 'InkEp01Full'});
-for (const [name, frame] of frames) {
-  await renderStill({serveUrl, composition, frame, output: path.join(outDir, `${name}_${frame}.jpg`), imageFormat: 'jpeg', jpegQuality: 70, scale: 0.5});
-  process.stdout.write(`${name}@${frame} `);
+// Remotion never deletes a bundle (~600 MB) from %TEMP%; 47 piled up by 2026-11-18 (~17 GB on C:). Always remove it.
+try {
+  const composition = await selectComposition({serveUrl, id: 'InkEp01Full'});
+  for (const [name, frame] of frames) {
+    await renderStill({serveUrl, composition, frame, output: path.join(outDir, `${name}_${frame}.jpg`), imageFormat: 'jpeg', jpegQuality: 70, scale: 0.5});
+    process.stdout.write(`${name}@${frame} `);
+  }
+  console.log(`\n${frames.length} stills`);
+} finally {
+  fs.rmSync(serveUrl, {recursive: true, force: true});
 }
-console.log(`\n${frames.length} stills`);

@@ -81,6 +81,9 @@ def test_ignored_dirs_are_never_tracked():
 DRAFT_SUBDIRS = {"current", "versions", "previews"}  # change together with ARCHITECTURE.md '## Practices' output line
 
 
+FULL_CUT = re.compile(r"\d+-v[0-9]+(\.[0-9]+)?[A-Z]?[0-9]*\.mp4")
+
+
 def test_output_dirs_follow_the_layout():
     bad = [f"top-level out/ exists: {p}" for p in [ROOT / "out"] if p.exists()]
     for draft in ROOT.glob("videos/*/*/draft"):
@@ -94,4 +97,9 @@ def test_output_dirs_follow_the_layout():
         for sub in DRAFT_SUBDIRS:
             if (draft / sub).is_dir():
                 bad += [f"{p}: only .mp4 in {sub}/" for p in (draft / sub).iterdir() if p.suffix != ".mp4"]
+        # Zen 2026-11-18: versions/ and current/ hold FULL cuts only ("01-v11B3.mp4"); share/lowres/partial -> previews/.
+        for sub in ("versions", "current"):
+            if (draft / sub).is_dir():
+                bad += [f"{p}: {sub}/ is full cuts only (NN-vX.mp4); share/lowres/partial -> previews/"
+                        for p in (draft / sub).glob("*.mp4") if not FULL_CUT.fullmatch(p.name)]
     assert not bad, "\n".join(bad)
