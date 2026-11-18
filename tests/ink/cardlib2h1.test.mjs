@@ -17,7 +17,7 @@ const SCALE_SHOT = 12; // 2h1 appends this shot
 const MIN_PARTS = {face: 6, man: 6}; // face: head, 2 ears, hair, eyes, nose, smile; man: head, body, legs, hat, tie, buttons
 const ICONS = 'engine/ink/parts/icons.tsx';
 const iconCase = (src, name) => {
-  const m = src.match(new RegExp(`case '${name}':([\s\S]*?)(?=case '|default:)`));
+  const m = src.match(new RegExp(String.raw`case '${name}':([\s\S]*?)(?=case '|default:)`));
   assert.ok(m, `icons.tsx has no case '${name}'`);
   return m[1];
 };
