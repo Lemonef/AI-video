@@ -8,10 +8,10 @@ Add ONE new doodle icon, `chair`, and show it inside a real layout: a new demo2 
 fills the icon box, reads at a glance at 160 px.
 
 # Files
-- EDIT `engine/ink/parts/icons.tsx` - add `'chair'` to `IconName` and ONE new `case 'chair':` (art +
-  highlight + break) placed before `default:`. Every other line stays byte-identical (the face and man
+- EDIT `engine/ink/parts/icons.tsx` - add 'chair' to IconName and ONE new case 'chair': (art +
+  highlight + break) placed before default:. Every other line stays byte-identical (the face and man
   cases from job 2h1-fix included).
-- EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND one shot (index 13) and raise `f1` from 1170 to
+- EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND one shot (index 13) and raise f1 from 1170 to
   1260. Shots 0-12 stay byte-identical.
 
 Nothing else changes.
