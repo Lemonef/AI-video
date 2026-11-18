@@ -22,7 +22,7 @@ Full story (and what happened next) in the related video.
 
 ## Pinned comment
 ```
-Part 2 is the full video: how he did it, who he scammed next (Al Capone), and how it ended. Tap the related video link under the title.
+Full story in the long video: how he pulled it off, who he conned next (Al Capone), and how it ended. Tap the video link at the bottom of this Short.
 ```
 
 ## Thumbnail
