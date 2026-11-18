@@ -9,7 +9,7 @@ outline weight, chunky marker fill, one paper glint, reads clearly at 160 px.
 
 # Files
 - EDIT `engine/ink/parts/icons.tsx` - add the two names face and man to the END of the IconName union and one
-  `case` each in DoodleIcon's switch, placed after `crown` and before `default`. Nothing else in the
+  case each in the DoodleIcon switch, placed after crown and before default. Nothing else in the
   file changes.
 - EDIT `engine/ink/parts/cardlib/demo2.json` - in shot 11 change ONLY odd.icon from badge to
   face; APPEND one shot (index 12) and raise f1 to 1170. Shots 0-10 stay byte-identical.
