@@ -22,9 +22,9 @@ Rendered stills of demo2 (CardLibrary2 frames 530, 710) show:
 - EDIT `engine/ink/parts/layouts/mapLayout.ts` - the europe coast, the projection, the label placement.
 - EDIT `engine/ink/parts/cardlib/demo2.json` - only the europe map shot's from/to x/y (labels,
   timing and every other shot unchanged).
-- EDIT `engine/ink/parts/layouts/map.tsx` - ONLY if the new label fields need it; otherwise leave it.
 
-Nothing else changes. Keep every existing export name of mapLayout.ts and every timing value it returns.
+Nothing else changes. The map renderer (map.tsx) already passes label x / y / anchor straight to
+`Text`, so it needs no edit: leave it untouched. Keep every existing export name of mapLayout.ts and every timing value it returns.
 You may ADD exports and ADD fields.
 
 # Contract
