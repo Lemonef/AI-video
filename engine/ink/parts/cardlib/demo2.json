@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 1260,
+  "f1": 1350,
   "shots": [
     {
       "f0": 0,
@@ -284,6 +284,21 @@
           "label": "A SEAT",
           "at": 1176,
           "step": 18
+        }
+      ]
+    },
+    {
+      "f0": 1260,
+      "f1": 1350,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "split",
+          "step": 12,
+          "left": {"icon": "arrow", "label": "HONEST"},
+          "right": {"icon": "bentarrow", "label": "CROOKED"},
+          "vs": "VS",
+          "at": 1266
         }
       ]
     }

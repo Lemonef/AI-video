@@ -1,7 +1,7 @@
 import React from 'react';
 import {INK, PAPER, GREEN, RED, ORANGE, LINE} from '../compositions/InkProof';
 
-export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair';
+export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair' | 'arrow' | 'bentarrow';
 export const DOODLE = {
   yellow: '#E8C15A', // muted gold marker
   blue: '#7FA6C9', // muted blue marker
@@ -90,6 +90,12 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
     case 'chair':
       art = <><path fill={base(DOODLE.brown)} d="M-43 1 L-31 0 L-33 69 L-43 70Z M39 -2 L50 -1 L56 68 L46 70Z"/><path fill={base(DOODLE.brown)} d="M-45 5 L-49 -87 Q-45 -93 -36 -91 L-31 5Z M32 2 L28 -89 Q34 -94 41 -90 L45 3Z"/><path fill={base(DOODLE.brown)} d="M-48 -88 Q-7 -97 40 -90 L41 -75 Q-3 -82 -47 -73Z M-46 -61 Q-6 -67 42 -61 L42 -50 Q-3 -55 -45 -49Z M-44 -35 Q-4 -40 43 -35 L44 -24 Q-1 -29 -43 -23Z"/><path fill={base(DOODLE.brown)} d="M-58 17 L-46 19 L-49 92 L-59 91Z M44 19 L57 16 L62 90 L51 92Z"/><path fill={base(DOODLE.brown)} d="M-53 59 Q-3 63 55 58 L56 66 Q1 71 -54 67Z"/><path fill={base(DOODLE.brown)} d="M-41 -5 Q0 -9 43 -5 L64 15 Q8 24 -64 18Z"/><path fill={INK} fillOpacity={0.25} d="M-64 18 Q5 24 64 15 L63 24 Q6 33 -63 27Z"/><path fill="none" d="M-32 4 Q-8 1 16 4 M-16 12 Q12 15 35 9"/></>;
       highlight = 'M-32 -85 Q-20 -88 -9 -87'; break;
+    case 'arrow':
+      art = <><path fill={base(DOODLE.blue)} d="M-88 -16 Q-40 -19 30 -16 L28 -44 L90 0 L28 44 L30 16 Q-40 19 -86 16 Q-92 0 -88 -16 Z"/><path fill="none" d="M-99 -40 Q-82 -42 -64 -40 M-99 40 Q-82 42 -64 40"/></>;
+      highlight = 'M-70 -9 Q-40 -11 -10 -10'; break;
+    case 'bentarrow':
+      art = <><path fill={base(DOODLE.yellow)} d="M-97 -61 L-39 37 L0 -18 L29 32 L14 41 L70 69 L74 7 L59 16 L4 -82 L-37 -25 L-67 -79 Z"/><path fill="none" d="M46 -96 Q58 -98 68 -94 M60 -72 Q72 -74 82 -70"/></>;
+      highlight = 'M-74 -58 L-38 0 L2 -42 L30 4'; break;
     default: throw new Error(`Unknown icon name: ${name}`);
   }
   if (!Number.isFinite(size) || size <= 0) throw new Error(`Icon ${name}: size must be positive and finite`);
