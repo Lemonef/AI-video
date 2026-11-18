@@ -33,31 +33,46 @@ Part 2 is the full video: how he did it, who he scammed next (Al Capone), and ho
 Victor Lustig, Eiffel Tower scam, con man, history, Eiffel Tower sold, Al Capone, true crime history, scam history
 ```
 
-## Full YT Studio checklist (Studio order)
-| Field | Set |
+## YT Studio checklist - exact screen order (Shorts upload, checked vs Zen's screenshots 2026-11-19)
+### Step 1 - Details
+| # | Field | Set |
+|---|---|---|
+| 1 | Title | replace filename "s01 sold twice" with title above |
+| 2 | Description | paste description above |
+| 3 | Thumbnail | Upload file -> thumb_s01_sold_twice.jpg |
+| 4 | Playlists | Pastly Life playlist if it exists, else skip |
+| 5 | Audience | No, it's not made for kids |
+| 6 | Age restriction (if shown) | No |
+| 7 | Paid promotion | No, my video doesn't include paid promotion |
+| 8 | Brand partnerships | skip |
+| 9 | AI use | No (ink cartoon: no real person faked, no realistic scene, music not the focus) |
+| 10 | Collaboration | skip |
+| 11 | Automatic chapters / places / concepts | leave checked |
+| 12 | Tags | paste tags above |
+| 13 | Video language | English |
+| 14 | Caption certification | None |
+| 15 | Recording date / location | None |
+| 16 | License | Standard YouTube License |
+| 17 | Allow embedding | checked |
+| 18 | Publish to subscriptions feed + notify | checked |
+| 19 | Shorts remixing | Allow video and audio remixing |
+| 20 | Category | Education |
+| 21 | Type / Problems / Academic system / Level / Exam | leave empty (None) |
+| 22 | Comments | On |
+| 23 | Moderation | Basic |
+| 24 | Who can comment | Anyone |
+| 25 | Sort by | Top |
+| 26 | Show how many viewers like this | checked |
+### Step 2 - Video elements
+| # | Field | Set |
+|---|---|---|
+| 27 | Related video | Add -> Pastly Life ep01 (needs ep01 live) |
+| 28 | Subtitles | skip (captions burned in) |
+### Step 3 - Checks
+| 29 | wait for "No issues found" -> Next |
 |---|---|
-| Title | as above |
-| Description | as above |
-| Thumbnail | Upload file -> thumb_s01_sold_twice.jpg |
-| Playlists | Pastly Life playlist if it exists, else skip |
-| Audience | No, it's not made for kids |
-| Age restriction | No, don't restrict |
-| Show more > Paid promotion | UNCHECKED |
-| Altered content | No (ink drawings, not realistic people) |
-| Automatic chapters / places / concepts | leave default (checked) |
-| Tags | as above |
-| Video language | English |
-| Caption certification | None |
-| Recording date / location | skip |
-| License | Standard YouTube License |
-| Allow embedding | CHECKED |
-| Publish to subscriptions feed and notify | CHECKED |
-| Shorts remixing | Allow video and audio remixing |
-| Category | Education |
-| Comments | On; Hold potentially inappropriate for review; Sort by Top |
-| Show how many viewers like this | CHECKED |
-| Related video | Pastly Life ep01 (Eiffel Tower long video) |
-| Video elements | Shorts have no end screen / cards -> Next |
-| Checks | wait for "No issues found" -> Next |
-| Visibility | Public (or Schedule) |
-| After publish | post pinned comment, then ... > Pin |
+### Step 4 - Visibility
+| # | Field | Set |
+|---|---|---|
+| 30 | Save or publish | Public, or Schedule (after ep01 is live) |
+| 31 | After publish | post pinned comment, then ... > Pin |
