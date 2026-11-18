@@ -8,12 +8,12 @@ path vs a crooked one" beat). Same finish as batch 1's best icons (tower, hat, m
 weight, chunky marker fill, one paper glint, fills the icon box, reads at a glance at 160 px.
 
 # Files
-- EDIT `engine/ink/parts/icons.tsx` - add `| 'arrow' | 'bentarrow'` to IconName right after 'chair', and
+- EDIT engine/ink/parts/icons.tsx - add | 'arrow' | 'bentarrow' to IconName right after 'chair', and
   TWO new cases ('arrow', then 'bentarrow'), each art + highlight + break, placed after the chair case and
   before default:. Every other line stays byte-identical (face, man and chair included; the shared
-  wrapper `<g>`, base() and the switch too: no opacity, transform or conditional anywhere outside the two
+  wrapper <g>, base() and the switch too: no opacity, transform or conditional anywhere outside the two
   new cases - the test hashes the rest against main).
-- EDIT `engine/ink/parts/cardlib/demo2.json` - APPEND one shot (index 14) and raise f1 from 1260 to
+- EDIT engine/ink/parts/cardlib/demo2.json - APPEND one shot (index 14) and raise f1 from 1260 to
   1350. Shots 0-13 stay byte-identical and the top level keeps exactly part, f0, f1, shots.
 
 Nothing else changes.
