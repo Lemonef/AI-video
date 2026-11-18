@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {fitText} from '@remotion/layout-utils';
 import {FONT, INK, LINE, ORANGE, PAPER} from './InkProof';
 import {EP01_V11B_PARTS, InkParts} from './InkParts';
 import type {Part} from '../parts/schema';
@@ -19,12 +20,12 @@ const HEADER_H = SCENE_TOP - UI_TOP;
 const CAPTION_TOP = SCENE_TOP + SCENE_H;
 const CAPTION_H = SHORT_H - UI_BOTTOM - CAPTION_TOP;
 const LINE_HEIGHT = 1.12; // Matches InkProof's hand-lettered Words line spacing.
-const GLYPH_WIDTH_RATIO = 0.75; // Conservative uppercase glyph advance estimate, including spaces.
 const KEYLINE_W = Math.round(LINE * 2 / 3); // Same accent outline as InkParts.
 const KEYLINE = {WebkitTextStroke: `${KEYLINE_W}px ${INK}`, paintOrder: 'stroke fill'} as const;
 const TEXT_WEIGHT = 700; // Same hand-lettered weight as InkProof Words.
 const END_FADE = 12; // 0.4 s at the composition's 30 fps.
 const MUSIC_FADE = 30; // Last second of the end card.
+const CAPTION_LINES = 2; // Caption band (CAPTION_H) holds two lines; one line made long groups tiny.
 
 type TextLine = {text: string; color?: string};
 type Word = {w: string; f0: number; f1: number};
@@ -36,9 +37,22 @@ export type ShortData = {
   endCard: {f0: number; f1: number; lines: TextLine[]}; totalFrames: number;
 };
 
-// Reserve both edges of the stroke as well as estimated glyph advances.
-const fitSize = (text: string, maxW: number) =>
-  (maxW - KEYLINE_W * 2) / Math.max(text.toUpperCase().length * GLYPH_WIDTH_RATIO, 1);
+// Measured fit (canvas metrics of the real font, uppercase, same weight), minus both stroke edges.
+const fitSize = (text: string, maxW: number) => fitText({
+  text, withinWidth: maxW - KEYLINE_W * 2, fontFamily: FONT, fontWeight: TEXT_WEIGHT,
+  textTransform: 'uppercase', validateFontIsLoaded: false,
+}).fontSize;
+// Largest uniform size at which `words` fit SAFE_W on at most `lines` lines (tries every split point).
+// Greedy browser wrapping at this size then also needs at most `lines` lines (greedy minimises line count).
+const bestSplitSize = (words: string[], lines: number): number => {
+  const whole = fitSize(words.join(' '), SAFE_W);
+  if (lines <= 1 || words.length <= 1) return whole;
+  let best = whole;
+  for (let i = 1; i < words.length; i++) {
+    best = Math.max(best, Math.min(fitSize(words.slice(0, i).join(' '), SAFE_W), bestSplitSize(words.slice(i), lines - 1)));
+  }
+  return best;
+};
 const textStyle: React.CSSProperties = {
   fontFamily: FONT, fontWeight: TEXT_WEIGHT, lineHeight: LINE_HEIGHT,
   textAlign: 'center', whiteSpace: 'nowrap', textTransform: 'uppercase', color: INK,
@@ -54,6 +68,14 @@ export const InkShort: React.FC<{data: ShortData; parts: Part[]}> = ({data, part
     ...data.hook.map(line => fitSize(line.text, SAFE_W)),
     (HEADER_H - KEYLINE_W * 2) / (data.hook.length * LINE_HEIGHT),
   );
+  // One caption size for the whole Short so size never jumps between groups. Each group may wrap to
+  // CAPTION_LINES lines: its size is its best split (largest size at which every line fits SAFE_W); the
+  // tightest group decides. Capped by the band height and by the hook, which stays the headline.
+  const captionSize = React.useMemo(() => Math.min(
+    ...data.captions.map(g => bestSplitSize(g.words.map(w => w.w), CAPTION_LINES)),
+    (CAPTION_H - KEYLINE_W * 2) / (CAPTION_LINES * LINE_HEIGHT),
+    hookSize,
+  ), [data, hookSize]);
   // Each end-card line fits independently, then the whole stack fits vertically.
   const endSizes = data.endCard.lines.map(line => fitSize(line.text, SAFE_W));
   const endHeight = endSizes.reduce((sum, size) => sum + size * LINE_HEIGHT, 0);
@@ -70,8 +92,8 @@ export const InkShort: React.FC<{data: ShortData; parts: Part[]}> = ({data, part
       <div style={{...textStyle, position: 'absolute', left: UI_RIGHT, top: UI_TOP, width: SAFE_W, height: HEADER_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', fontSize: hookSize}}>
         {data.hook.map((line, i) => <div key={i} style={lineStyle(line)}>{line.text}</div>)}
       </div>
-      {caption && <div style={{...textStyle, position: 'absolute', left: UI_RIGHT, top: CAPTION_TOP, width: SAFE_W, height: CAPTION_H, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: Math.min(fitSize(caption.words.map(w => w.w).join(' '), SAFE_W), (CAPTION_H - KEYLINE_W * 2) / LINE_HEIGHT)}}>
-        <div>{caption.words.map((word, i) => <React.Fragment key={i}>{i > 0 && ' '}<span style={word.f0 <= frame && frame < word.f1 ? {color: ORANGE, ...KEYLINE} : undefined}>{word.w}</span></React.Fragment>)}</div>
+      {caption && <div style={{...textStyle, position: 'absolute', left: UI_RIGHT, top: CAPTION_TOP, width: SAFE_W, height: CAPTION_H, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: captionSize}}>
+        <div style={{whiteSpace: 'normal', textWrap: 'balance'}}>{caption.words.map((word, i) => <React.Fragment key={i}>{i > 0 && ' '}<span style={word.f0 <= frame && frame < word.f1 ? {color: ORANGE, ...KEYLINE} : undefined}>{word.w}</span></React.Fragment>)}</div>
       </div>}
     </>}
     {frame >= data.endCard.f0 && frame < data.endCard.f1 && <div style={{...textStyle, position: 'absolute', left: UI_RIGHT, top: UI_TOP, width: SAFE_W, height: SAFE_H, display: 'flex', flexDirection: 'column', justifyContent: 'center', opacity: interpolate(frame - data.endCard.f0, [0, END_FADE], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}}>
