@@ -1,7 +1,7 @@
 {
   "part": "cardlib2",
   "f0": 0,
-  "f1": 900,
+  "f1": 990,
   "shots": [
     {
       "f0": 0,
@@ -214,6 +214,25 @@
           "label": "MONEY WINS",
           "at": 816,
           "dur": 20
+        }
+      ]
+    },
+    {
+      "f0": 900,
+      "f1": 990,
+      "bg": {"card": true},
+      "els": [
+        {
+          "t": "ring",
+          "x": 960,
+          "y": 470,
+          "r": 260,
+          "icon": "hat",
+          "n": 8,
+          "at": 906,
+          "step": 4,
+          "odd": {"angle": 30, "label": "OUTSIDER"},
+          "label": "ONE DOES NOT FIT"
         }
       ]
     }

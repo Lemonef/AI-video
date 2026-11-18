@@ -4,6 +4,7 @@ import {DocElement} from './layouts/doc';
 import {MapElement} from './layouts/map';
 import {TransformElement} from './layouts/transform';
 import {ScaleElement} from './layouts/scale';
+import {RingElement} from './layouts/ring';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Sprite, Tower, Words, Underline, useIn, INK, PAPER, ORANGE, RED, GREEN, TEAL, FONT, LINE} from '../compositions/InkProof';
 import {HAND_RADIUS, scribbleEllipse} from './doodle';
@@ -121,6 +122,7 @@ export const Element: React.FC<Props<El>> = props => {
     case 'map': return <MapElement {...common} el={el}/>;
     case 'transform': return <TransformElement {...common} el={el}/>;
     case 'scale': return <ScaleElement {...common} el={el}/>;
+    case 'ring': return <RingElement {...common} el={el}/>;
     default: throw new Error(`Unknown element type: ${(el as {t: string}).t}`);
   }
 };
