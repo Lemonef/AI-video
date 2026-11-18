@@ -1,6 +1,6 @@
 # Plan check: ink-short-s01
 
-brief-sha256: 46caa21f0ec15cd87f5db0354e8f0157a29305c0585d47341a84edc1dc11b4d6
+brief-sha256: 2ef2e11be1ed5acca0a08a631ecb2bd167d5fdd78b94e212c12e6676e37f8f65
 
 ## Reviewers
 - Codex (gpt-6.1-sol, read-only): VERDICT FIX, 9 points. All checked against the real data.
