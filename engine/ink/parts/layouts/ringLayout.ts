@@ -71,7 +71,7 @@ export const ringLayout = (el: RingEl) => {
   const circleRx = size / 2 + CIRCLE_PAD;
   const circleRy = size / 2 + CIRCLE_PAD;
   const oddLabelAt = odd.at + POP_FRAMES;
-  const oddLabelY = odd.y + size / 2 + SMALL;
+  const oddLabelY = odd.y + circleRy + SMALL; // under the red circle, not just the icon
   const labelAt = el.label !== undefined ? circleEnd : null;
   const labelX = el.x;
   const labelY = el.y + el.r + size / 2 + LABEL_GAP + LABEL;
