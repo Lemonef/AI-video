@@ -5,6 +5,7 @@ import {FONT, INK, LINE, ORANGE, PAPER} from './InkProof';
 import {EP01_V11B_PARTS, InkParts} from './InkParts';
 import type {Part} from '../parts/schema';
 import data from '../parts/shorts/ep01-s01.json';
+import data2 from '../parts/shorts/ep01-s02.json';
 
 // Canvas mirrors Root; source stage is the episode's native canvas.
 const SHORT_W = 1080, SHORT_H = 1920;
@@ -108,3 +109,5 @@ export const InkShort: React.FC<{data: ShortData; parts: Part[]}> = ({data, part
 
 export const INK_SHORT_EP01_S01_FRAMES = data.totalFrames;
 export const InkShortEp01S01: React.FC = () => <InkShort data={data} parts={EP01_V11B_PARTS}/>;
+export const INK_SHORT_EP01_S02_FRAMES = data2.totalFrames;
+export const InkShortEp01S02: React.FC = () => <InkShort data={data2} parts={EP01_V11B_PARTS}/>;

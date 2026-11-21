@@ -1,0 +1,74 @@
+{
+  "_doc": "Short s02 (Al Capone) of ep01. Read by tools/ink/make_short.py -> engine/ink/parts/shorts/ep01-s02.json. Beats are ep01 timeline ids (assets/ink60full/timeline_full.json); each plays its timeline window (stretched to the end of its last spoken word), in this order, back to back. thumb: vertical thumbnail for tools/ink/make_short_thumb.py. captions: group size cap and the hold gap (frames) under which a group stays up until the next one.",
+  "id": "ep01-s02",
+  "episode_assets": "videos/pastly-life/01-eiffel-ink/assets/ink60full",
+  "beats": [
+    "b64",
+    "b65",
+    "b66",
+    "b67",
+    "b68",
+    "b69",
+    "x26",
+    "x27",
+    "b70"
+  ],
+  "hook": [
+    {
+      "text": "HE CONNED"
+    },
+    {
+      "text": "AL CAPONE."
+    },
+    {
+      "text": "AND LIVED.",
+      "color": "orange"
+    }
+  ],
+  "end_card": {
+    "seconds": 2.5,
+    "lines": [
+      {
+        "text": "HE ALSO SOLD THE"
+      },
+      {
+        "text": "EIFFEL TOWER",
+        "color": "orange"
+      },
+      {
+        "text": "FULL STORY BELOW"
+      }
+    ]
+  },
+  "vo": "ink60full/master_v4nomusic.wav",
+  "music": {
+    "src": "ink60full/music_475737.mp3",
+    "volume": 0.12
+  },
+  "captions": {
+    "max_words": 3,
+    "hold_gap_frames": 10
+  },
+  "thumb": {
+    "out": "thumb_s02_capone.jpg",
+    "plate": "capone_desk_low_angle.png",
+    "sprite": "capone_from_below_menace.png",
+    "lines": [
+      [
+        "HE CONNED",
+        "white",
+        0.24
+      ],
+      [
+        "AL CAPONE",
+        "white",
+        0.24
+      ],
+      [
+        "AND LIVED.",
+        "yellow",
+        0.42
+      ]
+    ]
+  }
+}

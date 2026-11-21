@@ -1,5 +1,5 @@
 {
-  "_doc": "Short s01 of ep01. Read by tools/ink/make_short.py -> engine/ink/parts/shorts/ep01-s01.json. Beats are ep01 timeline ids (assets/ink60full/timeline_full.json); each plays its timeline window (stretched to the end of its last spoken word), in this order, back to back. captions: group size cap and the hold gap (frames) under which a group stays up until the next one.",
+  "_doc": "Short s01 of ep01. Read by tools/ink/make_short.py -> engine/ink/parts/shorts/ep01-s01.json. Beats are ep01 timeline ids (assets/ink60full/timeline_full.json); each plays its timeline window (stretched to the end of its last spoken word), in this order, back to back. thumb: vertical thumbnail for tools/ink/make_short_thumb.py. captions: group size cap and the hold gap (frames) under which a group stays up until the next one.",
   "id": "ep01-s01",
   "episode_assets": "videos/pastly-life/01-eiffel-ink/assets/ink60full",
   "beats": [
@@ -49,5 +49,27 @@
   "captions": {
     "max_words": 3,
     "hold_gap_frames": 10
+  },
+  "thumb": {
+    "out": "thumb_s01_sold_twice.jpg",
+    "plate": "tower_low_angle_up.png",
+    "sprite": "lustig_from_below_smug.png",
+    "lines": [
+      [
+        "HE SOLD THE",
+        "white",
+        0.24
+      ],
+      [
+        "EIFFEL TOWER",
+        "white",
+        0.24
+      ],
+      [
+        "TWICE.",
+        "yellow",
+        0.42
+      ]
+    ]
   }
 }
