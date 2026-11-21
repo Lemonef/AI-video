@@ -40,3 +40,4 @@ videos/*/*/assets/wishes*/
 _archive/out-unmapped/
 tools/ink/models/
 
+.tmp/

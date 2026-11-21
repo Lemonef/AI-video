@@ -57,5 +57,9 @@ for text, col, share in lines:
     d.text(((W - (r - l)) // 2 - l, y - t), text, font=f, fill=col, stroke_width=f.size // 12, stroke_fill=BLACK)
     y += (b - t) + gap
 bg.save(OUT, quality=92)
-bg.resize((216, 384), Image.LANCZOS).save(SPEC.parent / 'thumb_phone_preview.jpg', quality=92)
+# phone-size check copy for Claude only: goes to the repo's gitignored .tmp/, never next to the
+# upload file, so the post folder holds exactly one thumbnail (Zen 2026-11-22: "why 2 ... confuse")
+PREVIEW = Path(__file__).resolve().parents[2] / '.tmp' / f'{OUT.stem}_phone_preview.jpg'
+PREVIEW.parent.mkdir(exist_ok=True)
+bg.resize((216, 384), Image.LANCZOS).save(PREVIEW, quality=92)
 print('ok', OUT)
