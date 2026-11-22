@@ -137,7 +137,7 @@ export const BignumElement: React.FC<Props<BignumEl>> = ({el, shotF0}) => {
   const f = useCurrentFrame(), a = delay(el, shotF0);
   if (!Number.isSafeInteger(el.value) || el.value < 0) throw new Error('bignum.value must be a non-negative safe integer');
   if (!Number.isInteger(el.dur) || el.dur <= 0) throw new Error('bignum.dur must be a positive integer');
-  const format = (v: number) => `${el.prefix ?? ''}${Math.round(v).toLocaleString('en-US')}${el.suffix ?? ''}`;
+  const format = (v: number) => `${el.prefix ?? ''}${Math.round(v).toLocaleString('en-US', {useGrouping: el.group ?? true})}${el.suffix ?? ''}`;
   const size = Math.min(BIG_FONT, BIG_FIT / (format(el.value).length * CHAR_WIDTH));
   const p = progress(f, a, a + el.dur), width = format(el.value).length * size * CHAR_WIDTH;
   return <g><Text x={el.x} y={el.y} text={format(el.value * (1 - Math.pow(1 - p, COUNT_EASE)))} size={size} fill={color(el.color)} opacity={progress(f, a, a + BIG_FADE)}/><Draw ink={ORANGE} p={progress(f, a + el.dur, a + el.dur + UNDERLINE_DRAW)} d={`M${el.x - width / 2} ${el.y + size * UNDERLINE_Y} Q${el.x} ${el.y + size * (UNDERLINE_Y + UNDERLINE_BOW)} ${el.x + width / 2} ${el.y + size * UNDERLINE_Y}`}/><Text x={el.x} y={el.y + size * UNDERLINE_Y + LABEL * BIG_LABEL_GAP} text={el.label} opacity={progress(f, a + el.dur, a + el.dur + LABEL_FADE)}/></g>;
