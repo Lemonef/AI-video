@@ -7,8 +7,16 @@
 - [x] Compositions InkEp02Min1Hybrid / InkEp02Min1Straight registered
 - [x] Year card read "1,718" in sheet -> bignum group:false flag (003d1b3); min1 build committed (e9bc39c)
 - [x] Render both -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/draft/previews/ep02_min1_{hybrid,straight}.mp4 (65.7 s / 57.2 s), year card checked 1718, sent (720p share copies) + opened
-- [ ] Zen picks hybrid vs straight (Claude rec: hybrid, no jokes on death beats)
-- [ ] 3 ep02 thumbs; fix bath_gent_shocked outline gap (unused now)
+- [ ] Zen picks hybrid vs straight (Claude rec: hybrid, no jokes on death beats) -- ON HOLD until quality reset passes
+- [ ] 3 ep02 thumbs; fix bath_gent_shocked outline gap (moot if humans go stickman)
+- [x] White halo on sprites (Zen 11-22 "pixelate white outlines"): binary alpha kept blend pixels -> unmix_white_edge, cast re-cut, ring-1 light 67-78% -> 0-0.1%, 21 tests pass (e449d58)
+- [ ] **Min 1 BELOW BAR (Zen 11-22)**: plates not Ink/Beanie level, explain cards far under Ink, characters pasted on plates with no depth, realistic humans look bad, no real photos. SKILL rule 11 side-by-side gate was skipped before render (correction 2026-11-22-ep02-min1-below-bar). Reset:
+  - [ ] Side-by-side sheet: our min-1 frames vs Ink + Beanie frames, same shot kinds, scored on rule-11 anatomy
+  - [ ] All humans = Ink-style stickman (drop bath gent/merchant/farmer sprites)
+  - [ ] PD photo hunt (Wikimedia/LoC: Blackbeard engravings, Bath/Ocracoke maps, QAR wreck artifacts) -> photo beats, no gap >2 min
+  - [ ] Scene shots = character drawn INTO the plate (shared light, contact shadow, foreground occluder, small/turned/cropped), not pasted front-centre -> needs image gen: WAIT Zen OK on spend
+  - [ ] Explain cards rebuilt to Ink anatomy, judged vs Ink still before render
+  - [ ] Re-render min 1 only after side-by-side passes; send sheet with render
 
 ## NOW 2026-11-16 — Pastly Life ink ep01 polish (read first)
 - [x] FINAL render `draft/current/ink_ep01_full.mp4` (p01-p24)
