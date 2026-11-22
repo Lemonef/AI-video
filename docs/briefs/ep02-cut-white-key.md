@@ -1,5 +1,5 @@
 ---json
-{"id":"ep02-cut-white-key","type":"normal","risk":"medium","repo":"D:/AI-video","gates":["python -m pytest tests/test_cut_sprites_white.py -q"],"protected":["tests/**","conftest.py","**/conftest.py","pytest.ini","pyproject.toml","setup.cfg","videos/**","engine/**","tools/ink/check_art.py","tools/ink/integrate_art.py"],"context_files":["tools/ink/cut_sprites.py","tests/test_cut_sprites_white.py"],"shared_context":[]}
+{"id":"ep02-cut-white-key","type":"normal","risk":"low","repo":"D:/AI-video","gates":["python -m pytest tests/test_cut_sprites_white.py -q"],"protected":["tests/**","conftest.py","**/conftest.py","pytest.ini","pyproject.toml","setup.cfg","videos/**","engine/**","tools/ink/check_art.py","tools/ink/integrate_art.py"],"context_files":["tools/ink/cut_sprites.py","tests/test_cut_sprites_white.py"],"shared_context":[]}
 ---
 # Goal
 Add a white-background mode to the sprite-sheet cutter so the ep02 master sheets (pure white background, figures with WHITE heads and gloves inside thick black outlines) can be cut into transparent per-pose PNGs. The default magenta mode must behave exactly as it does now.
