@@ -102,6 +102,8 @@ def RING(t, d, icon, n, odd_label, odd_icon=None, label=None):
 
 
 def SCALE(t, d, left, right, heavy, label=None):
+    # Mirrors engine/ink/parts/layouts/scaleLayout.ts: the renderer throws mid-render on equal icons.
+    assert left[0] != right[0], f'scale left and right must have different icons ({left[0]})'
     e = {'t': 'scale', 'left': {'icon': left[0], 'label': left[1]}, 'right': {'icon': right[0], 'label': right[1]},
          'heavy': heavy, 'at': t + LEAD, 'dur': max(8, min(20, d - LEAD - 30 - TAIL - 2))}
     if label:
@@ -429,7 +431,7 @@ P = {
     'b84': [lambda t, d: S(t, CARD, BN(400, 'POUNDS PROMISED', t + 3, 30)),
             lambda t, d: S(t, SC(S06), W('WAITED 4 YEARS', t + 10, x=R, y=240), cam=PAN(1400, 900))],
     # b85 kept 90, no promotion
-    'b85': [lambda t, d: S(t, CARD, SCALE(t, d, ('coin', 'PROMISED 400'), ('coin', 'KEPT 90'), 'left')),
+    'b85': [lambda t, d: S(t, CARD, SCALE(t, d, ('pen', 'PROMISED 400'), ('coin', 'KEPT 90'), 'left')),
             lambda t, d: S(t, SC(S05), O('NO PROMOTION', t + 8, x=R, y=240), cam=PUSH(1000, 520, 1.15)),
             lambda t, d: S(t, CARD, XO('badge', 'PROMOTION', t + 3, t + 30))],
     # b86 paid four years late; work never changes

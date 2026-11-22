@@ -5,6 +5,8 @@
 - [x] Shots script tools/ink/ep02_full_shots.py (b1-b88, old plain sNN scenes) -> engine/ink/parts/shots_ep02full/full.json, lint OK (186 shots, 92 cards, per-minute split/TF 2-4, icon caps)
 - [x] Composition InkEp02Full registered
 - [ ] Render -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/draft/previews/ep02_full_hybrid.mp4, check stills, send
+  - [x] render 1 crashed @17055: b85 scale coin/coin (renderer bans equal icons); fixed b85 pen/coin + SCALE asserts it; tail 17000-17802 test render clean
+  - [ ] render 2 running (crf 20) -> ffprobe + stills + send
 - [ ] 3 ep02 thumbs (if time)
 
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
