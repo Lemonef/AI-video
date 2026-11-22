@@ -28,7 +28,9 @@ WHITE_SHEETS = [("master_bb.png", 42), ("master_crew.png", 42), ("master_bath.pn
 def _cut(sheet, outdir, want, *extra):
     return subprocess.run(
         [sys.executable, "-I", str(CUT), str(sheet), str(outdir), "p", str(want), *extra],
-        capture_output=True, text=True, timeout=600,
+        # stdin=DEVNULL: with no stdin given, Windows subprocess duplicates the parent's stdin
+        # handle, which is invalid under headless runners (WinError 6, flaky gate 2026-11-22).
+        stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=600,
     )
 
 
