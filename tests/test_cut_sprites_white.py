@@ -39,18 +39,24 @@ def test_white_key_cuts_every_cell(tmp_path, name, want):
     assert "WARN" not in r.stdout, r.stdout
     files = sorted(tmp_path.glob("p*.png"))
     assert len(files) == want
+    white_total = alpha_total = 0
     for f in files:
         a = np.array(Image.open(f))
         assert a.ndim == 3 and a.shape[2] == 4, f"{f.name} not RGBA"
         alpha = a[..., 3]
         # background removed: every corner of the crop is transparent
         assert all(alpha[y, x] == 0 for y, x in [(0, 0), (0, -1), (-1, 0), (-1, -1)]), f.name
-        # white heads / gloves inside the outline stay opaque
+        # white heads / gloves inside the outline stay opaque. Per crop only "some white":
+        # the top-down pose shows just a black hat + two gloves (~1% white), so a per-crop
+        # ratio is unfair; the sheet-wide ratio below catches a cutter that drops interiors.
         white_opaque = ((a[..., :3].min(axis=2) > 235) & (alpha > 0)).sum()
-        assert white_opaque > 0.02 * alpha.size, f"{f.name} lost its white interior"
+        assert white_opaque > 0, f"{f.name} lost its white interior"
+        white_total += white_opaque
+        alpha_total += alpha.size
         # no crop is a thin line (band dividers dropped)
         h, w = alpha.shape
         assert min(h, w) > 40 and max(h, w) / min(h, w) < 6, f"{f.name} looks like a line {w}x{h}"
+    assert white_total > 0.02 * alpha_total, "white interiors lost across the sheet"
 
 
 def test_white_key_row_major_order(tmp_path):
