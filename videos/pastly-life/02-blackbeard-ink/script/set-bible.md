@@ -11,6 +11,10 @@ to the yard; a lantern is head-sized; barrels reach from hip to chest. The hold 
 stoops, head near the beams) and short (about 4 figures long), crates stacked to the beams. Never a giant
 galleon deck, never a long tunnel hold.
 
+## LIGHTING (paste verbatim, Zen 2026-11-22 "why lighting so saturate")
+Realistic night. Main light = cool, pale, diffused moonlight. Lanterns = small, dim, muted amber points, light falls off fast into shadow, never a big warm wash. Most of the frame in soft shadow, detail kept in the darks. AVOID: oversaturated orange, teal-and-orange grade, glowing bloom, neon, stylized color grading, everything evenly lit.
+Target mean HSV saturation <= 0.35 (Beanie 0.235, Ink 0.242; ep01 0.299; v2 scenes measured 0.42-0.64). Post grade for merged scenes: colour x0.45, gamma 1.15, R x0.94 B x1.04 (test D:/AI-video/.tmp/scenes/light_test.jpg).
+
 ## Framing plan (minute 1)
 | Scene | Framing | Location |
 |---|---|---|
