@@ -14,7 +14,11 @@
   - [ ] Side-by-side sheet: our min-1 frames vs Ink + Beanie frames, same shot kinds, scored on rule-11 anatomy
   - [ ] All humans = Ink-style stickman (drop bath gent/merchant/farmer sprites)
   - [ ] PD photo hunt (Wikimedia/LoC: Blackbeard engravings, Bath/Ocracoke maps, QAR wreck artifacts) -> photo beats, no gap >2 min
-  - [ ] Scene shots = character drawn INTO the plate (shared light, contact shadow, foreground occluder, small/turned/cropped), not pasted front-centre -> needs image gen: WAIT Zen OK on spend
+  - [ ] Scene shots = character drawn INTO the plate (shared light, contact shadow, foreground occluder, small/turned/cropped), not pasted front-centre -> Zen OK 11-22 "apply all"; Codex plan quota (no money)
+    - [x] s01 deck party (66a9f66), sent to Zen
+    - [x] briefs s02-s11 + plan_checks (b2fb38d)
+    - [ ] s02-s04 building (pipeline), then s05-s07, s08-s10, s11; eyeball each vs s01 + sheets
+  - [ ] PD photos: moseley_map_1733.jpg OK; bb_engraving_1724 retry (Wikimedia 429)
   - [ ] HUD tracker overlay like Beanie NOISE meter (Zen 11-22 "See" still) -> ep02 survival-odds meter, SKILL rule 12
   - [ ] Explain cards rebuilt to Ink anatomy, judged vs Ink still before render
   - [ ] Re-render min 1 only after side-by-side passes; send sheet with render
