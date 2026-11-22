@@ -13,7 +13,7 @@ galleon deck, never a long tunnel hold.
 
 ## LIGHTING (paste verbatim, Zen 2026-11-22 "why lighting so saturate")
 Realistic night. Main light = cool, pale, diffused moonlight. Lanterns = small, dim, muted amber points, light falls off fast into shadow, never a big warm wash. Most of the frame in soft shadow, detail kept in the darks. AVOID: oversaturated orange, teal-and-orange grade, glowing bloom, neon, stylized color grading, everything evenly lit.
-Target mean HSV saturation <= 0.35 (Beanie 0.235, Ink 0.242; ep01 0.299; v2 scenes measured 0.42-0.64). Post grade for merged scenes: colour x0.45, gamma 1.15, R x0.94 B x1.04 (test D:/AI-video/.tmp/scenes/light_test.jpg).
+Gate (2026-11-22): chroma mean(S*V)/65025 on 400px thumb < 0.16 + small bright-orange share. Old mean-S <= 0.35 dropped (navy sky reads high S). Merged scenes graded PIL Color 0.55 (0.7 borderline), gamma 1.1, R x0.95 B x1.03; all 11 pass (commits 416a856..187e17c).
 
 ## DEPTH + DETAIL (paste verbatim, Zen 2026-11-22 7 reference stills)
 DEPTH: three clear layers. Foreground: one object close to camera, cut off by the frame edge and a little darker. Middle: the action. Background: far shore, sky or a vanishing point. Pack the set with small story props (coiled rope, buckets, nets, crates, a lantern hook, a tankard) so it feels lived in, but leave calm empty space around the main subject. Characters may be small, turned away or cropped. Keep to one muted colour family; the only strong accent is a small red (bandana or a single detail). Every character and object casts a soft contact shadow on the planks.
