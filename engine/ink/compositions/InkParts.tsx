@@ -7,6 +7,7 @@ import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
 import ep02m1Hybrid from '../parts/shots_ep02min1/hybrid.json';
 import ep02m1Straight from '../parts/shots_ep02min1/straight.json';
+import ep02Full from '../parts/shots_ep02full/full.json';
 import v2p01 from '../parts/shots_v2/p01.json';
 import v2p02 from '../parts/shots_v2/p02.json';
 import v3p01 from '../parts/shots_v3/p01.json';
@@ -186,3 +187,7 @@ export const InkEp02Min1Hybrid: React.FC = () => <><InkParts parts={EP02_MIN1_HY
 export const EP02_MIN1_STRAIGHT_PARTS = [ep02m1Straight] as unknown as Part[];
 export const INK_EP02_MIN1_STRAIGHT_FRAMES = EP02_MIN1_STRAIGHT_PARTS[EP02_MIN1_STRAIGHT_PARTS.length - 1].f1;
 export const InkEp02Min1Straight: React.FC = () => <><InkParts parts={EP02_MIN1_STRAIGHT_PARTS}/><Audio src={staticFile('min1-straight/master.wav')}/></>;
+// ep02 Blackbeard full episode, hybrid cut (tools/ink/ep02_full_shots.py); audio under ep02 public dir.
+export const EP02_FULL_PARTS = [ep02Full] as unknown as Part[];
+export const INK_EP02_FULL_FRAMES = EP02_FULL_PARTS[EP02_FULL_PARTS.length - 1].f1;
+export const InkEp02Full: React.FC = () => <><InkParts parts={EP02_FULL_PARTS}/><Audio src={staticFile('full-hybrid/master.wav')}/></>;

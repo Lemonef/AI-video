@@ -1,5 +1,12 @@
 # TODO — the only place live status lives
 
+## NOW 2026-11-23 — ep02 full video (Zen away: "make one full vid today ... after vid done stop")
+- [x] Full audio: 88 beats, Gemini batched TTS + Groq word-timestamp split -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/assets/full-hybrid/master.wav (17803 f)
+- [x] Shots script tools/ink/ep02_full_shots.py (b1-b88, old plain sNN scenes) -> engine/ink/parts/shots_ep02full/full.json, lint OK (186 shots, 92 cards, per-minute split/TF 2-4, icon caps)
+- [x] Composition InkEp02Full registered
+- [ ] Render -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/draft/previews/ep02_full_hybrid.mp4, check stills, send
+- [ ] 3 ep02 thumbs (if time)
+
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
 - [x] White-key cutter merged (pipeline e40283f) + gate stdin fix (57a4b71, 18 passed x3)
 - [x] Cast sprites cut from 3 master sheets, names read off contact sheets (de98d3c, 123 png)
