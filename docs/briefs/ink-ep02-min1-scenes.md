@@ -39,12 +39,16 @@ here spoils the turn). Do not reference it.
    - `PH(name, pos='50% 35%', push=(1.0, 1.08))`: port of `make_v11b_shots.py:40`, but for
      `ink/photos/{name}`; asserts the file exists; returns `{'photo': 'ink/photos/{name}', 'push': [...],
      'pos': pos}`.
-   - Name constants for the eleven keys above (e.g. `S01 = 's01_deck_party'`) instead of string literals
+   - Name constants for the ten scene keys and two photo keys above (e.g. `S01 = 's01_deck_party'`) instead of string literals
      at each call site. Keep `DECK/HOLD/INLET` and `PL` only if still used; delete them if not.
-2. `bg_key` returns `bg.get('plate') or bg.get('photo') or 'card'` (same as `make_v11b_shots.py:602`),
+2. `text_only(shot)` must return True only for a CARD background whose elements are all text
+   (`bg_key(shot['bg']) == 'card' and all(...)`): a painted scene or a photo IS the living picture, so
+   a scene/photo shot with only words, or with no elements, is valid. This is a predicate fix, not a
+   lint constant change.
+3. `bg_key` returns `bg.get('plate') or bg.get('photo') or 'card'` (same as `make_v11b_shots.py:602`),
    and `framing()` returns `'photo'` for a photo background (port the branch from
    `make_v11b_shots.py:630`). Update the module docstring line that says ep02 has no photos.
-3. Background swap, matched by the shot's CURRENT content (works for both cuts; frame starts stay as
+4. Background swap, matched by the shot's CURRENT content (works for both cuts; frame starts stay as
    they are, they come from the timeline):
    | Current shot (plate + elements) | New bg | Camera | Words / tags (keep text, move to) |
    |---|---|---|---|
@@ -54,7 +58,7 @@ here spoils the turn). Do not reference it.
    | HOLD, crew_cower + 'ONLY 2 KINDS' | s04 | zoom (1.0,1.1) as now | O at x=R, y=260 (crew are left) |
    | DECK, crew_thinking + 'STAY TO THE END' | s05 | PULL centred (960,520) | W at x=R, y=220 |
    | (straight only) INLET, bb_arms_crossed + 'TONIGHT' | s02 | PAN | W at x=L, y=240 |
-   | DECK, bb_sit_barrel + 'NOT WORRIED' | s06 | PAN as now, drop origin 70% 60% | W at x=R, y=240 (BB is left) |
+   | DECK, bb_sit_barrel + 'NOT WORRIED' | s06 | PAN as now, drop origin 70% 60% | keep it `O(...)` (orange), move to x=R, y=240 (BB is left) |
    | INLET, crew_lantern + chip OCRACOKE | photo `map`, pos '50% 50%', push (1.0,1.12) | none | chip unchanged |
    | INLET, crew_spyglass (b5 pan) | s07 | PAN(400,1300) as now | none |
    | DECK, crew_sit_drink + bb_drink + crew_laugh (b6 party) | s01, origin '30% 60%' | PUSH on crew (500,620) | none |
@@ -68,7 +72,7 @@ here spoils the turn). Do not reference it.
    Remove every `SP(...)` sprite from these shots. Card shots are untouched. If a "now" camera in the
    table conflicts with a lint, keep the lint green by adjusting that shot's camera, and say so in the
    report.
-4. Meter on every non-card shot, label `'SURVIVAL ODDS'` (the lint needs a non-empty label). Value per
+5. Meter on every non-card shot, label `'SURVIVAL ODDS'` (the lint needs a non-empty label). Value per
    beat, with `from` = the previous meter value so the bar eases between shots (the first meter shot
    has no `from`):
    | Beat | value |
@@ -78,12 +82,12 @@ here spoils the turn). Do not reference it.
    | b5 inlet (map, s07 pan) | 45 |
    | b6 party + toast | 60 |
    | b7 whisper (both shots) | 55 |
-   | b8 GREAT LINE / TREASURE | 50 |
-   | b9 COCOA/COTTON | 50 |
+   | b8 hybrid GREAT LINE / TERRIBLE PLAN | 50 |
+   | b9 TREASURE (straight) / COCOA / COTTON | 50 |
    | b10 MOST FEARED | 45 |
    Put the table in one named dict (beat -> value) and have the shot builders read it; no literal values
    at call sites.
-5. Run `python tools/ink/make_ep02_min1_shots.py`; it must print `OK hybrid` and `OK straight` and exit
+6. Run `python tools/ink/make_ep02_min1_shots.py`; it must print `OK hybrid` and `OK straight` and exit
    0. Lints that may now bite: `FRAMINGS_MIN` (sprites are gone, so `framing()` may return `'object'`
    less often; the photo branch adds `'photo'`), no same background twice in a row (`bg_key` now
    distinguishes scenes and photos), `fit_sprites` (no sprites left on scene shots). Fix content, not
