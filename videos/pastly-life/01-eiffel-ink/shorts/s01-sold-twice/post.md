@@ -1,5 +1,8 @@
 # Short s01 - post pack (draft, Zen posts; Claude never posts)
 
+**After you hit Publish: paste the Pinned comment below, then ... > Pin. (Zen 2026-11-22: missed on s01.)**
+
+
 Video: D:/AI-video/videos/pastly-life/01-eiffel-ink/shorts/s01-sold-twice/s01-sold-twice.mp4
 Related video (Shorts upload screen > "Related video"): Pastly Life ep01 (the Eiffel Tower long video).
 Post it AFTER ep01 is live, so the Related video link exists.
