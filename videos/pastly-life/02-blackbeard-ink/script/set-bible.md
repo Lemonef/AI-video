@@ -19,20 +19,21 @@ Target mean HSV saturation <= 0.35 (Beanie 0.235, Ink 0.242; ep01 0.299; v2 scen
 DEPTH: three clear layers. Foreground: one object close to camera, cut off by the frame edge and a little darker. Middle: the action. Background: far shore, sky or a vanishing point. Pack the set with small story props (coiled rope, buckets, nets, crates, a lantern hook, a tankard) so it feels lived in, but leave calm empty space around the main subject. Characters may be small, turned away or cropped. Keep to one muted colour family; the only strong accent is a small red (bandana or a single detail). Every character and object casts a soft contact shadow on the planks.
 Each scene brief names its own foreground element (see the FG list in the rebrief). Check by eye: a cropped near layer is present.
 
-## Framing plan (minute 1)
-| Scene | Framing | Location |
-|---|---|---|
-| s01 | wide, deck party (kept) | deck |
-| s02 | wide exterior, shore lookout (kept) | shore |
-| s03 | hands insert: crew hands hauling rope + scrub brush | deck close |
-| s04 | medium, hold cower (kept) | hold |
-| s05 | silhouette of a crewman at the rail vs moonlit water | rail |
-| s06 | low-angle medium: Blackbeard on a barrel, 2 crew small behind | deck |
-| s07 | EXTERIOR: sloop seen from the water, tiny toasting figures (scale anchor) | outside view |
-| s08 | tight face close-up: Blackbeard + wig gent whispering | deck close |
-| s09 | top-down through the hatch into the low hold, 2 crew carry a crate | hold |
-| s10 | over-shoulder from behind Blackbeard looking over the deck | deck |
-| s11 | spyglass POV circle across the inlet, edge of a gloved hand | outside view |
+## Framing plan (minute 1) - motivated camera (SKILL rule 12b, Zen 2026-11-22)
+Camera comes from where the character is and what they do; a look shot is always followed by its POV.
+| Scene | Framing | Location | Story reason for this camera |
+|---|---|---|---|
+| s01 | wide, deck party (kept) | deck | open on the whole party: where are we |
+| s02 | wide exterior, shore lookout (kept) | shore | someone on shore is watching the ship |
+| s03 | hands insert: crew hands hauling rope + scrub brush | deck close | "crew works all night" = show the work itself |
+| s04 | medium, hold cower (kept) | hold | YOU hide below: camera hides with you |
+| s05 | silhouette of a crewman at the rail vs moonlit water | rail | he is thinking about leaving: alone vs the sea |
+| s06 | low-angle medium: Blackbeard on a barrel, 2 crew small behind | deck | crew looks up to him: camera at their eye line |
+| s07 | EXTERIOR: sloop seen from the water, tiny toasting figures (scale anchor) | outside view | how small and exposed the ship is in the inlet |
+| s08 | tight face close-up: Blackbeard + wig gent whispering | deck close | a secret: camera leans in like eavesdropping |
+| s09 | top-down through the hatch into the low hold, 2 crew carry a crate | hold | YOU peer down the hatch at the loot |
+| s10 | over-shoulder behind Blackbeard as he raises his spyglass toward the inlet mouth | deck | LOOK shot: he spots something -> sets up s11 |
+| s11 | spyglass POV circle across the inlet, edge of a gloved hand | outside view | POV of s10's spyglass: what he sees |
 
 Wides: s01, s02, s07 (3 of 11). Check before merge: figure-to-rail and figure-to-mast against s01 on the
 contact grid.
