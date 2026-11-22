@@ -161,9 +161,10 @@ def PAN(fx0, fx1, s=CAM_SCALE, fy=540):
     return {'from': [s, fx0, fy], 'to': [s, fx1, fy]}
 
 
-def S(start, bg, *els, chip=None, chipAt=None, chipPos=None, cam=None):
+def S(start, bg, *els, chip=None, chipAt=None, chipPos=None, meter=None, cam=None):
     flat = [e for group in els for e in group]
-    return {'start': start, 'bg': bg, 'els': flat, 'chip': chip, 'chipAt': chipAt, 'chipPos': chipPos, 'cam': cam}
+    return {'start': start, 'bg': bg, 'els': flat, 'chip': chip, 'chipAt': chipAt, 'chipPos': chipPos,
+            'meter': meter, 'cam': cam}
 
 
 L, R = 600, 1320          # left / right thirds for words opposite a sprite
@@ -460,8 +461,17 @@ def build_cut(name):
                     errors.append(f'{tag}-{end}: {e["t"]} {e.get("text", e.get("label", ""))} at {t} outside shot')
         if s['chipAt'] is not None and not s['start'] <= s['chipAt'] <= end - TAIL:
             errors.append(f'{tag}: chip at {s["chipAt"]} outside shot')
+        if s['meter'] is not None:
+            m = s['meter']
+            if not isinstance(m.get('label'), str) or not m['label'].strip():
+                errors.append(f'{tag}: meter needs a non-empty label')
+            for k in ('value', 'from'):
+                if k == 'from' and k not in m:
+                    continue
+                if k not in m or not 0 <= m[k] <= 100:
+                    errors.append(f'{tag}: meter {k} {m.get(k)} outside 0..100')
         shot = {'f0': s['start'], 'f1': end, 'bg': s['bg']}
-        for k in ('cam', 'chip', 'chipAt', 'chipPos'):
+        for k in ('cam', 'chip', 'chipAt', 'chipPos', 'meter'):
             if s[k] is not None:
                 shot[k] = s[k]
         shot['els'] = s['els']

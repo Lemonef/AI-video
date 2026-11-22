@@ -1,6 +1,7 @@
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
 import {FPS, LINE} from '../compositions/InkProof';
+import {meterTone} from './meter.mjs';
 
 // Doodle feel (Zen 2026-11-17, brain docs/ink-card-patterns.md item 9): cards and diagrams must look drawn by
 // hand, not CSS-perfect. Two tools:
@@ -70,4 +71,42 @@ export const DoodleChip: React.FC<{text: string; font: string; ink: string; pape
     style.bottom = undefined;
   }
   return <div style={style}>{text}</div>;
+};
+
+// HUD survival-odds meter: top-right (the chip owns top-left, the watermark bottom-right), a hand-drawn bar
+// that eases to a new value as the shot opens; the caller boils it.
+export const DoodleMeter: React.FC<{label: string; value: number; font: string; ink: string; paper: string; red: string}> = ({label, value, font, ink, paper, red}) => {
+  const tone = meterTone(value) === 'red' ? red : ink;
+  return (
+    <div style={{
+      position: 'absolute',
+      top: CHIP_INSET,
+      right: CHIP_INSET + 8, // mirror of the chip's left inset
+      transform: `rotate(${-CHIP_TILT}deg)`, // mirror of the chip tilt
+      padding: '8px 22px',
+      background: paper,
+      border: `${LINE * 0.8}px solid ${ink}`,
+      borderRadius: HAND_RADIUS,
+      color: ink,
+      fontFamily: font,
+      fontWeight: 700,
+      letterSpacing: 2,
+      textTransform: 'uppercase',
+    }}>
+      <div style={{fontSize: 30}}>{label}</div>
+      <div style={{display: 'flex', alignItems: 'center', gap: 16}}>
+        <div style={{
+          width: 360,
+          height: 34,
+          background: paper,
+          border: `${LINE * 0.6}px solid ${ink}`,
+          borderRadius: HAND_RADIUS,
+          overflow: 'hidden',
+        }}>
+          <div style={{width: `${value}%`, height: '100%', background: tone}}/>
+        </div>
+        <div style={{fontSize: 44, color: tone}}>{Math.round(value)}%</div>
+      </div>
+    </div>
+  );
 };
