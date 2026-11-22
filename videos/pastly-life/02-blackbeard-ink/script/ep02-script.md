@@ -1,8 +1,8 @@
 # Ep02 script: How Long Would You Survive on Blackbeard's Ship?
 
-Status: DRAFT v2 (2026-11-22). The voice-over is not recorded yet. Zen reads it, then it gets locked. v1 was ~7 min, below the 10-15 min long-form target (docs/TODO.md F.), so v2 grows it with real facts only, no filler.
+Status: DRAFT v3 (2026-11-22), v2 + humour pass (Zen: "funny ... relate ... not just a boring story telling"). The voice-over is not recorded yet. Zen reads it, then it gets locked. v1 was ~7 min, below the 10-15 min long-form target (docs/TODO.md F.), so v2 grows it with real facts only, no filler.
 Facts: `D:/second-brain/research/channels/2026-11-22-ep02-blackbeard-facts.md`. F-numbers below point to its rows.
-Length: 1392 spoken words = about 9.9 min at ~140 wpm (target 1,400-1,550 spoken words = 10-11 min at Ink pace ~140 wpm). Voice: second person, present tense.
+Length: 1532 spoken words = about 10.9 min at ~140 wpm (target 1,400-1,550 spoken words = 10-11 min at Ink pace ~140 wpm). Voice: second person, present tense.
 
 **Title promise:** the hook answers "how long". Almost nobody on deck lives to see summer. The ending shows the only two ways out.
 **Loops:**
@@ -36,14 +36,16 @@ F8, F28, F29
 > It's the 21st of November, 1718. A small sloop is anchored in a quiet inlet off North Carolina.
 > There's rum, there's laughing, there are guests on board, people from the little town of Bath nearby. Remember them, one of them matters later. Someone asks the captain: does your wife know where you buried your money?
 > One account says he laughed: "Nobody but me and the devil knows where it is."
-> Spoiler: no treasure of his has ever been found. The ship's hold is full of cocoa and cotton.
+> Great line. Terrible retirement plan.
+> Spoiler: no treasure of his has ever been found. The ship's hold is full of cocoa and cotton. The most feared pirate in America is basically running a chocolate delivery.
 
 Explain card: "sloop = small fast boat with one mast". Caption on the quote: "Johnson's 1724 book, the only source".
 F10, F12, F11 (the guests set up the Odel payoff)
 
 ## 3 · 0:55-1:40 · Why he's so calm (turn 1)
 > Here's why he's relaxed. Five months ago he took a royal pardon. That's official forgiveness: stop pirating, and the crime is wiped.
-> He didn't stop. But the governor of North Carolina is his friendly neighbour. So who's going to come for him here?
+> He didn't stop. It's like getting caught speeding, promising never again, and doing two hundred on the drive home.
+> But the governor of North Carolina is his friendly neighbour. Your landlord is also your getaway driver. So who's going to come for him here?
 > Yes, the One Piece villain is named after him. This is the real one.
 > What he doesn't know: one state over, Virginia's governor wants him dead. His navy warships are too big for these shallow waters, so he pays for two small boats out of his own budget, and sends them to kill him.
 
@@ -53,8 +55,8 @@ F5, F13, F14
 ## 4 · 1:40-2:55 · From 300 men to 20 (turn 2, L3 opens and closes)
 > But wait. Blackbeard is the most feared pirate alive. So why is he sitting on a tiny boat with twenty men?
 > Rewind one year. He takes a big French ship and renames it Queen Anne's Revenge. Forty cannons. By spring he has about three hundred men.
-> He parks that fleet outside Charleston, one of the richest towns in America. For about a week nothing gets in or out. He grabs hostages, and his ransom is... a chest of medicine.
-> Then, in June, his flagship runs onto a sandbank and breaks. One of his own men later said Blackbeard did it on purpose: fewer men, fewer shares. He sails off with the loot and a small crew, and leaves the rest behind.
+> He parks that fleet outside Charleston, one of the richest towns in America. For about a week nothing gets in or out. He grabs hostages, and his ransom is... a chest of medicine. He robs a whole city and asks for a first-aid kit.
+> Then, in June, his flagship runs onto a sandbank and breaks. One of his own men later said Blackbeard did it on purpose: fewer men, fewer shares. The oldest layoff trick in the book. He sails off with the loot and a small crew, and leaves the rest behind.
 > The wreck was found in 1996. So the three hundred are gone. That's why you're one of twenty. And twenty is about to be a problem.
 
 Timeline card: big ship (40 guns, 300 faces) shrinks to the sloop (20 faces). Map card: Charleston with a blockade line. Prop: medicine chest. Caption on "on purpose": "one crewman's account".
@@ -64,8 +66,8 @@ F2, F3, F4
 > Count the men around you. Nineteen. Maybe twenty-five.
 > Look closer. About six of the men next to you are Black. Some are free sailors, some were enslaved. Pirate ships were mixed like that, and the hangman won't care which you were.
 > Where's everyone else? His sailing master, Israel Hands, and about two dozen men are in town, miles away.
-> You don't get wages here. You get a share of the loot: one for you, two for the captain. Your quartermaster is the man the crew voted in to split it fairly.
-> Pirate crews like yours had rules: lights out at eight, no gambling, keep your gun clean, and no smoking down where the gunpowder sits. And tonight, nobody keeps watch.
+> You don't get wages here. You get a share of the loot: one for you, two for the captain. Honestly? Fairer pay than a lot of offices today. Your quartermaster is the man the crew voted in to split it fairly. Basically HR, with a sword.
+> Pirate crews like yours had rules: lights out at eight, no gambling, keep your gun clean, and no smoking down where the gunpowder sits. And tonight, nobody keeps watch. Everyone thinks someone else is checking. Classic group chat.
 
 Count row: 19 stickmen with a "?" on 6 more. Split card: ship vs town, Hands on the town side. Explain card: "quartermaster = elected number two".
 Note: the rules come from other crews' written rules. VO says "pirate crews like yours", never "Blackbeard's rules".
@@ -81,7 +83,7 @@ Scene: you squint from the rail. Count card: 20 vs 60.
 F13, F14, F15, F16
 
 ## 7 · 4:40-5:30 · The face is the weapon
-> Blackbeard gets ready. His real name was probably Edward Teach, and he's only been a pirate for about two years. But he knows how to build a name. He tells ships he has forty men when he has twenty. And then there's the look. This is what made him famous.
+> Blackbeard gets ready. His real name was probably Edward Teach, and he's only been a pirate for about two years. But he knows how to build a name. He tells ships he has forty men when he has twenty. That's 1718's version of buying followers. And then there's the look. This is what made him famous.
 > One account says he tucked slow-burning fuses under his hat, so smoke curls around his face. Three pairs of pistols across his chest.
 > The plan is simple: look so terrifying that people give up without a fight. And it usually works. One historian says that until today, he may never have killed anyone.
 > Today that changes.
@@ -92,6 +94,7 @@ F1, F6, F7, F8, F35
 ## 8 · 5:30-6:15 · Stuck on the sand (turn 5)
 > You cut the anchor rope and run for open water. Then a jolt. Your ship sits still.
 > You're stuck on a sandbar, a ridge of sand under the water. But so are they. One navy boat throws its heavy ballast overboard, even its water barrels, just to float free.
+> Grown men with cannons, all stuck in the sand like a beach traffic jam.
 > Everybody is stuck, and the gap is closing. So far you're still alive. Hold that thought.
 
 Explain cards: "sandbar" and "ballast = heavy weight in the bottom of the boat".
@@ -118,6 +121,7 @@ F18
 > The smoke clears. On Maynard's boat, the deck looks almost empty. Bodies, smoke, nobody moving.
 > You throw bottles stuffed with gunpowder, homemade grenades. Then you throw hooks across and pull the two boats together.
 > Blackbeard laughs: they're finished, let's go.
+> Free win. And if history teaches one thing, it's this: never trust a free win.
 > You jump across.
 
 Scene: grappling hooks. Explain card: "grenade = bottle of powder + fuse".
@@ -143,7 +147,7 @@ F22, F23
 
 ## 14 · 9:35-10:10 · The bowsprit (turn 8)
 > They cut off his head and hang it from the pole at the front of their boat. The body goes over the side.
-> The head sails all the way back to Virginia. It's proof. No head, no reward.
+> The head sails all the way back to Virginia. It's proof. No head, no reward. Pics or it didn't happen, 1718 edition.
 > Legend says the headless body swam around the ship before it sank. No one who was there ever said that.
 > And the powder room? The fuse never touches the powder. Men stop him in time.
 
@@ -151,7 +155,7 @@ Scene: silhouette of the head on the bowsprit, wide and far away. Red X on the l
 F24, F25, F26
 
 ## 15 · 10:10-10:40 · The papers in the cabin (turn 9)
-> Then Maynard searches your ship. No gold. Just cocoa, cotton, and, in the cabin, letters. One is from Tobias Knight, a top official in North Carolina's government. The friendly neighbour was writing to the pirate.
+> Then Maynard searches your ship. No gold. Just cocoa, cotton, and, in the cabin, letters. One is from Tobias Knight, a top official in North Carolina's government. The friendly neighbour was in the pirate's DMs.
 > Virginia's governor later accused North Carolina's governor and Knight of helping Blackbeard. It never stuck. Nobody important went to jail.
 > So the men in charge walk away. What about you?
 
@@ -171,7 +175,7 @@ Count row: 20 men. Most go grey with a red X. Two stay coloured, labelled ODEL (
 F11, F28, F29, F9
 
 ## 17 · 11:25-11:45 · The reward
-> And Maynard, the man who won? His crews split four hundred pounds, and they waited four years to get it. He also kept about ninety pounds of the pirate's loot for himself, and that got him in trouble. He never got a promotion.
+> And Maynard, the man who won? His crews split four hundred pounds, and they waited four years to get it. He also kept about ninety pounds of the pirate's loot for himself, and that got him in trouble. He never got a promotion. Kill the most famous pirate alive, get paid four years late. Some things about work never change.
 
 Coin row. "4 years" on a calendar.
 F30 (the £400 and £90 are solid; never say the £100 proclamation)
@@ -197,6 +201,7 @@ F19
 | No backstory block | the 300-men rewind (beat 4) comes after we're on the boat, is one beat, and answers a question the viewer just got ("why only twenty?") |
 | 2 open loops in minute one | L1 calm (closes at beat 12), L2 who lives (closes at beat 16) |
 | Turn every 45-75 s | beats 3, 4, 5, 6, 8, 10, 12, 14, 15 |
+| Joke / modern moment every ~45-60 s (never changes a fact) | beats 2, 3, 4, 5, 7, 8, 11, 14, 15, 17; each gets a modern-cut insert card (phone, office, traffic jam) |
 | Callbacks | "20 vs 60" set in beat 6, paid off in beat 10; "still alive, hold that thought" in beat 8 |
 | Plain words with explain cards | sloop, pardon, quartermaster, slow match, sandbar, ballast, broadside, grenade, bowsprit, no jury |
 | Comment bait near the end, lesson card at the end | beats 18 and 19 |
