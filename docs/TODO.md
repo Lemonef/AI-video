@@ -1,5 +1,15 @@
 # TODO — the only place live status lives
 
+## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
+- [x] White-key cutter merged (pipeline e40283f) + gate stdin fix (57a4b71, 18 passed x3)
+- [x] Cast sprites cut from 3 master sheets, names read off contact sheets (de98d3c, 123 png)
+- [x] Shots script tools/ink/make_ep02_min1_shots.py -> engine/ink/parts/shots_ep02min1/{hybrid,straight}.json, lint clean (hybrid 28 shots, straight 27)
+- [x] Compositions InkEp02Min1Hybrid / InkEp02Min1Straight registered
+- [x] Year card read "1,718" in sheet -> bignum group:false flag (003d1b3); min1 build committed (e9bc39c)
+- [x] Render both -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/draft/previews/ep02_min1_{hybrid,straight}.mp4 (65.7 s / 57.2 s), year card checked 1718, sent (720p share copies) + opened
+- [ ] Zen picks hybrid vs straight (Claude rec: hybrid, no jokes on death beats)
+- [ ] 3 ep02 thumbs; fix bath_gent_shocked outline gap (unused now)
+
 ## NOW 2026-11-16 — Pastly Life ink ep01 polish (read first)
 - [x] FINAL render `draft/current/ink_ep01_full.mp4` (p01-p24)
 - [x] Scene-switch "weird sound" diagnosed: no SFX/clicks (151 cuts measured); music bed swells ~+10 dB in VO gaps
