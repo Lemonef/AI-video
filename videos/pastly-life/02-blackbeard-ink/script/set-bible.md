@@ -35,5 +35,9 @@ Camera comes from where the character is and what they do; a look shot is always
 | s10 | over-shoulder behind Blackbeard as he raises his spyglass toward the inlet mouth | deck | LOOK shot: he spots something -> sets up s11 |
 | s11 | spyglass POV circle across the inlet, edge of a gloved hand | outside view | POV of s10's spyglass: what he sees |
 
+s10/s11 placement (decided 2026-11-22): s11 shows the two sails = turn 4 (3:50 "Dawn: two sails"); in minute 1 it
+would spoil the "quiet inlet" line. So s10 (look) closes minute 1 on b10 as a cliffhanger, and its POV s11 pays off
+at 3:50 (re-show s10 right before s11 there). Rule: a look shot at a chapter end may defer its POV to the payoff beat.
+
 Wides: s01, s02, s07 (3 of 11). Check before merge: figure-to-rail and figure-to-mast against s01 on the
 contact grid.
