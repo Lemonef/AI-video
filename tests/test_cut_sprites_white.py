@@ -14,6 +14,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 from PIL import Image
+from scipy import ndimage as ndi
 
 ROOT = Path(__file__).resolve().parents[1]
 CUT = ROOT / "tools/ink/cut_sprites.py"
@@ -67,6 +68,24 @@ def test_white_key_row_major_order(tmp_path):
     assert r.returncode == 0, r.stderr
     hs = [np.array(Image.open(tmp_path / f"p{k}.png")).shape[0] for k in range(1, 43)]
     assert max(hs[-12:]) < min(hs[:6]), "expression heads should be the last row and shorter than full bodies"
+
+
+@pytest.mark.parametrize("name,want", WHITE_SHEETS)
+def test_white_key_no_light_halo(tmp_path, name, want):
+    """Zen 2026-11-22 ("pixelate white outlines"): antialiased outline-on-paper pixels at the
+    sprite edge were kept fully opaque, so a dotted white rim showed on dark decks. Composited
+    on a dark plate, the outermost visible ring must be as dark as the black outline it is."""
+    r = _cut(EP02 / name, tmp_path, want, "--key", "white")
+    assert r.returncode == 0, r.stderr
+    dark = np.array([20, 24, 40], float)                 # night-deck plate colour
+    for f in sorted(tmp_path.glob("p*.png")):
+        a = np.array(Image.open(f)).astype(float)
+        al = a[..., 3:] / 255
+        comp = a[..., :3] * al + dark * (1 - al)
+        vis = a[..., 3] > 0
+        rim = vis & ndi.binary_dilation(~vis, iterations=1)
+        light = (comp[rim].min(axis=1) > 120).mean()
+        assert light < 0.05, f"{f.name}: {light:.0%} of the edge ring is a light halo"
 
 
 @pytest.mark.parametrize("sheet", sorted(EP01.glob("sheet_*.png")))

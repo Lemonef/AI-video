@@ -16,6 +16,10 @@ from scipy import ndimage as ndi
 
 # White mode: every RGB channel above this is "near white", i.e. a background candidate.
 NEAR_WHITE = 235
+# Edge band (px) that gets un-mixed against white. Measured 2026-11-22 on crew_thinking /
+# bb_stand / bath_gent_stand: ring 1 was 67-78% light blend pixels, rings 2-3 only 1-13%,
+# so 2 px covers the antialias blend and stays well inside the (much thicker) black outline.
+EDGE_BAND = 2
 # A band divider is a thin strip spanning almost the whole sheet (master_bath has them);
 # it is much wider/taller than a pose but only a fraction of the other dimension thick.
 DIVIDER_SPAN = 0.90
@@ -66,6 +70,26 @@ def white_foreground(im):
     return drop_dividers(fg)
 
 
+def unmix_white_edge(alpha, rgb):
+    """Turn the hard white-key edge into a soft one.
+
+    Every ep02 sprite ends in a thick black outline, so a pixel in the outermost band is a mix
+    of outline black and paper white: lum = (1 - a) * 255. Solving for a gives a soft alpha, and
+    un-mixing the paper share gives the true (dark) colour. Without this the blend pixels kept
+    full alpha and showed as a dotted white rim on dark plates (Zen 2026-11-22).
+    """
+    vis = alpha > 0
+    band = vis & ndi.binary_dilation(~vis, iterations=EDGE_BAND)
+    c = rgb.astype(float)
+    a = np.clip(1 - c.min(axis=2) / 255, 0, 1)
+    pure = (c - (1 - a[..., None]) * 255) / np.maximum(a[..., None], 1e-3)
+    alpha = alpha.copy()
+    rgb = rgb.copy()
+    alpha[band] = np.round(a[band] * 255).astype(np.uint8)
+    rgb[band] = np.clip(np.round(pure[band]), 0, 255).astype(np.uint8)
+    return alpha, rgb
+
+
 def main(argv=None):
     args = parse_args(argv)
     im = np.array(Image.open(args.sheet).convert('RGB')).astype(int)
@@ -107,6 +131,8 @@ def main(argv=None):
             cr, cg, cb = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
             fringe = (cr - cg > 60) & (cb - cg > 60)           # leftover magenta halo on edges
             alpha[fringe] = 0
+        else:
+            alpha, rgb = unmix_white_edge(alpha, rgb)
         Image.fromarray(np.dstack([rgb, alpha])).save(f'{args.outdir}/{args.prefix}{k + 1}.png')
         print(f'{args.prefix}{k + 1}: {x1 - x0 + 1}x{y1 - y0 + 1}')
 
