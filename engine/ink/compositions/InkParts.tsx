@@ -1,7 +1,8 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import {Dust, FONT, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkProof';
-import {BoilDefs, DoodleChip, useBoil} from '../parts/doodle';
+import {Dust, FONT, INK, LINE, PAPER, RED, Vignette, Watermark, useIn} from './InkProof';
+import {BoilDefs, DoodleChip, DoodleMeter, useBoil} from '../parts/doodle';
+import {meterAt} from '../parts/meter.mjs';
 import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
 import ep02m1Hybrid from '../parts/shots_ep02min1/hybrid.json';
@@ -117,6 +118,10 @@ const Elements: React.FC<{shot: Shot}> = ({shot}) => {
   })}</>;
 };
 const BoiledChip: React.FC<{text: string; pos?: 'tl' | 'bl'}> = ({text, pos}) => <AbsoluteFill style={{filter: useBoil()}}><DoodleChip text={text} font={FONT} ink={INK} paper={PAPER} pos={pos}/></AbsoluteFill>;
+const BoiledMeter: React.FC<{meter: NonNullable<Shot['meter']>}> = ({meter}) => {
+  const frame = useCurrentFrame();
+  return <AbsoluteFill style={{filter: useBoil()}}><DoodleMeter label={meter.label} value={meterAt(meter, frame)} font={FONT} ink={INK} paper={PAPER} red={RED}/></AbsoluteFill>;
+};
 const STAGE_W = 1920, STAGE_H = 1080; // composition size (Root.tsx); the camera frames this stage
 // Holds the eased focus point at frame centre at the eased scale; translate is clamped to [stage*(1-s), 0]
 // so a zoomed stage never exposes its edge.
@@ -142,7 +147,7 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
     layer = <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
   } else throw new Error(`Unknown background kind: ${Object.keys(bg).join(', ')}`);
   if (shot.cam) layer = <Camera cam={shot.cam} len={len}>{layer}</Camera>;
-  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip} pos={shot.chipPos}/></AbsoluteFill>}</AbsoluteFill>;
+  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.meter && <BoiledMeter meter={shot.meter}/>}{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip} pos={shot.chipPos}/></AbsoluteFill>}</AbsoluteFill>;
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}><BoilDefs/>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 // Episode mix Zen picked 2026-11-17 ("ok no sound"): voice + pad + sparse SFX, no music. Copy of .build/.../remix-v4sound/final_nomusic.wav.
