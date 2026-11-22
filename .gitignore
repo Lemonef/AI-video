@@ -41,3 +41,6 @@ _archive/out-unmapped/
 tools/ink/models/
 
 .tmp/
+videos/*/*/assets/min1-*/vo/
+videos/*/*/assets/min1-*/*.wav
+videos/*/*/assets/min1-*/timeline.json

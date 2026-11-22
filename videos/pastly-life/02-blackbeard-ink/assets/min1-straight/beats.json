@@ -1,0 +1,46 @@
+{
+ "voice": "Charon",
+ "gapSeconds": 0.3,
+ "beats": [
+  {
+   "id": "b1",
+   "shots": 2,
+   "text": "You have less than a day to live."
+  },
+  {
+   "id": "b2",
+   "shots": 4,
+   "text": "You're one of about twenty men on Blackbeard's ship. By next summer, almost every one of you will be dead or hanged."
+  },
+  {
+   "id": "b3",
+   "shots": 3,
+   "text": "Only two kinds of men walk away. Stay to the end and you'll know if you're one of them."
+  },
+  {
+   "id": "b4",
+   "shots": 2,
+   "text": "And the strangest part? Tonight, Blackbeard isn't worried at all."
+  },
+  {
+   "id": "b5",
+   "shots": 4,
+   "text": "It's the twenty-first of November, seventeen eighteen. A small sloop is anchored in a quiet inlet off North Carolina."
+  },
+  {
+   "id": "b6",
+   "shots": 4,
+   "text": "There's rum, there's laughing, there are guests on board, people from the little town of Bath nearby. Remember them, one of them matters later."
+  },
+  {
+   "id": "b7",
+   "shots": 4,
+   "text": "Someone asks the captain: does your wife know where you buried your money? One account says he laughed: Nobody but me and the devil knows where it is."
+  },
+  {
+   "id": "b9",
+   "shots": 2,
+   "text": "Spoiler: no treasure of his has ever been found. The ship's hold is full of cocoa and cotton."
+  }
+ ]
+}
