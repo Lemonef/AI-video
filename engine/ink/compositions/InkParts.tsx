@@ -4,6 +4,8 @@ import {Dust, FONT, INK, LINE, PAPER, Vignette, Watermark, useIn} from './InkPro
 import {BoilDefs, DoodleChip, useBoil} from '../parts/doodle';
 import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
+import ep02m1Hybrid from '../parts/shots_ep02min1/hybrid.json';
+import ep02m1Straight from '../parts/shots_ep02min1/straight.json';
 import v2p01 from '../parts/shots_v2/p01.json';
 import v2p02 from '../parts/shots_v2/p02.json';
 import v3p01 from '../parts/shots_v3/p01.json';
@@ -172,3 +174,10 @@ export const InkEp01Full: React.FC = () => <><InkParts parts={EP01_FULL_PARTS}/>
 export const EP01_V11B_PARTS = [v8p01, v8p02, v11bp03, v11bp04, v11bp05, v11bp06, v11bp07, v11bp08, v11bp09, v11bp10, v11bp11, v11bp12, v11bp13, v11bp14, v11bp15, v11bp16, v11bp17, v11bp18, v11bp19, v11bp20, v11bp21, v11bp22, v11bp23, v11bp24] as unknown as Part[];
 export const INK_EP01_V11B_FRAMES = EP01_V11B_PARTS[EP01_V11B_PARTS.length - 1].f1;
 export const InkEp01V11B: React.FC = () => <><InkParts parts={EP01_V11B_PARTS}/><Audio src={staticFile(EPISODE_AUDIO)}/></>;
+// ep02 Blackbeard minute one, two cuts for Zen to compare (tools/ink/make_ep02_min1_shots.py); audio under ep02 public dir.
+export const EP02_MIN1_HYBRID_PARTS = [ep02m1Hybrid] as unknown as Part[];
+export const INK_EP02_MIN1_HYBRID_FRAMES = EP02_MIN1_HYBRID_PARTS[EP02_MIN1_HYBRID_PARTS.length - 1].f1;
+export const InkEp02Min1Hybrid: React.FC = () => <><InkParts parts={EP02_MIN1_HYBRID_PARTS}/><Audio src={staticFile('min1-hybrid/master.wav')}/></>;
+export const EP02_MIN1_STRAIGHT_PARTS = [ep02m1Straight] as unknown as Part[];
+export const INK_EP02_MIN1_STRAIGHT_FRAMES = EP02_MIN1_STRAIGHT_PARTS[EP02_MIN1_STRAIGHT_PARTS.length - 1].f1;
+export const InkEp02Min1Straight: React.FC = () => <><InkParts parts={EP02_MIN1_STRAIGHT_PARTS}/><Audio src={staticFile('min1-straight/master.wav')}/></>;
