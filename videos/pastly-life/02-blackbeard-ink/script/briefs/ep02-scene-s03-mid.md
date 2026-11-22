@@ -1,0 +1,34 @@
+---json
+{"id": "ep02-scene-s03-mid", "type": "creative", "risk": "high", "repo": "D:/AI-video", "gates": ["python -I tools/ink/check_art.py videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/ep02-scene-s03-mid.json"], "protected": ["tools/**", "engine/**", "tests/**", "docs/**", "package.json", "package-lock.json", "tsconfig.json", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/**", "videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/**", "videos/pastly-life/02-blackbeard-ink/assets/ink/plates/**", "videos/pastly-life/02-blackbeard-ink/script/**", "videos/pastly-life/01-eiffel-ink/**", "videos/pastly-life/02-blackbeard-ink/assets/ink/scenes/s01_deck_party.png", "videos/pastly-life/02-blackbeard-ink/assets/ink/scenes/s03_deck_work.png", "videos/pastly-life/02-blackbeard-ink/assets/ink/scenes/s03_deck_work_flat.png"], "context_files": ["videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_crew.png"], "plan_check": "videos/pastly-life/02-blackbeard-ink/script/briefs/ep02-scene-s03-mid.plan_check.md"}
+---
+# Goal
+STYLE TEST 2 for ep02 scene s03 (crew at work on deck at night). Two earlier tries both missed:
+- s03_deck_work.png = too "AI": amber wash over everything, grain on every surface, glossy highlights, bubbles, giant rubber-hose gloves filling the frame.
+- s03_deck_work_flat.png = too PLAIN: empty flat vector, side-on row of figures, almost no props, no depth, no shading.
+Target is IN BETWEEN: a hand-inked cartoon storybook look. Muted cool grey-blue world, LOTS of lived-in props and set detail drawn in clean ink, a real 3/4 perspective corner of the deck with depth (foreground, middle, background), simple hard-edged cel shading, and ONE warm light source (the lantern) casting a flat pale-gold pool of light onto nearby planks. Detail comes from MORE OBJECTS and drawn lines, never from texture, grain or shine.
+
+# Files
+Work only inside the repo (D:/AI-video). Create ONLY this file (exact name): videos/pastly-life/02-blackbeard-ink/assets/ink/scenes/s03_deck_work_mid.png. Do not edit any other file.
+
+# Steps
+Use your built-in image generation tool. Generate ONE image and SAVE it as PNG at the exact path (overwrite it on each redo). Pass exactly ONE reference image to the image tool:
+- CHARACTER IDENTITY: `videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_crew.png`. Copy only the crewman DESIGN (white round head, dot eyes, clothing, stick legs). Render him in the ink + cel style below.
+Do NOT pass any scene or plate image; the set is described in text only.
+
+Then LOOK at your result and redo (up to 3 times) if ANY of these show: (too AI) grain, noise or paper texture on surfaces; glossy shine, specular highlights, rim light, glow or bloom around the lantern or moon, wet sheen or suds on the planks; bubbles, sparkles, splashes; an orange or amber colour wash over the whole frame; giant hands or close-up gloves; realistic faces; (too plain) empty flat areas with no props, a side-on flat row of figures with no perspective, fewer than 10 distinct props, no shading at all; (other) any text or letters, wrong crew design, legs cropped, ship out of scale.
+
+Characters:
+- CREWMAN (draw 3 of them): white round head with two black dot eyes, muted brick-red bandana, blue-and-white striped shirt, brown vest, tan knee-length trousers, small white hands, black shoes, thin black stick legs and stick-thin arms. Neutral or focused faces.
+
+PROMPT:
+Hand-inked 2D cartoon illustration, storybook explainer style. Clean dark ink outlines; the only hand-drawn variation is in the line itself (slight width change, slightly thicker lines on near objects, thinner on far ones); every fill stays clean and untextured. Hard-edged cel shading: every object and figure gets its base tone plus one or two flat shadow shapes, no gradients, shadow side facing away from the lantern. Muted, desaturated, cool palette: slate blue-grey night sky, grey-blue sea, weathered grey-brown deck planks drawn with clean ink lines and a few knots, grey-brown wood for rail, mast and barrels. The only warm LIGHT is a single hanging oil lantern with a small flat flame: its light falls as a flat, hard-edged pale-gold pool (no glow, no bloom, no volumetric beam) across the nearby planks, a crate and the kneeling man; outside that pool everything stays cool grey-blue, and the crew's clothing colours stay muted. No overall warm tint.
+CAMERA: medium-wide 3/4 view looking diagonally across the deck of a small one-mast sloop at night, eye level, horizon about one third down from the top, deck planks converging toward a vanishing point behind the mast, clear depth: FOREGROUND = a coiled rope and one barrel cut by the bottom-left frame edge, the stacked crate cut by the bottom-right edge; MIDDLE = the crew; BACK = rail, sea, coastline and sky. Figures overlap props and each other so nothing stands in a flat row. Two crewmen at left middle ground, one slightly in front of the other, feet braced, leaning back, small hands gripping (hands never bigger than the head), hauling a rope that runs through a wooden block up the mast. One crewman at right middle ground kneeling, scrubbing the dry planks with a brush next to a wooden bucket (no suds, no water sheen); the lantern hangs above and just left of him. Full bodies visible.
+SET DETAIL (draw all of these, cleanly inked): the mast with ropes and a wooden block, rigging lines going up out of frame, a furled sail edge at the top of frame, a coiled rope on the deck, two barrels, a stacked wooden crate, a small cannon at the rail, a mop leaning on the rail, a hanging lantern on a hook, a wooden bucket, rail posts with a belaying-pin rack holding pins, a hatch cover in the deck, a few scattered wood shavings, the moon low in the sky as a plain flat pale disc with no glow, behind a few thin flat clouds, distant dark coastline on the horizon. Busy and lived-in but every object readable.
+SHIP SCALE: rail top at a standing man's waist; lantern about head-sized; barrel reaches a standing man's hip; cannon barrel at knee-to-waist height. Wide 16:9 landscape, 1920x1080 or the closest 16:9 size you can output (never below 1500 px wide).
+
+AVOID (keep short): grain, paper texture, glossy highlights, glow, bubbles, amber colour wash, giant hands, photoreal, 3D render, text.
+
+HARD RULES: exactly 3 crewmen as described, no other figures; NO text, NO letters, NO numbers, NO logos, NO readable signs; no watermarks; no white outline/halo around characters.
+
+# Done when
+The file exists and `python -I tools/ink/check_art.py videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/ep02-scene-s03-mid.json` prints OK. Report: what the image shows, how it sits between the two earlier tries against the redo list, how the crew match the sheet, and any weak areas.
