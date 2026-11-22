@@ -15,6 +15,7 @@
   - [ ] All humans = Ink-style stickman (drop bath gent/merchant/farmer sprites)
   - [ ] PD photo hunt (Wikimedia/LoC: Blackbeard engravings, Bath/Ocracoke maps, QAR wreck artifacts) -> photo beats, no gap >2 min
   - [ ] Scene shots = character drawn INTO the plate (shared light, contact shadow, foreground occluder, small/turned/cropped), not pasted front-centre -> needs image gen: WAIT Zen OK on spend
+  - [ ] HUD tracker overlay like Beanie NOISE meter (Zen 11-22 "See" still) -> ep02 survival-odds meter, SKILL rule 12
   - [ ] Explain cards rebuilt to Ink anatomy, judged vs Ink still before render
   - [ ] Re-render min 1 only after side-by-side passes; send sheet with render
 
