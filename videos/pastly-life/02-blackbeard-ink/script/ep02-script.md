@@ -2,7 +2,7 @@
 
 Status: DRAFT v1 (2026-11-22). The voice-over is not recorded yet. Zen reads it, then it gets locked.
 Facts: `D:/second-brain/research/channels/2026-11-22-ep02-blackbeard-facts.md`. F-numbers below point to its rows.
-Target length: about 10 min (~1,450 words at ~145 wpm). Voice: second person, present tense.
+Length: 957 spoken words = about 7 min at Ink pace (~140 wpm). The outline aimed for 10 min; Zen decides whether to grow it. Voice: second person, present tense.
 
 **Title promise:** the hook answers "how long". Almost nobody on deck lives to see summer. The ending shows the only two ways out.
 **Loops:**
