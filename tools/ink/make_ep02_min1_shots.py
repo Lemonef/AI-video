@@ -5,8 +5,9 @@
 
 Shot starts come from each cut's timeline.json (VO beat timing), so the picture can never drift
 from the voice. Helpers and lints are copied from make_v11b_shots.py (that file loads the ep01
-v10 parts at import time, so it cannot be imported); the ep01-only rules (photos, angled plates,
-quarter photo balance) are dropped because ep02 has no photos and three plates.
+v10 parts at import time, so it cannot be imported); the ep01-only rules (angled plates, quarter
+photo balance) are dropped. Ep02 paints its figures into eleven scenes and uses two public-domain
+photos, so no pasted sprites appear on those shots.
 
 Run: python tools/ink/make_ep02_min1_shots.py -> engine/ink/parts/shots_ep02min1/{hybrid,straight}.json
 """
@@ -21,7 +22,8 @@ COUNT_MAX = int(__import__('re').search(r'COUNT_MAX = (\d+)', (ROOT / 'engine/in
 ASSETS = ROOT / 'videos/pastly-life/02-blackbeard-ink/assets'
 OUT = ROOT / 'engine/ink/parts/shots_ep02min1'
 CAST = 'ink/cast'
-PLATES = 'ink/plates'
+SCENES = 'ink/scenes'
+PHOTOS = 'ink/photos'
 
 STAGE_W, STAGE_H = 1920, 1080          # mirrors the stage size in engine/ink (1920x1080)
 FLOOR = 1000                            # sprite baseline (same as ep01)
@@ -35,6 +37,16 @@ WORD_CARD_SHARE = 0.15                  # SKILL rule: word-only cards <= 15% of 
 SPLIT_RANGE = (2, 4)                    # SKILL rule: 2-4 splits per minute
 ONE_OBJECT_MIN = 3                      # SKILL rule: >= 3 one-object cards
 
+METER_LABEL = 'SURVIVAL ODDS'
+METER = {'b1': 12, 'b2': 12, 'b3': 12,   # hook: less than a day, stay to the end
+         'b4': 35,                       # tonight / not worried
+         'b5': 45,                       # inlet (map, s07 pan)
+         'b6': 60,                       # party + toast
+         'b7': 55,                       # whisper (both shots)
+         'b8': 50,                       # great line / terrible plan
+         'b9': 50,                       # treasure / cocoa / cotton
+         'b10': 45}                      # most feared
+
 TYPE_CAP = {'flow': 2, 'bars': 1}
 TYPE_CAP_ANY = 4
 LAYOUTS = ['flow', 'bars', 'timeline', 'count', 'split', 'hero', 'crossout', 'checklist', 'quote', 'bignum',
@@ -43,17 +55,23 @@ ICON_KEYS = ('icon', 'name')
 
 
 # ---------- backgrounds ----------
-def PL(name, zoom=(1.0, 1.08), origin=None):
-    assert (ASSETS / PLATES / f'{name}.png').exists(), f'missing plate {name}'
-    bg = {'plate': f'{PLATES}/{name}.png', 'zoom': list(zoom)}
+def SC(name, zoom=(1.0, 1.08), origin=None):
+    assert (ASSETS / SCENES / f'{name}.png').exists(), f'missing scene {name}'
+    bg = {'plate': f'{SCENES}/{name}.png', 'zoom': list(zoom)}
     if origin:
         bg['origin'] = origin
     return bg
 
 
+def PH(name, pos='50% 35%', push=(1.0, 1.08)):
+    assert (ASSETS / PHOTOS / name).exists(), f'missing photo {name}'
+    return {'photo': f'{PHOTOS}/{name}', 'push': list(push), 'pos': pos}
+
+
 CARD = {'card': True}
-DECK, HOLD, INLET = 'deck_night_lanterns', 'hold_cocoa_cotton', 'inlet_sloop_wide'
-SLOOP = (1470, 800)                     # sloop position on inlet_sloop_wide, read off the plate
+S01, S02, S03, S04, S05 = 's01_deck_party', 's02_inlet_lookout', 's03_deck_work', 's04_hold_cower', 's05_rail_thinking'
+S06, S07, S08, S09, S10 = 's06_bb_calm', 's07_guests_toast', 's08_rail_whisper', 's09_hold_carry', 's10_bb_hips'
+MAP, BB = 'moseley_map_1733.jpg', 'bb_engraving_1724.jpg'
 
 
 # ---------- elements ----------
@@ -172,24 +190,19 @@ L, R = 600, 1320          # left / right thirds for words opposite a sprite
 
 # ---------- shared beats b1-b7 (same VO timing in both cuts) ----------
 def opening():
-    a = 0
     shots = [
         # b1 "You have less than a day to live."
-        S(0, PL(DECK, (1.0, 1.0)), SP('crew_sit_drink', a + 2, 560, h=560), SP('bb_raise_tankard', a + 6, 1300),
-          cam=PUSH(1300, 480, 1.22)),
+        S(0, SC(S01), cam=PUSH(1300, 480, 1.22)),
         S(46, CARD, HERO('clock', 'UNDER 24 HOURS', 50, burst=True)),
         # b2 "one of about twenty men on Blackbeard's ship ... dead or hanged."
-        S(91, PL(INLET, (1.0, 1.04)), SP('crew_point', 94, 420, h=600), TG("BLACKBEARD'S SHIP", 110, SLOOP[0], 560),
-          cam=PUSH(*SLOOP, 1.3)),
+        S(91, SC(S02), TG("BLACKBEARD'S SHIP", 110, 960, 330), cam=PUSH(960, 470, 1.3)),
         S(153, CARD, CNT('man', 10, 156, 3, 'ABOUT 20 MEN · EACH = 2', 960, 520, 1300)),
-        S(215, PL(DECK, (1.04, 1.0)), SP('crew_scrub', 218, 420, h=520), SP('crew_haul_rope', 226, 980),
-          SP('crew_scared', 236, 1520, h=620), cam=PAN(500, 1420)),
+        S(215, SC(S03), cam=PAN(500, 1420)),
         S(276, CARD, XO('man', 'BY NEXT SUMMER', 279, 300)),
         # b3 "Only two kinds of men walk away. Stay to the end ..."
-        S(337, PL(HOLD, (1.0, 1.1)), SP('crew_cower', 340, 1250, h=600), O('ONLY 2 KINDS', 352, x=L, y=260)),
+        S(337, SC(S04, (1.0, 1.1)), O('ONLY 2 KINDS', 352, x=R, y=260)),
         S(390, CARD, SPL(('face', 'KIND ONE'), ('face', 'KIND TWO'), 393, 14, vs='?')),
-        S(443, PL(DECK, (1.08, 1.0)), SP('crew_thinking', 446, 700), W('STAY TO THE END', 456, x=R, y=260),
-          cam=PULL(700, 560)),
+        S(443, SC(S05, (1.08, 1.0)), W('STAY TO THE END', 456, x=R, y=220), cam=PULL(960, 520)),
     ]
     return shots
 
@@ -199,15 +212,12 @@ def tonight(split):
     if not split:
         return [
             S(495, CARD, SP('bb_exp_deadpan', 498, 960, h=320, y=620), W('STRANGEST PART?', 506, y=220, size=110)),
-            S(577, PL(DECK, (1.0, 1.06), origin='70% 60%'), SP('bb_sit_barrel', 579, 1250), O('NOT WORRIED', 590, x=L, y=260),
-              cam=PAN(1400, 1100)),
+            S(577, SC(S06, (1.0, 1.06)), O('NOT WORRIED', 590, x=R, y=240), cam=PAN(1400, 1100)),
         ]
     return [
         S(495, CARD, SP('bb_exp_deadpan', 498, 960, h=320, y=620), W('STRANGEST PART?', 503, y=220, size=110)),
-        S(536, PL(INLET, (1.06, 1.0)), SP('bb_arms_crossed', 539, R, h=620), W('TONIGHT', 540, x=L, y=260),
-          cam=PULL(*SLOOP, 1.2)),
-        S(577, PL(DECK, (1.0, 1.06), origin='70% 60%'), SP('bb_sit_barrel', 579, 1250), O('NOT WORRIED', 590, x=L, y=260),
-          cam=PAN(1400, 1100)),
+        S(536, SC(S02), W('TONIGHT', 540, x=L, y=240), cam=PAN(400, 1300)),
+        S(577, SC(S06, (1.0, 1.06)), O('NOT WORRIED', 590, x=R, y=240), cam=PAN(1400, 1100)),
     ]
 
 
@@ -215,25 +225,21 @@ def party():
     return [
         # b5 "21 November 1718. A small sloop anchored in a quiet inlet off North Carolina."
         S(658, CARD, BN(1718, '21 NOVEMBER', 661, 36, year=True)),
-        S(721, PL(INLET, (1.0, 1.08)), SP('crew_lantern', 724, 420, h=600),
-          chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=726, chipPos='tl',
-          cam=PUSH(*SLOOP, 1.25)),
+        S(721, PH(MAP, pos='50% 50%', push=(1.0, 1.12)),
+          chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=726, chipPos='tl'),
         S(784, CARD, HERO('ship', 'ONE SMALL SLOOP', 787)),
-        S(847, PL(INLET, (1.1, 1.0)), SP('crew_spyglass', 850, 380, h=620), cam=PAN(400, 1300)),
+        S(847, SC(S07), cam=PAN(400, 1300)),
         # b6 "rum, laughing, guests from the little town of Bath ... one of them matters later."
-        S(909, PL(DECK, (1.0, 1.08)), SP('crew_sit_drink', 911, 460, h=560), SP('bb_drink', 915, 1000),
-          SP('crew_laugh', 921, 1540, h=620), cam=PUSH(1000, 520)),
+        S(909, SC(S01, origin='30% 60%'), cam=PUSH(500, 620)),
         S(978, CARD, SP('bath_gent_stand', 981, 600, h=320, y=700), SP('bath_merchant_laugh', 987, 960, h=320, y=700),
           SP('bath_farmer_stand', 993, 1320, h=320, y=700), W('GUESTS FROM BATH', 1000, y=240, size=110)),
-        S(1047, PL(DECK, (1.06, 1.0), origin='40% 60%'), SP('bath_merchant_toast', 1050, 700), SP('bb_laugh', 1056, 1280),
-          cam=PAN(800, 1200)),
+        S(1047, SC(S07), cam=PUSH(880, 700, 1.35)),
         S(1116, CARD, SP('bath_gent_sly', 1119, 960, h=320, y=640), CI(1130, 960, 480, 380, 380),
           O('REMEMBER HIM', 1136, y=220, size=110)),
         # b7 "... does your wife know where you buried your money? ... me and the devil knows ..."
-        S(1185, PL(DECK, (1.0, 1.05)), SP('bath_gent_whisper', 1188, 720), SP('bb_lean_rail', 1194, 1300),
-          cam=PUSH(1000, 500, 1.18)),
+        S(1185, SC(S08), cam=PUSH(1000, 500, 1.18)),
         S(1262, CARD, QT('Does your wife know where you buried your money?', 'A GUEST', 1266)),
-        S(1339, PL(DECK, (1.0, 1.0), origin='70% 50%'), SP('bb_whisper', 1342, 1200), cam=PUSH(1200, 420, 1.35)),
+        S(1339, SC(S08), cam=PUSH(1250, 480, 1.35)),
         S(1416, CARD, SP('bb_exp_angry_grin', 1419, 960, h=320, y=640), O('ME AND THE DEVIL', 1430, y=220, size=110)),
     ]
 
@@ -241,26 +247,24 @@ def party():
 def hybrid():
     return opening() + tonight(False) + party() + [
         # b8 joke "Great line. Terrible retirement plan."
-        S(1492, PL(HOLD, (1.0, 1.06)), SP('bb_shrug', 1495, 1250), W('GREAT LINE.', 1500, x=L, y=230, size=90),
-          O('TERRIBLE PLAN', 1540, x=L, y=360, size=90), cam=PAN(1300, 900)),
+        S(1492, PH(BB, pos='50% 20%'), W('GREAT LINE.', 1500, x=R, y=230, size=90),
+          O('TERRIBLE PLAN', 1540, x=R, y=360, size=90)),
         # b9 "Spoiler: no treasure ... cocoa and cotton."
         S(1599, CARD, XO('coin', 'HIS TREASURE', 1602, 1630)),
-        S(1702, PL(HOLD, (1.08, 1.0)), SP('crew_carry_crate', 1705, 960), TG('COCOA', 1712, 380, 560),
-          TG('COTTON', 1726, 1560, 560), cam=PULL(960, 600)),
+        S(1702, SC(S09, (1.08, 1.0)), TG('COCOA', 1712, 440, 560), TG('COTTON', 1726, 840, 800),
+          cam=PULL(960, 600)),
         # b10 joke "most feared pirate in America is basically running a chocolate delivery."
-        S(1805, PL(DECK, (1.0, 1.08)), SP('bb_hands_hips', 1808, 1250), ST('MOST FEARED', 1816, x=L, y=320),
-          cam=PUSH(1250, 480, 1.2)),
+        S(1805, SC(S10), ST('MOST FEARED', 1816, x=R, y=260), cam=PUSH(560, 520, 1.15)),
         S(1880, CARD, TF(('mask', 'PIRATE'), ('suitcase', 'CHOCOLATE RUN'), 1883, 22)),
     ]
 
 
 def straight():
     return opening() + tonight(True) + party() + [
-        # b9 "Spoiler: no treasure ... cocoa and cotton." (b7 ends on a card, so b9 opens on a plate)
-        S(1492, PL(INLET, (1.0, 1.06)), SP('bb_dig', 1495, 600), W('TREASURE', 1505, x=R, y=280, size=120),
-          X(1530, R, 280), cam=PAN(700, 1100)),
-        S(1595, PL(HOLD, (1.08, 1.0)), SP('crew_carry_crate', 1598, 960), TG('COCOA', 1605, 380, 560),
-          TG('COTTON', 1620, 1560, 560), cam=PULL(960, 600)),
+        # b9 "Spoiler: no treasure ... cocoa and cotton." (b7 ends on a card, so b9 opens on a photo)
+        S(1492, PH(BB, pos='50% 20%'), W('TREASURE', 1505, x=R, y=280, size=120), X(1530, R, 280)),
+        S(1595, SC(S09, (1.08, 1.0)), TG('COCOA', 1605, 440, 560), TG('COTTON', 1620, 840, 800),
+          cam=PULL(960, 600)),
         S(1660, CARD, TF(('coin', 'TREASURE'), ('suitcase', 'COCOA + COTTON'), 1663, 18)),
     ]
 
@@ -280,13 +284,15 @@ SPRITE_MAX = 4
 
 
 def bg_key(bg):
-    return bg.get('plate') or 'card'
+    return bg.get('plate') or bg.get('photo') or 'card'
 
 
 def framing(shot):
     bg, cam = shot['bg'], shot.get('cam')
     if 'card' in bg:
         return 'card'
+    if 'photo' in bg:
+        return 'photo'
     if cam and cam['from'][0] == cam['to'][0]:
         return 'pan'
     z0, z1 = bg.get('zoom', [1, 1])
@@ -302,7 +308,7 @@ def framing(shot):
 
 
 def text_only(shot):
-    return all(e['t'] in TEXT_ELS for e in shot['els'])
+    return bg_key(shot['bg']) == 'card' and all(e['t'] in TEXT_ELS for e in shot['els'])
 
 
 def layout_of(shot):
@@ -419,12 +425,30 @@ def el_times(e):
     return times
 
 
+def add_meters(shots, tl):
+    """Every non-card shot carries the survival-odds meter for its beat; `from` = the previous value."""
+    spans = [(b['start'], b['start'] + b['dur'], b['id']) for b in tl['beats']]
+    prev = None
+    for s in shots:
+        if 'card' in s['bg']:
+            continue
+        beat = next((bid for a, z, bid in spans if a <= s['start'] < z), None)
+        if beat not in METER:
+            raise SystemExit(f'{s["start"]}: no survival-odds beat for this shot')
+        m = {'label': METER_LABEL, 'value': METER[beat]}
+        if prev is not None:
+            m['from'] = prev
+        s['meter'] = m
+        prev = METER[beat]
+
+
 def build_cut(name):
     make, audio = CUTS[name]
     tl = json.loads((ASSETS / audio / 'timeline.json').read_text(encoding='utf-8'))
     total = tl['totalFrames']
     want = sorted({s['start'] for b in tl['beats'] for s in b['shots']} | EXTRA_SPLITS.get(name, set()))
     shots = make()
+    add_meters(shots, tl)
     errors, fits, out = [], [], []
     starts = [s['start'] for s in shots]
     if starts != want:
