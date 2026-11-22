@@ -1,0 +1,28 @@
+---json
+{"id": "ep02-scene-s01-deck-party", "type": "creative", "risk": "high", "repo": "D:/AI-video", "gates": ["python -I tools/ink/check_art.py videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/ep02-scene-s01-deck-party.json"], "protected": ["tools/**", "engine/**", "tests/**", "docs/**", "package.json", "package-lock.json", "tsconfig.json", "conftest.py", "**/conftest.py", "pytest.ini", "pyproject.toml", "setup.cfg", "videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/**", "videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/**", "videos/pastly-life/02-blackbeard-ink/assets/ink/plates/**", "videos/pastly-life/02-blackbeard-ink/script/**", "videos/pastly-life/01-eiffel-ink/**"], "context_files": ["videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_bb.png", "videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_crew.png", "videos/pastly-life/02-blackbeard-ink/assets/ink/plates/deck_night_lanterns.png", "videos/pastly-life/01-eiffel-ink/assets/ink60full/art_refs/paris_night.png"], "plan_check": "videos/pastly-life/02-blackbeard-ink/script/briefs/ep02-scene-s01-deck-party.plan_check.md"}
+---
+# Goal
+Opening scene of the episode: a night party on the deck of Blackbeard's small sloop, 1718, with Blackbeard and two crewmen DRAWN INTO the scene (one finished illustration, characters lit by the same lanterns and moon as the ship). This replaces the old method of pasting cut-out characters on an empty plate, which looked flat and fake.
+
+# Files
+Work only inside the repo (D:/AI-video). Create ONLY this file (exact name): videos/pastly-life/02-blackbeard-ink/assets/ink/scenes/s01_deck_party.png. Do not edit any other file.
+
+# Steps
+Use your built-in image generation tool. Generate ONE image and SAVE it as PNG at the exact path. Pass the reference images to the image tool:
+- CHARACTER IDENTITY: `videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_bb.png` (Blackbeard) and `videos/pastly-life/02-blackbeard-ink/assets/ink/sheets/master_crew.png` (crewman). Copy their exact design: proportions, outline weight, colours, face style. They are cartoon stickmen, never realistic people.
+- SET: `videos/pastly-life/02-blackbeard-ink/assets/ink/plates/deck_night_lanterns.png` is the same ship's deck; keep the ship design (single mast, furled grey sail, lanterns in rigging, cannon at rail) but you may change the camera.
+- LINE STYLE: `videos/pastly-life/01-eiffel-ink/assets/ink60full/art_refs/paris_night.png` for line weight, paper grain and cel shading.
+
+Then LOOK at your result and redo (up to 3 times) if any of these fail: a character does not match its sheet (wrong colours, realistic face, missing beard/hat smoke/bandana); characters look pasted on (no shadow on the deck, lit differently from the scene, sharp white rim around them); any text or letters; extra people; flat side-on view.
+
+Characters (match the sheets exactly):
+- BLACKBEARD: white round head with a wide toothy grin, huge black bushy beard tied with small red ribbons, black tricorn hat with gold trim and grey smoke wisps curling up from under the hat, long black coat with gold buttons, red sash and red cuffs, brown bandolier strap, white cartoon gloves, black boots, thin black stick legs.
+- CREWMAN (draw two of the same design): white round head with simple dot eyes, red bandana with knot tails, blue-and-white striped shirt, brown vest, rope belt, tan knee-length trousers, white gloves, black shoes, thin black stick legs.
+
+PROMPT:
+Hand-inked storybook illustration, thick charcoal outlines, soft cel shading, muted vintage palette, paper-grain texture. Three-quarter view from the stern looking forward along the open wooden deck of a small single-masted 1718 sloop anchored at night in a calm inlet. Warm orange lanterns hang from the rigging and throw pools of warm light on the diagonal deck planks. In the right-middle third, BLACKBEARD stands on a low crate, raising a wooden tankard high, mid-laugh, body three-quarter turned toward the two crewmen; he fills about one third of the frame height. In the left-middle third, slightly further back, the two CREWMEN sit on barrels drinking from tin mugs, turned three-quarter toward Blackbeard, smaller than him because they are further away. All three cast long soft shadows across the planks away from the nearest lantern; warm lantern light on the side of each character facing the lanterns, cool blue moonlight rim on hats and shoulders on the other side, exactly like the ship around them. Beyond the rail: dark calm water with a moon reflection, layered black pine-tree shorelines fading into blue night haze, deep blue starry sky with a thin moon. About 60 percent of the frame is the ship, water and sky; the characters are part of the place, not posed in front of it. Foreground: a barrel, a coil of rope and a lantern cropped by the bottom-left frame edge, darker and slightly larger, for depth. Upper-left sky area kept calm and low-detail (title words go there later). Wide 16:9 landscape, 1920x1080 or the closest 16:9 size you can output (never below 1500 px wide).
+
+HARD RULES: exactly three characters (Blackbeard + two crewmen), no other people or figures; no realistic humans; NO text, NO letters, NO numbers, NO logos, NO readable signs, plain cloth only (no flag symbols), no watermarks, no 3D render look, no white outline/halo around the characters.
+
+# Done when
+The file exists and `python -I tools/ink/check_art.py videos/pastly-life/02-blackbeard-ink/assets/ink/art_manifests/ep02-scene-s01-deck-party.json` prints OK. Report: what the image shows, how well each character matches its sheet, and any weak areas.
