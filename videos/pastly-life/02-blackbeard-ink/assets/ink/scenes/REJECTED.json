@@ -1,6 +1,13 @@
 {
   "_doc": "Scene images Zen rejected. make_ep02_min1_shots.SC() refuses any plate whose md5 is listed, whatever its filename, so a revert or rename can never bring one back. Add a row the same turn Zen rejects a scene.",
   "rejected": {
-    "b7e64d5755207e2f400b98b9006f99ff": "old s03_deck_work (glossy AI, glowing lantern, wet-shine deck). Zen 2026-11-23: 'still ai', then on the ep02 full render at 1:46 'this weird bad scene ... the light ... so bad'"
+    "b7e64d5755207e2f400b98b9006f99ff": "old s03_deck_work (glossy AI, glowing lantern, wet-shine deck). Zen 2026-11-23: 'still ai', then on the ep02 full render at 1:46 'this weird bad scene ... the light ... so bad'",
+    "217b1e557c441a4f8296f878319c091b": "s01_deck_party_mid: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "9a9bd6420b13da2c5412a91436313224": "s02_inlet_lookout_mid: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "e95993a64dc23f476678ba8543d7b1e0": "s03_deck_work_mid (also copied over s03_deck_work.png): other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "298beb8ace3421caa5e9bbfa24652e39": "s04_hold_cower_mid: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "48ef2313c86d2f66c72fb2ac3954e51e": "s05_rail_thinking_mid: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "8663ecb72a070f956fcfcfc1a9a84536": "s03_deck_work_flat: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'",
+    "dcc8336407abbadfc7aaae05b161c406": "s04_hold_cower_blend: other style (one style only = the OLD graded scenes). Zen 2026-11-22 20:55 FINAL: 'I still like the old one more'; 2026-11-23: 'we already choose one style don't mix the other'"
   }
 }
