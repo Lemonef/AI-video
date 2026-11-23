@@ -582,7 +582,11 @@ def main():
         print('FITS:', *fits, sep='\n  ')
     if errors:
         print('ERRORS:', *errors, sep='\n  ')
-        sys.exit(1)
+        # --draft: write anyway so a preview render can follow the current timeline (e.g. an audio fix)
+        # while the lint stays red; never use it for a ship build.
+        if '--draft' not in sys.argv:
+            sys.exit(1)
+        print('DRAFT: written despite lint errors (preview only)')
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / 'full.json').write_text(json.dumps(part, separators=(',', ':')), encoding='utf-8')
     print(f'OK full: {stats[0]} shots ({stats[1]} cards), {part["f1"]} frames, framings {stats[2]}')
