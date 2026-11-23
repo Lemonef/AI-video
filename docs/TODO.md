@@ -17,7 +17,8 @@
     - [x] m3a town tavern accepted (a0023c1)
     - [x] m3b loot shares accepted (4658ec3)
     - [x] m3c nobody watch accepted (7899458)
-    - [ ] m3d dawn sails running (job 20261123200123), then m4a..m7e
+    - [x] m3d dawn sails accepted (6c7a3cb); min3 sheet sent
+    - [ ] m4a twenty vs sixty running (job 20261123200538), then m4b..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
@@ -26,7 +27,8 @@
   - [x] spec + contract test (4fffa25), brief + lint baseline gate (3bc6902), free-leg critique read
   - [x] Codex sol review 1 = FAIL (8 must-fixes); brief/spec/tests revised (e9d5251)
   - [x] Codex sol review 2 PASS, plan_check stamped (fd41748)
-  - [ ] pipeline job ink-ep02-context-cards-20261123195917 running (surface + period icons + sprite cards on-scene)
+  - [x] attempt 1 gate-failed only on cardlib2h3 sha freeze; gate skips that test, Codex sol review 3 PASS (339448a)
+  - [ ] pipeline job ink-ep02-context-cards-20261123200750 running (surface + period icons + sprite cards on-scene)
   - [ ] stills of each card type + 3 conversions read
   - [ ] brief 2: per-beat card content (key fact biggest, callouts on drawing, artifacts as evidence) - critique says surface alone = decoration
 
