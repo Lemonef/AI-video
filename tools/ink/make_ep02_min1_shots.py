@@ -421,6 +421,68 @@ def fit_sprites(shot):
     return log
 
 
+# Survival-odds box, screen space (it sits outside the camera). Mirrors DoodleMeter in
+# engine/ink/parts/doodle.tsx: right/top inset CHIP_INSET (+8 on the right), padding 8/22, label 30px,
+# bar 360 + gap 16 + "100%" at 44px, border LINE*0.8. Change together with that component.
+_INSET = int(__import__('re').search(r'CHIP_INSET = (\d+)', (ROOT / 'engine/ink/parts/doodle.tsx').read_text(encoding='utf-8')).group(1))
+_LINE = int(__import__('re').search(r'const LINE = (\d+)', (ROOT / 'engine/ink/compositions/InkProof.tsx').read_text(encoding='utf-8')).group(1))
+_LH = 1.2                            # CSS normal line height for the hand font
+_MW = 2 * 22 + 360 + 16 + GLYPH_BOX * 44 * len('100%') + 2 * 0.8 * _LINE
+_MH = 2 * 8 + _LH * 30 + _LH * 44 + 2 * 0.8 * _LINE
+METER_BOX = (STAGE_W - _INSET - 8 - _MW, _INSET, STAGE_W - _INSET - 8, _INSET + _MH)  # x0, y0, x1, y1
+TAG_FONT, TAG_PAD = 56, (28, 10)     # TagElement in engine/ink/parts/elements.tsx
+
+
+def _el_boxes(shot):
+    """Stage-space boxes of words and tags (centred on x, y as the engine draws them)."""
+    for e in shot['els']:
+        if e['t'] == 'words':
+            hw, hh = GLYPH_BOX * e['size'] * len(e['text']) / 2, CAP_H * e['size']
+        elif e['t'] == 'tag':
+            hw = GLYPH_BOX * TAG_FONT * len(e['text']) / 2 + TAG_PAD[0] + _LINE
+            hh = _LH * TAG_FONT / 2 + TAG_PAD[1] + _LINE
+        else:
+            continue
+        yield e, (e['x'] - hw, e['y'] - hh, e['x'] + hw, e['y'] + hh)
+
+
+def _text_boxes(shot):
+    for e, box in _el_boxes(shot):
+        yield e['text'], box
+
+
+def meter_hits(shot):
+    """Texts whose on-screen box (at camera start or end) runs under the survival-odds box."""
+    if shot['meter'] is None:
+        return []
+    mx0, my0, mx1, my1 = METER_BOX
+    out = []
+    for text, (x0, y0, x1, y1) in _text_boxes(shot):
+        for ax, bx, ay, by in _states(shot):
+            if ax * x1 + bx > mx0 and ax * x0 + bx < mx1 and ay * y1 + by > my0 and ay * y0 + by < my1:
+                out.append(text)
+                break
+    return out
+
+
+def clear_meter(shot):
+    """Push words/tags whose screen box runs under the survival-odds box below it, at every camera state."""
+    if shot['meter'] is None:
+        return []
+    log, states, floor = [], _states(shot), METER_BOX[3] + SAFE
+    mx0, my0, mx1, my1 = METER_BOX
+    for e, (x0, y0, x1, y1) in list(_el_boxes(shot)):
+        if not any(ax * x1 + bx > mx0 and ax * x0 + bx < mx1 and ay * y1 + by > my0 and ay * y0 + by < my1
+                   for ax, bx, ay, by in states):
+            continue
+        hh, old = (y1 - y0) / 2, e['y']
+        e['y'] = round(max((floor - by) / ay + hh for _, _, ay, by in states))
+        if any(ay * (e['y'] + hh) + by > STAGE_H - SAFE for _, _, ay, by in states):
+            raise SystemExit(f"{shot['start']}: '{e['text']}' cannot clear the meter box")
+        log.append(f"{e['text']}: y {old}->{e['y']} (meter box)")
+    return log
+
+
 def el_times(e):
     times = [e[k] for k in ('at', 'bracketAt', 'crossAt') if k in e]
     if e['t'] == 'count':
@@ -486,6 +548,7 @@ def build_cut(name):
                    if e['t'] == 'count' and not 1 <= e['n'] <= COUNT_MAX]
         fits += [f'{tag} {m}' for m in fit_words(s)]
         fits += [f'{tag} {m}' for m in fit_sprites(s)]
+        fits += [f'{tag} {m}' for m in clear_meter(s)]
         for e in s['els']:
             for t in el_times(e):
                 if not s['start'] <= t <= end - TAIL:

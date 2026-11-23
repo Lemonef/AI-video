@@ -21,7 +21,7 @@ from make_ep02_min1_shots import (ASSETS, ROOT, CARD, TEXT_ELS, ICON_H, CARD_WOR
                                   FRAMINGS_MIN, SPRITE_MAX, ICON_USES_MAX, WORD_CARD_SHARE, SPLIT_RANGE,
                                   ONE_OBJECT_MIN, MIN1_CUTS, TYPE_CAP, TYPE_CAP_ANY, TAIL, MIN_SHOT, COUNT_MAX,
                                   bg_key, framing, text_only, layout_of, icons_of, fit_words, fit_sprites,
-                                  add_meters)
+                                  add_meters, clear_meter, meter_hits)
 
 OUT = ROOT / 'engine/ink/parts/shots_ep02full'
 AUDIO = 'full-hybrid'
@@ -33,45 +33,6 @@ S11 = 's11_inlet_spyglass'
 # appear in only one minute window unless it is a named story callback here {plate: why}; every photo
 # (background or pinned element) is used once in the whole video.
 CALLBACKS = {}
-
-# Survival-odds box, screen space (it sits outside the camera). Mirrors DoodleMeter in
-# engine/ink/parts/doodle.tsx: right/top inset CHIP_INSET (+8 on the right), padding 8/22, label 30px,
-# bar 360 + gap 16 + "100%" at 44px, border LINE*0.8. Change together with that component.
-_INSET = int(__import__('re').search(r'CHIP_INSET = (\d+)', (ROOT / 'engine/ink/parts/doodle.tsx').read_text(encoding='utf-8')).group(1))
-_LINE = int(__import__('re').search(r'const LINE = (\d+)', (ROOT / 'engine/ink/compositions/InkProof.tsx').read_text(encoding='utf-8')).group(1))
-_LH = 1.2                            # CSS normal line height for the hand font
-_MW = 2 * 22 + 360 + 16 + m1.GLYPH_BOX * 44 * len('100%') + 2 * 0.8 * _LINE
-_MH = 2 * 8 + _LH * 30 + _LH * 44 + 2 * 0.8 * _LINE
-METER_BOX = (m1.STAGE_W - _INSET - 8 - _MW, _INSET, m1.STAGE_W - _INSET - 8, _INSET + _MH)  # x0, y0, x1, y1
-TAG_FONT, TAG_PAD = 56, (28, 10)     # TagElement in engine/ink/parts/elements.tsx
-
-
-def _text_boxes(shot):
-    """Stage-space boxes of words and tags (centred on x, y as the engine draws them)."""
-    for e in shot['els']:
-        if e['t'] == 'words':
-            hw, hh = m1.GLYPH_BOX * e['size'] * len(e['text']) / 2, m1.CAP_H * e['size']
-        elif e['t'] == 'tag':
-            hw = m1.GLYPH_BOX * TAG_FONT * len(e['text']) / 2 + TAG_PAD[0] + _LINE
-            hh = _LH * TAG_FONT / 2 + TAG_PAD[1] + _LINE
-        else:
-            continue
-        yield e['text'], (e['x'] - hw, e['y'] - hh, e['x'] + hw, e['y'] + hh)
-
-
-def meter_hits(shot):
-    """Texts whose on-screen box (at camera start or end) runs under the survival-odds box."""
-    if shot['meter'] is None:
-        return []
-    mx0, my0, mx1, my1 = METER_BOX
-    out = []
-    for text, (x0, y0, x1, y1) in _text_boxes(shot):
-        for ax, bx, ay, by in m1._states(shot):
-            if ax * x1 + bx > mx0 and ax * x0 + bx < mx1 and ay * y1 + by > my0 and ay * y0 + by < my1:
-                out.append(text)
-                break
-    return out
-
 
 def reuse_errors(shots):
     """Scene plate in more than one minute (not a named callback), or any photo used twice."""
@@ -569,7 +530,6 @@ def build():
             if len(lines) > CARD_LINES_MAX:
                 errors.append(f'{tag}: card has {len(lines)} lettered lines > {CARD_LINES_MAX}')
             errors += [f'{tag}: card line "{t}" > {CARD_WORDS_MAX} words' for t in lines if len(t.split()) > CARD_WORDS_MAX]
-        errors += [f'{tag}: "{t}" runs under the meter box' for t in meter_hits(s)]
         if text_only(s):
             errors.append(f'{tag}: text-only shot, needs a living picture')
         errors += [f'{tag}: banned icon {i}' for i in icons_of(s) if i in BANNED_ICONS]
@@ -577,6 +537,8 @@ def build():
                    if e['t'] == 'count' and not 1 <= e['n'] <= COUNT_MAX]
         fits += [f'{tag} {m}' for m in fit_words(s)]
         fits += [f'{tag} {m}' for m in fit_sprites(s)]
+        fits += [f'{tag} {m}' for m in clear_meter(s)]
+        errors += [f'{tag}: "{t}" runs under the meter box' for t in meter_hits(s)]
         for e in s['els']:
             for t in el_times(e):
                 if not s['start'] <= t <= end - TAIL:
