@@ -18,7 +18,8 @@ SCENES = [
                'overlapping a little, no flat row.',
      'props': 'the flagship rail with gun ports and two cannons, a brass spyglass, two small one-mast pirate sloops with '
               'furled sails, a small two-mast merchant ship with slack sails, a far town shore '
-              'with small wooden houses, a church spire and a wharf. No birds. All flags furled tight, no flag designs.',
+              'with small wooden houses, a church spire and a wharf. NO figures on the two sloops or the merchant ship '
+              '(empty decks). No birds. All flags furled tight, no flag designs.',
      'scale': 'rail at a standing man\'s waist; spyglass about forearm length; sloops clearly smaller than the flagship.'},
     {'id': 'm2b_ransom_chest', 'minute': 'minute 3 (b20: he takes hostages and the ransom is a chest of medicine)',
      'goal': 'on the flagship deck: two worried hostages (a wig gent and a merchant) sitting on a bench while a crewman '
@@ -50,12 +51,12 @@ SCENES = [
                'with a cheeky wink. Two crewmen row hard. On the tilted flagship three crewmen hold the slanted rail: one '
                'shakes a fist, one has both hands on his head, one points at the rowboat. Figures readable at every depth.',
      'props': 'a small rowboat with two oars, two small wooden chests and three sacks, the big three-mast flagship tilted '
-              'about fifteen degrees on a pale sandbank with sails furled, a small one-mast sloop waiting with a furled sail, '
+              'about fifteen degrees on a pale sandbank with sails furled, a small one-mast sloop waiting with a furled sail and an empty deck (NO figures on it), '
               'shallow water with ripples over sand, a low sandy shore with scrub bushes. No birds.',
      'scale': 'the flagship many times bigger than the rowboat; a chest about the size of a man\'s torso; masts many times taller than a man.'},
     {'id': 'm2d_roll_call', 'minute': 'minute 3 (b25-b26: count the men left on his crew, about 19 to 25)',
      'goal': 'on a beach by a beached sloop, the crew stands loosely for a head count while Blackbeard walks along '
-             'tapping each man on the shoulder, a crewman tallying with a quill on a blank paper on a barrel.',
+             'tapping each man on the shoulder, a crewman with a quill over a blank paper on a barrel.',
      'cast': [('bb', 1), ('crew', 7)],
      'palette': 'Overcast late afternoon: dusty blue-grey sky, slate sea, pale worn sand, worn brown wood; soft diffused daylight, gentle soft shadows.',
      'camera': 'medium-wide 3/4 view along the loose line of crew at eye level, the line receding diagonally toward the '
@@ -65,10 +66,10 @@ SCENES = [
      'action': 'Six crewmen stand in a loose, uneven curved line receding into the distance, each in a different pose (one '
                'saluting, one yawning, one waving, one hands in pockets, one scratching his head, one on tiptoe). '
                'Blackbeard walks along the line tapping the nearest crewman on the shoulder with one gloved finger, counting '
-               'with a serious squint. The seventh crewman bends over the barrel in the foreground tallying with the quill. '
+               'with a serious squint. The seventh crewman bends over the barrel in the foreground holding the quill over the blank paper. '
                'Figures overlap, nobody in a flat row.',
-     'props': 'a barrel with a blank sheet of paper and a quill (tally strokes only, no numbers or letters), the small '
+     'props': 'a barrel with a completely blank sheet of paper and a quill (no writing, no numbers, no marks at all), the small '
               'one-mast sloop beached on the sand, two crates, footprints in the sand, a '
               'low headland with scrub. No birds.',
-     'scale': 'barrel reaches a standing man\'s hip; the sloop hull taller than a man; rowboat about two men long.'},
+     'scale': 'barrel reaches a standing man\'s hip; the sloop hull taller than a man.'},
 ]

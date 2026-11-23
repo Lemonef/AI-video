@@ -30,7 +30,7 @@ SCENES = [
                'behind the barrel, two piles in front of him, thumbs up, grinning. One crewman holds up a single coin '
                'to inspect it, one nods with arms folded, one walks away happily holding his small pile in cupped hands. '
                'Figures overlap, staggered at different depths.',
-     'props': 'a barrel used as a table with small piles of plain round coins (no markings), an open wooden chest of '
+     'props': 'a barrel used as a table with small piles of plain flat unmarked dull gold discs (no engraving, no faces, no symbols), an open wooden chest of '
               'coins, a coiled rope, the mainmast with rigging, rail and sea. No birds. All flags furled tight.',
      'scale': 'barrel head at a standing man\'s hip; a coin pile about palm-sized; chest about shoulder-wide.'},
     {'id': 'm3c_nobody_watch', 'minute': 'minute 4 (b31: night before the attack, nobody keeps watch)',

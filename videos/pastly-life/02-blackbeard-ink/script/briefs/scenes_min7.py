@@ -38,16 +38,16 @@ SCENES = [
      'goal': 'the duel: Blackbeard and the navy officer face to face on the deck; Blackbeard\'s big sword has just snapped '
              'the officer\'s blade in half, the broken piece flying away, both men still holding a small flintlock pistol.',
      'cast': [('bb', 1), ('officer', 1)],
-     'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; pistol smoke one small matte grey puff, no flash, no glow.',
+     'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; pistol smoke = slow drifting matte grey residue, no muzzle flash, no orange or red light, no glow.',
      'camera': 'medium side-on view at eye level, the two men facing each other across the frame. LEFT = Blackbeard, '
                'larger and nearer; CENTRE-RIGHT = the officer. FOREGROUND = deck planks; BACK = rail, sea, sky. Keep the '
                'right third above the officer calm for text.',
-     'action': 'Blackbeard swings his big curved sword down, roaring, smoke curling from under his hat; the officer\'s '
+     'action': 'Blackbeard swings his big curved sword down, roaring, a faint matte grey wisp curling from under his hat; the officer\'s '
                'straight sword is snapped in half, the broken blade spinning through the air; the officer stumbles back '
-               'with the stub of his sword, eyes wide. Both hold a small flintlock pistol in their other hand, a small '
-               'grey puff drifting from the officer\'s pistol. No blood.',
+               'with the stub of his sword, eyes wide. Both hold a small flintlock pistol in their other hand, slow '
+               'drifting grey residue from the officer\'s pistol (no flash). No blood.',
      'props': 'one big curved sword, one straight sword snapped in two with the broken piece in the air, two small '
-              'flintlock pistols, one small grey smoke puff, deck planks, rail, rigging. No birds. All flags furled tight.',
+              'flintlock pistols, slow drifting grey residue (no flash), deck planks, rail, rigging. No birds. All flags furled tight.',
      'scale': 'rail at a standing man\'s waist; sword about arm length; pistol about hand-and-forearm sized.'},
     {'id': 'm7d_still_standing', 'minute': 'minute 8 (b65: five bullets, about twenty cuts, still standing, slow pan; b67: they still outnumber you, a few minutes, pull back; text on the right)',
      'goal': 'Blackbeard, battered but still standing in the middle of the deck, ringed by navy sailors closing in; '
@@ -55,26 +55,26 @@ SCENES = [
      'cast': [('bb', 1), ('officer', 1), ('navy', 5)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; thin matte grey smoke wisps, no glow.',
      'camera': 'wide 3/4 view from slightly above eye level looking down at the deck, Blackbeard centre-left inside a loose '
-               'ring of navy sailors. FOREGROUND = the back of one navy sailor cut by the bottom-right edge; BACK = rail, '
-               'sea and sky. Keep the right third above the ring calmer for text.',
+               'ring of navy sailors that stays in the left two thirds. FOREGROUND = the back of one navy sailor cut by the bottom-right edge; BACK = rail, '
+               'sea and sky. The RIGHT THIRD stays empty deck, rail and sea (no figures) for text.',
      'action': 'Blackbeard stands wide-legged, coat torn and hat crooked, a few plain cloth patches on his sleeves, sword '
-               'raised in both hands, grinning through his beard. Five navy sailors circle him at different distances, '
-               'swords pointed, edging closer; the officer at the back points at Blackbeard. No blood, no wounds shown.',
+               'raised in both hands, grinning through his beard. Five navy sailors circle him at different distances '
+               'on the left and centre, swords pointed, edging closer; the officer stands centre-left behind them pointing at Blackbeard. No blood, no wounds shown.',
      'props': 'deck planks, plain swords, a dropped pistol, a dropped hat, the mast with a furled sail and rigging, the rail. '
               'No birds. All flags furled tight.',
      'scale': 'rail at a standing man\'s waist; sword about arm length; the ring about three men across.'},
-    {'id': 'm7e_bowsprit_far', 'minute': 'minute 8 (b68: the head on the bowsprit, the body over the side; slow push in on a distant ship; told by silhouette only)',
-     'goal': 'the end, told from far away: the navy sloop sailing off across a grey inlet, a small dark round shape hanging '
+    {'id': 'm7e_bowsprit_far', 'minute': 'minute 8 (b68: his end, told only by a far silhouette; slow push in on a distant ship)',
+     'goal': 'the end, told from far away: the navy sloop sailing off across a grey inlet, a small dark bundle hanging '
              'from the tip of its bowsprit, too far to see any detail. Quiet, sombre, not gory.',
      'cast': [('navy', 2)],
      'palette': 'Late afternoon overcast: dusty grey-blue sky, slate water, low grey clouds; soft diffused daylight, gentle soft shadows, sombre and quiet, no glow.',
      'camera': 'wide view from low over the water, horizon about one third from the top. FOREGROUND = calm rippled water '
                'and one floating plank cut by the bottom edge; MIDDLE-RIGHT = the navy sloop sailing away, small in frame, '
                'seen from the side; BACK = low dark wooded shoreline and wide grey sky.',
-     'action': 'The navy sloop sails away under one small sail. At the very tip of its bowsprit hangs a small dark round '
-               'shape on a short rope, only a dot at this distance, no face, no detail. Two tiny navy figures stand at the '
+     'action': 'The navy sloop sails away under one small sail. At the very tip of its bowsprit hangs a small dark '
+               'cloth bundle on a short rope, only a dot at this distance, no face, no detail. Two tiny navy figures stand at the '
                'stern, backs turned. The water is calm.',
-     'props': 'the navy sloop with one small sail set, the bowsprit with a small dark shape on a rope, one floating plank, '
+     'props': 'the navy sloop with one small sail set, the bowsprit with a small dark cloth bundle on a rope, one floating plank, '
               'a low dark wooded shoreline. No birds. Flags furled tight.',
      'scale': 'the sloop small and far, about a fifth of the frame width; figures tiny.'},
 ]

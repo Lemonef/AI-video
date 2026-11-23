@@ -33,7 +33,7 @@ SCENES = [
                'with one arm out. Far back on his own sloop Blackbeard leans on the rail with his chin in his hand, '
                'watching, unimpressed. Figures staggered, overlapping a little.',
      'props': 'the navy sloop with a furled sail, water barrels (one in the air, one floating), a few grey ballast stones '
-              'splashing, a long pole, Blackbeard\'s small sloop with a furled sail, pale sandbars showing through '
+              'dropping into the water with dull matte splashes (no shine, no droplet sparkle), a long pole, Blackbeard\'s small sloop with a furled sail, pale sandbars showing through '
               'shallow water, a low wooded shore. No birds. All flags furled tight.',
      'scale': 'each sloop only about four men long; barrel reaches a man\'s hip; ballast stone about the size of a head.'},
     {'id': 'm5c_closing_gap', 'minute': 'minute 6 (b46: a traffic jam in the shallows, push in; b47: the gap closing, push in toward the right; text left or right)',
@@ -61,7 +61,7 @@ SCENES = [
                'rail, large in frame; RIGHT TWO THIRDS = across a narrow strip of water, the navy sloop with the officer at '
                'its bow and sailors behind. FOREGROUND = Blackbeard\'s rail cut by the bottom edge; BACK = low shore, sky.',
      'action': 'Blackbeard stands with one boot on the rail, tankard raised high in one hand, mouth wide open roaring, '
-               'smoke curling from under his hat. Two crewmen behind him laugh and shake their fists. On the navy sloop the '
+               'a faint matte grey wisp curling from under his hat (no glow, no fire). Two crewmen behind him laugh and shake their fists. On the navy sloop the '
                'officer cups one hand to his mouth shouting back, his other hand on his sword hilt; three navy sailors '
                'behind him crouch low behind the rail looking nervous. Figures staggered at different depths.',
      'props': 'Blackbeard\'s sloop rail, a plain pewter tankard, the navy sloop with a furled sail, rigging, a narrow strip '
