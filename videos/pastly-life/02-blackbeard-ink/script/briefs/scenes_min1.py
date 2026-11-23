@@ -15,15 +15,15 @@ SCENES = [
                'stacks a sack on a growing pile. The farmer stands right of the pile beside his two-wheeled hand cart, '
                'one eyebrow raised, scratching his straw hat. Figures overlap the pile and each other, nothing in a flat row.',
      'props': 'a pile of six plain burlap sacks with a few brown cocoa beans spilled, a two-wheeled wooden hand cart, a '
-              'gangplank from the sloop, the sloop hull with a furled sail and rigging, mooring ropes on bollards, two '
-              'barrels, a crate, a coil of rope, a wooden lamp post with an unlit lantern, a few gulls standing on posts, '
-              'small wooden houses and a church roof on the far shore, reeds at the water edge, a rowing boat tied up.',
+              'gangplank from the sloop (the plank and the crewman on it stay clearly separate from the hull), the sloop '
+              'hull with a furled sail and rigging, mooring ropes on bollards, two barrels, a crate, small wooden houses '
+              'on the far shore, reeds at the water edge.',
      'scale': 'a sack is about the size of a man\'s torso; barrel reaches a standing man\'s hip; cart wheel reaches his waist.'},
     {'id': 'm1b_gov_study', 'minute': 'minute 2 (b11, b13: the royal pardon; the governor is his friendly neighbour)',
      'goal': 'inside the governor\'s small wooden study in Bath: the governor (wig gent) stamping a blank pardon paper '
              'with a big wax seal while Blackbeard leans on the desk grinning.',
      'cast': [('wig', 1), ('bb', 1)],
-     'palette': 'Dim interior: dusty blue-grey plaster walls, worn brown wood panelling and floor. One small candle on the desk, dim, its light falling off fast; cool grey daylight from the window showing the harbour.',
+     'palette': 'Dim interior: dusty blue-grey plaster walls, worn brown wood panelling and floor. Main light = soft diffuse cool grey daylight from the window showing the harbour; a small unlit or barely lit candle adds nothing. Matte surfaces, no shine, no glow.',
      'camera': 'medium 3/4 view across the corner of the room at eye level, floorboards converging toward the window '
                'wall. FOREGROUND = the corner of the desk with an inkwell and quill cut by the bottom-left frame edge, a '
                'globe on a stand cut by the right edge; MIDDLE = the two figures at the desk; BACK = bookshelf, window, wall.',
@@ -33,11 +33,11 @@ SCENES = [
      'props': 'a heavy wooden desk, a blank paper sheet with a red wax seal, a wooden seal stamp, an inkwell and quill, a '
               'candle in a brass holder, a stack of blank papers tied with ribbon, a bookshelf of plain spines with no '
               'lettering, a framed plain landscape painting, a small window with harbour and a ship mast outside, a '
-              'globe on a stand, a high-backed chair, a rug, a hat stand with a coat, a small ship model on the shelf.',
+              'simple plain globe on a stand (no map detail), a high-backed chair, a rug.',
      'scale': 'desk top at a standing man\'s hip; candle about hand-sized; window sill at chest height.'},
-    {'id': 'm1c_navy_dawn', 'minute': 'minute 2 (b16, b17: two small boats paid from his own budget, 20 men on a tiny boat)',
-     'goal': 'grey dawn in a Virginia harbour: navy sailors crowding onto two small single-mast sloops, far too many men '
-             'for such tiny boats, an officer pointing out to sea.',
+    {'id': 'm1c_navy_dawn', 'minute': 'minute 2 (b16, b17: two small boats paid from his own budget, crammed tiny boats)',
+     'goal': 'grey dawn in a Virginia harbour: navy sailors squeezed onto two small single-mast sloops that look too '
+             'small for them, an officer pointing out to sea.',
      'cast': [('officer', 1), ('navy', 7)],
      'palette': 'Grey pre-dawn: dusty slate-blue sky, slate-grey water, worn brown wood. The sun is a small muted disc just touching the horizon with a faint muted strip on the water (no glow, no rays).',
      'camera': 'medium-wide 3/4 view from the jetty looking out across the two moored sloops toward the horizon, eye '
@@ -45,13 +45,12 @@ SCENES = [
                'edge, a stack of three barrels cut by the left edge; MIDDLE = the two small sloops side by side, the near '
                'one larger in frame; BACK = harbour mouth, a low headland, the rising sun.',
      'action': 'The navy officer stands on the jetty at left, one arm pointing out to sea, chest out. Seven navy sailors '
-               'are packed shoulder to shoulder on the two small decks (four on the near sloop, three on the far one), '
-               'some squeezed against the rail, one climbing over the rail with a bundle, one sitting on a barrel, the '
-               'tiny boats sitting low in the water. Overlapping figures, no flat row.',
-     'props': 'two small one-mast sloops with furled sails and rigging, oars stacked on deck, a small cannon on the near '
-              'sloop, coils of rope, three barrels on the jetty, a crate of supplies, a wooden jetty with posts and a '
-              'ladder, mooring lines, a lantern on a post (unlit), a pair of gulls, a navy flag on the mast that is a '
-              'plain blue-and-red block design with no symbols, the headland with a few trees.',
+               'stand close together on the two small decks (four on the near sloop, three on the far one), '
+               'one sitting on a barrel, the tiny boats sitting low in the water. Each figure readable, staggered at '
+               'different depths, overlapping a little, no flat row.',
+     'props': 'two small one-mast sloops with furled sails and rigging, oars on deck, coils of rope, three barrels on '
+              'the jetty, a wooden jetty with posts, mooring lines, a period British red ensign (plain red flag with a '
+              'small simple union canton in the top corner) on the near mast, the headland with a few trees.',
      'scale': 'sloop rail at a standing man\'s waist; each sloop only about four men long; barrel reaches a man\'s hip.'},
     {'id': 'm1d_qar_deck', 'minute': 'minute 2 (b18: rewind to 1717, his big flagship Queen Anne\'s Revenge, 40 cannons, ~300 men)',
      'goal': 'the busy main deck of a big three-mast pirate flagship: Blackbeard on the raised quarterdeck surveying a '
@@ -63,13 +62,12 @@ SCENES = [
                'and a pile of cannonballs cut by the bottom-left edge, a coiled rope cut by the bottom-right edge; MIDDLE '
                '= crew working along the deck; BACK = the raised quarterdeck with Blackbeard, the stern rail, sea.',
      'action': 'Blackbeard stands on the quarterdeck, fists on hips, chest out, smoke from his hat, grinning. Seven '
-               'crewmen fill the deck: two hauling a rope, one rolling a barrel, one swabbing, one climbing the rigging, '
-               'two loading a cannon. A row of many cannons runs along the side rail, receding into the distance. '
+               'crewmen fill the deck, all standing on the deck (nobody in the rigging): two hauling a rope, one rolling a '
+               'barrel, two swabbing, two loading a cannon. A row of many cannons runs along the side rail, receding into the distance. '
                'Figures overlap, staggered at different depths.',
      'props': 'a long row of at least eight cannons along the rail with gun ports, cannonball piles, three tall masts with '
-              'furled sails and dense rigging, rope ladders, a ship\'s wheel on the quarterdeck, stairs up to the '
-              'quarterdeck, barrels, crates, a hatch grating, coiled ropes, a ship\'s bell on a post, a plain black flag '
-              'with no symbol at the top of the main mast, buckets and a mop.',
+              'furled sails and rigging, a ship\'s wheel on the quarterdeck, stairs up to the quarterdeck, a few barrels, '
+              'coiled ropes, a bucket and a mop. All flags furled tight on their masts.',
      'scale': 'rail at a standing man\'s waist; cannon barrel at knee-to-waist height; masts many times taller than a man; '
               'the deck clearly much bigger than the small sloop in other scenes.'},
 ]
