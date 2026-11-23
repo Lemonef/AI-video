@@ -75,8 +75,20 @@ export const DoodleChip: React.FC<{text: string; font: string; ink: string; pape
 
 // HUD survival-odds meter: top-right (the chip owns top-left, the watermark bottom-right), a hand-drawn bar
 // that eases to a new value as the shot opens; the caller boils it.
+// Look (Zen 2026-11-24 "our explain card is not that good"): was a flat white UI box with a mostly-empty white
+// bar. Now a drawn sticker: hard offset ink shadow (box-shadow, no layout change, so the Python METER_BOX mirror
+// in tools/ink/make_ep02_min1_shots.py stays valid), the bar ruled into METER_CELLS cells, the empty part hatched
+// in ink so it reads "drawn empty", not blank. Sizes derive from LINE.
+const METER_CELLS = 10; // one cell = 10 %
+const METER_SHADOW = Math.round(LINE * 0.9);
+const HATCH_GAP = Math.round(LINE * 1.6);
 export const DoodleMeter: React.FC<{label: string; value: number; font: string; ink: string; paper: string; red: string}> = ({label, value, font, ink, paper, red}) => {
   const tone = meterTone(value) === 'red' ? red : ink;
+  const tick = Math.max(1, Math.round(LINE * 0.4));
+  const cell = 100 / METER_CELLS;
+  const cells = `repeating-linear-gradient(90deg, transparent 0 calc(${cell}% - ${tick}px), ${ink} calc(${cell}% - ${tick}px) ${cell}%)`;
+  const faint = `color-mix(in srgb, ${ink} 25%, transparent)`;
+  const hatch = `repeating-linear-gradient(-45deg, ${faint} 0 ${tick}px, transparent ${tick}px ${HATCH_GAP}px)`;
   return (
     <div style={{
       position: 'absolute',
@@ -87,6 +99,7 @@ export const DoodleMeter: React.FC<{label: string; value: number; font: string; 
       background: paper,
       border: `${LINE * 0.8}px solid ${ink}`,
       borderRadius: HAND_RADIUS,
+      boxShadow: `${METER_SHADOW}px ${METER_SHADOW}px 0 ${ink}`,
       color: ink,
       fontFamily: font,
       fontWeight: 700,
@@ -98,12 +111,14 @@ export const DoodleMeter: React.FC<{label: string; value: number; font: string; 
         <div style={{
           width: 360,
           height: 34,
-          background: paper,
+          position: 'relative',
+          background: `${hatch}, ${paper}`,
           border: `${LINE * 0.6}px solid ${ink}`,
           borderRadius: HAND_RADIUS,
           overflow: 'hidden',
         }}>
           <div style={{width: `${value}%`, height: '100%', background: tone}}/>
+          <div style={{position: 'absolute', inset: 0, background: cells}}/>
         </div>
         <div style={{fontSize: 44, color: tone}}>{Math.round(value)}%</div>
       </div>
