@@ -18,7 +18,8 @@
     - [x] m3b loot shares accepted (4658ec3)
     - [x] m3c nobody watch accepted (7899458)
     - [x] m3d dawn sails accepted (6c7a3cb); min3 sheet sent
-    - [ ] m4a twenty vs sixty running (job 20261123200538), then m4b..m7e
+    - [x] m4a twenty vs sixty accepted (4b877ad)
+    - [ ] m4b the look running (job 20261123201029), then m4c..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
