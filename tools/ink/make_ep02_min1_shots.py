@@ -76,7 +76,7 @@ def PH(name, pos='50% 35%', push=(1.0, 1.08)):
 
 
 CARD = {'card': True}
-S01, S02, S03, S04, S05 = 's01_deck_party', 's02_inlet_lookout', 's03_deck_work', 's04_hold_cower', 's05_rail_thinking'
+S01, S02, S03, S04, S05 = 's01_deck_party', 's02_inlet_lookout', 's03_deck_haul', 's04_hold_cower', 's05_rail_thinking'
 S06, S07, S08, S09, S10 = 's06_bb_calm', 's07_guests_toast', 's08_rail_whisper', 's09_hold_carry', 's10_bb_hips'
 MAP, BB = 'moseley_map_1733.jpg', 'bb_engraving_1724.jpg'
 
