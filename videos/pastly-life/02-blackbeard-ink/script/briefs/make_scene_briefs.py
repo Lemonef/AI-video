@@ -69,7 +69,8 @@ def brief(s):
     sid, out = f"ep02-scene-{s['id'].replace('_', '-')}", f"{EP}/assets/ink/scenes/{s['id']}.png"
     manifest = f'{EP}/assets/ink/art_manifests/{sid}.json'
     sheets = sorted({SHEET_OF[c] for c, _ in s['cast'] if c in SHEET_OF})
-    existing = sorted(p.name for p in (REPO / EP / 'assets/ink/scenes').glob('*.png'))
+    # the job's own output stays writable, so a redo of an existing scene can replace it
+    existing = sorted(p.name for p in (REPO / EP / 'assets/ink/scenes').glob('*.png') if p.name != f"{s['id']}.png")
     data = {'id': sid, 'type': 'creative', 'risk': 'high', 'repo': 'D:/AI-video',
             'gates': [f'python -I tools/ink/check_art.py {manifest}'],
             'protected': PROTECTED + [f'{EP}/assets/ink/scenes/{n}' for n in existing],

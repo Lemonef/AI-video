@@ -23,7 +23,7 @@ SCENES = [
      'goal': 'inside the governor\'s small wooden study in Bath: the governor (wig gent) stamping a blank pardon paper '
              'with a big wax seal while Blackbeard leans on the desk grinning.',
      'cast': [('wig', 1), ('bb', 1)],
-     'palette': 'Dim interior: dusty blue-grey plaster walls, worn brown wood panelling and floor. Main light = soft diffuse cool grey daylight from the window showing the harbour; a small unlit or barely lit candle adds nothing. Matte surfaces, no shine, no glow.',
+     'palette': 'Dim interior: dusty blue-grey plaster walls, worn brown wood panelling and floor. Only light = soft diffuse cool grey daylight from the window showing the harbour. No candle, no lamp, no flame anywhere in the room. Matte surfaces, no shine, no glow.',
      'camera': 'medium 3/4 view across the corner of the room at eye level, floorboards converging toward the window '
                'wall. FOREGROUND = the corner of the desk with an inkwell and quill cut by the bottom-left frame edge, a '
                'globe on a stand cut by the right edge; MIDDLE = the two figures at the desk; BACK = bookshelf, window, wall.',
@@ -31,26 +31,26 @@ SCENES = [
                'red wax blob, the other hand holding the paper flat, smiling politely. Blackbeard leans both gloved hands '
                'on the desk from the front-right side, beard bristling, giant toothy grin, smoke curling from his hat.',
      'props': 'a heavy wooden desk, a blank paper sheet with a red wax seal, a wooden seal stamp, an inkwell and quill, a '
-              'candle in a brass holder, a stack of blank papers tied with ribbon, a bookshelf of plain spines with no '
-              'lettering, a framed plain landscape painting, a small window with harbour and a ship mast outside, a '
+              'stack of blank papers tied with ribbon, a bookshelf of plain spines with no '
+              'lettering, a framed plain landscape painting, a small window with harbour and one bare ship mast outside (no flag, no sail), a '
               'simple plain globe on a stand (no map detail), a high-backed chair, a rug.',
-     'scale': 'desk top at a standing man\'s hip; candle about hand-sized; window sill at chest height.'},
+     'scale': 'desk top at a standing man\'s hip; window sill at chest height.'},
     {'id': 'm1c_navy_dawn', 'minute': 'minute 2 (b16, b17: two small boats paid from his own budget, crammed tiny boats)',
      'goal': 'grey dawn in a Virginia harbour: navy sailors squeezed onto two small single-mast sloops that look too '
              'small for them, an officer pointing out to sea.',
      'cast': [('officer', 1), ('navy', 7)],
-     'palette': 'Grey pre-dawn: dusty slate-blue sky, slate-grey water, worn brown wood. The sun is a small muted disc just touching the horizon with a faint muted strip on the water (no glow, no rays).',
+     'palette': 'Grey pre-dawn: dusty slate-blue sky, slate-grey water, worn brown wood. Flat even overcast sky, sun hidden behind cloud: NO sun disc, no bright spot, no glow, no rays, no light strip on the water.',
      'camera': 'medium-wide 3/4 view from the jetty looking out across the two moored sloops toward the horizon, eye '
                'level, horizon about one third from the top. FOREGROUND = jetty posts and a coiled rope cut by the bottom '
                'edge, a stack of three barrels cut by the left edge; MIDDLE = the two small sloops side by side, the near '
-               'one larger in frame; BACK = harbour mouth, a low headland, the rising sun.',
+               'one larger in frame; BACK = harbour mouth, a low headland, flat grey overcast sky.',
      'action': 'The navy officer stands on the jetty at left, one arm pointing out to sea, chest out. Seven navy sailors '
                'stand close together on the two small decks (four on the near sloop, three on the far one), '
                'one sitting on a barrel, the tiny boats sitting low in the water. Each figure readable, staggered at '
                'different depths, overlapping a little, no flat row.',
      'props': 'two small one-mast sloops with furled sails and rigging, oars on deck, coils of rope, three barrels on '
-              'the jetty, a wooden jetty with posts, mooring lines, a period British red ensign (plain red flag with a '
-              'small simple union canton in the top corner) on the near mast, the headland with a few trees.',
+              'the jetty, a wooden jetty with posts, mooring lines, NO flags of any kind (no ensign, no pennant, '
+              'nothing flying from the masts), the headland with a few trees.',
      'scale': 'sloop rail at a standing man\'s waist; each sloop only about four men long; barrel reaches a man\'s hip.'},
     {'id': 'm1d_qar_deck', 'minute': 'minute 2 (b18: rewind to 1717, his big flagship Queen Anne\'s Revenge, 40 cannons, ~300 men)',
      'goal': 'the busy main deck of a big three-mast pirate flagship: Blackbeard on the raised quarterdeck surveying a '
