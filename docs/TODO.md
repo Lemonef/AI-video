@@ -18,6 +18,11 @@
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
+- [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
+  - [x] spec + contract test (4fffa25), brief + lint baseline gate (3bc6902), free-leg critique read
+  - [ ] Codex sol brief review -> plan_check -> pipeline job (surface + period icons + sprite cards on-scene)
+  - [ ] stills of each card type + 3 conversions read
+  - [ ] brief 2: per-beat card content (key fact biggest, callouts on drawing, artifacts as evidence) - critique says surface alone = decoration
 
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
 - [x] White-key cutter merged (pipeline e40283f) + gate stdin fix (57a4b71, 18 passed x3)
