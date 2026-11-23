@@ -16,7 +16,8 @@
   - [ ] pipeline job per scene m2-m7, eye-check, cherry-pick, push
     - [x] m3a town tavern accepted (a0023c1)
     - [x] m3b loot shares accepted (4658ec3)
-    - [ ] m3c nobody watch running (job 20261123195838), then m3d, m4a..m7e
+    - [x] m3c nobody watch accepted (7899458)
+    - [ ] m3d dawn sails running (job 20261123200123), then m4a..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
