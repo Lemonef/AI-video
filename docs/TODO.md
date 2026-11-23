@@ -9,6 +9,14 @@
   - [x] render 2 OK: 593.45 s 1920x1080 + audio, 460 MB; 8 stills read OK; share copy ep02_full_hybrid-share.mp4 (720p, 26.4 MB) sent 2026-11-23
 - [x] old s03 (Zen-rejected) back in full render at 1:46 -> REJECTED.json hash ban in SC(), s03 = approved mid again; still f3200 checked
 - [ ] ep02 REDO per brain TODO (photo hunt, new art per minute, fresh job per minute). Lints done: reuse + meter overlap (13cb111) + clear_meter fit
+  - [x] min1 m1a/m1b/m1c merged (96b839f, a849b65, b332fa5)
+  - [ ] m1d qar deck: attempt 1 review-fail (reviewer reads PNG bytes, no vision), attempt 2 running
+  - [x] briefs drafted min2-min7 (24 scenes, scenes_minN.py + briefs + manifests, committed)
+  - [ ] Groq + Cohere review min2-min7 -> scenes_minN_review.md -> --stamp
+  - [ ] pipeline job per scene m2-m7, eye-check, cherry-pick, push
+  - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
+  - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
+  - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
