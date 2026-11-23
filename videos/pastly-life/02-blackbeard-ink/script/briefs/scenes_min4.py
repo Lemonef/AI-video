@@ -10,10 +10,7 @@ SCENES = [
              'right packed with sailors. Feeling: badly outnumbered, but the pirates do not look worried.',
      'cast': [('bb', 1), ('crew', 3), ('officer', 1), ('navy', 6)],
      'palette': 'Grey morning in a shallow inlet: dusty blue-grey sky, slate-grey water, worn brown hulls; soft diffused daylight, gentle soft shadows, no sunbeams.',
-     'camera': 'wide side-on view across the water at eye level, horizon about one third from the top. LEFT HALF = the '
-               'pirate sloop, nearer and larger; RIGHT HALF = the two navy sloops side by side, a little further away; '
-               'keep clear calm water and sky above both groups for text. FOREGROUND = a little rippled water along the '
-               'bottom edge; BACK = a low wooded shoreline.',
+     'camera': "HIGH view from up the pirate mast looking down and forward over Blackbeard's small sloop toward the two navy sloops across the water. FOREGROUND = a furled yard and rigging ropes cut by the top-left edge; MIDDLE = the pirate deck below with its few figures seen from above; BACK = across a strip of water, the two navy sloops packed with sailors, a low wooded shoreline. Keep the sky and open water at the top right calm for text.",
      'action': 'On the pirate sloop: Blackbeard stands at the rail with arms crossed and a calm smirk; one crewman leans '
                'on the mast picking his teeth, one sits on a barrel, one shrugs. On the navy sloops: the officer stands '
                'at the bow of the nearer one pointing a sword forward; three navy sailors on each sloop crowd shoulder to '
@@ -26,9 +23,7 @@ SCENES = [
              'grey smoke curling from under his hat, while a crewman behind him edges away nervously.',
      'cast': [('bb', 1), ('crew', 1)],
      'palette': 'Overcast late afternoon: dusty grey sky, slate sea, worn brown wood; soft diffused daylight, gentle soft shadows; smoke matte grey, no sparks, no glow, no fire.',
-     'camera': 'medium close-up at eye level, Blackbeard from the chest up placed left of centre (his face around the left '
-               'third), the right third left calmer (sky and rigging) for text. FOREGROUND = the ship rail cut by the '
-               'bottom edge; MIDDLE = Blackbeard; BACK = the crewman, the mast, sky.',
+     'camera': 'LOW-ANGLE close-up looking UP at Blackbeard from just below his rail, chest up, his face around the left third, sky and rigging behind him; the right third calmer (sky and rigging) for text. FOREGROUND = the ship rail cut by the bottom edge; MIDDLE = Blackbeard towering; BACK = the crewman small behind him by the mast, sky. Normal-size hands.',
      'action': 'Blackbeard leans slightly toward the viewer, eyes narrowed, brows down hard, teeth bared in a scary grin, '
                'one gloved hand gripping the rail. Thin grey smoke curls up from under his hat brim on both sides. Behind '
                'him at the right, the crewman tiptoes backward with both hands raised, sweating, eyes wide.',
@@ -39,10 +34,7 @@ SCENES = [
              'Blackbeard swings over the rail with smoke curling from his hat. Nobody fights.',
      'cast': [('bb', 1), ('crew', 2), ('merchant', 3)],
      'palette': 'Overcast midday at sea: dusty grey sky, slate-blue sea, worn brown deck; soft diffused daylight, gentle soft shadows; smoke matte grey, no glow, no fire.',
-     'camera': 'medium-wide 3/4 view across the merchant ship deck at eye level, planks converging toward the rail where '
-               'the pirate sloop is alongside. FOREGROUND = two dropped swords on the deck and a crate cut by the '
-               'bottom-left edge; MIDDLE = the figures; BACK = the pirate sloop\'s mast alongside, sea, sky. Keep the right '
-               'third calmer for text.',
+     'camera': 'REVERSE view from BEHIND the three merchants: the camera at waist height behind them on their own deck, the merchants seen from the back and side in the foreground-middle, hands up; Blackbeard beyond them landing on the rail and facing the camera, with the pirate sloop mast alongside behind him. FOREGROUND = two dropped swords on the deck and a crate cut by the bottom-left edge; BACK = sea and sky. Keep the right third calmer for text.',
      'action': 'Blackbeard lands on the deck from the rail, one boot on the rail, chest out, smoke curling from under his '
                'hat, glaring. Behind him two crewmen climb over the rail grinning. The three merchants stand in a loose '
                'staggered group: one has both hands up high, one is dropping his sword with a clatter, one is hiding '

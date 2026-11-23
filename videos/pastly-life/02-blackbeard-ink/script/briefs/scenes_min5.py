@@ -9,10 +9,7 @@ SCENES = [
              'run, while Blackbeard stands calmly at the tiller, more thoughtful than bloodthirsty.',
      'cast': [('bb', 1), ('crew', 3)],
      'palette': 'Grey misty dawn: pale dusty blue-grey sky and mist, slate-grey water, worn brown wood; soft diffused light, no sunbeams, no glow, gentle soft shadows.',
-     'camera': 'medium-wide 3/4 view along the small deck from the stern toward the bow at eye level, horizon about one '
-               'third from the top. FOREGROUND = the tiller and Blackbeard\'s side cut by the left edge area; MIDDLE = '
-               'the crewmen; BACK = the bow with the anchor cable going down into the water, the misty inlet, two faint '
-               'grey sails far off in the mist. Keep the right third calmer for text.',
+     'camera': 'LOW view at the bow, camera at deck height beside the anchor cable, looking back along the deck toward the stern. FOREGROUND = the thick anchor rope over the bow rail with the axe blade biting into it, cut by the bottom-left edge (the crewman swinging it seen full-figure just behind, normal-size hands); MIDDLE = the other two crewmen hauling a line and bracing at the rail; BACK = Blackbeard small at the tiller at the stern, misty inlet behind, two faint grey sails far off in the mist. Keep the right third calmer for text.',
      'action': 'Blackbeard holds the tiller with one hand, looking ahead with a calm, almost thoughtful face. At the bow '
                'one crewman swings an axe down onto the thick anchor rope, the rope fraying. One crewman hauls on a line '
                'to raise the sail, one crewman holds the rail bracing for the jolt. Staggered at different depths.',
@@ -24,10 +21,7 @@ SCENES = [
              'overboard to float free, while Blackbeard\'s sloop sits stuck on another sandbar in the background.',
      'cast': [('officer', 1), ('navy', 4), ('bb', 1)],
      'palette': 'Grey overcast morning: dusty slate sky, shallow grey-green water over pale sand, worn brown wood; soft diffused daylight, gentle soft shadows, matte water, no shine.',
-     'camera': 'wide 3/4 view from low over the water, horizon about one third from the top. FOREGROUND = a floating '
-               'barrel and splash rings cut by the bottom-left edge; MIDDLE = the navy sloop tilted slightly on the sand, '
-               'large in frame; BACK = Blackbeard\'s smaller sloop also stuck on a sandbar, Blackbeard a small figure at its '
-               'rail, a low wooded shore.',
+     'camera': "BIRD'S-EYE high view from far above the shallow inlet, looking down at an angle like a map: pale sandbars and channels in grey-green water. MIDDLE = the navy sloop stuck on one sandbar, larger, its sailors tiny but readable from above; BACK-RIGHT = Blackbeard's smaller sloop stuck on another sandbar, Blackbeard a tiny figure at its rail; FOREGROUND = a floating barrel and splash rings near the bottom-left edge; the low wooded shore along the top.",
      'action': 'On the navy sloop: two navy sailors lift a water barrel over the rail, one tosses a ballast stone with '
                'both hands, one pushes against the sand with a long pole. The officer stands at the stern shouting orders '
                'with one arm out. Far back on his own sloop Blackbeard leans on the rail with his chin in his hand, '
@@ -41,9 +35,7 @@ SCENES = [
              'the strip of water between the two boats getting narrow.',
      'cast': [('officer', 1), ('navy', 4), ('bb', 1), ('crew', 2)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, pale sand under the shallows, worn brown hulls; soft diffused daylight, gentle soft shadows.',
-     'camera': 'wide side-on view across the water at eye level, horizon about one third from the top. LEFT = the navy '
-               'sloop coming in; RIGHT = Blackbeard\'s sloop a short gap away; MIDDLE = the narrow strip of water between '
-               'them. FOREGROUND = rippled water along the bottom edge; BACK = low sandy shore with scrub.',
+     'camera': "OVER-THE-SHOULDER view from just behind the navy officer at the bow of the navy sloop, looking forward at Blackbeard's sloop a short gap ahead, eye level; the officer seen from behind, large in the left third, pointing ahead. FOREGROUND = the navy bow rail cut by the bottom edge; MIDDLE = the oars of the four navy sailors along both sides of the deck below and behind him, the narrow strip of water; BACK = Blackbeard's sloop with Blackbeard and two crewmen facing us, a low sandy shore with scrub.",
      'action': 'On the navy sloop four navy sailors pull long oars together, straining, while the officer at the bow '
                'leans forward pointing ahead. On Blackbeard\'s sloop Blackbeard stands at the rail facing them, hands on hips; '
                'one crewman rolls a small cannon toward the rail, one crewman peeks over the rail. Figures staggered, '
@@ -57,9 +49,7 @@ SCENES = [
              'navy officer shouting back from his own bow a short distance away.',
      'cast': [('bb', 1), ('crew', 2), ('officer', 1), ('navy', 3)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, worn brown hulls; soft diffused daylight, gentle soft shadows, matte surfaces.',
-     'camera': 'medium-wide 3/4 view from just behind Blackbeard\'s shoulder line, eye level. LEFT THIRD = Blackbeard at his '
-               'rail, large in frame; RIGHT TWO THIRDS = across a narrow strip of water, the navy sloop with the officer at '
-               'its bow and sailors behind. FOREGROUND = Blackbeard\'s rail cut by the bottom edge; BACK = low shore, sky.',
+     'camera': 'LOW-ANGLE view looking UP at Blackbeard standing on his rail, from his own deck a few steps behind and below him, Blackbeard large in the left half against the sky. FOREGROUND = deck planks and a coiled rope cut by the bottom edge; MIDDLE = Blackbeard and the two crewmen behind him; BACK-RIGHT = across the narrow strip of water, the navy sloop smaller with the officer at its bow and sailors behind, low shore, sky.',
      'action': 'Blackbeard stands with one boot on the rail, tankard raised high in one hand, mouth wide open roaring, '
                'a faint matte grey wisp curling from under his hat (no glow, no fire). Two crewmen behind him laugh and shake their fists. On the navy sloop the '
                'officer cups one hand to his mouth shouting back, his other hand on his sword hilt; three navy sailors '

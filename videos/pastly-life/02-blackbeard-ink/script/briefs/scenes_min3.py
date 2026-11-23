@@ -8,11 +8,7 @@ SCENES = [
              'and arm-wrestling, clearly far away from their ship.',
      'cast': [('crew', 5)],
      'palette': 'Dark interior at dusk: dusty blue-grey plaster, worn brown wood beams and tables. ONLY light = soft cool grey dusk light from one side window on the left; the room falls off from that window into deep soft shadow, the far right side of the room clearly darker, NOT evenly lit. Deeper cel shading with clear shadow shapes on figures and furniture, like the STYLE MATCH image. No lamps, no candles, matte surfaces.',
-     'camera': 'medium-wide 3/4 view across the tavern room at eye level, floorboards converging toward the window wall. '
-               'FOREGROUND = the corner of a table with two plain tankards cut by the bottom-left edge, a stool cut by the '
-               'bottom-right edge; MIDDLE = the five crewmen at two tables; BACK = bar counter with three barrels standing '
-               'on the floor behind it, the window showing a plain rural wooden riverbank with trees and one far ship mast '
-               '(NO stone buildings, NO bridge, NO church or tower: Bath in 1718 is a tiny wooden village).',
+     'camera': 'EXTERIOR looking IN: camera outside the tavern at dusk, looking through one open side window from a few steps away, eye level. FOREGROUND = the dark wooden window frame and sill filling the frame edges like a border, a rain barrel outside cut by the bottom-left edge; MIDDLE = through the window, the five crewmen inside at two tables, smallish; BACK = the bar counter with three barrels behind it inside. Outside the window frame on the right, a sliver of plain rural wooden riverbank with trees and one far ship mast (NO stone buildings, NO bridge, NO church or tower: Bath in 1718 is a tiny wooden village).',
      'action': 'Two crewmen arm-wrestle at the near table, faces strained. One crewman stands on a bench singing with '
                'his tankard raised. One crewman sits with his boots up on a table, his bandana pulled down over his eyes, '
                'napping (no hats on anyone). One crewman leans on the bar counter laughing. Every figure, including the man '
@@ -27,9 +23,7 @@ SCENES = [
              'Blackbeard gets two, everyone looks oddly satisfied.',
      'cast': [('bb', 1), ('crew', 4)],
      'palette': 'Overcast afternoon at anchor: dusty grey sky, slate sea, worn brown deck; soft diffused daylight, gentle soft shadows, coins matte dull gold, no sparkle.',
-     'camera': 'medium 3/4 view at slightly above eye level looking down onto a barrel used as a table. FOREGROUND = a '
-               'coiled rope cut by the bottom-left edge, an open wooden chest of coins cut by the bottom-right edge; '
-               'MIDDLE = the barrel with coin piles and the five figures around it; BACK = mainmast, rail, sea.',
+     'camera': 'HIGH TOP-DOWN view looking almost straight down from the rigging onto the barrel head used as a table. MIDDLE = the round barrel head with coin piles in the centre; the five figures seen from above standing around it (their round heads, hat brims and shoulders, short foreshortened bodies, still full cartoon stickmen with feet visible); FOREGROUND = a yard of rope rigging cut by the top-left edge; deck planks running diagonally, the open coin chest and a coiled rope on the planks at the bottom-right.',
      'action': 'One crewman pushes small even piles of coins across the barrel head with a flat hand. Blackbeard stands '
                'behind the barrel, two piles in front of him, thumbs up, grinning. One crewman holds up a single coin '
                'to inspect it, one nods with arms folded, one walks away happily holding his small pile in cupped hands. '
@@ -42,9 +36,7 @@ SCENES = [
              'post empty, a spyglass lying abandoned.',
      'cast': [('bb', 1), ('crew', 4)],
      'palette': 'Night: deep dusty blue-grey sky with a pale cool moon behind thin cloud, slate-black water, worn brown wood; soft cool moonlight, gentle soft shadows, dry matte deck, no lanterns, no glow.',
-     'camera': 'medium-wide 3/4 view along the small deck from the bow at eye level. FOREGROUND = the empty lookout spot '
-               'by the bow rail with a spyglass lying on the deck, cut by the bottom-left edge; MIDDLE = the sleeping '
-               'figures; BACK = the mast, stern, a dark wooded shoreline of the inlet.',
+     'camera': 'LOW view with the camera lying on the deck at the bow, looking back along the planks toward the stern. FOREGROUND = the abandoned brass spyglass lying on the planks close to camera, large, cut by the bottom-left edge; MIDDLE = the sleeping figures receding along the deck, getting smaller; BACK = the mast with Blackbeard asleep against it, the stern, the dark wooded shoreline and moonlit sky above.',
      'action': 'Blackbeard sleeps sitting against the mast, hat tipped over his face, arms folded, snoring. Four crewmen '
                'sleep in different poses: one curled on a coil of rope, one flat on his back with an arm hanging over a '
                'barrel, one hugging a bottle, one slumped against the rail. Nobody is awake. Figures staggered at '
@@ -57,10 +49,7 @@ SCENES = [
              'sails emerging from the mist.',
      'cast': [('crew', 1)],
      'palette': 'Misty dawn: pale dusty blue-grey mist, slate-grey water, worn brown wood; soft diffused light, no sunbeams, no glow, gentle soft shadows.',
-     'camera': 'over-the-shoulder 3/4 view from behind the crewman at the sloop rail looking out over the water, eye '
-               'level, horizon about one third from the top. FOREGROUND = the rail and a coiled rope cut by the bottom '
-               'edge; MIDDLE = the crewman at the rail; BACK = two small sloops with sails half hidden in the mist, one '
-               'slightly ahead of the other, a faint low shoreline.',
+     'camera': 'OVER-THE-SHOULDER view from just behind the crewman at the sloop rail looking out over the water, eye level, horizon about one third from the top; the crewman seen from behind and a little to the side, large in the left third. FOREGROUND = the rail and a coiled rope cut by the bottom edge; MIDDLE = the crewman at the rail; BACK = two small sloops with sails half hidden in the mist, one slightly ahead of the other, a faint low shoreline.',
      'action': 'The crewman leans on the rail, one hand rubbing his eye, the other hand dropping a tankard in surprise, '
                'mouth open. In the mist two small one-mast sloops with full sails appear, the near one clearer, the far '
                'one fainter. No figures visible on the far sloops.',

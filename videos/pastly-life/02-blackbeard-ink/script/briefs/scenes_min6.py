@@ -10,9 +10,7 @@ SCENES = [
              'rolls across the water and the navy sailors are knocked flat on their own deck like bowling pins.',
      'cast': [('bb', 1), ('crew', 3), ('officer', 1), ('navy', 5)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, worn brown hulls; soft diffused daylight, gentle soft shadows. Cannon smoke = thick matte grey puffs, no flash, no fire, no glow.',
-     'camera': 'wide side-on view across the water at eye level, horizon about one third from the top. LEFT = Blackbeard\'s '
-               'sloop with smoke bursting from its side; RIGHT = the navy sloop a short gap away. FOREGROUND = rippled '
-               'water along the bottom edge; MIDDLE = smoke drifting between the boats; BACK = low sandy shore.',
+     'camera': "HIGH view from up in the pirate rigging looking down along the pirate sloop's gun side and across the water at the navy sloop. FOREGROUND = rigging ropes and a furled yard cut by the top and left edges; MIDDLE = the pirate deck below, the three small cannons firing, thick grey smoke rolling out over the water; BACK = the navy sloop a short gap away with its sailors knocked flat, low sandy shore.",
      'action': 'On the pirate sloop: three crewmen crouch behind three small cannons that have just fired, smoke pouring '
                'out of the muzzles, one covering his ears; Blackbeard stands behind them with one arm thrust forward '
                'yelling. On the navy sloop: four navy sailors are knocked over backward in comic poses (one flat on his '
@@ -27,9 +25,7 @@ SCENES = [
              'battered navy sloop drifts with only a few sailors still standing, the rest sitting dazed.',
      'cast': [('bb', 1), ('crew', 3), ('navy', 5)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, worn brown hulls; soft diffused daylight, gentle soft shadows; leftover smoke thin matte grey wisps, no glow.',
-     'camera': 'medium-wide 3/4 view from the pirate sloop deck looking across at the navy sloop, eye level. LEFT THIRD = '
-               'Blackbeard and his crew on their deck, large in frame; RIGHT TWO THIRDS = across the water, the navy sloop '
-               'with a torn sail. FOREGROUND = a smoking cannon muzzle cut by the bottom-left edge; BACK = shore and sky.',
+     'camera': "REVERSE LOW view from the navy sloop's own deck at deck height, looking across at the pirates. FOREGROUND = two navy sailors sitting slumped close to camera holding their heads, cut by the bottom-left edge, and the torn sail hanging; MIDDLE = the other three navy sailors, two holding the rail; BACK = across the water, the smoky pirate sloop with Blackbeard and his crew cheering, smaller, sky.",
      'action': 'Blackbeard stands with one boot on a cannon, fist raised, laughing. One crewman waves his hat over his '
                'head, one does a little jig, one claps the jigging crewman on the back. On the navy sloop two navy '
                'sailors stand holding the rail looking shaken, three sit slumped on the deck holding their heads, bandaged '
@@ -43,10 +39,7 @@ SCENES = [
              'at the tiller), while Blackbeard\'s crew throw grappling hooks and small round grenade pots across.',
      'cast': [('bb', 1), ('crew', 3), ('officer', 1)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, worn brown hulls; soft diffused daylight, gentle soft shadows; smoke thin matte grey, no glow, no sparks.',
-     'camera': 'medium-wide 3/4 view from just behind the pirate rail looking across at the navy sloop, eye level. '
-               'FOREGROUND = the pirate rail with coiled grapple ropes cut by the bottom edge; MIDDLE = the pirates '
-               'throwing; RIGHT = the navy sloop alongside with its empty deck, shut hatches clearly visible; BACK = '
-               'shore and sky.',
+     'camera': 'OVER-THE-SHOULDER view from just behind Blackbeard as he leans on the pirate rail, eye level, Blackbeard seen from behind and a little to the side in the left third, looking across at the navy sloop. FOREGROUND = the pirate rail with coiled grapple ropes cut by the bottom edge; MIDDLE = the crewmen throwing beside him; RIGHT = the navy sloop alongside with its empty deck, shut hatches clearly visible; BACK = shore and sky.',
      'action': 'One crewman swings a grappling hook on a rope over his head, one has just thrown a hook that is flying '
                'across trailing rope, one lobs a small round black clay pot with a short smoking string. Blackbeard leans '
                'on the rail peering suspiciously at the empty deck with one eyebrow up. On the navy sloop the officer '
@@ -61,10 +54,7 @@ SCENES = [
              'up out of the hold with swords raised. Blackbeard freezes mid-landing, surprised.',
      'cast': [('bb', 1), ('crew', 2), ('officer', 1), ('navy', 5)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey water, worn brown deck; soft diffused daylight, gentle soft shadows; thin matte grey smoke wisps, no glow.',
-     'camera': 'medium-wide 3/4 view across the navy sloop deck at eye level, planks converging toward the far rail. '
-               'FOREGROUND = an open hatch lid cut by the bottom-right edge; MIDDLE = Blackbeard landing centre-left and '
-               'the navy sailors rising out of two open hatches; BACK = the pirate sloop rail with two crewmen climbing '
-               'over, sea and sky.',
+     'camera': 'FROM INSIDE THE DARK HOLD looking straight UP through an open square hatch at the deck and sky above. FOREGROUND = the dark hatch frame edges and a ladder cut by the bottom edge; MIDDLE = navy sailors climbing up the ladder past the camera and bursting out of the hatch, seen from below; BACK = framed in the bright hatch opening, Blackbeard landing on the deck above in a crouch, seen from below against grey sky, the officer at the hatch edge pointing his sword down, the two crewmen as small figures at the far rail.',
      'action': 'Blackbeard lands in a crouch with his sword drawn, eyes wide and mouth open in surprise, smoke curling from '
                'under his hat. Out of two open square hatches five navy sailors burst up to the waist or climbing out, '
                'swords and cutlasses raised, shouting. The officer steps forward from the tiller pointing his sword. Behind '

@@ -10,9 +10,7 @@ SCENES = [
              'shoving and clashing swords, with pirates starting to get knocked down.',
      'cast': [('bb', 1), ('crew', 4), ('navy', 4)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; thin matte grey smoke wisps, no glow.',
-     'camera': 'wide 3/4 view across the navy sloop deck at slightly above eye level, planks converging toward the far '
-               'rail. FOREGROUND = a dropped hat and a coil of rope cut by the bottom-left edge; MIDDLE = the brawl; '
-               'BACK = Blackbeard fighting near the mast, rail, sea. Keep the left third a little calmer for text.',
+     'camera': 'LOW view from deck height right in the middle of the fight, eye level of a man sitting on the deck. FOREGROUND = the dazed crewman sitting on the deck close to camera, cut by the bottom-left edge, a dropped hat beside him; MIDDLE = the fighting pairs overlapping at different depths, the near ones large; BACK = Blackbeard fighting near the mast, rail, sea. Keep the right third a little calmer for text.',
      'action': 'Four pairs fight in staggered depth: a crewman and a navy sailor push swords against each other; a navy '
                'sailor trips a crewman who is falling backward onto the deck; a crewman sits dazed on the deck seeing '
                'stars; a navy sailor and a crewman wrestle over a cutlass. At the back Blackbeard swings his sword at a '
@@ -25,9 +23,7 @@ SCENES = [
              'fuse cord with a small smoking tip, about to set it to the kegs.',
      'cast': [('crew', 1)],
      'palette': 'Dim below-deck room: dusty blue-grey shadows, worn brown wood planks and kegs. Main light = soft cool grey daylight falling through a small open hatch above; the fuse tip only a thin grey smoke curl, no glow, no sparks, matte surfaces.',
-     'camera': 'medium 3/4 view at eye level inside the cramped hold, low ceiling beams. FOREGROUND = the end of a keg cut '
-               'by the bottom-left edge; MIDDLE = the crewman and the fuse; BACK = stacked kegs, a ladder up to the open '
-               'hatch. Keep the right third calmer for text.',
+     'camera': 'OBJECT INSERT, low and close: the camera at floor level right beside the bottom powder keg. FOREGROUND = the keg curve and the smoking fuse tip close to camera, large and sharp, cut by the bottom-left edge; MIDDLE = the fuse cord running back along the floor to the crewman crouched behind, full figure, medium size; BACK = stacked kegs, low ceiling beams, a ladder up to the open hatch. Keep the right third calmer for text.',
      'action': 'The crewman crouches beside a stack of powder kegs, sweating, biting his lip, holding the fuse cord at arm\'s '
                'length; the cord runs along the floor to the bottom keg; a thin grey smoke curl rises from the fuse tip. '
                'He glances up toward the hatch.',
@@ -39,9 +35,7 @@ SCENES = [
              'the officer\'s blade in half, the broken piece flying away, both men still holding a small flintlock pistol.',
      'cast': [('bb', 1), ('officer', 1)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; pistol smoke = slow drifting matte grey residue, no muzzle flash, no orange or red light, no glow.',
-     'camera': 'medium side-on view at eye level, the two men facing each other across the frame. LEFT = Blackbeard, '
-               'larger and nearer; CENTRE-RIGHT = the officer. FOREGROUND = deck planks; BACK = rail, sea, sky. Keep the '
-               'right third above the officer calm for text.',
+     'camera': "OVER-THE-SHOULDER view from just behind the navy officer, the officer seen from behind and a little to the side, large in the right third; Blackbeard beyond him facing the camera, swinging his sword down, centre-left. FOREGROUND = the officer's shoulder and deck planks; BACK = rail, sea, sky. Keep the top-left calm for text.",
      'action': 'Blackbeard swings his big curved sword down, roaring, a faint matte grey wisp curling from under his hat; the officer\'s '
                'straight sword is snapped in half, the broken blade spinning through the air; the officer stumbles back '
                'with the stub of his sword, eyes wide. Both hold a small flintlock pistol in their other hand, slow '
@@ -54,9 +48,7 @@ SCENES = [
              'his torn coat and askew hat show he is in trouble, yet he still grins.',
      'cast': [('bb', 1), ('officer', 1), ('navy', 5)],
      'palette': 'Overcast midday: dusty grey sky, slate-grey sea, worn brown deck; soft diffused daylight, gentle soft shadows; thin matte grey smoke wisps, no glow.',
-     'camera': 'wide 3/4 view from slightly above eye level looking down at the deck, Blackbeard centre-left inside a loose '
-               'ring of navy sailors that stays in the left two thirds. FOREGROUND = the back of one navy sailor cut by the bottom-right edge; BACK = rail, '
-               'sea and sky. The RIGHT THIRD stays empty deck, rail and sea (no figures) for text.',
+     'camera': 'HIGH TOP-DOWN view looking almost straight down from the mast at the deck, Blackbeard centre-left inside a loose ring of navy sailors that stays in the left two thirds, everyone seen from above (round heads, hats, short foreshortened bodies, feet visible). FOREGROUND = a rigging rope crossing the top-left corner; deck planks running diagonally. The RIGHT THIRD stays empty deck planks and rail (no figures) for text.',
      'action': 'Blackbeard stands wide-legged, coat torn and hat crooked, a few plain cloth patches on his sleeves, sword '
                'raised in both hands, grinning through his beard. Five navy sailors circle him at different distances '
                'on the left and centre, swords pointed, edging closer; the officer stands centre-left behind them pointing at Blackbeard. No blood, no wounds shown.',

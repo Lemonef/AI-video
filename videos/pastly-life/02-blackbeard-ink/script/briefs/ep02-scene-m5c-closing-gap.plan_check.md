@@ -1,5 +1,5 @@
 # Plan check: ep02-scene-m5c-closing-gap
-brief-sha256: f17d3c93066fa3a90ec41d17a7455d6159895b1185f75420d2533551973fca7c
+brief-sha256: c3208d1e345ca9a1da1d43f54c83df4893aa15ccb8970835493c385475b25ef3
 
 Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled). See scenes_min5_review.md.
 

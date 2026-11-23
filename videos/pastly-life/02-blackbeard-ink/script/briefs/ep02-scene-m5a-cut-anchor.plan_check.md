@@ -1,5 +1,5 @@
 # Plan check: ep02-scene-m5a-cut-anchor
-brief-sha256: db5c7cb467245e423ff9eadc4fea206e86d77457325e987d95f477b6f598c279
+brief-sha256: 4da25b9e132f166a3236f7a7a64e43d9ac61560d05e381d2ded481526cb89719
 
 Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled). See scenes_min5_review.md.
 
