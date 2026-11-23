@@ -65,7 +65,8 @@ PROTECTED = ['tools/**', 'engine/**', 'tests/**', 'docs/**', 'package.json', 'pa
 
 
 def brief(s):
-    sid, out = f"ep02-scene-{s['id']}", f"{EP}/assets/ink/scenes/{s['id']}.png"
+    # job id must be a lowercase slug (tools/pipeline/brief.py): hyphens, never underscores; png keeps its name
+    sid, out = f"ep02-scene-{s['id'].replace('_', '-')}", f"{EP}/assets/ink/scenes/{s['id']}.png"
     manifest = f'{EP}/assets/ink/art_manifests/{sid}.json'
     sheets = sorted({SHEET_OF[c] for c, _ in s['cast'] if c in SHEET_OF})
     existing = sorted(p.name for p in (REPO / EP / 'assets/ink/scenes').glob('*.png'))
