@@ -7,6 +7,8 @@
 - [x] Render -> D:/AI-video/videos/pastly-life/02-blackbeard-ink/draft/previews/ep02_full_hybrid.mp4, check stills, send
   - [x] render 1 crashed @17055: b85 scale coin/coin (renderer bans equal icons); fixed b85 pen/coin + SCALE asserts it; tail 17000-17802 test render clean
   - [x] render 2 OK: 593.45 s 1920x1080 + audio, 460 MB; 8 stills read OK; share copy ep02_full_hybrid-share.mp4 (720p, 26.4 MB) sent 2026-11-23
+- [x] old s03 (Zen-rejected) back in full render at 1:46 -> REJECTED.json hash ban in SC(), s03 = approved mid again; still f3200 checked
+- [ ] ep02 REDO per brain TODO (reuse lint, photo hunt, new art per minute, fresh job per minute); also lint title vs meter box overlap (f3200 'HIM' under meter)
 - [ ] 3 ep02 thumbs (if time)
 
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
