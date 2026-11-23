@@ -89,5 +89,7 @@ test('card content: renderer draws the sheet from bg.sheet and keeps the inset f
   assert.match(src, /bg\.sheet/, 'InkParts reads bg.sheet');
   assert.match(src, /SHEET_INSET/, 'SHEET_INSET fallback kept');
   const schema = read('engine/ink/parts/schema.ts');
-  assert.match(schema.split('export type Background')[1].split(';')[0], /sheet\?:/, 'Background card variant has sheet?');
+  const bgType = schema.split('export type Background')[1].split('\n')[0]; // one-line declaration
+  const cardVariant = bgType.split('|').find((v) => /card:\s*true/.test(v)) ?? '';
+  assert.match(cardVariant, /sheet\?:/, 'Background card variant has sheet?');
 });

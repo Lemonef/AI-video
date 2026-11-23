@@ -12,6 +12,9 @@ inset panel whatever sits on it.
 Make every ep02 card explain its beat: ONE layout that carries the idea of what the voice says at that moment,
 the right person for the beat as a cast sprite (most cards), a support mark (stamp/tag/circle/underline/tick/
 cross/redact) that points at the key fact, and a sheet sized to the content it holds.
+For the support mark prefer `tag`, `stamp` or `underline` on the key fact over a standalone `circle`: those are
+in `TEXT_ELS`, so layout + mark (+ sprite) still counts as a one-object card, while layout + `circle` counts as
+two objects. Keep at least `ONE_OBJECT_MIN` one-object cards per minute (step 5).
 The protected contract test `tests/ink/ep02-card-content.test.mjs` defines done. Read it first.
 
 Files you may change: `engine/ink/compositions/InkParts.tsx`, `engine/ink/parts/schema.ts`,
@@ -47,7 +50,8 @@ Files you may change: `engine/ink/compositions/InkParts.tsx`, `engine/ink/parts/
      "A LETTER" (the letter found on Blackbeard: certificate or quote).
    - content fixes the owner will notice: f0 3075 count of sloops "PAID FROM HIS OWN BUDGET" must show the money
      (chest icon or a bignum of the cost) next to the sloops; f0 5164 count of flags "EACH = 2 MEN" must count
-     men (crew sprites or a count of crew), not flags; f0 7465 doc "LT. ROBERT MAYNARD" becomes a tag/stamp
+     men, not flags: `count` cannot draw humans, so use a `bignum` (the number of men) plus `crew_*` sprites
+     beside it; f0 7465 doc "LT. ROBERT MAYNARD" becomes a tag/stamp
      name callout on the navy beat; f0 8542 hero flag "SLOW FUSES UNDER HIS HAT" must show Blackbeard (bb_
      sprite) with the fuse idea, not a flag; f0 12843 hero key "THE POWDER ROOM" must show powder (barrel icon),
      not a key.
@@ -60,7 +64,10 @@ Files you may change: `engine/ink/compositions/InkParts.tsx`, `engine/ink/parts/
    change together" comment), never per-card literals. Full-stage layouts (`split, transform, scale, map`) get
    the brief-1 inset panel box (`STAGE_H * 0.12` inset, mirroring `SHEET_INSET`). The test requires: sheet
    inside the stage, compact-layout sheet ≤ 50% of stage area, full-stage ≤ the inset area, each layout's x/y
-   anchor inside its sheet, ≥ 6 distinct sheet sizes across cards. Run it as a post-pass in `build()` next to
+   anchor inside its sheet, ≥ 6 distinct sheet sizes across cards. Box sizes must follow the real renderer
+geometry of each layout (read the layout component; a layout with no x anchor, e.g. `timeline`, is centred on
+the stage, so derive its box from that). In `InkParts.tsx` keep the `SHEET_INSET` const declared after the
+wash constant as today (the brief-1 test reads that order). Run it as a post-pass in `build()` next to
    the brief-1 `under` pass (it reads final content; it does not change content).
 5. **Lint** (`ep02_full_shots.py`): the one-object lint counts cards with exactly one non-TEXT element. A sprite
    beside a layout is now normal, so redefine `one_obj` to count non-TEXT, non-sprite elements == 1. Do NOT
@@ -77,7 +84,8 @@ Files you may change: `engine/ink/compositions/InkParts.tsx`, `engine/ink/parts/
 - All gates pass: `--draft` writes full.json, the lint baseline reports no new errors, the diffgate passes, tsc
   clean, and every listed node test passes, including `tests/ink/ep02-card-content.test.mjs` and the brief-1
   test `tests/ink/ep02-context-card.test.mjs`.
-- The diff touches only the allowed files.
+- The diff touches only the allowed files (the diffgate runs in the clean pipeline worktree, so any file
+  outside the list under engine/ tools/ tests/ src/ fails it).
 - After merge the main session renders stills of many cards and eye-checks them; that review is not a gate.
 - Report: a per-card table (f0, beat words, old content -> new layout + support + sprite), the sheet sizes, and
   the counts (cards, with sprite, memo docs before/after).
