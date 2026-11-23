@@ -154,7 +154,7 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
     layer = bg.under ? <AbsoluteFill>
       <Img src={staticFile(bg.under)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: `blur(${CARD_BLUR}px)`}}/>
       <AbsoluteFill style={{background: PAPER, opacity: bg.wash ?? CARD_WASH}}/>
-      <div style={{position: 'absolute', inset: SHEET_INSET, background: PAPER, opacity: SHEET_ALPHA,
+      <div style={{position: 'absolute', ...(bg.sheet ? {left: bg.sheet[0], top: bg.sheet[1], width: bg.sheet[2], height: bg.sheet[3]} : {inset: SHEET_INSET}), background: PAPER, opacity: SHEET_ALPHA,
         borderRadius: HAND_RADIUS, boxShadow: `${METER_SHADOW}px ${METER_SHADOW}px 0 ${INK}`,
         border: `${LINE}px solid ${INK}`, transform: `rotate(${SHEET_TILT}deg)`}}/>
       <Elements shot={shot}/>
