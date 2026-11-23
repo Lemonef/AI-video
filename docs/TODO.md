@@ -20,7 +20,8 @@
     - [x] m3d dawn sails accepted (6c7a3cb); min3 sheet sent
     - [x] m4a twenty vs sixty accepted (4b877ad)
     - [x] m4b the look accepted (818101c)
-    - [ ] m4c ships surrender running (job 20261123201348), then min4 sheet, m5a..m7e
+    - [x] m4c ships surrender accepted (4d8d4c2)
+    - [ ] m5a cut anchor running (job 20261123201925; rung 1 audit FAIL: BB scowling, needs calm), then m5b..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
@@ -30,8 +31,8 @@
   - [x] Codex sol review 1 = FAIL (8 must-fixes); brief/spec/tests revised (e9d5251)
   - [x] Codex sol review 2 PASS, plan_check stamped (fd41748)
   - [x] attempt 1 gate-failed only on cardlib2h3 sha freeze; gate skips that test, Codex sol review 3 PASS (339448a)
-  - [ ] pipeline job ink-ep02-context-cards-20261123200750 running (surface + period icons + sprite cards on-scene)
-  - [ ] stills of each card type + 3 conversions read
+  - [x] pipeline job ink-ep02-context-cards-20261123200750 merged (59a19f4, pushed): 7/7 contract, tsc 0, lint baseline OK, b81 on s01
+  - [x] stills read (6 cards): plate+sheet+vignette render right; content still thin (e.g. 'paid from his own budget' = 2 sloops), sheet hides ~80% of scene
   - [ ] brief 2: per-beat card content (key fact biggest, callouts on drawing, artifacts as evidence) - critique says surface alone = decoration
 
 ## NOW 2026-11-22 — Pastly Life ep02 Blackbeard minute one (read first)
