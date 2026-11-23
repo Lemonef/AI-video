@@ -21,11 +21,12 @@ according to context".
    that plate blurred and washed toward PAPER, then a hand-drawn sheet: a paper panel with uneven radii
    (HAND_RADIUS), a hard ink offset shadow (same recipe as DoodleMeter), a slight tilt and an inset of the card
    area. The elements draw on top of the sheet, then the Vignette.
-   - Tokens are named constants derived from LINE and the stage size: blur radius, wash amount, sheet inset,
-     sheet tilt, shadow offset.
+   - Tokens are named constants derived from LINE and the stage size: blur radius (small), wash amount (~0.35),
+     sheet inset (~12% of stage height), sheet opacity (~0.85, translucent so the scene reads through), sheet
+     tilt (under 1.5 deg). The shadow offset reuses DoodleMeter's exported METER_SHADOW.
    - `card: true` without `under` keeps today's look, so the other compositions stay unchanged.
-2. **Generator: every ep02 card gets its beat's world.** `under` is the plate of the nearest scene shot in the
-   same beat, or the previous scene shot when the beat has none. One helper, no per-card literals. This ties each
+2. **Generator: every ep02 card gets its beat's world.** `under` is the plate of the nearest previous scene shot,
+   or the next one when none comes before. Each card gets its own bg dict (the shared CARD dict is never mutated). One helper, no per-card literals. This ties each
    card to the place it explains.
 3. **Sprite+words cards become on-scene shots.** These are the 17 cards with no diagram. The cast sprite and words
    move onto the beat's scene plate with halo words. They stop being cards.
@@ -37,8 +38,8 @@ according to context".
    - hat/man -> cast sprite or flag
    - factory/hotel -> dropped, or replaced with chest or barrel to fit the beat
 5. **Scale.** Split, hero and count layouts already sit near the centre. The sheet inset frames them, so their
-   coordinates do not change. Only the icon size tokens grow, about 1.3x, so each drawing fills about 60-70% of
-   the sheet.
+   coordinates do not change. Icon size stays as it is in this build; a larger icon size (about 1.3x) is a
+   later follow-up after the owner sees the stills (revised after the Codex brief review).
 
 ## Out of scope
 
