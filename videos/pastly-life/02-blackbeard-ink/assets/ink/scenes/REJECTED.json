@@ -1,0 +1,6 @@
+{
+  "_doc": "Scene images Zen rejected. make_ep02_min1_shots.SC() refuses any plate whose md5 is listed, whatever its filename, so a revert or rename can never bring one back. Add a row the same turn Zen rejects a scene.",
+  "rejected": {
+    "b7e64d5755207e2f400b98b9006f99ff": "old s03_deck_work (glossy AI, glowing lantern, wet-shine deck). Zen 2026-11-23: 'still ai', then on the ep02 full render at 1:46 'this weird bad scene ... the light ... so bad'"
+  }
+}

@@ -12,6 +12,7 @@ photos, so no pasted sprites appear on those shots.
 Run: python tools/ink/make_ep02_min1_shots.py -> engine/ink/parts/shots_ep02min1/{hybrid,straight}.json
 """
 import collections
+import hashlib
 import json
 import pathlib
 import sys
@@ -55,8 +56,14 @@ ICON_KEYS = ('icon', 'name')
 
 
 # ---------- backgrounds ----------
+REJECTED = json.loads((ASSETS / SCENES / 'REJECTED.json').read_text(encoding='utf-8'))['rejected']
+
+
 def SC(name, zoom=(1.0, 1.08), origin=None):
-    assert (ASSETS / SCENES / f'{name}.png').exists(), f'missing scene {name}'
+    path = ASSETS / SCENES / f'{name}.png'
+    assert path.exists(), f'missing scene {name}'
+    digest = hashlib.md5(path.read_bytes()).hexdigest()
+    assert digest not in REJECTED, f'scene {name} is a Zen-rejected image: {REJECTED.get(digest)}'
     bg = {'plate': f'{SCENES}/{name}.png', 'zoom': list(zoom)}
     if origin:
         bg['origin'] = origin
