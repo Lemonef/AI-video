@@ -1,7 +1,7 @@
 import React from 'react';
 import {INK, PAPER, GREEN, RED, ORANGE, LINE} from '../compositions/InkProof';
 
-export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair' | 'arrow' | 'bentarrow';
+export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair' | 'arrow' | 'bentarrow' | 'sloop' | 'chain' | 'chest' | 'cannon' | 'barrel' | 'pistol' | 'cutlass' | 'flag' | 'scroll' | 'lantern' | 'anchor';
 export const DOODLE = {
   yellow: '#E8C15A', // muted gold marker
   blue: '#7FA6C9', // muted blue marker
@@ -21,6 +21,39 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
   let highlight: string;
   const base = (c: string) => fill ?? c;
   switch (name) {
+    case 'sloop':
+      art = <><path fill={base(DOODLE.brown)} d="M-90 44 Q0 56 90 40 L66 78 Q0 92 -63 76Z"/><path fill="none" d="M-12 44 L-12 -92 M-12 -84 L60 -57"/><path fill={base(DOODLE.cream)} d="M-7 -76 L57 -53 L77 30 L-7 31Z M-23 -65 L-76 30 L-23 31Z"/></>;
+      highlight = 'M-66 56 L-35 60'; break;
+    case 'chain':
+      art = <><g fill="none"><path d="M-79 -50 Q-96 -31 -73 -13 L-47 8 Q-25 20 -13 1 Q0 -16 -21 -32 L-48 -54 Q-65 -68 -79 -50Z"/><path d="M-32 -13 Q-50 5 -28 24 L0 47 Q19 62 34 43 Q48 25 26 7 L-2 -16 Q-20 -30 -32 -13Z"/><path d="M17 25 Q0 44 23 63 L50 84 Q70 98 83 79 Q97 60 74 42 L48 20 Q29 6 17 25Z"/></g></>;
+      highlight = 'M-74 -44 Q-81 -34 -71 -25'; break;
+    case 'chest':
+      art = <><path fill={base(DOODLE.brown)} d="M-82 -12 Q-80 -70 0 -71 Q80 -69 82 -12 L80 72 L-80 73Z"/><path fill="none" d="M-81 -10 L81 -10 M-78 43 L78 42"/><path fill={base(DOODLE.grey)} d="M-53 -59 L-35 -66 L-35 72 L-53 72Z M35 -65 L53 -58 L53 72 L35 72Z"/><path fill={base(DOODLE.yellow)} d="M-12 -20 L13 -20 L13 16 L-12 16Z"/></>;
+      highlight = 'M-72 -30 Q-68 -48 -59 -51'; break;
+    case 'cannon':
+      art = <><path fill={base(DOODLE.brown)} d="M-64 20 L47 14 L70 61 L-77 63Z"/><path fill={base(INK)} d="M-77 -28 L65 -65 L79 -25 L-62 9 Q-88 10 -77 -28Z"/><path fill={base(DOODLE.grey)} d="M65 -65 L78 -69 L92 -28 L79 -25Z"/><circle cx="-43" cy="61" r="25" fill={base(DOODLE.brown)}/><circle cx="43" cy="61" r="25" fill={base(DOODLE.brown)}/><path fill="none" d="M-43 49 L-43 73 M31 61 L55 61"/></>;
+      highlight = 'M-61 -22 L43 -49'; break;
+    case 'barrel':
+      art = <><path fill={base(DOODLE.brown)} d="M-53 -73 Q-84 0 -53 74 Q0 91 53 74 Q85 0 53 -73 Q0 -91 -53 -73Z"/><path fill="none" d="M-24 -77 Q-40 0 -24 78 M24 -77 Q40 0 24 78 M0 -79 L0 80"/><path fill={base(DOODLE.grey)} d="M-65 -46 Q0 -31 65 -46 L70 -27 Q0 -12 -70 -27Z M-70 28 Q0 43 70 28 L65 48 Q0 63 -65 48Z"/><ellipse cx="0" cy="-72" rx="51" ry="13" fill={base(DOODLE.brown)}/></>;
+      highlight = 'M-47 -65 L-51 -56'; break;
+    case 'pistol':
+      art = <><path fill={base(DOODLE.brown)} d="M-82 7 L32 5 L37 28 L-24 33 L-48 79 L-78 63 L-55 21 L-82 22Z"/><path fill={base(DOODLE.grey)} d="M-79 -16 L87 -19 L88 4 L-78 8Z"/><path fill="none" d="M-26 30 Q5 63 16 29 M-17 -16 L-27 -38 L-10 -48 L0 -37 L-8 -20 M7 -10 L14 -31 L30 -29"/></>;
+      highlight = 'M-68 -10 L66 -12'; break;
+    case 'cutlass':
+      art = <><path fill={base(DOODLE.grey)} d="M-38 34 Q27 -7 53 -90 Q91 -2 -18 56Z"/><path fill={base(DOODLE.brown)} d="M-40 37 L-17 57 L-50 91 L-71 73Z"/><path fill={base(DOODLE.yellow)} d="M-59 21 Q-12 20 1 64 L-12 71 Q-27 40 -60 36Z"/><path fill="none" d="M-59 29 Q-98 68 -55 90"/></>;
+      highlight = 'M-19 30 Q36 -11 51 -57'; break;
+    case 'flag':
+      art = <><path fill="none" d="M-73 -92 L-73 93"/><path fill={base(INK)} d="M-69 -82 Q-20 -99 25 -76 Q54 -64 88 -83 L80 25 Q39 46 3 24 Q-31 8 -69 26Z"/><path stroke={PAPER} fill={PAPER} d="M-12 -45 Q-11 -65 10 -64 Q32 -64 33 -44 Q33 -30 23 -26 L23 -16 L-2 -16 L-2 -28 Q-13 -31 -12 -45Z"/><path stroke={PAPER} fill="none" d="M-16 -9 L39 10 M-14 10 L39 -10"/><circle cx="2" cy="-45" r="4" fill={INK}/><circle cx="21" cy="-45" r="4" fill={INK}/></>;
+      highlight = 'M-57 -72 Q-35 -78 -22 -75'; break;
+    case 'scroll':
+      art = <><path fill={base(DOODLE.cream)} d="M-54 -78 L61 -78 Q87 -73 78 -48 L56 -48 L56 62 Q57 85 32 86 L-60 86 Q-83 82 -79 61 L-57 61 L-57 -58 Q-78 -55 -76 -72 Q-72 -86 -54 -78Z"/><path fill="none" d="M56 -48 L56 -65 Q57 -78 68 -78 M-57 61 L28 61 Q15 86 32 86 M-34 -33 L31 -33 M-34 -7 L30 -7 M-34 18 L18 18"/></>;
+      highlight = 'M-46 -65 L38 -65'; break;
+    case 'lantern':
+      art = <><path fill="none" d="M-20 -64 L-20 -79 Q0 -99 20 -79 L20 -64"/><path fill={base(DOODLE.grey)} d="M-54 -43 L-27 -64 L27 -64 L54 -43Z M-51 63 L51 63 L59 81 L-59 81Z"/><path fill={base(DOODLE.yellow)} d="M-44 -42 L44 -42 L42 63 L-43 63Z"/><path fill={base(DOODLE.cream)} d="M-13 49 Q-28 28 4 -4 Q1 21 18 29 Q28 47 8 52Z"/><path fill="none" d="M-44 -42 L42 63 M44 -42 L-43 63"/></>;
+      highlight = 'M-34 -32 L-34 1'; break;
+    case 'anchor':
+      art = <><circle cx="0" cy="-71" r="18" fill="none"/><path fill="none" d="M0 -52 L0 76 M-48 -34 L48 -34 M-71 11 Q-68 64 0 80 Q66 65 73 12"/><path fill={base(DOODLE.grey)} d="M-85 28 L-72 -1 L-50 25Z M50 25 L73 -1 L86 28Z"/></>;
+      highlight = 'M-8 -80 Q0 -88 8 -79'; break;
     case 'tower':
       art = <><path fill={base(DOODLE.brown)} d="M-77 86 Q-40 30 -25 -20 L-9 -69 L0 -92 L8 -68 L24 -20 Q39 35 77 86 L42 86 Q29 32 0 34 Q-29 33 -43 87Z"/><path fill={base(DOODLE.brown)} d="M-38 9 L37 7 L40 19 L-41 21Z M-23 -31 L22 -33 L25 -23 L-26 -21Z"/><path fill="none" d="M-57 65 l22 7 m-17 -18 l22 6 m-13 -19 l20 6 M56 65 l-22 7 m17 -18 l-22 6 m13 -19 l-20 6 M-51 72 l19 -18 m-10 -1 l18 -16 M51 72 L32 54 m10 -1 L24 37 M-25 7 L15 -20 M25 7 L-15 -20 M-13 -35 L8 -56 M13 -35 L-8 -56"/></>;
       highlight = 'M-15 -43 L-11 -55'; break;

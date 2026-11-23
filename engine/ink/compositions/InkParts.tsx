@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {Dust, FONT, INK, LINE, PAPER, RED, Vignette, Watermark, useIn} from './InkProof';
-import {BoilDefs, DoodleChip, DoodleMeter, useBoil} from '../parts/doodle';
+import {BoilDefs, DoodleChip, DoodleMeter, HAND_RADIUS, METER_SHADOW, useBoil} from '../parts/doodle';
 import {meterAt} from '../parts/meter.mjs';
 import {Element} from '../parts/elements';
 import type {Cam, Part, Shot} from '../parts/schema';
@@ -134,6 +134,12 @@ const Camera: React.FC<{cam: Cam; len: number; children: React.ReactNode}> = ({c
   const ty = Math.min(0, Math.max(STAGE_H * (1 - s), STAGE_H / 2 - s * fy));
   return <AbsoluteFill style={{transform: `translate(${tx}px, ${ty}px) scale(${s})`, transformOrigin: '0 0'}}>{children}</AbsoluteFill>;
 };
+// Context-card surface: scene remains visible around and through the paper.
+const CARD_BLUR = LINE / 2; // half an ink stroke softens detail without losing the scene
+const CARD_WASH = LINE / (LINE + LINE * 2); // one of three stroke units gives a one-third paper wash
+const SHEET_INSET = STAGE_H * 0.12; // twelve percent of stage height exposes the scene band
+const SHEET_ALPHA = 1 - LINE / (LINE * 7); // six of seven stroke units gives translucent paper
+const SHEET_TILT = LINE / 10; // one tenth of an ink stroke gives a sub-degree tilt
 const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
   const f = useCurrentFrame(); const bg = shot.bg; const len = shot.f1 - shot.f0;
   const chip = useIn((shot.chipAt ?? shot.f0) - shot.f0);
@@ -145,10 +151,17 @@ const ShotPlayer: React.FC<{shot: Shot}> = ({shot}) => {
     const z = interpolate(f, [0, Math.max(1, len - 1)], bg.push, {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
     layer = <><AbsoluteFill style={{transform: `scale(${z})`, transformOrigin: bg.origin ?? '50% 50%'}}><Img src={staticFile(bg.photo)} style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: bg.pos ?? '50% 50%', filter: 'sepia(0.35) contrast(1.08)'}}/></AbsoluteFill><Elements shot={shot}/></>;
   } else if ('card' in bg && bg.card === true) {
-    layer = <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
+    layer = bg.under ? <AbsoluteFill>
+      <Img src={staticFile(bg.under)} style={{width: '100%', height: '100%', objectFit: 'cover', filter: `blur(${CARD_BLUR}px)`}}/>
+      <AbsoluteFill style={{background: PAPER, opacity: bg.wash ?? CARD_WASH}}/>
+      <div style={{position: 'absolute', inset: SHEET_INSET, background: PAPER, opacity: SHEET_ALPHA,
+        borderRadius: HAND_RADIUS, boxShadow: `${METER_SHADOW}px ${METER_SHADOW}px 0 ${INK}`,
+        border: `${LINE}px solid ${INK}`, transform: `rotate(${SHEET_TILT}deg)`}}/>
+      <Elements shot={shot}/>
+    </AbsoluteFill> : <AbsoluteFill style={{background: PAPER}}><Elements shot={shot}/></AbsoluteFill>;
   } else throw new Error(`Unknown background kind: ${Object.keys(bg).join(', ')}`);
   if (shot.cam) layer = <Camera cam={shot.cam} len={len}>{layer}</Camera>;
-  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{!('card' in bg) && <Vignette/>}<Watermark/>{shot.meter && <BoiledMeter meter={shot.meter}/>}{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip} pos={shot.chipPos}/></AbsoluteFill>}</AbsoluteFill>;
+  return <AbsoluteFill style={{overflow: 'hidden'}}>{layer}{(!('card' in bg) || bg.under) && <Vignette/>}<Watermark/>{shot.meter && <BoiledMeter meter={shot.meter}/>}{shot.chip && <AbsoluteFill style={{opacity: chip, transform: `translateX(${-100 * (1 - chip)}px)`}}><BoiledChip text={shot.chip} pos={shot.chipPos}/></AbsoluteFill>}</AbsoluteFill>;
 };
 export const InkParts: React.FC<{parts: Part[]}> = ({parts}) => <AbsoluteFill style={{background: PAPER}}><BoilDefs/>{parts.flatMap(part => part.shots.map(shot => <Sequence key={`${part.part}-${shot.f0}`} from={shot.f0} durationInFrames={shot.f1 - shot.f0}><ShotPlayer shot={shot}/></Sequence>))}</AbsoluteFill>;
 // Episode mix Zen picked 2026-11-17 ("ok no sound"): voice + pad + sparse SFX, no music. Copy of .build/.../remix-v4sound/final_nomusic.wav.

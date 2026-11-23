@@ -80,7 +80,7 @@ export const DoodleChip: React.FC<{text: string; font: string; ink: string; pape
 // in tools/ink/make_ep02_min1_shots.py stays valid), the bar ruled into METER_CELLS cells, the empty part hatched
 // in ink so it reads "drawn empty", not blank. Sizes derive from LINE.
 const METER_CELLS = 10; // one cell = 10 %
-const METER_SHADOW = Math.round(LINE * 0.9);
+export const METER_SHADOW = Math.round(LINE * 0.9);
 const HATCH_GAP = Math.round(LINE * 1.6);
 export const DoodleMeter: React.FC<{label: string; value: number; font: string; ink: string; paper: string; red: string}> = ({label, value, font, ink, paper, red}) => {
   const tone = meterTone(value) === 'red' ? red : ink;

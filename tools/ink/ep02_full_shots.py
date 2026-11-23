@@ -13,8 +13,9 @@ Run: python -I tools/ink/ep02_full_shots.py -> engine/ink/parts/shots_ep02full/f
 import collections
 import json
 import sys
+from pathlib import Path
 
-sys.path.insert(0, 'D:/AI-video/tools/ink')
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import make_ep02_min1_shots as m1  # noqa: E402
 from make_ep02_min1_shots import *  # noqa: E402,F401,F403
 from make_ep02_min1_shots import (ASSETS, ROOT, CARD, TEXT_ELS, ICON_H, CARD_WORDS_MAX, CARD_LINES_MAX,  # noqa: E402
@@ -26,7 +27,7 @@ from make_ep02_min1_shots import (ASSETS, ROOT, CARD, TEXT_ELS, ICON_H, CARD_WOR
 OUT = ROOT / 'engine/ink/parts/shots_ep02full'
 AUDIO = 'full-hybrid'
 MINUTE = 1800                       # 60 s x 30 fps: window for the per-minute SKILL rules
-BANNED_ICONS = {'man', 'mask', 'face'}
+BANNED_ICONS = {'man', 'mask', 'face', 'ship', 'padlock', 'hat', 'hotel', 'factory', 'suitcase'}
 S11 = 's11_inlet_spyglass'
 
 # Reuse rules (Zen 2026-11-23, SKILL lines 12-14): every minute gets its own pictures. A scene plate may
@@ -177,26 +178,26 @@ P = {
            lambda t, d: S(t, CARD, HERO('clock', 'UNDER 24 HOURS', t + LEAD, burst=True))],
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
-           lambda t, d: S(t, CARD, CS('crew_stand', t + 3, 600, y=700), CS('crew_scrub', t + 9, 960, y=700),
+           lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_stand', t + 3, 600, y=700), CS('crew_scrub', t + 9, 960, y=700),
                           CS('crew_haul_rope', t + 15, 1320, y=700), CW('ABOUT 20 MEN', t + 20)),
            lambda t, d: S(t, SC(S03), cam=PAN(500, 1420)),
            lambda t, d: S(t, CARD, CS('crew_scared', t + 3), X(t + 24, 960, 480), CW('BY NEXT SUMMER', t + 14))],
     # b3 only two kinds walk away; stay to the end
     'b3': [lambda t, d: S(t, SC(S04, (1.0, 1.1)), O('ONLY 2 KINDS', t + 15, x=R, y=260)),
-           lambda t, d: S(t, CARD, SPL(('key', 'KIND ONE'), ('padlock', 'KIND TWO'), t + 3, 14, vs='?')),
+           lambda t, d: S(t, CARD, SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?')),
            lambda t, d: S(t, SC(S05, (1.08, 1.0)), W('STAY TO THE END', t + 13, x=R, y=220), cam=PULL(960, 520))],
     # b4 strangest part: tonight he isn't worried
-    'b4': [lambda t, d: S(t, CARD, CS('bb_exp_deadpan', t + 3, y=620), CW('STRANGEST PART?', t + 11)),
+    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bb_exp_deadpan', t + 3, y=620), CW('STRANGEST PART?', t + 11)),
            lambda t, d: S(t, SC(S06, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240), cam=PAN(1400, 1100))],
     # b5 21 November 1718, small sloop, quiet inlet
     'b5': [lambda t, d: S(t, CARD, BN(1718, '21 NOVEMBER', t + 3, 36, year=True)),
            lambda t, d: S(t, PH(MAP, pos='50% 50%', push=(1.0, 1.12)),
                           chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=t + 5, chipPos='tl'),
-           lambda t, d: S(t, CARD, HERO('ship', 'ONE SMALL SLOOP', t + 3)),
+           lambda t, d: S(t, CARD, HERO('sloop', 'ONE SMALL SLOOP', t + 3)),
            lambda t, d: S(t, SC(S07), cam=PAN(400, 1300))],
     # b6 rum, guests from Bath, one matters later
     'b6': [lambda t, d: S(t, SC(S01, origin='30% 60%'), cam=PUSH(500, 620)),
-           lambda t, d: S(t, CARD, CS('bath_gent_stand', t + 3, 600, y=700), CS('bath_merchant_laugh', t + 9, 960, y=700),
+           lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bath_gent_stand', t + 3, 600, y=700), CS('bath_merchant_laugh', t + 9, 960, y=700),
                           CS('bath_farmer_stand', t + 15, 1320, y=700), CW('GUESTS FROM BATH', t + 22)),
            lambda t, d: S(t, SC(S07), cam=PUSH(880, 700, 1.35)),
            lambda t, d: S(t, CARD, CS('bath_gent_sly', t + 3), CI(t + 14, 960, 480, 380, 380),
@@ -205,17 +206,17 @@ P = {
     'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
            lambda t, d: S(t, CARD, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4)),
            lambda t, d: S(t, SC(S08), cam=PUSH(1250, 480, 1.35)),
-           lambda t, d: S(t, CARD, CS('bb_exp_angry_grin', t + 3), CW('ME AND THE DEVIL', t + 14, color='orange'))],
+           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_angry_grin', t + 3), CW('ME AND THE DEVIL', t + 14, color='orange'))],
     # b8 joke: great line, terrible retirement plan
     'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=230, size=90),
                           O('TERRIBLE PLAN', t + 48, x=R, y=360, size=90))],
     # b9 no treasure: cocoa and cotton
-    'b9': [lambda t, d: S(t, CARD, TF(('coin', 'TREASURE'), ('suitcase', 'COCOA + COTTON'), t + 3, 22)),
+    'b9': [lambda t, d: S(t, CARD, TF(('coin', 'TREASURE'), ('barrel', 'COCOA + COTTON'), t + 3, 22)),
            lambda t, d: S(t, SC(S09, (1.08, 1.0)), TG('COCOA', t + 10, 440, 560), TG('COTTON', t + 24, 840, 800),
                           cam=PULL(960, 600))],
     # b10 joke: most feared pirate = chocolate delivery
     'b10': [lambda t, d: S(t, SC(S10), ST('MOST FEARED', t + 11, x=R, y=260), cam=PUSH(560, 520, 1.15)),
-            lambda t, d: S(t, CARD, SPL(('ship', 'PIRATE'), ('suitcase', 'CHOCOLATE RUN'), t + 3, 22, vs='='))],
+            lambda t, d: S(t, CARD, SPL(('sloop', 'PIRATE'), ('barrel', 'CHOCOLATE RUN'), t + 3, 22, vs='='))],
     # b11 royal pardon five months ago
     'b11': [lambda t, d: S(t, SC(S06), O('ROYAL PARDON', t + 14, x=R, y=240), cam=PAN(1400, 1000)),
             lambda t, d: S(t, CARD, DOC(t, d, 'ROYAL PARDON', ['STOP PIRATING', 'THE CRIME IS WIPED', 'BY ORDER OF THE KING'],
@@ -228,14 +229,14 @@ P = {
             lambda t, d: S(t, CARD, SPL(('crown', 'GOVERNOR'), ('key', 'GETAWAY DRIVER'), t + LEAD, 16, vs='=')),
             lambda t, d: S(t, SC(S02), O('WHO COMES HERE?', t + 12, x=L, y=240), cam=PULL(960, 500))],
     # b14 One Piece villain named after him; the real one
-    'b14': [lambda t, d: S(t, CARD, CS('bb_exp_grin', t + 3), CW('THE REAL ONE', t + 16)),
+    'b14': [lambda t, d: S(t, SC(S10, (1.0, 1.06)), CS('bb_exp_grin', t + 3), CW('THE REAL ONE', t + 16)),
             lambda t, d: S(t, PH(BB, pos='50% 22%'), W('NAMED AFTER HIM', t + 10, x=R, y=260, size=90))],
     # b15 one state over, Virginia's governor wants him dead
     'b15': [lambda t, d: S(t, CARD, MAPE(t, d, (330, 640, 'NORTH CAROLINA'), (310, 520, 'VIRGINIA'), 'ONE STATE OVER'),
                            ST('WANTS HIM DEAD', t + 60, y=880, rot=-6))],
     # b16 navy too big for shallows: 2 small boats, own budget, sent to kill
     'b16': [lambda t, d: S(t, SC(S11), TG('WARSHIPS TOO BIG', t + 10, 960, 320), cam=PUSH(1100, 480, 1.2)),
-            lambda t, d: S(t, CARD, CNT('ship', 2, t + LEAD, 12, 'PAID FROM HIS OWN BUDGET', 960, 520, 900)),
+            lambda t, d: S(t, CARD, CNT('sloop', 2, t + LEAD, 12, 'PAID FROM HIS OWN BUDGET', 960, 520, 900)),
             lambda t, d: S(t, SC(S03), O('SENT TO KILL HIM', t + 12, x=R, y=240), cam=PAN(1400, 500))],
     # b17 most feared pirate alive, tiny boat, twenty men
     'b17': [lambda t, d: S(t, CARD, BN(20, 'MEN ON A TINY BOAT', t + 3, 30)),
@@ -247,10 +248,10 @@ P = {
     # b19 Charleston blockade, a week nothing moves
     'b19': [lambda t, d: S(t, PH(MAP, pos='50% 65%', push=(1.0, 1.14)), chip='CHARLESTON, SOUTH CAROLINA',
                            chipAt=t + 6, chipPos='tl'),
-            lambda t, d: S(t, CARD, GRID(t, d, 'ship', 4, 2, 5, 'padlock', 'A WEEK. NOTHING MOVES'))],
+            lambda t, d: S(t, CARD, GRID(t, d, 'sloop', 4, 2, 5, 'chain', 'A WEEK. NOTHING MOVES'))],
     # b20 hostages; ransom = chest of medicine
     'b20': [lambda t, d: S(t, SC(S09), O('HOSTAGES', t + 12, x=R, y=240), cam=PAN(500, 1400)),
-            lambda t, d: S(t, CARD, TF(('coin', 'RANSOM'), ('suitcase', 'FIRST-AID KIT'), t + LEAD, 30))],
+            lambda t, d: S(t, CARD, TF(('coin', 'RANSOM'), ('chest', 'FIRST-AID KIT'), t + LEAD, 30))],
     # b21 June, flagship on a sandbank
     'b21': [lambda t, d: S(t, SC(S05), W('JUNE: SANDBANK', t + 14, x=R, y=240), cam=PUSH(1100, 600, 1.2))],
     # b22 did it on purpose; fewer shares; layoff
@@ -259,13 +260,13 @@ P = {
             lambda t, d: S(t, CARD, FLOW(t, d, ['CHARLESTON', 'SANDBANK', 'LAYOFF']))],
     # b23 sails off with the loot, leaves the rest
     'b23': [lambda t, d: S(t, SC(S11), O('LEAVES THE REST', t + 10, x=L, y=240), cam=PAN(1300, 600)),
-            lambda t, d: S(t, CARD, SPL(('ship', 'HE SAILS OFF'), ('padlock', 'THE REST: LEFT'), t + LEAD, 16))],
+            lambda t, d: S(t, CARD, SPL(('sloop', 'HE SAILS OFF'), ('chain', 'THE REST: LEFT'), t + LEAD, 16))],
     # b24 wreck found 1996; 300 gone; one of twenty
     'b24': [lambda t, d: S(t, SC(S02), TG('THE WRECK', t + 10, 960, 320), cam=PUSH(700, 600, 1.22)),
             lambda t, d: S(t, CARD, TL(t, d, '1718', '1996', 'WRECK FOUND')),
             lambda t, d: S(t, SC(S06), O('ONE OF TWENTY', t + 10, x=R, y=240), cam=PULL(1300, 520))],
     # b25 count the men: nineteen, maybe twenty-five
-    'b25': [lambda t, d: S(t, CARD, CNT('hat', 10, t + LEAD, 6, 'EACH = 2 MEN', 960, 520, 1300))],
+    'b25': [lambda t, d: S(t, CARD, CNT('flag', 10, t + LEAD, 6, 'EACH = 2 MEN', 960, 520, 1300))],
     # b26 about six Black sailors; free or enslaved; hangman won't care
     'b26': [lambda t, d: S(t, SC(S01), W('LOOK CLOSER', t + 10, x=L, y=240), cam=PUSH(700, 600, 1.25)),
             lambda t, d: S(t, CARD, BN(6, 'BLACK SAILORS ON BOARD', t + 3, 24)),
@@ -273,7 +274,7 @@ P = {
             lambda t, d: S(t, CARD, SPL(('pen', 'FREE SAILOR'), ('handcuffs', 'ENSLAVED'), t + LEAD, 16, vs='='))],
     # b27 Israel Hands + two dozen men in town, miles away
     'b27': [lambda t, d: S(t, SC(S07), O('WHERE IS EVERYONE?', t + 12, x=R, y=240), cam=PAN(1300, 500)),
-            lambda t, d: S(t, CARD, TF(('ship', 'ON DECK: 20'), ('hotel', 'IN TOWN: ~24'), t + LEAD, 26))],
+            lambda t, d: S(t, CARD, TF(('sloop', 'ON DECK: 20'), ('barrel', 'IN TOWN: ~24'), t + LEAD, 26))],
     # b28 shares not wages: 1 for you, 2 for the captain; fairer than offices
     'b28': [lambda t, d: S(t, SC(S03), W('NO WAGES', t + 10, x=R, y=240), cam=PUSH(1200, 560, 1.2)),
             lambda t, d: S(t, CARD, BARS(t, d, [('YOU', 1, '1 SHARE'), ('CAPTAIN', 2, '2 SHARES')])),
@@ -293,10 +294,10 @@ P = {
     'b32': [lambda t, d: S(t, SC(S02), W('DAWN', t + 10, x=L, y=230), TG('A SAIL. THEN ANOTHER.', t + 70, 960, 380),
                            cam=PUSH(1300, 480, 1.25))],
     # b33 two boats, about 60 sailors, local guides
-    'b33': [lambda t, d: S(t, CARD, CNT('ship', 2, t + LEAD, 12, '2 BOATS · ABOUT 60 SAILORS', 960, 520, 900)),
+    'b33': [lambda t, d: S(t, CARD, CNT('sloop', 2, t + LEAD, 12, '2 BOATS · ABOUT 60 SAILORS', 960, 520, 900)),
             lambda t, d: S(t, SC(S11), TG('LOCAL GUIDES ON BOARD', t + 10, 960, 320), cam=PAN(600, 1300))],
     # b34 stopped last night, sandbanks
-    'b34': [lambda t, d: S(t, CARD, CS('crew_spyglass', t + 3), CW('STOPPED LAST NIGHT', t + 12)),
+    'b34': [lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_spyglass', t + 3), CW('STOPPED LAST NIGHT', t + 12)),
             lambda t, d: S(t, PH(MAP, pos='50% 45%', push=(1.0, 1.15)), chip='SANDBANKS EVERYWHERE', chipAt=t + 6,
                            chipPos='tl')],
     # b35 Lt Robert Maynard; no legal right
@@ -312,31 +313,31 @@ P = {
     # b38 claims 40 men, has 20: buying followers
     'b38': [lambda t, d: S(t, CARD, SPL(('newspaper', 'CLAIMS 40'), ('chair', 'REALLY 20'), t + LEAD, 16)),
             lambda t, d: S(t, SC(S01), TG('BUYING FOLLOWERS', t + 10, 960, 320), cam=PAN(500, 1400)),
-            lambda t, d: S(t, CARD, CS('bb_exp_smirk', t + 3), CW('FAKE FOLLOWERS', t + 12))],
+            lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_smirk', t + 3), CW('FAKE FOLLOWERS', t + 12))],
     # b39 the look
     'b39': [lambda t, d: S(t, SC(S10), O('THE LOOK', t + 14, x=R, y=240), cam=PUSH(560, 480, 1.3))],
     # b40 slow fuses under his hat, three pairs of pistols
-    'b40': [lambda t, d: S(t, CARD, HERO('hat', 'SLOW FUSES UNDER HIS HAT', t + 3, burst=True)),
+    'b40': [lambda t, d: S(t, CARD, HERO('flag', 'SLOW FUSES UNDER HIS HAT', t + 3, burst=True)),
             lambda t, d: S(t, SC(S06), cam=PUSH(1300, 460, 1.25)),
-            lambda t, d: S(t, CARD, CS('bb_hand_hilt', t + 3), CW('3 PAIRS OF PISTOLS', t + 12))],
+            lambda t, d: S(t, SC(S10, (1.0, 1.06)), CS('bb_hand_hilt', t + 3), CW('3 PAIRS OF PISTOLS', t + 12))],
     # b41 look terrifying so people give up
     'b41': [lambda t, d: S(t, SC(S04), W('LOOK TERRIFYING', t + 10, x=R, y=240), cam=PULL(960, 500)),
-            lambda t, d: S(t, CARD, TF(('hat', 'THE LOOK'), ('key', 'THEY GIVE UP'), t + LEAD, 26))],
+            lambda t, d: S(t, CARD, TF(('flag', 'THE LOOK'), ('key', 'THEY GIVE UP'), t + LEAD, 26))],
     # b42 may never have killed anyone
     'b42': [lambda t, d: S(t, SC(S05), O('NEVER KILLED ANYONE?', t + 10, x=R, y=240, size=80), cam=PAN(1300, 700)),
             lambda t, d: S(t, CARD, QT('He may never have killed anyone.', None, t + LEAD))],
     # b43 cut the anchor, jolt
     'b43': [lambda t, d: S(t, SC(S03), ST('CUT THE ANCHOR', t + 10, x=R, y=260), cam=PUSH(800, 600, 1.2)),
-            lambda t, d: S(t, CARD, CS('crew_haul_rope', t + 3), CW('JOLT!', t + 10, color='orange'))],
+            lambda t, d: S(t, SC(S09, (1.0, 1.06)), CS('crew_haul_rope', t + 3), CW('JOLT!', t + 10, color='orange'))],
     # b44 sandbar; so are they
     'b44': [lambda t, d: S(t, SC(S11), W('STUCK', t + 10, x=R, y=240), cam=PAN(1400, 700)),
-            lambda t, d: S(t, CARD, SPL(('padlock', 'US: STUCK'), ('padlock', 'THEM: STUCK'), t + LEAD, 18, vs='='))],
+            lambda t, d: S(t, CARD, SPL(('chain', 'US: STUCK'), ('chain', 'THEM: STUCK'), t + LEAD, 18, vs='='))],
     # b45 navy dumps ballast and water barrels
     'b45': [lambda t, d: S(t, SC(S09), TG('NAVY DUMPS WEIGHT', t + 10, 960, 320), cam=PULL(960, 600)),
             lambda t, d: S(t, CARD, FLOW(t, d, ['BALLAST', 'WATER BARRELS', 'AFLOAT']))],
     # b46 beach traffic jam
     'b46': [lambda t, d: S(t, SC(S02), O('TRAFFIC JAM', t + 10, x=R, y=240), cam=PUSH(960, 520, 1.2)),
-            lambda t, d: S(t, CARD, CS('crew_exp_deadpan', t + 3), CW('BEACH TRAFFIC', t + 12))],
+            lambda t, d: S(t, SC(S11, (1.0, 1.06)), CS('crew_exp_deadpan', t + 3), CW('BEACH TRAFFIC', t + 12))],
     # b47 gap closing, still alive
     'b47': [lambda t, d: S(t, SC(S08), W('GAP CLOSING', t + 10, x=L, y=240), cam=PUSH(1100, 480, 1.25)),
             lambda t, d: S(t, CARD, TF(('clock', 'GAP CLOSING'), ('key', 'STILL ALIVE'), t + LEAD, 26))],
@@ -349,19 +350,19 @@ P = {
             lambda t, d: S(t, CARD, XO('handcuffs', 'NO PRISONERS', t + 3, t + 30))],
     # b51 broadside
     'b51': [lambda t, d: S(t, SC(S01), ST('BROADSIDE!', t + 8, x=R, y=260), cam=PUSH(960, 560, 1.25)),
-            lambda t, d: S(t, CARD, HERO('ship', 'ALL GUNS AT ONCE', t + 3, burst=True))],
+            lambda t, d: S(t, CARD, HERO('sloop', 'ALL GUNS AT ONCE', t + 3, burst=True))],
     # b52 about 20 navy hit, 9 on the other boat, its captain dead
     'b52': [lambda t, d: S(t, SC(S03), cam=PAN(1400, 500)),
             lambda t, d: S(t, CARD, BARS(t, d, [('NAVY HIT', 20, '~20'), ('OTHER BOAT', 9, '9')])),
             lambda t, d: S(t, SC(S11), TG('THEIR CAPTAIN: DEAD', t + 10, 960, 320), cam=PUSH(1200, 520, 1.2))],
     # b53 a third down
-    'b53': [lambda t, d: S(t, CARD, GRID(t, d, 'hat', 3, 1, 0, 'scrap', 'A THIRD DOWN')),
+    'b53': [lambda t, d: S(t, CARD, GRID(t, d, 'flag', 3, 1, 0, 'scrap', 'A THIRD DOWN')),
             lambda t, d: S(t, SC(S07), W('THEY ARE HURTING', t + 10, x=R, y=240), cam=PULL(800, 560))],
     # b54 might live to see lunch
     'b54': [lambda t, d: S(t, CARD, TF(('clock', 'DEAD BY NOON?'), ('coin', 'LUNCH, MAYBE'), t + LEAD, 22)),
             lambda t, d: S(t, SC(S05), O('ODDS GOING UP', t + 10, x=R, y=240), cam=PAN(700, 1300))],
     # b55 deck looks empty
-    'b55': [lambda t, d: S(t, CARD, CS('crew_hide_barrel', t + 3), CW('DECK LOOKS EMPTY', t + 12)),
+    'b55': [lambda t, d: S(t, SC(S03, (1.0, 1.06)), CS('crew_hide_barrel', t + 3), CW('DECK LOOKS EMPTY', t + 12)),
             lambda t, d: S(t, SC(S08), cam=PUSH(960, 520, 1.2))],
     # b56 grenades, hooks pull the boats together
     'b56': [lambda t, d: S(t, CARD, FLOW(t, d, ['GRENADES', 'HOOKS', 'PULLED TOGETHER'])),
@@ -373,40 +374,40 @@ P = {
             lambda t, d: S(t, CARD, TF(('coin', 'FREE WIN'), ('handcuffs', 'TRAP'), t + LEAD, 30))],
     # b59 hatches burst: men hidden below
     'b59': [lambda t, d: S(t, SC(S04), O('HATCHES BURST', t + 8, x=R, y=240), cam=PUSH(960, 600, 1.25)),
-            lambda t, d: S(t, CARD, RING(t, d, 'hat', 8, 'HIDDEN BELOW'))],
+            lambda t, d: S(t, CARD, RING(t, d, 'flag', 8, 'HIDDEN BELOW'))],
     # b60 now it's even, on their ship
     'b60': [lambda t, d: S(t, SC(S01), W('NOW IT IS EVEN', t + 10, x=L, y=240), cam=PAN(1400, 600))],
     # b61 powder room, lit fuse
     'b61': [lambda t, d: S(t, CARD, HERO('key', 'THE POWDER ROOM', t + 3)),
             lambda t, d: S(t, SC(S09), O('LIT FUSE', t + 10, x=R, y=240), cam=PUSH(960, 600, 1.25)),
-            lambda t, d: S(t, CARD, CS('crew_lantern', t + 3), CW('ONE SPARK', t + 10, color='orange'))],
+            lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('crew_lantern', t + 3), CW('ONE SPARK', t + 10, color='orange'))],
     # b62 blow the ship up
     'b62': [lambda t, d: S(t, SC(S04), ST('BLOW THE SHIP UP', t + 12, x=960, y=300), cam=PUSH(960, 560, 1.28))],
     # b63 pistols
-    'b63': [lambda t, d: S(t, CARD, SPL(('hat', 'BLACKBEARD'), ('badge', 'MAYNARD'), t + LEAD, 16)),
+    'b63': [lambda t, d: S(t, CARD, SPL(('flag', 'BLACKBEARD'), ('badge', 'MAYNARD'), t + LEAD, 16)),
             lambda t, d: S(t, SC(S06), ST('BANG', t + 10, x=R, y=260), cam=PUSH(1300, 480, 1.25))],
     # b64 swords; his blade snaps Maynard's; neck cut
-    'b64': [lambda t, d: S(t, CARD, CS('bb_cutlass', t + 3), CW('SWORD SNAPS', t + 14)),
+    'b64': [lambda t, d: S(t, SC(S03, (1.0, 1.06)), CS('bb_cutlass', t + 3), CW('SWORD SNAPS', t + 14)),
             lambda t, d: S(t, SC(S10), O('NECK CUT', t + 10, x=R, y=240), cam=PULL(600, 500))],
     # b65 five bullets, about twenty cuts
     'b65': [lambda t, d: S(t, CARD, BARS(t, d, [('BULLETS', 5, '5'), ('SWORD CUTS', 20, '~20')])),
             lambda t, d: S(t, SC(S05), W('STILL STANDING', t + 10, x=R, y=240), cam=PAN(700, 1300))],
     # b66 crewmates going down
-    'b66': [lambda t, d: S(t, CARD, CS('crew_exp_scared', t + 3), CW('CREWMATES GOING DOWN', t + 12)),
+    'b66': [lambda t, d: S(t, SC(S04, (1.0, 1.06)), CS('crew_exp_scared', t + 3), CW('CREWMATES GOING DOWN', t + 12)),
             lambda t, d: S(t, SC(S03), cam=PUSH(1100, 560, 1.22))],
     # b67 they still outnumber you, a few minutes
     'b67': [lambda t, d: S(t, CARD, SCALE(t, d, ('chair', 'YOU'), ('badge', 'NAVY'), 'right', 'STILL OUTNUMBERED')),
             lambda t, d: S(t, SC(S08), O('A FEW MINUTES', t + 10, x=R, y=240), cam=PULL(1000, 500))],
     # b68 head on the bowsprit, body over the side
-    'b68': [lambda t, d: S(t, CARD, XO('hat', 'BLACKBEARD', t + 3, t + 24)),
+    'b68': [lambda t, d: S(t, CARD, XO('flag', 'BLACKBEARD', t + 3, t + 24)),
             lambda t, d: S(t, SC(S11), cam=PUSH(1200, 480, 1.2)),
-            lambda t, d: S(t, CARD, CS('crew_exp_oh', t + 3), CW('OVER THE SIDE', t + 8))],
+            lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('crew_exp_oh', t + 3), CW('OVER THE SIDE', t + 8))],
     # b69 head to Virginia: pics or it didn't happen
     'b69': [lambda t, d: S(t, SC(S02), W('TO VIRGINIA', t + 10, x=R, y=240), cam=PAN(600, 1400)),
             lambda t, d: S(t, CARD, MAPE(t, d, (330, 640, 'OCRACOKE'), (310, 520, 'VIRGINIA'), 'THE PROOF')),
             lambda t, d: S(t, PH(BB, pos='50% 20%'), O("PICS OR IT DIDN'T HAPPEN", t + 10, x=R, y=260, size=70))],
     # b70 legend: headless swim
-    'b70': [lambda t, d: S(t, CARD, SPL(('ship', 'LEGEND: SWIMS'), ('newspaper', 'FACT: SANK'), t + LEAD, 18, vs='?')),
+    'b70': [lambda t, d: S(t, CARD, SPL(('sloop', 'LEGEND: SWIMS'), ('newspaper', 'FACT: SANK'), t + LEAD, 18, vs='?')),
             lambda t, d: S(t, SC(S07), TG('JUST A LEGEND', t + 10, 960, 320), cam=PULL(960, 600))],
     # b71 fuse stopped in time
     'b71': [lambda t, d: S(t, CARD, XO('clock', 'THE FUSE', t + 3, t + 30)),
@@ -423,7 +424,7 @@ P = {
     'b74': [lambda t, d: S(t, CARD, TF(('pen', 'ACCUSED'), ('key', 'WALKS FREE'), t + LEAD, 30)),
             lambda t, d: S(t, SC(S07), W('NOBODY IMPORTANT JAILED', t + 10, x=960, y=220, size=80), cam=PAN(500, 1400))],
     # b75 men in charge walk away; what about you
-    'b75': [lambda t, d: S(t, CARD, SPL(('crown', 'MEN IN CHARGE'), ('hat', 'YOU'), t + LEAD, 20, vs='?'))],
+    'b75': [lambda t, d: S(t, CARD, SPL(('crown', 'MEN IN CHARGE'), ('flag', 'YOU'), t + LEAD, 20, vs='?'))],
     # b76 how long do you last
     'b76': [lambda t, d: S(t, SC(S05), O('HOW LONG DO YOU LAST?', t + 6, x=960, y=240, size=80), cam=PUSH(1000, 520, 1.15))],
     # b77 dead by noon or in chains: 16 to Virginia
@@ -437,10 +438,10 @@ P = {
                                         stamp='GUILTY')),
             lambda t, d: S(t, SC(S10), cam=PUSH(600, 480, 1.22))],
     # b80 two men walk away (46 frames)
-    'b80': [lambda t, d: S(t, CARD, CS('crew_exp_surprised', t + 2), CW('TWO WALK AWAY', t + 6))],
+    'b80': [lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_exp_surprised', t + 2), CW('TWO WALK AWAY', t + 6))],
     # b81 Samuel Odel, the party guest, freed
     'b81': [lambda t, d: S(t, SC(S07), TG('SAMUEL ODEL', t + 8, 960, 320), cam=PUSH(880, 700, 1.3)),
-            lambda t, d: S(t, CARD, CS('bath_gent_sly', t + 3), CW('PARTY GUEST: FREED', t + 10))],
+            lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('bath_gent_sly', t + 3), CW('PARTY GUEST: FREED', t + 10))],
     # b82 Israel Hands pardoned
     'b82': [lambda t, d: S(t, SC(S11), W('ISRAEL HANDS', t + 8, x=R, y=240), cam=PAN(600, 1300)),
             lambda t, d: S(t, CARD, HERO('pen', 'PARDONED', t + 3, burst=True))],
@@ -461,7 +462,7 @@ P = {
             lambda t, d: S(t, CARD, CHK(t, d, [('AT THE PARTY', 'none'), ('IN TOWN', 'none'), ('ON DECK', 'none')])),
             lambda t, d: S(t, SC(S02), W('TELL US IN COMMENTS', t + 8, x=960, y=220, size=80), cam=PUSH(960, 520, 1.15))],
     # b88 when a deck looks empty, ask who's hiding
-    'b88': [lambda t, d: S(t, CARD, GRID(t, d, 'suitcase', 4, 2, 6, 'hat', "WHO'S HIDING?"))],
+    'b88': [lambda t, d: S(t, CARD, GRID(t, d, 'barrel', 4, 2, 6, 'flag', "WHO'S HIDING?"))],
 }
 
 
@@ -489,6 +490,17 @@ def lint_window(name, shots, errors, partial):
                if c > TYPE_CAP.get(t, TYPE_CAP_ANY)]
 
 
+def add_card_underlays(shots):
+    """Each card owns its bg and borrows the nearest preceding scene, or the first following scene."""
+    previous = None
+    for i, shot in enumerate(shots):
+        if 'plate' in shot['bg']:
+            previous = shot['bg']['plate']
+        elif shot['bg'].get('card'):
+            plate = previous or next(s['bg']['plate'] for s in shots[i + 1:] if 'plate' in s['bg'])
+            shot['bg'] = {'card': True, 'under': plate}
+
+
 def build():
     tl = json.loads((ASSETS / AUDIO / 'timeline.json').read_text(encoding='utf-8'))
     total = tl['totalFrames']
@@ -509,6 +521,7 @@ def build():
     if errors:
         return None, errors, fits, None
     add_meters(shots, tl)
+    add_card_underlays(shots)
 
     out, prev_bg = [], None
     for i, s in enumerate(shots):
