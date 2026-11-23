@@ -1,5 +1,5 @@
 # Plan check: ep02-scene-m2b-ransom-chest
-brief-sha256: 4c6b8cb964f34db1c9bb3fe342082878d1148d7c2a97f28698b88ca6d0ef0d0c
+brief-sha256: 92ff4144e8201fb605f96c638f96e34f69cdbab4c1cb801ec00f7d0bc3a7002d
 
 Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled). See scenes_min2_review.md.
 

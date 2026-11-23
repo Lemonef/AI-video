@@ -1,5 +1,5 @@
 # Plan check: ep02-scene-m6d-hatches-burst
-brief-sha256: e18f93c558a0b671711212c80a23f01e64fb87737983c72617d9f6f428e8a026
+brief-sha256: a3042871e2f91a9696d20f14c4d538a82498cb4cdb4fad42494eeb744acecb5e
 
 Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled, no glow). See scenes_min6_review.md.
 

@@ -36,10 +36,12 @@ SHEET_OF = {'crew': 'crew', 'bb': 'bb', 'wig': 'bath', 'merchant': 'bath', 'farm
 # to just it some issue only with somescene"; 2026-11-23 "we already choose one style don't mix the other").
 # Style core copied verbatim from the old scene briefs (e.g. ep02-scene-s06-bb-calm.md). The only changes are the
 # faults Zen named on old s03 (glowing lantern light, wet shiny deck, glossy AI look, giant gloved hands): REDO/AVOID.
-STYLE_REF = f'{EP}/assets/ink/scenes/s01_deck_party.png'  # old approved first scene (md5 6701cd0e), never a *_mid/_flat/_blend
+# Zen 2026-11-23 21:37: "i want clean look like ink or beanie not this look like on old the old tv thingy" -> same old
+# drawing, NO grain. Ref = s01_deck_party.png (md5 6701cd0e) denoised (NL-means + bilateral + light unsharp).
+STYLE_REF = f'{EP}/assets/ink/sheets/style_ref_clean.png'
 STYLE = ('Hand-inked storybook illustration, thick charcoal outlines, soft cel shading, muted desaturated vintage '
-         'palette (dusty blues, slate greys, worn browns, low saturation), paper-grain texture, same look as the '
-         'approved first scene (copy its line, cel shading, paper grain and palette; ignore its lighting and any '
+         'palette (dusty blues, slate greys, worn browns, low saturation), clean crisp ink lines and clean smooth colour fills with NO grain, noise or texture, same look as the '
+         'approved first scene (copy its line, cel shading and palette; ignore its lighting and any '
          'lantern glow). Keep to one muted colour family; the only strong accent is a small muted brick red '
          '(the bandanas or one single detail), no other saturated colour. Every character and object casts a soft '
          'contact shadow on the floor or deck it stands on.')
@@ -52,12 +54,12 @@ LIGHT_RULE = ('Every light source is small and dim, its light falls off fast int
               'place around them.')
 REDO = ('any light glows, blooms, has a halo or rays; wet, shiny or reflective surfaces; glossy plastic shine or '
         'specular highlights; oversaturated orange or teal-and-orange grade; a look that does not match the STYLE MATCH '
-        'image (line weight, grading, paper grain); giant hands or close-up gloves; realistic faces; a character not '
+        'image (line weight, grading); any grain, noise, film, VHS or paper texture; giant hands or close-up gloves; realistic faces; a character not '
         'matching its sheet; characters pasted on (no shadow, white rim); any text, letters or numbers; wrong figure '
         'count; legs cropped; objects out of scale.')
 AVOID = ('glowing bloom, light halos or rays, wet shine, glossy highlights, oversaturated orange, teal-and-orange grade, '
          'neon colours, everything evenly lit, giant hands, photoreal, 3D render, fog or mist, lens flare, motion blur, '
-         'depth-of-field blur, smooth airbrush gradients, extra or melted limbs, text.')
+         'depth-of-field blur, smooth airbrush gradients, grain, noise, film grain, paper texture, VHS or old-TV look, halftone, scratches, extra or melted limbs, text.')
 PROTECTED = ['tools/**', 'engine/**', 'tests/**', 'docs/**', 'package.json', 'package-lock.json', 'tsconfig.json',
              'conftest.py', '**/conftest.py', 'pytest.ini', 'pyproject.toml', 'setup.cfg',
              f'{EP}/assets/ink/art_manifests/**', f'{EP}/assets/ink/sheets/**', f'{EP}/assets/ink/plates/**',
@@ -78,12 +80,11 @@ def brief(s):
             'plan_check': f'{EP}/script/briefs/{sid}.plan_check.md'}
     refs = ''.join(f'- CHARACTER IDENTITY: `{SHEETS[k]}`. Copy the exact design: proportions, outline weight, colours, '
                    f'face style. Cartoon stickmen, never realistic people.\n' for k in sheets)
-    refs += (f'- STYLE MATCH: `{STYLE_REF}` is the approved first scene. Match its line weight, colour grading and '
-             'paper grain so all scenes cut together as one film (copy its look, not its lantern glow).')
+    refs += (f'- STYLE MATCH: `{STYLE_REF}` is the approved first scene. Match its line weight and colour grading, clean with no grain, so all scenes cut together as one film (copy its look, not its lantern glow).')
     cast = '\n'.join(f'- {CAST[c]} Draw {n}.' for c, n in s['cast'])
     total = sum(n for _, n in s['cast'])
     body = f"""# Goal
-New scene for ep02 (Blackbeard) {s['minute']}: {s['goal']} Same look as the approved first scene s01_deck_party.png (the old graded style): hand-inked storybook, thick charcoal outlines, soft cel shading, muted vintage palette, paper grain. Lights stay small and dim with no glow; surfaces dry and matte.
+New scene for ep02 (Blackbeard) {s['minute']}: {s['goal']} Same look as the STYLE MATCH image (the old graded style, cleaned): hand-inked storybook, thick charcoal outlines, soft cel shading, muted vintage palette, clean crisp lines, no grain or noise. Lights stay small and dim with no glow; surfaces dry and matte.
 
 # Files
 Work only inside the repo (D:/AI-video). Create ONLY this file (exact name): {out}. Do not edit any other file.

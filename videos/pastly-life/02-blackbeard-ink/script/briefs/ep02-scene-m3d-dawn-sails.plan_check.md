@@ -1,5 +1,5 @@
 # Plan check: ep02-scene-m3d-dawn-sails
-brief-sha256: 2d4eb39bd01fc4643627a42417b0a1d82dff05fe02fc0504e1f69700e211f4cc
+brief-sha256: 0e38750588dd54a60f80f70ea0ad52a7decc3c52009a74142dcd83cca83d3fc3
 
 Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled). See scenes_min3_review.md.
 
