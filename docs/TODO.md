@@ -22,12 +22,16 @@
     - [x] m4b the look accepted (818101c)
     - [x] m4c ships surrender accepted (4d8d4c2)
     - [x] m5a cut anchor accepted (17397d1; rung 2 fixed the BB scowl, low deck cam)
-    - [ ] m5b both stuck running (job 20261123202437), then m5c, m5d, min5 sheet, m6a..m7e
+    - [x] m5b both stuck accepted (10b8fb5)
+    - [x] m5c closing gap accepted (3899f4e; over-shoulder Maynard cam, clean)
+    - [ ] m5d shouted challenge running (job 20261123203835), then min5 sheet, m6a..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
+  - [x] brief 1 surface merged (59a19f4)
+  - [ ] brief 2 content (63f857a): Sol review 2 running -> plan_check -> pipeline
   - [x] spec + contract test (4fffa25), brief + lint baseline gate (3bc6902), free-leg critique read
   - [x] Codex sol review 1 = FAIL (8 must-fixes); brief/spec/tests revised (e9d5251)
   - [x] Codex sol review 2 PASS, plan_check stamped (fd41748)
