@@ -44,3 +44,4 @@ tools/ink/models/
 videos/*/*/assets/min1-*/vo/
 videos/*/*/assets/min1-*/*.wav
 videos/*/*/assets/min1-*/timeline.json
+videos/*/*/assets/full-*/timeline.json
