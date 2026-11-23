@@ -14,13 +14,16 @@
   - [x] briefs drafted min2-min7 (24 scenes, scenes_minN.py + briefs + manifests, committed)
   - [ ] Groq + Cohere review min2-min7 -> scenes_minN_review.md -> --stamp
   - [ ] pipeline job per scene m2-m7, eye-check, cherry-pick, push
+    - [x] m3a town tavern accepted (a0023c1)
+    - [ ] m3b loot shares running (job 20261123194917), then m3c, m3d, m4a..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
   - [x] spec + contract test (4fffa25), brief + lint baseline gate (3bc6902), free-leg critique read
-  - [ ] Codex sol brief review -> plan_check -> pipeline job (surface + period icons + sprite cards on-scene)
+  - [x] Codex sol review 1 = FAIL (8 must-fixes); brief/spec/tests revised (e9d5251)
+  - [ ] Codex sol review 2 -> plan_check -> pipeline job (surface + period icons + sprite cards on-scene)
   - [ ] stills of each card type + 3 conversions read
   - [ ] brief 2: per-beat card content (key fact biggest, callouts on drawing, artifacts as evidence) - critique says surface alone = decoration
 
