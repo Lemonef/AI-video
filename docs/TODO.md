@@ -21,7 +21,8 @@
     - [x] m4a twenty vs sixty accepted (4b877ad)
     - [x] m4b the look accepted (818101c)
     - [x] m4c ships surrender accepted (4d8d4c2)
-    - [ ] m5a cut anchor running (job 20261123201925; rung 1 audit FAIL: BB scowling, needs calm), then m5b..m7e
+    - [x] m5a cut anchor accepted (17397d1; rung 2 fixed the BB scowl, low deck cam)
+    - [ ] m5b both stuck running (job 20261123202437), then m5c, m5d, min5 sheet, m6a..m7e
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
