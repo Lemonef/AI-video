@@ -12,3 +12,12 @@ Reviewers: Groq (Qwen) and Cohere, 2026-11-23 (free legs). Min1 lessons (no bird
 | m3d dawn sails | PASS | PASS | - | - |
 
 Style stays the OLD graded scenes (Zen 2026-11-22 20:55 FINAL).
+
+## m3a redo spec 2026-11-23 22:40 (top-tier audit FAIL on attempt 1)
+| Finding | Applied |
+|---|---|
+| window showed stone buildings, bridge, church tower (Bath 1718 = tiny wooden village) | window = plain wooden riverbank, trees, one far mast; stone/bridge/tower banned |
+| evenly lit, weak cel shading vs style ref | one left window light, falloff into deep shadow on the right, deeper cel shading |
+| figures missing contact shadows (bench man, bar man) | every figure casts a clear contact shadow, named |
+| barrels floating / unclear | three barrels standing on the floor behind the bar |
+| napping crewman got a hat (off-sheet) | bandana pulled over his eyes, no hats on anyone |

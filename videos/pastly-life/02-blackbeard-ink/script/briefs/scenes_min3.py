@@ -7,16 +7,20 @@ SCENES = [
      'goal': 'a small wooden riverside tavern in Bath at evening: off-duty pirate crewmen relaxing at tables, singing '
              'and arm-wrestling, clearly far away from their ship.',
      'cast': [('crew', 5)],
-     'palette': 'Dim interior at dusk: dusty blue-grey plaster, worn brown wood beams and tables. Main light = soft cool grey dusk light from a side window; no glowing lamps, no candle glow, matte surfaces.',
+     'palette': 'Dark interior at dusk: dusty blue-grey plaster, worn brown wood beams and tables. ONLY light = soft cool grey dusk light from one side window on the left; the room falls off from that window into deep soft shadow, the far right side of the room clearly darker, NOT evenly lit. Deeper cel shading with clear shadow shapes on figures and furniture, like the STYLE MATCH image. No lamps, no candles, matte surfaces.',
      'camera': 'medium-wide 3/4 view across the tavern room at eye level, floorboards converging toward the window wall. '
                'FOREGROUND = the corner of a table with two plain tankards cut by the bottom-left edge, a stool cut by the '
-               'bottom-right edge; MIDDLE = the five crewmen at two tables; BACK = bar counter with barrels, the window '
-               'showing the river with one far ship mast.',
+               'bottom-right edge; MIDDLE = the five crewmen at two tables; BACK = bar counter with three barrels standing '
+               'on the floor behind it, the window showing a plain rural wooden riverbank with trees and one far ship mast '
+               '(NO stone buildings, NO bridge, NO church or tower: Bath in 1718 is a tiny wooden village).',
      'action': 'Two crewmen arm-wrestle at the near table, faces strained. One crewman stands on a bench singing with '
-               'his tankard raised. One crewman sits with his boots up on a table, hat over his eyes, napping. One '
-               'crewman leans on the bar counter laughing. Figures overlap, staggered at different depths, no flat row.',
-     'props': 'two wooden tables, benches and stools, plain pewter tankards, three barrels behind a wooden bar counter, '
-              'wooden beams, a side window with the river and one far mast. No birds, no animals, no signs or writing.',
+               'his tankard raised. One crewman sits with his boots up on a table, his bandana pulled down over his eyes, '
+               'napping (no hats on anyone). One crewman leans on the bar counter laughing. Every figure, including the man '
+               'on the bench and the man at the bar, casts a clear soft contact shadow on the floor or bench under him. '
+               'Figures overlap, staggered at different depths, no flat row.',
+     'props': 'two wooden tables, benches and stools, plain pewter tankards, three barrels standing on the floor behind a '
+              'wooden bar counter, wooden beams, a side window with a wooden riverbank, trees and one far mast. No birds, '
+              'no animals, no signs or writing.',
      'scale': 'table top at a standing man\'s hip; tankard about hand-sized; barrel reaches a man\'s hip.'},
     {'id': 'm3b_loot_shares', 'minute': 'minute 4 (b28: no wages, shares: one for you, two for the captain)',
      'goal': 'on the flagship deck, coins being shared out in small piles on a barrel head: each crewman gets one pile, '
