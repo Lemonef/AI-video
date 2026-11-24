@@ -223,7 +223,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    spring damping 10, 2.2 - 1.2*p, see InkProof useIn; change together`), is at least `SAFE` from every screen
    edge at camera start and end
    (use `m1._states(shot)`), and clear of the meter box. Every new value is a named constant derived from existing
-   tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
+   tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers, except the
+   explicitly permitted named constants below.
    Stamp tilt: if a moved stamp is set level, use ONE named constant `STAMP_LEVEL_ROT = 0` with the comment
    `# level stamp (no tilt) so its rotated box is smallest and fits under the camera; owner asked for readable`
    and pass `rot=STAMP_LEVEL_ROT`. A plain `rot=0` in P is a bare number, and arithmetic that only hides a
@@ -290,8 +291,11 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
   is regenerated from your code (an earlier attempt edited the generator without running it: full.json stayed
   stale and the polish gate failed on every mark). A builder without a shell cannot do this task.
 - Self-check before replying: in the regenerated full.json, f0 153's 'ABOUT 20 MEN' has x `L` and y
-  `TOP_SLOT_Y`; f0 6863's 'DAWN' and its tag both sit at y >= `TEXT_LOW_Y` minus their fit_text_bottom lift
-  (i.e. in the low band, not y 240-330); grep the diff for `rot=0`, `x=960` in a def line, and
+  `TOP_SLOT_Y`; f0 6863's 'DAWN' and its tag both have x=R and explicitly authored, vertically stacked
+  low-band positions (tag lowest, 'DAWN' above it by a separation derived from their two box half-heights from
+  `m1._el_boxes`, e.g. 'DAWN' ~804 and tag ~917 under the current cameras; not y 240-330). After all fitting
+  passes their boxes are disjoint and every transformed box stays within the SAFE screen bounds at camera start
+  and end; record each authored stacking offset and any later fitting adjustment in the reply; grep the diff for `rot=0`, `x=960` in a def line, and
   `STAGE_W - STAGE_W`: none may appear.
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
