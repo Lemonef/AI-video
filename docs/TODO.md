@@ -46,6 +46,7 @@
     - [ ] plan_check + pipeline job docs/briefs/ink-ep02-plate-wire.md
       - [x] Sol review 2 FAIL (gate 2 skipped beats with no plate) -> CARD_ONLY pinned from 6ecc0d4, 2b plate-exists, b83 reason check, brief wording; gate FAILs on unwired full.json as expected
       - [x] Sol review 3 PASS (must-fix none, count nit fixed) -> plan_check -> cc87fb6 -> job ink-ep02-plate-wire-20261124064900 launched
+      - [ ] job 20261124080220 needs-owner: Codex rate-limited, Opus timed out at 15 min with 0 output (2nd time). Fix: creative timeout 900->1800s (brain 34707c0a). Auto relaunch 17:50 (Codex back 17:46)
       - [x] job 20261124064900 -> needs-owner: r1 audit FAIL (plate misfits b14/b40/b43/b55/b68, origin literals, no fit table), r2 lint (m9c twice), r3 Opus timeout
       - [x] brief r4 caa4f06 (free legs PASS, Sol out of quota) -> relaunched: job 20261124073603 Opus hit 5h limit, 0 files changed; relaunched 20261124080220 after account switch
   - [ ] card polish: transform cards draw the red circle before label B appears (fix timing only; surface stays as is, Zen 15:15 "leave it for now"). Brief after plate-wire accepts (same file ep02_full_shots.py)
