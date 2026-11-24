@@ -48,6 +48,7 @@
       - [x] Sol review 3 PASS (must-fix none, count nit fixed) -> plan_check -> cc87fb6 -> job ink-ep02-plate-wire-20261124064900 launched
       - [x] job 20261124064900 -> needs-owner: r1 audit FAIL (plate misfits b14/b40/b43/b55/b68, origin literals, no fit table), r2 lint (m9c twice), r3 Opus timeout
       - [x] brief r4 caa4f06 (free legs PASS, Sol out of quota) -> relaunched: job 20261124073603 Opus hit 5h limit, 0 files changed; relaunched 20261124080220 after account switch
+  - [ ] card polish (eye-check 15:10): transform cards draw the red circle before label B appears (circle at = card at; should wait for step); sheet lets plate ghost through heavily. Brief after plate-wire accepts (same file ep02_full_shots.py)
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
