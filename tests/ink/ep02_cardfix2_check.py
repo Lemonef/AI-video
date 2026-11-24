@@ -150,7 +150,7 @@ for c in cards:
 
 # ---- fix 2 (planner audit of fix-1 rungs 1-2): marks must ADD a fact, never echo what is already on screen ----
 TEXT_KEYS = ('text', 'label', 'left', 'right', 'bracket', 'title', 'items', 'rows', 'lines', 'by', 'value', 'who',
-             'chip', 'odd', 'a', 'b', 'from', 'to', 'prefix', 'suffix', 'name')
+             'chip', 'odd', 'a', 'b', 'from', 'to', 'prefix', 'suffix', 'name', 'stamp')
 
 
 def strings_of(e):
@@ -204,8 +204,8 @@ for s in shots:
             mw = content(words([e['text']]))
             # 8a. a mark must say at least one content word (not filler) the layout does not already say
             check(bool(mw - lay_words), f'{at}: {e["t"]} {e["text"]!r} only repeats the layout text (or is filler)')
-            # 8b. ... and not only the words of the shot right before the card (the plate the viewer just read)
-            check(bool(mw - prev_words), f'{at}: {e["t"]} {e["text"]!r} only repeats the previous shot')
+            # 8b. ... and not only words already on screen: this layout plus the shot right before the card, as one set
+            check(bool(mw - lay_words - prev_words), f'{at}: {e["t"]} {e["text"]!r} only repeats the layout/previous shot')
             # 8c. no mark text (punctuation/spacing normalised) reused on another card
             t = mark_text(e)
             check(seen.get(t, s['f0']) == s['f0'], f'{at}: {e["t"]} {e["text"]!r} already used on card @{seen.get(t)}')
