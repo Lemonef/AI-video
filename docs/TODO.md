@@ -62,7 +62,8 @@
     - [x] Codex Sol r6 on f413ad8: FAIL (spring envelope, tag bottom clamp) -> fixed 270e82f
     - [x] Codex Sol r7 on 270e82f brief: PASS, applied in f5d14b4
     - [x] polish job ink-ep02-card-polish-20261124132148 ended needs-owner (Sol audit FAIL: stamp off-frame under PUSH, stamps at y80, new overlaps f0 1492/7753, bare literals, KeyError; Astra gate-fail marks not retimed + 11489 end 11561>11559; Claude rung no Bash)
-    - [ ] brief r9: hook->red fitted words, overlap-repair diffs allowed, --sequence sweep (stamp_box/fit_stamps computed, TOP_SLOT_Y, check_overlap, LOW_SIZE assert, POINT at every mark, one end fn, reply a-f) -> Codex Sol r8 -> plan_check -> relaunch
+    - [x] brief r9 (d0d1c69) Codex Sol r9 PASS (hook size 92, all 6 stamps fit) -> plan_check f5e0ce4
+    - [ ] pipeline job ink-ep02-card-polish-20261124135837 running (launched 20:58) -> verify + cherry-pick
     - [ ] Zen: pipeline Claude rung lacks Bash (--allowedTools fix needs his OK; not widened while away)
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
