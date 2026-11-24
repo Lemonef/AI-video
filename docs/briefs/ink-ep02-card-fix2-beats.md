@@ -1,0 +1,92 @@
+# ep02 beat words (voice line per beat)
+
+Planner copy of the untracked assets/full-hybrid/beats.json, so a pipeline worktree can read what the voice says at each beat. Beat id = key in `P` of tools/ink/ep02_full_shots.py.
+
+- **b1** (2 shots): You have less than a day to live.
+- **b2** (4 shots): You're one of about twenty men on Blackbeard's ship. By next summer, almost every one of you will be dead or hanged.
+- **b3** (3 shots): Only two kinds of men walk away. Stay to the end and you'll know if you're one of them.
+- **b4** (2 shots): And the strangest part? Tonight, Blackbeard isn't worried at all.
+- **b5** (4 shots): It's the twenty-first of November, seventeen eighteen. A small sloop is anchored in a quiet inlet off North Carolina.
+- **b6** (4 shots): There's rum, there's laughing, there are guests on board, people from the little town of Bath nearby. Remember them, one of them matters later.
+- **b7** (4 shots): Someone asks the captain: does your wife know where you buried your money? One account says he laughed: Nobody but me and the devil knows where it is.
+- **b8** (1 shots): Great line. Terrible retirement plan.
+- **b9** (2 shots): Spoiler: no treasure of his has ever been found. The ship's hold is full of cocoa and cotton.
+- **b10** (2 shots): The most feared pirate in America is basically running a chocolate delivery.
+- **b11** (2 shots): Here's why he's relaxed. Five months ago he took a royal pardon. That's official forgiveness: stop pirating, and the crime is wiped.
+- **b12** (2 shots): He didn't stop. It's like getting caught speeding, promising never again, and doing two hundred on the drive home.
+- **b13** (3 shots): But the governor of North Carolina is his friendly neighbour. Your landlord is also your getaway driver. So who's going to come for him here?
+- **b14** (2 shots): Yes, the One Piece villain is named after him. This is the real one.
+- **b15** (1 shots): What he doesn't know: one state over, Virginia's governor wants him dead.
+- **b16** (3 shots): His navy warships are too big for these shallow waters, so he pays for two small boats out of his own budget, and sends them to kill him.
+- **b17** (2 shots): But wait. Blackbeard is the most feared pirate alive. So why is he sitting on a tiny boat with twenty men?
+- **b18** (3 shots): Rewind one year. He takes a big French ship and renames it Queen Anne's Revenge. Forty cannons. By spring he has about three hundred men.
+- **b19** (2 shots): He parks that fleet outside Charleston, one of the richest towns in America. For about a week nothing gets in or out.
+- **b20** (2 shots): He grabs hostages, and his ransom is... a chest of medicine. He robs a whole city and asks for a first-aid kit.
+- **b21** (1 shots): Then, in June, his flagship runs onto a sandbank and breaks.
+- **b22** (3 shots): One of his own men later said Blackbeard did it on purpose: fewer men, fewer shares. The oldest layoff trick in the book.
+- **b23** (2 shots): He sails off with the loot and a small crew, and leaves the rest behind.
+- **b24** (3 shots): The wreck was found in nineteen ninety-six. So the three hundred are gone. That's why you're one of twenty. And twenty is about to be a problem.
+- **b25** (1 shots): Count the men around you. Nineteen. Maybe twenty-five.
+- **b26** (4 shots): Look closer. About six of the men next to you are Black. Some are free sailors, some were enslaved. Pirate ships were mixed like that, and the hangman won't care which you were.
+- **b27** (2 shots): Where's everyone else? His sailing master, Israel Hands, and about two dozen men are in town, miles away.
+- **b28** (3 shots): You don't get wages here. You get a share of the loot: one for you, two for the captain. Honestly? Fairer pay than a lot of offices today.
+- **b29** (2 shots): Your quartermaster is the man the crew voted in to split it fairly. Basically HR, with a sword.
+- **b30** (3 shots): Pirate crews like yours had rules: lights out at eight, no gambling, keep your gun clean, and no smoking down where the gunpowder sits.
+- **b31** (2 shots): And tonight, nobody keeps watch. Everyone thinks someone else is checking. Classic group chat.
+- **b32** (1 shots): Dawn. Mist on the water. And there's a sail. Then a second one.
+- **b33** (2 shots): Two small boats, about sixty sailors borrowed from two navy warships, with local guides to find the channel.
+- **b34** (2 shots): They stopped last night outside the inlet because they didn't know the sandbanks. Now they're coming in.
+- **b35** (3 shots): Their leader is Lieutenant Robert Maynard. And they have no legal right to be here. Virginia has no power in North Carolina. They came anyway.
+- **b36** (1 shots): Twenty of you. Sixty of them. Remember that number.
+- **b37** (2 shots): Blackbeard gets ready. His real name was probably Edward Teach, and he's only been a pirate for about two years.
+- **b38** (3 shots): But he knows how to build a name. He tells ships he has forty men when he has twenty. That's seventeen eighteen's version of buying followers.
+- **b39** (1 shots): And then there's the look. This is what made him famous.
+- **b40** (3 shots): One account says he tucked slow-burning fuses under his hat, so smoke curls around his face. Three pairs of pistols across his chest.
+- **b41** (2 shots): The plan is simple: look so terrifying that people give up without a fight. And it usually works.
+- **b42** (2 shots): One historian says that until today, he may never have killed anyone. Today that changes.
+- **b43** (2 shots): You cut the anchor rope and run for open water. Then a jolt. Your ship sits still.
+- **b44** (2 shots): You're stuck on a sandbar, a ridge of sand under the water. But so are they.
+- **b45** (2 shots): One navy boat throws its heavy ballast overboard, even its water barrels, just to float free.
+- **b46** (2 shots): Grown men with cannons, all stuck in the sand like a beach traffic jam.
+- **b47** (2 shots): Everybody is stuck, and the gap is closing. So far you're still alive. Hold that thought.
+- **b48** (1 shots): Across the water, Blackbeard shouts: Damn you for villains, who are you?
+- **b49** (1 shots): Maynard points at his flag: we're no pirates.
+- **b50** (2 shots): One account says Blackbeard yelled back that he'd show no mercy and expect none. No prisoners.
+- **b51** (2 shots): Then your crew fires everything on one side of the ship at once. That's a broadside.
+- **b52** (3 shots): It's a massacre. Around twenty navy men are hit on the closer boat, nine more on the other one, and its captain is dead.
+- **b53** (2 shots): Remember: twenty of you, sixty of them. In one blast, a third of them are down.
+- **b54** (2 shots): For a moment it looks like you win. You might live to see lunch.
+- **b55** (2 shots): The smoke clears. On Maynard's boat, the deck looks almost empty. Bodies, smoke, nobody moving.
+- **b56** (2 shots): You throw bottles stuffed with gunpowder, homemade grenades. Then you throw hooks across and pull the two boats together.
+- **b57** (1 shots): Blackbeard laughs: they're finished, let's go.
+- **b58** (2 shots): Free win. And if history teaches one thing, it's this: never trust a free win. You jump across.
+- **b59** (2 shots): The hatches burst open. Maynard hid most of his men below deck the whole time.
+- **b60** (1 shots): Now it's even, and you're on their ship.
+- **b61** (3 shots): And here's why Blackbeard was so calm. Back on your ship, one man he raised himself sits in the gunpowder room with a lit fuse.
+- **b62** (1 shots): His order: if we lose, blow the ship up. Nobody gets taken alive.
+- **b63** (2 shots): Blackbeard and Maynard fire their pistols at each other. Maynard's shot hits. Blackbeard keeps coming. Maynard is only slightly hurt.
+- **b64** (2 shots): Then swords. Blackbeard's blade snaps Maynard's sword. He swings again, and a sailor behind him cuts his neck.
+- **b65** (2 shots): He still keeps fighting. When he finally drops, Maynard counts five bullets in him and about twenty cuts.
+- **b66** (2 shots): Around you, your crewmates are going down one by one. Remember the numbers? Twenty of you, sixty of them.
+- **b67** (2 shots): Even after the broadside, they still have more men than you. The fight takes only a few minutes.
+- **b68** (3 shots): They cut off his head and hang it from the pole at the front of their boat. The body goes over the side.
+- **b69** (3 shots): The head sails all the way back to Virginia. It's proof. No head, no reward. Pics or it didn't happen, seventeen eighteen edition.
+- **b70** (2 shots): Legend says the headless body swam around the ship before it sank. No one who was there ever said that.
+- **b71** (2 shots): And the powder room? The fuse never touches the powder. Men stop him in time.
+- **b72** (2 shots): Then Maynard searches your ship. No gold. Just cocoa, cotton, and, in the cabin, letters.
+- **b73** (2 shots): One is from Tobias Knight, a top official in North Carolina's government. The friendly neighbour was in the pirate's DMs.
+- **b74** (2 shots): Virginia's governor later accused North Carolina's governor and Knight of helping Blackbeard. It never stuck. Nobody important went to jail.
+- **b75** (1 shots): So the men in charge walk away. What about you?
+- **b76** (1 shots): So, how long do you last?
+- **b77** (2 shots): If you were on that deck, you're either dead by noon or in chains. Sixteen men are taken to Virginia for trial.
+- **b78** (1 shots): You sit in jail through the whole winter, almost four months, waiting.
+- **b79** (3 shots): In March, a court sits with no jury, just judges. Fourteen are sentenced to death. Records don't agree on the exact count, but about a dozen hang.
+- **b80** (1 shots): Two men walk away.
+- **b81** (2 shots): Samuel Odel says he was only a guest at last night's party. He's freed.
+- **b82** (2 shots): Israel Hands was in town. He wasn't even on the ship. He gets a pardon.
+- **b83** (1 shots): So the only way to survive Blackbeard's ship? Don't be on it.
+- **b84** (2 shots): And Maynard, the man who won? His crews split four hundred pounds, and they waited four years to get it.
+- **b85** (3 shots): He also kept about ninety pounds of the pirate's loot for himself, and that got him in trouble. He never got a promotion.
+- **b86** (2 shots): Kill the most famous pirate alive, get paid four years late. Some things about work never change.
+- **b87** (3 shots): So be honest. Where are you that night: at the party, in town, or on deck with a sword? Tell me in the comments.
+- **b88** (1 shots): When a deck looks empty, ask who's hiding.
