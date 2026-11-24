@@ -52,48 +52,106 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    `POINT(..., 'b')` becomes `SPL(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, <fitted>)`
    with `POINT(..., 'right')`, cast unchanged. Same two sides, same circle on the right (gate pins
    `split circle@1440`). Apart from timing and this card, the only other b1-b9 changes are the step-4 / 4a
-   overlay and sprite moves (f0 0 stamp, f0 153, f0 530, f0 1024, and b8 if a still shows it on a face).
-4. Words off faces. For each shot below, move the overlay text (`O`, `W`, `CW`; also a `CS` cast sprite
-   on a card when it sits under the words) to a calm area of that plate. Use the existing `L`, `R`,
-   centre 960 and y 240. For a low text band over floor, deck or water, add ONE named constant next to
-   the other position constants, for example `TEXT_LOW_Y = ...  # low text band over deck/floor/water, clear
-   of the meter box`, derived from existing tokens (`STAGE_H`, `FLOOR`, etc.), not a bare number. Keep
-   the words, colour and timing; size may shrink only to fit. The meter-clearance pass
-   (make_ep02_min1_shots.py ~line 481) may push a line downward to clear the meter box: fine, but no line may end up
-   back on a face. A card headline `CW` keeps the top of the card; on a card, move the `CS` sprite off
-   the words instead (left or right third, `L` / `R`).
+   overlay, sprite and stamp moves and the f0 443 `at` fix listed in the step-4 table.
+4. Words off faces. The owner reviewed minute 1 and wrote "Be careful of overlap": overlay words and card
+   sprites must never sit on a face, head, hat or wig, in ANY shot. A full sweep of all shots at each
+   element's SETTLED frame (words: `min(at + (n_words-1)*4 + 20, f1 - 2)`, the frame the last word has
+   finished entering; other elements: `min(at + 20, f1 - 2)`) found the shots in the table below. The f0
+   values are the REAL shot starts in the current full.json (an earlier draft of this table used wrong
+   f0s; ignore any older list). Find each shot by its f0 and text in `P`.
 
-   | f0 | text | today | on | move to |
-   |---|---|---|---|---|
-   | 0 | ST 'LESS THAN A DAY TO LIVE' | 960, 380, rot -8, PUSH to (1300,480) | crew faces + BB; owner: "hard to read" | see step 4a |
-   | 153 | CW 'ABOUT 20 MEN' | 960, y 298 (CW fixed y) | rigging + BB's hat behind the 3 crew sprites; owner: "sits on the background" | low band between/below the sprites' heads, or y clear above all heads on dark sky; sprites stay |
-   | 530 | CW 'STRANGEST PART?' | top, CS bb_exp_deadpan 960 y 620 | words cross BB's hat and the governor's wig (S08 is a two-face close-up); sprite sits centred between the two faces | words to the low band (rail / lantern area); CS to a side third (`L` or `R`) and low enough that its head is clear of both plate faces and of the words |
-   | 1024 | CW 'GUESTS FROM BATH' (S08 scene-plate shot, not a card: the headline stays where it is) | top, CS bath_farmer_stand 1320 | sprite head under words | CS lower / other third |
-   | 2726 | W 'THE REAL ONE' | R, 240, size 110 | BB hat; CS bb_exp_grin | words to L or low band, sprite clear |
-   | 4079 | O 'HOSTAGES' | R, 240 | BB's head | L, 240 (sky / rigging) |
-   | 7308 | W 'STOPPED LAST NIGHT' | top | spyglass crewman's head | R, low band (water) |
-   | 8338 | W 'FAKE FOLLOWERS' | 960 | CS bb_exp_smirk under it | sprite to a side third |
-   | 8776 | W '3 PAIRS OF PISTOLS' | R, 240 | BB face, rigging heads | R, low band (deck) |
-   | 10027 | W 'BEACH TRAFFIC' | top | CS crew_exp_deadpan face | sprite to a side third |
-   | 10652 | O 'NO MERCY' | 960, 240 | BB's hat | R, 240 (sky over navy boat) |
-   | 11424 | W 'THEY ARE HURTING' | R, 240 | BB on the ship | L or low band |
-   | 11665 | W 'DECK LOOKS EMPTY' | top | CS crew_hide_barrel head | sprite clear of words |
-   | 12301 | W 'NEVER TRUST A FREE WIN' | top | BB's head | R, low band (deck) |
-   | 12583 | O 'HATCHES BURST' | top | BB's head | R, low band (deck) |
-   | 13631 | W 'SWORD SNAPS' | L, 240 | near heads | check still; move if on a head |
-   | 13756 | O 'NECK CUT' | R, 240 | navy head | check still; move if on a head |
-   | 14125 | W 'CREWMATES GOING DOWN' | L | CS crew_exp_scared face | sprite clear |
-   | 14656 | W 'OVER THE SIDE' | top | CS crew_exp_oh head | sprite clear |
-   | 16458 | W 'DEAD BY NOON OR CHAINS' | top | standing prisoner's head | over the stone wall, or low band |
-   | 17071 | W 'TWO WALK AWAY' | 960 | CS crew_exp_surprised face | sprite clear |
-   | 17207 | W 'PARTY GUEST: FREED' | 960 | CS bath_gent_sly head | sprite clear |
-   | 17430 | O "DON'T BE ON IT" | R, 240 | BB's head | L, 240 (sky) or low band |
-   | 17692 | W 'WAITED 4 YEARS' | R, 240 | navy heads | L or low band |
-   | 17880 | O 'NO PROMOTION' | R, 240 | officer's hat | L or low band |
-   | 18022 | W 'PAID 4 YEARS LATE' | R, 240 | officer's head | L or low band |
+   Placement vocabulary (all from existing tokens, no bare numbers):
+   - `TL` / `TC` / `TR`: y 240 at x `L` / 960 / `R` (sky, rigging, wall, houses). The meter box sits top
+     right, so `TR` only where the meter-clearance pass does not push it onto a face.
+   - low band: add ONE named constant next to the other position constants:
+     `TEXT_LOW_Y = m1.STAGE_H - m1.SAFE - round(m1.CAP_H * LOW_SIZE)`, where `LOW_SIZE` is the largest
+     words size placed on the band (a named constant or an existing size token; the clearance pass treats
+     `CAP_H * size` as a line's half-height, so its bottom stays `SAFE` above the stage edge), with a mirror
+     comment: `# low text band over deck/floor/water/street; derived from STAGE_H/SAFE/CAP_H in
+     make_ep02_min1_shots.py; change together`.
+     "LL low" / "LR low" / "low 960" = x `L` / `R` / 960 at `TEXT_LOW_Y`.
+   - a sprite move: `CS` to x `L` or `R` (side third), and lower (bigger `y`, or smaller `h` if needed)
+     so its head clears the words and every plate face.
+   Keep the words, colour and timing (one exception, f0 443 below); size may shrink only to fit. The
+   meter-clearance pass (make_ep02_min1_shots.py ~line 470-483) may push a line downward to clear the meter
+   box: fine, but no line may end up back on a face, and it must not hit its "cannot clear the meter box"
+   SystemExit. A card headline `CW` keeps the top of the card; on a card, move the `CS` sprite instead.
+   `CW` has no position parameter today; give it an optional `y` (default unchanged, so every other CW shot
+   is byte-identical) for the f0 153 and f0 495 moves.
 
-   Also check b8 'GREAT LINE.' (W R, 230, size 90 over the BB portrait) and the f0 9333 'CUT THE ANCHOR'
-   stamp (partly clipped); move only if they cover a face or clip.
+   | f0 | text (element) | sits on today | move to |
+   |---|---|---|---|
+   | 0 | ST 'LESS THAN A DAY TO LIVE' | crew faces + BB, hard to read | see 4a |
+   | 46 | b1 split card | owner: "big weird cut" | step 3 (split); must be fully settled before f1 |
+   | 153 | CW 'ABOUT 20 MEN' | rigging + BB's hat behind the sprites | TL, or a y clear above all heads; sprites stay |
+   | 443 | W 'STAY TO THE END' | timing: settles 488, shot ends 495 (< HOLD) | its `at` from `t + 13` to `t + LEAD` (the only timing change); position TL or low band if a still shows it on a head |
+   | 495 | CW 'STRANGEST PART?' + CS bb_exp_deadpan | words on BB's hat + governor's wig; sprite between the faces | words to the low band; CS to a side third, low, head clear of both plate faces |
+   | 978 | CW 'GUESTS FROM BATH' + CS sprites | sprite heads under the words | sprites lower / to the side thirds; headline stays |
+   | 1416 | 'ME AND THE DEVIL' | BB's hat + sprite | TL / TC / low band, whichever a still shows clear |
+   | 1492 | b8 'GREAT LINE.' | BB portrait | TL or LR low |
+   | 1805 | stamp 'MOST FEARED' | gangplank figure | a clear corner, inside the frame |
+   | 1954 | 'ROYAL PARDON' | BB's hat | clear area (TL / low band) |
+   | 2242 | "HE DIDN'T STOP" | heads | clear area |
+   | 2449 | tag 'NORTH CAROLINA' | hat | clear area |
+   | 2607 | 'WHO COMES HERE' | hat | clear area |
+   | 2686 | 'THE REAL ONE' | sprite + farmer's head | words to L or low band; sprite clear |
+   | 2762 | 'NAMED AFTER HIM' | portrait hat | clear area |
+   | 3367 | 'MOST FEARED ALIVE' | boat heads | clear area |
+   | 4043 | O 'HOSTAGES' | BB's head | TL |
+   | 4572 | 'FEWER MEN, FEWER SHARES' | heads | TC / R sky |
+   | 5071 | 'ONE OF TWENTY' | heads | TL |
+   | 5296 | 'LOOK CLOSER' | heads | TL or low band |
+   | 5464 | tag 'FREE OR ENSLAVED' | heads | LR low |
+   | 5632 | 'WHERE IS EVERYONE?' | heads | TL |
+   | 5847 | 'NO WAGES' | heads | LR low |
+   | 6027 | 'FAIRER THAN OFFICES' | heads | LL low |
+   | 6236 | 'VOTED IN' | heads | LL low |
+   | 6633 | 'NOBODY ON WATCH' | heads | TL |
+   | 6863 | 'DAWN' / 'A SAIL' | heads | LR low |
+   | 7272 | 'STOPPED LAST NIGHT' | spyglass crewman's head | R low (water) |
+   | 7561 | 'NO LEGAL RIGHT' | heads | TL |
+   | 7753 | '60 OF THEM' | navy heads | clear area |
+   | 7998 | 'EDWARD TEACH' | heads | LR low |
+   | 8302 | 'FAKE FOLLOWERS' + CS bb_exp_smirk | sprite under the words | sprite to LL, lower |
+   | 8740 | '3 PAIRS OF PISTOLS' | BB's face, rigging heads | R low (deck) |
+   | 8839 | 'LOOK TERRIFYING' | heads | LR low |
+   | 9062 | 'NEVER KILLED ANYONE?' | heads | LR low |
+   | 9299 | stamp 'CUT THE ANCHOR' | clipped by the frame edge | TC, fully inside the frame |
+   | 9409 | 'JOLT!' | heads | TL |
+   | 9915 | 'TRAFFIC JAM' | heads | TL or LR low |
+   | 9991 | 'BEACH TRAFFIC' + CS crew_exp_deadpan | sprite face under the words | sprite to LR |
+   | 10067 | 'GAP CLOSING' | heads | LR low |
+   | 10304 | tag 'WHO ARE YOU?' | heads | LR low |
+   | 10618 | O 'NO MERCY' | BB's hat | TR (sky over the navy boat) |
+   | 10848 | stamp 'BROADSIDE' | heads | TL |
+   | 11390 | 'THEY ARE HURTING' | BB on the ship | TL |
+   | 11629 | 'DECK LOOKS EMPTY' + CS crew_hide_barrel | sprite head | TL / TC, sprite clear |
+   | 12011 | stamp 'GRAPPLE!' | heads | TC |
+   | 12267 | 'NEVER TRUST A FREE WIN' | BB's head | LR low (deck) |
+   | 12551 | O 'HATCHES BURST' | BB's head | LR low (deck) |
+   | 13141 | stamp 'BLOW THE SHIP UP' | heads / edge | LR, inside the frame, clear of the meter box |
+   | 13455 | stamp 'BANG' | heads | TL |
+   | 13722 | O 'NECK CUT' | navy officer's hat | low 960 |
+   | 14089 | 'CREWMATES GOING DOWN' + CS crew_exp_scared | sprite face | sprite to the R third, lower |
+   | 14411 | 'A FEW MINUTES' | navy head | low 960 |
+   | 14624 | 'OVER THE SIDE' + CS crew_exp_oh | sprite head | sprite to the L third, lower |
+   | 14681 | 'TO VIRGINIA' | heads | TL (over the houses) |
+   | 14870 | "PICS OR IT DIDN'T HAPPEN" | BB engraving face / hat | R low |
+   | 15061 | tag 'JUST A LEGEND' | heads | TL (houses) |
+   | 16424 | 'DEAD BY NOON OR CHAINS' | standing prisoner's head (meter blocks top right) | R low |
+   | 16703 | tag 'NO JURY' | judge's head | R low |
+   | 17041 | 'TWO WALK AWAY' | CS crew_exp_surprised face | words to low 960 (street / steps); sprite unchanged |
+   | 17173 | 'PARTY GUEST: FREED' | bath_gent_sly head + guard's head | low 960 |
+   | 17245 | 'ISRAEL HANDS' | farmer's hat | LL low |
+   | 17394 | O "DON'T BE ON IT" | BB's head | TL (sky / rigging) |
+   | 17658 | 'WAITED 4 YEARS' | navy heads | LL low |
+   | 17848 | O 'NO PROMOTION' | officer's hat | LL low |
+   | 17988 | 'PAID 4 YEARS LATE' | officer's head | LL low |
+
+   "clear area" means: pick TL / TC / TR / LL low / LR low / low 960 by looking at the still; the choice
+   goes in the reply table. Every other shot was
+   checked and is already clear: do not move it. Shots 4329 and 8399 were borderline: render their still
+   and move only if the words touch a head.
 
    4a. Hook stamp (f0 0, frames 0-45, b1 shot 1, plate S01, `ST('LESS THAN A DAY TO LIVE', t + 10)`). The owner reviewed
    minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read. Make it
@@ -102,22 +160,23 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    band over the dark deck, whichever a still shows is clear of faces at both the first and last visible
    frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
    style, words, timing AND size: `StampElement` hard-codes its font size and the stamp has no size
-   parameter, so fit it by position and rotation only. If `ST` has no rot/x/y parameter for this, pass the
-   existing ones (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`). Every new value is a named constant
-   derived from existing tokens (`STAGE_W`, `STAGE_H`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
-   `CW` has no position parameter today; give it an optional `y` (default unchanged, so every other CW
-   shot is identical) for the ABOUT 20 MEN and STRANGEST PART? moves.
-   Find each shot by its text in `P`; f0 values are from the current full.json. Render half-scale stills
-   (`npx remotion still engine/ink/index.ts InkEp02Full .tmp/polish/<name>.png --frame=<N> --scale=0.5
-   --public-dir videos/pastly-life/02-blackbeard-ink/assets`) ONLY into the git-ignored `.tmp/polish/`
-   directory (any other output path is an untracked file and fails the allowed-file gate) and look at each:
-   for every moved overlay, frame `at + E` (its `at` plus the entrance length E of its element, read from
-   elements.tsx: the frame the words / sprite are fully in) and frame `f1 - 10` (the words
-   or sprite must stay off faces for the whole visible interval, cameras move); for each of the three
-   re-stepped cards (f0 46, 11489, 18090), the frame its mark finishes drawing (`at + DRAW`), so the
-   completed circle and the finished card are both visible. For f0 46 also look at the last frame
-   (f1 - 1): the owner called the old b1 card "a big weird cut", so both sides and the circle must be fully
-   drawn and settled there, not mid-animation. For the f0 0 stamp look at frames 12, 28 and 45.
+   parameter, so fit it by position and rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`).
+   The same applies to every stamp in the table: fully inside the frame (its rotated box at least `SAFE`
+   from every edge) and clear of the meter box. Every new value is a named constant derived from existing
+   tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
+
+   4b. Check. Render half-scale stills (`npx remotion still engine/ink/index.ts InkEp02Full
+   .tmp/polish/<name>.png --frame=<N> --scale=0.5 --public-dir videos/pastly-life/02-blackbeard-ink/assets`)
+   ONLY into the git-ignored `.tmp/polish/` directory (any other output path is an untracked file and fails
+   the allowed-file gate) and look at each:
+   - every moved overlay / sprite: its SETTLED frame (formula above) and frame `f1 - 10` (cameras move; the
+     words or sprite must stay off faces for the whole visible interval);
+   - each of the three re-stepped cards (f0 46, 11489, 18090): the frame its mark finishes drawing
+     (`at + DRAW`), so the completed circle and the finished card are both visible. For f0 46 also the last
+     frame (f1 - 1): both sides and the circle fully drawn and settled there, not mid-animation;
+   - the f0 0 stamp: frames 12, 28 and 45;
+   - f0 443: frame `at + 32` and f1 - 1 (all four words settled before the cut).
+   Do not judge overlap at an entrance frame (words still sliding in look like they sit elsewhere).
    The fitter must receive the split's `vs` flag (versus-circle on/off) when computing the split end, so a
    split with `vs` set gets its extra draw frames counted. The protected gate does NOT count the
    versus-circle draw in a split's end, so a gate pass alone does not prove a `vs` split finishes in time;
@@ -132,7 +191,7 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
-  sprite positions and sizes, and the f0 0 stamp position / rotation may differ (stamp size stays). The b1 card at f0 46 may
+  sprite / stamp positions, sizes and rotations, the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
   also change its circle y (655 -> 675, the split label anchor that POINT uses), its side keys (`a`/`b` ->
   `left`/`right`) and gain the default `vs` field. Otherwise card content, layout `at`, mark y/size, f0/f1, plates and cameras are
   unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
