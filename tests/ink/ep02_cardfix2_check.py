@@ -216,7 +216,11 @@ for s in shots:
                 lb = G.content_box(lay)
                 for e in marks:
                     check(not overlap(G.content_box(e), lb), f'{at}: {e["t"]} {e["text"]!r} overlaps the {lay["t"]} layout')
-    prev_words = words(x for e in s.get('els', []) if e['t'] != 'sprite' for x in strings_of(e))
+    # shot-level text the viewer also saw (chip tag, meter label) counts as "already on screen" too
+    shot_text = [s['chip']] if s.get('chip') else []
+    if isinstance(s.get('meter'), dict):
+        shot_text += strings_of(s['meter'])
+    prev_words = words([*(x for e in s.get('els', []) if e['t'] != 'sprite' for x in strings_of(e)), *shot_text])
 
 # 10. marks authored per card in P, not a beat-keyed lookup table (fix-1 rung 2 added CARD_FACTS + beat-id branches)
 check(not hasattr(G, 'CARD_FACTS'), 'generator keeps a beat-keyed CARD_FACTS table (author each mark in its P entry)')
