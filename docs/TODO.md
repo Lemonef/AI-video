@@ -69,6 +69,9 @@
     - [x] Zen 21:40 "nothing is done at all today": job ...143346 gets ONE try; if it fails -> direct edit (#claude-ok) + render min1 + send Zen TONIGHT -- job failed; direct edit ddb80f2 + e9668a9 (hook, 153, 495, 8740, b88 revert, CW_Y), gates + stills read
     - [x] re-render min1 -> send Zen (22:22: .tmp/polish/ep02_min1_v2.mp4 full decode 1800 frames OK, 4 frames read, 720p share 15.5 MB sent)
     - [ ] WAIT Zen look on min1 -> then min2; then REAL IMAGES pass, full + share + 3 thumbs
+    - [ ] Zen ~23:20 "ABOUT 20 MEN should be white card / explain card": facts -> tag, words only for voice
+      - [x] ABOUT 20 MEN + GUESTS FROM BATH -> TG tags (still f210 read); b6 close-up guest sprites over BB beard removed, tag low (still f1040 read); other min1 words all voice lines; gates pass
+      - [ ] render min1 v3 + one frame per shot check -> send Zen
     - [ ] verify diff + stills -> accept
   - [x] min1 ~52s (fixed e9668a9, stacked low-right, still f1590 read; 3 PAIRS f8780 low, read): "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
   - [ ] REAL IMAGES (Zen 11-24 "why i feel like you didn't use much real images"): 14 archive photos on disk (assets/ink/photos, SOURCES.md), only 2 used (bb_engraving_1724 ~5 shots, moseley_map_1733 ~2). Separate brief AFTER polish accepts: wire the 12 unused (maynard fight, spotswood, QAR model, ocracoke 1795, teach's hole marker, ferris battle/capture, bb prints) onto the beats they show, one use each, overlap check at settled frame

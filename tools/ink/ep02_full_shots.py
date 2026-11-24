@@ -505,7 +505,7 @@ P = {
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
            lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_stand', t + 3, 600, y=700), CS('crew_scrub', t + 9, 960, y=700),
-                          CS('crew_haul_rope', t + 15, 1320, y=700), CW('ABOUT 20 MEN', t + 20, x=L, y=TOP_SLOT_Y)),
+                          CS('crew_haul_rope', t + 15, 1320, y=700), TG('ABOUT 20 MEN', t + 20, L, TOP_SLOT_Y)),
            lambda t, d: S(t, SC(S03), cam=PAN(500, 1420)),
            lambda t, d: CARD_SHOT(t, BN(20, 'MEN ABOARD', t + 3, 20), TG('ALMOST ALL DEAD BY SUMMER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking')],
     # b3 only two kinds walk away; stay to the end
@@ -523,8 +523,7 @@ P = {
            lambda t, d: S(t, SC(S07), cam=PAN(400, 1300))],
     # b6 rum, guests from Bath, one matters later
     'b6': [lambda t, d: S(t, SC(S01, origin='30% 60%'), cam=PUSH(500, 620)),
-           lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bath_gent_stand', t + 3, 600, y=SPRITE_LOW_Y), CS('bath_merchant_laugh', t + 9, 960, y=SPRITE_LOW_Y),
-                          CS('bath_farmer_stand', t + 15, 1320, y=SPRITE_LOW_Y), CW('GUESTS FROM BATH', t + 22)),
+           lambda t, d: S(t, SC(S08, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),  # close-up: no sprites over faces
            lambda t, d: S(t, SC(S07), cam=PUSH(880, 700, 1.35)),
            lambda t, d: CARD_SHOT(t, CHK(t, d, [('PARTY GUEST', 'tick'), ('REMEMBER HIM', 'tick')]), TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
     # b7 does your wife know where you buried your money? me and the devil
