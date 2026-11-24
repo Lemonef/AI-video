@@ -1,6 +1,6 @@
 # Plan check: ep02-scene-m6c-empty-deck-grapple
-brief-sha256: 188181d1ad5a89c9c136b72a05570ef8cad42b35d6953bc4b5ab4061a755b00a
+brief-sha256: e3791ef30c997a5132ca9c7d84f31a09b8dd3727873b410c42cda785e6c269eb
 
-Min1 review lessons applied up front (no birds, props cut, counts exact, flags furled, no glow). See scenes_min6_review.md.
+Review (Codex gpt-6.1-sol, read-only, 2026-11-24): after attempt-1 audit fails, fixed the camera/eyebrow/grin contradiction (BB seen from behind in profile, mouth closed), white glove, tiller described, clear contact shadows. One MUST-FIX: redo list rejected cropped legs while the over-the-shoulder framing crops Blackbeard; fixed by exempting Blackbeard only (crewmen and officer keep full legs).
 
 VERDICT: PASS
