@@ -51,14 +51,15 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 3. b1 hook card (f0 46): `TF(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, 14)` with
    `POINT(..., 'b')` becomes `SPL(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, <fitted>)`
    with `POINT(..., 'right')`, cast unchanged. Same two sides, same circle on the right (gate pins
-   `split circle@1440`). This is the only b1-b9 change apart from timing.
+   `split circle@1440`). Apart from timing and this card, the only other b1-b9 changes are the step-4 / 4a
+   overlay and sprite moves (f0 0 stamp, f0 153, f0 530, f0 1024, and b8 if a still shows it on a face).
 4. Words off faces. For each shot below, move the overlay text (`O`, `W`, `CW`; also a `CS` cast sprite
    on a card when it sits under the words) to a calm area of that plate. Use the existing `L`, `R`,
    centre 960 and y 240. For a low text band over floor, deck or water, add ONE named constant next to
    the other position constants, for example `TEXT_LOW_Y = ...  # low text band over deck/floor/water, clear
    of the meter box`, derived from existing tokens (`STAGE_H`, `FLOOR`, etc.), not a bare number. Keep
    the words, colour and timing; size may shrink only to fit. The meter-clearance pass
-   (make_ep02_min1_shots.py ~line 481) may nudge a low line upward: fine, but no line may end up
+   (make_ep02_min1_shots.py ~line 481) may push a line downward to clear the meter box: fine, but no line may end up
    back on a face. A card headline `CW` keeps the top of the card; on a card, move the `CS` sprite off
    the words instead (left or right third, `L` / `R`).
 
@@ -67,7 +68,7 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    | 0 | ST 'LESS THAN A DAY TO LIVE' | 960, 380, rot -8, PUSH to (1300,480) | crew faces + BB; owner: "hard to read" | see step 4a |
    | 153 | CW 'ABOUT 20 MEN' | 960, y 298 (CW fixed y) | rigging + BB's hat behind the 3 crew sprites; owner: "sits on the background" | low band between/below the sprites' heads, or y clear above all heads on dark sky; sprites stay |
    | 530 | CW 'STRANGEST PART?' | top, CS bb_exp_deadpan 960 y 620 | words cross BB's hat and the governor's wig (S08 is a two-face close-up); sprite sits centred between the two faces | words to the low band (rail / lantern area); CS to a side third (`L` or `R`) and low enough that its head is clear of both plate faces and of the words |
-   | 1024 | CW 'GUESTS FROM BATH' | card top, CS bath_farmer_stand 1320 | sprite head under words | CS lower / other third |
+   | 1024 | CW 'GUESTS FROM BATH' (S08 scene-plate shot, not a card: the headline stays where it is) | top, CS bath_farmer_stand 1320 | sprite head under words | CS lower / other third |
    | 2726 | W 'THE REAL ONE' | R, 240, size 110 | BB hat; CS bb_exp_grin | words to L or low band, sprite clear |
    | 4079 | O 'HOSTAGES' | R, 240 | BB's head | L, 240 (sky / rigging) |
    | 7308 | W 'STOPPED LAST NIGHT' | top | spyglass crewman's head | R, low band (water) |
@@ -100,7 +101,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    place it in the calm night sky band at the top (between the masts, left of the meter box) or in the low
    band over the dark deck, whichever a still shows is clear of faces at both the first and last visible
    frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
-   style, words and timing; size may shrink only to fit. If `ST` has no rot/x/y parameter for this, pass the
+   style, words, timing AND size: `StampElement` hard-codes its font size and the stamp has no size
+   parameter, so fit it by position and rotation only. If `ST` has no rot/x/y parameter for this, pass the
    existing ones (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`). Every new value is a named constant
    derived from existing tokens (`STAGE_W`, `STAGE_H`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
    `CW` has no position parameter today; give it an optional `y` (default unchanged, so every other CW
@@ -109,14 +111,17 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    (`npx remotion still engine/ink/index.ts InkEp02Full .tmp/polish/<name>.png --frame=<N> --scale=0.5
    --public-dir videos/pastly-life/02-blackbeard-ink/assets`) ONLY into the git-ignored `.tmp/polish/`
    directory (any other output path is an untracked file and fails the allowed-file gate) and look at each:
-   for every moved overlay, one frame after the words are in and one 10 frames before the cut (the words
+   for every moved overlay, frame `at + E` (its `at` plus the entrance length E of its element, read from
+   elements.tsx: the frame the words / sprite are fully in) and frame `f1 - 10` (the words
    or sprite must stay off faces for the whole visible interval, cameras move); for each of the three
    re-stepped cards (f0 46, 11489, 18090), the frame its mark finishes drawing (`at + DRAW`), so the
    completed circle and the finished card are both visible. For f0 46 also look at the last frame
    (f1 - 1): the owner called the old b1 card "a big weird cut", so both sides and the circle must be fully
    drawn and settled there, not mid-animation. For the f0 0 stamp look at frames 12, 28 and 45.
    The fitter must receive the split's `vs` flag (versus-circle on/off) when computing the split end, so a
-   split with `vs` set gets its extra draw frames counted.
+   split with `vs` set gets its extra draw frames counted. The protected gate does NOT count the
+   versus-circle draw in a split's end, so a gate pass alone does not prove a `vs` split finishes in time;
+   the fitter is what guarantees it.
 5. Nothing else changes: same shots, same f0s (gate pins them), same plates, cameras, words, cards, colours.
    Plates untouched (`ep02_plates_check.py`). No new bare numbers anywhere (review checks).
 
@@ -127,7 +132,9 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
-  sprite positions and sizes, and the f0 0 stamp position / rotation / size may differ. Card content, layout `at`, mark y/size, f0/f1, plates and cameras are
+  sprite positions and sizes, and the f0 0 stamp position / rotation may differ (stamp size stays). The b1 card at f0 46 may
+  also change its circle y (655 -> 675, the split label anchor that POINT uses), its side keys (`a`/`b` ->
+  `left`/`right`) and gain the default `vs` field. Otherwise card content, layout `at`, mark y/size, f0/f1, plates and cameras are
   unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
 - The reply includes: (a) a table per card shot with f0, kind, old step -> new step, old mark at -> new mark
   at; (b) a table per moved overlay with f0, text, old x/y -> new x/y (and any sprite move), and one line on
