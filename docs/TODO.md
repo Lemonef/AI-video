@@ -79,7 +79,9 @@
       - [x] cards full-screen white paper (bg card, no dimmed scene; contact sheet read)
       - [x] overlaps: hook split over 2 lines at x=L, GREAT LINE/TERRIBLE PLAN gap STACK_GAP_LINES, bb_print crop (stills fix.png read); gates pass
       - [x] render v4 -> send Zen (.tmp/polish/ep02_min1_v4_720p.mp4 15.5 MB)
-      - [ ] WAIT Zen look on v4; then apply same 4 rules to min2+ (episode lint: bb_engraving 4x, moseley 2x)
+      - [x] WAIT Zen look on v4; then apply same 4 rules to min2+ (episode lint: bb_engraving 4x, moseley 2x)
+      - [x] v4 feedback 11-25 "spamming real photos ... explain stuff turn into image and no cards": v5 = 5 photos (dropped teach_loc page + bb_print), b6 rum party -> FLOW card, b7 "terrible retirement plan" -> XO chest card; crossout label gap fixed in cards.tsx; gates green; stills read
+      - [ ] WAIT Zen look on v5 (D:/AI-video/.tmp/polish/ep02_min1_v5_720p.mp4); then apply same rules to min2+
   - [x] min1 ~52s (fixed e9668a9, stacked low-right, still f1590 read; 3 PAIRS f8780 low, read): "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
   - [ ] REAL IMAGES (Zen 11-24 "why i feel like you didn't use much real images"): 14 archive photos on disk (assets/ink/photos, SOURCES.md), only 2 used (bb_engraving_1724 ~5 shots, moseley_map_1733 ~2). Separate brief AFTER polish accepts: wire the 12 unused (maynard fight, spotswood, QAR model, ocracoke 1795, teach's hole marker, ferris battle/capture, bb prints) onto the beats they show, one use each, overlap check at settled frame
     - [ ] map each photo -> beat from SOURCES.md + beats doc

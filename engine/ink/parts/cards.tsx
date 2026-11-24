@@ -53,6 +53,7 @@ const BIG_FADE = 4, UNDERLINE_DRAW = 10; // number entrance and underline time
 const UNDERLINE_Y = 0.18, UNDERLINE_BOW = 0.04, BIG_LABEL_GAP = 1.5; // number layout (gap below underline in label heights)
 const HERO_LABEL_GAP = LABEL * 0.3; // clear space between icon base and label cap top
 const HERO_CAP = LABEL * 0.7; // label cap height
+const CROSS_LABEL_GAP = LABEL * 0.6; // crossout: clear space between the red cross ends (round caps) and label cap top
 
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 export const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
@@ -105,7 +106,7 @@ export const CrossoutElement: React.FC<Props<CrossoutEl>> = ({el, shotF0, shotF1
   const f = useCurrentFrame(), a = delay(el, shotF0), c = el.crossAt - shotF0;
   // Remap only the cross's local clock so the exact existing bowed strokes finish in ten frames.
   const crossClock = c + (f - c) * CROSS_NATIVE_END / CROSS_FRAMES;
-  return <g><g opacity={1 - (1 - CROSS_DIM) * progress(f, c, c + CROSS_FRAMES)}><IconElement shotF0={shotF0} shotF1={shotF1} el={{...el, t: 'icon', name: el.icon}}/></g><g fill="none" strokeLinejoin="round"><CrossElement shotF0={shotF0} shotF1={shotF1} el={{t: 'cross', x: el.x, y: el.y, size: el.size, at: el.crossAt + f - crossClock}}/></g>{el.label && <Text x={el.x} y={el.y + el.size / 2 + LABEL} text={el.label} opacity={progress(f, a + POP_FRAMES, a + POP_FRAMES + LABEL_FADE)}/>}</g>;
+  return <g><g opacity={1 - (1 - CROSS_DIM) * progress(f, c, c + CROSS_FRAMES)}><IconElement shotF0={shotF0} shotF1={shotF1} el={{...el, t: 'icon', name: el.icon}}/></g><g fill="none" strokeLinejoin="round"><CrossElement shotF0={shotF0} shotF1={shotF1} el={{t: 'cross', x: el.x, y: el.y, size: el.size, at: el.crossAt + f - crossClock}}/></g>{el.label && <Text x={el.x} y={el.y + el.size / 2 + CROSS_LABEL_GAP + HERO_CAP} text={el.label} opacity={progress(f, a + POP_FRAMES, a + POP_FRAMES + LABEL_FADE)}/>}</g>;
 };
 export const ChecklistElement: React.FC<Props<ChecklistEl>> = ({el, shotF0}) => {
   const f = useCurrentFrame(), left = el.x - el.w / 2;

@@ -527,15 +527,15 @@ P = {
            lambda t, d: CARD_SHOT(t, HERO('sloop', 'ONE SMALL SLOOP', t + 3), TG('ANCHORED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt'),
            lambda t, d: S(t, PH(TEACHS_HOLE, pos='50% 50%', push=(1.0, 1.1)))],  # real marker at the inlet; CC BY-SA credit in description
     # b6 rum, guests from Bath, one matters later
-    'b6': [lambda t, d: S(t, PH(TEACH_LOC, pos='50% 25%', push=(1.0, 1.1))),
+    'b6': [lambda t, d: CARD_SHOT(t, FLOW(t, d, ['RUM', 'LAUGHING', 'VISITORS']), TG('PARTY AT ANCHOR', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand'),
            lambda t, d: S(t, SC(S07, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),
            lambda t, d: S(t, PH(BB_PIRATE, pos='50% 22%', push=(1.0, 1.1))),
            lambda t, d: CARD_SHOT(t, CHK(t, d, [('PARTY GUEST', 'tick'), ('REMEMBER HIM', 'tick')]), TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
     # b7 does your wife know where you buried your money? me and the devil
     'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
            lambda t, d: CARD_SHOT(t, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4), TG('HE LAUGHED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_merchant_whisper'),
-           lambda t, d: S(t, PH(BB_PRINT, pos='50% 52%', push=(1.0, 1.1))),
-           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
+           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y)),
+           lambda t, d: CARD_SHOT(t, XO('chest', 'RETIREMENT PLAN', t + 3, t + 34), TG('NOBODY ELSE KNOWS WHERE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point')],
     # b8 joke: great line, terrible retirement plan
     'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y - B8_STACK_OFFSET, size=MEDIUM_WORD_SIZE),
                           O('TERRIBLE PLAN', t + 48, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
