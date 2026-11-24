@@ -229,6 +229,7 @@ check(not hasattr(G, 'CARD_FACTS'), 'generator keeps a beat-keyed CARD_FACTS tab
 #     ink; their mark is a circle/tick/cross ON one of the layout's own label anchors (geometry from the generator's
 #     mirrored constants, which mirror parts/cards.tsx and parts/layouts/*Layout.ts):
 #       split / transform: left or right label centre (STAGE_W/4 or 3*STAGE_W/4, *_LABEL_Y - LABEL/2);
+#       transform also: either icon centre (TRANSFORM_ICON_Y) - long b labels cannot be ringed on-stage (11-25 f1700);
 #       scale: its caption centre (STAGE_W/2, SCALE_LABEL_Y - LABEL/2), so a scale card must carry a label;
 #       map: the from or to pin point (from.x/y, to.x/y; pin labels move by collision, the pin does not).
 #     A circle must also be at least as wide as the label it rings (real font).
@@ -239,7 +240,8 @@ def anchors(lay):
                 (G.STAGE_W * 3 / 4, G.SPLIT_LABEL_Y - half, lay['right']['label'])]
     if k == 'transform':
         return [(G.STAGE_W / 4, G.TRANSFORM_LABEL_Y - half, lay['a']['label']),
-                (G.STAGE_W * 3 / 4, G.TRANSFORM_LABEL_Y - half, lay['b']['label'])]
+                (G.STAGE_W * 3 / 4, G.TRANSFORM_LABEL_Y - half, lay['b']['label']),
+                (G.STAGE_W / 4, G.TRANSFORM_ICON_Y, None), (G.STAGE_W * 3 / 4, G.TRANSFORM_ICON_Y, None)]
     if k == 'scale':
         return [(G.STAGE_W / 2, G.SCALE_LABEL_Y - half, lay['label'])] if lay.get('label') else []
     if k == 'map':

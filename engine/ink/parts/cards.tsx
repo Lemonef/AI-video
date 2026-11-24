@@ -5,7 +5,7 @@ import {color, CrossElement} from './elements';
 import {DoodleIcon} from './icons';
 import {scribbleEllipse} from './doodle';
 import type {IconEl, CountEl, SplitEl, HeroEl, CrossoutEl, ChecklistEl, QuoteEl, BignumEl} from './schema';
-import {LABEL, SMALL, CHAR_WIDTH} from './layouts/tokens';
+import {LABEL, SMALL, CHAR_WIDTH, CROSS_LABEL_GAP} from './layouts/tokens';
 export {LABEL, SMALL, CHAR_WIDTH} from './layouts/tokens';
 
 const W = 1920, H = 1080; // stage dimensions
@@ -53,7 +53,6 @@ const BIG_FADE = 4, UNDERLINE_DRAW = 10; // number entrance and underline time
 const UNDERLINE_Y = 0.18, UNDERLINE_BOW = 0.04, BIG_LABEL_GAP = 1.5; // number layout (gap below underline in label heights)
 const HERO_LABEL_GAP = LABEL * 0.3; // clear space between icon base and label cap top
 const HERO_CAP = LABEL * 0.7; // label cap height
-const CROSS_LABEL_GAP = LABEL * 0.6; // crossout: clear space between the red cross ends (round caps) and label cap top
 
 type Props<T> = {el: T; shotF0: number; shotF1: number};
 export const progress = (f: number, a: number, b: number) => interpolate(f, [a, b], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});

@@ -1,4 +1,4 @@
-import {LABEL, SMALL, CHAR_WIDTH} from './tokens';
+import {LABEL, SMALL, CHAR_WIDTH, CROSS_LABEL_GAP} from './tokens';
 import type {TransformEl} from '../schema';
 
 export const CARD_W = 1920;
@@ -48,7 +48,7 @@ export function transformLayout(el: TransformEl) {
 
   const headD = `M${arrowX2 - HEAD_LEN} ${arrowY - HEAD_LEN / 2} L${arrowX2} ${arrowY} L${arrowX2 - HEAD_LEN} ${arrowY + HEAD_LEN / 2}`;
 
-  const slotLabelY = ICON_Y + ICON_SIZE / 2 + LABEL;
+  const slotLabelY = ICON_Y + ICON_SIZE / 2 + CROSS_LABEL_GAP + LABEL; // slot a gets crossed: its label clears the cross ends
   const labelX = CARD_W / 2;
   const labelY = slotLabelY + CAPTION_GAP + LABEL;
 

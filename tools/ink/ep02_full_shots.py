@@ -252,8 +252,11 @@ TAG_PAD_X, TAG_PAD_Y, TAG_BORDER, TAG_TILT = 28, 10, 9, 2  # mirrors TagElement/
 STAMP_PAD_Y, STAMP_BORDER = 8, 10  # mirrors StampElement in parts/elements.tsx; change together
 HTML_LINE_HEIGHT = 1.2  # conservative normal line-height box for tag/stamp fonts in elements.tsx
 UNDERLINE_HEIGHT = 34  # mirrors Underline SVG height in compositions/InkProof.tsx; change together
-SPLIT_LABEL_Y = 460 + 360/2 + LABEL  # mirrors SplitElement in parts/cards.tsx; change together
-TRANSFORM_LABEL_Y = 460 + 320/2 + LABEL  # mirrors slotLabelY in parts/layouts/transformLayout.ts; change together
+SPLIT_Y, SPLIT_SIZE = 460, 360  # mirrors SPLIT_Y / SPLIT_SIZE in parts/cards.tsx; change together
+SPLIT_LABEL_Y = SPLIT_Y + SPLIT_SIZE/2 + LABEL  # mirrors SplitElement in parts/cards.tsx; change together
+RING_K = math.sqrt(2)  # an ellipse through a box's corners has sides sqrt(2) the box's; any smaller cuts the corners (Zen 11-25: circle crossed the label)
+TRANSFORM_ICON_Y, TRANSFORM_ICON = 460, 320  # mirrors ICON_Y / ICON_SIZE in parts/layouts/transformLayout.ts; change together
+TRANSFORM_LABEL_Y = TRANSFORM_ICON_Y + TRANSFORM_ICON/2 + LABEL*0.6 + LABEL  # mirrors slotLabelY (incl. CROSS_LABEL_GAP in layouts/tokens.ts) in parts/layouts/transformLayout.ts; change together
 SCALE_LABEL_Y = 800 + 30 + LABEL  # mirrors labelY in parts/layouts/scaleLayout.ts; change together
 
 SP_POP, SP_FADE, SP_VS_DRAW = 8, 6, 8  # mirrors POP_FRAMES/LABEL_FADE/VS_DRAW in parts/cards.tsx; change together
@@ -345,11 +348,16 @@ def POINT(layouts, side, t, d):
         return layouts + [{'t': 'tick', 'x': pin['x'], 'y': pin['y'], 'at': card_times(e, side)[0]}]
     if k == 'scale':
         x, y, label = STAGE_W/2, SCALE_LABEL_Y-LABEL/2, e['label']
-    else:
+        return layouts + CI(card_times(e, side)[0], x, y, text_width(label)+MARK_GAP, LABEL+MARK_GAP)
+    if k == 'split':  # ring the whole chosen side (drawing + label): the gap between them is too tight for a label-only ring
         x = STAGE_W/4 if side in ('left', 'a') else STAGE_W*3/4
-        y = (SPLIT_LABEL_Y if k == 'split' else TRANSFORM_LABEL_Y)-LABEL/2
-        label = e[side]['label']
-    return layouts + CI(card_times(e, side)[0], x, y, text_width(label)+MARK_GAP, LABEL+MARK_GAP)
+        top, bottom = SPLIT_Y - SPLIT_SIZE/2 - MARK_GAP, SPLIT_LABEL_Y + MARK_GAP
+        half = max(SPLIT_SIZE, text_width(e[side]['label']))/2 + MARK_GAP
+        return layouts + CI(card_times(e, side)[0], x, (top + bottom)/2, 2*half*RING_K, (bottom - top)*RING_K)
+    # transform: ring the drawing only; its long labels (COCOA + COTTON) would push a label ring off-stage or into the icon
+    x = STAGE_W/4 if side in ('left', 'a') else STAGE_W*3/4
+    # width = the icon box itself: the arrow stops a gap short of the box, so any wider ring touches its tip (11-25 f1700)
+    return layouts + CI(card_times(e, side)[0], x, TRANSFORM_ICON_Y, TRANSFORM_ICON, TRANSFORM_ICON + 2*MARK_GAP)
 
 
 def place_card_marks(shot, layout):
@@ -500,14 +508,14 @@ S01, S02, S03, S04, S05 = m1.S01, m1.S02, m1.S03, m1.S04, m1.S05
 S06, S07, S08, S09, S10 = m1.S06, m1.S07, m1.S08, m1.S09, m1.S10
 MAP, BB = m1.MAP, m1.BB
 # real archive images (ink/photos/SOURCES.md); one use each per minute, Zen 2026-11-25 "too many reuse images"
-FERRIS_CAPTURE, TEACHS_HOLE, TEACH_LOC = 'ferris_capture_1920.jpg', 'teachs_hole_marker.jpg', 'teach_loc_1725.jpg'
+FERRIS_CAPTURE, TEACH_LOC, OCRACOKE_1795 = 'ferris_capture_1920.jpg', 'teach_loc_1725.jpg', 'ocracoke_map_1795.png'
 BB_PIRATE, BB_PRINT = 'bb_pirate_c1724.jpg', 'bb_print_1734.jpg'
 
 # ---------- shot plan: beat id -> one builder per timeline shot ----------
 P = {
     # b1 "You have less than a day to live."
     'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN', t + 10, x=L, y=TOP_SLOT_Y, color='red'), W('A DAY TO LIVE', t + 22, x=L, y=TOP_SLOT_Y + HOOK_STACK_OFFSET, color='red'), cam=PUSH(1300, 480, 1.22)),
-           lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'ALIVE NOW'), ('chain', 'DEAD WITHIN A DAY'), t + LEAD, 14), 'right', t, d), cast='bb_stand')],
+           lambda t, d: CARD_SHOT(t, HERO('clock', 'LESS THAN 24 HOURS', t + 3, burst=True), TG('OCRACOKE, NOV 1718', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand')],  # says the hook plainly; no metaphor
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
            lambda t, d: S(t, SC(S03, (1.0, 1.06)), TG('ABOUT 20 MEN', t + 20, L, TOP_SLOT_Y)),  # plate already shows the crew
@@ -525,7 +533,9 @@ P = {
            lambda t, d: S(t, PH(MAP, pos='50% 50%', push=(1.0, 1.12)),
                           chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=t + 5, chipPos='tl'),
            lambda t, d: CARD_SHOT(t, HERO('sloop', 'ONE SMALL SLOOP', t + 3), TG('ANCHORED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt'),
-           lambda t, d: S(t, PH(TEACHS_HOLE, pos='50% 50%', push=(1.0, 1.1)))],  # real marker at the inlet; CC BY-SA credit in description
+           # 1795 inlet chart naming 'Teaches Hole' = the exact anchorage (was a road-sign photo; Zen 11-25 "it don't belong to context here at all")
+           lambda t, d: S(t, PH(OCRACOKE_1795, pos='70% 45%', push=(1.0, 1.08)),
+                          chip="TEACH'S HOLE: HIS ANCHORAGE", chipAt=t + 5, chipPos='tl')],
     # b6 rum, guests from Bath, one matters later
     'b6': [lambda t, d: CARD_SHOT(t, FLOW(t, d, ['RUM', 'LAUGHING', 'VISITORS']), TG('PARTY AT ANCHOR', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand'),
            lambda t, d: S(t, SC(S07, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),
