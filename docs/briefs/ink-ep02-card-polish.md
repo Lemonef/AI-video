@@ -1,5 +1,5 @@
 ---json
-{"id": "ink-ep02-card-polish", "type": "creative", "risk": "high", "repo": "D:/AI-video", "gates": ["python tools/ink/ep02_full_shots.py --draft", "python -I tests/ink/ep02_lint_baseline.py", "python -I tests/ink/ep02_cardfix1_diffgate.py", "python -I tests/ink/ep02_cardfix2_check.py", "python -I tests/ink/ep02_plates_check.py", "node --test tests/ink/ep02_polish_check.test.mjs", "python tools/tsc_in_worktree.py", "node --test --test-skip-pattern=icons.tsx.changes.ONLY.by.the.IconName tests/ink/cardlib.test.mjs tests/ink/cardlib2a.test.mjs tests/ink/cardlib2b.test.mjs tests/ink/cardlib2c.test.mjs tests/ink/cardlib2d.test.mjs tests/ink/cardlib2e.test.mjs tests/ink/cardlib2f.test.mjs tests/ink/cardlib2g.test.mjs tests/ink/cardlib2h1.test.mjs tests/ink/cardlib2h1fix.test.mjs tests/ink/cardlib2h1fix2.test.mjs tests/ink/cardlib2h2.test.mjs tests/ink/cardlib2h3.test.mjs tests/ink/directed.test.mjs tests/ink/ep02-context-card.test.mjs tests/ink/ep02-card-content.test.mjs tests/ink/ep02-meter.test.mjs tests/ink/inkshort.test.mjs tests/ink/rig.test.mjs tests/ink/v11b-chip.test.mjs tests/ink/v11b.test.mjs"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "engine/ink/Root.tsx", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v*/**", "engine/ink/parts/shots_ep02min1/**", "engine/ink/parts/elements.tsx", "engine/ink/parts/icons.tsx", "engine/ink/parts/doodle.tsx", "engine/ink/ink/**", "engine/ink/rig/**", "tools/ink/make_ep02_min1_shots.py", "tools/ink/make_v10_shots.py", "tools/ink/make_v11b_shots.py", "engine/ink/parts/cards.tsx", "engine/ink/compositions/InkProof.tsx", "engine/ink/compositions/InkParts.tsx", "engine/ink/parts/schema.ts", "engine/ink/parts/layouts/**", "engine/ink/parts/meter.mjs", "tools/tsc_in_worktree.py"], "context_files": ["tests/ink/ep02_polish_check.test.mjs", "tests/ink/ep02_plates_check.py", "tests/ink/ep02_lint_baseline.py", "tests/ink/ep02_cardfix2_check.py", "tools/ink/ep02_full_shots.py", "tools/ink/make_ep02_min1_shots.py", "engine/ink/parts/layouts/transformLayout.ts", "engine/ink/parts/layouts/mapLayout.ts", "engine/ink/parts/layouts/scaleLayout.ts", "engine/ink/parts/cards.tsx", "engine/ink/parts/elements.tsx", "docs/briefs/ink-ep02-card-fix2-beats.md"], "seed_files": ["videos/pastly-life/02-blackbeard-ink/assets/full-hybrid/timeline.json"], "plan_check": "docs/briefs/ink-ep02-card-polish.plan_check.md"}
+{"id": "ink-ep02-card-polish", "type": "creative", "risk": "high", "repo": "D:/AI-video", "gates": ["python tools/ink/ep02_full_shots.py --draft", "python -I tests/ink/ep02_lint_baseline.py", "python -I tests/ink/ep02_cardfix1_diffgate.py", "python -I tests/ink/ep02_cardfix2_check.py", "python -I tests/ink/ep02_plates_check.py", "node --test tests/ink/ep02_polish_check.test.mjs", "python tools/tsc_in_worktree.py", "node --test --test-skip-pattern=icons.tsx.changes.ONLY.by.the.IconName tests/ink/cardlib.test.mjs tests/ink/cardlib2a.test.mjs tests/ink/cardlib2b.test.mjs tests/ink/cardlib2c.test.mjs tests/ink/cardlib2d.test.mjs tests/ink/cardlib2e.test.mjs tests/ink/cardlib2f.test.mjs tests/ink/cardlib2g.test.mjs tests/ink/cardlib2h1.test.mjs tests/ink/cardlib2h1fix.test.mjs tests/ink/cardlib2h1fix2.test.mjs tests/ink/cardlib2h2.test.mjs tests/ink/cardlib2h3.test.mjs tests/ink/directed.test.mjs tests/ink/ep02-context-card.test.mjs tests/ink/ep02-card-content.test.mjs tests/ink/ep02-meter.test.mjs tests/ink/inkshort.test.mjs tests/ink/rig.test.mjs tests/ink/v11b-chip.test.mjs tests/ink/v11b.test.mjs"], "protected": ["tests/**", "docs/**", "videos/**", "public/**", "package.json", "package-lock.json", "tsconfig.json", "engine/ink/Root.tsx", "engine/ink/parts/shots/**", "engine/ink/parts/shots_v*/**", "engine/ink/parts/shots_ep02min1/**", "engine/ink/parts/elements.tsx", "engine/ink/parts/icons.tsx", "engine/ink/parts/doodle.tsx", "engine/ink/ink/**", "engine/ink/rig/**", "tools/ink/make_ep02_min1_shots.py", "tools/ink/make_v10_shots.py", "tools/ink/make_v11b_shots.py", "engine/ink/parts/cards.tsx", "engine/ink/compositions/InkProof.tsx", "engine/ink/compositions/InkParts.tsx", "engine/ink/parts/schema.ts", "engine/ink/parts/layouts/**", "engine/ink/parts/meter.mjs", "tools/tsc_in_worktree.py"], "context_files": ["tests/ink/ep02_polish_check.test.mjs", "tests/ink/ep02_plates_check.py", "tests/ink/ep02_lint_baseline.py", "tests/ink/ep02_cardfix2_check.py", "tools/ink/ep02_full_shots.py", "tools/ink/make_ep02_min1_shots.py", "engine/ink/parts/layouts/transformLayout.ts", "engine/ink/parts/layouts/mapLayout.ts", "engine/ink/parts/layouts/scaleLayout.ts", "engine/ink/parts/cards.tsx", "engine/ink/parts/elements.tsx", "engine/ink/compositions/InkProof.tsx", "docs/briefs/ink-ep02-card-fix2-beats.md"], "seed_files": ["videos/pastly-life/02-blackbeard-ink/assets/full-hybrid/timeline.json"], "plan_check": "docs/briefs/ink-ep02-card-polish.plan_check.md"}
 ---
 # Goal
 Polish the ep02 cards and overlay words, with no new pictures and no plate changes:
@@ -33,7 +33,10 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    `TF_POP, TF_FADE, TF_ARROW = 8, 6, 10  # mirrors POP_FRAMES/LABEL_FADE/ARROW_DRAW in parts/layouts/transformLayout.ts; change together`).
    Mark draw lengths (circle, tick) mirror `progress(f, 0, N)` in elements.tsx the same way, and
    `HOLD = 10` mirrors HOLD in tests/ink/ep02_polish_check.test.mjs. No bare frame numbers in POINT or
-   the fitter.
+   the fitter. An earlier attempt changed `POINT` but the gate still listed marks at `at + 4`: EVERY mark in
+   P must be produced by the new `POINT` (grep P for every circle / tick and convert each one; no mark may
+   keep a hand-written `at`). Run the polish gate after step 1 alone and confirm its mark-start findings are
+   gone before step 2.
 2. Step fitter. Card shots pass a fixed authored step today (b54 `TF(... 22)`, b86 `TF(... 30)`,
    b47 `TF(... 26)`, etc.). Add one helper whose inputs are: the card kind (split / transform), the card's
    authored layout `at` (e.g. `t + 3` or `t + LEAD`, kept exactly as authored), the marked side and mark
@@ -47,7 +50,11 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    (they do today) and fail loudly if not. Map readiness uses the destination pin (both current map calls
    point at `'to'`); say so in a comment. A fit simulation found only three steps change: f0 46 (becomes a
    split, step 14 -> 5), f0 11489 (transform 22 -> 10), f0 18090 (transform 30 -> 26). If a card cannot fit
-   even at the minimum step, fail the build loudly (SystemExit naming the f0); do not clip.
+   even at the minimum step, fail the build loudly (SystemExit naming the f0); do not clip. The fitter, POINT
+   and the map/scale check share ONE end function per card kind built from the mirrored constants (no second
+   copy of the layout math), and it must give the same `end` the gate computes from transformLayout /
+   scaleLayout / mapLayout: an earlier attempt let f0 11489 finish at 11561 against a shot end of 11559
+   because its own end formula differed from the layout's. Check the result with the gate, not by reasoning.
 3. b1 hook card (f0 46): `TF(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, 14)` with
    `POINT(..., 'b')` becomes `SPL(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, <fitted>)`
    with `POINT(..., 'right')`, cast unchanged. Same two sides, same circle on the right (gate pins
@@ -61,11 +68,18 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    f0s; ignore any older list). Find each shot by its f0 and text in `P`.
 
    Placement vocabulary (all from existing tokens, no bare numbers):
-   - `TL` / `TC` / `TR`: y 240 at x `L` / 960 / `R` (sky, rigging, wall, houses). The meter box sits top
-     right, so `TR` only where the meter-clearance pass does not push it onto a face.
+   - `TL` / `TC` / `TR`: the existing top slot at x `L` / 960 / `R` (sky, rigging, wall, houses). Name it
+     ONCE: `TOP_SLOT_Y = 240  # the top text slot the O/W/TG calls in P already use; moved or new elements
+     use this name; change together`. Untouched calls keep their literal (byte-identical output); every
+     MOVED element and the new `CW` `y` use `TOP_SLOT_Y`, never a bare 240. Do NOT invent a higher top band
+     (an earlier attempt used `STAGE_H - FLOOR` = y 80: that is the frame edge, rejected). The meter box
+     sits top right, so `TR` only where the meter-clearance pass does not push it onto a face.
    - low band: add ONE named constant next to the other position constants:
      `TEXT_LOW_Y = m1.STAGE_H - m1.SAFE - round(m1.CAP_H * LOW_SIZE)`, where `LOW_SIZE` is the largest
-     words size placed on the band (a named constant or an existing size token; the clearance pass treats
+     words size ACTUALLY placed on the band (an earlier attempt picked a size smaller than some low-band
+     lines: wrong). Define it from the existing size token(s) the moved low-band lines use (e.g. `max(...)`
+     of those tokens), and after building P assert that no low-band words element has `size > LOW_SIZE`
+     (SystemExit naming the f0). The clearance pass treats
      `CAP_H * size` as a line's half-height, so its bottom stays `SAFE` above the stage edge), with a mirror
      comment: `# low text band over deck/floor/water/street; derived from STAGE_H/SAFE/CAP_H in
      make_ep02_min1_shots.py; change together`.
@@ -155,6 +169,16 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    checked and is already clear: do not move it. Shots 4329 and 8399 were borderline: render their still
    and move only if the words touch a head (a move there counts as a step-4 move in Done-when).
 
+   No two overlay elements may overlap each other. An earlier attempt moved 'GREAT LINE.' (f0 1492) and
+   'TERRIBLE PLAN' to the same spot (both x `R`, y 966), and '60 OF THEM' (f0 7753) onto '20 OF YOU', which is
+   still on screen there. Add ONE check in ep02_full_shots.py, run after every fit / clear pass:
+   `check_overlap(shot)`. For each pair of words / tag / stamp elements in the same shot (overlay elements
+   stay to the shot end, so any pair in one shot is on screen together), take the stage boxes from
+   `m1._el_boxes` (words, tags) and `stamp_box` (4a); if two boxes intersect raise `SystemExit` naming the f0
+   and both texts (`e.get('text', e['t'])`). It runs on every shot. If a shot that is not in the table fails
+   it, move one of its elements with the same vocabulary and list that move in the reply table. Comment:
+   `# no two overlay boxes may intersect; boxes from m1._el_boxes + stamp_box; change together`.
+
    Bottom edge under the camera. `m1.fit_words` clamps only the TOP and sides against the camera states;
    a low-band line can leave the bottom of the screen when the plate zoom / camera scales it (Codex found
    f0 6863, 12267, 16424, 17041 at about screen y 1103 > 1080). `make_ep02_min1_shots.py` is protected, so
@@ -164,7 +188,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    `m1._el_boxes(shot)` (words: `CAP_H*size`; tags: `TAG_FONT`/`TAG_PAD`/`_LINE` half-height), so no size
    is restated: for each `(e, (x0, y0, x1, y1))` it yields, `hh = y1 - e['y']`,
    `hi_y = min((m1.STAGE_H - m1.SAFE - by) / ay - hh for _, _, ay, by in m1._states(shot))`,
-   `e['y'] = min(e['y'], hi_y)`, logged into `fits` the same way. Comment: `# bottom-safe twin of m1.fit_words
+   `e['y'] = min(e['y'], hi_y)`, logged into `fits` the same way (log `e.get('text', e['t'])`: some boxes
+   have no `text` key, an earlier attempt crashed on `e['text']`). Comment: `# bottom-safe twin of m1.fit_words
    lo_y, words + tags via m1._el_boxes; change together`. It runs on every shot (an element already inside the
    frame is unchanged). It only ever moves an element UP (smaller y), never down, while
    `clear_meter` only pushes down out of the top-right meter box; if `clear_meter` then pushes an element back
@@ -172,14 +197,22 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    or side) instead. The still check then confirms the element is still off faces.
 
    4a. Hook stamp (f0 0, frames 0-45, b1 shot 1, plate S01, `ST('LESS THAN A DAY TO LIVE', t + 10)`). The owner reviewed
-   minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read. Make it
-   readable and off every face for its whole visible interval (the PUSH camera moves the plate under it):
-   place it in the calm night sky band at the top (between the masts, left of the meter box) or in the low
-   band over the dark deck, whichever a still shows is clear of faces at both the first and last visible
-   frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
-   style, words, timing AND size: `StampElement` hard-codes its font size and the stamp has no size
-   parameter, so fit it by position and rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`).
-   The same applies to every stamp in the table. StampElement scale is `2.2 - 1.2*p` with
+   minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read; he
+   asked to "swap for something better so audience know readable". It CANNOT stay a stamp: StampElement
+   hard-codes font 110 with no size parameter, and the 23-character box is about 1710 stage px wide, which
+   the f0 0 camera (plate zoom 1.08 x PUSH 1.22) makes about 2254 screen px against 1824 available, so no
+   position or rotation fits. Swap the treatment: replace `ST('LESS THAN A DAY TO LIVE', t + 10)` with
+   `W('LESS THAN A DAY TO LIVE', t + 10, x=960, y=TOP_SLOT_Y, color='red')` (same words, same `at`, red, no
+   tilt; default size), placed in the calm night sky band at the top (or the low deck band if a still shows
+   the sky band on a face; then use the low-band y). `m1.fit_words` already shrinks a words line until it fits
+   every camera state, and `fit_text_bottom` guards the bottom, so the line is fitted by the existing passes;
+   do not add a size literal. Report its fitted size in reply table (b); it must stay at least
+   `HOOK_MIN_SIZE = 80` (named constant, comment: `# smallest readable hook words size at 1080p; owner asked for
+   readable; change together`), else SystemExit.
+   Every stamp in the table keeps the stamp treatment, size and words, and is fitted by position and
+   rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`). If `fit_stamps` (below) finds an empty
+   range for one of them, swap THAT stamp to the same red words treatment (`W(<same text>, <same at>,
+   color='red', x=..., y=...)`) and list the swap in reply table (b); do not shorten its text. StampElement scale is `2.2 - 1.2*p` with
    `p = useIn(delay, 10)`, a remotion `spring` with damping 10 (InkProof.tsx `useIn`), NOT a 10-frame ease:
    it slams down to scale 1 by about `at + 8`, undershoots to about 0.81, then overshoots to a max of about
    1.032 near `at + 22`, and is within 0.6% of 1 from about `at + 30`. The slam frames before the first
@@ -190,16 +223,45 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    (use `m1._states(shot)`), and clear of the meter box. Every new value is a named constant derived from existing
    tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
 
+   This must be COMPUTED, not eyeballed. An earlier attempt put the hook stamp at `TEXT_LOW_Y` (966); under
+   the f0 0 `PUSH` camera (scale up to about 1.22) that lands near screen y 1133, off the frame, and it
+   defined `STAMP_SETTLE_MAX` without using it. Required:
+   - `stamp_box(e)`: the stage-space box of a stamp. Read its font size, padding and border width from the
+     `StampElement` line in engine/ink/parts/elements.tsx with a fail-loud regex (the same way
+     make_ep02_min1_shots.py reads its chip inset from a source file). Width `m1.GLYPH_BOX * font *
+     len(text) + 2*pad_x + 2*border`, height `m1._LH * font + 2*pad_y + 2*border`, both times
+     `STAMP_SETTLE_MAX`, then the axis-aligned box of that rectangle rotated by `e['rot']` degrees
+     (`w|cos| + h|sin|` by `w|sin| + h|cos|`), centred on `e['x'], e['y']`. Comment: `# StampElement box,
+     font/padding/border read from elements.tsx; change together`.
+   - `fit_stamps(shot)`: for every stamp, the four-side analogue of `m1.fit_words`: over every state in
+     `m1._states(shot)` (screen = `a*stage + b`) compute the stage x and y ranges that keep the screen box at
+     least `SAFE` inside every edge, clamp `e['x']`, `e['y']` into them, and if a range is empty raise
+     `SystemExit` naming the f0 and text. Then, if the screen box meets `m1.METER_BOX` at any state, move the
+     stamp left of the box or below `METER_BOX[3] + SAFE` (still inside the frame), else `SystemExit`. Run it
+     beside `fit_words` on every shot; log moves into `fits`.
+   - The table stamps (MOST FEARED, CUT THE ANCHOR, BROADSIDE!, GRAPPLE!, BLOW THE SHIP UP, BANG) and every
+     other stamp in P go through this fitter. A stamp at the stage top edge (an earlier attempt used y 80)
+     fails this rule. The f0 0 hook is now words (above), so it goes through `fit_words` /
+     `fit_text_bottom` / `check_overlap`, not `fit_stamps`.
+
    4b. Check. Render half-scale stills (`npx remotion still engine/ink/index.ts InkEp02Full
    .tmp/polish/<name>.png --frame=<N> --scale=0.5 --public-dir videos/pastly-life/02-blackbeard-ink/assets`)
    ONLY into the git-ignored `.tmp/polish/` directory (any other output path is an untracked file and fails
    the allowed-file gate) and look at each:
-   - every moved overlay / sprite: its SETTLED frame (formula above) and frame `f1 - 10` (cameras move; the
-     words or sprite must stay off faces for the whole visible interval);
+   - every moved overlay / sprite (and the f0 0 hook words, and any stamp swapped to words): a frame SWEEP
+     from its SETTLED frame (formula above) to `f1 - 1` inclusive. Render it as ONE image-sequence call per
+     shot (`npx remotion render engine/ink/index.ts InkEp02Full .tmp/polish/seq_<f0> --sequence
+     --image-format=jpeg --frames=<settled>-<f1-1> --scale=0.5 --public-dir
+     videos/pastly-life/02-blackbeard-ink/assets`), then look at every 8th frame plus `f1 - 1` (stride 8 =
+     about a quarter second at the composition's 30 fps; a review-procedure value, not code, so no constant
+     is needed), so the whole settled interval is sampled, not two frames. The
+     clearance claim is "off faces from the settled frame to the cut"; entrance frames are excluded on
+     purpose (words still sliding in). Bounce/camera motion is covered by the sweep. In reply (d) list each
+     `seq_<f0>` folder, the frames looked at, and one line per shot on what they show;
    - each of the three re-stepped cards (f0 46, 11489, 18090): the frame its mark finishes drawing
      (`at + DRAW`), so the completed circle and the finished card are both visible. For f0 46 also the last
      frame (f1 - 1): both sides and the circle fully drawn and settled there, not mid-animation;
-   - the f0 0 stamp: frames 12, 28 and 45;
+   - the f0 0 hook words: covered by the sweep above (settled frame to 45);
    - f0 443: frame `at + 32` and f1 - 1 (all four words settled before the cut).
    Do not judge overlap at an entrance frame (words still sliding in look like they sit elsewhere).
    The fitter must receive the split's `vs` flag (versus-circle on/off) when computing the split end, so a
@@ -217,10 +279,15 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
   sprite / stamp positions, sizes and rotations (including 4329 / 8399 if moved, and any words or tag y raised by
-  `fit_text_bottom`), the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
+  `fit_text_bottom`), the f0 443 words `at`, any `check_overlap` repair move (listed in table b), the
+  f0 0 hook element (stamp -> red words: `t`, `size`, `color`, x/y, no `rot`), and any table stamp
+  swapped to red words by the 4a fallback (listed in table b), may differ (a kept stamp's size stays). The b1 card at f0 46 may
   also change its circle y (655 -> 675, the split label anchor that POINT uses), its side keys (`a`/`b` ->
   `left`/`right`) and gain the default `vs` field. Otherwise card content, layout `at`, mark y/size, f0/f1, plates and cameras are
   unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
 - The reply includes: (a) a table per card shot with f0, kind, old step -> new step, old mark at -> new mark
   at; (b) a table per moved overlay with f0, text, old x/y -> new x/y (and any sprite move), and one line on
-  what calm area it now sits on; (c) the new named constants with their mirror comments.
+  what calm area it now sits on; (c) the new named constants with their mirror comments; (d) every still
+  path rendered under `.tmp/polish/` (each frame 4b names) with one line on what it shows; (e) the one-line
+  full.json diff summary; (f) the real non-draft `ep02_full_shots.py` output. A reply missing any of (a)-(f)
+  fails review.

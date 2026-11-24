@@ -61,7 +61,9 @@
     - [x] Codex Sol r5 on 12a61f1 brief: FAIL (stamp settle, bottom clamp) -> fixed f413ad8
     - [x] Codex Sol r6 on f413ad8: FAIL (spring envelope, tag bottom clamp) -> fixed 270e82f
     - [x] Codex Sol r7 on 270e82f brief: PASS, applied in f5d14b4
-    - [ ] polish pipeline job ink-ep02-card-polish-20261124132148 (running)
+    - [x] polish job ink-ep02-card-polish-20261124132148 ended needs-owner (Sol audit FAIL: stamp off-frame under PUSH, stamps at y80, new overlaps f0 1492/7753, bare literals, KeyError; Astra gate-fail marks not retimed + 11489 end 11561>11559; Claude rung no Bash)
+    - [ ] brief r9: hook->red fitted words, overlap-repair diffs allowed, --sequence sweep (stamp_box/fit_stamps computed, TOP_SLOT_Y, check_overlap, LOW_SIZE assert, POINT at every mark, one end fn, reply a-f) -> Codex Sol r8 -> plan_check -> relaunch
+    - [ ] Zen: pipeline Claude rung lacks Bash (--allowedTools fix needs his OK; not widened while away)
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
