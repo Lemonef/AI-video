@@ -513,7 +513,7 @@ P = {
            lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?'), 'right', t, d), cast='crew_point'),
            lambda t, d: S(t, SC(S05, (1.08, 1.0)), W('STAY TO THE END', t + LEAD, x=L, y=TOP_SLOT_Y), cam=PULL(960, 520))],
     # b4 strangest part: tonight he isn't worried
-    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bb_exp_deadpan', t + 3, x=L, y=SPRITE_LOW_Y), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
+    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
            lambda t, d: S(t, SC(S06, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240), cam=PAN(1400, 1100))],
     # b5 21 November 1718, small sloop, quiet inlet
     'b5': [lambda t, d: CARD_SHOT(t, BN(1718, '21 NOVEMBER', t + 3, 36, year=True), TG('QUIET INLET', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_arms_crossed'),
@@ -530,7 +530,7 @@ P = {
     'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
            lambda t, d: CARD_SHOT(t, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4), TG('HE LAUGHED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_merchant_whisper'),
            lambda t, d: S(t, SC(S08), cam=PUSH(1250, 480, 1.35)),
-           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_angry_grin', t + 3, x=L, y=SPRITE_LOW_Y), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
+           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
     # b8 joke: great line, terrible retirement plan
     'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y - B8_STACK_OFFSET, size=MEDIUM_WORD_SIZE),
                           O('TERRIBLE PLAN', t + 48, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
