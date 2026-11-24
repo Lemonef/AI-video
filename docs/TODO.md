@@ -40,12 +40,13 @@
     - [x] min5/min6/min7 progress sheets (contact sheets sent 11-24 06:05, all 13 plates eye-checked)
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
     - [x] 9 briefs m8a-c, m9a-d, m10a-b + free-leg review (Groq+Cohere) + plan_checks a00b39d
-    - [ ] jobs one at a time: [x] m8a c852dcf · [x] m8b 72516c8 · [x] m8c 1822c0a · [x] m9a 40372b4 · [x] m9b 2da3972 · [x] m9c ec466fe · [x] m10a · [x] m10b · [ ] m9d brief fix (bandage knee only, farmer hoe) cross-check running, then relaunch
+    - [ ] jobs one at a time: [x] m8a c852dcf · [x] m8b 72516c8 · [x] m8c 1822c0a · [x] m9a 40372b4 · [x] m9b 2da3972 · [x] m9c ec466fe · [x] m10a · [x] m10b · [x] m9d 01a0d8c
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
     - [x] gate tests/ink/ep02_plates_check.py 4bbb671; Sol review 1 FAIL (4 holes) -> gate+brief fixed, re-review running
     - [ ] plan_check + pipeline job docs/briefs/ink-ep02-plate-wire.md
       - [x] Sol review 2 FAIL (gate 2 skipped beats with no plate) -> CARD_ONLY pinned from 6ecc0d4, 2b plate-exists, b83 reason check, brief wording; gate FAILs on unwired full.json as expected
-      - [ ] Sol review 3 (.tmp_pw_review3.txt) -> plan_check -> commit gate+brief+plan_check -> launch job
+      - [x] Sol review 3 PASS (must-fix none, count nit fixed) -> plan_check -> cc87fb6 -> job ink-ep02-plate-wire-20261124064900 launched
+      - [ ] accept job, then hand-wire b82 -> m9d + MISSING_OK = set() in the gate
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
