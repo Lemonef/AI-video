@@ -30,7 +30,7 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    constants beside the geometry they mirror, each with a "mirrors X in <file>; change together" comment.
 3. **Underline only under a caption.** Remove the universal underline from `CARD_SHOT`. Add one only when the
    card's layout is `hero`, `bignum` or `count` AND that layout has a `label`: centred on the layout x, width =
-   `text_width(label, LABEL)`, y inside the caption row (gate: between `content_box(layout)[3] - LABEL -
+   `text_width(label, LABEL)`, y inside the caption row (gate: exactly one per such card, width 100-120% of the real caption, y between `content_box(layout)[3] - LABEL -
    CAP_DESCENT` and `content_box(layout)[3] + UNDERLINE_HEIGHT`). No `min(420, ...)` cap. Cards that lose their
    underline must still carry another non-sprite mark (gate 6): give them a `tag` or `stamp` on the key fact,
    or for `doc` a `mark`/`stamp` on the document, chosen from the beat's words.
@@ -43,7 +43,7 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    tag, stamp, words) must sit horizontally inside `bg.sheet`, measured with the real font. With steps 1 and 4
    the existing sheet union does this; where a sheet is clamped by the stage, shorten the text instead.
 6. **Short captions.** Every layout `label` and every card tag/stamp text is at most 6 words, matching what the
-   voice says at that beat (read the beat words in the seed timeline). Known long one: f0 5164 caption.
+   voice says at that beat (read the beat words in the seed timeline). Known spill: the f0 5164 caption (4 words) overflows its sheet width; shorten it.
 7. **Content the owner flagged.**
    - f0 8542 "SLOW FUSES UNDER HIS HAT": no `lantern` icon anywhere on the card. Show Blackbeard (a `bb_*`
      sprite, e.g. `ink/cast/bb_stand.png` or another `bb_` pose) with the fuse idea as the layout (e.g. a hero

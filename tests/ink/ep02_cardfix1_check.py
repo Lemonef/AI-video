@@ -118,14 +118,16 @@ for c in cards:
 
     # 3. underline only under a real caption, sized to it.
     cap = caption_of(lay)
-    for u in (e for e in c['els'] if e['t'] == 'underline'):
+    unders = [e for e in c['els'] if e['t'] == 'underline']
+    check(not cap or len(unders) == 1, f'{at}: {lay["t"]} caption {cap!r} has {len(unders)} underlines (want 1)')
+    for u in unders:
         if not cap:
             fails.append(f'{at}: underline on a {lay["t"]} card (no caption to underline)')
             continue
         cb = caption_box(lay)
         cw = cb[2] - cb[0]
         check(abs(u['x'] - (cb[0] + cb[2]) / 2) <= TOL, f'{at}: underline x {u["x"]} not centred on caption')
-        check(abs(u['w'] - cw) <= cw * (OVER_MAX - 1) + TOL, f'{at}: underline w {u["w"]:.0f} vs caption {cw:.0f}')
+        check(cw - TOL <= u['w'] <= cw * OVER_MAX + TOL, f'{at}: underline w {u["w"]:.0f} vs caption {cw:.0f}')
         check(cb[1] <= u['y'] <= cb[3] + G.UNDERLINE_HEIGHT, f'{at}: underline y {u["y"]:.0f} not under caption '
                                                              f'({cb[1]:.0f}..{cb[3]:.0f})')
 
@@ -152,7 +154,7 @@ by_f0 = {c['f0']: c for c in cards}
 fuse = by_f0.get(8542)
 check(fuse is not None, 'fuse card @8542 missing')
 if fuse:
-    check(not any(e.get('icon') == 'lantern' or e.get('name') == 'lantern' for e in fuse['els']),
+    check('lantern' not in json.dumps(fuse).lower(),  # anywhere, nested icons and srcs included
           'card @8542 (fuses under his hat) still shows a lantern')
     check(any(e['t'] == 'sprite' and '/bb_' in e['src'] for e in fuse['els']), 'card @8542 has no Blackbeard sprite')
 lay_off = by_f0.get(4659)

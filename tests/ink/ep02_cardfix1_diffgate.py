@@ -9,9 +9,12 @@ import sys
 ALLOWED = {'tools/ink/ep02_full_shots.py', 'engine/ink/parts/shots_ep02full/full.json'}
 out = subprocess.run(['git', 'status', '--porcelain', '--untracked-files=all'], capture_output=True, text=True,
                      check=True).stdout
-changed = {line[3:].strip().strip('"').split(' -> ')[-1] for line in out.splitlines() if line.strip()}
-# Pre-existing untracked owner files are not the builder's; only flag paths the build could have produced.
-bad = sorted(p for p in changed if p not in ALLOWED and p.startswith(('engine/', 'tools/', 'tests/', 'src/')))
+rows = [(line[:2], line[3:].strip().strip('"').split(' -> ')[-1]) for line in out.splitlines() if line.strip()]
+changed = {p for _, p in rows}
+# Any tracked change outside ALLOWED fails. Untracked files fail under the code/asset trees and at the repo root;
+# pre-existing untracked owner drafts elsewhere are not the builder's (the pipeline worktree has none anyway).
+BUILD_TREES = ('engine/', 'tools/', 'tests/', 'src/', 'docs/', 'videos/', 'public/')
+bad = sorted(p for st, p in rows if p not in ALLOWED and (st != '??' or p.startswith(BUILD_TREES) or '/' not in p))
 if bad:
     print('FILES OUTSIDE THE ALLOWED LIST:', *bad, sep='\n  ')
     sys.exit(1)
