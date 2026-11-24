@@ -7,7 +7,8 @@ points two independent audits of the fix-1 builds found. The owner's words: card
 context", not "a white card, something placed on it, then words".
 
 The protected gate `tests/ink/ep02_cardfix2_check.py` defines done. Checks 1-7 are fix 1's, unchanged; checks
-8-11 are new. Read it first.
+8-12 are new. Where fix 1 step 3 allows a tag/stamp fallback on any card, fix-2 steps 11-12 override it:
+full-stage cards take no tag/stamp at all. Read it first.
 
 Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/ink/parts/shots_ep02full/full.json`
 (regenerate with `python tools/ink/ep02_full_shots.py --draft`; never hand-edit it). Work only inside the repo.
@@ -20,8 +21,12 @@ Use it. Each mark must come from that beat's own line.
 9. **Marks add a fact.** Every `tag`/`stamp` on a card says something the card does not already show. It is
    not the layout's caption, item, row, quote or label again (gate 8a). It is not the words of the plate shot
    just before the card (gate 8b). No mark text is used on two cards (gate 8c). Pick the fact from the beat's
-   voice line: a number, a name, a consequence, a twist. Example: on a checklist of NO GOLD rows, do not tag
-   `GOLD`; tag what the line adds (e.g. `ALL OF IT SPENT`).
+   voice line: a number, a name, a consequence, a twist. A mark needs at least one content word
+   (filler such as THE, NO, JUST, WOW never counts). Example (b72: "Then Maynard searches your ship. No gold.
+   Just cocoa, cotton, and, in the cabin, letters."): on a checklist of NO GOLD rows, do not tag `GOLD`; tag what
+   the line adds (e.g. `JUST LETTERS`). Every card that is not full-stage carries at least one such tag/stamp
+   (gate 12); an underline or sprite alone is not the fact. Marks are checked for meaning in review (below), so a
+   word that passes the gate but is not in the beat's line is a fail.
 10. **Authored per card, in `P`.** Write each card's mark inside its own `P` lambda, next to the layout it
    supports. No lookup table keyed by beat (`CARD_FACTS` or any rename), no `if beat_id == ...` branches, no
    pass in `build()` that appends marks after `P` runs (gate 10 checks the name; the review checks the rest).
@@ -32,9 +37,16 @@ Use it. Each mark must come from that beat's own line.
    grows to hold it.
 12. **Full-stage cards point, not tag.** `split`, `transform`, `scale` and `map` fill the inset panel, so no
    free-floating text can be proven clear of them. On those cards use no `tag`/`stamp`. Put one `circle`
-   (or `tick`/`cross`) around the label the beat is about, placed from the generator's existing label
-   geometry (`SPLIT_LABEL_Y`, `TRANSFORM_LABEL_Y`, `SCALE_LABEL_Y`, the side x it already uses; no new magic
-   numbers) (gate 11).
+   (or `tick`/`cross`) on the label anchor the beat is about (gate 11). Anchors, all from existing generator
+   constants (no new numbers):
+   - `split`: left label at (`STAGE_W/4`, `SPLIT_LABEL_Y - LABEL/2`), right at (`STAGE_W*3/4`, same y).
+   - `transform`: a label at (`STAGE_W/4`, `TRANSFORM_LABEL_Y - LABEL/2`), b at (`STAGE_W*3/4`, same y).
+   - `scale`: the caption at (`STAGE_W/2`, `SCALE_LABEL_Y - LABEL/2`). A scale card must carry a `label`; card
+     @17777 has none, so give it a caption of at most 6 words from its beat line.
+   - `map`: the `to` pin (or the `from` pin) at its exact data x, y. Not the band label (it sits above the
+     sheet) and not the pin labels (their place depends on collisions).
+   The mark's `content_box` must contain the anchor point, and a `circle` must be at least as wide as the label
+   it rings (real font width).
 13. If a card cannot get a good mark from its beat line without breaking a lint, change the card's content
    (layout, caption) instead of a constant, and say so in the report.
 
@@ -45,4 +57,7 @@ Use it. Each mark must come from that beat's own line.
 - The reply includes a report (not only code comments): one row per card with f0, beat, layout, caption,
   underline yes/no, each mark's text and the beat words it came from, and whether the mark was moved. Also
   give BOLD_ALLOWANCE and how it was chosen, and the 8542 / 4659 / 5164 before/after.
-- After the merge the main session renders stills of the cards and eye-checks them. That review is not a gate.
+- Semantic review is an acceptance requirement, not optional: the pipeline reviewer and then the main session
+  check every mark against its beat's voice line (from the report). A mark whose fact is not in that line, or
+  that is junk, fails the job even when every gate passes.
+- After the merge the main session renders stills of the cards and eye-checks them.

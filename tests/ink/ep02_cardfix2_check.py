@@ -149,7 +149,8 @@ for c in cards:
           f'{at}: no non-sprite support mark')
 
 # ---- fix 2 (planner audit of fix-1 rungs 1-2): marks must ADD a fact, never echo what is already on screen ----
-TEXT_KEYS = ('text', 'label', 'left', 'right', 'bracket', 'title', 'items', 'rows', 'lines', 'by')
+TEXT_KEYS = ('text', 'label', 'left', 'right', 'bracket', 'title', 'items', 'rows', 'lines', 'by', 'value', 'who',
+             'chip', 'odd', 'a', 'b', 'from', 'to', 'prefix', 'suffix', 'name')
 
 
 def strings_of(e):
@@ -157,8 +158,8 @@ def strings_of(e):
     out = []
 
     def walk(v):
-        if isinstance(v, str):
-            out.append(v)
+        if isinstance(v, (str, int, float)) and not isinstance(v, bool):
+            out.append(str(v))
         elif isinstance(v, (list, tuple)):
             for x in v:
                 walk(x)
@@ -172,12 +173,23 @@ def strings_of(e):
     return out
 
 
+PUNCT = ".,!?:;'\"()+~-"
+STOP = {'THE', 'A', 'AN', 'OF', 'TO', 'AND', 'OR', 'IN', 'ON', 'AT', 'IS', 'IT', 'BY', 'FOR', 'HIS', 'HE', 'YOU',
+        'YOUR', 'ALL', 'NO', 'NOT', 'JUST', 'SO', 'BUT', 'WOW', 'YES', 'OK', 'WAS', 'ARE', 'WITH'}  # filler: never the fact
+
+
 def words(strings):
-    return {w.strip('.,!?:;\'"()').upper() for s in strings for w in s.split()} - {''}
+    return {w.strip(PUNCT).upper() for s in strings for w in s.split()} - {''}
+
+
+def content(ws):
+    """Words that can carry a fact: filler words never count as the new information a mark adds."""
+    return {w for w in ws if w not in STOP}
 
 
 def mark_text(e):
-    return e['text'].upper().strip()
+    """Mark text normalised for the reuse check: case, punctuation and spacing do not make a new mark."""
+    return ' '.join(w for w in (x.strip(PUNCT) for x in e['text'].upper().split()) if w)
 
 
 seen = {}
@@ -189,14 +201,14 @@ for s in shots:
         lays = [e for e in s['els'] if e['t'] in LAYOUTS]
         lay_words = words(x for e in lays for x in strings_of(e))
         for e in marks:
-            mw = words([e['text']])
-            # 8a. a mark must say at least one word the layout does not already say
-            check(not mw <= lay_words, f'{at}: {e["t"]} {e["text"]!r} only repeats the layout text')
+            mw = content(words([e['text']]))
+            # 8a. a mark must say at least one content word (not filler) the layout does not already say
+            check(bool(mw - lay_words), f'{at}: {e["t"]} {e["text"]!r} only repeats the layout text (or is filler)')
             # 8b. ... and not only the words of the shot right before the card (the plate the viewer just read)
-            check(not mw <= prev_words, f'{at}: {e["t"]} {e["text"]!r} only repeats the previous shot')
-            # 8c. no mark text reused on two cards
+            check(bool(mw - prev_words), f'{at}: {e["t"]} {e["text"]!r} only repeats the previous shot')
+            # 8c. no mark text (punctuation/spacing normalised) reused on another card
             t = mark_text(e)
-            check(t not in seen, f'{at}: {e["t"]} {e["text"]!r} already used on card @{seen.get(t)}')
+            check(seen.get(t, s['f0']) == s['f0'], f'{at}: {e["t"]} {e["text"]!r} already used on card @{seen.get(t)}')
             seen.setdefault(t, s['f0'])
         # 9. non-full-stage layouts: marks never on the layout ink (its whole content box, not only the caption)
         for lay in lays:
@@ -210,12 +222,50 @@ for s in shots:
 check(not hasattr(G, 'CARD_FACTS'), 'generator keeps a beat-keyed CARD_FACTS table (author each mark in its P entry)')
 
 # 11. full-stage layouts (split/transform/scale/map) fill the panel, so no tag/stamp can be proven clear of their
-#     ink; their mark is a circle/tick/cross pointing at one of the layout's own labels.
+#     ink; their mark is a circle/tick/cross ON one of the layout's own label anchors (geometry from the generator's
+#     mirrored constants, which mirror parts/cards.tsx and parts/layouts/*Layout.ts):
+#       split / transform: left or right label centre (STAGE_W/4 or 3*STAGE_W/4, *_LABEL_Y - LABEL/2);
+#       scale: its caption centre (STAGE_W/2, SCALE_LABEL_Y - LABEL/2), so a scale card must carry a label;
+#       map: the from or to pin point (from.x/y, to.x/y; pin labels move by collision, the pin does not).
+#     A circle must also be at least as wide as the label it rings (real font).
+def anchors(lay):
+    k, half = lay['t'], G.LABEL / 2
+    if k == 'split':
+        return [(G.STAGE_W / 4, G.SPLIT_LABEL_Y - half, lay['left']['label']),
+                (G.STAGE_W * 3 / 4, G.SPLIT_LABEL_Y - half, lay['right']['label'])]
+    if k == 'transform':
+        return [(G.STAGE_W / 4, G.TRANSFORM_LABEL_Y - half, lay['a']['label']),
+                (G.STAGE_W * 3 / 4, G.TRANSFORM_LABEL_Y - half, lay['b']['label'])]
+    if k == 'scale':
+        return [(G.STAGE_W / 2, G.SCALE_LABEL_Y - half, lay['label'])] if lay.get('label') else []
+    if k == 'map':
+        return [(lay['from']['x'], lay['from']['y'], None), (lay['to']['x'], lay['to']['y'], None)]
+    return []
+
+
+def contains(b, x, y):
+    return b[0] - TOL <= x <= b[2] + TOL and b[1] - TOL <= y <= b[3] + TOL
+
+
 for c in cards:
-    if any(e['t'] in FULL_STAGE for e in c['els']):
-        at = f"card @{c['f0']}"
+    full = [e for e in c['els'] if e['t'] in FULL_STAGE]
+    at = f"card @{c['f0']}"
+    if full:
         check(not any(e['t'] in ('tag', 'stamp') for e in c['els']), f'{at}: tag/stamp on a full-stage card')
-        check(any(e['t'] in ('circle', 'tick', 'cross') for e in c['els']), f'{at}: full-stage card has no circle/tick/cross')
+        pts = anchors(full[0])
+        check(bool(pts), f'{at}: {full[0]["t"]} card has no label anchor (a scale card needs a label)')
+        pointers = [e for e in c['els'] if e['t'] in ('circle', 'tick', 'cross')]
+        check(bool(pointers), f'{at}: full-stage card has no circle/tick/cross')
+        for e in pointers:
+            b = G.content_box(e)
+            hit = [p for p in pts if contains(b, p[0], p[1])]
+            check(bool(hit), f'{at}: {e["t"]} at ({e["x"]:.0f},{e["y"]:.0f}) is not on any {full[0]["t"]} label anchor')
+            if hit and e['t'] == 'circle' and hit[0][2]:
+                check(e['w'] >= real_w(hit[0][2], G.LABEL) - TOL,
+                      f'{at}: circle w {e["w"]:.0f} narrower than label {hit[0][2]!r}')
+    else:
+        # 12. every other card carries at least one tag/stamp (the added fact), not only an underline or sprite
+        check(any(e['t'] in ('tag', 'stamp') for e in c['els']), f'{at}: no tag/stamp adding a fact')
 
 by_f0 = {c['f0']: c for c in cards}
 
