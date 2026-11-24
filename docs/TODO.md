@@ -49,6 +49,7 @@
       - [x] job 20261124064900 -> needs-owner: r1 audit FAIL (plate misfits b14/b40/b43/b55/b68, origin literals, no fit table), r2 lint (m9c twice), r3 Opus timeout
       - [x] brief r4 caa4f06 (free legs PASS, Sol out of quota) -> relaunched: job 20261124073603 Opus hit 5h limit, 0 files changed; relaunched 20261124080220 after account switch
   - [ ] card polish: transform cards draw the red circle before label B appears (fix timing only; surface stays as is, Zen 15:15 "leave it for now"). Brief after plate-wire accepts (same file ep02_full_shots.py)
+  - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20)
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
