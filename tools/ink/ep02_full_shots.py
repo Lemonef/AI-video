@@ -13,6 +13,7 @@ Run: python -I tools/ink/ep02_full_shots.py -> engine/ink/parts/shots_ep02full/f
 import collections
 import json
 import math
+import re
 import sys
 from PIL import ImageFont
 from pathlib import Path
@@ -206,9 +207,15 @@ def CS(name, t, x=960, h=320, y=640, flip=False):
     return SP(name, t, x, h=h, flip=flip, y=y)
 
 
-def CW(text, t, color=None):
+CW_Y = 220  # card headline y, the original CW default; change together with W/HEADLINE_SIZE top band
+
+
+def CW(text, t, color=None, x=None, y=None):
     """Card headline line (top of card)."""
-    return W(text, t, y=220, size=110, color=color)
+    position = {}
+    if x is not None: position['x'] = x
+    position['y'] = CW_Y if y is None else y
+    return W(text, t, size=HEADLINE_SIZE, color=color, **position)
 
 
 
@@ -249,6 +256,51 @@ SPLIT_LABEL_Y = 460 + 360/2 + LABEL  # mirrors SplitElement in parts/cards.tsx; 
 TRANSFORM_LABEL_Y = 460 + 320/2 + LABEL  # mirrors slotLabelY in parts/layouts/transformLayout.ts; change together
 SCALE_LABEL_Y = 800 + 30 + LABEL  # mirrors labelY in parts/layouts/scaleLayout.ts; change together
 
+SP_POP, SP_FADE, SP_VS_DRAW = 8, 6, 8  # mirrors POP_FRAMES/LABEL_FADE/VS_DRAW in parts/cards.tsx; change together
+TF_POP, TF_FADE, TF_ARROW, TF_CROSS = 8, 6, 10, 10  # mirrors POP_FRAMES/LABEL_FADE/ARROW_DRAW/CROSS_FRAMES in parts/layouts/transformLayout.ts; change together
+SC_POP, SC_FADE, SC_LEFT, SC_RIGHT, SC_TILT = 8, 6, 10, 18, 30  # mirrors POP_FRAMES/LABEL_FADE/LEFT_POP/RIGHT_POP/TILT_START in parts/layouts/scaleLayout.ts; change together
+MP_COAST, MP_LAG, MP_POP, MP_PIN_FADE, MP_GAP, MP_FADE = 12, 4, 7, 6, 4, 7  # mirrors COAST_DRAW/ROUTE_LAG/PIN_POP/PIN_LABEL_FADE/LABEL_GAP/LABEL_FADE in parts/layouts/mapLayout.ts; change together
+CIRCLE_DRAW, TICK_DRAW = 12, 8  # mirrors progress(f, 0, N) in CircleElement/TickElement in parts/elements.tsx; change together
+HOLD = 10  # mirrors HOLD in tests/ink/ep02_polish_check.test.mjs; change together
+
+
+def card_times(e, side):
+    """One source for label readiness and the layout's real animation end."""
+    at, kind = e['at'], e['t']
+    if kind == 'split':
+        right = at + e['step'] + SP_POP
+        return (at if side == 'left' else at + e['step']) + SP_POP + SP_FADE, right + max(SP_FADE, SP_VS_DRAW if e.get('vs') else SP_FADE)
+    if kind == 'transform':
+        a = at + TF_POP + TF_FADE
+        b = at + e['step'] * 2 + TF_ARROW + TF_POP + TF_FADE
+        return a if side == 'a' else b, b
+    if kind == 'scale':
+        tilt = at + SC_TILT + e['dur']
+        right = at + SC_RIGHT + SC_POP + SC_FADE
+        label = tilt + SC_FADE if e.get('label') is not None else right
+        ready = label if side == 'label' else at + (SC_LEFT if side == 'left' else SC_RIGHT) + SC_POP + SC_FADE
+        return ready, max(tilt, label)
+    # Both current map marks select 'to': readiness uses the destination pin.
+    pin = at + MP_COAST + MP_LAG + e['dur']
+    ready = pin + max(MP_POP, MP_PIN_FADE)
+    end = max(pin + MP_POP + MP_GAP + MP_FADE, pin + MP_PIN_FADE) if e.get('label') else ready
+    return ready, end
+
+TOP_SLOT_Y = 240  # the top text slot the O/W/TG calls in P already use; moved or new elements use this name; change together
+DEFAULT_WORD_SIZE = W('', LEAD)[0]['size']  # mirrors W default size in make_ep02_min1_shots.py; change together
+HEADLINE_SIZE = 110  # mirrors existing CW and large W size in this shot plan; change together
+SMALL_WORD_SIZE = 80  # mirrors existing small W size in this shot plan; change together
+MEDIUM_WORD_SIZE = 90  # mirrors existing medium W size in this shot plan; change together
+LOW_SIZE = max(DEFAULT_WORD_SIZE, HEADLINE_SIZE, SMALL_WORD_SIZE, MEDIUM_WORD_SIZE)  # largest words size placed on the low band; change together with those lines
+TEXT_LOW_Y = m1.STAGE_H - m1.SAFE - round(m1.CAP_H * LOW_SIZE)  # low text band over deck/floor/water/street; derived from STAGE_H/SAFE/CAP_H in make_ep02_min1_shots.py; change together
+HOOK_MIN_SIZE = 80  # smallest readable hook words size at 1080p; owner asked for readable; change together
+STAMP_SETTLE_MAX = 1.04  # max StampElement scale after the slam: spring damping 10, 2.2 - 1.2*p, see InkProof useIn; change together
+STAMP_LEVEL_ROT = 0  # level stamp (no tilt) so its rotated box is smallest and fits under the camera; owner asked for readable
+SPRITE_LOW_Y = TEXT_LOW_Y  # side-third sprites stand over deck/floor below plate heads; change together with low text band
+
+DAWN_LOW_Y = TEXT_LOW_Y - m1.SAFE  # reserve camera-edge clearance before stacking
+DAWN_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('DAWN', LEAD) + TG('A SAIL. THEN ANOTHER.', LEAD, R, TEXT_LOW_Y)})) + m1._LINE  # disjoint words/tag half-heights plus one stroke gap; change together with m1._el_boxes
+
 
 FONT_FILE = 'C:/Windows/Fonts/Inkfree.ttf'  # the face behind FONT = 'Ink Free' in compositions/InkProof.tsx; change together
 BOLD_ALLOWANCE = 1.05  # synthetic bold widens each glyph by its stroke; reserve 5% above measured advances
@@ -264,20 +316,36 @@ def text_width(text, size=LABEL):
     return _fonts[size].getlength(str(text).upper()) * BOLD_ALLOWANCE
 
 
-def POINT(layouts, side):
+def fit_card_step(kind, at, side, mark, t, d, authored, vs=None):
+    minimum = TF_CROSS if kind == 'transform' else 1
+    for step in range(authored, minimum - 1, -1):
+        ready, end = card_times({'t': kind, 'at': at, 'step': step, 'vs': vs}, side)
+        draw = CIRCLE_DRAW if mark == 'circle' else TICK_DRAW
+        if max(end, ready + draw) + HOLD <= t + d:
+            return step
+    raise SystemExit(f'f0 {t}: {kind} cannot fit at minimum step')
+
+
+def POINT(layouts, side, t, d):
     """Ring an explicitly selected label, or tick a map pin; never supply narrative text."""
     e = layouts[0]
     k = e['t']
+    mark = 'tick' if k == 'map' else 'circle'
+    if k in ('split', 'transform'):
+        e['step'] = fit_card_step(k, e['at'], side, mark, t, d, e['step'], e.get('vs'))
+    ready, end = card_times(e, side)
+    if max(end, ready + (TICK_DRAW if mark == 'tick' else CIRCLE_DRAW)) + HOLD > t + d:
+        raise SystemExit(f'f0 {t}: {k} animation or mark exceeds cut')
     if k == 'map':
         pin = e[side]
-        return layouts + [{'t': 'tick', 'x': pin['x'], 'y': pin['y'], 'at': e['at']}]
+        return layouts + [{'t': 'tick', 'x': pin['x'], 'y': pin['y'], 'at': card_times(e, side)[0]}]
     if k == 'scale':
         x, y, label = STAGE_W/2, SCALE_LABEL_Y-LABEL/2, e['label']
     else:
         x = STAGE_W/4 if side in ('left', 'a') else STAGE_W*3/4
         y = (SPLIT_LABEL_Y if k == 'split' else TRANSFORM_LABEL_Y)-LABEL/2
         label = e[side]['label']
-    return layouts + CI(e['at'], x, y, text_width(label)+MARK_GAP, LABEL+MARK_GAP)
+    return layouts + CI(card_times(e, side)[0], x, y, text_width(label)+MARK_GAP, LABEL+MARK_GAP)
 
 
 def place_card_marks(shot, layout):
@@ -431,20 +499,20 @@ MAP, BB = m1.MAP, m1.BB
 # ---------- shot plan: beat id -> one builder per timeline shot ----------
 P = {
     # b1 "You have less than a day to live."
-    'b1': [lambda t, d: S(t, SC(S01), ST('LESS THAN A DAY TO LIVE', t + 10), cam=PUSH(1300, 480, 1.22)),
-           lambda t, d: CARD_SHOT(t, POINT(TF(('key', 'ALIVE NOW'), ('chain', 'DEAD WITHIN A DAY'), t + LEAD, 14), 'b'), cast='bb_stand')],
+    'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN A DAY TO LIVE', t + 10, x=STAGE_W/2, y=TOP_SLOT_Y, color='red'), cam=PUSH(1300, 480, 1.22)),
+           lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'ALIVE NOW'), ('chain', 'DEAD WITHIN A DAY'), t + LEAD, 14), 'right', t, d), cast='bb_stand')],
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
            lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_stand', t + 3, 600, y=700), CS('crew_scrub', t + 9, 960, y=700),
-                          CS('crew_haul_rope', t + 15, 1320, y=700), CW('ABOUT 20 MEN', t + 20)),
+                          CS('crew_haul_rope', t + 15, 1320, y=700), CW('ABOUT 20 MEN', t + 20, x=L, y=TOP_SLOT_Y)),
            lambda t, d: S(t, SC(S03), cam=PAN(500, 1420)),
            lambda t, d: CARD_SHOT(t, BN(20, 'MEN ABOARD', t + 3, 20), TG('ALMOST ALL DEAD BY SUMMER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking')],
     # b3 only two kinds walk away; stay to the end
     'b3': [lambda t, d: S(t, SC(S04, (1.0, 1.1)), O('ONLY 2 KINDS', t + 15, x=R, y=260)),
-           lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?'), 'right'), cast='crew_point'),
-           lambda t, d: S(t, SC(S05, (1.08, 1.0)), W('STAY TO THE END', t + 13, x=R, y=220), cam=PULL(960, 520))],
+           lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?'), 'right', t, d), cast='crew_point'),
+           lambda t, d: S(t, SC(S05, (1.08, 1.0)), W('STAY TO THE END', t + LEAD, x=L, y=TOP_SLOT_Y), cam=PULL(960, 520))],
     # b4 strangest part: tonight he isn't worried
-    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bb_exp_deadpan', t + 3, y=620), CW('STRANGEST PART?', t + 11)),
+    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bb_exp_deadpan', t + 3, x=L, y=SPRITE_LOW_Y), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
            lambda t, d: S(t, SC(S06, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240), cam=PAN(1400, 1100))],
     # b5 21 November 1718, small sloop, quiet inlet
     'b5': [lambda t, d: CARD_SHOT(t, BN(1718, '21 NOVEMBER', t + 3, 36, year=True), TG('QUIET INLET', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_arms_crossed'),
@@ -454,41 +522,41 @@ P = {
            lambda t, d: S(t, SC(S07), cam=PAN(400, 1300))],
     # b6 rum, guests from Bath, one matters later
     'b6': [lambda t, d: S(t, SC(S01, origin='30% 60%'), cam=PUSH(500, 620)),
-           lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bath_gent_stand', t + 3, 600, y=700), CS('bath_merchant_laugh', t + 9, 960, y=700),
-                          CS('bath_farmer_stand', t + 15, 1320, y=700), CW('GUESTS FROM BATH', t + 22)),
+           lambda t, d: S(t, SC(S08, (1.0, 1.06)), CS('bath_gent_stand', t + 3, 600, y=SPRITE_LOW_Y), CS('bath_merchant_laugh', t + 9, 960, y=SPRITE_LOW_Y),
+                          CS('bath_farmer_stand', t + 15, 1320, y=SPRITE_LOW_Y), CW('GUESTS FROM BATH', t + 22)),
            lambda t, d: S(t, SC(S07), cam=PUSH(880, 700, 1.35)),
            lambda t, d: CARD_SHOT(t, CHK(t, d, [('PARTY GUEST', 'tick'), ('REMEMBER HIM', 'tick')]), TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
     # b7 does your wife know where you buried your money? me and the devil
     'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
            lambda t, d: CARD_SHOT(t, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4), TG('HE LAUGHED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_merchant_whisper'),
            lambda t, d: S(t, SC(S08), cam=PUSH(1250, 480, 1.35)),
-           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_angry_grin', t + 3), CW('ME AND THE DEVIL', t + 14, color='orange'))],
+           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_angry_grin', t + 3, x=L, y=SPRITE_LOW_Y), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
     # b8 joke: great line, terrible retirement plan
-    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=230, size=90),
+    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE),
                           O('TERRIBLE PLAN', t + 48, x=R, y=360, size=90))],
     # b9 no treasure: cocoa and cotton
-    'b9': [lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'TREASURE'), ('barrel', 'COCOA + COTTON'), t + 3, 22), 'b'), cast='bb_lean_rail'),
+    'b9': [lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'TREASURE'), ('barrel', 'COCOA + COTTON'), t + 3, 22), 'b', t, d), cast='bb_lean_rail'),
            lambda t, d: S(t, SC(S09, (1.08, 1.0)), TG('COCOA', t + 10, 440, 560), TG('COTTON', t + 24, 840, 800),
                           cam=PULL(960, 600))],
     # b10 joke: most feared pirate = chocolate delivery
-    'b10': [lambda t, d: S(t, SC(M1A, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('MOST FEARED', t + 11, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'PIRATE'), ('barrel', 'CHOCOLATE RUN'), t + 3, 22, vs='='), 'right'), cast='bb_shrug')],
+    'b10': [lambda t, d: S(t, SC(M1A, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('MOST FEARED', t + 11, x=L, y=TOP_SLOT_Y, rot=STAMP_LEVEL_ROT), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'PIRATE'), ('barrel', 'CHOCOLATE RUN'), t + 3, 22, vs='='), 'right', t, d), cast='bb_shrug')],
     # b11 royal pardon five months ago
-    'b11': [lambda t, d: S(t, SC(M1B, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('ROYAL PARDON', t + 14, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
+    'b11': [lambda t, d: S(t, SC(M1B, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('ROYAL PARDON', t + 14, x=L, y=TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, DOC(t, d, 'ROYAL PARDON', ['STOP PIRATING', 'THE CRIME IS WIPED', 'BY ORDER OF THE KING'],
                                         kind='certificate', mark=(1, 'underline')), TG('FIVE MONTHS AGO', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_exp_thinking')],
     # b12 didn't stop: caught speeding, 200 on the drive home
-    'b12': [lambda t, d: S(t, SC(M1A, ZOOM_MID, origin=ORIGIN_LEFT), W("HE DIDN'T STOP", t + 12, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('pen', '"NEVER AGAIN"'), ('clock', 'DOING 200'), t + LEAD, 24), 'b'), cast='bb_hands_hips')],
+    'b12': [lambda t, d: S(t, SC(M1A, ZOOM_MID, origin=ORIGIN_LEFT), W("HE DIDN'T STOP", t + 12, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('pen', '"NEVER AGAIN"'), ('clock', 'DOING 200'), t + LEAD, 24), 'b', t, d), cast='bb_hands_hips')],
     # b13 governor is his neighbour: landlord = getaway driver; who comes here?
-    'b13': [lambda t, d: S(t, SC(M1B, ZOOM_MID, origin=ORIGIN_LEFT), TG('NORTH CAROLINA', t + 10, R, 240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(SPL(('crown', 'GOVERNOR'), ('key', 'GETAWAY DRIVER'), t + LEAD, 16, vs='='), 'right'), cast=None),
-            lambda t, d: S(t, SC(M1B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('WHO COMES HERE?', t + 12, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE))],
+    'b13': [lambda t, d: S(t, SC(M1B, ZOOM_MID, origin=ORIGIN_LEFT), TG('NORTH CAROLINA', t + 10, L, TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(SPL(('crown', 'GOVERNOR'), ('key', 'GETAWAY DRIVER'), t + LEAD, 16, vs='='), 'right', t, d), cast=None),
+            lambda t, d: S(t, SC(M1B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('WHO COMES HERE?', t + 12, x=L, y=TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE))],
     # b14 One Piece villain named after him; the real one
-    'b14': [lambda t, d: S(t, SC(M1A, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('bb_exp_grin', t + 3), W('THE REAL ONE', t + 16, x=R, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: S(t, PH(BB, pos='50% 22%'), W('NAMED AFTER HIM', t + 10, x=R, y=260, size=90))],
+    'b14': [lambda t, d: S(t, SC(M1A, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('bb_exp_grin', t + 3), W('THE REAL ONE', t + 16, x=L, y=TEXT_LOW_Y, size=HEADLINE_SIZE), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, PH(BB, pos='50% 22%'), W('NAMED AFTER HIM', t + 10, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
     # b15 one state over, Virginia's governor wants him dead
-    'b15': [lambda t, d: CARD_SHOT(t, POINT(MAPE(t, d, (330, 640, 'NORTH CAROLINA'), (310, 520, 'VIRGINIA'), 'GOVERNOR WANTS HIM DEAD'), 'to'), cast=None)],
+    'b15': [lambda t, d: CARD_SHOT(t, POINT(MAPE(t, d, (330, 640, 'NORTH CAROLINA'), (310, 520, 'VIRGINIA'), 'GOVERNOR WANTS HIM DEAD'), 'to', t, d), cast=None)],
     # b16 navy too big for shallows: 2 small boats, own budget, sent to kill
     'b16': [lambda t, d: S(t, SC(M1C, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('WARSHIPS TOO BIG', t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, CNT('sloop', 2, t + LEAD, 12, '2 SMALL BOATS', 1100, 520, 700),
@@ -497,7 +565,7 @@ P = {
             lambda t, d: S(t, SC(M1C, ZOOM_MID, origin=ORIGIN_LEFT), O('SENT TO KILL HIM', t + 12, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b17 most feared pirate alive, tiny boat, twenty men
     'b17': [lambda t, d: CARD_SHOT(t, BN(20, 'MEN ON A TINY BOAT', t + 3, 30), TG('BLACKBEARD', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_exp_grin'),
-            lambda t, d: S(t, SC(M1C, ZOOM_REVERSE, origin=ORIGIN_RIGHT), W('MOST FEARED ALIVE?', t + 12, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M1C, ZOOM_REVERSE, origin=ORIGIN_RIGHT), W('MOST FEARED ALIVE?', t + 12, x=L, y=TOP_SLOT_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b18 rewind a year: Queen Anne's Revenge, 40 cannons, ~300 men
     'b18': [lambda t, d: CARD_SHOT(t, TL(t, d, '1717', '1718', 'REWIND ONE YEAR'), TG('BIG FRENCH SHIP', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand'),
             lambda t, d: S(t, SC(M1D, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG("QUEEN ANNE'S REVENGE", t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE)),
@@ -507,107 +575,107 @@ P = {
                            chipAt=t + 6, chipPos='tl', cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, GRID(t, d, 'sloop', 4, 2, 5, 'chain', 'A WEEK. NOTHING MOVES'), TG('RICHEST TOWNS IN AMERICA', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt')],
     # b20 hostages; ransom = chest of medicine
-    'b20': [lambda t, d: S(t, SC(M2B, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('HOSTAGES', t + 12, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'RANSOM'), ('chest', 'FIRST-AID KIT'), t + LEAD, 30), 'b'), cast='bb_lean_rail')],
+    'b20': [lambda t, d: S(t, SC(M2B, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('HOSTAGES', t + 12, x=L, y=TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'RANSOM'), ('chest', 'FIRST-AID KIT'), t + LEAD, 30), 'b', t, d), cast='bb_lean_rail')],
     # b21 June, flagship on a sandbank
     'b21': [lambda t, d: S(t, SC(M2C, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('JUNE: SANDBANK', t + 14, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b22 did it on purpose; fewer shares; layoff
     'b22': [lambda t, d: CARD_SHOT(t, QT('He did it on purpose.', 'ONE OF HIS OWN MEN', t + LEAD), TG('OLDEST LAYOFF TRICK', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_turn_34'),
-            lambda t, d: S(t, SC(M2C, ZOOM_REVERSE, origin=ORIGIN_LEFT), W('FEWER MEN, FEWER SHARES', t + 10, size=80, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, SC(M2C, ZOOM_REVERSE, origin=ORIGIN_LEFT), W('FEWER MEN, FEWER SHARES', t + 10, size=80, x=STAGE_W/2, y=TOP_SLOT_Y), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, FLOW(t, d, ['ON PURPOSE?', 'FEWER SHARES']), TG('HIS OWN MAN SAID SO', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared')],
     # b23 sails off with the loot, leaves the rest
     'b23': [lambda t, d: S(t, SC(M2C, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('LEAVES THE REST', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'HE SAILS OFF'), ('chain', 'THE REST: LEFT'), t + LEAD, 16), 'right'), cast='bb_shrug')],
+            lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'HE SAILS OFF'), ('chain', 'THE REST: LEFT'), t + LEAD, 16), 'right', t, d), cast='bb_shrug')],
     # b24 wreck found 1996; 300 gone; one of twenty
     'b24': [lambda t, d: S(t, SC(M2C, ZOOM_DETAIL, origin=ORIGIN_UPPER), TG('THE WRECK', t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, TL(t, d, '1718', '1996', 'WRECK FOUND'), TG('THREE HUNDRED GONE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_exp_thinking'),
-            lambda t, d: S(t, SC(M2D, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('ONE OF TWENTY', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M2D, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('ONE OF TWENTY', t + 10, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE))],
     # b25 count the men: nineteen, maybe twenty-five
     'b25': [lambda t, d: CARD_SHOT(t, BN(19, 'MEN AROUND YOU', t + LEAD, 24), TG('MAYBE TWENTY-FIVE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
     # b26 about six Black sailors; free or enslaved; hangman won't care
-    'b26': [lambda t, d: S(t, SC(M2D, ZOOM_MID, origin=ORIGIN_LEFT), W('LOOK CLOSER', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b26': [lambda t, d: S(t, SC(M2D, ZOOM_MID, origin=ORIGIN_LEFT), W('LOOK CLOSER', t + 10, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, FLOW(t, d, ['6 BLACK SAILORS', 'FREE OR ENSLAVED']), TG("HANGMAN WON'T CARE", t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking'),
-            lambda t, d: S(t, SC(M2D, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('FREE OR ENSLAVED', t + 10, R, 240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(SPL(('pen', 'FREE SAILOR'), ('handcuffs', 'ENSLAVED'), t + LEAD, 16, vs='='), 'right'), cast='crew_point')],
+            lambda t, d: S(t, SC(M2D, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('FREE OR ENSLAVED', t + 10, R, TEXT_LOW_Y), cam=PAN(600, 1300, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(SPL(('pen', 'FREE SAILOR'), ('handcuffs', 'ENSLAVED'), t + LEAD, 16, vs='='), 'right', t, d), cast='crew_point')],
     # b27 Israel Hands + two dozen men in town, miles away
-    'b27': [lambda t, d: S(t, SC(M3A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('WHERE IS EVERYONE?', t + 12, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('sloop', 'ON DECK: 20'), ('barrel', 'IN TOWN: ~24'), t + LEAD, 26), 'b'), cast='crew_stand')],
+    'b27': [lambda t, d: S(t, SC(M3A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('WHERE IS EVERYONE?', t + 12, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('sloop', 'ON DECK: 20'), ('barrel', 'IN TOWN: ~24'), t + LEAD, 26), 'b', t, d), cast='crew_stand')],
     # b28 shares not wages: 1 for you, 2 for the captain; fairer than offices
-    'b28': [lambda t, d: S(t, SC(M3B, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NO WAGES', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b28': [lambda t, d: S(t, SC(M3B, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NO WAGES', t + 10, x=R, y=TEXT_LOW_Y), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, BARS(t, d, [('YOU', 1, '1 SHARE'), ('CAPTAIN', 2, '2 SHARES')]), TG('SHARE OF THE LOOT', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_worried'),
-            lambda t, d: S(t, SC(M3B, ZOOM_REVERSE, origin=ORIGIN_LEFT), O('FAIRER THAN OFFICES', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M3B, ZOOM_REVERSE, origin=ORIGIN_LEFT), O('FAIRER THAN OFFICES', t + 10, x=L, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b29 quartermaster voted in: HR with a sword
     'b29': [lambda t, d: CARD_SHOT(t, HERO('badge', 'QUARTERMASTER', t + 3), TG('SPLIT IT FAIRLY', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_shrug'),
-            lambda t, d: S(t, SC(M3B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('VOTED IN BY THE CREW', t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M3B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('VOTED IN BY THE CREW', t + 10, L, TEXT_LOW_Y), cam=PUSH(960, 540, CAM_GENTLE))],
     # b30 rules: lights out at 8, no gambling, gun clean, no smoking near powder
     'b30': [lambda t, d: CARD_SHOT(t, CHK(t, d, [('LIGHTS OUT AT 8', 'tick'), ('NO GAMBLING', 'tick')]), TG('KEEP YOUR GUN CLEAN', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_turn_34'),
             lambda t, d: S(t, SC(M3C, ZOOM_REVERSE, origin=ORIGIN_CENTRE), W('PIRATE RULES', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, DOC(t, d, 'PIRATE ARTICLES', ['KEEP YOUR GUN CLEAN', 'NO SMOKING BY THE POWDER'],
                                         kind='certificate', mark=(1, 'circle')), TG('LIGHTS OUT AT EIGHT', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared')],
     # b31 nobody keeps watch
-    'b31': [lambda t, d: S(t, SC(M3C, ZOOM_MID, origin=ORIGIN_LEFT), O('NOBODY ON WATCH', t + 12, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b31': [lambda t, d: S(t, SC(M3C, ZOOM_MID, origin=ORIGIN_LEFT), O('NOBODY ON WATCH', t + 12, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, XO('clock', 'THE NIGHT WATCH', t + 3, t + 34), TG('SOMEONE ELSE IS CHECKING', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
     # b32 dawn, mist, a sail, then a second
-    'b32': [lambda t, d: S(t, SC(M3D, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('DAWN', t + 10, x=R, y=240), TG('A SAIL. THEN ANOTHER.', t + 70, R, 380),
+    'b32': [lambda t, d: S(t, SC(M3D, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('DAWN', t + 10, x=R, y=DAWN_LOW_Y - DAWN_STACK_OFFSET), TG('A SAIL. THEN ANOTHER.', t + 70, R, DAWN_LOW_Y),
                            cam=PUSH(960, 540, CAM_GENTLE))],
     # b33 two boats, about 60 sailors, local guides
     'b33': [lambda t, d: CARD_SHOT(t, CNT('sloop', 2, t + LEAD, 12, '2 BOATS / ABOUT 60 SAILORS', 960, 520, 900), TG('BORROWED FROM NAVY WARSHIPS', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking'),
             lambda t, d: S(t, SC(M3D, ZOOM_MID, origin=ORIGIN_LEFT), TG('LOCAL GUIDES ON BOARD', t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b34 stopped last night, sandbanks
-    'b34': [lambda t, d: S(t, SC(M4A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), CS('crew_spyglass', t + 3), W('STOPPED LAST NIGHT', t + 12, x=R, y=240, size=110), cam=PAN(600, 1300, CAM_GENTLE)),
+    'b34': [lambda t, d: S(t, SC(M4A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), CS('crew_spyglass', t + 3), W('STOPPED LAST NIGHT', t + 12, x=R, y=TEXT_LOW_Y, size=HEADLINE_SIZE), cam=PAN(600, 1300, CAM_GENTLE)),
             lambda t, d: S(t, PH(MAP, pos='50% 45%', push=(1.0, 1.15)), chip='SANDBANKS EVERYWHERE', chipAt=t + 6,
                            chipPos='tl')],
     # b35 Lt Robert Maynard; no legal right
     'b35': [lambda t, d: CARD_SHOT(t, HERO('anchor', 'ROYAL NAVY', t + LEAD), TG('LT. ROBERT MAYNARD', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
-            lambda t, d: S(t, SC(M4A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('NO LEGAL RIGHT', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, SC(M4A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('NO LEGAL RIGHT', t + 10, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, XO('pen', 'PERMISSION', t + 3, t + 30), TG('VIRGINIA HAS NO POWER', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None)],
     # b36 twenty of you, sixty of them
-    'b36': [lambda t, d: S(t, SC(M4A, ZOOM_MID, origin=ORIGIN_LEFT), W('20 OF YOU', t + 8, x=L, y=240), O('60 OF THEM', t + 50, x=R, y=240),
+    'b36': [lambda t, d: S(t, SC(M4A, ZOOM_MID, origin=ORIGIN_LEFT), W('20 OF YOU', t + 8, x=L, y=240), O('60 OF THEM', t + 50, x=R, y=TEXT_LOW_Y),
                            cam=PUSH(960, 540, CAM_GENTLE))],
     # b37 Edward Teach, two years a pirate
     'b37': [lambda t, d: CARD_SHOT(t, BN(2, 'YEARS AS A PIRATE', t + 3, 24), TG('PROBABLY EDWARD TEACH', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hands_hips'),
-            lambda t, d: S(t, PH(BB, pos='50% 28%', push=(1.06, 1.0)), W('EDWARD TEACH', t + 10, x=R, y=260, size=90))],
+            lambda t, d: S(t, PH(BB, pos='50% 28%', push=(1.06, 1.0)), W('EDWARD TEACH', t + 10, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
     # b38 claims 40 men, has 20: buying followers
-    'b38': [lambda t, d: CARD_SHOT(t, POINT(SPL(('newspaper', 'CLAIMS 40'), ('chair', 'REALLY 20'), t + LEAD, 16), 'right'), cast='bb_exp_grin'),
+    'b38': [lambda t, d: CARD_SHOT(t, POINT(SPL(('newspaper', 'CLAIMS 40'), ('chair', 'REALLY 20'), t + LEAD, 16), 'right', t, d), cast='bb_exp_grin'),
             lambda t, d: S(t, SC(M4B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('BUYING FOLLOWERS', t + 10, R, 240), cam=PUSH(560, 540, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M4A, ZOOM_REVERSE, origin=ORIGIN_CENTRE), CS('bb_exp_smirk', t + 3), W('FAKE FOLLOWERS', t + 12, x=960, y=240, size=110), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M4A, ZOOM_REVERSE, origin=ORIGIN_CENTRE), CS('bb_exp_smirk', t + 3, x=L, y=SPRITE_LOW_Y), W('FAKE FOLLOWERS', t + 12, x=960, y=240, size=110), cam=PULL(960, 540, CAM_GENTLE))],
     # b39 the look
     'b39': [lambda t, d: S(t, SC(M4B, ZOOM_MID, origin=ORIGIN_LEFT), O('THE LOOK', t + 14, x=R, y=240), cam=PUSH(560, 540, CAM_GENTLE))],
     # b40 slow fuses under his hat, three pairs of pistols
     'b40': [lambda t, d: CARD_SHOT(t, HERO('cannon', 'FUSES UNDER HIS HAT', t + 3, x=1120),
                            TG('SMOKE AROUND HIS FACE', t + LEAD, 1120, 820), cast='bb_stand'),
             lambda t, d: S(t, SC(M4A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), cam=PUSH(560, 540, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M4B, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('bb_hand_hilt', t + 3), W('3 PAIRS OF PISTOLS', t + 12, x=R, y=240, size=110), cam=PUSH(560, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M4B, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('bb_hand_hilt', t + 3), W('3 PAIRS OF PISTOLS', t + 12, x=R, y=TEXT_LOW_Y, size=HEADLINE_SIZE), cam=PUSH(560, 540, CAM_GENTLE))],
     # b41 look terrifying so people give up
-    'b41': [lambda t, d: S(t, SC(M4C, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('LOOK TERRIFYING', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('flag', 'THE LOOK'), ('key', 'THEY GIVE UP'), t + LEAD, 26), 'b'), cast='bb_arms_crossed')],
+    'b41': [lambda t, d: S(t, SC(M4C, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('LOOK TERRIFYING', t + 10, x=R, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('flag', 'THE LOOK'), ('key', 'THEY GIVE UP'), t + LEAD, 26), 'b', t, d), cast='bb_arms_crossed')],
     # b42 may never have killed anyone
-    'b42': [lambda t, d: S(t, SC(M5A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('NEVER KILLED ANYONE?', t + 10, size=80, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
+    'b42': [lambda t, d: S(t, SC(M5A, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('NEVER KILLED ANYONE?', t + 10, size=SMALL_WORD_SIZE, x=R, y=TEXT_LOW_Y), cam=PAN(600, 1300, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, QT('He may never have killed anyone.', None, t + LEAD), TG('TODAY THAT CHANGES', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt')],
     # b43 cut the anchor, jolt
-    'b43': [lambda t, d: S(t, SC(M5B, ZOOM_MID, origin=ORIGIN_LEFT), ST('CUT THE ANCHOR', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M5A, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_haul_rope', t + 3), W('JOLT!', t + 10, color='orange', x=R, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
+    'b43': [lambda t, d: S(t, SC(M5B, ZOOM_MID, origin=ORIGIN_LEFT), ST('CUT THE ANCHOR', t + 10, x=STAGE_W/2, y=TOP_SLOT_Y, rot=STAMP_LEVEL_ROT), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, SC(M5A, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_haul_rope', t + 3), W('JOLT!', t + 10, color='orange', x=L, y=TOP_SLOT_Y, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
     # b44 sandbar; so are they
     'b44': [lambda t, d: S(t, SC(M5B, ZOOM_MID, origin=ORIGIN_LEFT), W('STUCK', t + 10, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(SPL(('chain', 'US: STUCK'), ('chain', 'THEM: STUCK'), t + LEAD, 18, vs='='), 'right'), cast='crew_exp_worried')],
+            lambda t, d: CARD_SHOT(t, POINT(SPL(('chain', 'US: STUCK'), ('chain', 'THEM: STUCK'), t + LEAD, 18, vs='='), 'right', t, d), cast='crew_exp_worried')],
     # b45 navy dumps ballast and water barrels
     'b45': [lambda t, d: S(t, SC(M5B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('NAVY DUMPS WEIGHT', t + 10, R, 240), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, FLOW(t, d, ['BALLAST', 'WATER BARRELS', 'AFLOAT']), TG('ONE BOAT', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_shrug')],
     # b46 beach traffic jam
-    'b46': [lambda t, d: S(t, SC(M5C, ZOOM_DETAIL, origin=ORIGIN_UPPER), O('TRAFFIC JAM', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M5B, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_deadpan', t + 3), W('BEACH TRAFFIC', t + 12, x=R, y=240, size=110), cam=PAN(600, 1300, CAM_GENTLE))],
+    'b46': [lambda t, d: S(t, SC(M5C, ZOOM_DETAIL, origin=ORIGIN_UPPER), O('TRAFFIC JAM', t + 10, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, SC(M5B, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_deadpan', t + 3, x=R, y=SPRITE_LOW_Y), W('BEACH TRAFFIC', t + 12, x=R, y=240, size=110), cam=PAN(600, 1300, CAM_GENTLE))],
     # b47 gap closing, still alive
-    'b47': [lambda t, d: S(t, SC(M5C, ZOOM_MID, origin=ORIGIN_LEFT), W('GAP CLOSING', t + 10, x=R, y=240), cam=PUSH(1100, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('clock', 'GAP CLOSING'), ('key', 'STILL ALIVE'), t + LEAD, 26), 'b'), cast='crew_turn_34')],
+    'b47': [lambda t, d: S(t, SC(M5C, ZOOM_MID, origin=ORIGIN_LEFT), W('GAP CLOSING', t + 10, x=R, y=TEXT_LOW_Y), cam=PUSH(1100, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('clock', 'GAP CLOSING'), ('key', 'STILL ALIVE'), t + LEAD, 26), 'b', t, d), cast='crew_turn_34')],
     # b48 "Damn you for villains, who are you?"
-    'b48': [lambda t, d: S(t, SC(M5D, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('"WHO ARE YOU?"', t + 20, 960, 240), cam=PUSH(560, 540, CAM_GENTLE))],
+    'b48': [lambda t, d: S(t, SC(M5D, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('"WHO ARE YOU?"', t + 20, R, TEXT_LOW_Y), cam=PUSH(560, 540, CAM_GENTLE))],
     # b49 "we're no pirates"
     'b49': [lambda t, d: CARD_SHOT(t, QT("We're no pirates.", 'MAYNARD', t + LEAD), TG('POINTS AT HIS FLAG', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None)],
     # b50 no mercy, no prisoners
-    'b50': [lambda t, d: S(t, SC(M5D, ZOOM_MID, origin=ORIGIN_LEFT), O('NO MERCY', t + 10, x=960, y=240), cam=PULL(960, 540, CAM_GENTLE)),
+    'b50': [lambda t, d: S(t, SC(M5D, ZOOM_MID, origin=ORIGIN_LEFT), O('NO MERCY', t + 10, x=R, y=TOP_SLOT_Y), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, XO('handcuffs', 'NO PRISONERS', t + 3, t + 30), TG('EXPECT NONE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_lean_rail')],
     # b51 broadside
-    'b51': [lambda t, d: S(t, SC(M6A, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('BROADSIDE!', t + 8, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b51': [lambda t, d: S(t, SC(M6A, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('BROADSIDE!', t + 8, x=L, y=TOP_SLOT_Y, rot=STAMP_LEVEL_ROT), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, HERO('sloop', 'ALL GUNS AT ONCE', t + 3, burst=True), TG('ONE SIDE OF THE SHIP', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
     # b52 about 20 navy hit, 9 on the other boat, its captain dead
     'b52': [lambda t, d: S(t, SC(M6A, ZOOM_MID, origin=ORIGIN_LEFT), cam=PULL(960, 540, CAM_GENTLE)),
@@ -615,23 +683,23 @@ P = {
             lambda t, d: S(t, SC(M6B, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('THEIR CAPTAIN: DEAD', t + 10, R, 240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b53 a third down
     'b53': [lambda t, d: CARD_SHOT(t, GRID(t, d, 'flag', 3, 1, 0, 'scrap', 'A THIRD DOWN'), TG('ONE BLAST', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point'),
-            lambda t, d: S(t, SC(M6B, ZOOM_MID, origin=ORIGIN_LEFT), W('THEY ARE HURTING', t + 10, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M6B, ZOOM_MID, origin=ORIGIN_LEFT), W('THEY ARE HURTING', t + 10, x=L, y=TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE))],
     # b54 might live to see lunch
-    'b54': [lambda t, d: CARD_SHOT(t, POINT(TF(('clock', 'DEAD BY NOON?'), ('coin', 'LUNCH, MAYBE'), t + LEAD, 22), 'b'), cast='crew_stand'),
+    'b54': [lambda t, d: CARD_SHOT(t, POINT(TF(('clock', 'DEAD BY NOON?'), ('coin', 'LUNCH, MAYBE'), t + LEAD, 22), 'b', t, d), cast='crew_stand'),
             lambda t, d: S(t, SC(M6B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('ODDS GOING UP', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b55 deck looks empty
-    'b55': [lambda t, d: S(t, SC(M6A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), CS('crew_hide_barrel', t + 3), W('DECK LOOKS EMPTY', t + 12, x=R, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b55': [lambda t, d: S(t, SC(M6A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), CS('crew_hide_barrel', t + 3, x=L, y=SPRITE_LOW_Y), W('DECK LOOKS EMPTY', t + 12, x=L, y=TOP_SLOT_Y, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: S(t, SC(M6C, ZOOM_CLOSE, origin=ORIGIN_RIGHT), cam=PUSH(960, 540, CAM_GENTLE))],
     # b56 grenades, hooks pull the boats together
     'b56': [lambda t, d: CARD_SHOT(t, FLOW(t, d, ['GRENADES', 'HOOKS', 'PULLED TOGETHER']), TG('BOTTLES STUFFED WITH GUNPOWDER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_worried'),
-            lambda t, d: S(t, SC(M6C, ZOOM_MID, origin=ORIGIN_LEFT), ST('GRAPPLE!', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M6C, ZOOM_MID, origin=ORIGIN_LEFT), ST('GRAPPLE!', t + 10, x=STAGE_W/2, y=TOP_SLOT_Y, rot=STAMP_LEVEL_ROT), cam=PULL(960, 540, CAM_GENTLE))],
     # b57 "they're finished"
     'b57': [lambda t, d: CARD_SHOT(t, QT("They're finished.", 'BLACKBEARD', t + LEAD), TG("LAUGHS: LET'S GO", t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_shrug')],
     # b58 never trust a free win; jump across
-    'b58': [lambda t, d: S(t, SC(M6D, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NEVER TRUST A FREE WIN', t + 10, size=80, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'FREE WIN'), ('handcuffs', 'TRAP'), t + LEAD, 30), 'a'), cast='crew_shrug')],
+    'b58': [lambda t, d: S(t, SC(M6D, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NEVER TRUST A FREE WIN', t + 10, size=SMALL_WORD_SIZE, x=R, y=TEXT_LOW_Y), cam=PUSH(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'FREE WIN'), ('handcuffs', 'TRAP'), t + LEAD, 30), 'a', t, d), cast='crew_shrug')],
     # b59 hatches burst: men hidden below
-    'b59': [lambda t, d: S(t, SC(M6D, ZOOM_MID, origin=ORIGIN_LEFT), O('HATCHES BURST', t + 8, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
+    'b59': [lambda t, d: S(t, SC(M6D, ZOOM_MID, origin=ORIGIN_LEFT), O('HATCHES BURST', t + 8, x=R, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, RING(t, d, 'flag', 8, 'HIDDEN BELOW'), TG('MAYNARD HID HIS MEN', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_turn_34')],
     # b60 now it's even, on their ship
     'b60': [lambda t, d: S(t, SC(M7A, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NOW IT IS EVEN', t + 10, x=L, y=240), cam=PAN(600, 1300, CAM_GENTLE))],
@@ -640,33 +708,33 @@ P = {
             lambda t, d: S(t, SC(M7B, ZOOM_WIDE, origin=ORIGIN_CENTRE), O('LIT FUSE', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: S(t, SC(M7A, ZOOM_MID, origin=ORIGIN_LEFT), CS('crew_lantern', t + 3), W('ONE SPARK', t + 10, color='orange', x=L, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
     # b62 blow the ship up
-    'b62': [lambda t, d: S(t, SC(M7B, ZOOM_MID, origin=ORIGIN_LEFT), ST('BLOW THE SHIP UP', t + 12, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+    'b62': [lambda t, d: S(t, SC(M7B, ZOOM_MID, origin=ORIGIN_LEFT), ST('BLOW THE SHIP UP', t + 12, x=R, y=TEXT_LOW_Y, rot=STAMP_LEVEL_ROT), cam=PULL(960, 540, CAM_GENTLE))],
     # b63 pistols
-    'b63': [lambda t, d: CARD_SHOT(t, POINT(SPL(('flag', 'BLACKBEARD'), ('badge', 'MAYNARD'), t + LEAD, 16), 'right'), cast='bb_exp_deadpan'),
-            lambda t, d: S(t, SC(M7C, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('BANG', t + 10, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
+    'b63': [lambda t, d: CARD_SHOT(t, POINT(SPL(('flag', 'BLACKBEARD'), ('badge', 'MAYNARD'), t + LEAD, 16), 'right', t, d), cast='bb_exp_deadpan'),
+            lambda t, d: S(t, SC(M7C, ZOOM_WIDE, origin=ORIGIN_CENTRE), ST('BANG', t + 10, x=L, y=TOP_SLOT_Y, rot=STAMP_LEVEL_ROT), cam=PUSH(960, 540, CAM_GENTLE))],
     # b64 swords; his blade snaps Maynard's; neck cut
     'b64': [lambda t, d: S(t, SC(M7A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), CS('bb_cutlass', t + 3), W('SWORD SNAPS', t + 14, x=L, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M7C, ZOOM_REVERSE, origin=ORIGIN_RIGHT), O('NECK CUT', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M7C, ZOOM_REVERSE, origin=ORIGIN_RIGHT), O('NECK CUT', t + 10, x=STAGE_W/2, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b65 five bullets, about twenty cuts
     'b65': [lambda t, d: CARD_SHOT(t, BARS(t, d, [('BULLETS', 5, '5'), ('SWORD CUTS', 20, '~20')]), TG('MAYNARD COUNTS', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_exp_thinking'),
             lambda t, d: S(t, SC(M7D, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('STILL STANDING', t + 10, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE))],
     # b66 crewmates going down
-    'b66': [lambda t, d: S(t, SC(M7A, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('crew_exp_scared', t + 3), W('CREWMATES GOING DOWN', t + 12, x=L, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
+    'b66': [lambda t, d: S(t, SC(M7A, ZOOM_DETAIL, origin=ORIGIN_UPPER), CS('crew_exp_scared', t + 3, x=R, y=SPRITE_LOW_Y), W('CREWMATES GOING DOWN', t + 12, x=L, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: S(t, SC(M7D, ZOOM_MID, origin=ORIGIN_LEFT), cam=PAN(600, 1300, CAM_GENTLE))],
     # b67 they still outnumber you, a few minutes
-    'b67': [lambda t, d: CARD_SHOT(t, POINT(SCALE(t, d, ('chair', 'YOU'), ('badge', 'NAVY'), 'right', 'STILL OUTNUMBERED'), 'label'), cast='crew_thinking'),
-            lambda t, d: S(t, SC(M7D, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('A FEW MINUTES', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+    'b67': [lambda t, d: CARD_SHOT(t, POINT(SCALE(t, d, ('chair', 'YOU'), ('badge', 'NAVY'), 'right', 'STILL OUTNUMBERED'), 'label', t, d), cast='crew_thinking'),
+            lambda t, d: S(t, SC(M7D, ZOOM_CLOSE, origin=ORIGIN_RIGHT), O('A FEW MINUTES', t + 10, x=STAGE_W/2, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b68 head on the bowsprit, body over the side
     'b68': [lambda t, d: CARD_SHOT(t, XO('flag', 'BLACKBEARD', t + 3, t + 24), TG('HEAD ON THE FRONT POLE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hands_hips'),
             lambda t, d: S(t, SC(M8A, ZOOM_WIDE, origin=ORIGIN_CENTRE), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M7E, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_oh', t + 3), W('OVER THE SIDE', t + 8, x=R, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M7E, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_oh', t + 3, x=L, y=SPRITE_LOW_Y), W('OVER THE SIDE', t + 8, x=R, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
     # b69 head to Virginia: pics or it didn't happen
-    'b69': [lambda t, d: S(t, SC(M8A, ZOOM_MID, origin=ORIGIN_LEFT), W('TO VIRGINIA', t + 10, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(MAPE(t, d, (330, 640, 'OCRACOKE'), (310, 520, 'VIRGINIA'), 'THE PROOF'), 'to'), cast='bb_exp_grin'),
-            lambda t, d: S(t, PH(BB, pos='50% 20%'), O("PICS OR IT DIDN'T HAPPEN", t + 10, x=R, y=260, size=70))],
+    'b69': [lambda t, d: S(t, SC(M8A, ZOOM_MID, origin=ORIGIN_LEFT), W('TO VIRGINIA', t + 10, x=L, y=TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(MAPE(t, d, (330, 640, 'OCRACOKE'), (310, 520, 'VIRGINIA'), 'THE PROOF'), 'to', t, d), cast='bb_exp_grin'),
+            lambda t, d: S(t, PH(BB, pos='50% 20%'), O("PICS OR IT DIDN'T HAPPEN", t + 10, x=R, y=TEXT_LOW_Y, size=70))],
     # b70 legend: headless swim
-    'b70': [lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'LEGEND: SWIMS'), ('newspaper', 'FACT: SANK'), t + LEAD, 18, vs='?'), 'left'), cast='bb_stand'),
-            lambda t, d: S(t, SC(M8A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('JUST A LEGEND', t + 10, R, 240), cam=PAN(600, 1300, CAM_GENTLE))],
+    'b70': [lambda t, d: CARD_SHOT(t, POINT(SPL(('sloop', 'LEGEND: SWIMS'), ('newspaper', 'FACT: SANK'), t + LEAD, 18, vs='?'), 'left', t, d), cast='bb_stand'),
+            lambda t, d: S(t, SC(M8A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('JUST A LEGEND', t + 10, L, TOP_SLOT_Y), cam=PAN(600, 1300, CAM_GENTLE))],
     # b71 fuse stopped in time
     'b71': [lambda t, d: CARD_SHOT(t, XO('clock', 'THE FUSE', t + 3, t + 30), TG('NEVER TOUCHES POWDER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point'),
             lambda t, d: S(t, SC(M8B, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('IN TIME', t + 10, x=L, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
@@ -679,42 +747,42 @@ P = {
                                         mark=(1, 'circle')), TG('TOP GOVERNMENT OFFICIAL', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
             lambda t, d: S(t, SC(M8B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG("IN THE PIRATE'S DMS", t + 10, L, 240), cam=PAN(600, 1300, CAM_GENTLE))],
     # b74 accused, never stuck; nobody important jailed
-    'b74': [lambda t, d: CARD_SHOT(t, POINT(TF(('pen', 'ACCUSED'), ('key', 'WALKS FREE'), t + LEAD, 30), 'b'), cast=None),
+    'b74': [lambda t, d: CARD_SHOT(t, POINT(TF(('pen', 'ACCUSED'), ('key', 'WALKS FREE'), t + LEAD, 30), 'b', t, d), cast=None),
             lambda t, d: S(t, SC(M8C, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('NOBODY IMPORTANT JAILED', t + 10, size=80, x=960, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b75 men in charge walk away; what about you
-    'b75': [lambda t, d: CARD_SHOT(t, POINT(SPL(('crown', 'MEN IN CHARGE'), ('flag', 'YOU'), t + LEAD, 20, vs='?'), 'right'), cast='crew_turn_34')],
+    'b75': [lambda t, d: CARD_SHOT(t, POINT(SPL(('crown', 'MEN IN CHARGE'), ('flag', 'YOU'), t + LEAD, 20, vs='?'), 'right', t, d), cast='crew_turn_34')],
     # b76 how long do you last
     'b76': [lambda t, d: S(t, SC(M8C, ZOOM_MID, origin=ORIGIN_LEFT), O('HOW LONG DO YOU LAST?', t + 6, size=80, x=960, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b77 dead by noon or in chains: 16 to Virginia
     'b77': [lambda t, d: CARD_SHOT(t, CNT('handcuffs', 16, t + LEAD, 4, '16 TAKEN TO VIRGINIA', 960, 520, 1300), TG('FOR TRIAL', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared'),
-            lambda t, d: S(t, SC(M9A, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('DEAD BY NOON OR CHAINS', t + 10, size=80, x=R, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M9A, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('DEAD BY NOON OR CHAINS', t + 10, size=SMALL_WORD_SIZE, x=R, y=TEXT_LOW_Y), cam=PUSH(960, 540, CAM_GENTLE))],
     # b78 jail almost four months
     'b78': [lambda t, d: CARD_SHOT(t, TL(t, d, 'NOV 1718', 'MAR 1719', 'ALMOST 4 MONTHS IN JAIL'), TG('WHOLE WINTER WAITING', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
     # b79 March, no jury, 14 sentenced, about 12 hang
-    'b79': [lambda t, d: S(t, SC(M9B, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('NO JURY', t + 10, 960, 240), cam=PULL(960, 540, CAM_GENTLE)),
+    'b79': [lambda t, d: S(t, SC(M9B, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('NO JURY', t + 10, R, TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, DOC(t, d, 'THE SENTENCE', ['14 SENTENCED', 'ABOUT 12 HANG'], kind='certificate',
                                         stamp='GUILTY'), TG('JUST JUDGES', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking'),
             lambda t, d: S(t, SC(M9A, ZOOM_MID, origin=ORIGIN_LEFT), cam=PUSH(960, 540, CAM_GENTLE))],
     # b80 two men walk away (46 frames)
-    'b80': [lambda t, d: S(t, SC(M9C, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_surprised', t + 2), W('TWO WALK AWAY', t + 6, x=960, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
+    'b80': [lambda t, d: S(t, SC(M9C, ZOOM_WIDE, origin=ORIGIN_CENTRE), CS('crew_exp_surprised', t + 2), W('TWO WALK AWAY', t + 6, x=STAGE_W/2, y=TEXT_LOW_Y, size=HEADLINE_SIZE), cam=PUSH(960, 540, CAM_GENTLE))],
     # b81 Samuel Odel, the party guest, freed
     'b81': [lambda t, d: S(t, SC(M9D, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('SAMUEL ODEL', t + 8, R, 240), cam=PAN(600, 1300, CAM_GENTLE)),
-            lambda t, d: S(t, SC(M9C, ZOOM_MID, origin=ORIGIN_LEFT), CS('bath_gent_sly', t + 3), W('PARTY GUEST: FREED', t + 10, x=960, y=240, size=110), cam=PUSH(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M9C, ZOOM_MID, origin=ORIGIN_LEFT), CS('bath_gent_sly', t + 3), W('PARTY GUEST: FREED', t + 10, x=STAGE_W/2, y=TEXT_LOW_Y, size=HEADLINE_SIZE), cam=PUSH(960, 540, CAM_GENTLE))],
     # b82 Israel Hands pardoned
-    'b82': [lambda t, d: S(t, SC(M9D, ZOOM_MID, origin=ORIGIN_LEFT), W('ISRAEL HANDS', t + 8, x=R, y=240), cam=PAN(600, 1300, CAM_GENTLE)),
+    'b82': [lambda t, d: S(t, SC(M9D, ZOOM_MID, origin=ORIGIN_LEFT), W('ISRAEL HANDS', t + 8, x=L, y=TEXT_LOW_Y), cam=PAN(600, 1300, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, HERO('pen', 'PARDONED', t + 3, burst=True), TG('NOT ON THE SHIP', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point')],
     # b83 don't be on it
-    'b83': [lambda t, d: S(t, SC(S01, ZOOM_WIDE, origin=ORIGIN_CENTRE), O("DON'T BE ON IT", t + 12, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+    'b83': [lambda t, d: S(t, SC(S01, ZOOM_WIDE, origin=ORIGIN_CENTRE), O("DON'T BE ON IT", t + 12, x=L, y=TOP_SLOT_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b84 400 pounds promised; waited four years
     'b84': [lambda t, d: CARD_SHOT(t, BN(400, 'POUNDS SPLIT', t + 3, 30), TG('HIS CREWS', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
-            lambda t, d: S(t, SC(M10A, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('WAITED 4 YEARS', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE))],
+            lambda t, d: S(t, SC(M10A, ZOOM_WIDE, origin=ORIGIN_CENTRE), W('WAITED 4 YEARS', t + 10, x=L, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE))],
     # b85 kept 90, no promotion
     'b85': [lambda t, d: CARD_SHOT(t, HERO('coin', 'KEPT ABOUT 90 POUNDS', t + LEAD), TG('GOT HIM IN TROUBLE', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
-            lambda t, d: S(t, SC(M10A, ZOOM_MID, origin=ORIGIN_LEFT), O('NO PROMOTION', t + 8, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
+            lambda t, d: S(t, SC(M10A, ZOOM_MID, origin=ORIGIN_LEFT), O('NO PROMOTION', t + 8, x=L, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, XO('badge', 'PROMOTION', t + 3, t + 30), TG('PIRATE LOOT', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None)],
     # b86 paid four years late; work never changes
-    'b86': [lambda t, d: S(t, SC(M10A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), W('PAID 4 YEARS LATE', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
-            lambda t, d: CARD_SHOT(t, POINT(TF(('flag', 'KILL FAMOUS PIRATE'), ('bill', 'PAID FOUR YEARS LATE'), t + LEAD, 30), 'b'), cast=None)],
+    'b86': [lambda t, d: S(t, SC(M10A, ZOOM_CLOSE, origin=ORIGIN_RIGHT), W('PAID 4 YEARS LATE', t + 10, x=L, y=TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
+            lambda t, d: CARD_SHOT(t, POINT(TF(('flag', 'KILL FAMOUS PIRATE'), ('bill', 'PAID FOUR YEARS LATE'), t + LEAD, 30), 'b', t, d), cast=None)],
     # b87 CTA: at the party, in town, on deck?
     'b87': [lambda t, d: S(t, SC(M10B, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('WHERE WOULD YOU BE?', t + 8, 960, 240), cam=PAN(600, 1300, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, CHK(t, d, [('AT THE PARTY', 'none'), ('IN TOWN', 'none'), ('ON DECK', 'none')]), TG('WITH A SWORD', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_farmer_stand'),
@@ -723,6 +791,71 @@ P = {
     'b88': [lambda t, d: CARD_SHOT(t, GRID(t, d, 'barrel', 4, 2, 6, 'flag', "WHO'S HIDING?"), TG('DECK LOOKS EMPTY', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared')],
 }
 
+
+
+# StampElement box, font/padding/border read from elements.tsx; change together
+_stamp_source = (ROOT / 'engine/ink/parts/elements.tsx').read_text(encoding='utf-8')
+_stamp_match = re.search(r'export const StampElement:[\s\S]*?border: `([\d.]+)px solid[\s\S]*?fontSize: ([\d.]+),[\s\S]*?padding: \'([\d.]+)px ([\d.]+)px\'', _stamp_source)
+if not _stamp_match:
+    raise SystemExit('StampElement font/padding/border source changed')
+_stamp_border, _stamp_font, _stamp_pad_y, _stamp_pad_x = map(float, _stamp_match.groups())
+
+
+def stamp_box(e):
+    w = (m1.GLYPH_BOX * _stamp_font * len(e['text']) + 2 * _stamp_pad_x + 2 * _stamp_border) * STAMP_SETTLE_MAX
+    h = (m1._LH * _stamp_font + 2 * _stamp_pad_y + 2 * _stamp_border) * STAMP_SETTLE_MAX
+    return rotated_box(e['x'], e['y'], w, h, e['rot'])
+
+
+def intersects(a, b):
+    return a[0] < b[2] and b[0] < a[2] and a[1] < b[3] and b[1] < a[3]
+
+
+def fit_stamps(shot):
+    log, states = [], m1._states(shot)
+    for e in (e for e in shot['els'] if e['t'] == 'stamp'):
+        old = e['x'], e['y']
+        x0, y0, x1, y1 = stamp_box(e)
+        hw, hh = (x1-x0)/2, (y1-y0)/2
+        lo_x = max((m1.SAFE-bx)/ax+hw for ax,bx,_,_ in states)
+        hi_x = min((STAGE_W-m1.SAFE-bx)/ax-hw for ax,bx,_,_ in states)
+        lo_y = max((m1.SAFE-by)/ay+hh for _,_,ay,by in states)
+        hi_y = min((STAGE_H-m1.SAFE-by)/ay-hh for _,_,ay,by in states)
+        if lo_x > hi_x or lo_y > hi_y:
+            raise SystemExit(f"f0 {shot['start']}: stamp {e['text']} has empty safe range")
+        e['x'] = min(max(e['x'], lo_x), hi_x)
+        e['y'] = min(max(e['y'], lo_y), hi_y)
+        def hits():
+            x0,y0,x1,y1=stamp_box(e)
+            return shot['meter'] is not None and any(intersects((ax*x0+bx,ay*y0+by,ax*x1+bx,ay*y1+by),m1.METER_BOX) for ax,bx,ay,by in states)
+        if hits():
+            left = min((m1.METER_BOX[0]-m1.SAFE-bx)/ax-hw for ax,bx,_,_ in states)
+            below = max((m1.METER_BOX[3]+m1.SAFE-by)/ay+hh for _,_,ay,by in states)
+            if left >= lo_x: e['x'] = min(e['x'], left)
+            elif below <= hi_y: e['y'] = max(e['y'], below)
+            else: raise SystemExit(f"f0 {shot['start']}: stamp {e['text']} cannot clear meter")
+        if old != (e['x'],e['y']): log.append(f"{e['text']}: stamp x/y {old}->{(e['x'],e['y'])}")
+    return log
+
+
+def fit_text_bottom(shot):
+    # bottom-safe twin of m1.fit_words lo_y, words + tags via m1._el_boxes; change together
+    log=[]
+    for e, (_,_,_,y1) in m1._el_boxes(shot):
+        old=e['y']; hh=y1-old
+        hi_y=min((m1.STAGE_H-m1.SAFE-by)/ay-hh for _,_,ay,by in m1._states(shot))
+        e['y']=min(old,hi_y)
+        if e['y'] != old: log.append(f"{e.get('text',e['t'])}: y {old}->{e['y']} (bottom safe)")
+    return log
+
+
+def check_overlap(shot):
+    # no two overlay boxes may intersect; boxes from m1._el_boxes + stamp_box; change together
+    boxes=list(m1._el_boxes(shot))+[(e,stamp_box(e)) for e in shot['els'] if e['t']=='stamp']
+    for i,(e,a) in enumerate(boxes):
+        for other,b in boxes[i+1:]:
+            if intersects(a,b):
+                raise SystemExit(f"f0 {shot['start']}: overlays {e.get('text',e['t'])} / {other.get('text',other['t'])} intersect")
 
 def lint_window(name, shots, errors, partial):
     """Minute-one SKILL rules applied to one minute window; lower bounds relaxed on a partial last window."""
@@ -778,6 +911,10 @@ def build():
             shots.append(fn(t, d))
     if errors:
         return None, errors, fits, None
+    for shot in shots:
+        for e in shot['els']:
+            if e['t'] == 'words' and e['y'] == TEXT_LOW_Y and e['size'] > LOW_SIZE:
+                raise SystemExit(f"f0 {shot['start']}: low-band words exceed LOW_SIZE")
     add_meters(shots, tl)
     add_card_underlays(shots)
 
@@ -807,8 +944,13 @@ def build():
         errors += [f'{tag}: count n={e["n"]} > engine COUNT_MAX {COUNT_MAX}' for e in s['els']
                    if e['t'] == 'count' and not 1 <= e['n'] <= COUNT_MAX]
         fits += [f'{tag} {m}' for m in fit_words(s)]
+        fits += [f'{tag} {m}' for m in fit_text_bottom(s)]
+        fits += [f'{tag} {m}' for m in fit_stamps(s)]
         fits += [f'{tag} {m}' for m in fit_sprites(s)]
         fits += [f'{tag} {m}' for m in clear_meter(s)]
+        check_overlap(s)
+        if s['start'] == 0 and next(e['size'] for e in s['els'] if e['t'] == 'words') < HOOK_MIN_SIZE:
+            raise SystemExit('f0 0: hook below minimum readable size')
         errors += [f'{tag}: "{t}" runs under the meter box' for t in meter_hits(s)]
         for e in s['els']:
             for t in el_times(e):
