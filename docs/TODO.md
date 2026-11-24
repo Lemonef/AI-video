@@ -84,7 +84,12 @@
       - [x] WAIT Zen look on v5 -> 11-25 "first part so weird it cut so fast ... I don't even know what going on" (0:02 key/chain metaphor card + circle crossing text)
       - [x] v6: b1[1] = clock "LESS THAN 24 HOURS" + TG OCRACOKE, NOV 1718 (plain hook, no metaphor); split ring circles whole side (RING_K); transform ring = icon box oval (clears arrow + long label); CROSS_LABEL_GAP token shared (cards.tsx + transformLayout.ts); cardfix2 accepts transform icon anchor; gates green; stills 80/440/1650/1700 read
       - [x] Teach's Hole road-sign photo swapped for 1795 inlet chart + chip (Zen 11-25 'don't belong to context'); gates rc=0, still f890 clean
-      - [ ] WAIT Zen look on v6 (D:/AI-video/.tmp/polish/ep02_min1_v6_720p.mp4); then apply same rules to min2+
+      - [x] WAIT Zen look on v6 (D:/AI-video/.tmp/polish/ep02_min1_v6_720p.mp4); then apply same rules to min2+ -> 11-25 visual dead/hanged, lists pop one by one, jokes, no bar chart spam; then "spamming the explain cards"
+      - [ ] v7 WIP (uncommitted, paused 11-25 by Zen "stop for today"): noose/grave/bottle icons, FLOW->pop-in, guest list circle, gags; doodle.tsx scribbleFit tilt search; DOC_H_RINGED=560
+        - [ ] f6600 PIRATE ARTICLES still throws ring-leaves-paper (y 323 vs 280 at h=560): auto-grow paper or bigger h
+        - [ ] REBALANCE min1: too many explain cards; mix scene / explain card / real image, none overloaded
+        - [ ] min2+: cut FLOW 5->2, BARS 4->1, BN 6->=4
+        - [ ] WAIT Zen look on v7
   - [x] min1 ~52s (fixed e9668a9, stacked low-right, still f1590 read; 3 PAIRS f8780 low, read): "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
   - [ ] REAL IMAGES (Zen 11-24 "why i feel like you didn't use much real images"): 14 archive photos on disk (assets/ink/photos, SOURCES.md), only 2 used (bb_engraving_1724 ~5 shots, moseley_map_1733 ~2). Separate brief AFTER polish accepts: wire the 12 unused (maynard fight, spotswood, QAR model, ocracoke 1795, teach's hole marker, ferris battle/capture, bb prints) onto the beats they show, one use each, overlap check at settled frame
     - [ ] map each photo -> beat from SOURCES.md + beats doc
