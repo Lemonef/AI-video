@@ -52,7 +52,7 @@
       - [x] brief r4 caa4f06 (free legs PASS, Sol out of quota) -> relaunched: job 20261124073603 Opus hit 5h limit, 0 files changed; relaunched 20261124080220 after account switch
   - [ ] card polish: transform cards draw the red circle before label B appears (fix timing only; surface stays as is, Zen 15:15 "leave it for now"). Brief after plate-wire accepts (same file ep02_full_shots.py)
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
-  - [ ] card at f5940 (b28) still a blank frame + one line 40f in: check content timing in polish brief
+  - [x] card at f5940 (b28) blank: FALSE ALARM, bars animate from 5941, full by f5995 (still checked)
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
