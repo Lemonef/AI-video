@@ -149,9 +149,21 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    | 17988 | 'PAID 4 YEARS LATE' | officer's head | LL low |
 
    "clear area" means: pick TL / TC / TR / LL low / LR low / low 960 by looking at the still; the choice
-   goes in the reply table. Every other shot was
+   goes in the reply table. Table texts are search fragments: find the element whose text starts with or
+   contains them (e.g. 'VOTED IN' = 'VOTED IN BY THE CREW', 'A SAIL' = 'A SAIL. THEN ANOTHER.', 'BROADSIDE' =
+   'BROADSIDE!'); move the whole element. Every other shot was
    checked and is already clear: do not move it. Shots 4329 and 8399 were borderline: render their still
-   and move only if the words touch a head.
+   and move only if the words touch a head (a move there counts as a step-4 move in Done-when).
+
+   Bottom edge under the camera. `m1.fit_words` clamps only the TOP and sides against the camera states;
+   a low-band line can leave the bottom of the screen when the plate zoom / camera scales it (Codex found
+   f0 6863, 12267, 16424, 17041 at about screen y 1103 > 1080). `make_ep02_min1_shots.py` is protected, so
+   add ONE pass in ep02_full_shots.py, run right after `fit_words(s)` and before `clear_meter(s)` (line ~809):
+   `fit_words_bottom(shot)`, the mirror of fit_words' `lo_y`: for every words element
+   `hi_y = min((m1.STAGE_H - m1.SAFE - by) / ay - m1.CAP_H * size for _, _, ay, by in m1._states(shot))`,
+   `y = min(y, hi_y)`, logged into `fits` the same way. Comment: `# bottom-safe twin of m1.fit_words lo_y;
+   change together`. It applies to every shot (a line already inside the frame is unchanged), so a
+   low-band line stays on screen at every camera state; the still check then confirms it is still off faces.
 
    4a. Hook stamp (f0 0, frames 0-45, b1 shot 1, plate S01, `ST('LESS THAN A DAY TO LIVE', t + 10)`). The owner reviewed
    minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read. Make it
@@ -161,8 +173,10 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
    style, words, timing AND size: `StampElement` hard-codes its font size and the stamp has no size
    parameter, so fit it by position and rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`).
-   The same applies to every stamp in the table: fully inside the frame (its rotated box at least `SAFE`
-   from every edge) and clear of the meter box. Every new value is a named constant derived from existing
+   The same applies to every stamp in the table: once SETTLED (StampElement's entrance `useIn(..., 10)` has
+   finished, i.e. from `at + 10` at scale 1; the 2.2x slam-in frames before that may overflow, that is the
+   intended stamp hit) its rotated box is at least `SAFE` from every screen edge at camera start and end
+   (use `m1._states(shot)`), and clear of the meter box. Every new value is a named constant derived from existing
    tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
 
    4b. Check. Render half-scale stills (`npx remotion still engine/ink/index.ts InkEp02Full
@@ -191,7 +205,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
-  sprite / stamp positions, sizes and rotations, the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
+  sprite / stamp positions, sizes and rotations (including 4329 / 8399 if moved, and any words y lowered by
+  `fit_words_bottom`), the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
   also change its circle y (655 -> 675, the split label anchor that POINT uses), its side keys (`a`/`b` ->
   `left`/`right`) and gain the default `vs` field. Otherwise card content, layout `at`, mark y/size, f0/f1, plates and cameras are
   unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
