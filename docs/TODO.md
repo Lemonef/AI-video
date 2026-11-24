@@ -60,6 +60,10 @@
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
+  - [ ] REAL IMAGES (Zen 11-24 "why i feel like you didn't use much real images"): 14 archive photos on disk (assets/ink/photos, SOURCES.md), only 2 used (bb_engraving_1724 ~5 shots, moseley_map_1733 ~2). Separate brief AFTER polish accepts: wire the 12 unused (maynard fight, spotswood, QAR model, ocracoke 1795, teach's hole marker, ferris battle/capture, bb prints) onto the beats they show, one use each, overlap check at settled frame
+    - [ ] map each photo -> beat from SOURCES.md + beats doc
+    - [ ] brief + Codex review + plan_check -> pipeline
+    - [ ] verify stills -> accept -> re-render affected minutes
   - [x] card at f5940 (b28) blank: FALSE ALARM, bars animate from 5941, full by f5995 (still checked)
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
