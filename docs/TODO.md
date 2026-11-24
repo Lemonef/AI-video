@@ -60,7 +60,8 @@
     - [x] overlap sweep at SETTLED frame, all shots -> brief step 4 real-f0 table (65 moves), 4a stamp, 4b stills, f0 443 at fix (12a61f1)
     - [x] Codex Sol r5 on 12a61f1 brief: FAIL (stamp settle, bottom clamp) -> fixed f413ad8
     - [x] Codex Sol r6 on f413ad8: FAIL (spring envelope, tag bottom clamp) -> fixed 270e82f
-    - [ ] Codex Sol r7 on 270e82f brief (running)
+    - [x] Codex Sol r7 on 270e82f brief: PASS, applied in f5d14b4
+    - [ ] polish pipeline job ink-ep02-card-polish-20261124132148 (running)
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
