@@ -47,7 +47,7 @@
       - [x] Sol review 2 FAIL (gate 2 skipped beats with no plate) -> CARD_ONLY pinned from 6ecc0d4, 2b plate-exists, b83 reason check, brief wording; gate FAILs on unwired full.json as expected
       - [x] Sol review 3 PASS (must-fix none, count nit fixed) -> plan_check -> cc87fb6 -> job ink-ep02-plate-wire-20261124064900 launched
       - [x] job 20261124064900 -> needs-owner: r1 audit FAIL (plate misfits b14/b40/b43/b55/b68, origin literals, no fit table), r2 lint (m9c twice), r3 Opus timeout
-      - [ ] brief r4: m9d wired by builder, MISSING_OK = set(), named framing tokens, misfit list -> Sol round 4 -> relaunch
+      - [x] brief r4 caa4f06 (free legs PASS, Sol out of quota) -> relaunched: job 20261124073603 Opus hit 5h limit, 0 files changed; relaunched 20261124080220 after account switch
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
