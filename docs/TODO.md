@@ -40,7 +40,7 @@
     - [x] min5/min6/min7 progress sheets (contact sheets sent 11-24 06:05, all 13 plates eye-checked)
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
     - [x] 9 briefs m8a-c, m9a-d, m10a-b + free-leg review (Groq+Cohere) + plan_checks a00b39d
-    - [ ] jobs one at a time: [x] m8a c852dcf · [x] m8b 72516c8 · [x] m8c 1822c0a · [x] m9a 40372b4 · [x] m9b 2da3972 · [x] m9c ec466fe · [x] m10a · [x] m10b · [x] m9d 01a0d8c
+    - [x] jobs one at a time: [x] m8a c852dcf · [x] m8b 72516c8 · [x] m8c 1822c0a · [x] m9a 40372b4 · [x] m9b 2da3972 · [x] m9c ec466fe · [x] m10a · [x] m10b · [x] m9d 01a0d8c
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
     - [x] gate tests/ink/ep02_plates_check.py 4bbb671; Sol review 1 FAIL (4 holes) -> gate+brief fixed, re-review running
     - [ ] plan_check + pipeline job docs/briefs/ink-ep02-plate-wire.md
