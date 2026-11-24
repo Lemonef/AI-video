@@ -300,7 +300,10 @@ SPRITE_LOW_Y = TEXT_LOW_Y  # side-third sprites stand over deck/floor below plat
 
 DAWN_LOW_Y = TEXT_LOW_Y - m1.SAFE  # reserve camera-edge clearance before stacking
 DAWN_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('DAWN', LEAD) + TG('A SAIL. THEN ANOTHER.', LEAD, R, TEXT_LOW_Y)})) + m1._LINE  # disjoint words/tag half-heights plus one stroke gap; change together with m1._el_boxes
-B8_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('GREAT LINE.', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE) + O('TERRIBLE PLAN', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE)})) + m1._LINE  # b8 pair stacked in the low band clear of the engraving face; same derivation as DAWN_STACK_OFFSET
+STACK_GAP_LINES = 3  # outlined words read as touching at a one-stroke gap (Zen 2026-11-25 overlap note); change together with the stacks below
+B8_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('GREAT LINE.', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE) + O('TERRIBLE PLAN', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE)})) + STACK_GAP_LINES * m1._LINE
+# hook split onto two lines in the left third: one centred line crossed BB's hat during the push
+HOOK_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('LESS THAN', LEAD, x=L, y=TOP_SLOT_Y) + W('A DAY TO LIVE', LEAD, x=L, y=TOP_SLOT_Y)})) + STACK_GAP_LINES * m1._LINE  # b8 pair stacked in the low band clear of the engraving face; same derivation as DAWN_STACK_OFFSET
 
 
 FONT_FILE = 'C:/Windows/Fonts/Inkfree.ttf'  # the face behind FONT = 'Ink Free' in compositions/InkProof.tsx; change together
@@ -496,40 +499,42 @@ def el_times(e):
 S01, S02, S03, S04, S05 = m1.S01, m1.S02, m1.S03, m1.S04, m1.S05
 S06, S07, S08, S09, S10 = m1.S06, m1.S07, m1.S08, m1.S09, m1.S10
 MAP, BB = m1.MAP, m1.BB
+# real archive images (ink/photos/SOURCES.md); one use each per minute, Zen 2026-11-25 "too many reuse images"
+FERRIS_CAPTURE, TEACHS_HOLE, TEACH_LOC = 'ferris_capture_1920.jpg', 'teachs_hole_marker.jpg', 'teach_loc_1725.jpg'
+BB_PIRATE, BB_PRINT = 'bb_pirate_c1724.jpg', 'bb_print_1734.jpg'
 
 # ---------- shot plan: beat id -> one builder per timeline shot ----------
 P = {
     # b1 "You have less than a day to live."
-    'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN A DAY TO LIVE', t + 10, x=STAGE_W/2, y=TOP_SLOT_Y, color='red'), cam=PUSH(1300, 480, 1.22)),
+    'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN', t + 10, x=L, y=TOP_SLOT_Y, color='red'), W('A DAY TO LIVE', t + 22, x=L, y=TOP_SLOT_Y + HOOK_STACK_OFFSET, color='red'), cam=PUSH(1300, 480, 1.22)),
            lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'ALIVE NOW'), ('chain', 'DEAD WITHIN A DAY'), t + LEAD, 14), 'right', t, d), cast='bb_stand')],
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
-           lambda t, d: S(t, SC(S01, (1.0, 1.06)), CS('crew_stand', t + 3, 600, y=700), CS('crew_scrub', t + 9, 960, y=700),
-                          CS('crew_haul_rope', t + 15, 1320, y=700), TG('ABOUT 20 MEN', t + 20, L, TOP_SLOT_Y)),
-           lambda t, d: S(t, SC(S03), cam=PAN(500, 1420)),
+           lambda t, d: S(t, SC(S03, (1.0, 1.06)), TG('ABOUT 20 MEN', t + 20, L, TOP_SLOT_Y)),  # plate already shows the crew
+           lambda t, d: S(t, PH(FERRIS_CAPTURE, pos='50% 40%', push=(1.0, 1.1))),  # real painting: how it ends
            lambda t, d: CARD_SHOT(t, BN(20, 'MEN ABOARD', t + 3, 20), TG('ALMOST ALL DEAD BY SUMMER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking')],
     # b3 only two kinds walk away; stay to the end
     'b3': [lambda t, d: S(t, SC(S04, (1.0, 1.1)), O('ONLY 2 KINDS', t + 15, x=R, y=260)),
            lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?'), 'right', t, d), cast='crew_point'),
            lambda t, d: S(t, SC(S05, (1.08, 1.0)), W('STAY TO THE END', t + LEAD, x=L, y=TOP_SLOT_Y), cam=PULL(960, 520))],
     # b4 strangest part: tonight he isn't worried
-    'b4': [lambda t, d: S(t, SC(S08, (1.0, 1.06)), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
-           lambda t, d: S(t, SC(S06, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240), cam=PAN(1400, 1100))],
+    'b4': [lambda t, d: S(t, SC(S11, (1.0, 1.06)), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
+           lambda t, d: S(t, SC(S10, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240))],
     # b5 21 November 1718, small sloop, quiet inlet
     'b5': [lambda t, d: CARD_SHOT(t, BN(1718, '21 NOVEMBER', t + 3, 36, year=True), TG('QUIET INLET', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_arms_crossed'),
            lambda t, d: S(t, PH(MAP, pos='50% 50%', push=(1.0, 1.12)),
                           chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=t + 5, chipPos='tl'),
            lambda t, d: CARD_SHOT(t, HERO('sloop', 'ONE SMALL SLOOP', t + 3), TG('ANCHORED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt'),
-           lambda t, d: S(t, SC(S07), cam=PAN(400, 1300))],
+           lambda t, d: S(t, PH(TEACHS_HOLE, pos='50% 50%', push=(1.0, 1.1)))],  # real marker at the inlet; CC BY-SA credit in description
     # b6 rum, guests from Bath, one matters later
-    'b6': [lambda t, d: S(t, SC(S01, origin='30% 60%'), cam=PUSH(500, 620)),
-           lambda t, d: S(t, SC(S08, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),  # close-up: no sprites over faces
-           lambda t, d: S(t, SC(S07), cam=PUSH(880, 700, 1.35)),
+    'b6': [lambda t, d: S(t, PH(TEACH_LOC, pos='50% 25%', push=(1.0, 1.1))),
+           lambda t, d: S(t, SC(S07, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),
+           lambda t, d: S(t, PH(BB_PIRATE, pos='50% 22%', push=(1.0, 1.1))),
            lambda t, d: CARD_SHOT(t, CHK(t, d, [('PARTY GUEST', 'tick'), ('REMEMBER HIM', 'tick')]), TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
     # b7 does your wife know where you buried your money? me and the devil
     'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
            lambda t, d: CARD_SHOT(t, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4), TG('HE LAUGHED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_merchant_whisper'),
-           lambda t, d: S(t, SC(S08), cam=PUSH(1250, 480, 1.35)),
+           lambda t, d: S(t, PH(BB_PRINT, pos='50% 52%', push=(1.0, 1.1))),
            lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
     # b8 joke: great line, terrible retirement plan
     'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y - B8_STACK_OFFSET, size=MEDIUM_WORD_SIZE),
@@ -888,8 +893,7 @@ def add_card_underlays(shots):
         if 'plate' in shot['bg']:
             previous = shot['bg']['plate']
         elif shot['bg'].get('card'):
-            plate = previous or next(s['bg']['plate'] for s in shots[i + 1:] if 'plate' in s['bg'])
-            shot['bg'] = {'card': True, 'under': plate}
+            shot['bg'] = {'card': True}  # full-screen white paper, no dimmed scene behind (Zen 2026-11-25)
 
 
 def build():
