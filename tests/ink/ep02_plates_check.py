@@ -2,10 +2,13 @@
 
 The beat -> plate map is read from the scene specs themselves (scenes_min*.py 'minute' strings), so the
 specs stay the single source. Checks, on the generated engine/ink/parts/shots_ep02full/full.json:
- 1. every fresh plate that exists on disk is used as a shot background at least once;
- 2. every mapped beat that has a plate shot uses its own plate in at least one of them
+ 0. every specified plate is on disk, except the named MISSING_OK plates still being drawn;
+ 1. every fresh plate on disk is used as a shot background inside its own minute window(s);
+ 2. every mapped beat outside the pinned CARD_ONLY set uses its own plate in at least one plate shot
     (card-only beats are exempt: their plate goes to a neighbouring plate shot of the same minute);
- 3. from b10 on, no plate shot uses an old s* plate, except the named S01 callback at b83;
+    2b. every plate a shot references exists on disk;
+ 3. from b10 on, no plate shot uses an old s* plate, except the named S01 callback at b83,
+    which is required (b83 shows s01_deck_party; CALLBACKS names it with a reason naming b83);
  4. CALLBACKS names only that callback and fresh plates whose own mapped beats span two minute windows.
 Run after: python tools/ink/ep02_full_shots.py --draft
 """
@@ -26,6 +29,7 @@ FULL = ROOT / 'engine/ink/parts/shots_ep02full/full.json'
 TIMELINE = EP / 'assets/full-hybrid/timeline.json'
 FIRST_REDO_BEAT = 10                  # minute 1 (b1-b9) keeps the old s* plates
 CALLBACK = ('b83', 's01_deck_party')  # script beat 18: back on the party deck, named callback
+MISSING_OK = {'m9d_hands_in_town'}    # still being drawn; drop from this set once its plate is accepted
 fails = []
 
 
@@ -57,7 +61,8 @@ def spec_map():
 
 plates = spec_map()
 present = {p for p in plates if (SCENE_DIR / f'{p}.png').exists()}
-check(len(present) * 2 > len(plates), f'only {len(present)} of {len(plates)} fresh plates on disk')
+for p in sorted(set(plates) - present - MISSING_OK):
+    check(False, f'0: specified plate {p} is not on disk')
 check(FULL.exists(), f'{FULL} missing (run the generator with --draft first)')
 shots = json.loads(FULL.read_text(encoding='utf-8'))['shots'] if FULL.exists() else []
 tl = json.loads(TIMELINE.read_text(encoding='utf-8'))
@@ -77,24 +82,39 @@ def stem(plate):
     return pathlib.PurePosixPath(plate).stem
 
 
-used = {}  # beat -> set of plate stems used as shot backgrounds
+used = {}      # beat -> set of plate stems used as shot backgrounds
+used_win = {}  # plate stem -> set of minute windows it is on screen in
 for s in shots:
     p = s['bg'].get('plate')
     if p:
         used.setdefault(beat_at(s['f0']), set()).add(stem(p))
-all_used = set().union(*used.values()) if used else set()
+        used_win.setdefault(stem(p), set()).add(s['f0'] // G.MINUTE)
 
-# 1. every fresh plate on disk is on screen
+# minute windows each beat's own shots fall in (timeline shot starts)
+win = {b['id']: {s['start'] // G.MINUTE for s in b['shots']} for b in tl['beats']}
+
+# 1. every fresh plate on disk is on screen inside a window its own beats live in
 for p in sorted(present):
-    check(p in all_used, f'1: plate {p} is never used as a shot background')
+    own = set().union(*(win[b] for b in plates[p]))
+    check(used_win.get(p, set()) & own,
+          f'1: plate {p} is not on screen in its own window(s) {sorted(own)} (seen in {sorted(used_win.get(p, set()))})')
 
-# 2. mapped beats with a plate shot use their own plate
+# 2. every plate-bearing mapped beat uses its own plate. Card-only beats are pinned here, not inferred from
+#    the build (a build that drops a beat's plate shots must not turn it card-only); a card-only beat may gain
+#    a plate shot (brief step 7, b19). Source: the beats with
+#    no plate background in the pre-rewire full.json (commit 6ecc0d4); the rewire swaps plates, not shot kinds.
+CARD_ONLY = {'b8', 'b15', 'b19', 'b25', 'b37', 'b49', 'b57', 'b75', 'b78'}
 for p, beats in sorted(plates.items()):
     if p not in present:
         continue
     for bid in beats:
-        if bid in used:
-            check(p in used[bid], f'2: {bid} has plate shots {sorted(used[bid])} but not its own plate {p}')
+        if bid not in CARD_ONLY:
+            check(p in used.get(bid, set()), f'2: {bid} must show its own plate {p} (has {sorted(used.get(bid, set()))})')
+
+# 2b. every plate a shot references exists on disk
+for st in sorted(used_win):
+    check(any((EP / 'assets' / d / f'{st}.png').exists() for d in ('ink/scenes', 'ink')),
+          f'2b: shots reference plate {st}, not found under assets')
 
 # 3. no old s* plates from b10 on, except the callback
 for bid, stems in sorted(used.items(), key=lambda kv: beat_num(kv[0] or 'b0')):
@@ -103,9 +123,13 @@ for bid, stems in sorted(used.items(), key=lambda kv: beat_num(kv[0] or 'b0')):
     for st in stems:
         if st.startswith('s') and (bid, st) != CALLBACK:
             check(False, f'3: {bid} still shows old plate {st}')
+check(CALLBACK[1] in used.get(CALLBACK[0], set()), f'3: {CALLBACK[0]} must show the callback plate {CALLBACK[1]}')
+check(f'ink/scenes/{CALLBACK[1]}.png' in G.CALLBACKS, f'3: CALLBACKS must name ink/scenes/{CALLBACK[1]}.png')
+reason = G.CALLBACKS.get(f'ink/scenes/{CALLBACK[1]}.png', '') if isinstance(G.CALLBACKS, dict) else ''
+check(isinstance(reason, str) and CALLBACK[0] in reason and len(reason.split()) >= 4,
+      f'3: CALLBACKS reason for {CALLBACK[1]} must name {CALLBACK[0]} and say why (got {reason!r})')
 
 # 4. CALLBACKS stays honest
-win = {b['id']: {s['start'] // G.MINUTE for s in b['shots']} for b in tl['beats']}
 allowed = {CALLBACK[1]} | {p for p, beats in plates.items()
                            if len(set().union(*(win[b] for b in beats))) > 1}
 for p in G.CALLBACKS:
