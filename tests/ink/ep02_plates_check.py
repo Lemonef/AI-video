@@ -29,7 +29,7 @@ FULL = ROOT / 'engine/ink/parts/shots_ep02full/full.json'
 TIMELINE = EP / 'assets/full-hybrid/timeline.json'
 FIRST_REDO_BEAT = 10                  # minute 1 (b1-b9) keeps the old s* plates
 CALLBACK = ('b83', 's01_deck_party')  # script beat 18: back on the party deck, named callback
-MISSING_OK = {'m9d_hands_in_town'}    # still being drawn; drop from this set once its plate is accepted
+MISSING_OK = set()                    # plates still being drawn; m9d accepted in 01a0d8c
 fails = []
 
 
