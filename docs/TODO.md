@@ -66,6 +66,7 @@
     - [x] job ink-ep02-card-polish-20261124135837 needs-owner (Sol audit: LOW_SIZE=STAMP_FONT, rot=0, CW x=960, 6863 LL; Astra audit: 153 pushed back y298 by meter pass, DAWN unmoved, STAGE_W-STAGE_W; Claude rung no Bash -> full.json stale)
     - [ ] brief r10 (CW x/y=None, 153 x=L, 6863 both LR low, STAMP_LEVEL_ROT, LOW_SIZE max, builder runs generator) -> Codex Sol r10 FAIL (6863 self-check vs stacking; named-zero exception) -> fixed -> r11 PASS (10e916e plan_check) -> job ink-ep02-card-polish-20261124143346 running
     - [ ] Zen: pipeline Claude rung lacks Bash (--allowedTools fix needs his OK; not widened while away)
+    - [ ] Zen 21:40 "nothing is done at all today": job ...143346 gets ONE try; if it fails -> direct edit (#claude-ok) + render min1 + send Zen TONIGHT
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
