@@ -46,7 +46,8 @@
     - [ ] plan_check + pipeline job docs/briefs/ink-ep02-plate-wire.md
       - [x] Sol review 2 FAIL (gate 2 skipped beats with no plate) -> CARD_ONLY pinned from 6ecc0d4, 2b plate-exists, b83 reason check, brief wording; gate FAILs on unwired full.json as expected
       - [x] Sol review 3 PASS (must-fix none, count nit fixed) -> plan_check -> cc87fb6 -> job ink-ep02-plate-wire-20261124064900 launched
-      - [ ] accept job, then hand-wire b82 -> m9d + MISSING_OK = set() in the gate
+      - [x] job 20261124064900 -> needs-owner: r1 audit FAIL (plate misfits b14/b40/b43/b55/b68, origin literals, no fit table), r2 lint (m9c twice), r3 Opus timeout
+      - [ ] brief r4: m9d wired by builder, MISSING_OK = set(), named framing tokens, misfit list -> Sol round 4 -> relaunch
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
