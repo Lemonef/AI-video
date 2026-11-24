@@ -54,6 +54,10 @@
     - [x] gate tests/ink/ep02_polish_check.test.mjs 0344539 (fails 27 on current build, as expected)
     - [x] brief docs/briefs/ink-ep02-card-polish.md bb885f3 (mark timing + step fitter + b1 split + 24 words-off-faces moves)
     - [ ] cross-check (Codex Sol + free legs) -> plan_check -> pipeline job
+    - [x] Codex Sol r1 FAIL (4 must-fix) fixed; r2 PASS on old brief
+    - [ ] Zen min1 review 11-24 (4 screenshots): "First pic hard to read and overlap swap for something better ... 2nd pic probably big weird cut, 3 pic idk why it sit on the background like that can theme see 4 too" -> brief amended: f0 0 hook stamp readable off faces (4a), f0 46 split settled by last frame, f0 153 ABOUT 20 MEN off rigging/hat, f0 530 STRANGEST PART? off hat+wig + sprite to side third
+    - [ ] Codex Sol r3 on amended brief -> plan_check -> pipeline
+    - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
   - [x] card at f5940 (b28) blank: FALSE ALARM, bars animate from 5941, full by f5995 (still checked)

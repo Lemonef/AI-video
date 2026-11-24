@@ -35,14 +35,19 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    `HOLD = 10` mirrors HOLD in tests/ink/ep02_polish_check.test.mjs. No bare frame numbers in POINT or
    the fitter.
 2. Step fitter. Card shots pass a fixed authored step today (b54 `TF(... 22)`, b86 `TF(... 30)`,
-   b47 `TF(... 26)`, etc.). Add one helper that, given the shot length `d` (builders are `lambda t, d:`),
-   returns the largest step <= the authored step such that the card end + HOLD and the mark's
-   `at + DRAW + HOLD` both land at or before the cut (`t + d`), never below the layout minimum
-   (`CROSS_FRAMES` for transform, mirrored; 1 for split). Route every card POINT marks through that
-   helper, so a card whose authored step already fits keeps it unchanged. A fit simulation found only three
-   steps change: f0 46 (becomes a split, step 14 -> about 5), f0 11489 (transform 22 -> 10), f0 18090
-   (transform 30 -> 26). If a card cannot fit even at the minimum step, fail the build loudly
-   (SystemExit naming the f0); do not clip.
+   b47 `TF(... 26)`, etc.). Add one helper whose inputs are: the card kind (split / transform), the card's
+   authored layout `at` (e.g. `t + 3` or `t + LEAD`, kept exactly as authored), the marked side and mark
+   type (circle / tick), the shot start `t` and length `d` (builders are `lambda t, d:`), and the authored
+   step. It returns the largest INTEGER step <= the authored step such that the card's real animation end
+   + HOLD (for a split, include the optional versus-circle's extra draw frames, mirrored from cards.tsx)
+   and the mark's `at + DRAW + HOLD` both land at or before the cut (`t + d`), never below the layout
+   minimum (`CROSS_FRAMES` for transform, mirrored; 1 for split). Route every split / transform card POINT
+   marks through that helper, so a card whose authored step already fits keeps it unchanged. Map and scale
+   cards have a `dur`, not a `step`: do not refit them; only check that their timing and mark already fit
+   (they do today) and fail loudly if not. Map readiness uses the destination pin (both current map calls
+   point at `'to'`); say so in a comment. A fit simulation found only three steps change: f0 46 (becomes a
+   split, step 14 -> 5), f0 11489 (transform 22 -> 10), f0 18090 (transform 30 -> 26). If a card cannot fit
+   even at the minimum step, fail the build loudly (SystemExit naming the f0); do not clip.
 3. b1 hook card (f0 46): `TF(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, 14)` with
    `POINT(..., 'b')` becomes `SPL(('key','ALIVE NOW'),('chain','DEAD WITHIN A DAY'), t + LEAD, <fitted>)`
    with `POINT(..., 'right')`, cast unchanged. Same two sides, same circle on the right (gate pins
@@ -59,7 +64,9 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 
    | f0 | text | today | on | move to |
    |---|---|---|---|---|
-   | 530 | CW 'STRANGEST PART?' | card top, CS bb_exp_deadpan centre | sprite face under words | CS to a side third |
+   | 0 | ST 'LESS THAN A DAY TO LIVE' | 960, 380, rot -8, PUSH to (1300,480) | crew faces + BB; owner: "hard to read" | see step 4a |
+   | 153 | CW 'ABOUT 20 MEN' | 960, y 298 (CW fixed y) | rigging + BB's hat behind the 3 crew sprites; owner: "sits on the background" | low band between/below the sprites' heads, or y clear above all heads on dark sky; sprites stay |
+   | 530 | CW 'STRANGEST PART?' | top, CS bb_exp_deadpan 960 y 620 | words cross BB's hat and the governor's wig (S08 is a two-face close-up); sprite sits centred between the two faces | words to the low band (rail / lantern area); CS to a side third (`L` or `R`) and low enough that its head is clear of both plate faces and of the words |
    | 1024 | CW 'GUESTS FROM BATH' | card top, CS bath_farmer_stand 1320 | sprite head under words | CS lower / other third |
    | 2726 | W 'THE REAL ONE' | R, 240, size 110 | BB hat; CS bb_exp_grin | words to L or low band, sprite clear |
    | 4079 | O 'HOSTAGES' | R, 240 | BB's head | L, 240 (sky / rigging) |
@@ -85,10 +92,31 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    | 18022 | W 'PAID 4 YEARS LATE' | R, 240 | officer's head | L or low band |
 
    Also check b8 'GREAT LINE.' (W R, 230, size 90 over the BB portrait) and the f0 9333 'CUT THE ANCHOR'
-   stamp (partly clipped); move only if they cover a face or clip. Leave the f0 34 hook stamp as is.
-   Find each shot by its text in `P`; f0 values are from the current full.json. Render a half-scale still
-   of each moved shot (`npx remotion still engine/ink/index.ts InkEp02Full <out>.png --frame=<f0+30>
-   --scale=0.5 --public-dir videos/pastly-life/02-blackbeard-ink/assets`) and look at it before finishing.
+   stamp (partly clipped); move only if they cover a face or clip.
+
+   4a. Hook stamp (f0 0, frames 0-45, b1 shot 1, plate S01, `ST('LESS THAN A DAY TO LIVE', t + 10)`). The owner reviewed
+   minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read. Make it
+   readable and off every face for its whole visible interval (the PUSH camera moves the plate under it):
+   place it in the calm night sky band at the top (between the masts, left of the meter box) or in the low
+   band over the dark deck, whichever a still shows is clear of faces at both the first and last visible
+   frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
+   style, words and timing; size may shrink only to fit. If `ST` has no rot/x/y parameter for this, pass the
+   existing ones (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`). Every new value is a named constant
+   derived from existing tokens (`STAGE_W`, `STAGE_H`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
+   `CW` has no position parameter today; give it an optional `y` (default unchanged, so every other CW
+   shot is identical) for the ABOUT 20 MEN and STRANGEST PART? moves.
+   Find each shot by its text in `P`; f0 values are from the current full.json. Render half-scale stills
+   (`npx remotion still engine/ink/index.ts InkEp02Full .tmp/polish/<name>.png --frame=<N> --scale=0.5
+   --public-dir videos/pastly-life/02-blackbeard-ink/assets`) ONLY into the git-ignored `.tmp/polish/`
+   directory (any other output path is an untracked file and fails the allowed-file gate) and look at each:
+   for every moved overlay, one frame after the words are in and one 10 frames before the cut (the words
+   or sprite must stay off faces for the whole visible interval, cameras move); for each of the three
+   re-stepped cards (f0 46, 11489, 18090), the frame its mark finishes drawing (`at + DRAW`), so the
+   completed circle and the finished card are both visible. For f0 46 also look at the last frame
+   (f1 - 1): the owner called the old b1 card "a big weird cut", so both sides and the circle must be fully
+   drawn and settled there, not mid-animation. For the f0 0 stamp look at frames 12, 28 and 45.
+   The fitter must receive the split's `vs` flag (versus-circle on/off) when computing the split end, so a
+   split with `vs` set gets its extra draw frames counted.
 5. Nothing else changes: same shots, same f0s (gate pins them), same plates, cameras, words, cards, colours.
    Plates untouched (`ep02_plates_check.py`). No new bare numbers anywhere (review checks).
 
@@ -97,6 +125,10 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
   `ep02_cardfix2_check.py`, `ep02_plates_check.py`, the lint baseline (no new errors), tsc and every listed
   node test. Paste the real output of `python tools/ink/ep02_full_shots.py` (without --draft) too.
 - The diff touches only the two allowed files. Work only inside the repo.
+- The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
+  shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
+  sprite positions and sizes, and the f0 0 stamp position / rotation / size may differ. Card content, layout `at`, mark y/size, f0/f1, plates and cameras are
+  unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
 - The reply includes: (a) a table per card shot with f0, kind, old step -> new step, old mark at -> new mark
   at; (b) a table per moved overlay with f0, text, old x/y -> new x/y (and any sprite move), and one line on
   what calm area it now sits on; (c) the new named constants with their mirror comments.
