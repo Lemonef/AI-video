@@ -44,6 +44,8 @@
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
     - [x] gate tests/ink/ep02_plates_check.py 4bbb671; Sol review 1 FAIL (4 holes) -> gate+brief fixed, re-review running
     - [ ] plan_check + pipeline job docs/briefs/ink-ep02-plate-wire.md
+      - [x] Sol review 2 FAIL (gate 2 skipped beats with no plate) -> CARD_ONLY pinned from 6ecc0d4, 2b plate-exists, b83 reason check, brief wording; gate FAILs on unwired full.json as expected
+      - [ ] Sol review 3 (.tmp_pw_review3.txt) -> plan_check -> commit gate+brief+plan_check -> launch job
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
 - [ ] ep02 explain cards redo (Zen 11-24 "white card no design ... should explain according to context")
