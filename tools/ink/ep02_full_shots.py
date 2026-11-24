@@ -549,7 +549,7 @@ P = {
             lambda t, d: CARD_SHOT(t, HERO('sloop', 'ALL GUNS AT ONCE', t + 3, burst=True), TG('ONE SIDE OF THE SHIP', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
     # b52 about 20 navy hit, 9 on the other boat, its captain dead
     'b52': [lambda t, d: S(t, SC(S03), cam=PAN(1400, 500)),
-            lambda t, d: CARD_SHOT(t, BARS(t, d, [('NAVY HIT', 20, '~20'), ('OTHER BOAT', 9, '9')]), TG('A MASSACRE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking'),
+            lambda t, d: CARD_SHOT(t, BARS(t, d, [('NAVY HIT', 20, '~20'), ('OTHER BOAT', 9, '9')]), TG('HEAVY LOSSES', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking'),
             lambda t, d: S(t, SC(S11), TG('THEIR CAPTAIN: DEAD', t + 10, 960, 320), cam=PUSH(1200, 520, 1.2))],
     # b53 a third down
     'b53': [lambda t, d: CARD_SHOT(t, GRID(t, d, 'flag', 3, 1, 0, 'scrap', 'A THIRD DOWN'), TG('ONE BLAST', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point'),
