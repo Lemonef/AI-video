@@ -27,7 +27,9 @@
     - [x] m5d shouted challenge accepted (45a4fc2)
     - [x] m6a broadside accepted (c5c6d38)
     - [x] m6b navy hurting accepted (e7fb0e9)
-    - [ ] m6c empty deck grapple: run 2 needs-owner (Sol audit: boats too far, officer faces pirates, BB 3/4 face); brief louder, relaunch after Codex quota reset 07:43
+    - [ ] m6c empty deck grapple: run 2 needs-owner (boats too far, officer faces pirates, BB 3/4 face); brief fixed 55f8567 after Codex review 2 FAIL (2 contradictions), review 3 PASS (28b68d8), run 3 launched job ep02-scene-m6c-empty-deck-grapple-20261124005447
+    - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), pipeline job ink-ep02-card-fix1-20261124005433 running
+    - [ ] NOTE generator drift: scenes_minN.py / make_scene_briefs.py no longer match the committed min6 briefs (hand edits); regen breaks plan_check hashes. Committed brief = source of truth; reconcile generator later
     - [ ] m6d, m7a..m7e; min5/min6 sheets
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
