@@ -300,6 +300,7 @@ SPRITE_LOW_Y = TEXT_LOW_Y  # side-third sprites stand over deck/floor below plat
 
 DAWN_LOW_Y = TEXT_LOW_Y - m1.SAFE  # reserve camera-edge clearance before stacking
 DAWN_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('DAWN', LEAD) + TG('A SAIL. THEN ANOTHER.', LEAD, R, TEXT_LOW_Y)})) + m1._LINE  # disjoint words/tag half-heights plus one stroke gap; change together with m1._el_boxes
+B8_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('GREAT LINE.', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE) + O('TERRIBLE PLAN', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE)})) + m1._LINE  # b8 pair stacked in the low band clear of the engraving face; same derivation as DAWN_STACK_OFFSET
 
 
 FONT_FILE = 'C:/Windows/Fonts/Inkfree.ttf'  # the face behind FONT = 'Ink Free' in compositions/InkProof.tsx; change together
@@ -532,8 +533,8 @@ P = {
            lambda t, d: S(t, SC(S08), cam=PUSH(1250, 480, 1.35)),
            lambda t, d: S(t, SC(S06, (1.0, 1.06)), CS('bb_exp_angry_grin', t + 3, x=L, y=SPRITE_LOW_Y), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y))],
     # b8 joke: great line, terrible retirement plan
-    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE),
-                          O('TERRIBLE PLAN', t + 48, x=R, y=360, size=90))],
+    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y - B8_STACK_OFFSET, size=MEDIUM_WORD_SIZE),
+                          O('TERRIBLE PLAN', t + 48, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
     # b9 no treasure: cocoa and cotton
     'b9': [lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'TREASURE'), ('barrel', 'COCOA + COTTON'), t + 3, 22), 'b', t, d), cast='bb_lean_rail'),
            lambda t, d: S(t, SC(S09, (1.08, 1.0)), TG('COCOA', t + 10, 440, 560), TG('COTTON', t + 24, 840, 800),
