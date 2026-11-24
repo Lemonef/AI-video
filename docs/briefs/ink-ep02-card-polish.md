@@ -159,11 +159,17 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    a low-band line can leave the bottom of the screen when the plate zoom / camera scales it (Codex found
    f0 6863, 12267, 16424, 17041 at about screen y 1103 > 1080). `make_ep02_min1_shots.py` is protected, so
    add ONE pass in ep02_full_shots.py, run right after `fit_words(s)` and before `clear_meter(s)` (line ~809):
-   `fit_words_bottom(shot)`, the mirror of fit_words' `lo_y`: for every words element
-   `hi_y = min((m1.STAGE_H - m1.SAFE - by) / ay - m1.CAP_H * size for _, _, ay, by in m1._states(shot))`,
-   `y = min(y, hi_y)`, logged into `fits` the same way. Comment: `# bottom-safe twin of m1.fit_words lo_y;
-   change together`. It applies to every shot (a line already inside the frame is unchanged), so a
-   low-band line stays on screen at every camera state; the still check then confirms it is still off faces.
+   `fit_text_bottom(shot)`, the bottom twin of fit_words' `lo_y`, for words AND tags (the table puts tags in
+   the low band too: f0 5464, 6236, 6863, 10304 reach about y 1088-1130 today). Reuse m1's own box geometry,
+   `m1._el_boxes(shot)` (words: `CAP_H*size`; tags: `TAG_FONT`/`TAG_PAD`/`_LINE` half-height), so no size
+   is restated: for each `(e, (x0, y0, x1, y1))` it yields, `hh = y1 - e['y']`,
+   `hi_y = min((m1.STAGE_H - m1.SAFE - by) / ay - hh for _, _, ay, by in m1._states(shot))`,
+   `e['y'] = min(e['y'], hi_y)`, logged into `fits` the same way. Comment: `# bottom-safe twin of m1.fit_words
+   lo_y, words + tags via m1._el_boxes; change together`. It runs on every shot (an element already inside the
+   frame is unchanged). It only ever moves an element UP (smaller y), never down, while
+   `clear_meter` only pushes down out of the top-right meter box; if `clear_meter` then pushes an element back
+   under the bottom limit it raises its existing SystemExit: move that element elsewhere (a different band
+   or side) instead. The still check then confirms the element is still off faces.
 
    4a. Hook stamp (f0 0, frames 0-45, b1 shot 1, plate S01, `ST('LESS THAN A DAY TO LIVE', t + 10)`). The owner reviewed
    minute 1: the tilted red stamp at the centre crosses the crew's faces and BB, and is hard to read. Make it
@@ -173,9 +179,14 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    frame. Reduce the tilt (a named constant such as `HOOK_STAMP_ROT`, small or 0) and keep the stamp's red
    style, words, timing AND size: `StampElement` hard-codes its font size and the stamp has no size
    parameter, so fit it by position and rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`).
-   The same applies to every stamp in the table: once SETTLED (StampElement's entrance `useIn(..., 10)` has
-   finished, i.e. from `at + 10` at scale 1; the 2.2x slam-in frames before that may overflow, that is the
-   intended stamp hit) its rotated box is at least `SAFE` from every screen edge at camera start and end
+   The same applies to every stamp in the table. StampElement scale is `2.2 - 1.2*p` with
+   `p = useIn(delay, 10)`, a remotion `spring` with damping 10 (InkProof.tsx `useIn`), NOT a 10-frame ease:
+   it slams down to scale 1 by about `at + 7`, undershoots to about 0.81, then overshoots to a max of about
+   1.035 near `at + 22`, and is within 0.5% of 1 from about `at + 30`. The slam frames before the first
+   scale-1 crossing may overflow (that is the intended hit). From that crossing to f1 the stamp's rotated box,
+   at a scale of `STAMP_SETTLE_MAX = 1.04` (named constant, comment: `# max StampElement scale after the slam:
+   spring damping 10, 2.2 - 1.2*p, see InkProof useIn; change together`), is at least `SAFE` from every screen
+   edge at camera start and end
    (use `m1._states(shot)`), and clear of the meter box. Every new value is a named constant derived from existing
    tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
 
@@ -205,8 +216,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
-  sprite / stamp positions, sizes and rotations (including 4329 / 8399 if moved, and any words y lowered by
-  `fit_words_bottom`), the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
+  sprite / stamp positions, sizes and rotations (including 4329 / 8399 if moved, and any words or tag y raised by
+  `fit_text_bottom`), the f0 443 words `at`, may differ (stamp size stays). The b1 card at f0 46 may
   also change its circle y (655 -> 675, the split label anchor that POINT uses), its side keys (`a`/`b` ->
   `left`/`right`) and gain the default `vs` field. Otherwise card content, layout `at`, mark y/size, f0/f1, plates and cameras are
   unchanged. Paste a one-line summary of that diff (count of changed fields by kind).
