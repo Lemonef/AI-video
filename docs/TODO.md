@@ -32,10 +32,12 @@
     - [x] m7a deck brawl accepted ac76e92 (rung 2 astra, md5 d89de5ad not rejected, eye-checked)
     - [x] m7b powder fuse accepted b76236c (rung 0 sol, md5 cfc4148f not rejected, eye-checked)
     - [x] m7c sword snap accepted cec3a44 (rung 0 sol, md5 5c2ca736 not rejected, eye-checked)
-    - [ ] m7d still standing: job ep02-scene-m7d-still-standing-20261124011815 running
-    - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), pipeline job ink-ep02-card-fix1-20261124005433 running
+    - [x] m7d still standing accepted 49019cc (rung 1 astra, md5 7c65c7cd not rejected, eye-checked: high angle, navy ring, BB standing)
+    - [ ] m7e bowsprit far: job ep02-scene-m7e-bowsprit-far-20261124012728 running
+    - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), job ink-ep02-card-fix1-20261124005433 needs-owner (rungs 0-1 audit FAIL: tags echo layout, CARD_FACTS table, full-stage overlap, no report; rung 2 timeout). SUPERSEDED by fix 2
+    - [ ] card fix 2: brief+gate+beat words 0343eed; Codex Sol plan review running, then pipeline
     - [ ] NOTE generator drift: scenes_minN.py / make_scene_briefs.py no longer match the committed min6 briefs (hand edits); regen breaks plan_check hashes. Committed brief = source of truth; reconcile generator later
-    - [ ] m7c..m7e; min5/min6 sheets
+    - [ ] m7e; min5/min6/min7 sheets
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
