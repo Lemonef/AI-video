@@ -40,7 +40,7 @@
     - [ ] min5/min6/min7 progress sheets (m7e done)
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
     - [x] 9 briefs m8a-c, m9a-d, m10a-b + free-leg review (Groq+Cohere) + plan_checks a00b39d
-    - [ ] jobs one at a time (m8a running; Codex quota back 12:45)
+    - [ ] jobs one at a time: [x] m8a c852dcf · [ ] m8b running · [ ] m8c m9a-d m10a-b
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
