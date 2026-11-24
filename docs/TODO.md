@@ -58,7 +58,8 @@
     - [ ] Zen min1 review 11-24 (4 screenshots): "First pic hard to read and overlap swap for something better ... 2nd pic probably big weird cut, 3 pic idk why it sit on the background like that can theme see 4 too" -> brief amended: f0 0 hook stamp readable off faces (4a), f0 46 split settled by last frame, f0 153 ABOUT 20 MEN off rigging/hat, f0 530 STRANGEST PART? off hat+wig + sprite to side third
     - [ ] Codex Sol r3 on amended brief -> plan_check -> pipeline
     - [x] overlap sweep at SETTLED frame, all shots -> brief step 4 real-f0 table (65 moves), 4a stamp, 4b stills, f0 443 at fix (12a61f1)
-    - [ ] Codex Sol r5 on 12a61f1 brief (running)
+    - [x] Codex Sol r5 on 12a61f1 brief: FAIL (stamp settle, bottom clamp) -> fixed f413ad8
+    - [ ] Codex Sol r6 on f413ad8 brief (running)
     - [ ] re-render min1 -> send Zen; then min2; then full + share + 3 thumbs
     - [ ] verify diff + stills -> accept
   - [ ] min1 ~52s: "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
