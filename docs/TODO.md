@@ -31,7 +31,8 @@
     - [x] m6d hatches burst: accepted fabf07c (low angle from the hold, Opus audit PASS, md5 a9d28bbf not in REJECTED)
     - [x] m7a deck brawl accepted ac76e92 (rung 2 astra, md5 d89de5ad not rejected, eye-checked)
     - [x] m7b powder fuse accepted b76236c (rung 0 sol, md5 cfc4148f not rejected, eye-checked)
-    - [ ] m7c sword snap: job ep02-scene-m7c-sword-snap-20261124011519 running
+    - [x] m7c sword snap accepted cec3a44 (rung 0 sol, md5 5c2ca736 not rejected, eye-checked)
+    - [ ] m7d still standing: job ep02-scene-m7d-still-standing-20261124011815 running
     - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), pipeline job ink-ep02-card-fix1-20261124005433 running
     - [ ] NOTE generator drift: scenes_minN.py / make_scene_briefs.py no longer match the committed min6 briefs (hand edits); regen breaks plan_check hashes. Committed brief = source of truth; reconcile generator later
     - [ ] m7c..m7e; min5/min6 sheets
