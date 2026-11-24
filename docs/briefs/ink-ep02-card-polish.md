@@ -181,8 +181,8 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    parameter, so fit it by position and rotation only (`x`, `y`, `rot` exist in `make_ep02_min1_shots.ST`).
    The same applies to every stamp in the table. StampElement scale is `2.2 - 1.2*p` with
    `p = useIn(delay, 10)`, a remotion `spring` with damping 10 (InkProof.tsx `useIn`), NOT a 10-frame ease:
-   it slams down to scale 1 by about `at + 7`, undershoots to about 0.81, then overshoots to a max of about
-   1.035 near `at + 22`, and is within 0.5% of 1 from about `at + 30`. The slam frames before the first
+   it slams down to scale 1 by about `at + 8`, undershoots to about 0.81, then overshoots to a max of about
+   1.032 near `at + 22`, and is within 0.6% of 1 from about `at + 30`. The slam frames before the first
    scale-1 crossing may overflow (that is the intended hit). From that crossing to f1 the stamp's rotated box,
    at a scale of `STAMP_SETTLE_MAX = 1.04` (named constant, comment: `# max StampElement scale after the slam:
    spring damping 10, 2.2 - 1.2*p, see InkProof useIn; change together`), is at least `SAFE` from every screen
