@@ -35,10 +35,12 @@
     - [x] m7d still standing accepted 49019cc (rung 1 astra, md5 7c65c7cd not rejected, eye-checked: high angle, navy ring, BB standing)
     - [x] m7e bowsprit far accepted ada3ffa (rung 2 astra, md5 not rejected, eye-checked: far sloop, bundle on bowsprit, 2 tiny cast figures, clean)
     - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), job ink-ep02-card-fix1-20261124005433 needs-owner (rungs 0-1 audit FAIL: tags echo layout, CARD_FACTS table, full-stage overlap, no report; rung 2 timeout). SUPERSEDED by fix 2
-    - [ ] card fix 2: brief+gate+beat words 0343eed; Codex Sol review 1 FAIL (junk words pass, mark not tied to label, map unspecified, cards with no fact); gate+brief fixed f6d6810; re-review running, then pipeline
+    - [ ] card fix 2: brief+gate+beat words 0343eed; Codex Sol review 1 FAIL (junk words pass, mark not tied to label, map unspecified, cards with no fact); gate+brief fixed f6d6810; re-review hit Codex quota, relaunch after 12:45, then pipeline
     - [ ] NOTE generator drift: scenes_minN.py / make_scene_briefs.py no longer match the committed min6 briefs (hand edits); regen breaks plan_check hashes. Committed brief = source of truth; reconcile generator later
     - [ ] min5/min6/min7 progress sheets (m7e done)
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
+    - [x] 9 briefs m8a-c, m9a-d, m10a-b + free-leg review (Groq+Cohere) + plan_checks a00b39d
+    - [ ] jobs one at a time (m8a running; Codex quota back 12:45)
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
 - [ ] 3 ep02 thumbs (if time)
