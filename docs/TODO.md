@@ -28,10 +28,11 @@
     - [x] m6a broadside accepted (c5c6d38)
     - [x] m6b navy hurting accepted (e7fb0e9)
     - [x] m6c empty deck grapple: run 2 needs-owner (boats too far, officer faces pirates, BB 3/4 face); brief fixed 55f8567 after Codex review 2 FAIL (2 contradictions), review 3 PASS (28b68d8), run 3 ep02-scene-m6c-empty-deck-grapple-20261124005447 accepted cc9a91a (eye-check: hull against hull, officer back turned, BB profile raised brow, clean, md5 not rejected)
-    - [ ] m6d hatches burst: job ep02-scene-m6d-hatches-burst-20261124005851 running
+    - [x] m6d hatches burst: accepted fabf07c (low angle from the hold, Opus audit PASS, md5 a9d28bbf not in REJECTED)
+    - [ ] m7a deck brawl: job ep02-scene-m7a-deck-brawl-20261124010418 running
     - [ ] card fix 1 (cards explain by context): diffgate fixed 16aa6b0 after review 2 FAIL, review 3 PASS (28b68d8), pipeline job ink-ep02-card-fix1-20261124005433 running
     - [ ] NOTE generator drift: scenes_minN.py / make_scene_briefs.py no longer match the committed min6 briefs (hand edits); regen breaks plan_check hashes. Committed brief = source of truth; reconcile generator later
-    - [ ] m6d, m7a..m7e; min5/min6 sheets
+    - [ ] m7a..m7e; min5/min6 sheets
   - [ ] scenes_min8-10 (b69-b88), callbacks named, 1 photo/min
   - [ ] rewire ep02_full_shots.py to per-minute plates + CALLBACKS + photo spread + scene/photo repeat lint
   - [ ] render min2 first, then full + share copy
