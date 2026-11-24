@@ -90,14 +90,16 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    meter-clearance pass (make_ep02_min1_shots.py ~line 470-483) may push a line downward to clear the meter
    box: fine, but no line may end up back on a face, and it must not hit its "cannot clear the meter box"
    SystemExit. A card headline `CW` keeps the top of the card; on a card, move the `CS` sprite instead.
-   `CW` has no position parameter today; give it an optional `y` (default unchanged, so every other CW shot
-   is byte-identical) for the f0 153 and f0 495 moves.
+   `CW` has no position parameter today; give it optional `x=None, y=None` that are passed to `W` ONLY when
+   given (`CW(text, t, color=None, x=None, y=None)`; no new default value such as `x=960`: an earlier attempt
+   added a bare 960 default and failed audit), so every other CW shot is byte-identical, for the f0 153 and
+   f0 495 moves.
 
    | f0 | text (element) | sits on today | move to |
    |---|---|---|---|
    | 0 | ST 'LESS THAN A DAY TO LIVE' | crew faces + BB, hard to read | see 4a |
    | 46 | b1 split card | owner: "big weird cut" | step 3 (split); must be fully settled before f1 |
-   | 153 | CW 'ABOUT 20 MEN' | rigging + BB's hat behind the sprites | TL, or a y clear above all heads; sprites stay |
+   | 153 | CW 'ABOUT 20 MEN' | rigging + BB's hat behind the sprites | TL: `CW(..., x=L, y=TOP_SLOT_Y)`. NOT x 960: at 960 the meter-clearance pass pushes it back down to y 298 onto the hat (an earlier attempt left the shot byte-identical this way and failed audit). Its final full.json y must equal `TOP_SLOT_Y`; sprites stay |
    | 443 | W 'STAY TO THE END' | timing: settles 488, shot ends 495 (< HOLD) | its `at` from `t + 13` to `t + LEAD` (the only timing change); position TL or low band if a still shows it on a head |
    | 495 | CW 'STRANGEST PART?' + CS bb_exp_deadpan | words on BB's hat + governor's wig; sprite between the faces | words to the low band; CS to a side third, low, head clear of both plate faces |
    | 978 | CW 'GUESTS FROM BATH' + CS sprites | sprite heads under the words | sprites lower / to the side thirds; headline stays |
@@ -121,7 +123,7 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    | 6027 | 'FAIRER THAN OFFICES' | heads | LL low |
    | 6236 | 'VOTED IN' | heads | LL low |
    | 6633 | 'NOBODY ON WATCH' | heads | TL |
-   | 6863 | 'DAWN' / 'A SAIL' | heads | LR low |
+   | 6863 | W 'DAWN' AND tag 'A SAIL. THEN ANOTHER.' (both elements) | heads | both to the low band at x `R` (LR low); stack them so they do not overlap (`check_overlap` must pass). An earlier attempt moved only the tag and left 'DAWN' at (1320, 309) on heads: failed audit |
    | 7272 | 'STOPPED LAST NIGHT' | spyglass crewman's head | R low (water) |
    | 7561 | 'NO LEGAL RIGHT' | heads | TL |
    | 7753 | '60 OF THEM' | navy heads | clear area |
@@ -222,6 +224,15 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
    edge at camera start and end
    (use `m1._states(shot)`), and clear of the meter box. Every new value is a named constant derived from existing
    tokens (`STAGE_W`, `STAGE_H`, `SAFE`, `FLOOR`, `L`, `R`, the meter box), no bare numbers.
+   Stamp tilt: if a moved stamp is set level, use ONE named constant `STAMP_LEVEL_ROT = 0` with the comment
+   `# level stamp (no tilt) so its rotated box is smallest and fits under the camera; owner asked for readable`
+   and pass `rot=STAMP_LEVEL_ROT`. A plain `rot=0` in P is a bare number, and arithmetic that only hides a
+   literal (an earlier attempt wrote `STAGE_W - STAGE_W`) is also rejected: a named, commented 0 is the
+   allowed form.
+   `LOW_SIZE`: define it as `max(...)` of the words size tokens the moved low-band lines actually use (the
+   same names P passes as `size=`, or W's default-size token if a line uses the default), with the mirror
+   comment `# largest words size placed on the low band; change together with those lines`. Do NOT alias it to
+   `STAMP_FONT` or any stamp token (an earlier attempt did; the value matched only by coincidence: failed audit).
 
    This must be COMPUTED, not eyeballed. An earlier attempt put the hook stamp at `TEXT_LOW_Y` (966); under
    the f0 0 `PUSH` camera (scale up to about 1.22) that lands near screen y 1133, off the frame, and it
@@ -275,6 +286,13 @@ Files you may change: `tools/ink/ep02_full_shots.py` and the generated `engine/i
 - All gates pass, including `node --test tests/ink/ep02_polish_check.test.mjs` (0 findings),
   `ep02_cardfix2_check.py`, `ep02_plates_check.py`, the lint baseline (no new errors), tsc and every listed
   node test. Paste the real output of `python tools/ink/ep02_full_shots.py` (without --draft) too.
+- You MUST run `python tools/ink/ep02_full_shots.py` yourself after editing it, so the generated full.json
+  is regenerated from your code (an earlier attempt edited the generator without running it: full.json stayed
+  stale and the polish gate failed on every mark). A builder without a shell cannot do this task.
+- Self-check before replying: in the regenerated full.json, f0 153's 'ABOUT 20 MEN' has x `L` and y
+  `TOP_SLOT_Y`; f0 6863's 'DAWN' and its tag both sit at y >= `TEXT_LOW_Y` minus their fit_text_bottom lift
+  (i.e. in the low band, not y 240-330); grep the diff for `rot=0`, `x=960` in a def line, and
+  `STAGE_W - STAGE_W`: none may appear.
 - The diff touches only the two allowed files. Work only inside the repo.
 - The gate pins card kind and mark type/x only, so also diff the new full.json against the old one: per
   shot, only mark `at`, card `step` (the three listed shots), the b1 card kind, the step-4 overlay /
