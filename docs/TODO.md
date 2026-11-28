@@ -92,7 +92,9 @@
           - [x] gates: lint baseline (4 known, 0 new), cardfix2, plates, node 8/8, tsc 0; min0 = 26 cuts
           - [x] rendered + sent D:/AI-video/.tmp/polish/ep02_min1_v7_720p.mp4 (10 MB), sheet min1_v7_sheet.png read
         - [ ] min2+: cut FLOW 5->2, BARS 4->1, BN 6->=4
-        - [ ] WAIT Zen look on v7
+        - [x] VOICE CRACKLE (Zen 11-28 "voice like ไมแตก"): ink_audio.py tanh clipper -> gain-envelope limiter (brain 158be86b); flat factor 22.97 -> 0.10, timeline identical; master.wav swapped; v7b = v7 video + new audio sent D:/AI-video/.tmp/polish/ep02_min1_v7b_720p.mp4
+        - [ ] ep01 master built with same clipper: rebuild its master.wav with fixed ink_audio.py (+music_bed) when Zen wants
+        - [ ] WAIT Zen look on v7b
   - [x] min1 ~52s (fixed e9668a9, stacked low-right, still f1590 read; 3 PAIRS f8780 low, read): "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face
   - [ ] REAL IMAGES (Zen 11-24 "why i feel like you didn't use much real images"): 14 archive photos on disk (assets/ink/photos, SOURCES.md), only 2 used (bb_engraving_1724 ~5 shots, moseley_map_1733 ~2). Separate brief AFTER polish accepts: wire the 12 unused (maynard fight, spotswood, QAR model, ocracoke 1795, teach's hole marker, ferris battle/capture, bb prints) onto the beats they show, one use each, overlap check at settled frame
     - [ ] map each photo -> beat from SOURCES.md + beats doc
