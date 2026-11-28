@@ -79,11 +79,11 @@ export const DocElement: React.FC<{el: DocEl; shotF0: number; shotF1: number}> =
   });
 
   let mark = null;
-  if (el.mark && L.markAt !== null && L.markX !== null && L.markY !== null && L.markRx !== null && L.markRy !== null) {
+  if (el.mark && L.markAt !== null && L.markX !== null && L.markY !== null) {
     const markA = L.markAt - shotF0;
     const markP = progress(f, markA, markA + MARK_DRAW);
-    if (el.mark.style === 'circle') {
-      const c = scribbleEllipse(L.markRx, L.markRy);
+    if (el.mark.style === 'circle' && L.markRx !== null && L.markRy !== null && L.markTilt !== null) {
+      const c = scribbleEllipse(L.markRx, L.markRy, L.markTilt);
       mark = (
         <g key="mark" transform={`translate(${L.markX} ${L.markY}) rotate(${c.tilt})`}>
           <Draw d={c.d} p={markP} ink={RED} />

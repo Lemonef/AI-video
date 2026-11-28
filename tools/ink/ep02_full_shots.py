@@ -15,7 +15,7 @@ import json
 import math
 import re
 import sys
-from PIL import ImageFont
+from PIL import Image, ImageFont
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -34,6 +34,9 @@ BANNED_ICONS = {'man', 'mask', 'face', 'ship', 'padlock', 'hat', 'hotel', 'facto
 S11 = 's11_inlet_spyglass'
 M10A = 'm10a_pay_office'
 M10B = 'm10b_three_places'
+M0A = 'm0a_navy_coming'   # min1 v7 fill plates (Zen 11-27 'Codex draws 3 plates')
+M0B = 'm0b_lone_sloop'
+M0C = 'm0c_buried_chest'
 M1A = 'm1a_bath_dock'
 M1B = 'm1b_gov_study'
 M1C = 'm1c_navy_dawn'
@@ -134,9 +137,20 @@ def stp(d, n, fixed=0, cap=14, lead=LEAD):
     return max(2, min(cap, (d - lead - fixed - TAIL - 2) // max(1, n - 1)))
 
 
+# Doc timing mirrors engine/ink/parts/layouts/docLayout.ts (change together): outline, per-char title typing,
+# line fade, mark draw. The mark starts after its line fades + one MARK_DRAW, then needs MARK_DRAW to finish.
+DOC_OUTLINE, DOC_TYPE_STEP, DOC_LINE_FADE, DOC_MARK_DRAW = 10, 1, 6, 8
+DOC_MARK_HOLD = 12  # finished mark stays on screen this long before the cut so it reads (Zen 11-25: ring ended on the last frame)
+
+
+# Paper for a doc whose circled line runs near the paper width: the ring is width-capped to the paper, so it
+# grows taller (doodle.scribbleFit); docLayout throws 'doc ring leaves the paper' if this is too short.
+DOC_H_RINGED = 560
 def DOC(t, d, title, lines, kind='card', mark=None, stamp=None, rot=-3, w=860, h=480):
+    # Everything after the last line starts: title typing before, fade + mark (+ hold) after. Derived, not a flat guess.
+    fixed = DOC_OUTLINE + len(title) * DOC_TYPE_STEP + DOC_LINE_FADE + (2 * DOC_MARK_DRAW + DOC_MARK_HOLD if mark else 0)
     e = {'t': 'doc', 'x': 960, 'y': 540, 'w': w, 'h': h, 'kind': kind, 'title': title, 'lines': lines,
-         'at': t + LEAD, 'step': stp(d, len(lines), 20, cap=8), 'rot': rot}
+         'at': t + LEAD, 'step': stp(d, len(lines), fixed, cap=8), 'rot': rot}
     if mark:
         e['mark'] = {'line': mark[0], 'style': mark[1]}
     if stamp:
@@ -289,6 +303,7 @@ def card_times(e, side):
     end = max(pin + MP_POP + MP_GAP + MP_FADE, pin + MP_PIN_FADE) if e.get('label') else ready
     return ready, end
 
+B6_POP = 16  # frames between b6 list items: rum, laughing, visitors land on their words
 TOP_SLOT_Y = 240  # the top text slot the O/W/TG calls in P already use; moved or new elements use this name; change together
 DEFAULT_WORD_SIZE = W('', LEAD)[0]['size']  # mirrors W default size in make_ep02_min1_shots.py; change together
 HEADLINE_SIZE = 110  # mirrors existing CW and large W size in this shot plan; change together
@@ -304,7 +319,18 @@ SPRITE_LOW_Y = TEXT_LOW_Y  # side-third sprites stand over deck/floor below plat
 DAWN_LOW_Y = TEXT_LOW_Y - m1.SAFE  # reserve camera-edge clearance before stacking
 DAWN_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('DAWN', LEAD) + TG('A SAIL. THEN ANOTHER.', LEAD, R, TEXT_LOW_Y)})) + m1._LINE  # disjoint words/tag half-heights plus one stroke gap; change together with m1._el_boxes
 STACK_GAP_LINES = 3  # outlined words read as touching at a one-stroke gap (Zen 2026-11-25 overlap note); change together with the stacks below
-B8_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('GREAT LINE.', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE) + O('TERRIBLE PLAN', LEAD, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE)})) + STACK_GAP_LINES * m1._LINE
+B8_STAMP_ROT = -6  # b8 punchline stamp tilt; stack offset below measures the rotated stamp
+def b8_stamp_y():
+    # punchline stamp rests on the bottom safe line (its settled, rotated stamp_box), as fit_stamps would push it
+    e = ST('TERRIBLE PLAN', LEAD, x=R, y=0, rot=B8_STAMP_ROT)[0]
+    return m1.STAGE_H - m1.SAFE - stamp_box(e)[3]
+
+
+def b8_word_y():
+    # 'GREAT LINE.' sits one STACK_GAP above the stamp's box, measured not guessed
+    stamp_top = stamp_box(ST('TERRIBLE PLAN', LEAD, x=R, y=b8_stamp_y(), rot=B8_STAMP_ROT)[0])[1]
+    (_, (_, y0, _, _)), = m1._el_boxes({'els': W('GREAT LINE.', LEAD, x=R, y=0, size=MEDIUM_WORD_SIZE)})
+    return stamp_top - STACK_GAP_LINES * m1._LINE + y0
 # hook split onto two lines in the left third: one centred line crossed BB's hat during the push
 HOOK_STACK_OFFSET = sum(b[3] - e['y'] for e, b in m1._el_boxes({'els': W('LESS THAN', LEAD, x=L, y=TOP_SLOT_Y) + W('A DAY TO LIVE', LEAD, x=L, y=TOP_SLOT_Y)})) + STACK_GAP_LINES * m1._LINE  # b8 pair stacked in the low band clear of the engraving face; same derivation as DAWN_STACK_OFFSET
 
@@ -450,6 +476,10 @@ def content_box(e):
     if k == 'tick': return box(x,y,TICK_W,TICK_H)
     if k == 'circle': return box(x,y,e['w'],e['h'])
     if k == 'redact': return (x,y,x+e['w'],y+e['h'])
+    if k == 'sprite':  # feet at (x, y), fit by height inside SPRITE_BOX_W (InkProof.tsx Sprite)
+        pw, ph = Image.open(ASSETS / e['src']).size
+        half = min(SPRITE_BOX_W, e['h']*pw/ph)/2
+        return (x-half, y-e['h'], x+half, y)
     return None
 
 
@@ -457,7 +487,7 @@ def CARD_SHOT(t, *content, cast=None, name=None):
     """P authors layouts, facts and pointers; place marks and underline real captions."""
     shot = S(t, CARD, *content)
     layout = next(e for e in shot['els'] if e['t'] in
-                  ('flow','bars','timeline','count','split','hero','crossout','checklist','quote','bignum','doc','map','grid','ring','scale','transform'))
+                  ('flow','bars','timeline','count','split','hero','crossout','checklist','quote','bignum','doc','map','grid','ring','scale','transform','sprite'))
     bounds = content_box(layout)
     if layout['t'] in ('hero', 'bignum', 'count') and layout.get('label'):
         shot['els'] += [{'t': 'underline', 'x': layout.get('x', STAGE_W/2), 'y': bounds[3],
@@ -514,13 +544,15 @@ BB_PIRATE, BB_PRINT = 'bb_pirate_c1724.jpg', 'bb_print_1734.jpg'
 # ---------- shot plan: beat id -> one builder per timeline shot ----------
 P = {
     # b1 "You have less than a day to live."
-    'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN', t + 10, x=L, y=TOP_SLOT_Y, color='red'), W('A DAY TO LIVE', t + 22, x=L, y=TOP_SLOT_Y + HOOK_STACK_OFFSET, color='red'), cam=PUSH(1300, 480, 1.22)),
-           lambda t, d: CARD_SHOT(t, HERO('clock', 'LESS THAN 24 HOURS', t + 3, burst=True), TG('OCRACOKE, NOV 1718', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand')],  # says the hook plainly; no metaphor
+    'b1': [lambda t, d: S(t, SC(S01), W('LESS THAN', t + 10, x=L, y=TOP_SLOT_Y, color='red'), W('A DAY TO LIVE', t + 22, x=L, y=TOP_SLOT_Y + HOOK_STACK_OFFSET, color='red'),
+                          TG('OCRACOKE, NOV 1718', t + d // 2, STAGE_W/2, TEXT_LOW_Y), cam=PUSH(1300, 480, 1.22)),
+           # Zen 11-25 card spam: clock card cut; new graded plate m0a fills the slot (v7), the threat already on its way
+           lambda t, d: S(t, SC(M0A, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('2 NAVY SLOOPS', t + 10, STAGE_W/2, TEXT_LOW_Y), cam=PAN(1300, 600, CAM_GENTLE))],
     # b2 one of about twenty men ... dead or hanged
     'b2': [lambda t, d: S(t, SC(S02), TG("BLACKBEARD'S SHIP", t + 19, 960, 330), cam=PUSH(960, 470, 1.3)),
            lambda t, d: S(t, SC(S03, (1.0, 1.06)), TG('ABOUT 20 MEN', t + 20, L, TOP_SLOT_Y)),  # plate already shows the crew
            lambda t, d: S(t, PH(FERRIS_CAPTURE, pos='50% 40%', push=(1.0, 1.1))),  # real painting: how it ends
-           lambda t, d: CARD_SHOT(t, BN(20, 'MEN ABOARD', t + 3, 20), TG('ALMOST ALL DEAD BY SUMMER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_thinking')],
+           lambda t, d: CARD_SHOT(t, GRID(t, d, 'grave', 4, 2, 6, 'noose', 'DEAD OR HANGED'), TG('BY NEXT SUMMER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_scared')],  # Zen 11-25: dead/hanged shown, not a '20' card
     # b3 only two kinds walk away; stay to the end
     'b3': [lambda t, d: S(t, SC(S04, (1.0, 1.1)), O('ONLY 2 KINDS', t + 15, x=R, y=260)),
            lambda t, d: CARD_SHOT(t, POINT(SPL(('key', 'KIND ONE'), ('chain', 'KIND TWO'), t + 3, 14, vs='?'), 'right', t, d), cast='crew_point'),
@@ -529,26 +561,34 @@ P = {
     'b4': [lambda t, d: S(t, SC(S11, (1.0, 1.06)), CW('STRANGEST PART?', t + 11, x=R, y=TEXT_LOW_Y)),
            lambda t, d: S(t, SC(S10, (1.0, 1.06)), O('NOT WORRIED', t + 13, x=R, y=240))],
     # b5 21 November 1718, small sloop, quiet inlet
-    'b5': [lambda t, d: CARD_SHOT(t, BN(1718, '21 NOVEMBER', t + 3, 36, year=True), TG('QUIET INLET', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_arms_crossed'),
+    # Zen 11-25 card spam: date + sloop cards became scenes with tags; the charts keep place chips
+    'b5': [lambda t, d: S(t, SC(M1D, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('21 NOV 1718', t + 10, STAGE_W/2, TEXT_LOW_Y), cam=PAN(600, 1300, CAM_GENTLE)),
            lambda t, d: S(t, PH(MAP, pos='50% 50%', push=(1.0, 1.12)),
                           chip='OCRACOKE INLET, NORTH CAROLINA', chipAt=t + 5, chipPos='tl'),
-           lambda t, d: CARD_SHOT(t, HERO('sloop', 'ONE SMALL SLOOP', t + 3), TG('ANCHORED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_hand_hilt'),
+           # sloop card cut (Zen 11-25); v7 graded plate m0b shows the one small sloop alone at anchor
+           lambda t, d: S(t, SC(M0B, ZOOM_WIDE, origin=ORIGIN_CENTRE), TG('ONE SMALL SLOOP', t + 10, STAGE_W/2, TEXT_LOW_Y), cam=PULL(960, 540, CAM_GENTLE)),
            # 1795 inlet chart naming 'Teaches Hole' = the exact anchorage (was a road-sign photo; Zen 11-25 "it don't belong to context here at all")
            lambda t, d: S(t, PH(OCRACOKE_1795, pos='70% 45%', push=(1.0, 1.08)),
-                          chip="TEACH'S HOLE: HIS ANCHORAGE", chipAt=t + 5, chipPos='tl')],
+                          chip="TEACH'S HOLE: ONE SMALL SLOOP AT ANCHOR", chipAt=t + 5, chipPos='tl')],
     # b6 rum, guests from Bath, one matters later
-    'b6': [lambda t, d: CARD_SHOT(t, FLOW(t, d, ['RUM', 'LAUGHING', 'VISITORS']), TG('PARTY AT ANCHOR', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_stand'),
+    'b6': [lambda t, d: CARD_SHOT(t, CNT('bottle', 3, t + LEAD, 3, 'RUM', STAGE_W/6, 500, STAGE_W/4),
+                         CS('bb_exp_laugh', t + LEAD + B6_POP, x=STAGE_W/2, y=650), TG('LAUGHING', t + LEAD + B6_POP, STAGE_W/2, 740),
+                         CS('bath_gent_walk', t + LEAD + 2*B6_POP, x=STAGE_W*5/6, y=650), TG('VISITORS', t + LEAD + 2*B6_POP, STAGE_W*5/6, 740),
+                         TG('PARTY AT ANCHOR', t + LEAD, STAGE_W/2, TOP_SLOT_Y)),  # Zen 11-25: a list pops one by one, FLOW only for sequences
            lambda t, d: S(t, SC(S07, (1.0, 1.06)), TG('GUESTS FROM BATH', t + 22, STAGE_W/2, TEXT_LOW_Y)),
            lambda t, d: S(t, PH(BB_PIRATE, pos='50% 22%', push=(1.0, 1.1))),
-           lambda t, d: CARD_SHOT(t, CHK(t, d, [('PARTY GUEST', 'tick'), ('REMEMBER HIM', 'tick')]), TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
+           lambda t, d: CARD_SHOT(t, DOC(t, d, 'GUESTS FROM BATH', ['A MERCHANT', 'A FARMER', 'A GENTLEMAN'], mark=(2, 'circle')),
+                         TG('ONE MATTERS LATER', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_gent_sly')],
     # b7 does your wife know where you buried your money? me and the devil
-    'b7': [lambda t, d: S(t, SC(S08), cam=PUSH(1000, 500, 1.18)),
-           lambda t, d: CARD_SHOT(t, QT('Does your wife know where you buried your money?', 'A GUEST', t + 4), TG('HE LAUGHED', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bath_merchant_whisper'),
-           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('ME AND THE DEVIL', t + 14, color='orange', x=L, y=TOP_SLOT_Y)),
-           lambda t, d: CARD_SHOT(t, XO('chest', 'RETIREMENT PLAN', t + 3, t + 34), TG('NOBODY ELSE KNOWS WHERE', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_point')],
+    # Zen 11-25 card spam: the guest's question is voice, so it floats over the whisper scene instead of a quote card; one line (camera push + per-line clamps break a two-line stack), the VO says it in full
+    'b7': [lambda t, d: S(t, SC(S08), W('DOES YOUR WIFE KNOW?', t + 4, x=L, y=TOP_SLOT_Y, size=MEDIUM_WORD_SIZE), cam=PUSH(1000, 500, 1.18)),
+           # v7 graded plate m0c: the rumour pictured (buried chest); top-left kept empty, camera pans toward the boot prints
+           lambda t, d: S(t, SC(M0C, ZOOM_WIDE, origin=ORIGIN_CENTRE), cam=PAN(1300, 600, CAM_GENTLE)),
+           lambda t, d: S(t, SC(S06, (1.0, 1.06)), CW('HE LAUGHED', t + 14, color='orange', x=L, y=TOP_SLOT_Y)),
+           lambda t, d: CARD_SHOT(t, CHK(t, d, [('ME', 'tick'), ('THE DEVIL', 'tick'), ('HIS WIFE', 'cross')]), TG('WHO KNOWS WHERE IT IS?', t + LEAD, STAGE_W/2, STAGE_H/2), cast='bb_exp_wink_laugh')],
     # b8 joke: great line, terrible retirement plan
-    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=TEXT_LOW_Y - B8_STACK_OFFSET, size=MEDIUM_WORD_SIZE),
-                          O('TERRIBLE PLAN', t + 48, x=R, y=TEXT_LOW_Y, size=MEDIUM_WORD_SIZE))],
+    'b8': [lambda t, d: S(t, PH(BB, pos='50% 20%'), W('GREAT LINE.', t + 8, x=R, y=b8_word_y(), size=MEDIUM_WORD_SIZE),
+                          ST('TERRIBLE PLAN', t + 48, x=R, y=b8_stamp_y(), rot=B8_STAMP_ROT))],
     # b9 no treasure: cocoa and cotton
     'b9': [lambda t, d: CARD_SHOT(t, POINT(TF(('coin', 'TREASURE'), ('barrel', 'COCOA + COTTON'), t + 3, 22), 'b', t, d), cast='bb_lean_rail'),
            lambda t, d: S(t, SC(S09, (1.08, 1.0)), TG('COCOA', t + 10, 440, 560), TG('COTTON', t + 24, 840, 800),
@@ -622,11 +662,12 @@ P = {
     # b29 quartermaster voted in: HR with a sword
     'b29': [lambda t, d: CARD_SHOT(t, HERO('badge', 'QUARTERMASTER', t + 3), TG('SPLIT IT FAIRLY', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_shrug'),
             lambda t, d: S(t, SC(M3B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG('VOTED IN BY THE CREW', t + 10, L, TEXT_LOW_Y), cam=PUSH(960, 540, CAM_GENTLE))],
-    # b30 rules: lights out at 8, no gambling, gun clean, no smoking near powder
+    # b30 rules: lights out at 8, no gambling, gun clean, no smoking near powder. The powder line is underlined, not
+    # circled: a left-aligned 24-char line leaves the ring only DOC_PAD of room, so a circle grows tall and cuts the text.
     'b30': [lambda t, d: CARD_SHOT(t, CHK(t, d, [('LIGHTS OUT AT 8', 'tick'), ('NO GAMBLING', 'tick')]), TG('KEEP YOUR GUN CLEAN', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_turn_34'),
             lambda t, d: S(t, SC(M3C, ZOOM_REVERSE, origin=ORIGIN_CENTRE), W('PIRATE RULES', t + 10, x=R, y=240), cam=PULL(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, DOC(t, d, 'PIRATE ARTICLES', ['KEEP YOUR GUN CLEAN', 'NO SMOKING BY THE POWDER'],
-                                        kind='certificate', mark=(1, 'circle')), TG('LIGHTS OUT AT EIGHT', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared')],
+                                        kind='certificate', mark=(1, 'underline')), TG('LIGHTS OUT AT EIGHT', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_scared')],
     # b31 nobody keeps watch
     'b31': [lambda t, d: S(t, SC(M3C, ZOOM_MID, origin=ORIGIN_LEFT), O('NOBODY ON WATCH', t + 12, x=L, y=TOP_SLOT_Y), cam=PUSH(960, 540, CAM_GENTLE)),
             lambda t, d: CARD_SHOT(t, XO('clock', 'THE NIGHT WATCH', t + 3, t + 34), TG('SOMEONE ELSE IS CHECKING', t + LEAD, STAGE_W/2, STAGE_H/2), cast='crew_exp_neutral')],
@@ -759,7 +800,7 @@ P = {
             lambda t, d: S(t, SC(M8B, ZOOM_MID, origin=ORIGIN_LEFT), O('NO GOLD', t + 10, x=L, y=240), cam=PUSH(960, 540, CAM_GENTLE))],
     # b73 Tobias Knight: in the pirate's DMs
     'b73': [lambda t, d: CARD_SHOT(t, DOC(t, d, 'A LETTER', ['TO: BLACKBEARD', 'FROM: TOBIAS KNIGHT'], kind='certificate',
-                                        mark=(1, 'circle')), TG('TOP GOVERNMENT OFFICIAL', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
+                                        mark=(1, 'circle'), h=DOC_H_RINGED), TG('TOP GOVERNMENT OFFICIAL', t + LEAD, STAGE_W/2, STAGE_H/2), cast=None),
             lambda t, d: S(t, SC(M8B, ZOOM_CLOSE, origin=ORIGIN_RIGHT), TG("IN THE PIRATE'S DMS", t + 10, L, 240), cam=PAN(600, 1300, CAM_GENTLE))],
     # b74 accused, never stuck; nobody important jailed
     'b74': [lambda t, d: CARD_SHOT(t, POINT(TF(('pen', 'ACCUSED'), ('key', 'WALKS FREE'), t + LEAD, 30), 'b', t, d), cast=None),

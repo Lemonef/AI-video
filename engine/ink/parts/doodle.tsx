@@ -35,13 +35,57 @@ export const HAND_RADIUS = [2.2, 0.9, 2.6, 1.2].map(k => `${Math.round(LINE * k)
 // Red hand circle: an ellipse drawn on in one stroke that overshoots its start (1.15 turns), slightly tilted,
 // the way a marker circles a detail. Radius wobbles per angle so it is never a perfect ellipse.
 const OVERSHOOT = 1.15, TILT = -6, STEPS = 64;
-export const scribbleEllipse = (rx: number, ry: number) => {
+const LUMP = 0.05, SPIRAL = 0.04; // radius wobble: lumpy + spirals out a touch on the overshoot
+const W_MAX = 1 + LUMP + SPIRAL * OVERSHOOT; // largest radius factor the stroke reaches
+export const scribbleEllipse = (rx: number, ry: number, tilt: number = TILT) => {
   const pts = Array.from({length: Math.round(STEPS * OVERSHOOT) + 1}, (_, i) => {
     const a = (i / STEPS) * Math.PI * 2 - Math.PI * 0.6;
-    const w = 1 + 0.05 * Math.sin(a * 3 + 1) + 0.04 * (i / STEPS); // lumpy + spirals out a touch on the overshoot
+    const w = 1 + LUMP * Math.sin(a * 3 + 1) + SPIRAL * (i / STEPS);
     return `${(Math.cos(a) * rx * w).toFixed(1)} ${(Math.sin(a) * ry * w).toFixed(1)}`;
   });
-  return {d: `M${pts.join(' L')}`, tilt: TILT};
+  return {d: `M${pts.join(' L')}`, tilt};
+};
+const W_MIN = 1 - LUMP; // smallest radius factor the stroke reaches (lump trough before the spiral grows)
+// Radii for a ring that keeps a 2*halfW x 2*halfH box (centred on the ring) fully inside the drawn stroke,
+// tilt + wobble included. The pen runs a little past the item's ends (box corner at FIT_X_K of the horizontal
+// radius) but never past maxHalfW (the room the caller has); the vertical radius then grows to clear the corners.
+// A long item gets a flatter ring: the tilt is capped at a fraction of the box's own corner angle, else the
+// tilted corners force a ring far taller and wider than the item (11-25: rings spilled off the doc paper).
+const FIT_TILT_K = 0.5, FIT_X_K = 0.85;
+// Tilt candidates tried from the shape-capped tilt down to flat; a flat ring's half width is W_MAX*rx, which the
+// rx cap keeps on the paper, so the search always ends with a ring that fits.
+const FIT_TILT_STEPS = 6;
+const fitAtTilt = (halfW: number, halfH: number, minRy: number, maxHalfW: number, tilt: number) => {
+  const t = (tilt * Math.PI) / 180;
+  // a world corner in the ring's own (un-tilted) frame
+  const corners = [1, -1].map((sy) => ({
+    x: halfW * Math.cos(t) + sy * halfH * Math.sin(t),
+    y: -halfW * Math.sin(t) + sy * halfH * Math.cos(t),
+  }));
+  const xMax = Math.max(...corners.map((c) => Math.abs(c.x)));
+  const rx = Math.min(xMax / (W_MIN * FIT_X_K), maxHalfW / (W_MAX * Math.cos(t)));
+  if (rx * W_MIN <= xMax) return null;
+  const ry = Math.max(minRy, ...corners.map((c) => Math.abs(c.y) / Math.sqrt(W_MIN ** 2 - (c.x / rx) ** 2)));
+  return {rx, ry, tilt};
+};
+export const scribbleFit = (halfW: number, halfH: number, minRy: number, maxHalfW = Infinity) => {
+  const capDeg = (FIT_TILT_K * Math.atan2(halfH, halfW) * 180) / Math.PI;
+  const top = Math.sign(TILT) * Math.min(Math.abs(TILT), capDeg);
+  for (let i = 0; i <= FIT_TILT_STEPS; i++) {
+    const fit = fitAtTilt(halfW, halfH, minRy, maxHalfW, top * (1 - i / FIT_TILT_STEPS));
+    // the true drawn half width includes ry*sin(tilt), which grows with ry after the rx cap
+    if (fit && scribbleHalfWidth(fit.rx, fit.ry, fit.tilt) <= maxHalfW) return fit;
+  }
+  throw new Error(`scribbleFit: no room for a ring around a ${2 * halfW}px item`);
+};
+// Half height of the drawn ring's bounding box (wobble + tilt included), so layouts can keep it off nearby text.
+export const scribbleHalfHeight = (rx: number, ry: number, tilt: number = TILT) => {
+  const t = (tilt * Math.PI) / 180;
+  return W_MAX * Math.hypot(rx * Math.sin(t), ry * Math.cos(t));
+};
+export const scribbleHalfWidth = (rx: number, ry: number, tilt: number = TILT) => {
+  const t = (tilt * Math.PI) / 180;
+  return W_MAX * Math.hypot(rx * Math.cos(t), ry * Math.sin(t));
 };
 
 // HUD chip: top-left (default) or bottom-left; hand font, uneven border, slight tilt; boiled by the caller.

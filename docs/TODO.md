@@ -87,7 +87,10 @@
       - [x] WAIT Zen look on v6 (D:/AI-video/.tmp/polish/ep02_min1_v6_720p.mp4); then apply same rules to min2+ -> 11-25 visual dead/hanged, lists pop one by one, jokes, no bar chart spam; then "spamming the explain cards"
       - [ ] v7 WIP (uncommitted, paused 11-25 by Zen "stop for today"): noose/grave/bottle icons, FLOW->pop-in, guest list circle, gags; doodle.tsx scribbleFit tilt search; DOC_H_RINGED=560
         - [ ] f6600 PIRATE ARTICLES still throws ring-leaves-paper (y 323 vs 280 at h=560): auto-grow paper or bigger h
-        - [ ] REBALANCE min1: too many explain cards; mix scene / explain card / real image, none overloaded
+        - [x] REBALANCE min1: too many explain cards; mix scene / explain card / real image, none overloaded
+          - [x] 3 cut cards -> new graded plates via pipeline (Zen 11-27 "Codex draws 3 plates"): m0a navy coming f46, m0b lone sloop f784, m0c buried chest f1262 (astra rung 2); each eye-checked, stills f75/f830/f1320 read
+          - [x] gates: lint baseline (4 known, 0 new), cardfix2, plates, node 8/8, tsc 0; min0 = 26 cuts
+          - [x] rendered + sent D:/AI-video/.tmp/polish/ep02_min1_v7_720p.mp4 (10 MB), sheet min1_v7_sheet.png read
         - [ ] min2+: cut FLOW 5->2, BARS 4->1, BN 6->=4
         - [ ] WAIT Zen look on v7
   - [x] min1 ~52s (fixed e9668a9, stacked low-right, still f1590 read; 3 PAIRS f8780 low, read): "GREAT LINE. / TERRIBLE PLAN" words sit on the BB portrait head (unreadable over face). Move to calm area in same polish brief (seen in ep02-min1.mp4 check 15:20). Same bug at b39 '3 PAIRS OF PISTOLS' over BB face (still f8830) -> polish brief: no overlay word box over any character face

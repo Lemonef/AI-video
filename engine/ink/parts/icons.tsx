@@ -1,7 +1,7 @@
 import React from 'react';
 import {INK, PAPER, GREEN, RED, ORANGE, LINE} from '../compositions/InkProof';
 
-export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair' | 'arrow' | 'bentarrow' | 'sloop' | 'chain' | 'chest' | 'cannon' | 'barrel' | 'pistol' | 'cutlass' | 'flag' | 'scroll' | 'lantern' | 'anchor';
+export type IconName = 'tower' | 'hat' | 'bill' | 'coin' | 'padlock' | 'letter' | 'mask' | 'pin' | 'ship' | 'newspaper' | 'factory' | 'badge' | 'clock' | 'scrap' | 'key' | 'suitcase' | 'handcuffs' | 'pen' | 'hotel' | 'crown' | 'face' | 'man' | 'chair' | 'arrow' | 'bentarrow' | 'sloop' | 'chain' | 'chest' | 'cannon' | 'barrel' | 'pistol' | 'cutlass' | 'flag' | 'scroll' | 'lantern' | 'anchor' | 'noose' | 'grave' | 'bottle';
 export const DOODLE = {
   yellow: '#E8C15A', // muted gold marker
   blue: '#7FA6C9', // muted blue marker
@@ -54,6 +54,15 @@ export const DoodleIcon: React.FC<{name: IconName; size: number; fill?: string}>
     case 'anchor':
       art = <><circle cx="0" cy="-71" r="18" fill="none"/><path fill="none" d="M0 -52 L0 76 M-48 -34 L48 -34 M-71 11 Q-68 64 0 80 Q66 65 73 12"/><path fill={base(DOODLE.grey)} d="M-85 28 L-72 -1 L-50 25Z M50 25 L73 -1 L86 28Z"/></>;
       highlight = 'M-8 -80 Q0 -88 8 -79'; break;
+    case 'noose':
+      art = <><path fill={base(DOODLE.brown)} d="M-70 -92 L-52 -92 L-52 84 L-70 84Z M-70 -92 L62 -92 L62 -76 L-70 -76Z M-96 84 L10 84 L10 96 L-96 96Z"/><path fill="none" d="M-52 -42 L-14 -76 M42 -76 L42 -14"/><path fill={base(DOODLE.cream)} d="M42 -14 Q14 -4 18 30 Q24 60 42 62 Q60 60 66 30 Q70 -4 42 -14Z M42 2 Q32 8 33 30 Q35 47 42 48 Q49 47 51 30 Q52 8 42 2Z" fillRule="evenodd"/><path fill="none" d="M34 -22 L50 -16 M34 -12 L50 -6"/></>;
+      highlight = 'M-64 -60 L-64 -10'; break;
+    case 'grave':
+      art = <><path fill={base(DOODLE.brown)} d="M-92 92 Q-80 52 0 50 Q80 52 92 92Z"/><path fill={base(DOODLE.grey)} d="M-52 66 L-52 -40 Q-50 -92 0 -92 Q50 -92 52 -40 L52 66Z"/><path fill="none" d="M0 -64 L0 16 M-26 -38 L26 -38 M-30 40 L30 40"/></>;
+      highlight = 'M-40 -40 Q-38 -70 -18 -80'; break;
+    case 'bottle':
+      art = <><path fill={base(DOODLE.brown)} d="M-14 -92 L14 -92 L14 -80 L-14 -80Z"/><path fill={base(GREEN)} d="M-12 -80 L12 -80 L12 -40 Q48 -26 48 8 L48 80 Q0 94 -48 80 L-48 8 Q-48 -26 -12 -40Z"/><path fill={base(DOODLE.cream)} d="M-36 10 L36 10 L36 52 L-36 52Z"/><path fill="none" d="M-20 24 L20 24 M-14 38 L14 38"/></>;
+      highlight = 'M-34 -4 L-34 70'; break;
     case 'tower':
       art = <><path fill={base(DOODLE.brown)} d="M-77 86 Q-40 30 -25 -20 L-9 -69 L0 -92 L8 -68 L24 -20 Q39 35 77 86 L42 86 Q29 32 0 34 Q-29 33 -43 87Z"/><path fill={base(DOODLE.brown)} d="M-38 9 L37 7 L40 19 L-41 21Z M-23 -31 L22 -33 L25 -23 L-26 -21Z"/><path fill="none" d="M-57 65 l22 7 m-17 -18 l22 6 m-13 -19 l20 6 M56 65 l-22 7 m17 -18 l-22 6 m13 -19 l-20 6 M-51 72 l19 -18 m-10 -1 l18 -16 M51 72 L32 54 m10 -1 L24 37 M-25 7 L15 -20 M25 7 L-15 -20 M-13 -35 L8 -56 M13 -35 L-8 -56"/></>;
       highlight = 'M-15 -43 L-11 -55'; break;

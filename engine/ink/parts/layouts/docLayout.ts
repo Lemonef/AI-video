@@ -1,3 +1,4 @@
+import {scribbleFit, scribbleHalfHeight, scribbleHalfWidth} from '../doodle';
 import {LABEL, SMALL, CHAR_WIDTH} from './tokens';
 import type {DocEl} from '../schema';
 
@@ -56,11 +57,13 @@ export const STAMP_GAP = STROKE * 2; // gap between the stamp's double border
 export const STAMP_TEXT_DROP = LABEL * 0.35; // stamp text baseline below the box centre
 const STAMP_Y_K = 0.25; // stamp centre as a fraction of paper height: the middle of the lower half
 
-const MARK_PAD_K = 0.6; // mark circle overshoot around the line text, in SMALL heights
-const MARK_RY_K = 0.9; // mark circle half height, in SMALL heights
-const MARK_RAISE_K = 0.35; // mark circle centre above the line baseline, in SMALL heights
+const MARK_RY_K = 0.9; // smallest mark circle half height, in SMALL heights (scribbleFit grows it to enclose the text)
 const UNDER_DROP_K = 0.35; // underline below the line baseline, in SMALL heights
 const UNDER_PAD_K = 0.3; // underline run past the line text, in SMALL heights
+const GLYPH_CAP_K = 0.75; // cap height above the baseline, in SMALL heights (ring must clear the next line's caps)
+const GLYPH_DESC_K = 0.25; // descender below the baseline, in SMALL heights (ring must clear the line above)
+const MARK_CLEAR_K = 0.1; // air between the ring and any text (its own line and neighbours), in SMALL heights
+const MARK_RAISE_K = (GLYPH_CAP_K - GLYPH_DESC_K) / 2; // ring centre above the baseline = middle of the glyph box
 
 // Hand wobble: sin/cos of the point index, never Math.random, so every frame and every render match.
 export const EDGE_SEGS = 8; // points sampled per paper edge (>= 6 keeps the corners clearly uneven)
@@ -141,6 +144,7 @@ export type DocLayout = {
   markX: number | null;
   markY: number | null;
   markRx: number | null;
+  markTilt: number | null;
   markRy: number | null;
   underlineX1: number | null;
   underlineX2: number | null;
@@ -210,8 +214,20 @@ export function docLayout(el: DocEl): DocLayout {
   // A memo title sits below the letterhead band; every other kind starts at the top padding.
   const contentTop = el.kind === 'memo' ? top + STROKE + MEMO_BAND : top;
   const titleY = contentTop + TITLE_TOP;
-  const lineY = el.lines.map((_, i) => contentTop + LINE_FIRST + i * LINE_GAP);
   const lineW = el.lines.map((line) => line.length * SMALL * CHAR_WIDTH);
+  // A circled line gets room above and below so the ring (true drawn extent) never crosses a neighbouring line.
+  const circled = el.mark?.style === 'circle' ? el.mark.line : -1;
+  // Ring radii: the circled line's glyph box (plus air) sits fully inside the drawn, tilted, wobbling stroke.
+  // Its width is capped at the paper room either side of the line's centre (minus the paper's stroke).
+  const ringRoom = circled >= 0 ? el.w / 2 - STROKE - Math.abs(lineX + lineW[circled] / 2) : 0;
+  const ring = circled >= 0 ? scribbleFit(lineW[circled] / 2 + SMALL * MARK_CLEAR_K,
+    SMALL * ((GLYPH_CAP_K + GLYPH_DESC_K) / 2 + MARK_CLEAR_K), SMALL * MARK_RY_K, ringRoom) : null;
+  const ringHalf = ring ? scribbleHalfHeight(ring.rx, ring.ry, ring.tilt) : 0;
+  const ringPadAbove = circled > 0 ? Math.max(0, ringHalf + SMALL * (MARK_RAISE_K + GLYPH_DESC_K + MARK_CLEAR_K) - LINE_GAP) : 0;
+  const ringPadBelow = circled >= 0 && circled < el.lines.length - 1
+    ? Math.max(0, ringHalf - SMALL * MARK_RAISE_K + SMALL * (GLYPH_CAP_K + MARK_CLEAR_K) - LINE_GAP) : 0;
+  const lineY = el.lines.map((_, i) => contentTop + LINE_FIRST + i * LINE_GAP
+    + (circled >= 0 && i >= circled ? ringPadAbove : 0) + (circled >= 0 && i > circled ? ringPadBelow : 0));
   const barY = lineY.map((y) => y - SMALL * BAR_RAISE_K);
   const ruleY = titleY + LABEL * RULE_GAP_K;
   const bandTop = top + STROKE;
@@ -240,6 +256,7 @@ export function docLayout(el: DocEl): DocLayout {
   let markY: number | null = null;
   let markRx: number | null = null;
   let markRy: number | null = null;
+  let markTilt: number | null = null;
   let underlineX1: number | null = null;
   let underlineX2: number | null = null;
   let underlineY: number | null = null;
@@ -247,8 +264,11 @@ export function docLayout(el: DocEl): DocLayout {
     const idx = el.mark.line;
     markX = lineX + lineW[idx] / 2;
     markY = lineY[idx] - SMALL * MARK_RAISE_K;
-    markRx = lineW[idx] / 2 + SMALL * MARK_PAD_K;
-    markRy = SMALL * MARK_RY_K;
+    markRx = ring ? ring.rx : null;
+    markRy = ring ? ring.ry : null;
+    markTilt = ring ? ring.tilt : null;
+    if (ring && markX !== null && (Math.abs(markX) + scribbleHalfWidth(ring.rx, ring.ry, ring.tilt) > el.w / 2 + STROKE
+      || markY + ringHalf > halfH)) throw new Error(`doc ring leaves the paper: line ${idx} of ${el.lines[idx]} (x ${Math.round(Math.abs(markX) + scribbleHalfWidth(ring.rx, ring.ry, ring.tilt))} vs ${Math.round(el.w / 2 + STROKE)}, y ${Math.round(markY + ringHalf)} vs ${Math.round(halfH)})`);
     underlineX1 = markX - lineW[idx] / 2 - SMALL * UNDER_PAD_K;
     underlineX2 = markX + lineW[idx] / 2 + SMALL * UNDER_PAD_K;
     underlineY = lineY[idx] + SMALL * UNDER_DROP_K;
@@ -285,6 +305,7 @@ export function docLayout(el: DocEl): DocLayout {
     markX,
     markY,
     markRx,
+    markTilt,
     markRy,
     underlineX1,
     underlineX2,
